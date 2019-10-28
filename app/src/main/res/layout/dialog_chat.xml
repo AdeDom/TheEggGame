@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:padding="10dp">
+
+    <com.sevenheaven.segmentcontrol.SegmentControl
+            android:id="@+id/mSegment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:block_direction="horizon"
+            app:gaps="10dp"
+            app:texts="Public|Room|Team|Private"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_above="@+id/chat"
+            tools:listitem="@layout/item_chat"/>
+
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/chat"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/mEdtChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edit"
+                android:drawableRight="@drawable/ic_send_black"
+                android:hint="Chat"/>
+    </android.support.design.widget.TextInputLayout>
+</RelativeLayout>

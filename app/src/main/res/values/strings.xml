@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">The Egg Game</string>
+    <string name="google_maps_key">AIzaSyA0X_TUK3iYed_8q7tiGzup3TworGgYEfo</string>
+
+    <string name="h2p">How to play</string>
+    <string name="single">Single player</string>
+    <string name="multi">Multi player</string>
+
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+</resources>
