@@ -75,6 +75,4 @@ class MainActivity : AppCompatActivity() { // 14/7/62
         super.onPause()
         MyMediaPlayer.mMusic!!.stop()
     }
-
-//    todo test
 }

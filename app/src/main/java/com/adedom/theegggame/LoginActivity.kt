@@ -14,7 +14,7 @@ import com.luseen.simplepermission.permissions.PermissionActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.sql.ResultSet
 
-class LoginActivity : PermissionActivity() { // 14/7/62
+class LoginActivity : PermissionActivity() {
 
     val TAG = "LoginActivity"
     private val mPlayerItem = arrayListOf<PlayerItem>()
@@ -28,7 +28,7 @@ class LoginActivity : PermissionActivity() { // 14/7/62
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        checkConn()
+        checkConn()
         requestPermission()
         locationSetting()
 

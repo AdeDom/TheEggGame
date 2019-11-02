@@ -42,5 +42,7 @@ dependencies {
     implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
     implementation 'com.7heaven.widgets:segmentcontrol:1.16'
 
-    implementation project(':mysql-connector-java-3.0.17-ga-bin')
+//    Library
+    implementation project(path: ':library')
+
 }
