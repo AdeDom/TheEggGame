@@ -38,7 +38,7 @@ public class ExecuteCommit {
         }
     }
 
-    public void commit(ExecuteUpdate update) {
+    public void commitUpdate(ExecuteUpdate update) {
         Statement statement = null;
 
         try {
@@ -60,7 +60,7 @@ public class ExecuteCommit {
         }
     }
 
-    public void commit(ExecuteQuery query) {
+    public void commitQuery(ExecuteQuery query) {
         Statement statement = null;
         ResultSet resultSet = null;
 

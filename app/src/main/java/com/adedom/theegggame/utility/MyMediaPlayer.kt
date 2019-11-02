@@ -6,25 +6,25 @@ import android.media.MediaPlayer
 class MyMediaPlayer {
 
     companion object {
-        var mMusic: MediaPlayer? = null
-        var mSound: MediaPlayer? = null
+        var music: MediaPlayer? = null
+        var sound: MediaPlayer? = null
 
         fun getMusic(context: Context, music: Int): MediaPlayer {
-            mMusic = if (mMusic == null) {
+            this.music = if (this.music == null) {
                 MediaPlayer.create(context, music)
             } else {
-                mMusic!!.stop()
+                this.music!!.stop()
                 MediaPlayer.create(context, music)
             }
-            mMusic!!.start()
-            mMusic!!.isLooping = true
-            return mMusic as MediaPlayer
+            this.music!!.start()
+            this.music!!.isLooping = true
+            return this.music as MediaPlayer
         }
 
         fun getSound(context: Context, sound: Int): MediaPlayer {
-            mSound = MediaPlayer.create(context,sound)
-            mSound!!.start()
-            return mSound as MediaPlayer
+            this.sound = MediaPlayer.create(context,sound)
+            this.sound!!.start()
+            return this.sound as MediaPlayer
         }
     }
 }

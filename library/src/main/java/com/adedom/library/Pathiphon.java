@@ -14,8 +14,17 @@ public class Pathiphon {
     public Pathiphon() {
     }
 
-    public static final String IP = "";
+    private static final String IP = "192.168.43.22";
+    private static final String DB_NAME = "the_egg_game";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "abc456";
+    private static final String BASE_URL = "http://" + IP + "/the-egg-game/";
 
+    public static Connection connection() {
+        return connection(IP, DB_NAME, USERNAME, PASSWORD);
+    }
+
+    @Deprecated
     public static Connection connection(String ip, String dbName, String username, String password) {
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitAll().build());
 
@@ -31,12 +40,22 @@ public class Pathiphon {
         return null;
     }
 
+    @Deprecated
     public static Execute connection(Connection connection) {
         return new Execute(connection);
     }
 
+    @Deprecated
     public static Call with(Connection connection) {
         return new Call(connection);
+    }
+
+    public static ExecuteCommit execute(String sql) {
+        return new ExecuteCommit(connection(), sql);
+    }
+
+    public static CallCommit call(String storedProcedureName) {
+        return new CallCommit(connection(), storedProcedureName);
     }
 
     public static void completed(Context context) {

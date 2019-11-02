@@ -73,6 +73,6 @@ class MainActivity : AppCompatActivity() { // 14/7/62
 
     override fun onPause() {
         super.onPause()
-        MyMediaPlayer.mMusic!!.stop()
+        MyMediaPlayer.music!!.stop()
     }
 }

@@ -190,6 +190,6 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
 
     override fun onPause() {
         super.onPause()
-        MyMediaPlayer.mMusic!!.stop()
+        MyMediaPlayer.music!!.stop()
     }
 }

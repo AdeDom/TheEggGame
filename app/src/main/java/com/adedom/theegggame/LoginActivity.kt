@@ -6,6 +6,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AlertDialog
+import com.adedom.library.Pathiphon
 import com.adedom.theegggame.dialog.InsertPlayerDialog
 import com.adedom.theegggame.model.PlayerItem
 import com.adedom.theegggame.utility.*
@@ -37,10 +38,12 @@ class LoginActivity : PermissionActivity() {
     }
 
     private fun checkConn() {
-        if (MyConnect.conn() == null) {
-            MyToast.showLong(baseContext, "NULL")
+        val conn = Pathiphon.connection()
+
+        if (conn == null) {
+            Pathiphon.failed(baseContext)
         } else {
-            MyToast.showLong(baseContext, "OK")
+            Pathiphon.completed(baseContext)
         }
     }
 
@@ -171,6 +174,6 @@ class LoginActivity : PermissionActivity() {
 
     override fun onPause() {
         super.onPause()
-        MyMediaPlayer.mMusic!!.stop()
+        MyMediaPlayer.music!!.stop()
     }
 }

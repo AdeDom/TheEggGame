@@ -41,7 +41,7 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
         super.onResume()
         mRunnableRefresh.run()
 
-        MyMediaPlayer.mMusic!!.stop()
+        MyMediaPlayer.music!!.stop()
     }
 
     private fun setToolbar() {
