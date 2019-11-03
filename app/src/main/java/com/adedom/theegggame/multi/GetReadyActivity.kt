@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.RoomInfoDialog
@@ -22,6 +21,7 @@ import com.adedom.theegggame.model.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGrid
 import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.utility.MyLibrary
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_get_ready.*

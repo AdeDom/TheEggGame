@@ -3,7 +3,6 @@ package com.adedom.theegggame.single
 import android.location.Location
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.ChatSingleDialog
@@ -13,6 +12,7 @@ import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyMap
 import com.adedom.theegggame.utility.MyMediaPlayer
 import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.utility.MyLibrary
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng

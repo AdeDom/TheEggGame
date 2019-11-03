@@ -9,8 +9,6 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import com.adedom.library.MyLibrary
-import com.adedom.library.Pathiphon
 import com.adedom.theegggame.dialog.AboutDialog
 import com.adedom.theegggame.dialog.MissionDialog
 import com.adedom.theegggame.dialog.RankDialog
@@ -21,11 +19,13 @@ import com.adedom.theegggame.single.SingleActivity
 import com.adedom.theegggame.utility.MyGlide
 import com.adedom.theegggame.utility.MyIntent
 import com.adedom.theegggame.utility.MyMediaPlayer
+import com.adedom.utility.MyLibrary
+import com.adedom.utility.Pathiphon
 import com.luseen.simplepermission.permissions.Permission
 import com.luseen.simplepermission.permissions.PermissionActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : PermissionActivity() {
+class MainActivity : PermissionActivity() { // 03/11/19
 
     private lateinit var mPlayerId: String
     private var mCountExit = 0
@@ -33,9 +33,9 @@ class MainActivity : PermissionActivity() {
 
     companion object {
         const val MY_LOGIN = "login"
+        lateinit var activity: Activity
         lateinit var context: Context
         lateinit var mPlayerItem: PlayerBean
-        lateinit var mActivity: Activity
         val mTimeStamp = System.currentTimeMillis() / 1000
     }
 
@@ -43,11 +43,9 @@ class MainActivity : PermissionActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mActivity = this@MainActivity
+        activity = this@MainActivity
         context = baseContext
         if (checkLogin()) return
-
-        MyLibrary.with(baseContext).showShort(R.string.welcome)
 
         requestPermission()
         locationListener()
@@ -81,6 +79,7 @@ class MainActivity : PermissionActivity() {
                         )
                         mPlayerItem = player
 
+                        MyLibrary.with(baseContext).showShort(R.string.welcome)
                         setWidgets()
                     } else {
                         getSharedPreferences(MY_LOGIN, Context.MODE_PRIVATE).edit()
@@ -196,6 +195,5 @@ class MainActivity : PermissionActivity() {
             LocationManager.GPS_PROVIDER
         )
     }
-
     //endregion
 }

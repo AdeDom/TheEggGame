@@ -10,11 +10,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import com.adedom.library.MyLibrary
-import com.adedom.library.Pathiphon
 import com.adedom.theegggame.LoginActivity
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
+import com.adedom.utility.MyLibrary
+import com.adedom.utility.Pathiphon
 import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 

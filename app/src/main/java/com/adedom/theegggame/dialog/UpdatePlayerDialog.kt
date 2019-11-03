@@ -10,12 +10,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.PlayerBean
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon
+import com.adedom.utility.MyLibrary
 
 class UpdatePlayerDialog : DialogFragment() {
 

@@ -74,7 +74,7 @@ class SettingDialog : DialogFragment() {
             .setIcon(R.drawable.ic_exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which ->
-                MainActivity.mActivity.finishAffinity()
+                MainActivity.activity.finishAffinity()
             }.show()
     }
 }

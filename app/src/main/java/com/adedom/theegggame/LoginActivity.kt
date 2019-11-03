@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.adedom.library.MyLibrary
-import com.adedom.library.Pathiphon
 import com.adedom.theegggame.dialog.InsertPlayerDialog
 import com.adedom.theegggame.utility.MyMediaPlayer
+import com.adedom.utility.MyLibrary
+import com.adedom.utility.Pathiphon
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() { // 03/11/19
@@ -48,9 +48,7 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
         }
 
         mBtnLogin.setOnClickListener {
-            val username = mEdtUsername.text.toString().trim()
-            val password = mEdtPassword.text.toString().trim()
-            login(username, password)
+            login()
         }
 
         mTvForgotPassword.setOnClickListener {
@@ -58,21 +56,31 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
         }
     }
 
-    private fun login(username: String, password: String) {
+    private fun login() {
         // TODO: 20/05/2562 login one user only
+
+        val username = mEdtUsername.text.toString().trim()
+        val password = mEdtPassword.text.toString().trim()
+
+        when {
+            MyLibrary.isEmpty(mEdtUsername, getString(R.string.error_username)) -> return
+            MyLibrary.isEmpty(mEdtPassword, getString(R.string.error_password)) -> return
+        }
 
         Pathiphon.call("sp_login_player")
             .parameter(username)
             .parameter(password)
             .commitQuery {
+
                 if (it.next()) {
                     login(
                         this,
                         context,
                         it.getString(1).trim(),
-                        mEdtUsername.text.toString().trim()
+                        username
                     )
                 } else {
+                    mEdtPassword.text.clear()
                     MyLibrary.with(baseContext).showLong(R.string.username_password_incorrect)
                 }
             }

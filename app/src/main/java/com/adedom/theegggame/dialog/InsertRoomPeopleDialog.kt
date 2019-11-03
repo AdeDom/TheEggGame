@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.RoomItem
@@ -20,6 +19,7 @@ import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIntent
 import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.utility.MyLibrary
 import java.sql.ResultSet
 
 class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62

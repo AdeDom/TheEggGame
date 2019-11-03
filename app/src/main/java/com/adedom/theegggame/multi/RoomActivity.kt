@@ -13,13 +13,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
-import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.InsertRoomDialog
 import com.adedom.theegggame.dialog.InsertRoomPeopleDialog
 import com.adedom.theegggame.model.RoomItem
 import com.adedom.theegggame.utility.*
+import com.adedom.utility.MyLibrary
 import kotlinx.android.synthetic.main.activity_room.*
 import kotlinx.android.synthetic.main.item_rv_room.view.*
 import java.sql.ResultSet
