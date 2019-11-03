@@ -3,7 +3,6 @@ package com.adedom.theegggame.dialog
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -11,22 +10,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.adedom.library.MyLibrary
+import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.PlayerItem
+import com.adedom.theegggame.model.PlayerBean
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon
-import com.adedom.theegggame.utility.MyToast
-import com.iceteck.silicompressorr.SiliCompressor
-import com.vlk.multimager.activities.GalleryActivity
-import com.vlk.multimager.utils.Constants.*
-import com.vlk.multimager.utils.Image
-import com.vlk.multimager.utils.Params
-import java.io.File
 
-class UpdatePlayerDialog : DialogFragment() { // 15/7/62
+class UpdatePlayerDialog : DialogFragment() {
 
     val TAG = "UpdatePlayerDialog"
-    private lateinit var mPlayerItem: PlayerItem
+    private lateinit var mPlayerItem: PlayerBean
     private lateinit var mEdtUser: EditText
     private lateinit var mEdtPassword: EditText
     private lateinit var mEdtRePassword: EditText
@@ -54,7 +48,7 @@ class UpdatePlayerDialog : DialogFragment() { // 15/7/62
     }
 
     private fun bindWidgets(view: View) {
-        mEdtUser = view.findViewById(R.id.mEdtUser) as EditText
+        mEdtUser = view.findViewById(R.id.mEdtUsername) as EditText
         mEdtPassword = view.findViewById(R.id.mEdtPassword) as EditText
         mEdtRePassword = view.findViewById(R.id.mEdtRePassword) as EditText
         mEdtName = view.findViewById(R.id.mEdtName) as EditText
@@ -79,11 +73,11 @@ class UpdatePlayerDialog : DialogFragment() { // 15/7/62
     }
 
     private fun selectImage() {
-        val intent = Intent(activity, GalleryActivity::class.java)
-        val params = Params()
-        params.pickerLimit = 1
-        intent.putExtra(KEY_PARAMS, params)
-        startActivityForResult(intent, TYPE_MULTI_PICKER)
+//        val intent = Intent(activity, GalleryActivity::class.java)
+//        val params = Params()
+//        params.pickerLimit = 1
+//        intent.putExtra(KEY_PARAMS, params)
+//        startActivityForResult(intent, TYPE_MULTI_PICKER)
     }
 
     private fun updatePlayer() {
@@ -102,11 +96,11 @@ class UpdatePlayerDialog : DialogFragment() { // 15/7/62
                 "password = '${mEdtPassword.text.toString().trim()}',\n" +
                 "name = '${mEdtName.text.toString().trim()}',\n" +
                 "image = '$mImgName'\n" +
-                "WHERE id = '${mPlayerItem.id}'"
+                "WHERE id = '${mPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
 
         dialog.dismiss()
-        MyToast.showShort(context!!, "บันทึกข้อมูลเรียบร้อย")
+        MyLibrary.with(MainActivity.context).showShort(R.string.recording_complete)
 
         // TODO: 23/05/2562 refresh MainActivity
         //todo password activity login
@@ -130,7 +124,7 @@ class UpdatePlayerDialog : DialogFragment() { // 15/7/62
         }
 
         if (errMsg != "") {
-            MyToast.showLong(context!!, errMsg)
+            MyLibrary.with(MainActivity.context).showLong(errMsg)
             return true
         }
         return false
@@ -141,21 +135,21 @@ class UpdatePlayerDialog : DialogFragment() { // 15/7/62
             return
         }
 
-        if (requestCode == TYPE_MULTI_PICKER) {
-            val images = data!!.getParcelableArrayListExtra<Image>(KEY_BUNDLE_LIST)
-            var bmp: Bitmap? = null
-            mImagePath = images[0].imagePath
-            try {
-                bmp = SiliCompressor.with(context).getCompressBitmap(mImagePath)
-
-                val filePath = SiliCompressor.with(context).compress(mImagePath, File(mImagePath))
-                mImgName = filePath.substring(mImagePath.length + 1)
-                mImagePath = "/storage/emulated/0/Silicompressor/images/$mImgName"
-
-            } catch (ex: Exception) {
-            }
-
-            mImgProfile.setImageBitmap(bmp)
-        }
+//        if (requestCode == TYPE_MULTI_PICKER) {
+//            val images = data!!.getParcelableArrayListExtra<Image>(KEY_BUNDLE_LIST)
+//            var bmp: Bitmap? = null
+//            mImagePath = images[0].imagePath
+//            try {
+//                bmp = SiliCompressor.with(contexts).getCompressBitmap(mImagePath)
+//
+//                val filePath = SiliCompressor.with(contexts).compress(mImagePath, File(mImagePath))
+//                mImgName = filePath.substring(mImagePath.length + 1)
+//                mImagePath = "/storage/emulated/0/Silicompressor/images/$mImgName"
+//
+//            } catch (ex: Exception) {
+//            }
+//
+//            mImgProfile.setImageBitmap(bmp)
+//        }
     }
 }

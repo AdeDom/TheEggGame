@@ -3,12 +3,16 @@ package com.adedom.theegggame.single
 import android.location.Location
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.ChatSingleDialog
 import com.adedom.theegggame.model.ChatItem
 import com.adedom.theegggame.model.SingleItem
-import com.adedom.theegggame.utility.*
+import com.adedom.theegggame.utility.MyConnect
+import com.adedom.theegggame.utility.MyMap
+import com.adedom.theegggame.utility.MyMediaPlayer
+import com.adedom.theegggame.utility.MyResultSet
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng
@@ -46,12 +50,24 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
     }
 
     private fun setEvents() {
-        mFab.setOnClickListener { ChatSingleDialog().show(supportFragmentManager, null) }
-        mImgEggI.setOnClickListener { MyToast.showLong(baseContext, "Can not use mode Single Player!!!") }
-        mImgEggII.setOnClickListener { MyToast.showLong(baseContext, "Can not use mode Single Player!!!") }
-        mImgEggIII.setOnClickListener { MyToast.showLong(baseContext, "Can not use mode Single Player!!!") }
-        mImgEggIV.setOnClickListener { MyToast.showLong(baseContext, "Can not use mode Single Player!!!") }
-        mImgEggV.setOnClickListener { MyToast.showLong(baseContext, "Can not use mode Single Player!!!") }
+        mFab.setOnClickListener {
+            ChatSingleDialog().show(supportFragmentManager, null)
+        }
+        mImgEggI.setOnClickListener {
+            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+        }
+        mImgEggII.setOnClickListener {
+            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+        }
+        mImgEggIII.setOnClickListener {
+            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+        }
+        mImgEggIV.setOnClickListener {
+            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+        }
+        mImgEggV.setOnClickListener {
+            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+        }
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -120,8 +136,9 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
             }
         }
 
-        val sql = "SELECT * FROM tbl_my_item WHERE player_id = '${MainActivity.mPlayerItem.id}' AND " +
-                "object_id = '${myItem.toString().trim()}'"
+        val sql =
+            "SELECT * FROM tbl_my_item WHERE player_id = '${MainActivity.mPlayerItem.playerId}' AND " +
+                    "object_id = '${myItem.toString().trim()}'"
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
                 if (rs.next()) {
@@ -129,12 +146,12 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
                     num += values
                     val sql = "UPDATE tbl_my_item SET\n" +
                             "qty = '${num.toString().trim()}'\n" +
-                            "WHERE player_id = '${MainActivity.mPlayerItem.id}' AND " +
+                            "WHERE player_id = '${MainActivity.mPlayerItem.playerId}' AND " +
                             "object_id = '${myItem.toString().trim()}'"
                     MyConnect.executeQuery(sql)
                 } else {
                     val sql = "INSERT INTO tbl_my_item (player_id, object_id, qty) \n" +
-                            "VALUES ('${MainActivity.mPlayerItem.id}', " +
+                            "VALUES ('${MainActivity.mPlayerItem.playerId}', " +
                             "'${myItem.toString().trim()}', " +
                             "'${values.toString().trim()}')"
                     MyConnect.executeQuery(sql)
@@ -143,14 +160,14 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         })
 
         chatList(myItem, values)
-        MyToast.showShort(mContext, detailItem(myItem, values))
+        MyLibrary.with(baseContext).showShort(detailItem(myItem, values))
     }
 
     private fun chatList(myItem: Int, values: Int) { // type "1" -> public
         val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val time = df.format(Calendar.getInstance().time)
         val chatItem = ChatItem(
-            MainActivity.mPlayerItem.id,
+            MainActivity.mPlayerItem.playerId,
             time.toString(),
             detailItem(myItem, values),
             MainActivity.mPlayerItem.image,

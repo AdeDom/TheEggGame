@@ -15,7 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.PlayerItem
+import com.adedom.theegggame.model.PlayerBean
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGlide
 import com.adedom.theegggame.utility.MyResultSet
@@ -25,7 +25,7 @@ import java.sql.ResultSet
 class RankDialog : DialogFragment() { // 15/7/62
 
     val TAG = "RankDialog"
-    private val mPlayerItem = arrayListOf<PlayerItem>()
+    private val mPlayerItem = arrayListOf<PlayerBean>()
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEdtSearch: EditText
     private lateinit var mBtnRank10: Button
@@ -96,14 +96,13 @@ class RankDialog : DialogFragment() { // 15/7/62
             override fun onResponse(rs: ResultSet) {
                 mPlayerItem.clear()
                 while (rs.next()) {
-                    val item = PlayerItem(
+                    val item = PlayerBean(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7)
+                        rs.getInt(5),
+                        rs.getString(6)
                     )
                     mPlayerItem.add(item)
                 }

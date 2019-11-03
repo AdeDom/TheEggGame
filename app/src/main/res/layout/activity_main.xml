@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
-                android:background="@drawable/shape_bg"
-                tools:context=".MainActivity">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_bg"
+        tools:context=".MainActivity">
 
     <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_above="@+id/main_play"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/the_egg_game"/>
+            android:src="@drawable/the_egg_game" />
 
     <LinearLayout
             android:id="@+id/main_play"
@@ -26,12 +27,12 @@
                 android:text="@string/app_name"
                 android:textColor="@android:color/black"
                 android:textSize="30sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         <GridLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:columnCount="2"
                 android:rowCount="2">
 
@@ -40,7 +41,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_rowSpan="2"
-                    android:src="@drawable/ic_player"/>
+                    android:src="@drawable/ic_player" />
 
             <TextView
                     android:id="@+id/mTvName"
@@ -50,7 +51,7 @@
                     android:text="Name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             <TextView
                     android:id="@+id/mTvLevel"
@@ -60,7 +61,7 @@
                     android:text="Level"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
         </GridLayout>
 
         <Button
@@ -70,7 +71,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_btn"
                 android:text="Single player"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
                 android:id="@+id/mBtnMulti"
@@ -79,7 +80,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_btn"
                 android:text="Multi player"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
@@ -99,11 +100,11 @@
                     android:id="@+id/mImgMission"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_mission"/>
+                    android:src="@drawable/ic_mission" />
 
             <TextView
                     style="@style/MainTv"
-                    android:text="Mission"/>
+                    android:text="Mission" />
         </LinearLayout>
 
         <LinearLayout style="@style/MainBtn">
@@ -112,11 +113,11 @@
                     android:id="@+id/mImgRank"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_rank"/>
+                    android:src="@drawable/ic_rank" />
 
             <TextView
                     style="@style/MainTv"
-                    android:text="Rank"/>
+                    android:text="Rank" />
         </LinearLayout>
 
         <LinearLayout style="@style/MainBtn">
@@ -125,11 +126,11 @@
                     android:id="@+id/mImgAbout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_h2p"/>
+                    android:src="@drawable/ic_h2p" />
 
             <TextView
                     style="@style/MainTv"
-                    android:text="About"/>
+                    android:text="About" />
         </LinearLayout>
 
         <LinearLayout style="@style/MainBtn">
@@ -138,11 +139,11 @@
                     android:id="@+id/mImgSetting"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_setting"/>
+                    android:src="@drawable/ic_setting" />
 
             <TextView
                     style="@style/MainTv"
-                    android:text="Setting"/>
+                    android:text="Setting" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

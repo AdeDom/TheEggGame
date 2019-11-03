@@ -1,98 +1,45 @@
 package com.adedom.theegggame
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.location.LocationManager
 import android.os.Bundle
-import android.provider.Settings
-import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
+import com.adedom.library.MyLibrary
 import com.adedom.library.Pathiphon
 import com.adedom.theegggame.dialog.InsertPlayerDialog
-import com.adedom.theegggame.model.PlayerItem
-import com.adedom.theegggame.utility.*
-import com.luseen.simplepermission.permissions.Permission
-import com.luseen.simplepermission.permissions.PermissionActivity
+import com.adedom.theegggame.utility.MyMediaPlayer
 import kotlinx.android.synthetic.main.activity_login.*
-import java.sql.ResultSet
 
-class LoginActivity : PermissionActivity() {
-
-    val TAG = "LoginActivity"
-    private val mPlayerItem = arrayListOf<PlayerItem>()
-    private var mIsRememberPassword = false
+class LoginActivity : AppCompatActivity() { // 03/11/19
 
     companion object {
-        const val MY_LOGIN = "login"
+        lateinit var context: Context
+
+        fun login(activity: Activity, context: Context, playerId: String, username: String) {
+            context.getSharedPreferences(MainActivity.MY_LOGIN, Context.MODE_PRIVATE).edit()
+                .putString("player_id", playerId)
+                .putString("username", username.trim())
+                .apply()
+            activity.finishAffinity()
+            activity.startActivity(Intent(context, MainActivity::class.java))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        checkConn()
-        requestPermission()
-        locationSetting()
+        context = baseContext
 
         setWidgets()
         setEvents()
     }
 
-    private fun checkConn() {
-        val conn = Pathiphon.connection()
-
-        if (conn == null) {
-            Pathiphon.failed(baseContext)
-        } else {
-            Pathiphon.completed(baseContext)
-        }
-    }
-
-    private fun requestPermission() {
-        requestPermission(Permission.FINE_LOCATION) { permissionGranted, isPermissionDeniedForever ->
-            if (!permissionGranted) {
-                MyToast.showLong(baseContext, "Please grant permission")
-                finish()
-            }
-        }
-    }
-
-    private fun locationSetting() {
-        //todo check Log1
-        val contentResolver = baseContext.contentResolver
-        val gpsStatus = Settings.Secure.isLocationProviderEnabled(
-            contentResolver,
-            LocationManager.GPS_PROVIDER
-        )
-        if (!gpsStatus) {
-            startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 1234)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //todo check Log2
-        val contentResolver = baseContext.contentResolver
-        val gpsStatus = Settings.Secure.isLocationProviderEnabled(
-            contentResolver,
-            LocationManager.GPS_PROVIDER
-        )
-        if (!gpsStatus && requestCode === 1234) {
-            MyToast.showLong(baseContext, "Please grant location")
-            finish()
-        }
-    }
-
     private fun setWidgets() {
-        val preferences = getSharedPreferences(MY_LOGIN, Context.MODE_PRIVATE)
-        val user = preferences.getString("user", "")
-        mEdtUser.setText(user)
-
-        val password = preferences.getString("password", "")
-        if (password!!.isNotEmpty()) {
-            mIsRememberPassword = true
-            mEdtPassword.setText(password)
-            login()
-        }
+        val preferences = getSharedPreferences(MainActivity.MY_LOGIN, Context.MODE_PRIVATE)
+        val username = preferences.getString("username", "")!!
+        mEdtUsername.setText(username)
     }
 
     private fun setEvents() {
@@ -101,70 +48,34 @@ class LoginActivity : PermissionActivity() {
         }
 
         mBtnLogin.setOnClickListener {
-            login()
+            val username = mEdtUsername.text.toString().trim()
+            val password = mEdtPassword.text.toString().trim()
+            login(username, password)
         }
 
         mTvForgotPassword.setOnClickListener {
-            //todo forgot password
+            MyLibrary.failed(baseContext)
         }
     }
 
-    private fun login() {
+    private fun login(username: String, password: String) {
         // TODO: 20/05/2562 login one user only
 
-        val sql = "SELECT * FROM tbl_player\n" +
-                "WHERE user = '${mEdtUser.text.toString().trim()}' AND " +
-                "password = '${mEdtPassword.text.toString().trim()}'"
-        MyConnect.executeQuery(sql, object : MyResultSet {
-            override fun onResponse(rs: ResultSet) {
-                if (rs.next()) {
-                    val item = PlayerItem(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7)
+        Pathiphon.call("sp_login_player")
+            .parameter(username)
+            .parameter(password)
+            .commitQuery {
+                if (it.next()) {
+                    login(
+                        this,
+                        context,
+                        it.getString(1).trim(),
+                        mEdtUsername.text.toString().trim()
                     )
-                    mPlayerItem.add(item)
-
-                    if (!mIsRememberPassword) {
-                        dialogRememberPassword()
-                    } else {
-                        loginFinish()
-                    }
                 } else {
-                    MyToast.showLong(baseContext, "Username & Password ไม่ถูกต้อง")
+                    MyLibrary.with(baseContext).showLong(R.string.username_password_incorrect)
                 }
             }
-        })
-    }
-
-    private fun dialogRememberPassword() {
-        val editor = getSharedPreferences(MY_LOGIN, Context.MODE_PRIVATE).edit()
-
-        val builder = AlertDialog.Builder(this@LoginActivity)
-        builder.setTitle("Remember password")
-            .setMessage("Do you want remember password?")
-            .setPositiveButton(R.string.yes) { dialog, which ->
-                editor.putString("password", mEdtPassword.text.toString().trim()).commit()
-                loginFinish()
-            }.setNegativeButton(R.string.no) { dialog, which ->
-                editor.putString("password", "").commit()
-                loginFinish()
-            }.show()
-    }
-
-    private fun loginFinish() {
-        val editor = getSharedPreferences(MY_LOGIN, Context.MODE_PRIVATE).edit()
-        editor.putString("user", mEdtUser.text.toString().trim()).commit()
-
-        finish()
-        MyToast.showShort(baseContext, "Welcome to Five Star Game.")
-        for (item in mPlayerItem) {
-            MyIntent().getIntent(baseContext, MainActivity::class.java, item)
-        }
     }
 
     override fun onResume() {

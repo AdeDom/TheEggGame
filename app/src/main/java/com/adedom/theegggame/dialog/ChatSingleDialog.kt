@@ -81,7 +81,7 @@ class ChatSingleDialog : DialogFragment() { // 19/7/19
         val time = df.format(Calendar.getInstance().time)
 
         val sql = "INSERT INTO tbl_chat (player_id, time, message, type) " +
-                "VALUES ('${MainActivity.mPlayerItem.id}', " +
+                "VALUES ('${MainActivity.mPlayerItem.playerId}', " +
                 "'${time.toString().trim()}', " +
                 "'${mEdtChat.text.toString().trim()}', " +
                 "'1')"

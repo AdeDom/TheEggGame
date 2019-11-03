@@ -2,6 +2,7 @@ package com.adedom.theegggame.dialog
 
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -10,11 +11,9 @@ import android.widget.Button
 import com.adedom.theegggame.LoginActivity
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.utility.MyIntent
 
-class SettingDialog : DialogFragment() { // 15/7/62
+class SettingDialog : DialogFragment() {
 
-    val TAG = "SettingDialog"
     private lateinit var mBtnChange: Button
     private lateinit var mBtnLogout: Button
     private lateinit var mBtnExit: Button
@@ -25,7 +24,7 @@ class SettingDialog : DialogFragment() { // 15/7/62
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
             .setIcon(R.drawable.ic_setting)
-            .setTitle("Setting")
+            .setTitle(R.string.setting)
 
         bindWidgets(view)
         setEvents()
@@ -52,10 +51,14 @@ class SettingDialog : DialogFragment() { // 15/7/62
         }
 
         mBtnLogout.setOnClickListener {
-            val editor = activity!!.getSharedPreferences(LoginActivity.MY_LOGIN, MODE_PRIVATE).edit()
-            editor.putString("password", "").commit()
-            activity!!.finish()
-            MyIntent().getIntent(activity!!, LoginActivity::class.java)
+            activity!!.getSharedPreferences(MainActivity.MY_LOGIN, MODE_PRIVATE).edit()
+                .putString("player_id", "empty")
+                .apply()
+            startActivity(
+                Intent(MainActivity.context, LoginActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            )
+            activity!!.finishAffinity()
         }
 
         mBtnExit.setOnClickListener {

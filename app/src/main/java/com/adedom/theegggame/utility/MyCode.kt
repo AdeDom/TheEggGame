@@ -1,7 +1,5 @@
 package com.adedom.theegggame.utility
 
-import android.content.Context
-
 class MyCode {
 
     companion object {
@@ -27,14 +25,6 @@ class MyCode {
             } else {
                 "B"
             }
-        }
-
-        fun checkIsEmpty(context: Context, object1: Any, message1: String): Boolean {
-            if (object1.toString().trim().isEmpty()) {
-                MyToast.showLong(context, message1)
-                return true
-            }
-            return false
         }
     }
 }

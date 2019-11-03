@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.multi.GetReadyActivity
@@ -56,9 +57,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
     }
 
     private fun getNoRoomToInsert() {
-        if (MyCode.checkIsEmpty(context!!, mEdtName.text, "Please enter the room name")) {
-            return
-        }
+        if (MyLibrary.isEmpty(mEdtName, getString(R.string.error_room_name))) return
 
         val sql = "SELECT no FROM tbl_room ORDER BY id DESC LIMIT 1"
         MyConnect.executeQuery(sql, object : MyResultSet {
@@ -85,7 +84,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
 
         val sqlRoomInfo = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mNoRoom.trim()}', " +
-                "'${MainActivity.mPlayerItem.id.trim()}', " +
+                "'${MainActivity.mPlayerItem.playerId.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sqlRoomInfo)

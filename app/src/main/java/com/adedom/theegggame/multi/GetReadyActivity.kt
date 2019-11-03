@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.RoomInfoDialog
@@ -21,7 +22,6 @@ import com.adedom.theegggame.model.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGrid
 import com.adedom.theegggame.utility.MyResultSet
-import com.adedom.theegggame.utility.MyToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_get_ready.*
@@ -116,14 +116,14 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
 
             if (teamA == 0 || teamB == 0) {
-                MyToast.showLong(baseContext, "Arrange at least 1 team per team")
+                MyLibrary.with(baseContext).showLong(R.string.least_one_person_per_team)
                 return
             }
 
             if (count <= 1 && mRoomInfoItem.size != 1) {
                 onReady()
             } else {
-                MyToast.showLong(baseContext, "The player is not ready yet")
+                MyLibrary.with(baseContext).showLong(R.string.player_not_ready)
             }
         } else {
             onReady()
@@ -139,14 +139,14 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
         val sql = "UPDATE tbl_room_info \n" +
                 "SET status_id = '${mReady.trim()}'\n" +
-                "WHERE player_id = '${MainActivity.mPlayerItem.id}'"
+                "WHERE player_id = '${MainActivity.mPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
     }
 
     private fun setTeam(team: String) {
         val sql = "UPDATE tbl_room_info \n" +
                 "SET team = '${team.trim()}'\n" +
-                "WHERE player_id = '${MainActivity.mPlayerItem.id}'"
+                "WHERE player_id = '${MainActivity.mPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
     }
 
@@ -166,7 +166,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
         }
         mHandlerRefresh.removeCallbacks(mRunnableRefresh)
-        deletePlayerRoomInfo(MainActivity.mPlayerItem.id)
+        deletePlayerRoomInfo(MainActivity.mPlayerItem.playerId)
         finish()
     }
 
@@ -186,10 +186,11 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
     private fun feedRoomInfo() {
         mRoomInfoItem.clear()
-        val sql = "SELECT ri.room_no,p.id,p.name,p.image,p.level,ri.latitude,ri.longitude,ri.team,ri.status_id\n" +
-                "FROM tbl_room_info AS ri , tbl_player AS p\n" +
-                "WHERE ri.room_no = '$mNoRoom' AND ri.player_id = p.id\n" +
-                "ORDER BY ri.id ASC"
+        val sql =
+            "SELECT ri.room_no,p.id,p.name,p.image,p.level,ri.latitude,ri.longitude,ri.team,ri.status_id\n" +
+                    "FROM tbl_room_info AS ri , tbl_player AS p\n" +
+                    "WHERE ri.room_no = '$mNoRoom' AND ri.player_id = p.id\n" +
+                    "ORDER BY ri.id ASC"
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
                 while (rs.next()) {
@@ -249,7 +250,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
                 mHandlerRefresh.removeCallbacks(mRunnableRefresh)
                 startActivityForResult(Intent(baseContext, MultiActivity::class.java), 1111)
-                MyToast.showShort(baseContext, "Start Game")
+                MyLibrary.with(baseContext).showShort(R.string.start_game)
             }
         }
     }
@@ -257,7 +258,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_CANCELED) {
-            deletePlayerRoomInfo(MainActivity.mPlayerItem.id)
+            deletePlayerRoomInfo(MainActivity.mPlayerItem.playerId)
             finish()
         }
 
@@ -277,7 +278,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
             val numA = data!!.getStringExtra("values1")
             val numB = data!!.getStringExtra("values2")
-            MyToast.showLong(baseContext, "Team A : $numA\nTeam B : $numB")
+            MyLibrary.with(baseContext).showLong("Team A : $numA\nTeam B : $numB")
         }
     }
 
@@ -343,7 +344,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
         init {
             itemView.setOnLongClickListener(object : View.OnLongClickListener {
                 override fun onLongClick(p0: View?): Boolean {
-                    if (MainActivity.mPlayerItem.id != mRoomInfoItem[adapterPosition].playerId && mHeadRoom == "1") {
+                    if (MainActivity.mPlayerItem.playerId != mRoomInfoItem[adapterPosition].playerId && mHeadRoom == "1") {
                         dialogRoomInfo()
                         return true
                     }

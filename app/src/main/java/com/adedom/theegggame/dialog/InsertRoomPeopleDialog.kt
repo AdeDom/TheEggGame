@@ -10,11 +10,16 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.RoomItem
 import com.adedom.theegggame.multi.GetReadyActivity
-import com.adedom.theegggame.utility.*
+import com.adedom.theegggame.multi.RoomActivity
+import com.adedom.theegggame.utility.MyCode
+import com.adedom.theegggame.utility.MyConnect
+import com.adedom.theegggame.utility.MyIntent
+import com.adedom.theegggame.utility.MyResultSet
 import java.sql.ResultSet
 
 class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
@@ -59,15 +64,13 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     }
 
     private fun checkRoomToJoin() {
-        if (MyCode.checkIsEmpty(context!!, mEdtPassword.text, "Please enter the password")) {
-            return
-        }
+        if (MyLibrary.isEmpty(mEdtPassword, getString(R.string.error_password))) return
 
         val password = mEdtPassword.text.toString().trim()
         if (password == mRoomItem.password) {
             checkPeopleInRoom()
         } else {
-            MyToast.showLong(context!!, "Password is incorrect")
+            MyLibrary.with(RoomActivity.context).showLong(R.string.password_incorrect)
         }
     }
 
@@ -80,7 +83,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                         insertPeople()
                     } else {
                         dialog.dismiss()
-                        MyToast.showLong(context!!, "Full")
+                        MyLibrary.with(RoomActivity.context).showLong(R.string.full)
                     }
                 }
             }
@@ -90,7 +93,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     private fun insertPeople() {
         val sql = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mRoomItem.no.trim()}', " +
-                "'${MainActivity.mPlayerItem.id.trim()}', " +
+                "'${MainActivity.mPlayerItem.playerId.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sql)

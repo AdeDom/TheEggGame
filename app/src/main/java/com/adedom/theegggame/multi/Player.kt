@@ -37,7 +37,7 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
             var bmp = BitmapFactory.decodeResource(MyMap.mContext.resources, R.drawable.ic_player)
             if (image.isNotEmpty()) {
                 bmp = MyIon.getIon(MyMap.mContext, bmp, image)
-                bmp = Bitmap.createScaledBitmap(bmp!!, (bmp.width * 0.2).toInt(), (bmp.height * 0.2).toInt(), true)
+                bmp = Bitmap.createScaledBitmap(bmp, (bmp.width * 0.2).toInt(), (bmp.height * 0.2).toInt(), true)
             }
 
             //player
@@ -53,7 +53,7 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
 
             //Circle
             val latLng = LatLng(latitude, longitude)
-            if (MainActivity.mPlayerItem.id == playerId) {
+            if (MainActivity.mPlayerItem.playerId == playerId) {
                 MultiActivity.mCircle = MyMap.mGoogleMap!!.addCircle(
                     CircleOptions()
                         .center(latLng)

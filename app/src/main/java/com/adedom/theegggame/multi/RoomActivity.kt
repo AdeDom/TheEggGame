@@ -1,5 +1,6 @@
 package com.adedom.theegggame.multi
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import com.adedom.library.MyLibrary
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.InsertRoomDialog
@@ -28,9 +30,15 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
     private val mRoomItem = arrayListOf<RoomItem>()
     private val mHandlerRefresh = Handler()
 
+    companion object {
+        lateinit var context: Context
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
+
+        context = baseContext
 
         setToolbar()
         setWidgets()
@@ -160,7 +168,7 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
         }
 
         private fun checkRoomToJoin() {
-            // TODO: 21/05/2562 check status room id
+            // TODO: 21/05/2562 check status room ids
             if (mRoomItem[adapterPosition].password.isEmpty()) {
                 joinNoPassword()
             } else {
@@ -174,14 +182,15 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
         }
 
         private fun joinNoPassword() {
-            val sql = "SELECT COUNT(*) FROM tbl_room_info WHERE room_no = '${mRoomItem[adapterPosition].no}'"
+            val sql =
+                "SELECT COUNT(*) FROM tbl_room_info WHERE room_no = '${mRoomItem[adapterPosition].no}'"
             MyConnect.executeQuery(sql, object : MyResultSet {
                 override fun onResponse(rs: ResultSet) {
                     if (rs.next()) {
                         if (rs.getInt(1) < mRoomItem[adapterPosition].people.toInt()) {
                             joinNow()
                         } else {
-                            MyToast.showLong(baseContext, "Full")
+                            MyLibrary.with(baseContext).showLong(R.string.full)
                         }
                     }
                 }
@@ -191,7 +200,7 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
         private fun joinNow() {
             val sql = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) " +
                     "VALUES ('${mRoomItem[adapterPosition].no}', " +
-                    "'${MainActivity.mPlayerItem.id}', " +
+                    "'${MainActivity.mPlayerItem.playerId}', " +
                     "'${MyCode.rndTeam()}', " +
                     "'0')"
             MyConnect.executeQuery(sql)
