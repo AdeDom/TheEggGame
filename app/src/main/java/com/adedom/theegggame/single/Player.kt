@@ -48,8 +48,8 @@ class Player(latLng: LatLng)  { // 21/7/62
         SingleActivity.mMyCircle = MyMap.mGoogleMap!!.addCircle(
             CircleOptions().center(latLng)
                 .radius(Commons.ONE_HUNDRED_METER.toDouble())
-                .fillColor(R.color.colorRadius)
-                .strokeColor(R.color.colorStrokeRadius)
+                .fillColor(R.color.colorWhite)
+                .strokeColor(android.R.color.white)
                 .strokeWidth(5f)
         )
     }

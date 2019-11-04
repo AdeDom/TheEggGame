@@ -1,149 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape_bg"
+        style="@style/RelativeLayout"
         tools:context=".MainActivity">
 
-    <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_above="@+id/main_play"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/the_egg_game" />
-
     <LinearLayout
-            android:id="@+id/main_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:orientation="vertical">
+            style="@style/LinearLayoutMain"
+            android:layout_centerInParent="true">
+
+        <ImageView
+                style="@style/ImageViewLogo"
+                android:contentDescription="@string/logo" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextViewLarge"
                 android:text="@string/app_name"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/textViewMain" />
 
         <GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                style="@style/WrapWrap"
+                android:layout_marginTop="@dimen/large"
                 android:columnCount="2"
                 android:rowCount="2">
 
             <ImageView
                     android:id="@+id/mImgProfile"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    style="@style/ImageViewPlayer"
                     android:layout_rowSpan="2"
-                    android:src="@drawable/ic_player" />
+                    android:contentDescription="@string/player" />
 
             <TextView
                     android:id="@+id/mTvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Name"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold" />
+                    style="@style/TextView"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/name" />
 
             <TextView
                     android:id="@+id/mTvLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Level"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold" />
+                    style="@style/TextViewSmall"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/level" />
         </GridLayout>
 
         <Button
                 android:id="@+id/mBtnSingle"
-                android:layout_width="220dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_btn"
-                android:text="Single player"
+                style="@style/Button"
+                android:layout_width="@dimen/buttonWidthMain"
+                android:layout_height="@dimen/buttonHeightMain"
+                android:text="@string/single_player"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
                 android:id="@+id/mBtnMulti"
-                android:layout_width="220dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_btn"
-                android:text="Multi player"
+                style="@style/Button"
+                android:layout_width="@dimen/buttonWidthMain"
+                android:layout_height="@dimen/buttonHeightMain"
+                android:text="@string/multi_player"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            style="@style/LinearLayoutHorizontal"
+            android:layout_alignParentBottom="true">
 
-        <LinearLayout style="@style/MainBtn">
+        <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
                     android:id="@+id/mImgMission"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_mission" />
+                    style="@style/ImageViewPlayer"
+                    android:src="@drawable/ic_mission"
+                    android:contentDescription="@string/mission" />
 
             <TextView
-                    style="@style/MainTv"
-                    android:text="Mission" />
+                    style="@style/TextViewSmall"
+                    android:text="@string/mission" />
         </LinearLayout>
 
-        <LinearLayout style="@style/MainBtn">
+        <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
                     android:id="@+id/mImgRank"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_rank" />
+                    style="@style/ImageViewPlayer"
+                    android:src="@drawable/ic_rank"
+                    android:contentDescription="@string/rank" />
 
             <TextView
-                    style="@style/MainTv"
-                    android:text="Rank" />
+                    style="@style/TextViewSmall"
+                    android:text="@string/rank" />
         </LinearLayout>
 
-        <LinearLayout style="@style/MainBtn">
+        <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
                     android:id="@+id/mImgAbout"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_h2p" />
+                    style="@style/ImageViewPlayer"
+                    android:src="@drawable/ic_h2p"
+                    android:contentDescription="@string/about" />
 
             <TextView
-                    style="@style/MainTv"
-                    android:text="About" />
+                    style="@style/TextViewSmall"
+                    android:text="@string/about" />
         </LinearLayout>
 
-        <LinearLayout style="@style/MainBtn">
+        <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
                     android:id="@+id/mImgSetting"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_setting" />
+                    style="@style/ImageViewPlayer"
+                    android:src="@drawable/ic_setting"
+                    android:contentDescription="@string/setting" />
 
             <TextView
-                    style="@style/MainTv"
-                    android:text="Setting" />
+                    style="@style/TextViewSmall"
+                    android:text="@string/setting" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -8,7 +8,7 @@ import java.sql.SQLException
 class Pathiphon {
 
     companion object{
-        private val IP = "192.168.43.22"
+        private val IP = "192.168.42.48"
         private val DB_NAME = "the_egg_game"
         private val USERNAME = "root"
         private val PASSWORD = "abc456"

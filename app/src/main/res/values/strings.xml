@@ -34,5 +34,19 @@
     <string name="name">Name</string>
     <string name="username_less">Please enter your username no less than 4 characters</string>
     <string name="password_less">Please enter your password no less than 4 characters</string>
+    <string name="logo">Logo</string>
+    <string name="level">Level</string>
+    <string name="single_player">Single player</string>
+    <string name="multi_player">Multi player</string>
+    <string name="mission">Mission</string>
+    <string name="rank">Rank</string>
+    <string name="about">About</string>
     <string name="setting">Setting</string>
+    <string name="player">Player</string>
+    <string name="log_in">Log In</string>
+    <string name="login">Login</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="ready">Ready</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
 </resources>

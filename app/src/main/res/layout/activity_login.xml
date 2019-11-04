@@ -1,96 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_bg"
-              android:focusable="true"
-              android:focusableInTouchMode="true"
-              android:gravity="center"
-              android:orientation="vertical"
-              android:padding="20dp"
-              tools:context=".LoginActivity">
-
-    <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/the_egg_game"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/black"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/RelativeLayout"
+        tools:context=".LoginActivity">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="#1A000000"
-            android:orientation="vertical"
-            android:padding="20dp">
+            style="@style/LinearLayoutMain"
+            android:layout_centerInParent="true">
+
+        <ImageView
+                style="@style/ImageViewLogo"
+                android:contentDescription="@string/logo" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Log In"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"/>
+                style="@style/TextViewLarge"
+                android:text="@string/app_name"
+                android:textSize="30sp" />
 
-        <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+                style="@style/TextViewLarge"
+                android:text="@string/log_in"
+                android:textColor="@android:color/black" />
+
+        <android.support.design.widget.TextInputLayout style="@style/WrapWrap">
 
             <EditText
                     android:id="@+id/mEdtUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_edit"
-                    android:hint="Username"/>
+                    style="@style/EditText"
+                    android:hint="@string/username" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputLayout style="@style/WrapWrap">
 
             <EditText
                     android:id="@+id/mEdtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_edit"
-                    android:hint="Password"
-                    android:inputType="textPassword"/>
+                    style="@style/EditTextPassword"
+                    android:hint="@string/password" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal">
 
             <Button
                     android:id="@+id/mBtnReg"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Register"/>
+                    style="@style/Button"
+                    android:text="@string/register" />
 
             <Button
                     android:id="@+id/mBtnLogin"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Login"/>
+                    style="@style/Button"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/login" />
         </LinearLayout>
 
         <TextView
                 android:id="@+id/mTvForgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgot your password?"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                style="@style/TextViewSmall"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/large"
+                android:text="@string/forgot_your_password" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -58,8 +58,8 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
                     CircleOptions()
                         .center(latLng)
                         .radius(Commons.ONE_HUNDRED_METER.toDouble())
-                        .fillColor(R.color.colorRadius)
-                        .strokeColor(R.color.colorStrokeRadius)
+                        .fillColor(R.color.colorWhite)
+                        .strokeColor(android.R.color.white)
                         .strokeWidth(5f)
                 )
             }
