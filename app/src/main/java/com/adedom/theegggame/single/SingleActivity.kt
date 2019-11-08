@@ -2,7 +2,7 @@ package com.adedom.theegggame.single
 
 import android.location.Location
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.ChatSingleDialog

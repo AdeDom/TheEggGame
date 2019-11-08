@@ -4,7 +4,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R

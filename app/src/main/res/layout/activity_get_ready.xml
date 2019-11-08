@@ -5,14 +5,14 @@
         style="@style/RelativeLayout"
         tools:context=".multi.GetReadyActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/bar"
             style="@style/AppBarLayout">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar" />
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <include
             android:id="@+id/head"
@@ -24,13 +24,13 @@
             android:layout_marginTop="@dimen/large"
             android:layout_marginRight="@dimen/large" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecyclerView"
             style="@style/MatchMatch"
             android:layout_above="@+id/menu"
             android:layout_below="@+id/head"
             android:layout_marginTop="5dp"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_rv_player" />
 

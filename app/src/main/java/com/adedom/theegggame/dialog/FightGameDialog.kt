@@ -3,9 +3,9 @@ package com.adedom.theegggame.dialog
 import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.DialogFragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.TextView

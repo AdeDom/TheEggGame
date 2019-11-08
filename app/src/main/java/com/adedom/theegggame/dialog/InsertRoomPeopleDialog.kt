@@ -3,9 +3,9 @@ package com.adedom.theegggame.dialog
 import android.app.Dialog
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
+import androidx.fragment.app.DialogFragment
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
