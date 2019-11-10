@@ -18,7 +18,6 @@ class Pathiphon {
             return connection(IP, DB_NAME, USERNAME, PASSWORD)
         }
 
-        @Deprecated("")
         fun connection(
             ip: String,
             dbName: String,

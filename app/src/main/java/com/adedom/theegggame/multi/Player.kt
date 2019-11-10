@@ -53,7 +53,7 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
 
             //Circle
             val latLng = LatLng(latitude, longitude)
-            if (MainActivity.mPlayerItem.playerId == playerId) {
+            if (MainActivity.sPlayerItem.playerId == playerId) {
                 MultiActivity.mCircle = MyMap.mGoogleMap!!.addCircle(
                     CircleOptions()
                         .center(latLng)

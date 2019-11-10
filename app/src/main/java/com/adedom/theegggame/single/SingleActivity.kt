@@ -117,7 +117,7 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
         val timeNow = System.currentTimeMillis() / 1000
-        if (timeNow > MainActivity.mTimeStamp + Commons.FIFTEEN_MINUTE) { // Multiply 2
+        if (timeNow > MainActivity.sTimeStamp + Commons.FIFTEEN_MINUTE) { // Multiply 2
             values *= 2
         }
 
@@ -137,7 +137,7 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         }
 
         val sql =
-            "SELECT * FROM tbl_my_item WHERE player_id = '${MainActivity.mPlayerItem.playerId}' AND " +
+            "SELECT * FROM tbl_my_item WHERE player_id = '${MainActivity.sPlayerItem.playerId}' AND " +
                     "object_id = '${myItem.toString().trim()}'"
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
@@ -146,12 +146,12 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
                     num += values
                     val sql = "UPDATE tbl_my_item SET\n" +
                             "qty = '${num.toString().trim()}'\n" +
-                            "WHERE player_id = '${MainActivity.mPlayerItem.playerId}' AND " +
+                            "WHERE player_id = '${MainActivity.sPlayerItem.playerId}' AND " +
                             "object_id = '${myItem.toString().trim()}'"
                     MyConnect.executeQuery(sql)
                 } else {
                     val sql = "INSERT INTO tbl_my_item (player_id, object_id, qty) \n" +
-                            "VALUES ('${MainActivity.mPlayerItem.playerId}', " +
+                            "VALUES ('${MainActivity.sPlayerItem.playerId}', " +
                             "'${myItem.toString().trim()}', " +
                             "'${values.toString().trim()}')"
                     MyConnect.executeQuery(sql)
@@ -167,10 +167,10 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val time = df.format(Calendar.getInstance().time)
         val chatItem = ChatItem(
-            MainActivity.mPlayerItem.playerId,
+            MainActivity.sPlayerItem.playerId,
             time.toString(),
             detailItem(myItem, values),
-            MainActivity.mPlayerItem.image,
+            MainActivity.sPlayerItem.image,
             "3"
         )
         mChatItem.add(chatItem)

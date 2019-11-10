@@ -1,15 +1,15 @@
 package com.adedom.theegggame.dialog
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import com.google.android.material.textfield.TextInputLayout
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.RoomItem
@@ -17,9 +17,9 @@ import com.adedom.theegggame.multi.GetReadyActivity
 import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyIntent
 import com.adedom.theegggame.utility.MyResultSet
 import com.adedom.utility.MyLibrary
+import com.google.android.material.textfield.TextInputLayout
 import java.sql.ResultSet
 
 class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
@@ -70,7 +70,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
         if (password == mRoomItem.password) {
             checkPeopleInRoom()
         } else {
-            MyLibrary.with(RoomActivity.context).showLong(R.string.password_incorrect)
+            MyLibrary.with(RoomActivity.sContext).showLong(R.string.password_incorrect)
         }
     }
 
@@ -83,7 +83,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                         insertPeople()
                     } else {
                         dialog.dismiss()
-                        MyLibrary.with(RoomActivity.context).showLong(R.string.full)
+                        MyLibrary.with(RoomActivity.sContext).showLong(R.string.full)
                     }
                 }
             }
@@ -93,19 +93,18 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     private fun insertPeople() {
         val sql = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mRoomItem.no.trim()}', " +
-                "'${MainActivity.mPlayerItem.playerId.trim()}', " +
+                "'${MainActivity.sPlayerItem.playerId.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sql)
 
         dialog.dismiss()
-        MyIntent().getIntent(
-            context!!,
-            GetReadyActivity::class.java,
-            mRoomItem.no,
-            mRoomItem.name,
-            mRoomItem.people,
-            "2"
+        RoomActivity.sContext.startActivity(
+            Intent(RoomActivity.sContext, GetReadyActivity::class.java)
+                .putExtra("values1", mRoomItem.no)
+                .putExtra("values2", mRoomItem.name)
+                .putExtra("values3", mRoomItem.people)
+                .putExtra("values4", "2")
         )
     }
 }

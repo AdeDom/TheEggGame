@@ -3,10 +3,6 @@ package com.adedom.theegggame.multi
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +10,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.RoomInfoDialog
@@ -22,8 +22,6 @@ import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGrid
 import com.adedom.theegggame.utility.MyResultSet
 import com.adedom.utility.MyLibrary
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_get_ready.*
 import kotlinx.android.synthetic.main.item_rv_player.view.*
 import kotlinx.android.synthetic.main.item_rv_room.*
@@ -139,14 +137,14 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
         val sql = "UPDATE tbl_room_info \n" +
                 "SET status_id = '${mReady.trim()}'\n" +
-                "WHERE player_id = '${MainActivity.mPlayerItem.playerId}'"
+                "WHERE player_id = '${MainActivity.sPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
     }
 
     private fun setTeam(team: String) {
         val sql = "UPDATE tbl_room_info \n" +
                 "SET team = '${team.trim()}'\n" +
-                "WHERE player_id = '${MainActivity.mPlayerItem.playerId}'"
+                "WHERE player_id = '${MainActivity.sPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
     }
 
@@ -166,7 +164,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
         }
         mHandlerRefresh.removeCallbacks(mRunnableRefresh)
-        deletePlayerRoomInfo(MainActivity.mPlayerItem.playerId)
+        deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId)
         finish()
     }
 
@@ -258,7 +256,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_CANCELED) {
-            deletePlayerRoomInfo(MainActivity.mPlayerItem.playerId)
+            deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId)
             finish()
         }
 
@@ -323,10 +321,8 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
 
             if (mRoomInfoItem[i].image.isNotEmpty()) {
-                Glide.with(baseContext)
-                    .load(MyConnect.BASE_URL + "images/${mRoomInfoItem[i].image}")
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(holder.mImgProfile)
+                MyLibrary.with(baseContext)
+                    .glideProfile(mRoomInfoItem[i].image,holder.mImgProfile)
             }
             holder.mTvMyName.text = mRoomInfoItem[i].name
             holder.mTvLevel.text = "Level : ${mRoomInfoItem[i].level}"
@@ -344,7 +340,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
         init {
             itemView.setOnLongClickListener(object : View.OnLongClickListener {
                 override fun onLongClick(p0: View?): Boolean {
-                    if (MainActivity.mPlayerItem.playerId != mRoomInfoItem[adapterPosition].playerId && mHeadRoom == "1") {
+                    if (MainActivity.sPlayerItem.playerId != mRoomInfoItem[adapterPosition].playerId && mHeadRoom == "1") {
                         dialogRoomInfo()
                         return true
                     }

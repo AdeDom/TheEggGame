@@ -31,16 +31,16 @@ class Player(latLng: LatLng)  { // 21/7/62
 
     private fun setMyLocation(latLng: LatLng) {
         var bmp = BitmapFactory.decodeResource(MyMap.mContext.resources, R.drawable.ic_player)
-        if (MainActivity.mPlayerItem.image.isNotEmpty()) {
-            bmp = MyIon.getIon(MyMap.mContext, bmp, MainActivity.mPlayerItem.image)
+        if (MainActivity.sPlayerItem.image.isNotEmpty()) {
+            bmp = MyIon.getIon(MyMap.mContext, bmp, MainActivity.sPlayerItem.image)
             bmp = Bitmap.createScaledBitmap(bmp, (bmp.width * 0.2).toInt(), (bmp.height * 0.2).toInt(), true)
         }
 
         SingleActivity.mMarkerMyLocation = MyMap.mGoogleMap!!.addMarker(
             MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude))
                 .icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                .title(MainActivity.mPlayerItem.name)
-                .snippet("Level : " + MainActivity.mPlayerItem.level)
+                .title(MainActivity.sPlayerItem.name)
+                .snippet("Level : " + MainActivity.sPlayerItem.level)
         )
     }
 

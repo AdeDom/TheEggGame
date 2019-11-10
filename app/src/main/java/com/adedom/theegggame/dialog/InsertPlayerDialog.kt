@@ -4,18 +4,17 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.LoginActivity
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.utility.MyLibrary
 import com.adedom.utility.Pathiphon
-import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 
 class InsertPlayerDialog : DialogFragment() {
@@ -64,7 +63,7 @@ class InsertPlayerDialog : DialogFragment() {
             .setRequestedSize(150, 150)
             .setMinCropWindowSize(150, 150)
             .setAspectRatio(1, 1)
-            .start(LoginActivity.context, this)
+            .start(LoginActivity.sContext, this)
     }
 
     private fun registerPlayer() {
@@ -80,8 +79,8 @@ class InsertPlayerDialog : DialogFragment() {
 
         //todo upload image
         if (mImageUri != "empty") {
-            MyLibrary.with(LoginActivity.context)
-                .uploadProfile(mImageUri)
+            MyLibrary.with(LoginActivity.sContext)
+                .ionUpload(mImageUri)
         }
 
         Pathiphon.call("sp_insert_player")
@@ -92,12 +91,12 @@ class InsertPlayerDialog : DialogFragment() {
             .commitQuery {
                 if (it.next()) {
                     if (it.getString(1).trim() == "failed") {
-                        MyLibrary.with(LoginActivity.context)
+                        MyLibrary.with(LoginActivity.sContext)
                             .showLong(R.string.username_same_current_player)
                     } else {
                         LoginActivity.login(
                             activity!!,
-                            LoginActivity.context,
+                            LoginActivity.sContext,
                             it.getString(1).trim(),
                             mEdtUsername.text.toString().trim()
                         )
@@ -112,9 +111,9 @@ class InsertPlayerDialog : DialogFragment() {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
                 mImageUri = result.uri.toString()
-                Glide.with(context!!).load(mImageUri).circleCrop().into(mImgProfile)
+                MyLibrary.with(LoginActivity.sContext).glide(mImageUri, mImgProfile)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                MyLibrary.with(MainActivity.context).showLong(result.error.toString())
+                MyLibrary.with(MainActivity.sContext).showLong(result.error.toString())
             }
         }
     }

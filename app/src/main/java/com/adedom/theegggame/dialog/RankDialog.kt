@@ -2,10 +2,6 @@ package com.adedom.theegggame.dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.PlayerBean
 import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyGlide
 import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.utility.MyLibrary
 import kotlinx.android.synthetic.main.item_player.view.*
 import java.sql.ResultSet
 
@@ -113,7 +114,8 @@ class RankDialog : DialogFragment() { // 15/7/62
 
     inner class CustomAdapter : RecyclerView.Adapter<CustomHolder>() {
         override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): CustomHolder {
-            val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_player, viewGroup, false)
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.item_player, viewGroup, false)
             return CustomHolder(view)
         }
 
@@ -123,7 +125,8 @@ class RankDialog : DialogFragment() { // 15/7/62
 
         override fun onBindViewHolder(holder: CustomHolder, position: Int) {
             if (mPlayerItem[position].image.isNotEmpty()) {
-                MyGlide.getGlide(context!!, holder.mImgProfile, mPlayerItem[position].image)
+                MyLibrary.with(MainActivity.sContext)
+                    .glideProfile(mPlayerItem[position].image, holder.mImgProfile)
             }
             holder.mTvName.text = mPlayerItem[position].name
             holder.mTvLevel.text = mPlayerItem[position].level.toString()

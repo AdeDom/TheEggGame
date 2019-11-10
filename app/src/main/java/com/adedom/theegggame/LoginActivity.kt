@@ -14,10 +14,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() { // 03/11/19
 
     companion object {
-        lateinit var context: Context
+        lateinit var sContext: Context
 
         fun login(activity: Activity, context: Context, playerId: String, username: String) {
-            context.getSharedPreferences(MainActivity.MY_LOGIN, Context.MODE_PRIVATE).edit()
+            context.getSharedPreferences(MainActivity.PREF_LOGIN, Context.MODE_PRIVATE).edit()
                 .putString("player_id", playerId)
                 .putString("username", username.trim())
                 .apply()
@@ -30,14 +30,14 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        context = baseContext
+        sContext = baseContext
 
         setWidgets()
         setEvents()
     }
 
     private fun setWidgets() {
-        val preferences = getSharedPreferences(MainActivity.MY_LOGIN, Context.MODE_PRIVATE)
+        val preferences = getSharedPreferences(MainActivity.PREF_LOGIN, Context.MODE_PRIVATE)
         val username = preferences.getString("username", "")!!
         mEdtUsername.setText(username)
     }
@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
                 if (it.next()) {
                     login(
                         this,
-                        context,
+                        sContext,
                         it.getString(1).trim(),
                         username
                     )

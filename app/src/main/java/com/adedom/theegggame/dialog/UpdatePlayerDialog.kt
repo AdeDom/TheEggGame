@@ -4,12 +4,12 @@ import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.PlayerBean
@@ -100,7 +100,7 @@ class UpdatePlayerDialog : DialogFragment() {
         MyConnect.executeQuery(sql)
 
         dialog.dismiss()
-        MyLibrary.with(MainActivity.context).showShort(R.string.recording_complete)
+        MyLibrary.with(MainActivity.sContext).showShort(R.string.recording_complete)
 
         // TODO: 23/05/2562 refresh MainActivity
         //todo password activity login
@@ -124,7 +124,7 @@ class UpdatePlayerDialog : DialogFragment() {
         }
 
         if (errMsg != "") {
-            MyLibrary.with(MainActivity.context).showLong(errMsg)
+            MyLibrary.with(MainActivity.sContext).showLong(errMsg)
             return true
         }
         return false

@@ -1,18 +1,19 @@
 package com.adedom.theegggame.dialog
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.multi.GetReadyActivity
+import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyIntent
 import com.adedom.theegggame.utility.MyResultSet
 import com.adedom.utility.MyLibrary
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
@@ -49,7 +50,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
     }
 
     private fun setWidgets() {
-        mEdtName.setText(MainActivity.mPlayerItem.name)
+        mEdtName.setText(MainActivity.sPlayerItem.name)
     }
 
     private fun setEvents() {
@@ -84,19 +85,18 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
 
         val sqlRoomInfo = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mNoRoom.trim()}', " +
-                "'${MainActivity.mPlayerItem.playerId.trim()}', " +
+                "'${MainActivity.sPlayerItem.playerId.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sqlRoomInfo)
 
         dialog.dismiss()
-        MyIntent().getIntent(
-            context!!,
-            GetReadyActivity::class.java,
-            mNoRoom,
-            mEdtName.text,
-            mNumberPicker.value,
-            "1"
+        startActivity(
+            Intent(RoomActivity.sContext, GetReadyActivity::class.java)
+                .putExtra("values1", mNoRoom)
+                .putExtra("values2", mEdtName.text.toString().trim())
+                .putExtra("values3", mNumberPicker.value.toString())
+                .putExtra("values4", "1")
         )
     }
 }

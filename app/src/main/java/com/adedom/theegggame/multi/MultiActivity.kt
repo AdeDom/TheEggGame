@@ -4,8 +4,8 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AlertDialog
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.FightGameDialog
@@ -110,7 +110,7 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
         val sql = "UPDATE tbl_room_info SET \n" +
                 "latitude = '${mLatLng!!.latitude.toString().trim()}',\n" +
                 "longitude = '${mLatLng!!.longitude.toString().trim()}'\n" +
-                "WHERE player_id = '${MainActivity.mPlayerItem.playerId.trim()}'"
+                "WHERE player_id = '${MainActivity.sPlayerItem.playerId.trim()}'"
         MyConnect.executeQuery(sql)
     }
 
@@ -145,14 +145,14 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
     }
 
     private fun checkNewItem() {
-        if (mRoomInfoItem[0].playerId == MainActivity.mPlayerItem.playerId
+        if (mRoomInfoItem[0].playerId == MainActivity.sPlayerItem.playerId
             && mRoomInfoItem[0].latitude != Commons.LATLNG_ZERO
             && mRoomInfoItem[0].longitude != Commons.LATLNG_ZERO
             && mIsRndItem
         ) {
             mIsRndItem = false
             Item(mLatLng!!)
-        } else if (mRoomInfoItem[0].playerId != MainActivity.mPlayerItem.playerId
+        } else if (mRoomInfoItem[0].playerId != MainActivity.sPlayerItem.playerId
             && mRoomInfoItem[0].latitude != Commons.LATLNG_ZERO
             && mRoomInfoItem[0].longitude != Commons.LATLNG_ZERO
             && mIsRndItem
@@ -185,7 +185,7 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
 
                 MyMediaPlayer.getSound(baseContext, R.raw.keep)
 
-                val sql = "UPDATE tbl_multi SET player_id = '${MainActivity.mPlayerItem.playerId.trim()}', " +
+                val sql = "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId.trim()}', " +
                         "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
                 MyConnect.executeQuery(sql)
             }
@@ -196,7 +196,7 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
         //todo check fighting game
 
         for (i in mRoomInfoItem.indices) {
-            if (mRoomInfoItem[i].playerId != MainActivity.mPlayerItem.playerId
+            if (mRoomInfoItem[i].playerId != MainActivity.sPlayerItem.playerId
                 && mRoomInfoItem[i].latitude != Commons.LATLNG_ZERO
                 && mRoomInfoItem[i].longitude != Commons.LATLNG_ZERO
             ) {

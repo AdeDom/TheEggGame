@@ -3,16 +3,16 @@ package com.adedom.theegggame.dialog
 import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.ChatItem
@@ -82,7 +82,7 @@ class ChatSingleDialog : DialogFragment() { // 19/7/19
         val time = df.format(Calendar.getInstance().time)
 
         val sql = "INSERT INTO tbl_chat (player_id, time, message, type) " +
-                "VALUES ('${MainActivity.mPlayerItem.playerId}', " +
+                "VALUES ('${MainActivity.sPlayerItem.playerId}', " +
                 "'${time.toString().trim()}', " +
                 "'${mEdtChat.text.toString().trim()}', " +
                 "'1')"
