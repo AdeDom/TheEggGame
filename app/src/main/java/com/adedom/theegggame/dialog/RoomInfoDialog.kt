@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.model.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
@@ -42,7 +42,7 @@ class RoomInfoDialog : DialogFragment() { // 21/7/62
     }
 
     private fun onKickOut() {
-        dialog.dismiss()
+        dialog!!.dismiss()
         val builder = AlertDialog.Builder(activity!!)
         builder.setTitle("Do you want to kick out ${mRoomInfoItem.name} ?")
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }

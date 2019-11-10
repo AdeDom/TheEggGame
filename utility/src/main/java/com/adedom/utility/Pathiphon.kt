@@ -7,22 +7,22 @@ import java.sql.SQLException
 
 class Pathiphon {
 
-    companion object{
-        private val IP = "192.168.42.48"
-        private val DB_NAME = "the_egg_game"
+    companion object {
+        private val HOST = "192.168.43.22"
         private val USERNAME = "root"
         private val PASSWORD = "abc456"
-        val BASE_URL = "http://$IP/the-egg-game/"
+        private val DB_NAME = "the_egg_game"
+        val BASE_URL = "http://$HOST/the-egg-game/php-script-file/"
 
         fun connection(): Connection? {
-            return connection(IP, DB_NAME, USERNAME, PASSWORD)
+            return connection(HOST, USERNAME, PASSWORD, DB_NAME)
         }
 
         fun connection(
             ip: String,
-            dbName: String,
             username: String,
-            password: String
+            password: String,
+            dbName: String
         ): Connection? {
             StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().permitAll().build())
 

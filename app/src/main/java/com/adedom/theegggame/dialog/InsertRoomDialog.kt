@@ -90,7 +90,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
                 "'0')"
         MyConnect.executeQuery(sqlRoomInfo)
 
-        dialog.dismiss()
+        dialog!!.dismiss()
         startActivity(
             Intent(RoomActivity.sContext, GetReadyActivity::class.java)
                 .putExtra("values1", mNoRoom)

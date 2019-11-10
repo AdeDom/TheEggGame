@@ -6,12 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.adedom.theegggame.dialog.InsertPlayerDialog
-import com.adedom.theegggame.utility.MyMediaPlayer
 import com.adedom.utility.MyLibrary
 import com.adedom.utility.Pathiphon
+import com.adedom.utility.Setting
+import com.google.gson.JsonObject
+import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() { // 03/11/19
+class LoginActivity : AppCompatActivity() { // 10/11//19
 
     companion object {
         lateinit var sContext: Context
@@ -32,6 +34,8 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
 
         sContext = baseContext
 
+        Setting(this, this)
+
         setWidgets()
         setEvents()
     }
@@ -43,17 +47,9 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
     }
 
     private fun setEvents() {
-        mBtnReg.setOnClickListener {
-            InsertPlayerDialog().show(supportFragmentManager, null)
-        }
-
-        mBtnLogin.setOnClickListener {
-            login()
-        }
-
-        mTvForgotPassword.setOnClickListener {
-            MyLibrary.failed(baseContext)
-        }
+        mBtnReg.setOnClickListener { InsertPlayerDialog().show(supportFragmentManager, null) }
+        mBtnLogin.setOnClickListener { login() }
+        mTvForgotPassword.setOnClickListener { MyLibrary.failed(baseContext) }
     }
 
     private fun login() {
@@ -67,32 +63,35 @@ class LoginActivity : AppCompatActivity() { // 03/11/19
             MyLibrary.isEmpty(mEdtPassword, getString(R.string.error_password)) -> return
         }
 
-        Pathiphon.call("sp_login_player")
-            .parameter(username)
-            .parameter(password)
-            .commitQuery {
-
-                if (it.next()) {
-                    login(
-                        this,
-                        sContext,
-                        it.getString(1).trim(),
-                        username
-                    )
-                } else {
+        Ion.with(baseContext)
+            .load(Pathiphon.BASE_URL + "2-1.php")
+            .setBodyParameter("spName", "sp_login_player")
+            .setBodyParameter("values1", username)
+            .setBodyParameter("values2", password)
+            .asJsonArray()
+            .setCallback { e, result ->
+                if (result.size() == 0) {
                     mEdtPassword.text.clear()
                     MyLibrary.with(baseContext).showLong(R.string.username_password_incorrect)
+                } else {
+                    for (i in 0 until result.size()) {
+                        val jsObject = result.get(i) as JsonObject
+                        val values = jsObject.get("values1").asString.trim()
+                        login(this, baseContext, values, username)
+                    }
                 }
             }
     }
 
     override fun onResume() {
         super.onResume()
-        MyMediaPlayer.getMusic(baseContext, R.raw.music_main)
+        Setting.locationListener(this, true)
+//        MyMediaPlayer.getMusic(baseContext, R.raw.music_main)
     }
 
     override fun onPause() {
         super.onPause()
-        MyMediaPlayer.music!!.stop()
+        Setting.locationListener(this, false)
+//        MyMediaPlayer.music!!.stop()
     }
 }

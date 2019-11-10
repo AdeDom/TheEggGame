@@ -99,7 +99,7 @@ class UpdatePlayerDialog : DialogFragment() {
                 "WHERE id = '${mPlayerItem.playerId}'"
         MyConnect.executeQuery(sql)
 
-        dialog.dismiss()
+        dialog!!.dismiss()
         MyLibrary.with(MainActivity.sContext).showShort(R.string.recording_complete)
 
         // TODO: 23/05/2562 refresh MainActivity

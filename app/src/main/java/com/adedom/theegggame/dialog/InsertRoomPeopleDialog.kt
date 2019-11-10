@@ -82,7 +82,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                     if (rs.getInt(1) < mRoomItem.people.toInt()) {
                         insertPeople()
                     } else {
-                        dialog.dismiss()
+                        dialog!!.dismiss()
                         MyLibrary.with(RoomActivity.sContext).showLong(R.string.full)
                     }
                 }
@@ -98,7 +98,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                 "'0')"
         MyConnect.executeQuery(sql)
 
-        dialog.dismiss()
+        dialog!!.dismiss()
         RoomActivity.sContext.startActivity(
             Intent(RoomActivity.sContext, GetReadyActivity::class.java)
                 .putExtra("values1", mRoomItem.no)

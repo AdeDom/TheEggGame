@@ -40,7 +40,7 @@ class SettingDialog : DialogFragment() {
 
     private fun setEvents() {
         mBtnChange.setOnClickListener {
-            dialog.dismiss()
+            dialog!!.dismiss()
 
             val bundle = Bundle()
             bundle.putParcelable("player", MainActivity.sPlayerItem)
@@ -62,7 +62,7 @@ class SettingDialog : DialogFragment() {
         }
 
         mBtnExit.setOnClickListener {
-            dialog.dismiss()
+            dialog!!.dismiss()
             exitDialog()
         }
     }

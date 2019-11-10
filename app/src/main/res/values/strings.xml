@@ -7,23 +7,15 @@
     <string name="multi">Multi player</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="grant_permission">Please grant permission</string>
     <string name="can_not_use_single">Can not use mode Single Player!!!</string>
     <string name="least_one_person_per_team">Arrange at least 1 team per team</string>
     <string name="player_not_ready">The player is not ready yet</string>
     <string name="error_room_name">Please enter room name</string>
-    <string name="error_username">Please enter username</string>
-    <string name="error_password">Please enter password</string>
-    <string name="error_re_password">Please enter Re - password</string>
-    <string name="error_name">Please enter name</string>
-    <string name="password_not_match">Passwords do not match</string>
     <string name="full">Full</string>
     <string name="username_same_current_player">Username is same as the current player</string>
     <string name="password_incorrect">Password is incorrect</string>
     <string name="username_password_incorrect">Please enter a valid username and password</string>
-    <string name="please_grant_location">Please grant location</string>
     <string name="start_game">Start Game</string>
-    <string name="registered_successfully">Registered successfully</string>
     <string name="welcome">Welcome to The Egg Game</string>
     <string name="on_back_pressed">Press back again to exit</string>
     <string name="recording_complete">Recording complete</string>
@@ -32,8 +24,6 @@
     <string name="password">Password</string>
     <string name="re_password">Re - password</string>
     <string name="name">Name</string>
-    <string name="username_less">Please enter your username no less than 4 characters</string>
-    <string name="password_less">Please enter your password no less than 4 characters</string>
     <string name="logo">Logo</string>
     <string name="level">Level</string>
     <string name="single_player">Single player</string>
@@ -49,4 +39,13 @@
     <string name="ready">Ready</string>
     <string name="red">Red</string>
     <string name="blue">Blue</string>
+
+    <string name="error_username">Please enter username</string>
+    <string name="error_password">Please enter password</string>
+    <string name="error_re_password">Please enter Re - password</string>
+    <string name="error_name">Please enter name</string>
+    <string name="error_username_less">Please enter your username no less than 4 characters</string>
+    <string name="error_password_less">Please enter your password no less than 4 characters</string>
+    <string name="error_password_not_match">Passwords do not match</string>
+
 </resources>
