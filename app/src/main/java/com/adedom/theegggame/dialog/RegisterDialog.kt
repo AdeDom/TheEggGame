@@ -19,7 +19,7 @@ import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
 import com.theartofdev.edmodo.cropper.CropImage
 
-class InsertPlayerDialog : DialogFragment() { // 11/11/19
+class RegisterDialog : DialogFragment() { //15/11/19
 
     val TAG = "MyTag"
     private lateinit var mEdtUsername: EditText
@@ -32,7 +32,7 @@ class InsertPlayerDialog : DialogFragment() { // 11/11/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_player, null)
+        val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
@@ -100,8 +100,7 @@ class InsertPlayerDialog : DialogFragment() { // 11/11/19
 //        }
 
         Ion.with(LoginActivity.sContext)
-            .load(Pathiphon.BASE_URL + "4-1.php")
-            .setBodyParameter("spName", "sp_insert_player")
+            .load(Pathiphon.BASE_URL + "register.php")
             .setBodyParameter("values1", mEdtUsername.text.toString().trim())
             .setBodyParameter("values2", mEdtPassword.text.toString().trim())
             .setBodyParameter("values3", mEdtName.text.toString().trim())

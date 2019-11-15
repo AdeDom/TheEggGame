@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adedom.theegggame.dialog.InsertPlayerDialog
+import com.adedom.theegggame.dialog.RegisterDialog
 import com.adedom.utility.MyLibrary
 import com.adedom.utility.Pathiphon
 import com.adedom.utility.Setting
@@ -13,7 +13,7 @@ import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() { // 10/11//19
+class LoginActivity : AppCompatActivity() { // 15/11/19
 
     companion object {
         lateinit var sContext: Context
@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() { // 10/11//19
         fun login(activity: Activity, context: Context, playerId: String, username: String) {
             context.getSharedPreferences(MainActivity.PREF_LOGIN, Context.MODE_PRIVATE).edit()
                 .putString("player_id", playerId)
-                .putString("username", username.trim())
+                .putString("username", username)
                 .apply()
             activity.finishAffinity()
             activity.startActivity(Intent(context, MainActivity::class.java))
@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() { // 10/11//19
     }
 
     private fun setEvents() {
-        mBtnReg.setOnClickListener { InsertPlayerDialog().show(supportFragmentManager, null) }
+        mBtnReg.setOnClickListener { RegisterDialog().show(supportFragmentManager, null) }
         mBtnLogin.setOnClickListener { login() }
         mTvForgotPassword.setOnClickListener { MyLibrary.failed(baseContext) }
     }
@@ -64,8 +64,7 @@ class LoginActivity : AppCompatActivity() { // 10/11//19
         }
 
         Ion.with(baseContext)
-            .load(Pathiphon.BASE_URL + "2-1.php")
-            .setBodyParameter("spName", "sp_login_player")
+            .load(Pathiphon.BASE_URL + "login.php")
             .setBodyParameter("values1", username)
             .setBodyParameter("values2", password)
             .asJsonArray()

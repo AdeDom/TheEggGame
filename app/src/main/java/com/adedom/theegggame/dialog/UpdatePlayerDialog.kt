@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.PlayerBean
+import com.adedom.theegggame.model.Player
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon
 import com.adedom.utility.MyLibrary
@@ -20,7 +20,7 @@ import com.adedom.utility.MyLibrary
 class UpdatePlayerDialog : DialogFragment() {
 
     val TAG = "UpdatePlayerDialog"
-    private lateinit var mPlayerItem: PlayerBean
+    private lateinit var mPlayerItem: Player
     private lateinit var mEdtUser: EditText
     private lateinit var mEdtPassword: EditText
     private lateinit var mEdtRePassword: EditText
@@ -31,7 +31,7 @@ class UpdatePlayerDialog : DialogFragment() {
     private var mImgName = ""
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_player, null)
+        val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
         mPlayerItem = arguments!!.getParcelable("player")
 

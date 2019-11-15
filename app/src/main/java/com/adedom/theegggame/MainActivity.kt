@@ -10,7 +10,7 @@ import com.adedom.theegggame.dialog.AboutDialog
 import com.adedom.theegggame.dialog.MissionDialog
 import com.adedom.theegggame.dialog.RankDialog
 import com.adedom.theegggame.dialog.SettingDialog
-import com.adedom.theegggame.model.PlayerBean
+import com.adedom.theegggame.model.Player
 import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.single.SingleActivity
 import com.adedom.utility.MyLibrary
@@ -20,7 +20,7 @@ import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() { //10/11/19
+class MainActivity : AppCompatActivity() { // 15/11/19
 
     private lateinit var mPlayerId: String
     private var mCountExit = 0
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() { //10/11/19
         const val PREF_LOGIN = "PREF_LOGIN"
         lateinit var sActivity: Activity
         lateinit var sContext: Context
-        lateinit var sPlayerItem: PlayerBean
-        val sTimeStamp = System.currentTimeMillis() / 1000
+        lateinit var sPlayerItem: Player
+//        val sTimeStamp = System.currentTimeMillis() / 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +59,7 @@ class MainActivity : AppCompatActivity() { //10/11/19
             return true
         } else {
             Ion.with(baseContext)
-                .load(Pathiphon.BASE_URL + "1-6.php")
-                .setBodyParameter("spName", "sp_get_player_by_player_id")
+                .load(Pathiphon.BASE_URL + "get-player.php")
                 .setBodyParameter("values1", mPlayerId)
                 .asJsonArray()
                 .setCallback { e, result ->
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() { //10/11/19
                     } else {
                         for (i in 0 until result.size()) {
                             val jsObject = result.get(i) as JsonObject
-                            val item = PlayerBean(
+                            val item = Player(
                                 jsObject.get("values1").asString.trim(),
                                 jsObject.get("values2").asString.trim(),
                                 jsObject.get("values3").asString.trim(),

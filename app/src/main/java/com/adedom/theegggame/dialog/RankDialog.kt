@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.PlayerBean
+import com.adedom.theegggame.model.Player
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyResultSet
 import com.adedom.utility.MyLibrary
@@ -26,7 +26,7 @@ import java.sql.ResultSet
 class RankDialog : DialogFragment() { // 15/7/62
 
     val TAG = "RankDialog"
-    private val mPlayerItem = arrayListOf<PlayerBean>()
+    private val mPlayerItem = arrayListOf<Player>()
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEdtSearch: EditText
     private lateinit var mBtnRank10: Button
@@ -97,7 +97,7 @@ class RankDialog : DialogFragment() { // 15/7/62
             override fun onResponse(rs: ResultSet) {
                 mPlayerItem.clear()
                 while (rs.next()) {
-                    val item = PlayerBean(
+                    val item = Player(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),

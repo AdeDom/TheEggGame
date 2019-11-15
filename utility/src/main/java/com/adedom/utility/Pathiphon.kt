@@ -13,6 +13,7 @@ class Pathiphon {
         private val PASSWORD = "abc456"
         private val DB_NAME = "the_egg_game"
         val BASE_URL = "http://$HOST/the-egg-game/php-script-file/"
+//        val BASE_URL = "http://pathiphon.000webhostapp.com/php-script-file/"
 
         fun connection(): Connection? {
             return connection(HOST, USERNAME, PASSWORD, DB_NAME)

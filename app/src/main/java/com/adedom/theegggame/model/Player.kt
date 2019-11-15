@@ -3,7 +3,7 @@ package com.adedom.theegggame.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PlayerBean(
+data class Player(
     val playerId: String = "",
     val user: String = "",
     val name: String = "",
@@ -33,12 +33,12 @@ data class PlayerBean(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<PlayerBean> {
-        override fun createFromParcel(parcel: Parcel): PlayerBean {
-            return PlayerBean(parcel)
+    companion object CREATOR : Parcelable.Creator<Player> {
+        override fun createFromParcel(parcel: Parcel): Player {
+            return Player(parcel)
         }
 
-        override fun newArray(size: Int): Array<PlayerBean?> {
+        override fun newArray(size: Int): Array<Player?> {
             return arrayOfNulls(size)
         }
     }

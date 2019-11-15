@@ -116,10 +116,10 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         var myItem = item // item Id
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
-        val timeNow = System.currentTimeMillis() / 1000
-        if (timeNow > MainActivity.sTimeStamp + Commons.FIFTEEN_MINUTE) { // Multiply 2
-            values *= 2
-        }
+//        val timeNow = System.currentTimeMillis() / 1000
+//        if (timeNow > MainActivity.sTimeStamp + Commons.FIFTEEN_MINUTE) { // Multiply 2
+//            values *= 2
+//        }
 
         when (myItem) {
             2 -> { // mystery box
