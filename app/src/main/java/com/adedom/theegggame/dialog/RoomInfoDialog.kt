@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.RoomInfoItem
+import com.adedom.theegggame.models.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 
 class RoomInfoDialog : DialogFragment() { // 21/7/62

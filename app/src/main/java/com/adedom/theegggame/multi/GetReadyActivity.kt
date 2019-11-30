@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.RoomInfoDialog
-import com.adedom.theegggame.model.RoomInfoItem
+import com.adedom.theegggame.models.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGrid
 import com.adedom.theegggame.utility.MyResultSet
@@ -164,7 +164,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
         }
         mHandlerRefresh.removeCallbacks(mRunnableRefresh)
-        deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId)
+        deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId!!)
         finish()
     }
 
@@ -256,7 +256,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_CANCELED) {
-            deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId)
+            deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId!!)
             finish()
         }
 

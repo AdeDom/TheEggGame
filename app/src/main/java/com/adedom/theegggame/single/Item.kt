@@ -3,7 +3,7 @@ package com.adedom.theegggame.single
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.SingleItem
+import com.adedom.theegggame.models.SingleItem
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory

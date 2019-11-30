@@ -1,4 +1,4 @@
-package com.adedom.theegggame.model
+package com.adedom.theegggame.models
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -15,16 +15,17 @@ data class RoomInfoItem(
     val status_id: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readInt(),
         parcel.readDouble(),
         parcel.readDouble(),
-        parcel.readString(),
-        parcel.readString()
-    )
+        parcel.readString()!!,
+        parcel.readString()!!
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(room_no)

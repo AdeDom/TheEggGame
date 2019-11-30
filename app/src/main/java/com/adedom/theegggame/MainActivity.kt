@@ -10,7 +10,7 @@ import com.adedom.theegggame.dialog.AboutDialog
 import com.adedom.theegggame.dialog.MissionDialog
 import com.adedom.theegggame.dialog.RankDialog
 import com.adedom.theegggame.dialog.SettingDialog
-import com.adedom.theegggame.model.Player
+import com.adedom.theegggame.models.Player
 import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.single.SingleActivity
 import com.adedom.utility.MyLibrary
@@ -20,9 +20,8 @@ import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() { // 15/11/19
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var mPlayerId: String
     private var mCountExit = 0
 
     companion object {
@@ -42,15 +41,15 @@ class MainActivity : AppCompatActivity() { // 15/11/19
 
         if (checkLogin()) return
 
-        Setting(this, this)
+        Setting(sActivity, sContext)
 
         setEvents()
     }
 
     private fun checkLogin(): Boolean {
-        mPlayerId = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
+        val playerId = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
             .getString("player_id", "empty")!!
-        if (mPlayerId == "empty") {
+        if (playerId == "empty") {
             startActivity(
                 Intent(baseContext, LoginActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() { // 15/11/19
         } else {
             Ion.with(baseContext)
                 .load(Pathiphon.BASE_URL + "get-player.php")
-                .setBodyParameter("values1", mPlayerId)
+                .setBodyParameter("values1", playerId)
                 .asJsonArray()
                 .setCallback { e, result ->
                     if (result.size() == 0) {
@@ -95,7 +94,7 @@ class MainActivity : AppCompatActivity() { // 15/11/19
 
     private fun setWidgets() {
         if (sPlayerItem.image != "empty") {
-            MyLibrary.with(baseContext).glideProfile(sPlayerItem.image, mImgProfile)
+            MyLibrary.with(baseContext).glideProfile(sPlayerItem.image!!, mImgProfile)
         }
 
         mTvName.text = sPlayerItem.name

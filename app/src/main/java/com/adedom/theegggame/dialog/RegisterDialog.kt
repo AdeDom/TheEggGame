@@ -15,7 +15,6 @@ import com.adedom.theegggame.LoginActivity
 import com.adedom.theegggame.R
 import com.adedom.utility.MyLibrary
 import com.adedom.utility.Pathiphon
-import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -107,20 +106,22 @@ class RegisterDialog : DialogFragment() { //15/11/19
             .setBodyParameter("values4", mImageUri)
             .asJsonArray()
             .setCallback { e, result ->
-                val jsObject = result.get(0) as JsonObject
-                val values = jsObject.get("values1").asString.trim()
+                Log.d(TAG, ">>$result")
 
-                if (values == "failed") {
-                    MyLibrary.with(LoginActivity.sContext)
-                        .showLong(R.string.username_same_current_player)
-                } else {
-                    LoginActivity.login(
-                        activity!!,
-                        LoginActivity.sContext,
-                        values,
-                        mEdtUsername.text.toString().trim()
-                    )
-                }
+//                val jsObject = result.get(0) as JsonObject
+//                val values = jsObject.get("values1").asString.trim()
+//
+//                if (values == "failed") {
+//                    MyLibrary.with(LoginActivity.sContext)
+//                        .showLong(R.string.username_same_current_player)
+//                } else {
+//                    LoginActivity.login(
+//                        activity!!,
+//                        LoginActivity.sContext,
+//                        values,
+//                        mEdtUsername.text.toString().trim()
+//                    )
+//                }
             }
     }
 

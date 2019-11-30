@@ -6,7 +6,7 @@ import android.widget.Toast
 
 class MyLibrary {
 
-    companion object{
+    companion object {
         fun completed(context: Context) {
             Toast.makeText(context, R.string.completed, Toast.LENGTH_SHORT).show()
         }
@@ -29,3 +29,4 @@ class MyLibrary {
         }
     }
 }
+

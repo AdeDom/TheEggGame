@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.ChatItem
+import com.adedom.theegggame.models.ChatItem
 import com.adedom.theegggame.single.SingleActivity
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon

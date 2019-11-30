@@ -9,8 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.FightGameDialog
-import com.adedom.theegggame.model.MultiItem
-import com.adedom.theegggame.model.RoomInfoItem
+import com.adedom.theegggame.models.MultiItem
+import com.adedom.theegggame.models.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyMap
 import com.adedom.theegggame.utility.MyMediaPlayer
@@ -110,7 +110,7 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
         val sql = "UPDATE tbl_room_info SET \n" +
                 "latitude = '${mLatLng!!.latitude.toString().trim()}',\n" +
                 "longitude = '${mLatLng!!.longitude.toString().trim()}'\n" +
-                "WHERE player_id = '${MainActivity.sPlayerItem.playerId.trim()}'"
+                "WHERE player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}'"
         MyConnect.executeQuery(sql)
     }
 
@@ -185,7 +185,7 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
 
                 MyMediaPlayer.getSound(baseContext, R.raw.keep)
 
-                val sql = "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId.trim()}', " +
+                val sql = "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}', " +
                         "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
                 MyConnect.executeQuery(sql)
             }

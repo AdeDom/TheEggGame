@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.Player
+import com.adedom.theegggame.models.Player
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon
 import com.adedom.utility.MyLibrary
@@ -33,7 +33,7 @@ class UpdatePlayerDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
-        mPlayerItem = arguments!!.getParcelable("player")
+        mPlayerItem = arguments!!.getParcelable("player")!!
 
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
@@ -58,11 +58,11 @@ class UpdatePlayerDialog : DialogFragment() {
 
     private fun setWidgets() {
         mEdtUser.isEnabled = false
-        mEdtUser.setText(mPlayerItem.user)
+        mEdtUser.setText(mPlayerItem.username)
         mEdtName.setText(mPlayerItem.name)
 
-        if (mPlayerItem.image.isNotEmpty()) {
-            MyIon.getIon(mImgProfile, mPlayerItem.image)
+        if (mPlayerItem.image!!.isNotEmpty()) {
+            MyIon.getIon(mImgProfile, mPlayerItem.image!!)
         }
         mBtnSave.text = "Update player"
     }
@@ -88,7 +88,7 @@ class UpdatePlayerDialog : DialogFragment() {
         if (mImagePath.isNotEmpty()) {
             MyIon.getIon(context!!, mImagePath) // upload image
         } else {
-            mImgName = mPlayerItem.image
+            mImgName = mPlayerItem.image!!
         }
 
         val sql = "UPDATE tbl_player SET \n" +

@@ -18,7 +18,7 @@ import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.InsertRoomDialog
 import com.adedom.theegggame.dialog.InsertRoomPeopleDialog
-import com.adedom.theegggame.model.RoomItem
+import com.adedom.theegggame.models.RoomItem
 import com.adedom.theegggame.utility.*
 import com.adedom.utility.MyLibrary
 import kotlinx.android.synthetic.main.activity_room.*

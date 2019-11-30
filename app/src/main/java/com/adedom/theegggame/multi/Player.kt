@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.RoomInfoItem
+import com.adedom.theegggame.models.RoomInfoItem
 import com.adedom.theegggame.utility.MyIon
 import com.adedom.theegggame.utility.MyMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory

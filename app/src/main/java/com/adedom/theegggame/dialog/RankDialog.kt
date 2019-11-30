@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.Player
+import com.adedom.theegggame.models.Player
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyResultSet
 import com.adedom.utility.MyLibrary
@@ -124,9 +124,9 @@ class RankDialog : DialogFragment() { // 15/7/62
         }
 
         override fun onBindViewHolder(holder: CustomHolder, position: Int) {
-            if (mPlayerItem[position].image.isNotEmpty()) {
+            if (mPlayerItem[position].image!!.isNotEmpty()) {
                 MyLibrary.with(MainActivity.sContext)
-                    .glideProfile(mPlayerItem[position].image, holder.mImgProfile)
+                    .glideProfile(mPlayerItem[position].image!!, holder.mImgProfile)
             }
             holder.mTvName.text = mPlayerItem[position].name
             holder.mTvLevel.text = mPlayerItem[position].level.toString()

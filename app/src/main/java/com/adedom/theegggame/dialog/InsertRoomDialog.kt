@@ -85,7 +85,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
 
         val sqlRoomInfo = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mNoRoom.trim()}', " +
-                "'${MainActivity.sPlayerItem.playerId.trim()}', " +
+                "'${MainActivity.sPlayerItem.playerId!!.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sqlRoomInfo)

@@ -6,8 +6,8 @@ import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.dialog.ChatSingleDialog
-import com.adedom.theegggame.model.ChatItem
-import com.adedom.theegggame.model.SingleItem
+import com.adedom.theegggame.models.ChatItem
+import com.adedom.theegggame.models.SingleItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyMap
 import com.adedom.theegggame.utility.MyMediaPlayer
@@ -167,10 +167,10 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val time = df.format(Calendar.getInstance().time)
         val chatItem = ChatItem(
-            MainActivity.sPlayerItem.playerId,
+            MainActivity.sPlayerItem.playerId!!,
             time.toString(),
             detailItem(myItem, values),
-            MainActivity.sPlayerItem.image,
+            MainActivity.sPlayerItem.image!!,
             "3"
         )
         mChatItem.add(chatItem)

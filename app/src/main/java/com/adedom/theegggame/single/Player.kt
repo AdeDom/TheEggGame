@@ -31,8 +31,8 @@ class Player(latLng: LatLng)  { // 21/7/62
 
     private fun setMyLocation(latLng: LatLng) {
         var bmp = BitmapFactory.decodeResource(MyMap.mContext.resources, R.drawable.ic_player)
-        if (MainActivity.sPlayerItem.image.isNotEmpty()) {
-            bmp = MyIon.getIon(MyMap.mContext, bmp, MainActivity.sPlayerItem.image)
+        if (MainActivity.sPlayerItem.image!!.isNotEmpty()) {
+            bmp = MyIon.getIon(MyMap.mContext, bmp, MainActivity.sPlayerItem.image!!)
             bmp = Bitmap.createScaledBitmap(bmp, (bmp.width * 0.2).toInt(), (bmp.height * 0.2).toInt(), true)
         }
 

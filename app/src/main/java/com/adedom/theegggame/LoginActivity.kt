@@ -4,16 +4,25 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.dialog.RegisterDialog
+import com.adedom.theegggame.factories.LoginActivityFactory
+import com.adedom.theegggame.networks.PlayerApi
+import com.adedom.theegggame.repositories.PlayerRepository
+import com.adedom.theegggame.viewmodels.LoginActivityViewModel
 import com.adedom.utility.MyLibrary
-import com.adedom.utility.Pathiphon
 import com.adedom.utility.Setting
-import com.google.gson.JsonObject
-import com.koushikdutta.ion.Ion
+import com.adedom.utility.isEmpty
+import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() { // 15/11/19
+class LoginActivity : AppCompatActivity() {
+
+    val TAG = "MyTag"
+    private lateinit var mViewModel: LoginActivityViewModel
 
     companion object {
         lateinit var sContext: Context
@@ -33,6 +42,9 @@ class LoginActivity : AppCompatActivity() { // 15/11/19
         setContentView(R.layout.activity_login)
 
         sContext = baseContext
+
+        val factory = LoginActivityFactory(PlayerRepository(PlayerApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(LoginActivityViewModel::class.java)
 
         Setting(this, this)
 
@@ -59,38 +71,29 @@ class LoginActivity : AppCompatActivity() { // 15/11/19
         val password = mEdtPassword.text.toString().trim()
 
         when {
-            MyLibrary.isEmpty(mEdtUsername, getString(R.string.error_username)) -> return
-            MyLibrary.isEmpty(mEdtPassword, getString(R.string.error_password)) -> return
+            mEdtUsername.isEmpty(getString(R.string.error_username)) -> return
+            mEdtPassword.isEmpty(getString(R.string.error_password)) -> return
         }
 
-        Ion.with(baseContext)
-            .load(Pathiphon.BASE_URL + "login.php")
-            .setBodyParameter("values1", username)
-            .setBodyParameter("values2", password)
-            .asJsonArray()
-            .setCallback { e, result ->
-                if (result.size() == 0) {
-                    mEdtPassword.text.clear()
-                    MyLibrary.with(baseContext).showLong(R.string.username_password_incorrect)
-                } else {
-                    for (i in 0 until result.size()) {
-                        val jsObject = result.get(i) as JsonObject
-                        val values = jsObject.get("values1").asString.trim()
-                        login(this, baseContext, values, username)
-                    }
-                }
+        mViewModel.getPlayerId(username, password)
+        mViewModel.playerId.observe(this, Observer {
+            if (it.playerId == null) {
+                mEdtPassword.text.clear()
+                sContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)
+            } else {
+                sContext.toast("OK")
             }
+        })
+
     }
 
     override fun onResume() {
         super.onResume()
         Setting.locationListener(this, true)
-//        MyMediaPlayer.getMusic(baseContext, R.raw.music_main)
     }
 
     override fun onPause() {
         super.onPause()
         Setting.locationListener(this, false)
-//        MyMediaPlayer.music!!.stop()
     }
 }

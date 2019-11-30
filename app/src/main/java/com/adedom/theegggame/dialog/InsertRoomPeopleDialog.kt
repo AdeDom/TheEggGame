@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.RoomItem
+import com.adedom.theegggame.models.RoomItem
 import com.adedom.theegggame.multi.GetReadyActivity
 import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.utility.MyCode
@@ -93,7 +93,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     private fun insertPeople() {
         val sql = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
                 "VALUES ('${mRoomItem.no.trim()}', " +
-                "'${MainActivity.sPlayerItem.playerId.trim()}', " +
+                "'${MainActivity.sPlayerItem.playerId!!.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sql)

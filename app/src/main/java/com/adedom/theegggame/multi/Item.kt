@@ -3,7 +3,7 @@ package com.adedom.theegggame.multi
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
-import com.adedom.theegggame.model.MultiItem
+import com.adedom.theegggame.models.MultiItem
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyMap
