@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,7 +22,8 @@ import com.adedom.theegggame.models.RoomInfoItem
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyGrid
 import com.adedom.theegggame.utility.MyResultSet
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.loadProfile
+import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_get_ready.*
 import kotlinx.android.synthetic.main.item_rv_player.view.*
 import kotlinx.android.synthetic.main.item_rv_room.*
@@ -114,14 +116,14 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
 
             if (teamA == 0 || teamB == 0) {
-                MyLibrary.with(baseContext).showLong(R.string.least_one_person_per_team)
+                baseContext.toast(R.string.least_one_person_per_team, Toast.LENGTH_LONG)
                 return
             }
 
             if (count <= 1 && mRoomInfoItem.size != 1) {
                 onReady()
             } else {
-                MyLibrary.with(baseContext).showLong(R.string.player_not_ready)
+                baseContext.toast(R.string.player_not_ready,Toast.LENGTH_LONG)
             }
         } else {
             onReady()
@@ -248,7 +250,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
                 mHandlerRefresh.removeCallbacks(mRunnableRefresh)
                 startActivityForResult(Intent(baseContext, MultiActivity::class.java), 1111)
-                MyLibrary.with(baseContext).showShort(R.string.start_game)
+                baseContext.toast(R.string.start_game)
             }
         }
     }
@@ -276,7 +278,9 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
             val numA = data!!.getStringExtra("values1")
             val numB = data!!.getStringExtra("values2")
-            MyLibrary.with(baseContext).showLong("Team A : $numA\nTeam B : $numB")
+
+            val score = "Team A : $numA\nTeam B : $numB"
+            baseContext.toast(score, Toast.LENGTH_LONG)
         }
     }
 
@@ -321,8 +325,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
             }
 
             if (mRoomInfoItem[i].image.isNotEmpty()) {
-                MyLibrary.with(baseContext)
-                    .glideProfile(mRoomInfoItem[i].image,holder.mImgProfile)
+                holder.mImgProfile.loadProfile(mRoomInfoItem[i].image)
             }
             holder.mTvMyName.text = mRoomInfoItem[i].name
             holder.mTvLevel.text = "Level : ${mRoomInfoItem[i].level}"

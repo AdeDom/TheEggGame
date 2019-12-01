@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,7 +21,7 @@ import com.adedom.theegggame.dialog.InsertRoomDialog
 import com.adedom.theegggame.dialog.InsertRoomPeopleDialog
 import com.adedom.theegggame.models.RoomItem
 import com.adedom.theegggame.utility.*
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_room.*
 import kotlinx.android.synthetic.main.item_rv_room.view.*
 import java.sql.ResultSet
@@ -191,7 +192,7 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
                         if (rs.getInt(1) < mRoomItem[adapterPosition].people.toInt()) {
                             joinNow()
                         } else {
-                            MyLibrary.with(baseContext).showLong(R.string.full)
+                            baseContext.toast(R.string.full, Toast.LENGTH_LONG)
                         }
                     }
                 }

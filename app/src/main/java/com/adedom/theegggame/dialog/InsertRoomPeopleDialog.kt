@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.MainActivity
@@ -18,7 +19,8 @@ import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyResultSet
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.isEmpty
+import com.adedom.utility.toast
 import com.google.android.material.textfield.TextInputLayout
 import java.sql.ResultSet
 
@@ -64,13 +66,13 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     }
 
     private fun checkRoomToJoin() {
-        if (MyLibrary.isEmpty(mEdtPassword, getString(R.string.error_password))) return
+        if (mEdtPassword.isEmpty(getString(R.string.error_password))) return
 
         val password = mEdtPassword.text.toString().trim()
         if (password == mRoomItem.password) {
             checkPeopleInRoom()
         } else {
-            MyLibrary.with(RoomActivity.sContext).showLong(R.string.password_incorrect)
+            RoomActivity.sContext.toast(R.string.password_incorrect, Toast.LENGTH_LONG)
         }
     }
 
@@ -83,7 +85,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                         insertPeople()
                     } else {
                         dialog!!.dismiss()
-                        MyLibrary.with(RoomActivity.sContext).showLong(R.string.full)
+                        RoomActivity.sContext.toast(R.string.full, Toast.LENGTH_LONG)
                     }
                 }
             }

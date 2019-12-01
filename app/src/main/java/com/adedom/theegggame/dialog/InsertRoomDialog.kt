@@ -15,7 +15,7 @@ import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.utility.MyCode
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyResultSet
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.isEmpty
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 import java.sql.ResultSet
 
@@ -58,7 +58,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
     }
 
     private fun getNoRoomToInsert() {
-        if (MyLibrary.isEmpty(mEdtName, getString(R.string.error_room_name))) return
+        if (mEdtName.isEmpty(getString(R.string.error_room_name))) return
 
         val sql = "SELECT no FROM tbl_room ORDER BY id DESC LIMIT 1"
         MyConnect.executeQuery(sql, object : MyResultSet {

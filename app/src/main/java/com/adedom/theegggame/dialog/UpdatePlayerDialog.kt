@@ -15,7 +15,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.models.Player
 import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyIon
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.toast
 
 class UpdatePlayerDialog : DialogFragment() {
 
@@ -100,7 +100,7 @@ class UpdatePlayerDialog : DialogFragment() {
         MyConnect.executeQuery(sql)
 
         dialog!!.dismiss()
-        MyLibrary.with(MainActivity.sContext).showShort(R.string.recording_complete)
+        MainActivity.sContext.toast(R.string.recording_complete)
 
         // TODO: 23/05/2562 refresh MainActivity
         //todo password activity login
@@ -124,7 +124,7 @@ class UpdatePlayerDialog : DialogFragment() {
         }
 
         if (errMsg != "") {
-            MyLibrary.with(MainActivity.sContext).showLong(errMsg)
+            MainActivity.sContext.toast(errMsg)
             return true
         }
         return false

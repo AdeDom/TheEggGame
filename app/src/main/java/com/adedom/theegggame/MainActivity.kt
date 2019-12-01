@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.dialog.AboutDialog
 import com.adedom.theegggame.dialog.MissionDialog
 import com.adedom.theegggame.dialog.RankDialog
@@ -13,19 +15,16 @@ import com.adedom.theegggame.dialog.SettingDialog
 import com.adedom.theegggame.models.Player
 import com.adedom.theegggame.multi.RoomActivity
 import com.adedom.theegggame.single.SingleActivity
-import com.adedom.utility.MyLibrary
-import com.adedom.utility.Pathiphon
-import com.adedom.utility.Setting
-import com.google.gson.JsonObject
-import com.koushikdutta.ion.Ion
+import com.adedom.theegggame.viewmodels.MainActivityViewModel
+import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mViewModel: MainActivityViewModel
     private var mCountExit = 0
 
     companion object {
-        const val PREF_LOGIN = "PREF_LOGIN"
         lateinit var sActivity: Activity
         lateinit var sContext: Context
         lateinit var sPlayerItem: Player
@@ -39,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         sActivity = this@MainActivity
         sContext = baseContext
 
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+
         if (checkLogin()) return
 
         Setting(sActivity, sContext)
@@ -47,8 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLogin(): Boolean {
-        val playerId = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
-            .getString("player_id", "empty")!!
+        val playerId = this.getPrefLogin(PLAYER_ID)
         if (playerId == "empty") {
             startActivity(
                 Intent(baseContext, LoginActivity::class.java)
@@ -57,48 +57,28 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
             return true
         } else {
-            Ion.with(baseContext)
-                .load(Pathiphon.BASE_URL + "get-player.php")
-                .setBodyParameter("values1", playerId)
-                .asJsonArray()
-                .setCallback { e, result ->
-                    if (result.size() == 0) {
-                        getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE).edit()
-                            .putString("player_id", "empty")
-                            .apply()
-                        startActivity(
-                            Intent(baseContext, LoginActivity::class.java)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        )
-                        finishAffinity()
-                    } else {
-                        for (i in 0 until result.size()) {
-                            val jsObject = result.get(i) as JsonObject
-                            val item = Player(
-                                jsObject.get("values1").asString.trim(),
-                                jsObject.get("values2").asString.trim(),
-                                jsObject.get("values3").asString.trim(),
-                                jsObject.get("values4").asString.trim(),
-                                jsObject.get("values5").asInt,
-                                jsObject.get("values6").asString.trim()
-                            )
-                            sPlayerItem = item
-                        }
-                        MyLibrary.with(baseContext).showShort(R.string.welcome)
-                        setWidgets()
-                    }
+            mViewModel.repository.getPlayers(playerId)
+            mViewModel.player.observe(this, Observer {
+                if (it.playerId == null) {
+                    this.login(LoginActivity::class.java)
+                } else {
+                    sPlayerItem = it
+                    sContext.toast(R.string.welcome)
+                    setWidgets()
                 }
+            })
         }
         return false
     }
 
     private fun setWidgets() {
         if (sPlayerItem.image != "empty") {
-            MyLibrary.with(baseContext).glideProfile(sPlayerItem.image!!, mImgProfile)
+            mImgProfile.loadProfile(sPlayerItem.image!!)
         }
 
         mTvName.text = sPlayerItem.name
-        mTvLevel.text = "Level : ${sPlayerItem.level}"
+        val level = "Level : ${sPlayerItem.level}"
+        mTvLevel.text = level
     }
 
     private fun setEvents() {
@@ -118,18 +98,16 @@ class MainActivity : AppCompatActivity() {
         if (mCountExit > 0) finishAffinity()
         mCountExit++
         Handler().postDelayed({ mCountExit = 0 }, 2000)
-        MyLibrary.with(baseContext).showShort(R.string.on_back_pressed)
+        sContext.toast(R.string.on_back_pressed)
     }
 
     override fun onResume() {
         super.onResume()
         Setting.locationListener(this, true)
-//        MyMediaPlayer.getMusic(baseContext, R.raw.music_main)
     }
 
     override fun onPause() {
         super.onPause()
         Setting.locationListener(this, false)
-//        MyMediaPlayer.music!!.stop()
     }
 }

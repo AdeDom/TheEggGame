@@ -12,7 +12,6 @@ class MyConnect { // 25/7/62
         private const val DB_NAME = "the_egg_game"
         private const val USERNAME = "root"
         private const val PASSWORD = "abc456"
-        const val BASE_URL = "http://$IP/the-egg-game/"
 
         fun conn(): Connection {
             StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().permitAll().build())

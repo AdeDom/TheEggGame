@@ -1,8 +1,6 @@
 package com.adedom.theegggame.dialog
 
 import android.app.Dialog
-import android.content.Context.MODE_PRIVATE
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.LoginActivity
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
+import com.adedom.utility.login
 
 class SettingDialog : DialogFragment() {
 
@@ -51,14 +50,10 @@ class SettingDialog : DialogFragment() {
         }
 
         mBtnLogout.setOnClickListener {
-            activity!!.getSharedPreferences(MainActivity.PREF_LOGIN, MODE_PRIVATE).edit()
-                .putString("player_id", "empty")
-                .apply()
-            startActivity(
-                Intent(MainActivity.sContext, LoginActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            activity!!.login(
+                LoginActivity::class.java,
+                username = MainActivity.sPlayerItem.username!!
             )
-            activity!!.finishAffinity()
         }
 
         mBtnExit.setOnClickListener {

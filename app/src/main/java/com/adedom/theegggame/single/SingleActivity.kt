@@ -2,6 +2,7 @@ package com.adedom.theegggame.single
 
 import android.location.Location
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
@@ -12,7 +13,7 @@ import com.adedom.theegggame.utility.MyConnect
 import com.adedom.theegggame.utility.MyMap
 import com.adedom.theegggame.utility.MyMediaPlayer
 import com.adedom.theegggame.utility.MyResultSet
-import com.adedom.utility.MyLibrary
+import com.adedom.utility.toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng
@@ -54,19 +55,19 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
             ChatSingleDialog().show(supportFragmentManager, null)
         }
         mImgEggI.setOnClickListener {
-            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+            baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }
         mImgEggII.setOnClickListener {
-            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+            baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }
         mImgEggIII.setOnClickListener {
-            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+            baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }
         mImgEggIV.setOnClickListener {
-            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+            baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }
         mImgEggV.setOnClickListener {
-            MyLibrary.with(baseContext).showLong(R.string.can_not_use_single)
+            baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }
     }
 
@@ -160,7 +161,7 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
         })
 
         chatList(myItem, values)
-        MyLibrary.with(baseContext).showShort(detailItem(myItem, values))
+        baseContext.toast(detailItem(myItem, values))
     }
 
     private fun chatList(myItem: Int, values: Int) { // type "1" -> public
