@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() { // 2/12/19
         lateinit var sActivity: Activity
         lateinit var sContext: Context
         lateinit var sPlayerItem: Player
-//        val sTimeStamp = System.currentTimeMillis() / 1000
+        val sTimeStamp = System.currentTimeMillis() / 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

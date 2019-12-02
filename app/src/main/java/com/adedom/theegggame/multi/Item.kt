@@ -4,10 +4,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.MultiItem
-import com.adedom.theegggame.util.MyCode
+import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
-import com.adedom.theegggame.util.MyMap
 import com.adedom.theegggame.util.MyResultSet
+import com.adedom.utility.rndLatLng
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -59,10 +59,10 @@ class Item { // 31/7/62
     private fun setMarker() {
         var bmp: Bitmap?
         for (i in MultiActivity.mMultiItem.indices) {
-            bmp = BitmapFactory.decodeResource(MyMap.mContext.resources, R.drawable.the_egg_game)
+            bmp = BitmapFactory.decodeResource(MapActivity.sContext.resources, R.drawable.the_egg_game)
 
             MultiActivity.mMarkerItem.add(
-                MyMap.mGoogleMap!!.addMarker(
+                MapActivity.sGoogleMap!!.addMarker(
                     MarkerOptions()
                         .position(LatLng(MultiActivity.mMultiItem[i].latitude, MultiActivity.mMultiItem[i].longitude))
                         .icon(BitmapDescriptorFactory.fromBitmap(bmp))
@@ -77,8 +77,8 @@ class Item { // 31/7/62
         for (i in 1..Commons.NUMBER_OF_ITEM) {
             val sql = "INSERT INTO tbl_multi (room_no, latitude, longitude, status_id) \n" +
                     "VALUES ('${GetReadyActivity.mNoRoom.trim()}', " +
-                    "'${MyCode.rndLatLng(latLng.latitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
-                    "'${MyCode.rndLatLng(latLng.longitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
+                    "'${rndLatLng(latLng.latitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
+                    "'${rndLatLng(latLng.longitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
                     "'1')"
             MyConnect.executeQuery(sql)
         }

@@ -11,8 +11,8 @@ import com.adedom.theegggame.data.models.MultiItem
 import com.adedom.theegggame.data.models.RoomInfoItem
 import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.ui.dialogs.FightGameDialog
+import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
-import com.adedom.theegggame.util.MyMap
 import com.adedom.theegggame.util.MyMediaPlayer
 import com.adedom.theegggame.util.MyResultSet
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 import java.sql.ResultSet
 
-open class MultiActivity : MyMap(), Commons { // 5/8/62
+open class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     val TAG = "MultiActivity"
     protected val mRoomInfoItem = arrayListOf<RoomInfoItem>()
@@ -99,10 +99,10 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
     }
 
     private fun setCamera() {
-        if (mIsCamera) {
-            mIsCamera = false
+        if (sIsCamera) {
+            sIsCamera = false
             val update = CameraUpdateFactory.newLatLngZoom(mLatLng, Commons.CAMERA_ZOOM)
-            mGoogleMap!!.animateCamera(update)
+            sGoogleMap!!.animateCamera(update)
         }
     }
 

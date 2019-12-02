@@ -27,10 +27,16 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Setting.locationListener(this, true)
+
+        // online
+        // music
     }
 
     override fun onPause() {
         super.onPause()
         Setting.locationListener(this, false)
+
+        // offline
+        // music
     }
 }

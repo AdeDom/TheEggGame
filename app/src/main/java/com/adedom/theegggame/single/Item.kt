@@ -1,109 +1,31 @@
 package com.adedom.theegggame.single
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.SingleItem
-import com.adedom.theegggame.util.MyCode
-import com.adedom.theegggame.util.MyMap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.adedom.theegggame.util.MapActivity
+import com.adedom.utility.imageMarker
+import com.adedom.utility.removeItemMarker
+import com.adedom.utility.setItemMarker
+import com.google.android.gms.maps.model.Marker
 
-class Item(latLng: LatLng) { // 15/7/62
+class Item(
+    singles: ArrayList<SingleItem>,
+    mMarkerMyItem: ArrayList<Marker>
+) { // 2/12/19
 
     init {
-        if (SingleActivity.mSingleItem.size < Commons.NUMBER_OF_ITEM) {
-            SingleActivity.mIsRndItem = true
-        }
-
-        if (SingleActivity.mIsRndItem) {
-            SingleActivity.mIsRndItem = false
-            rndItem(latLng)
-        }
-        removeMarkerItem()
-        setMarker()
-    }
-
-    private fun rndItem(latLng: LatLng) {
-        var numItem = (Math.random() * 10).toInt()
-        while (numItem < Commons.NUMBER_OF_ITEM) {
-            numItem = (Math.random() * 10).toInt()
-        }
-
-        for (i in 0 until numItem) {
-            val item = SingleItem(
-                controlItem(),
-                MyCode.rndLatLng(latLng.latitude,Commons.TWO_HUNDRED_METER),
-                MyCode.rndLatLng(latLng.longitude, Commons.TWO_HUNDRED_METER)
-            )
-            SingleActivity.mSingleItem.add(item)
-        }
-    }
-
-    private fun controlItem(): Int {
-        var num = (1..3).random()
-
-        when (num) {
-            2 -> {
-                val mysteryBox = (1..3).random()
-                num = if (mysteryBox == 2) {
-                    mysteryBox
-                } else {
-                    1
-                }
-            }
-            3 -> {
-                val mysteryItem = (1..9).random()
-                num = if (mysteryItem == 3) {
-                    mysteryItem
-                } else {
-                    1
-                }
-            }
-        }
-        return num
-    }
-
-    private fun removeMarkerItem() {
-        if (SingleActivity.mMarkerMyItem != null) {
-            for (marker in SingleActivity.mMarkerMyItem) {
-                marker.remove()
-            }
-            SingleActivity.mMarkerMyItem.clear()
-        }
-    }
-
-    private fun setMarker() {
+        removeItemMarker(mMarkerMyItem)
         var bmp: Bitmap? = null
-        for ((itemId, latitude, longitude) in SingleActivity.mSingleItem) {
+        for ((itemId, latitude, longitude) in singles) {
             when (itemId) {
-                1 -> bmp = imageMarker(R.drawable.ic_egg)
-                2 -> bmp = imageMarker(R.drawable.ic_mystery_box)
-                3 -> bmp = imageMarker(R.drawable.ic_mystery_item)
+                1 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_egg)
+                2 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_mystery_box)
+                3 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_mystery_item)
             }
 
-            SingleActivity.mMarkerMyItem.add(
-                MyMap.mGoogleMap!!.addMarker(
-                    MarkerOptions().position(LatLng(latitude, longitude))
-                        .icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                        .title(detailItem(itemId))
-                )
-            )
+            setItemMarker(MapActivity.sGoogleMap, latitude, longitude, itemId, bmp, mMarkerMyItem)
         }
     }
 
-    private fun detailItem(itemId: Int): String {
-        var name = ""
-        when (itemId) {
-            1 -> name = "Experience point"
-            2 -> name = "Mystery Box"
-            3 -> name = "Mystery Item"
-        }
-        return name
-    }
-
-    private fun imageMarker(image: Int): Bitmap {
-        return BitmapFactory.decodeResource(MyMap.mContext.resources, image)
-    }
 }

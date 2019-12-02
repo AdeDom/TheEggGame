@@ -2,11 +2,11 @@ package com.adedom.theegggame.multi
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfoItem
+import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyIon
-import com.adedom.theegggame.util.MyMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
@@ -34,15 +34,15 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
 
     private fun setPeopleLocation(items: ArrayList<RoomInfoItem>) {
         for ((room_no, playerId, name, image, level, latitude, longitude) in items) {
-            var bmp = BitmapFactory.decodeResource(MyMap.mContext.resources, R.drawable.ic_player)
+            var bmp = BitmapFactory.decodeResource(MapActivity.sContext.resources, R.drawable.ic_player)
             if (image.isNotEmpty()) {
-                bmp = MyIon.getIon(MyMap.mContext, bmp, image)
+                bmp = MyIon.getIon(MapActivity.sContext, bmp, image)
                 bmp = Bitmap.createScaledBitmap(bmp, (bmp.width * 0.2).toInt(), (bmp.height * 0.2).toInt(), true)
             }
 
             //player
             MultiActivity.mMarkerPlayer.add(
-                MyMap.mGoogleMap!!.addMarker(
+                MapActivity.sGoogleMap!!.addMarker(
                     MarkerOptions()
                         .position(LatLng(latitude, longitude))
                         .icon(BitmapDescriptorFactory.fromBitmap(bmp))
@@ -54,7 +54,7 @@ class Player(item: ArrayList<RoomInfoItem>)  { // 21/7/62
             //Circle
             val latLng = LatLng(latitude, longitude)
             if (MainActivity.sPlayerItem.playerId == playerId) {
-                MultiActivity.mCircle = MyMap.mGoogleMap!!.addCircle(
+                MultiActivity.mCircle = MapActivity.sGoogleMap!!.addCircle(
                     CircleOptions()
                         .center(latLng)
                         .radius(Commons.ONE_HUNDRED_METER.toDouble())
