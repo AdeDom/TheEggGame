@@ -6,12 +6,12 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.activities.LoginActivity
 import com.adedom.theegggame.ui.activities.MainActivity
-import com.adedom.theegggame.R
 import com.adedom.utility.login
 
-class SettingDialog : DialogFragment() {
+class SettingDialog : DialogFragment() { // 2/12/19
 
     private lateinit var mBtnChange: Button
     private lateinit var mBtnLogout: Button
@@ -25,26 +25,23 @@ class SettingDialog : DialogFragment() {
             .setIcon(R.drawable.ic_setting)
             .setTitle(R.string.setting)
 
-        bindWidgets(view)
-        setEvents()
+        init(view)
 
         return builder.create()
     }
 
-    private fun bindWidgets(view: View) {
+    private fun init(view: View) {
         mBtnChange = view.findViewById(R.id.mBtnChange) as Button
         mBtnLogout = view.findViewById(R.id.mBtnLogout) as Button
         mBtnExit = view.findViewById(R.id.mBtnExit) as Button
-    }
 
-    private fun setEvents() {
         mBtnChange.setOnClickListener {
             dialog!!.dismiss()
 
             val bundle = Bundle()
             bundle.putParcelable("player", MainActivity.sPlayerItem)
 
-            val dialog = UpdatePlayerDialog()
+            val dialog = ChangePasswordDialog()
             dialog.arguments = bundle
             dialog.show(activity!!.supportFragmentManager, null)
         }

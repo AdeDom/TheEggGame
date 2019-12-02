@@ -1,5 +1,6 @@
 package com.adedom.theegggame.data.networks
 
+import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Player
 import retrofit2.Call
 import retrofit2.http.Field
@@ -36,5 +37,13 @@ interface PlayerApi {
         @Field("values1") search: String,
         @Field("values2") limit: String
     ): Call<List<Player>>
+
+    @FormUrlEncoded
+    @POST("change-password.php")
+    fun changePassword(
+        @Field("values1") playerId: String,
+        @Field("values2") oldPassword: String,
+        @Field("values3") newPassword: String
+    ): Call<JsonResponse>
 
 }

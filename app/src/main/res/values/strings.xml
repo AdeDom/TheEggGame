@@ -18,7 +18,6 @@
     <string name="start_game">Start Game</string>
     <string name="welcome">Welcome to The Egg Game</string>
     <string name="on_back_pressed">Press back again to exit</string>
-    <string name="recording_complete">Recording complete</string>
     <string name="register">Register</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -48,5 +47,9 @@
     <string name="error_password_less">Please enter your password no less than 4 characters</string>
     <string name="error_password_not_match">Passwords do not match</string>
     <string name="search">Search</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="successfully">Successfully</string>
 
 </resources>

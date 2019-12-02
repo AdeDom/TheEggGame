@@ -12,15 +12,6 @@ const val PREF_LOGIN = "PREF_LOGIN"
 const val PLAYER_ID = "player_id"
 const val USERNAME = "username"
 
-fun EditText.isEmpty(error: String): Boolean {
-    if (this.text.toString().trim().isEmpty()) {
-        this.requestFocus()
-        this.error = error
-        return true
-    }
-    return false
-}
-
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
@@ -67,6 +58,15 @@ fun ImageView.loadProfile(image: String) {
         .load("$BASE_URL../profiles/$image")
         .circleCrop()
         .into(this)
+}
+
+fun EditText.isEmpty(error: String): Boolean {
+    if (this.text.toString().trim().isEmpty()) {
+        this.requestFocus()
+        this.error = error
+        return true
+    }
+    return false
 }
 
 fun EditText.checkLess4(error: String): Boolean {
