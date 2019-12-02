@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:focusable="true"
-              android:focusableInTouchMode="true"
-              android:orientation="vertical"
-              android:padding="10dp">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="10dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -16,16 +16,16 @@
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_rank"/>
+                android:src="@drawable/ic_rank" />
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Rank"
+                android:text="@string/rank"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -36,27 +36,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_edit"
                     android:drawableRight="@drawable/ic_search"
                     android:drawableTint="#aaa"
                     android:gravity="right"
-                    android:hint="search"
+                    android:hint="@string/search"
                     android:maxLines="1"
-                    android:textColor="#3F51B5"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#3F51B5" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingBottom="100dp"
-            tools:listitem="@layout/item_player"/>
+            tools:listitem="@layout/item_player" />
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -70,24 +70,24 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="10"/>
+                android:text="10" />
 
         <Button
                 android:id="@+id/mBtnRank50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="50"/>
+                android:text="50" />
 
         <Button
                 android:id="@+id/mBtnRank100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="100"/>
+                android:text="100" />
     </LinearLayout>
 </LinearLayout>

@@ -15,12 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adedom.theegggame.MainActivity
+import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.dialog.InsertRoomDialog
-import com.adedom.theegggame.dialog.InsertRoomPeopleDialog
-import com.adedom.theegggame.models.RoomItem
-import com.adedom.theegggame.utility.*
+import com.adedom.theegggame.ui.dialogs.InsertRoomDialog
+import com.adedom.theegggame.ui.dialogs.InsertRoomPeopleDialog
+import com.adedom.theegggame.data.models.RoomItem
+import com.adedom.theegggame.util.*
 import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_room.*
 import kotlinx.android.synthetic.main.item_rv_room.view.*
@@ -91,7 +91,8 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
 
     private fun setEvents() {
         mFab.setOnClickListener {
-            InsertRoomDialog().show(supportFragmentManager, null)
+            InsertRoomDialog()
+                .show(supportFragmentManager, null)
         }
     }
 
@@ -177,7 +178,8 @@ class RoomActivity : AppCompatActivity() { // 20/7/62
                 val bundle = Bundle()
                 bundle.putParcelable("room", mRoomItem[adapterPosition])
 
-                val dialog = InsertRoomPeopleDialog()
+                val dialog =
+                    InsertRoomPeopleDialog()
                 dialog.arguments = bundle
                 dialog.show(supportFragmentManager, null)
             }

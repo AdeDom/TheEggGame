@@ -4,15 +4,14 @@ import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.dialog.ChatSingleDialog
-import com.adedom.theegggame.models.ChatItem
-import com.adedom.theegggame.models.SingleItem
-import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyMap
-import com.adedom.theegggame.utility.MyMediaPlayer
-import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.theegggame.data.models.ChatItem
+import com.adedom.theegggame.data.models.SingleItem
+import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.util.MyConnect
+import com.adedom.theegggame.util.MyMap
+import com.adedom.theegggame.util.MyMediaPlayer
+import com.adedom.theegggame.util.MyResultSet
 import com.adedom.utility.toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Circle
@@ -51,9 +50,10 @@ open class SingleActivity : MyMap(), Commons { // 21/7/62
     }
 
     private fun setEvents() {
-        mFab.setOnClickListener {
-            ChatSingleDialog().show(supportFragmentManager, null)
-        }
+//        mFab.setOnClickListener {
+//            ChatSingleDialog()
+//                .show(supportFragmentManager, null)
+//        }
         mImgEggI.setOnClickListener {
             baseContext.toast(R.string.can_not_use_single, Toast.LENGTH_LONG)
         }

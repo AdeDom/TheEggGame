@@ -6,15 +6,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.adedom.theegggame.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.dialog.FightGameDialog
-import com.adedom.theegggame.models.MultiItem
-import com.adedom.theegggame.models.RoomInfoItem
-import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyMap
-import com.adedom.theegggame.utility.MyMediaPlayer
-import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.theegggame.data.models.MultiItem
+import com.adedom.theegggame.data.models.RoomInfoItem
+import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.dialogs.FightGameDialog
+import com.adedom.theegggame.util.MyConnect
+import com.adedom.theegggame.util.MyMap
+import com.adedom.theegggame.util.MyMediaPlayer
+import com.adedom.theegggame.util.MyResultSet
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng
@@ -217,7 +217,8 @@ open class MultiActivity : MyMap(), Commons { // 5/8/62
 
                     for (item in mMultiItem) {
                         if (item.player_id == mRoomInfoItem[i].playerId) {
-                            val dialog = FightGameDialog()
+                            val dialog =
+                                FightGameDialog()
                             dialog.show(supportFragmentManager, null)
                             dialog.isCancelable = false
                         }

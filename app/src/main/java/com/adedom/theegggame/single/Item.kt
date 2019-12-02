@@ -3,9 +3,9 @@ package com.adedom.theegggame.single
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
-import com.adedom.theegggame.models.SingleItem
-import com.adedom.theegggame.utility.MyCode
-import com.adedom.theegggame.utility.MyMap
+import com.adedom.theegggame.data.models.SingleItem
+import com.adedom.theegggame.util.MyCode
+import com.adedom.theegggame.util.MyMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions

@@ -3,11 +3,11 @@ package com.adedom.theegggame.multi
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
-import com.adedom.theegggame.models.MultiItem
-import com.adedom.theegggame.utility.MyCode
-import com.adedom.theegggame.utility.MyConnect
-import com.adedom.theegggame.utility.MyMap
-import com.adedom.theegggame.utility.MyResultSet
+import com.adedom.theegggame.data.models.MultiItem
+import com.adedom.theegggame.util.MyCode
+import com.adedom.theegggame.util.MyConnect
+import com.adedom.theegggame.util.MyMap
+import com.adedom.theegggame.util.MyResultSet
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions

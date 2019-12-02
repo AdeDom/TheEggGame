@@ -68,3 +68,23 @@ fun ImageView.loadProfile(image: String) {
         .circleCrop()
         .into(this)
 }
+
+fun EditText.checkLess4(error: String): Boolean {
+    if (this.text.toString().trim().length < 4) {
+        this.requestFocus()
+        this.error = error
+        return true
+    }
+    return false
+}
+
+fun checkPassword(editText1: EditText, editText2: EditText, error: String): Boolean {
+    val edt1 = editText1.text.toString().trim()
+    val edt2 = editText2.text.toString().trim()
+    if (edt1 != edt2) {
+        editText2.requestFocus()
+        editText2.error = error
+        return true
+    }
+    return false
+}
