@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_bg"
-        tools:context=".multi.RoomActivity">
+        tools:context=".ui.multi.RoomActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"

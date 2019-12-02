@@ -22,19 +22,19 @@
                 android:value="@string/google_maps_key" />
 
         <activity
-                android:name=".multi.MultiActivity"
+                android:name="com.adedom.theegggame.ui.multi.MultiActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name=".multi.GetReadyActivity"
+                android:name="com.adedom.theegggame.ui.multi.GetReadyActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name=".multi.RoomActivity"
+                android:name="com.adedom.theegggame.ui.multi.RoomActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name=".single.SingleActivity"
+                android:name="com.adedom.theegggame.ui.single.SingleActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity

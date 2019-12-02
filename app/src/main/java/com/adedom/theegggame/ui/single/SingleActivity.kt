@@ -1,8 +1,10 @@
-package com.adedom.theegggame.single
+package com.adedom.theegggame.ui.single
 
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.SingleItem
 import com.adedom.theegggame.ui.activities.MainActivity
@@ -12,15 +14,18 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : MapActivity() { // 21/7/62
+class SingleActivity : MapActivity() { // 2/12/19
 
     val TAG = "SingleActivity"
+    private lateinit var mViewModel: SingleActivityViewModel
     private var mSwitchItem = GameSwitch.ON
     private val mSingleItem by lazy { arrayListOf<SingleItem>() }
     private val mMarkerMyItem by lazy { arrayListOf<Marker>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mViewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
 
         toolbar.title = "Single player"
         setSupportActionBar(toolbar)
@@ -113,30 +118,14 @@ class SingleActivity : MapActivity() { // 21/7/62
             }
         }
 
-//        val sql =
-//            "SELECT * FROM tbl_my_item WHERE player_id = '${MainActivity.sPlayerItem.playerId}' AND " +
-//                    "object_id = '${myItem.toString().trim()}'"
-//        MyConnect.executeQuery(sql, object : MyResultSet {
-//            override fun onResponse(rs: ResultSet) {
-//                if (rs.next()) {
-//                    var num = rs.getInt(4)
-//                    num += values
-//                    val sql = "UPDATE tbl_my_item SET\n" +
-//                            "qty = '${num.toString().trim()}'\n" +
-//                            "WHERE player_id = '${MainActivity.sPlayerItem.playerId}' AND " +
-//                            "object_id = '${myItem.toString().trim()}'"
-//                    MyConnect.executeQuery(sql)
-//                } else {
-//                    val sql = "INSERT INTO tbl_my_item (player_id, object_id, qty) \n" +
-//                            "VALUES ('${MainActivity.sPlayerItem.playerId}', " +
-//                            "'${myItem.toString().trim()}', " +
-//                            "'${values.toString().trim()}')"
-//                    MyConnect.executeQuery(sql)
-//                }
-//            }
-//        })
-
-        baseContext.toast(detailItem(myItem, values))
+        mViewModel.repository.insertItem(MainActivity.sPlayerItem.playerId!!, myItem, values)
+        mViewModel.insertItem().observe(this, Observer {
+            if (it.result) {
+                baseContext.toast(detailItem(myItem, values))
+            } else {
+                baseContext.failed()
+            }
+        })
     }
 
     override fun onBackPressed() {

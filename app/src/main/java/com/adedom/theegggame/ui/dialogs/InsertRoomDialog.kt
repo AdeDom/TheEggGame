@@ -9,8 +9,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.multi.GetReadyActivity
-import com.adedom.theegggame.multi.RoomActivity
+import com.adedom.theegggame.ui.multi.GetReadyActivity
+import com.adedom.theegggame.ui.multi.RoomActivity
 import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.util.MyCode
 import com.adedom.theegggame.util.MyConnect

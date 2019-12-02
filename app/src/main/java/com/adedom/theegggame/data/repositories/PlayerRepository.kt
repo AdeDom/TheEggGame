@@ -1,7 +1,6 @@
 package com.adedom.theegggame.data.repositories
 
 import androidx.lifecycle.MutableLiveData
-import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.networks.RetrofitClient
@@ -16,8 +15,6 @@ class PlayerRepository {
     val player = MutableLiveData<Player>()
 
     val players = MutableLiveData<List<Player>>()
-
-    val result = MutableLiveData<JsonResponse>()
 
     fun getPlayerId(
         username: String,
@@ -87,23 +84,4 @@ class PlayerRepository {
             })
     }
 
-    fun changePassword(
-        playerId: String,
-        oldPassword: String,
-        newPassword: String
-    ) {
-        api.changePassword(playerId, oldPassword, newPassword)
-            .enqueue(object : Callback<JsonResponse> {
-                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
-
-                override fun onResponse(
-                    call: Call<JsonResponse>,
-                    response: Response<JsonResponse>
-                ) {
-                    if (!response.isSuccessful) return
-
-                    result.value = response.body()
-                }
-            })
-    }
 }

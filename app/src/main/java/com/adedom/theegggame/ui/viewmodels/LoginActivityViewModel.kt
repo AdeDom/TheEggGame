@@ -7,7 +7,7 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 
 class LoginActivityViewModel : ViewModel() { // 2/12/19
 
-    val repository = PlayerRepository()
+    val repository by lazy { PlayerRepository() }
 
     fun getPlayerId(): LiveData<Player> = repository.player
 

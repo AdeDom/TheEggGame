@@ -1,4 +1,4 @@
-package com.adedom.theegggame.multi
+package com.adedom.theegggame.ui.multi
 
 import android.content.Intent
 import android.location.Location

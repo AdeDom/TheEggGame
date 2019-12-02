@@ -7,7 +7,7 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 
 class RankDialogViewModel : ViewModel() { // 2/12/19
 
-    val repository = PlayerRepository()
+    val repository by lazy { PlayerRepository() }
 
     fun getPlayerRank(): LiveData<List<Player>> = repository.players
 

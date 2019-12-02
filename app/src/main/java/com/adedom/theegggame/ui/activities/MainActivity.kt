@@ -8,8 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.multi.RoomActivity
-import com.adedom.theegggame.single.SingleActivity
+import com.adedom.theegggame.ui.multi.RoomActivity
+import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.ui.dialogs.AboutDialog
 import com.adedom.theegggame.ui.dialogs.MissionDialog
 import com.adedom.theegggame.ui.dialogs.RankDialog

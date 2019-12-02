@@ -1,4 +1,4 @@
-package com.adedom.theegggame.single
+package com.adedom.theegggame.ui.single
 
 import android.graphics.Bitmap
 import com.adedom.theegggame.R

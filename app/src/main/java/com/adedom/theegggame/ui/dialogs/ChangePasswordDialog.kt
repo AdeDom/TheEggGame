@@ -77,12 +77,12 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
         mViewModel.response.changePassword(mPlayer.playerId!!, oldPassword, newPassword)
         mViewModel.result().observe(this, Observer {
-            if (it.result == "failed") {
-                mEdtOldPassword.requestFocus()
-                mEdtOldPassword.error = getString(R.string.password_incorrect)
-            } else {
+            if (it.result) {
                 dialog!!.dismiss()
                 MainActivity.sContext.toast(R.string.successfully)
+            } else {
+                mEdtOldPassword.requestFocus()
+                mEdtOldPassword.error = getString(R.string.password_incorrect)
             }
         })
 

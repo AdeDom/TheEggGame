@@ -7,7 +7,7 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 
 class RegisterDialogViewModel : ViewModel() { // 2/12/19
 
-    val repository = PlayerRepository()
+    val repository by lazy { PlayerRepository() }
 
     fun registerPlayer(): LiveData<Player> = repository.player
 
