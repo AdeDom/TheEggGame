@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.dialogs.RoomInfoDialog
 import com.adedom.theegggame.data.models.RoomInfoItem
+import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.dialogs.RoomInfoDialog
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyGrid
 import com.adedom.theegggame.util.MyResultSet
@@ -84,7 +84,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
         mRecyclerView.layoutManager = GridLayoutManager(baseContext, 2)
         mRecyclerView.addItemDecoration(MyGrid(2, MyGrid.dpToPx(10, resources), true)) // init
 
-        mTvNo.text = mNoRoom
+        mTvRoomNo.text = mNoRoom
         mTvName.text = mName
         mTvPeople.text = mPeople
         if (mHeadRoom == "1") {

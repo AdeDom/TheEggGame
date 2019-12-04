@@ -37,4 +37,11 @@ interface PlayerApi {
         @Field("values2") limit: String
     ): Call<List<Player>>
 
+    companion object {
+        operator fun invoke(): PlayerApi {
+            return RetrofitClient.instance()
+                .create(PlayerApi::class.java)
+        }
+    }
+
 }

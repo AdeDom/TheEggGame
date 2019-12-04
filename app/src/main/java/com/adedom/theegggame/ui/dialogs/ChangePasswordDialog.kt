@@ -11,8 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.data.networks.RetrofitApi
+import com.adedom.theegggame.data.repositories.RetrofitRepository
+import com.adedom.theegggame.ui.factories.ChangePasswordDialogFactory
 import com.adedom.theegggame.ui.viewmodels.ChangePasswordDialogViewModel
+import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.checkLess4
 import com.adedom.utility.checkPassword
 import com.adedom.utility.isEmpty
@@ -31,7 +34,8 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        mViewModel = ViewModelProviders.of(this).get(ChangePasswordDialogViewModel::class.java)
+        val factory = ChangePasswordDialogFactory(RetrofitRepository(RetrofitApi()))
+        mViewModel = ViewModelProviders.of(this,factory).get(ChangePasswordDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_change_password, null)
 
@@ -75,16 +79,16 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
         val oldPassword = mEdtOldPassword.text.toString().trim()
         val newPassword = mEdtNewPassword.text.toString().trim()
 
-        mViewModel.response.changePassword(mPlayer.playerId!!, oldPassword, newPassword)
-        mViewModel.result().observe(this, Observer {
-            if (it.result) {
-                dialog!!.dismiss()
-                MainActivity.sContext.toast(R.string.successfully)
-            } else {
-                mEdtOldPassword.requestFocus()
-                mEdtOldPassword.error = getString(R.string.password_incorrect)
-            }
-        })
+        mViewModel.changePassword(mPlayer.playerId!!, oldPassword, newPassword)
+            .observe(this, Observer {
+                if (it.result == "completed") {
+                    dialog!!.dismiss()
+                    BaseActivity.sContext.toast(R.string.successfully)
+                } else {
+                    mEdtOldPassword.requestFocus()
+                    mEdtOldPassword.error = getString(R.string.password_incorrect)
+                }
+            })
 
         // TODO: 23/05/2562 refresh MainActivity
     }

@@ -11,11 +11,11 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.RoomItem
+import com.adedom.theegggame.data.models.Room
+import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.ui.multi.GetReadyActivity
-import com.adedom.theegggame.ui.multi.RoomActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyCode
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyResultSet
@@ -30,12 +30,12 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     private lateinit var mPeople: LinearLayout
     private lateinit var mEdtPassword: EditText
     private lateinit var mBtnCreateRoom: Button
-    private lateinit var mRoomItem: RoomItem
+    private lateinit var mRoomItem: Room
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = activity!!.layoutInflater.inflate(R.layout.item_room, null)
 
-        mRoomItem = arguments!!.getParcelable<Parcelable>("room") as RoomItem
+        mRoomItem = arguments!!.getParcelable<Parcelable>("room") as Room
 
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
@@ -68,24 +68,24 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
     private fun checkRoomToJoin() {
         if (mEdtPassword.isEmpty(getString(R.string.error_password))) return
 
-        val password = mEdtPassword.text.toString().trim()
-        if (password == mRoomItem.password) {
-            checkPeopleInRoom()
-        } else {
-            RoomActivity.sContext.toast(R.string.password_incorrect, Toast.LENGTH_LONG)
-        }
+//        val password = mEdtPassword.text.toString().trim()
+//        if (password == mRoomItem.password) {
+//            checkPeopleInRoom()
+//        } else {
+//            GameActivity.sContext.toast(R.string.password_incorrect, Toast.LENGTH_LONG)
+//        }
     }
 
     private fun checkPeopleInRoom() {
-        val sql = "SELECT COUNT(*) FROM tbl_room_info WHERE room_no = '${mRoomItem.no}'"
+        val sql = "SELECT COUNT(*) FROM tbl_room_info WHERE room_no = '${mRoomItem.room_no}'"
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
                 if (rs.next()) {
-                    if (rs.getInt(1) < mRoomItem.people.toInt()) {
+                    if (rs.getInt(1) < mRoomItem.people!!.toInt()) {
                         insertPeople()
                     } else {
                         dialog!!.dismiss()
-                        RoomActivity.sContext.toast(R.string.full, Toast.LENGTH_LONG)
+                        GameActivity.sContext.toast(R.string.full, Toast.LENGTH_LONG)
                     }
                 }
             }
@@ -94,16 +94,16 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
 
     private fun insertPeople() {
         val sql = "INSERT INTO tbl_room_info (room_no, player_id, team, status_id) \n" +
-                "VALUES ('${mRoomItem.no.trim()}', " +
+                "VALUES ('${mRoomItem.room_no!!.trim()}', " +
                 "'${MainActivity.sPlayerItem.playerId!!.trim()}', " +
                 "'${MyCode.rndTeam().trim()}', " +
                 "'0')"
         MyConnect.executeQuery(sql)
 
         dialog!!.dismiss()
-        RoomActivity.sContext.startActivity(
-            Intent(RoomActivity.sContext, GetReadyActivity::class.java)
-                .putExtra("values1", mRoomItem.no)
+        GameActivity.sContext.startActivity(
+            Intent(GameActivity.sContext, GetReadyActivity::class.java)
+                .putExtra("values1", mRoomItem.room_no)
                 .putExtra("values2", mRoomItem.name)
                 .putExtra("values3", mRoomItem.people)
                 .putExtra("values4", "2")

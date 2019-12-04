@@ -14,7 +14,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
+import com.adedom.theegggame.data.networks.PlayerApi
+import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.adapters.RankAdapter
+import com.adedom.theegggame.ui.factories.RankDialogFactory
 import com.adedom.theegggame.ui.viewmodels.RankDialogViewModel
 
 class RankDialog : DialogFragment() { // 2/12/19
@@ -30,7 +33,8 @@ class RankDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        mViewModel = ViewModelProviders.of(this).get(RankDialogViewModel::class.java)
+        val factory = RankDialogFactory(PlayerRepository(PlayerApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(RankDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_rank, null)
 
@@ -75,8 +79,7 @@ class RankDialog : DialogFragment() { // 2/12/19
     }
 
     private fun freshPlayer(search: String = "", limit: String = "") {
-        mViewModel.repository.getPlayerRank(search, limit)
-        mViewModel.getPlayerRank().observe(this, Observer {
+        mViewModel.getPlayerRank(search, limit).observe(this, Observer {
             mAdapter.setList(it)
         })
     }

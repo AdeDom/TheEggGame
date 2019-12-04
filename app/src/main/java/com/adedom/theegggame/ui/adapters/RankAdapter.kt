@@ -13,10 +13,10 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankHolder>() {
 
     private var players = arrayListOf<Player>()
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): RankHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RankHolder =
         RankHolder(
-            LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.item_player, viewGroup, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_player, parent, false)
         )
 
     override fun getItemCount(): Int = players.size

@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.activities.LoginActivity
 import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.login
 
 class SettingDialog : DialogFragment() { // 2/12/19
@@ -31,6 +32,10 @@ class SettingDialog : DialogFragment() { // 2/12/19
     }
 
     private fun init(view: View) {
+        //todo sound
+
+        //todo update name & profile
+
         mBtnChange = view.findViewById(R.id.mBtnChange) as Button
         mBtnLogout = view.findViewById(R.id.mBtnLogout) as Button
         mBtnExit = view.findViewById(R.id.mBtnExit) as Button
@@ -66,7 +71,7 @@ class SettingDialog : DialogFragment() { // 2/12/19
             .setIcon(R.drawable.ic_exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which ->
-                MainActivity.sActivity.finishAffinity()
+                BaseActivity.sActivity.finishAffinity()
             }.show()
     }
 }

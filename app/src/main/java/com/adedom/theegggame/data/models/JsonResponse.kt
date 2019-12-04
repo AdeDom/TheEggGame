@@ -1,3 +1,5 @@
 package com.adedom.theegggame.data.models
 
-data class JsonResponse(val result: Boolean)
+import com.google.gson.annotations.SerializedName
+
+data class JsonResponse(@SerializedName("result") val result: String? = null)

@@ -7,7 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.SingleItem
+import com.adedom.theegggame.data.networks.RetrofitApi
+import com.adedom.theegggame.data.repositories.RetrofitRepository
 import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.factories.SingleActivityFactory
+import com.adedom.theegggame.ui.viewmodels.SingleActivityViewModel
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import com.google.android.gms.maps.model.LatLng
@@ -25,7 +29,10 @@ class SingleActivity : MapActivity() { // 2/12/19
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
+        val factory = SingleActivityFactory(
+            RetrofitRepository(RetrofitApi())
+        )
+        mViewModel = ViewModelProviders.of(this,factory).get(SingleActivityViewModel::class.java)
 
         toolbar.title = "Single player"
         setSupportActionBar(toolbar)
@@ -33,6 +40,8 @@ class SingleActivity : MapActivity() { // 2/12/19
 
         mFloatingActionButton.setOnClickListener {
             baseContext.completed()
+
+            //todo backpack item
         }
     }
 
@@ -118,14 +127,14 @@ class SingleActivity : MapActivity() { // 2/12/19
             }
         }
 
-        mViewModel.repository.insertItem(MainActivity.sPlayerItem.playerId!!, myItem, values)
-        mViewModel.insertItem().observe(this, Observer {
-            if (it.result) {
-                baseContext.toast(detailItem(myItem, values))
-            } else {
-                baseContext.failed()
-            }
-        })
+        mViewModel.insertItem(MainActivity.sPlayerItem.playerId!!, myItem, values)
+            .observe(this, Observer {
+                if (it.result == "completed") {
+                    baseContext.toast(detailItem(myItem, values))
+                } else {
+                    baseContext.failed()
+                }
+            })
     }
 
     override fun onBackPressed() {

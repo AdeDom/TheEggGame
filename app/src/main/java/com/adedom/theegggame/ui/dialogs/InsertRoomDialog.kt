@@ -9,9 +9,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.multi.GetReadyActivity
-import com.adedom.theegggame.ui.multi.RoomActivity
 import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.multi.GetReadyActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyCode
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyResultSet
@@ -92,7 +92,7 @@ class InsertRoomDialog : DialogFragment() { // 21/7/62
 
         dialog!!.dismiss()
         startActivity(
-            Intent(RoomActivity.sContext, GetReadyActivity::class.java)
+            Intent(GameActivity.sContext, GetReadyActivity::class.java)
                 .putExtra("values1", mNoRoom)
                 .putExtra("values2", mEdtName.text.toString().trim())
                 .putExtra("values3", mNumberPicker.value.toString())

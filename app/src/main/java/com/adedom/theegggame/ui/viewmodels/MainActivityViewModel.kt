@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class MainActivityViewModel : ViewModel() { // 2/12/19
+class MainActivityViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
 
-    val repository by lazy { PlayerRepository() }
-
-    fun getPlayers(): LiveData<Player> = repository.player
-
+    fun getPlayers(playerId: String): LiveData<Player> {
+        return repository.getPlayers(playerId)
+    }
 }

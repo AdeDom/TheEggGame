@@ -1,19 +1,20 @@
 package com.adedom.theegggame.ui.activities
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.ui.multi.RoomActivity
-import com.adedom.theegggame.ui.single.SingleActivity
+import com.adedom.theegggame.data.networks.PlayerApi
+import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.AboutDialog
 import com.adedom.theegggame.ui.dialogs.MissionDialog
 import com.adedom.theegggame.ui.dialogs.RankDialog
 import com.adedom.theegggame.ui.dialogs.SettingDialog
+import com.adedom.theegggame.ui.factories.MainActivityFactory
+import com.adedom.theegggame.ui.multi.RoomActivity
+import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.ui.viewmodels.MainActivityViewModel
 import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.*
@@ -25,8 +26,6 @@ class MainActivity : BaseActivity() { // 2/12/19
     private lateinit var mViewModel: MainActivityViewModel
 
     companion object {
-        lateinit var sActivity: Activity
-        lateinit var sContext: Context
         lateinit var sPlayerItem: Player
         val sTimeStamp = System.currentTimeMillis() / 1000
     }
@@ -35,10 +34,8 @@ class MainActivity : BaseActivity() { // 2/12/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sActivity = this@MainActivity
-        sContext = baseContext
-
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        val factory = MainActivityFactory(PlayerRepository(PlayerApi()))
+        mViewModel = ViewModelProviders.of(this,factory).get(MainActivityViewModel::class.java)
 
         if (checkLogin()) return
 
@@ -48,16 +45,18 @@ class MainActivity : BaseActivity() { // 2/12/19
     private fun checkLogin(): Boolean {
         val playerId = this.getPrefLogin(PLAYER_ID)
         if (playerId == "empty") {
-            this.login(LoginActivity::class.java)
+            this.login(
+                LoginActivity::class.java,
+                username = this.getPrefLogin(USERNAME)
+            )
             return true
         } else {
-            mViewModel.repository.getPlayers(playerId)
-            mViewModel.getPlayers().observe(this, Observer {
+            mViewModel.getPlayers(playerId).observe(this, Observer {
                 if (it.playerId == null) {
                     this.login(LoginActivity::class.java)
                 } else {
                     sPlayerItem = it
-                    sContext.toast(R.string.welcome)
+                    BaseActivity.sContext.toast(R.string.welcome)
                     setWidgets()
                 }
             })

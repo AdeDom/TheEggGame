@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class LoginActivityViewModel : ViewModel() { // 2/12/19
+class LoginActivityViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
 
-    val repository by lazy { PlayerRepository() }
-
-    fun getPlayerId(): LiveData<Player> = repository.player
+    fun getPlayerId(username: String, password: String): LiveData<Player> {
+        return repository.getPlayerId(username, password)
+    }
 
 }

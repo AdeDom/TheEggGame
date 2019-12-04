@@ -1,10 +1,11 @@
 package com.adedom.theegggame.util
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.utility.Setting
 import com.adedom.utility.toast
 
@@ -14,6 +15,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sActivity = this@BaseActivity
+        sContext = baseContext
+
         Setting(this, this)
     }
 
@@ -21,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (mCountExit > 0) finishAffinity()
         mCountExit++
         Handler().postDelayed({ mCountExit = 0 }, 2000)
-        MainActivity.sContext.toast(R.string.on_back_pressed)
+        sContext.toast(R.string.on_back_pressed)
     }
 
     override fun onResume() {
@@ -38,5 +43,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // offline
         // music
+    }
+
+    companion object{
+        lateinit var sActivity: Activity
+        lateinit var sContext: Context
     }
 }

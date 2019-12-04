@@ -6,7 +6,9 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface DatabaseApi {
+interface RetrofitApi {
+
+//    Call<Void>
 
     @FormUrlEncoded
     @POST("change-password.php")
@@ -23,4 +25,17 @@ interface DatabaseApi {
         @Field("values2") itemId: Int,
         @Field("values3") qty: Int
     ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("get-people-room.php")
+    fun getPeopleRoom(
+        @Field("values1") roomNo: String
+    ): Call<JsonResponse>
+
+    companion object {
+        operator fun invoke(): RetrofitApi {
+            return RetrofitClient.instance()
+                .create(RetrofitApi::class.java)
+        }
+    }
 }

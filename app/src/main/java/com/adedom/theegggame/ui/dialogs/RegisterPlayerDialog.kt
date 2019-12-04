@@ -15,9 +15,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.activities.LoginActivity
+import com.adedom.theegggame.data.networks.PlayerApi
+import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.factories.RegisterPlayerDialogFactory
 import com.adedom.theegggame.ui.viewmodels.RegisterDialogViewModel
+import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -36,7 +39,8 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        mViewModel = ViewModelProviders.of(this).get(RegisterDialogViewModel::class.java)
+        val factory = RegisterPlayerDialogFactory(PlayerRepository(PlayerApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(RegisterDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
@@ -68,7 +72,7 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
             .setRequestedSize(150, 150)
             .setMinCropWindowSize(150, 150)
             .setAspectRatio(1, 1)
-            .start(LoginActivity.sContext, this)
+            .start(BaseActivity.sContext, this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -79,7 +83,7 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
                 mImageUri = result.uri.toString()
                 mImgProfile.loadCircle(mImageUri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                LoginActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
+                BaseActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
             }
         }
     }
@@ -106,10 +110,9 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
         val password = mEdtPassword.text.toString().trim()
         val name = mEdtName.text.toString().trim()
 
-        mViewModel.repository.registerPlayer(username, password, name, mImageUri)
-        mViewModel.registerPlayer().observe(this, Observer {
+        mViewModel.registerPlayer(username, password, name, mImageUri).observe(this, Observer {
             if (it.playerId == "failed") {
-                LoginActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
+                BaseActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
             } else {
                 activity!!.login(MainActivity::class.java, it.playerId!!, username)
             }
