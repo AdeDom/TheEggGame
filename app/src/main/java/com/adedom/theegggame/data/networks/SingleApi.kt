@@ -6,17 +6,9 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface RetrofitApi {
+interface SingleApi {
 
 //    Call<Void>
-
-    @FormUrlEncoded
-    @POST("change-password.php")
-    fun changePassword(
-        @Field("values1") playerId: String,
-        @Field("values2") oldPassword: String,
-        @Field("values3") newPassword: String
-    ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("insert-item.php")
@@ -26,16 +18,10 @@ interface RetrofitApi {
         @Field("values3") qty: Int
     ): Call<JsonResponse>
 
-    @FormUrlEncoded
-    @POST("get-people-room.php")
-    fun getPeopleRoom(
-        @Field("values1") roomNo: String
-    ): Call<JsonResponse>
-
     companion object {
-        operator fun invoke(): RetrofitApi {
+        operator fun invoke(): SingleApi {
             return RetrofitClient.instance()
-                .create(RetrofitApi::class.java)
+                .create(SingleApi::class.java)
         }
     }
 }

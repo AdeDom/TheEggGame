@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.MultiItem
+import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyResultSet

@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.adapters
+package com.adedom.theegggame.ui.multi.room
 
 import android.view.LayoutInflater
 import android.view.View

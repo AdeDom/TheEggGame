@@ -1,11 +1,11 @@
-package com.adedom.theegggame.ui.viewmodels
+package com.adedom.theegggame.ui.dialogs.registerplayer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class RegisterDialogViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
+class RegisterPlayerDialogViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
 
     fun registerPlayer(
         username: String,

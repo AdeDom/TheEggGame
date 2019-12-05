@@ -7,8 +7,9 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.activities.LoginActivity
-import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.dialogs.changepassword.ChangePasswordDialog
+import com.adedom.theegggame.ui.login.LoginActivity
+import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.login
 
@@ -46,7 +47,8 @@ class SettingDialog : DialogFragment() { // 2/12/19
             val bundle = Bundle()
             bundle.putParcelable("player", MainActivity.sPlayerItem)
 
-            val dialog = ChangePasswordDialog()
+            val dialog =
+                ChangePasswordDialog()
             dialog.arguments = bundle
             dialog.show(activity!!.supportFragmentManager, null)
         }

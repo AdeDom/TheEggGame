@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs
+package com.adedom.theegggame.ui.dialogs.changepassword
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,10 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.data.networks.RetrofitApi
-import com.adedom.theegggame.data.repositories.RetrofitRepository
-import com.adedom.theegggame.ui.factories.ChangePasswordDialogFactory
-import com.adedom.theegggame.ui.viewmodels.ChangePasswordDialogViewModel
+import com.adedom.theegggame.data.networks.PlayerApi
+import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.checkLess4
 import com.adedom.utility.checkPassword
@@ -34,7 +32,10 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val factory = ChangePasswordDialogFactory(RetrofitRepository(RetrofitApi()))
+        val factory =
+            ChangePasswordDialogFactory(
+                PlayerRepository(PlayerApi())
+            )
         mViewModel = ViewModelProviders.of(this,factory).get(ChangePasswordDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_change_password, null)

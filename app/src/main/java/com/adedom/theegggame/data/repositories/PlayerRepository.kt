@@ -2,6 +2,7 @@ package com.adedom.theegggame.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.networks.PlayerApi
 import retrofit2.Call
@@ -75,6 +76,30 @@ class PlayerRepository(private val api: PlayerApi) {
                 override fun onResponse(
                     call: Call<List<Player>>,
                     response: Response<List<Player>>
+                ) {
+                    if (!response.isSuccessful) return
+
+                    liveData.value = response.body()
+                }
+            })
+
+        return liveData
+    }
+
+    fun changePassword(
+        playerId: String,
+        oldPassword: String,
+        newPassword: String
+    ): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+
+        api.changePassword(playerId, oldPassword, newPassword)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
                 ) {
                     if (!response.isSuccessful) return
 

@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs
+package com.adedom.theegggame.ui.dialogs.registerplayer
 
 import android.app.Activity
 import android.app.Dialog
@@ -17,9 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
-import com.adedom.theegggame.ui.activities.MainActivity
-import com.adedom.theegggame.ui.factories.RegisterPlayerDialogFactory
-import com.adedom.theegggame.ui.viewmodels.RegisterDialogViewModel
+import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage
@@ -27,7 +25,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 class RegisterPlayerDialog : DialogFragment() { // 2/12/19
 
     val TAG = "MyTag"
-    private lateinit var mViewModel: RegisterDialogViewModel
+    private lateinit var mViewModel: RegisterPlayerDialogViewModel
     private lateinit var mEdtUsername: EditText
     private lateinit var mEdtPassword: EditText
     private lateinit var mEdtRePassword: EditText
@@ -39,8 +37,11 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val factory = RegisterPlayerDialogFactory(PlayerRepository(PlayerApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(RegisterDialogViewModel::class.java)
+        val factory =
+            RegisterPlayerDialogFactory(
+                PlayerRepository(PlayerApi())
+            )
+        mViewModel = ViewModelProviders.of(this, factory).get(RegisterPlayerDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 

@@ -26,11 +26,11 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name="com.adedom.theegggame.ui.multi.GetReadyActivity"
+                android:name="com.adedom.theegggame.ui.multi.getready.GetReadyActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name="com.adedom.theegggame.ui.multi.RoomActivity"
+                android:name="com.adedom.theegggame.ui.multi.room.RoomActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -38,11 +38,11 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name=".ui.activities.LoginActivity"
+                android:name=".ui.login.LoginActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name=".ui.activities.MainActivity"
+                android:name=".ui.main.MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

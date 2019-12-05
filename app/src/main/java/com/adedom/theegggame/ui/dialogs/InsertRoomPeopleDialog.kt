@@ -13,9 +13,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.ui.activities.MainActivity
-import com.adedom.theegggame.ui.multi.GetReadyActivity
-import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
+import com.adedom.theegggame.util.BaseActivity
 import com.adedom.theegggame.util.MyCode
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyResultSet
@@ -85,7 +85,7 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
                         insertPeople()
                     } else {
                         dialog!!.dismiss()
-                        GameActivity.sContext.toast(R.string.full, Toast.LENGTH_LONG)
+                        BaseActivity.sContext.toast(R.string.full, Toast.LENGTH_LONG)
                     }
                 }
             }
@@ -101,8 +101,8 @@ class InsertRoomPeopleDialog : DialogFragment() { // 21/7/62
         MyConnect.executeQuery(sql)
 
         dialog!!.dismiss()
-        GameActivity.sContext.startActivity(
-            Intent(GameActivity.sContext, GetReadyActivity::class.java)
+        BaseActivity.sContext.startActivity(
+            Intent(BaseActivity.sContext, GetReadyActivity::class.java)
                 .putExtra("values1", mRoomItem.room_no)
                 .putExtra("values2", mRoomItem.name)
                 .putExtra("values3", mRoomItem.people)

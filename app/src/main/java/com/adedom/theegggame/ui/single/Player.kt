@@ -3,7 +3,7 @@ package com.adedom.theegggame.ui.single
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.activities.MainActivity
+import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import com.bumptech.glide.Glide

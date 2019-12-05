@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.viewmodels
+package com.adedom.theegggame.ui.dialogs.rank
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.viewmodels
+package com.adedom.theegggame.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

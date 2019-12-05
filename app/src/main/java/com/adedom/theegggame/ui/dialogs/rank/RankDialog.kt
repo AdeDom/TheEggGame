@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs
+package com.adedom.theegggame.ui.dialogs.rank
 
 import android.app.Dialog
 import android.os.Bundle
@@ -16,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
-import com.adedom.theegggame.ui.adapters.RankAdapter
-import com.adedom.theegggame.ui.factories.RankDialogFactory
-import com.adedom.theegggame.ui.viewmodels.RankDialogViewModel
 
 class RankDialog : DialogFragment() { // 2/12/19
 
@@ -33,7 +30,9 @@ class RankDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val factory = RankDialogFactory(PlayerRepository(PlayerApi()))
+        val factory = RankDialogFactory(
+            PlayerRepository(PlayerApi())
+        )
         mViewModel = ViewModelProviders.of(this, factory).get(RankDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_rank, null)

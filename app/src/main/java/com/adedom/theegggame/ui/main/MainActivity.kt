@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.activities
+package com.adedom.theegggame.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,19 +10,18 @@ import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.AboutDialog
 import com.adedom.theegggame.ui.dialogs.MissionDialog
-import com.adedom.theegggame.ui.dialogs.RankDialog
 import com.adedom.theegggame.ui.dialogs.SettingDialog
-import com.adedom.theegggame.ui.factories.MainActivityFactory
-import com.adedom.theegggame.ui.multi.RoomActivity
+import com.adedom.theegggame.ui.dialogs.rank.RankDialog
+import com.adedom.theegggame.ui.login.LoginActivity
+import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
-import com.adedom.theegggame.ui.viewmodels.MainActivityViewModel
 import com.adedom.theegggame.util.BaseActivity
+import com.adedom.theegggame.util.BasicActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() { // 2/12/19
+class MainActivity : BasicActivity() { // 2/12/19
 
-    val TAG = "MyTag"
     private lateinit var mViewModel: MainActivityViewModel
 
     companion object {
@@ -34,7 +33,9 @@ class MainActivity : BaseActivity() { // 2/12/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val factory = MainActivityFactory(PlayerRepository(PlayerApi()))
+        val factory = MainActivityFactory(
+            PlayerRepository(PlayerApi())
+        )
         mViewModel = ViewModelProviders.of(this,factory).get(MainActivityViewModel::class.java)
 
         if (checkLogin()) return

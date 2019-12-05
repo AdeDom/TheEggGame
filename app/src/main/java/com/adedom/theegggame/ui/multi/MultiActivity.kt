@@ -9,8 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.MultiItem
 import com.adedom.theegggame.data.models.RoomInfoItem
-import com.adedom.theegggame.ui.activities.MainActivity
 import com.adedom.theegggame.ui.dialogs.FightGameDialog
+import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyMediaPlayer
