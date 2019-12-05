@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.networks.RoomApi
-import com.adedom.theegggame.data.repositories.RoomRepository
-import com.adedom.theegggame.ui.dialogs.InsertRoomDialog
+import com.adedom.theegggame.data.networks.MultiApi
+import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
 import com.adedom.theegggame.util.GameActivity
@@ -29,7 +29,7 @@ class RoomActivity : GameActivity() { // 5/12/19
         setContentView(R.layout.activity_room)
 
         val factory = RoomActivityFactory(
-            RoomRepository(RoomApi())
+            MultiRepository(MultiApi())
         )
         mViewModel = ViewModelProviders.of(this, factory).get(RoomActivityViewModel::class.java)
 
@@ -61,13 +61,17 @@ class RoomActivity : GameActivity() { // 5/12/19
         }
 
         mFloatingActionButton.setOnClickListener {
-            InsertRoomDialog().show(supportFragmentManager, null)
+            CreateRoomDialog().show(supportFragmentManager, null)
         }
 
         mAdapter.onItemClick = { room ->
-            mViewModel.getPeopleRoom(room.room_no!!).observe(this, Observer {
-                if (it.result!!.toInt() < room.people!!.toInt()) {
-                    insertRoomInfo(room)
+            val playerId = MainActivity.sPlayerItem.playerId!!
+            mViewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
+                if (it.result == "completed") {
+                    startActivity(
+                        Intent(baseContext, GetReadyActivity::class.java)
+                            .putExtra("room", Room(null, room.room_no, room.name, room.people, "T"))
+                    )
                 } else {
                     baseContext.toast(R.string.full, Toast.LENGTH_LONG)
                 }
@@ -75,19 +79,9 @@ class RoomActivity : GameActivity() { // 5/12/19
         }
     }
 
-    private fun insertRoomInfo(room: Room) {
-        val playerId = MainActivity.sPlayerItem.playerId!!
-        mViewModel.insertRoomInfo(room.room_no!!, playerId).observe(this, Observer {
-            if (it.result == "completed") {
-                startActivity(
-                    Intent(baseContext, GetReadyActivity::class.java)
-                        .putExtra("room", Room(null, room.room_no, room.name, room.people, "T"))
-                )
-            }
-        })
-    }
-
     private fun freshRoom() {
+        //todo off room
+
         mViewModel.getRooms().observe(this, Observer {
             mAdapter.setList(it)
         })

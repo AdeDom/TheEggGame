@@ -3,10 +3,15 @@ package com.adedom.theegggame.ui.multi.getready
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfoItem
+import com.adedom.theegggame.data.networks.MultiApi
+import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.MyGrid
 import kotlinx.android.synthetic.main.activity_get_ready.*
 import kotlinx.android.synthetic.main.item_rv_room.*
@@ -14,6 +19,7 @@ import kotlinx.android.synthetic.main.item_rv_room.*
 class GetReadyActivity : AppCompatActivity() { // 21/7/62
 
     val TAG = "GetReadyActivity"
+    private lateinit var mViewModel: GetReadyActivityViewModel
     private lateinit var mRoom: Room
     private val mRoomInfoItem = arrayListOf<RoomInfoItem>()
     //    private val mHandlerRefresh = Handler()
@@ -31,6 +37,9 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_ready)
+
+        val factory = GetReadyActivityFactory(MultiRepository(MultiApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(GetReadyActivityViewModel::class.java)
 
 //        mIsPause = true
 //        mIsStartGame = true
@@ -72,7 +81,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
         return super.onOptionsItemSelected(item)
     }
 
-//    private fun getReadyToStartGame() {
+    //    private fun getReadyToStartGame() {
 //        if (mHeadRoom == "1") {
 //            var count = 0
 //            var teamA = 0
@@ -132,8 +141,7 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 //        // TODO: 30/05/2562 finish this class
 //    }
 //
-//    override fun onBackPressed() {
-//        super.onBackPressed()
+    override fun onBackPressed() {
 //        if (mHeadRoom == "1") {
 //            for ((room_no, playerId) in mRoomInfoItem) {
 //                deletePlayerRoomInfo(playerId)
@@ -142,7 +150,15 @@ class GetReadyActivity : AppCompatActivity() { // 21/7/62
 //        mHandlerRefresh.removeCallbacks(mRunnableRefresh)
 //        deletePlayerRoomInfo(MainActivity.sPlayerItem.playerId!!)
 //        finish()
-//    }
+
+        val playerId = MainActivity.sPlayerItem.playerId
+        mViewModel.deletePlayer(mRoom.room_no!!, playerId!!).observe(this, Observer {
+            if (it.result == "completed") {
+                super.onBackPressed()
+            }
+        })
+
+    }
 //
 //    override fun onPause() {
 //        super.onPause()

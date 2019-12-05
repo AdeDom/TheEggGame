@@ -22,9 +22,7 @@ class LoginActivity : BasicActivity() { // 2/12/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val factory = LoginActivityFactory(
-            PlayerRepository(PlayerApi())
-        )
+        val factory = LoginActivityFactory(PlayerRepository(PlayerApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(LoginActivityViewModel::class.java)
 
         init()
@@ -62,7 +60,6 @@ class LoginActivity : BasicActivity() { // 2/12/19
             }
         })
     }
-
 
 
 }

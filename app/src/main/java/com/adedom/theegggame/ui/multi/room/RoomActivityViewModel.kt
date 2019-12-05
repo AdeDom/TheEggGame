@@ -4,16 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.repositories.RoomRepository
+import com.adedom.theegggame.data.repositories.MultiRepository
 
-class RoomActivityViewModel(private val repository: RoomRepository) : ViewModel() {
+class RoomActivityViewModel(private val repository: MultiRepository) : ViewModel() {
 
     fun getRooms(): LiveData<List<Room>> = repository.getRooms()
 
-    fun getPeopleRoom(roomNo: String): LiveData<JsonResponse> = repository.getPeopleRoom(roomNo)
-
-    fun insertRoomInfo(roomNo: String, playerId: String): LiveData<JsonResponse> {
-        return repository.insertRoomInfo(roomNo, playerId)
+    fun joinRoom(roomNo: String, playerId: String): LiveData<JsonResponse> {
+        return repository.joinRoom(roomNo, playerId)
     }
 
 }

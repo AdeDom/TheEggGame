@@ -54,5 +54,6 @@
     <string name="successfully">Successfully</string>
     <string name="kick_out">Kick out</string>
     <string name="exit">Exit</string>
+    <string name="create_room">Create room</string>
 
 </resources>

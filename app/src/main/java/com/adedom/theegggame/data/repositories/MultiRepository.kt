@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.networks.RoomApi
+import com.adedom.theegggame.data.networks.MultiApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RoomRepository(private val api: RoomApi) {
+class MultiRepository(private val api: MultiApi) {
 
     fun getRooms(): LiveData<List<Room>> {
         val liveData = MutableLiveData<List<Room>>()
@@ -25,29 +25,9 @@ class RoomRepository(private val api: RoomApi) {
         return liveData
     }
 
-    fun getPeopleRoom(roomNo: String): LiveData<JsonResponse> {
+    fun joinRoom(roomNo: String, playerId: String): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-
-        api.getPeopleRoom(roomNo)
-            .enqueue(object : Callback<JsonResponse> {
-                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
-
-                override fun onResponse(
-                    call: Call<JsonResponse>,
-                    response: Response<JsonResponse>
-                ) {
-                    if (!response.isSuccessful) return
-
-                    liveData.value = response.body()
-                }
-            })
-
-        return liveData
-    }
-
-    fun insertRoomInfo(roomNo: String, playerId: String): LiveData<JsonResponse> {
-        val liveData = MutableLiveData<JsonResponse>()
-        api.insertRoomInfo(roomNo, playerId)
+        api.joinRoom(roomNo, playerId)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
 
@@ -61,5 +41,40 @@ class RoomRepository(private val api: RoomApi) {
             })
         return liveData
     }
+
+    fun createRoom(name: String, people: String, playerId: String): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+        api.createRoom(name, people, playerId)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
+    fun deletePlayer(roomNo: String, playerId: String): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+        api.deletePlayer(roomNo, playerId)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
 
 }

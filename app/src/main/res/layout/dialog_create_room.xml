@@ -23,22 +23,6 @@
                 android:textColor="@android:color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <EditText
-                android:id="@+id/mEdtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/black"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <LinearLayout
             android:id="@+id/people"
             android:layout_width="match_parent"
@@ -72,6 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Create room"/>
+            android:text="@string/create_room"/>
 
 </LinearLayout>

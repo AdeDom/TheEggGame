@@ -8,28 +8,37 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface RoomApi {
+interface MultiApi {
 
     @GET("get-room.php")
     fun getRooms(): Call<List<Room>>
 
     @FormUrlEncoded
-    @POST("get-people-room.php")
-    fun getPeopleRoom(
-        @Field("values1") roomNo: String
+    @POST("join-room.php")
+    fun joinRoom(
+        @Field("values1") roomNo: String,
+        @Field("values2") playerId: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
-    @POST("insert-room-info.php")
-    fun insertRoomInfo(
+    @POST("create-room.php")
+    fun createRoom(
+        @Field("values1") name: String,
+        @Field("values2") people: String,
+        @Field("values3") playerId: String
+    ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("delete-player-room-info.php")
+    fun deletePlayer(
         @Field("values1") roomNo: String,
         @Field("values2") playerId: String
     ): Call<JsonResponse>
 
     companion object {
-        operator fun invoke(): RoomApi {
+        operator fun invoke(): MultiApi {
             return RetrofitClient.instance()
-                .create(RoomApi::class.java)
+                .create(MultiApi::class.java)
         }
     }
 
