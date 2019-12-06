@@ -26,7 +26,7 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity
-                android:name="com.adedom.theegggame.ui.multi.getready.GetReadyActivity"
+                android:name="com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity

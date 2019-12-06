@@ -10,8 +10,8 @@ import retrofit2.http.POST
 interface PlayerApi {
 
     @FormUrlEncoded
-    @POST("login.php")
-    fun getPlayerId(
+    @POST("get-player-id-login.php")
+    fun getPlayerIdLogin(
         @Field("values1") username: String,
         @Field("values2") password: String
     ): Call<Player>
@@ -23,8 +23,8 @@ interface PlayerApi {
     ): Call<Player>
 
     @FormUrlEncoded
-    @POST("register-player.php")
-    fun registerPlayers(
+    @POST("insert-player.php")
+    fun insertPlayer(
         @Field("values1") username: String,
         @Field("values2") password: String,
         @Field("values3") name: String,
@@ -39,8 +39,8 @@ interface PlayerApi {
     ): Call<List<Player>>
 
     @FormUrlEncoded
-    @POST("change-password.php")
-    fun changePassword(
+    @POST("update-password.php")
+    fun updatePassword(
         @Field("values1") playerId: String,
         @Field("values2") oldPassword: String,
         @Field("values3") newPassword: String

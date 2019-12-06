@@ -12,21 +12,17 @@ class SingleRepository(private val api: SingleApi) {
 
     fun insertItem(playerId: String, itemId: Int, qty: Int): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-
         api.insertItem(playerId, itemId, qty)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
-
                 override fun onResponse(
                     call: Call<JsonResponse>,
                     response: Response<JsonResponse>
                 ) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
-
         return liveData
     }
 

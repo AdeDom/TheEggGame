@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.MultiItem
-import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyResultSet
@@ -37,7 +37,7 @@ class Item { // 31/7/62
     private fun feedItemMulti() {
         MultiActivity.mMultiItem.clear()
         val sql = "SELECT * FROM tbl_multi\n" +
-                "WHERE room_no = '${GetReadyActivity.mNoRoom.trim()}' AND status_id = '1'"
+                "WHERE room_no = '${RoomInfoActivity.sRoom.room_no!!.trim()}' AND status_id = '1'"
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
                 while (rs.next()) {
@@ -60,12 +60,20 @@ class Item { // 31/7/62
     private fun setMarker() {
         var bmp: Bitmap?
         for (i in MultiActivity.mMultiItem.indices) {
-            bmp = BitmapFactory.decodeResource(MapActivity.sContext.resources, R.drawable.the_egg_game)
+            bmp = BitmapFactory.decodeResource(
+                MapActivity.sContext.resources,
+                R.drawable.the_egg_game
+            )
 
             MultiActivity.mMarkerItem.add(
                 MapActivity.sGoogleMap!!.addMarker(
                     MarkerOptions()
-                        .position(LatLng(MultiActivity.mMultiItem[i].latitude, MultiActivity.mMultiItem[i].longitude))
+                        .position(
+                            LatLng(
+                                MultiActivity.mMultiItem[i].latitude,
+                                MultiActivity.mMultiItem[i].longitude
+                            )
+                        )
                         .icon(BitmapDescriptorFactory.fromBitmap(bmp))
                         .title(MultiActivity.mMultiItem[i].latitude.toString())
                         .snippet(MultiActivity.mMultiItem[i].longitude.toString())
@@ -77,9 +85,15 @@ class Item { // 31/7/62
     private fun rndItem(latLng: LatLng) {
         for (i in 1..Commons.NUMBER_OF_ITEM) {
             val sql = "INSERT INTO tbl_multi (room_no, latitude, longitude, status_id) \n" +
-                    "VALUES ('${GetReadyActivity.mNoRoom.trim()}', " +
-                    "'${rndLatLng(latLng.latitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
-                    "'${rndLatLng(latLng.longitude, Commons.TWO_HUNDRED_METER).toString().trim()}', " +
+                    "VALUES ('${RoomInfoActivity.sRoom.room_no!!.trim()}', " +
+                    "'${rndLatLng(
+                        latLng.latitude,
+                        Commons.TWO_HUNDRED_METER
+                    ).toString().trim()}', " +
+                    "'${rndLatLng(
+                        latLng.longitude,
+                        Commons.TWO_HUNDRED_METER
+                    ).toString().trim()}', " +
                     "'1')"
             MyConnect.executeQuery(sql)
         }

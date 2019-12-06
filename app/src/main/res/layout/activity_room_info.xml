@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/RelativeLayout"
+        android:padding="@dimen/zero"
+        tools:context=".ui.multi.roominfo.RoomInfoActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/bar"
+            style="@style/AppBarLayout">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+            android:id="@+id/head"
+            layout="@layout/item_rv_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bar"
+            android:layout_marginLeft="@dimen/large"
+            android:layout_marginTop="@dimen/large"
+            android:layout_marginRight="@dimen/large" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            style="@style/MatchMatch"
+            android:layout_above="@+id/menu"
+            android:layout_below="@+id/head"
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_room_info" />
+
+    <RelativeLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+        <Button
+                android:id="@+id/mBtnGo"
+                style="@style/Button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/large"
+                android:text="@string/ready" />
+
+        <ImageView
+                android:id="@+id/mImgTeamA"
+                style="@style/ImageViewPlayer"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/large"
+                android:layout_toStartOf="@+id/mImgTeamB"
+                android:contentDescription="@string/red"
+                android:src="@drawable/shape_bg_player_red" />
+
+        <ImageView
+                android:id="@+id/mImgTeamB"
+                style="@style/ImageViewPlayer"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/large"
+                android:contentDescription="@string/blue"
+                android:src="@drawable/shape_bg_player_blue" />
+    </RelativeLayout>
+</RelativeLayout>

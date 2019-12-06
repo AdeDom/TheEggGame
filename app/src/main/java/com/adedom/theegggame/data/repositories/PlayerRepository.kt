@@ -11,16 +11,13 @@ import retrofit2.Response
 
 class PlayerRepository(private val api: PlayerApi) {
 
-    fun getPlayerId(username: String, password: String): LiveData<Player> {
+    fun getPlayerIdLogin(username: String, password: String): LiveData<Player> {
         val liveData = MutableLiveData<Player>()
-
-        api.getPlayerId(username, password)
+        api.getPlayerIdLogin(username, password)
             .enqueue(object : Callback<Player> {
                 override fun onFailure(call: Call<Player>, t: Throwable) {}
-
                 override fun onResponse(call: Call<Player>, response: Response<Player>) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
@@ -29,84 +26,68 @@ class PlayerRepository(private val api: PlayerApi) {
 
     fun getPlayers(playerId: String): LiveData<Player> {
         val liveData = MutableLiveData<Player>()
-
         api.getPlayers(playerId)
             .enqueue(object : Callback<Player> {
                 override fun onFailure(call: Call<Player>, t: Throwable) {}
-
                 override fun onResponse(call: Call<Player>, response: Response<Player>) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
-
         return liveData
     }
 
-    fun registerPlayer(
+    fun insertPlayer(
         username: String,
         password: String,
         name: String,
         image: String
     ): LiveData<Player> {
         val liveData = MutableLiveData<Player>()
-
-        api.registerPlayers(username, password, name, image)
+        api.insertPlayer(username, password, name, image)
             .enqueue(object : Callback<Player> {
                 override fun onFailure(call: Call<Player>, t: Throwable) {}
-
                 override fun onResponse(call: Call<Player>, response: Response<Player>) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
-
         return liveData
     }
 
     fun getPlayerRank(search: String, limit: String): LiveData<List<Player>> {
         val liveData = MutableLiveData<List<Player>>()
-
         api.getPlayerRank(search, limit)
             .enqueue(object : Callback<List<Player>> {
                 override fun onFailure(call: Call<List<Player>>, t: Throwable) {}
-
                 override fun onResponse(
                     call: Call<List<Player>>,
                     response: Response<List<Player>>
                 ) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
-
         return liveData
     }
 
-    fun changePassword(
+    fun updatePassword(
         playerId: String,
         oldPassword: String,
         newPassword: String
     ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-
-        api.changePassword(playerId, oldPassword, newPassword)
+        api.updatePassword(playerId, oldPassword, newPassword)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
-
                 override fun onResponse(
                     call: Call<JsonResponse>,
                     response: Response<JsonResponse>
                 ) {
                     if (!response.isSuccessful) return
-
                     liveData.value = response.body()
                 }
             })
-
         return liveData
     }
 

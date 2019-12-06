@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="#1A000000" />
 
     <gradient
@@ -19,5 +19,4 @@
         android:left="5dp"
         android:right="5dp"
         android:top="5dp" />
-
 </shape>

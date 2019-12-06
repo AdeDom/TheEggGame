@@ -61,10 +61,10 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
         mEdtUsername.setText(mPlayer.username)
 
-        mBtnChangePassword.setOnClickListener { updatePlayer() }
+        mBtnChangePassword.setOnClickListener { changePassword() }
     }
 
-    private fun updatePlayer() {
+    private fun changePassword() {
         when {
             mEdtOldPassword.isEmpty(getString(R.string.error_password)) -> return
             mEdtNewPassword.isEmpty(getString(R.string.error_password)) -> return
@@ -80,7 +80,7 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
         val oldPassword = mEdtOldPassword.text.toString().trim()
         val newPassword = mEdtNewPassword.text.toString().trim()
 
-        mViewModel.changePassword(mPlayer.playerId!!, oldPassword, newPassword)
+        mViewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {
                 if (it.result == "completed") {
                     dialog!!.dismiss()

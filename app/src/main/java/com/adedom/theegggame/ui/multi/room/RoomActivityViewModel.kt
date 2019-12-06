@@ -10,8 +10,8 @@ class RoomActivityViewModel(private val repository: MultiRepository) : ViewModel
 
     fun getRooms(): LiveData<List<Room>> = repository.getRooms()
 
-    fun joinRoom(roomNo: String, playerId: String): LiveData<JsonResponse> {
-        return repository.joinRoom(roomNo, playerId)
+    fun insertRoomInfo(roomNo: String, playerId: String): LiveData<JsonResponse> {
+        return repository.insertRoomInfo(roomNo, playerId)
     }
 
 }

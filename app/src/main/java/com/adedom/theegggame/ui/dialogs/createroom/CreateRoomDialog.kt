@@ -15,7 +15,7 @@ import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.BaseActivity
 import com.adedom.utility.failed
 import com.adedom.utility.isEmpty
@@ -61,13 +61,13 @@ class CreateRoomDialog : DialogFragment() { //5/12/19
         val name = mEdtName.text.toString().trim()
         val people = mNumberPicker.value.toString().trim()
         val playerId = MainActivity.sPlayerItem.playerId
-        mViewModel.createRoom(name, people, playerId!!).observe(this, Observer {
+        mViewModel.insertRoom(name, people, playerId!!).observe(this, Observer {
             if (it.result == "failed") {
                 BaseActivity.sContext.failed()
             } else {
                 dialog!!.dismiss()
                 startActivity(
-                    Intent(BaseActivity.sContext, GetReadyActivity::class.java)
+                    Intent(BaseActivity.sContext, RoomInfoActivity::class.java)
                         .putExtra("room", Room(null, it.result, name, people, "H"))
                 )
             }

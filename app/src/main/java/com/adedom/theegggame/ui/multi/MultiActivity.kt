@@ -8,10 +8,10 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.MultiItem
-import com.adedom.theegggame.data.models.RoomInfoItem
+import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.dialogs.FightGameDialog
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
 import com.adedom.theegggame.util.MyMediaPlayer
@@ -26,7 +26,7 @@ import java.sql.ResultSet
 open class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     val TAG = "MultiActivity"
-    protected val mRoomInfoItem = arrayListOf<RoomInfoItem>()
+    protected val mRoomInfoItem = arrayListOf<RoomInfo>()
     private val mHandlerCountdown = Handler()
     private var mLatLng: LatLng? = null
     private var mIsRndItem = true
@@ -117,32 +117,33 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     private fun feedRoomInfo() {
         mRoomInfoItem.clear()
-        val sql = "SELECT ri.room_no,p.id,p.name,p.image,p.level,ri.latitude,ri.longitude,ri.team,ri.status_id\n" +
-                "FROM tbl_room_info AS ri , tbl_player AS p\n" +
-                "WHERE ri.room_no = '${GetReadyActivity.mNoRoom.trim()}' AND ri.player_id = p.id\n" +
-                "ORDER BY ri.id ASC"
-        MyConnect.executeQuery(sql, object : MyResultSet {
-            override fun onResponse(rs: ResultSet) {
-                while (rs.next()) {
-                    val item = RoomInfoItem(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getDouble(6),
-                        rs.getDouble(7),
-                        rs.getString(8),
-                        rs.getString(9)
-                    )
-                    mRoomInfoItem.add(item)
-                }
-
-                Player(mRoomInfoItem)
-                Item()
-                checkNewItem()
-            }
-        })
+        val sql =
+            "SELECT ri.room_no,p.id,p.name,p.image,p.level,ri.latitude,ri.longitude,ri.team,ri.status_id\n" +
+                    "FROM tbl_room_info AS ri , tbl_player AS p\n" +
+                    "WHERE ri.room_no = '${RoomInfoActivity.sRoom.room_no!!.trim()}' AND ri.player_id = p.id\n" +
+                    "ORDER BY ri.id ASC"
+//        MyConnect.executeQuery(sql, object : MyResultSet {
+//            override fun onResponse(rs: ResultSet) {
+//                while (rs.next()) {
+//                    val item = RoomInfo(
+//                        rs.getString(1),
+//                        rs.getDouble(2),
+//                        rs.getDouble(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getString(6),
+//                        rs.getString(7),
+//                        rs.getInt(8),
+//                        rs.getString(9)
+//                    )
+//                    mRoomInfoItem.add(item)
+//                }
+//
+//                Player(mRoomInfoItem)
+//                Item()
+//                checkNewItem()
+//            }
+//        })
     }
 
     private fun checkNewItem() {
@@ -163,7 +164,7 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
                 val distance = FloatArray(1)
                 Location.distanceBetween(
                     mLatLng!!.latitude, mLatLng!!.longitude,
-                    mRoomInfoItem[i].latitude, mRoomInfoItem[i].longitude, distance
+                    mRoomInfoItem[i].latitude!!, mRoomInfoItem[i].longitude!!, distance
                 )
 
                 if (distance[0] > Commons.THREE_KILOMETER) {
@@ -186,8 +187,9 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
 
                 MyMediaPlayer.getSound(baseContext, R.raw.keep)
 
-                val sql = "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}', " +
-                        "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
+                val sql =
+                    "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}', " +
+                            "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
                 MyConnect.executeQuery(sql)
             }
         }
@@ -204,7 +206,7 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
                 val distance = FloatArray(1)
                 Location.distanceBetween(
                     mLatLng!!.latitude, mLatLng!!.longitude,
-                    mRoomInfoItem[i].latitude, mRoomInfoItem[i].longitude, distance
+                    mRoomInfoItem[i].latitude!!, mRoomInfoItem[i].longitude!!, distance
                 )
 
                 if (distance[0] > Commons.ONE_FIFTY_HUNDRED_METER) {
@@ -271,7 +273,8 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
     private fun finishGame() {
         mHandlerCountdown.removeCallbacks(mRunnableCountdown)
 
-        val sql = "DELETE FROM tbl_multi WHERE room_no = '${GetReadyActivity.mNoRoom}'"
+        val sql =
+            "DELETE FROM tbl_multi WHERE room_no = '${RoomInfoActivity.sRoom.room_no.toString()}'"
         MyConnect.executeQuery(sql)
 
         val intent = Intent()

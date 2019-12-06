@@ -13,7 +13,7 @@ import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.getready.GetReadyActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyGrid
 import com.adedom.utility.toast
@@ -35,9 +35,9 @@ class RoomActivity : GameActivity() { // 5/12/19
 
         init()
 
-        freshRoom()
+        fetchRoom()
 
-        gameLoop = { freshRoom() }
+        gameLoop = { fetchRoom() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -66,10 +66,10 @@ class RoomActivity : GameActivity() { // 5/12/19
 
         mAdapter.onItemClick = { room ->
             val playerId = MainActivity.sPlayerItem.playerId!!
-            mViewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
+            mViewModel.insertRoomInfo(room.room_no!!, playerId).observe(this, Observer {
                 if (it.result == "completed") {
                     startActivity(
-                        Intent(baseContext, GetReadyActivity::class.java)
+                        Intent(baseContext, RoomInfoActivity::class.java)
                             .putExtra("room", Room(null, room.room_no, room.name, room.people, "T"))
                     )
                 } else {
@@ -79,7 +79,7 @@ class RoomActivity : GameActivity() { // 5/12/19
         }
     }
 
-    private fun freshRoom() {
+    private fun fetchRoom() {
         //todo off room
 
         mViewModel.getRooms().observe(this, Observer {

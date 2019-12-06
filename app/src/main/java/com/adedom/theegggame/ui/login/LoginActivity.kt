@@ -51,7 +51,7 @@ class LoginActivity : BasicActivity() { // 2/12/19
         val username = mEdtUsername.text.toString().trim()
         val password = mEdtPassword.text.toString().trim()
 
-        mViewModel.getPlayerId(username, password).observe(this, Observer {
+        mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.playerId == null) {
                 mEdtPassword.text.clear()
                 BaseActivity.sContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)

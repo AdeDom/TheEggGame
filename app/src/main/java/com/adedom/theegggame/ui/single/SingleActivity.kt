@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.SingleItem
+import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.data.networks.SingleApi
 import com.adedom.theegggame.data.repositories.SingleRepository
 import com.adedom.theegggame.ui.main.MainActivity
@@ -21,7 +21,7 @@ class SingleActivity : MapActivity() { // 2/12/19
     val TAG = "SingleActivity"
     private lateinit var mViewModel: SingleActivityViewModel
     private var mSwitchItem = GameSwitch.ON
-    private val mSingleItem by lazy { arrayListOf<SingleItem>() }
+    private val mSingleItem by lazy { arrayListOf<Single>() }
     private val mMarkerMyItem by lazy { arrayListOf<Marker>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +64,7 @@ class SingleActivity : MapActivity() { // 2/12/19
         if (mSingleItem.size < ITEM_MIN) {
             val numItem = (ITEM_MIN..MAX_ITEM).random()
             for (i in 0 until numItem) {
-                val item = SingleItem(
+                val item = Single(
                     (1..3).random(),
                     rndLatLng(latLng.latitude, TWO_HUNDRED_METER),
                     rndLatLng(latLng.longitude, TWO_HUNDRED_METER)
@@ -86,7 +86,7 @@ class SingleActivity : MapActivity() { // 2/12/19
             )
 
             if (distance[0] < ONE_HUNDRED_METER) {
-                insertMyItem(mSingleItem[i].itemId)
+                keepItem(mSingleItem[i].itemId)
                 mMarkerMyItem[i].remove()
                 mSingleItem.removeAt(i)
                 mSwitchItem = GameSwitch.ON
@@ -101,7 +101,7 @@ class SingleActivity : MapActivity() { // 2/12/19
         }
     }
 
-    private fun insertMyItem(item: Int) {
+    private fun keepItem(item: Int) {
         var myItem = item // item Id
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 

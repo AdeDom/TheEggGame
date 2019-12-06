@@ -9,8 +9,8 @@ class LoginActivityViewModel(private val repository: PlayerRepository) : ViewMod
 
     val TAG = "MyTag"
 
-    fun getPlayerId(username: String, password: String): LiveData<Player> {
-        return repository.getPlayerId(username, password)
+    fun getPlayerIdLogin(username: String, password: String): LiveData<Player> {
+        return repository.getPlayerIdLogin(username, password)
     }
 
 }

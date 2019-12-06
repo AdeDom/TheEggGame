@@ -8,12 +8,12 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 class ChangePasswordDialogViewModel(private val repository: PlayerRepository) :
     ViewModel() { // 2/12/19
 
-    fun changePassword(
+    fun updatePassword(
         playerId: String,
         oldPassword: String,
         newPassword: String
     ): LiveData<JsonResponse> {
-        return repository.changePassword(playerId, oldPassword, newPassword)
+        return repository.updatePassword(playerId, oldPassword, newPassword)
     }
 
 }

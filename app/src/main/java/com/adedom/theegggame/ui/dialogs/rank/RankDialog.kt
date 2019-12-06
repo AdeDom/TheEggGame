@@ -42,7 +42,7 @@ class RankDialog : DialogFragment() { // 2/12/19
 
         init(view)
 
-        freshPlayer()
+        fetchPlayer()
 
         return builder.create()
     }
@@ -68,16 +68,16 @@ class RankDialog : DialogFragment() { // 2/12/19
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                freshPlayer(text.toString())
+                fetchPlayer(text.toString())
             }
         })
 
-        mBtnRank10.setOnClickListener { freshPlayer(limit = "10") }
-        mBtnRank50.setOnClickListener { freshPlayer(limit = "50") }
-        mBtnRank100.setOnClickListener { freshPlayer(limit = "100") }
+        mBtnRank10.setOnClickListener { fetchPlayer(limit = "10") }
+        mBtnRank50.setOnClickListener { fetchPlayer(limit = "50") }
+        mBtnRank100.setOnClickListener { fetchPlayer(limit = "100") }
     }
 
-    private fun freshPlayer(search: String = "", limit: String = "") {
+    private fun fetchPlayer(search: String = "", limit: String = "") {
         mViewModel.getPlayerRank(search, limit).observe(this, Observer {
             mAdapter.setList(it)
         })

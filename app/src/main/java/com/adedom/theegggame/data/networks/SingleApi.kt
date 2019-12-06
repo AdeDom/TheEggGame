@@ -8,8 +8,6 @@ import retrofit2.http.POST
 
 interface SingleApi {
 
-//    Call<Void>
-
     @FormUrlEncoded
     @POST("insert-item.php")
     fun insertItem(
