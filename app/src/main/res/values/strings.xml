@@ -16,6 +16,7 @@
     <string name="password_incorrect">Password is incorrect</string>
     <string name="username_password_incorrect">Please enter a valid username and password</string>
     <string name="start_game">Start Game</string>
+    <string name="fight_game">Fight Game</string>
     <string name="welcome">Welcome to The Egg Game</string>
     <string name="on_back_pressed">Press back again to exit</string>
     <string name="register">Register</string>

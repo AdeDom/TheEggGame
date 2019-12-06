@@ -7,7 +7,7 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.MultiItem
+import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.dialogs.FightGameDialog
 import com.adedom.theegggame.ui.main.MainActivity
@@ -36,7 +36,7 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
     private var scoreTeamB = ""
 
     companion object {
-        val mMultiItem = arrayListOf<MultiItem>()
+        val mMultiItem = arrayListOf<Multi>()
         val mMarkerItem = arrayListOf<Marker>()
         val mMarkerPlayer = arrayListOf<Marker>()
         var mCircle: Circle? = null
@@ -51,7 +51,7 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
     }
 
     private fun setToolbar() {
-        toolbar.title = "Multi player"
+        toolbar.title = getString(R.string.multi_player)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
@@ -67,7 +67,7 @@ open class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     private fun onDialogBack() {
         val builder = AlertDialog.Builder(this@MultiActivity)
-        builder.setTitle("You want to go back to main?")
+        builder.setTitle(R.string.exit)
             .setMessage("If you leave, you will not receive money and experience point.")
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which ->

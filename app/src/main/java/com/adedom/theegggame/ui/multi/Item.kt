@@ -3,7 +3,7 @@ package com.adedom.theegggame.ui.multi
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.MultiItem
+import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.MyConnect
@@ -41,7 +41,7 @@ class Item { // 31/7/62
         MyConnect.executeQuery(sql, object : MyResultSet {
             override fun onResponse(rs: ResultSet) {
                 while (rs.next()) {
-                    val item = MultiItem(
+                    val item = Multi(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getDouble(3),

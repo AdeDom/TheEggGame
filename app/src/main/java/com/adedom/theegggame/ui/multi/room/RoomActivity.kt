@@ -16,6 +16,9 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyGrid
+import com.adedom.utility.COMPLETED
+import com.adedom.utility.ROOM
+import com.adedom.utility.TAIL
 import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_room.*
 
@@ -48,7 +51,7 @@ class RoomActivity : GameActivity() { // 5/12/19
     }
 
     private fun init() {
-        toolbar.title = "Multi player"
+        toolbar.title = getString(R.string.multi_player)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -67,10 +70,10 @@ class RoomActivity : GameActivity() { // 5/12/19
         mAdapter.onItemClick = { room ->
             val playerId = MainActivity.sPlayerItem.playerId!!
             mViewModel.insertRoomInfo(room.room_no!!, playerId).observe(this, Observer {
-                if (it.result == "completed") {
+                if (it.result == COMPLETED) {
                     startActivity(
                         Intent(baseContext, RoomInfoActivity::class.java)
-                            .putExtra("room", Room(null, room.room_no, room.name, room.people, "T"))
+                            .putExtra(ROOM, Room(null, room.room_no, room.name, room.people, TAIL))
                     )
                 } else {
                     baseContext.toast(R.string.full, Toast.LENGTH_LONG)
@@ -80,8 +83,6 @@ class RoomActivity : GameActivity() { // 5/12/19
     }
 
     private fun fetchRoom() {
-        //todo off room
-
         mViewModel.getRooms().observe(this, Observer {
             mAdapter.setList(it)
         })

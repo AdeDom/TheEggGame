@@ -32,7 +32,7 @@ class SingleActivity : MapActivity() { // 2/12/19
         )
         mViewModel = ViewModelProviders.of(this,factory).get(SingleActivityViewModel::class.java)
 
-        toolbar.title = "Single player"
+        toolbar.title = getString(R.string.single_player)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -127,7 +127,7 @@ class SingleActivity : MapActivity() { // 2/12/19
 
         mViewModel.insertItem(MainActivity.sPlayerItem.playerId!!, myItem, values)
             .observe(this, Observer {
-                if (it.result == "completed") {
+                if (it.result == COMPLETED) {
                     baseContext.toast(detailItem(myItem, values))
                 } else {
                     baseContext.failed()
@@ -137,7 +137,7 @@ class SingleActivity : MapActivity() { // 2/12/19
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this@SingleActivity)
-        builder.setTitle("You want to go back to main menu?")
+        builder.setTitle(R.string.exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which -> finish() }.show()
     }

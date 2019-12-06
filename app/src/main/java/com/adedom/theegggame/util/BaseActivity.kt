@@ -6,10 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.adedom.theegggame.data.networks.RetrofitClient
-import com.adedom.utility.PLAYER_ID
-import com.adedom.utility.Setting
-import com.adedom.utility.failed
-import com.adedom.utility.getPrefLogin
+import com.adedom.utility.*
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,8 +39,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // todo music
         mPlayerId = this.getPrefLogin(PLAYER_ID)
-        mViewModel.setState(mPlayerId!!, "online").observe(this, Observer {
-            if (it.result == "failed") baseContext.failed()
+        mViewModel.setState(mPlayerId!!, ONLINE).observe(this, Observer {
+            if (it.result == FAILED) baseContext.failed()
         })
     }
 
@@ -53,8 +50,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // music
 
-        mViewModel.setState(mPlayerId!!, "offline").observe(this, Observer {
-            if (it.result == "failed") baseContext.failed()
+        mViewModel.setState(mPlayerId!!, OFFLINE).observe(this, Observer {
+            if (it.result == FAILED) baseContext.failed()
         })
     }
 
@@ -100,8 +97,8 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("set-state.php")
     fun setState(
-        @Field("values1") playerId: String,
-        @Field("values2") state: String
+        @Field(VALUES1) playerId: String,
+        @Field(VALUES2) state: String
     ): Call<BaseEntity>
 
     companion object {
@@ -112,4 +109,4 @@ interface BaseApi {
     }
 }
 
-data class BaseEntity(@SerializedName("result") val result: String? = null)
+data class BaseEntity(@SerializedName(RESULT) val result: String? = null)

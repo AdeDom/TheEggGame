@@ -14,7 +14,7 @@ class MissionDialog : DialogFragment() { // 15/7/62
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
             .setIcon(R.drawable.ic_mission)
-            .setTitle("Mission")
+            .setTitle(R.string.mission)
 
         return builder.create()
     }

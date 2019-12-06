@@ -14,10 +14,7 @@ import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.util.BaseActivity
-import com.adedom.utility.checkLess4
-import com.adedom.utility.checkPassword
-import com.adedom.utility.isEmpty
-import com.adedom.utility.toast
+import com.adedom.utility.*
 
 class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
@@ -40,7 +37,7 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_change_password, null)
 
-        mPlayer = arguments!!.getParcelable("player")!!
+        mPlayer = arguments!!.getParcelable(PLAYER)!!
 
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
@@ -82,7 +79,7 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
         mViewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {
-                if (it.result == "completed") {
+                if (it.result == COMPLETED) {
                     dialog!!.dismiss()
                     BaseActivity.sContext.toast(R.string.successfully)
                 } else {

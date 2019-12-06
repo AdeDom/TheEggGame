@@ -25,7 +25,7 @@ class Player(latLng: LatLng) { // 2/12/19
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayerItem
 
-        if (player.image == "empty") {
+        if (player.image == EMPTY) {
             setMyMarker(
                 MapActivity.sGoogleMap!!,
                 latLng,

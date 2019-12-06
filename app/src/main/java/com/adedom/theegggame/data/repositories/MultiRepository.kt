@@ -126,4 +126,20 @@ class MultiRepository(private val api: MultiApi) {
             })
         return liveData
     }
+
+    fun setRoomOff(roomNo: String): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+        api.setRoomOff(roomNo)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
 }

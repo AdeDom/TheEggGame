@@ -14,7 +14,7 @@ class AboutDialog : DialogFragment() { // 14/7/62
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
             .setIcon(R.drawable.ic_h2p)
-            .setTitle("About")
+            .setTitle(R.string.about)
 
         return builder.create()
     }

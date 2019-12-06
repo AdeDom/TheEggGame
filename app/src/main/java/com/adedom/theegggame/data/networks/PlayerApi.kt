@@ -2,6 +2,10 @@ package com.adedom.theegggame.data.networks
 
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Player
+import com.adedom.utility.VALUES1
+import com.adedom.utility.VALUES2
+import com.adedom.utility.VALUES3
+import com.adedom.utility.VALUES4
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -12,38 +16,38 @@ interface PlayerApi {
     @FormUrlEncoded
     @POST("get-player-id-login.php")
     fun getPlayerIdLogin(
-        @Field("values1") username: String,
-        @Field("values2") password: String
+        @Field(VALUES1) username: String,
+        @Field(VALUES2) password: String
     ): Call<Player>
 
     @FormUrlEncoded
     @POST("get-player.php")
     fun getPlayers(
-        @Field("values1") playerId: String
+        @Field(VALUES1) playerId: String
     ): Call<Player>
 
     @FormUrlEncoded
     @POST("insert-player.php")
     fun insertPlayer(
-        @Field("values1") username: String,
-        @Field("values2") password: String,
-        @Field("values3") name: String,
-        @Field("values4") image: String
+        @Field(VALUES1) username: String,
+        @Field(VALUES2) password: String,
+        @Field(VALUES3) name: String,
+        @Field(VALUES4) image: String
     ): Call<Player>
 
     @FormUrlEncoded
     @POST("get-player-rank.php")
     fun getPlayerRank(
-        @Field("values1") search: String,
-        @Field("values2") limit: String
+        @Field(VALUES1) search: String,
+        @Field(VALUES2) limit: String
     ): Call<List<Player>>
 
     @FormUrlEncoded
     @POST("update-password.php")
     fun updatePassword(
-        @Field("values1") playerId: String,
-        @Field("values2") oldPassword: String,
-        @Field("values3") newPassword: String
+        @Field(VALUES1) playerId: String,
+        @Field(VALUES2) oldPassword: String,
+        @Field(VALUES3) newPassword: String
     ): Call<JsonResponse>
 
     companion object {

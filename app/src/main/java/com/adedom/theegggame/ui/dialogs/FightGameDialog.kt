@@ -31,7 +31,7 @@ class FightGameDialog : DialogFragment() { // 5/8/62
 
         val builder = AlertDialog.Builder(activity!!)
             .setView(view)
-            .setTitle("Fight Game")
+            .setTitle(R.string.fight_game)
 
         // todo fighting game
 

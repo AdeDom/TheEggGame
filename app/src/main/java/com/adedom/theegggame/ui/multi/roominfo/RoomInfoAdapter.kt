@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.utility.loadProfile
+import com.adedom.utility.*
 import kotlinx.android.synthetic.main.item_room_info.view.*
 
 class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
@@ -24,13 +24,13 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
 
     override fun onBindViewHolder(holder: RoomInfoHolder, position: Int) {
         val (_, _, _, team, status, _, name, image, level, state) = items[position]
-        if (state == "offline") {
+        if (state == OFFLINE) {
             holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
                 holder.itemView.context,
                 R.drawable.shape_bg_gray
             )
         } else {
-            if (team == "A") {
+            if (team == TEAM_A) {
                 holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
                     holder.itemView.context,
                     R.drawable.shape_bg_player_red
@@ -45,14 +45,14 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
 
         if (position == 0) holder.itemView.mImgKing.visibility = View.VISIBLE
 
-        if (image != "empty") holder.itemView.mImgProfile.loadProfile(image!!)
+        if (image != EMPTY) holder.itemView.mImgProfile.loadProfile(image!!)
 
         holder.itemView.mTvName.text = name
 
         val l = "Level : $level"
         holder.itemView.mTvLevel.text = l
 
-        if (status == "ready") {
+        if (status == READY) {
             holder.itemView.mImgReady.background = ContextCompat.getDrawable(
                 holder.itemView.context,
                 R.drawable.shape_oval_green

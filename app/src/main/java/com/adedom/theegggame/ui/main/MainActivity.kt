@@ -45,7 +45,7 @@ class MainActivity : BasicActivity() { // 2/12/19
 
     private fun checkLogin(): Boolean {
         val playerId = this.getPrefLogin(PLAYER_ID)
-        if (playerId == "empty") {
+        if (playerId == EMPTY) {
             this.login(
                 LoginActivity::class.java,
                 username = this.getPrefLogin(USERNAME)
@@ -66,7 +66,7 @@ class MainActivity : BasicActivity() { // 2/12/19
     }
 
     private fun setWidgets() {
-        if (sPlayerItem.image != "empty") {
+        if (sPlayerItem.image != EMPTY) {
             mImgProfile.loadProfile(sPlayerItem.image!!)
         }
 

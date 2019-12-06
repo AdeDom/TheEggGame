@@ -8,9 +8,17 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 
+const val COMPLETED = "completed"
+const val FAILED = "failed"
+
+const val PLAYER = "player"
+const val ONLINE = "online"
+const val OFFLINE = "offline"
+
 const val PREF_LOGIN = "PREF_LOGIN"
 const val PLAYER_ID = "player_id"
 const val USERNAME = "username"
+const val EMPTY = "empty"
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
@@ -30,7 +38,7 @@ fun Context.completed() {
 
 fun Activity.login(
     c: Class<*>,
-    playerId: String = "empty",
+    playerId: String = EMPTY,
     username: String? = null
 ) {
     baseContext.getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE).edit()

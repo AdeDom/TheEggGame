@@ -24,4 +24,8 @@ class RoomInfoActivityViewModel(private val repository: MultiRepository) : ViewM
         return repository.setReady(roomNo, playerId, status)
     }
 
+    fun setRoomOff(roomNo: String): LiveData<JsonResponse> {
+        return repository.setRoomOff(roomNo)
+    }
+
 }
