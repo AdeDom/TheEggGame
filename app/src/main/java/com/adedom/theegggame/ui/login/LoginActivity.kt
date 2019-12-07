@@ -9,12 +9,11 @@ import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.registerplayer.RegisterPlayerDialog
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.BaseActivity
-import com.adedom.theegggame.util.BasicActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BasicActivity() { // 2/12/19
+class LoginActivity : GameActivity() { // 2/12/19
 
     private lateinit var mViewModel: LoginActivityViewModel
 
@@ -37,7 +36,7 @@ class LoginActivity : BasicActivity() { // 2/12/19
                 .show(supportFragmentManager, null)
         }
         mBtnLogin.setOnClickListener { loginToMain() }
-        mTvForgotPassword.setOnClickListener { BaseActivity.sContext.failed() }
+        mTvForgotPassword.setOnClickListener { GameActivity.sContext.failed() }
     }
 
     private fun loginToMain() {
@@ -54,7 +53,7 @@ class LoginActivity : BasicActivity() { // 2/12/19
         mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.playerId == null) {
                 mEdtPassword.text.clear()
-                BaseActivity.sContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)
+                GameActivity.sContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)
             } else {
                 this.login(MainActivity::class.java, it.playerId, username)
             }

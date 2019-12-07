@@ -16,7 +16,7 @@ import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
-import com.adedom.theegggame.util.BaseActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
@@ -62,11 +62,11 @@ class CreateRoomDialog : DialogFragment() { //5/12/19
         val playerId = MainActivity.sPlayerItem.playerId
         mViewModel.insertRoom(name, people, playerId!!).observe(this, Observer {
             if (it.result == FAILED) {
-                BaseActivity.sContext.failed()
+                GameActivity.sContext.failed()
             } else {
                 dialog!!.dismiss()
                 startActivity(
-                    Intent(BaseActivity.sContext, RoomInfoActivity::class.java)
+                    Intent(GameActivity.sContext, RoomInfoActivity::class.java)
                         .putExtra(ROOM, Room(null, it.result, name, people, HEAD))
                 )
             }

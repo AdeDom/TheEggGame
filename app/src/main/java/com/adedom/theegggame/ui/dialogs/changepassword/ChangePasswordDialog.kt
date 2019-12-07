@@ -13,7 +13,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
-import com.adedom.theegggame.util.BaseActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 
 class ChangePasswordDialog : DialogFragment() { // 2/12/19
@@ -81,7 +81,7 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
             .observe(this, Observer {
                 if (it.result == COMPLETED) {
                     dialog!!.dismiss()
-                    BaseActivity.sContext.toast(R.string.successfully)
+                    GameActivity.sContext.toast(R.string.successfully)
                 } else {
                     mEdtOldPassword.requestFocus()
                     mEdtOldPassword.error = getString(R.string.password_incorrect)

@@ -18,7 +18,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.BaseActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -73,7 +73,7 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
             .setRequestedSize(150, 150)
             .setMinCropWindowSize(150, 150)
             .setAspectRatio(1, 1)
-            .start(BaseActivity.sContext, this)
+            .start(GameActivity.sContext, this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,7 +84,7 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
                 mImageUri = result.uri.toString()
                 mImgProfile.loadCircle(mImageUri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                BaseActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
+                GameActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
             }
         }
     }
@@ -113,7 +113,7 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
 
         mViewModel.insertPlayer(username, password, name, mImageUri).observe(this, Observer {
             if (it.playerId == FAILED) {
-                BaseActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
+                GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
             } else {
                 activity!!.login(MainActivity::class.java, it.playerId!!, username)
             }

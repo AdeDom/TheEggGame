@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.multi
+package com.adedom.theegggame.ui.multi.multi
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

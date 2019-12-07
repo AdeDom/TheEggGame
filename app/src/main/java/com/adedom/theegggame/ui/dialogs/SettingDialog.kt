@@ -10,7 +10,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.dialogs.changepassword.ChangePasswordDialog
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.BaseActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.PLAYER
 import com.adedom.utility.login
 
@@ -74,7 +74,7 @@ class SettingDialog : DialogFragment() { // 2/12/19
             .setIcon(R.drawable.ic_exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which ->
-                BaseActivity.sActivity.finishAffinity()
+                GameActivity.sActivity.finishAffinity()
             }.show()
     }
 }

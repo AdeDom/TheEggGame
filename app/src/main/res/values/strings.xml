@@ -53,8 +53,8 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="successfully">Successfully</string>
-    <string name="kick_out">Kick out</string>
     <string name="exit">Exit</string>
     <string name="create_room">Create room</string>
+    <string name="time">Time</string>
 
 </resources>

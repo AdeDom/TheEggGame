@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.multi
+package com.adedom.theegggame.ui.multi.multi
 
 interface Commons { // 31/7/62
     companion object {

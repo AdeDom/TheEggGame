@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.single
 
 import android.location.Location
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : MapActivity() { // 2/12/19
 
-    val TAG = "SingleActivity"
     private lateinit var mViewModel: SingleActivityViewModel
     private var mSwitchItem = GameSwitch.ON
     private val mSingleItem by lazy { arrayListOf<Single>() }
@@ -30,7 +28,7 @@ class SingleActivity : MapActivity() { // 2/12/19
         val factory = SingleActivityFactory(
             SingleRepository(SingleApi())
         )
-        mViewModel = ViewModelProviders.of(this,factory).get(SingleActivityViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this, factory).get(SingleActivityViewModel::class.java)
 
         toolbar.title = getString(R.string.single_player)
         setSupportActionBar(toolbar)
@@ -106,9 +104,7 @@ class SingleActivity : MapActivity() { // 2/12/19
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
         val timeNow = System.currentTimeMillis() / 1000
-        if (timeNow > MainActivity.sTimeStamp + FIFTEEN_MINUTE) { // Multiply 2
-            values *= 2
-        }
+        if (timeNow > MainActivity.sTimeStamp + FIFTEEN_MINUTE) values *= 2 // Multiply 2
 
         when (myItem) {
             2 -> { // mystery box
@@ -125,21 +121,10 @@ class SingleActivity : MapActivity() { // 2/12/19
             }
         }
 
-        mViewModel.insertItem(MainActivity.sPlayerItem.playerId!!, myItem, values)
-            .observe(this, Observer {
-                if (it.result == COMPLETED) {
-                    baseContext.toast(detailItem(myItem, values))
-                } else {
-                    baseContext.failed()
-                }
-            })
-    }
-
-    override fun onBackPressed() {
-        val builder = AlertDialog.Builder(this@SingleActivity)
-        builder.setTitle(R.string.exit)
-            .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
-            .setNegativeButton(R.string.yes) { dialog, which -> finish() }.show()
+        val playerId = MainActivity.sPlayerItem.playerId
+        mViewModel.insertItem(playerId!!, myItem, values).observe(this, Observer {
+            if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
+        })
     }
 
 }

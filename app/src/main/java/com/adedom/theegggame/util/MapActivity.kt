@@ -6,6 +6,7 @@ import android.location.Location
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.adedom.theegggame.R
 import com.adedom.utility.GameSwitch
@@ -26,6 +27,7 @@ abstract class MapActivity : AppCompatActivity(),
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
 
+    val TAG = "MapActivity"
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mLocationRequest: LocationRequest
 
@@ -138,6 +140,13 @@ abstract class MapActivity : AppCompatActivity(),
     override fun onMapReady(googleMap: GoogleMap?) {
         sGoogleMap = googleMap
         sGoogleMap!!.isMyLocationEnabled = true
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this@MapActivity)
+        builder.setTitle(R.string.exit)
+            .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
+            .setNegativeButton(R.string.yes) { dialog, which -> finish() }.show()
     }
 }
 

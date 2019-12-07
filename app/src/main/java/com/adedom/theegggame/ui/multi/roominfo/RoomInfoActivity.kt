@@ -13,7 +13,7 @@ import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.MultiActivity
+import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyGrid
 import com.adedom.utility.*
@@ -40,13 +40,11 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
         sRoom = intent.getParcelableExtra(ROOM) as Room
 
         init()
+    }
 
+    override fun gameLoop() {
         fetchRoomInfo()
-
-        gameLoop = {
-            fetchRoomInfo()
-            startGame()
-        }
+        startGame()
     }
 
     private fun init() {
@@ -81,21 +79,22 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
 
     private fun getReadyToStartGame() {
         if (sRoom.status == HEAD) {
+            val count = mRoomInfo.count { it.status == READY }
             val teamA = mRoomInfo.count { it.team == TEAM_A }
             val teamB = mRoomInfo.count { it.team == TEAM_B }
-            val count = mRoomInfo.count { it.status == READY }
 
-            //check team
-            if (teamA == 0 || teamB == 0) {
-                baseContext.toast(R.string.least_one_person_per_team, Toast.LENGTH_LONG)
-                return
-            }
-
-            //check all ready
-            if (count <= 1 && mRoomInfo.size != 1) {
-                setReady(ready())
-            } else {
-                baseContext.toast(R.string.player_not_ready, Toast.LENGTH_LONG)
+            when {
+                //player not yet
+                count != mRoomInfo.lastIndex -> {
+                    baseContext.toast(R.string.player_not_ready, Toast.LENGTH_LONG)
+                    return
+                }
+                //check team
+                teamA == 0 || teamB == 0 -> {
+                    baseContext.toast(R.string.least_one_person_per_team, Toast.LENGTH_LONG)
+                    return
+                }
+                count == mRoomInfo.lastIndex -> setReady(ready())
             }
         } else {
             setReady(ready())
@@ -123,6 +122,7 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
         mViewModel.deletePlayer(sRoom.room_no!!, playerId!!).observe(this, Observer {
             if (it.result == COMPLETED) finish()
         })
+        super.onBackPressed()
     }
 
     private fun fetchRoomInfo() {

@@ -28,13 +28,9 @@ fun Context.toast(message: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 
-fun Context.failed() {
-    Toast.makeText(this, R.string.failed, Toast.LENGTH_LONG).show()
-}
+fun Context.failed() = Toast.makeText(this, R.string.failed, Toast.LENGTH_LONG).show()
 
-fun Context.completed() {
-    Toast.makeText(this, R.string.completed, Toast.LENGTH_SHORT).show()
-}
+fun Context.completed() = Toast.makeText(this, R.string.completed, Toast.LENGTH_SHORT).show()
 
 fun Activity.login(
     c: Class<*>,

@@ -31,17 +31,13 @@ class RoomActivity : GameActivity() { // 5/12/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        val factory = RoomActivityFactory(
-            MultiRepository(MultiApi())
-        )
+        val factory = RoomActivityFactory(MultiRepository(MultiApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(RoomActivityViewModel::class.java)
 
         init()
-
-        fetchRoom()
-
-        gameLoop = { fetchRoom() }
     }
+
+    override fun gameLoop() = fetchRoom()
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
@@ -82,11 +78,7 @@ class RoomActivity : GameActivity() { // 5/12/19
         }
     }
 
-    private fun fetchRoom() {
-        mViewModel.getRooms().observe(this, Observer {
-            mAdapter.setList(it)
-        })
-    }
+    private fun fetchRoom() = mViewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
 
 }
 

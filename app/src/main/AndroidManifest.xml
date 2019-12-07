@@ -22,7 +22,7 @@
                 android:value="@string/google_maps_key" />
 
         <activity
-                android:name="com.adedom.theegggame.ui.multi.MultiActivity"
+                android:name="com.adedom.theegggame.ui.multi.multi.MultiActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity

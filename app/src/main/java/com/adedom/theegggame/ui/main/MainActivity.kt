@@ -2,6 +2,7 @@ package com.adedom.theegggame.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
@@ -15,14 +16,14 @@ import com.adedom.theegggame.ui.dialogs.rank.RankDialog
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
-import com.adedom.theegggame.util.BaseActivity
-import com.adedom.theegggame.util.BasicActivity
+import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BasicActivity() { // 2/12/19
+class MainActivity : GameActivity() { // 2/12/19
 
     private lateinit var mViewModel: MainActivityViewModel
+    private var mCountExit = 0
 
     companion object {
         lateinit var sPlayerItem: Player
@@ -57,7 +58,7 @@ class MainActivity : BasicActivity() { // 2/12/19
                     this.login(LoginActivity::class.java)
                 } else {
                     sPlayerItem = it
-                    BaseActivity.sContext.toast(R.string.welcome)
+                    GameActivity.sContext.toast(R.string.welcome)
                     setWidgets()
                 }
             })
@@ -98,5 +99,12 @@ class MainActivity : BasicActivity() { // 2/12/19
             SettingDialog()
                 .show(supportFragmentManager, null)
         }
+    }
+
+    override fun onBackPressed() {
+        if (mCountExit > 0) finishAffinity()
+        mCountExit++
+        Handler().postDelayed({ mCountExit = 0 }, 2000)
+        sContext.toast(R.string.on_back_pressed)
     }
 }
