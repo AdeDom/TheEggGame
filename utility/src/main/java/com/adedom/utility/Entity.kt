@@ -1,4 +1,4 @@
-package com.adedom.theegggame.data.models
+package com.adedom.utility
 
 data class Single(
     val itemId: Int,

@@ -87,7 +87,5 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
                     mEdtOldPassword.error = getString(R.string.password_incorrect)
                 }
             })
-
-        // TODO: 23/05/2562 refresh MainActivity
     }
 }

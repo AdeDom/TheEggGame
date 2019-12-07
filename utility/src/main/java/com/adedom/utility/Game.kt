@@ -19,18 +19,29 @@ const val TWO_HUNDRED_METER = 200.0
 const val ITEM_MIN = 5
 const val MAX_ITEM = 10
 const val FIFTEEN_MINUTE = 900L
+const val ROOM = "room"
+const val HEAD = "head"
+const val TAIL = "tail"
+const val TEAM_A = "A"
+const val TEAM_B = "B"
+const val READY = "ready"
+const val UNREADY = "unready"
+
+var ready = "unready"
 
 var myLocation: Marker? = null
 var myCircle: Circle? = null
 
+val single by lazy { arrayListOf<Single>() }
 val markerPlayers by lazy { arrayListOf<Marker>() }
 val markerItems by lazy { arrayListOf<Marker>() }
 
-var switch = GameSwitch.ON
+var switchCamera = GameSwitch.ON
+var switchItem = GameSwitch.ON
 
 fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
-    if (switch == GameSwitch.ON) {
-        switch = GameSwitch.OFF
+    if (switchCamera == GameSwitch.ON) {
+        switchCamera = GameSwitch.OFF
         val update = CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
         googleMap!!.animateCamera(update)
     }
@@ -130,4 +141,47 @@ fun detailItem(itemId: Int, values: Int): String {
         6 -> name = "Egg V" // devil
     }
     return name
+}
+
+fun rndItem(latLng: LatLng) {
+    if (single.size < ITEM_MIN) {
+        val numItem = (ITEM_MIN..MAX_ITEM).random()
+        for (i in 0 until numItem) {
+            val item = Single(
+                (1..3).random(),
+                rndLatLng(latLng.latitude, TWO_HUNDRED_METER),
+                rndLatLng(latLng.longitude, TWO_HUNDRED_METER)
+            )
+            single.add(item)
+        }
+    }
+}
+
+fun getItemValues(i: Int, timeStamp: Long): Pair<Int, Int> {
+    var myItem = single[i].itemId // item Id
+    var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
+
+    val timeNow = System.currentTimeMillis() / 1000
+    if (timeNow > timeStamp + FIFTEEN_MINUTE) values *= 2 // Multiply 2
+
+    when (myItem) {
+        2 -> { // mystery box
+            myItem = (1..2).random() // random exp and item*/
+            values += (1..20).random() // mystery box + 20 point.
+            if (myItem == 2) {
+                myItem = (2..6).random() // random item
+                values = 1
+            }
+        }
+        3 -> { // item
+            myItem = (2..6).random()
+            values = 1
+        }
+    }
+    return Pair(myItem, values)
+}
+
+fun ready(): String {
+    ready = if (ready == "unready") "ready" else "unready"
+    return ready
 }

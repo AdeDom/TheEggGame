@@ -22,8 +22,6 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankHolder>() {
     override fun getItemCount(): Int = players.size
 
     override fun onBindViewHolder(holder: RankHolder, position: Int) {
-        //todo animation
-
         val player = players[position]
 
         if (players[position].image!!.isNotEmpty()) {
