@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
@@ -30,13 +31,13 @@ abstract class MapActivity : AppCompatActivity(),
     val TAG = "MapActivity"
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mLocationRequest: LocationRequest
+    private val mHandlerFetch = Handler()
 
     companion object {
         var sGoogleMap: GoogleMap? = null
         lateinit var sContext: Context
         var sIsCamera = false
         var sLatLng = LatLng(0.0, 0.0)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +70,7 @@ abstract class MapActivity : AppCompatActivity(),
 
         mLocationRequest = LocationRequest()
             .setInterval(5000)
-            .setFastestInterval(2500)
+            .setFastestInterval(3000)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
     }
 
@@ -100,20 +101,20 @@ abstract class MapActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
+        mRunnableFetch.run()
+
         switch = GameSwitch.ON
 
-        if (mGoogleApiClient.isConnected) {
-            startLocationUpdate()
-        }
+        if (mGoogleApiClient.isConnected) startLocationUpdate()
     }
 
     override fun onPause() {
         super.onPause()
+        mHandlerFetch.removeCallbacks(mRunnableFetch)
+
         switch = GameSwitch.OFF
 
-        if (mGoogleApiClient.isConnected) {
-            stopLocationUpdate()
-        }
+        if (mGoogleApiClient.isConnected) stopLocationUpdate()
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -143,10 +144,20 @@ abstract class MapActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
+        mHandlerFetch.removeCallbacks(mRunnableFetch)
         val builder = AlertDialog.Builder(this@MapActivity)
         builder.setTitle(R.string.exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which -> finish() }.show()
+    }
+
+    open fun gameLoop() {}
+
+    private val mRunnableFetch = object : Runnable {
+        override fun run() {
+            gameLoop()
+            mHandlerFetch.postDelayed(this, 1000)
+        }
     }
 }
 

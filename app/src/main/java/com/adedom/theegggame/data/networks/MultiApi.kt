@@ -6,6 +6,7 @@ import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.utility.VALUES1
 import com.adedom.utility.VALUES2
 import com.adedom.utility.VALUES3
+import com.adedom.utility.VALUES4
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -65,6 +66,15 @@ interface MultiApi {
     @POST("set-room-off.php")
     fun setRoomOff(
         @Field(VALUES1) roomNo: String
+    ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("set-latlng.php")
+    fun setLatlng(
+        @Field(VALUES1) roomNo: String,
+        @Field(VALUES2) playerId: String,
+        @Field(VALUES3) latitude: Double,
+        @Field(VALUES4) longitude: Double
     ): Call<JsonResponse>
 
     companion object {

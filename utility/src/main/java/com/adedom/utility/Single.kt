@@ -32,32 +32,32 @@ fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
     }
 }
 
-fun removeMyMarker(marker: Marker?) = marker?.remove()
+fun removeMarker(marker: Marker?) = marker?.remove()
 
 fun removeCircle(circle: Circle?) = circle?.remove()
 
-fun removeItemMarker(myItem: ArrayList<Marker>) {
-    for (marker in myItem) marker.remove()
-    myItem.clear()
+fun removeListMarker(markers: ArrayList<Marker>) {
+    for (marker in markers) marker.remove()
+    markers.clear()
 }
 
-fun setMyMarker(
+fun setMarker(
     googleMap: GoogleMap,
     latLng: LatLng,
-    name: String,
-    level: Int,
-    icon: BitmapDescriptor
+    icon: BitmapDescriptor,
+    title: String,
+    snippet: String
 ) {
     myLocation = googleMap.addMarker(
         MarkerOptions()
             .position(latLng)
             .icon(icon)
-            .title(name)
-            .snippet("Level : $level")
+            .title(title)
+            .snippet(snippet)
     )
 }
 
-fun setMyCircle(googleMap: GoogleMap?, latLng: LatLng) {
+fun setCircle(googleMap: GoogleMap?, latLng: LatLng) {
     myCircle = googleMap!!.addCircle(
         CircleOptions().center(latLng)
             .radius(RADIUS_ONE_HUNDRED_METER)
@@ -67,19 +67,20 @@ fun setMyCircle(googleMap: GoogleMap?, latLng: LatLng) {
     )
 }
 
-fun setItemMarker(
+fun setListMarker(
+    myItem: ArrayList<Marker>,
     googleMap: GoogleMap?,
-    latitude: Double,
-    longitude: Double,
-    itemId: Int,
-    bmp: Bitmap?,
-    myItem: ArrayList<Marker>
+    latLng: LatLng,
+    icon: BitmapDescriptor,
+    title: String,
+    snippet: String? = null
 ) {
     myItem.add(
         googleMap!!.addMarker(
-            MarkerOptions().position(LatLng(latitude, longitude))
-                .icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                .title(titleItem(itemId))
+            MarkerOptions().position(latLng)
+                .icon(icon)
+                .title(title)
+                .snippet(snippet)
         )
     )
 }

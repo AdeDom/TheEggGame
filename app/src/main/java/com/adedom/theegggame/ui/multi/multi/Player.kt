@@ -1,72 +1,80 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.MapActivity
+import com.adedom.utility.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Marker
 
-class Player(item: ArrayList<RoomInfo>) { // 21/7/62
+class Player(items: ArrayList<RoomInfo>, marker: ArrayList<Marker>) { // 7/12/19
 
     init {
-        removeMarker()
-        setPeopleLocation(item)
+        removeListMarker(marker)
+        removeCircle(myCircle)
+
+        setPeopleLocation(items, marker)
     }
 
-    private fun removeMarker() {
-        if (MultiActivity.mMarkerPlayer != null) {
-            for (marker in MultiActivity.mMarkerPlayer) {
-                marker.remove()
-            }
-            MultiActivity.mMarkerPlayer.clear()
-        }
-
-        if (MultiActivity.mCircle != null) {
-            MultiActivity.mCircle!!.remove()
-        }
-    }
-
-    private fun setPeopleLocation(items: ArrayList<RoomInfo>) {
-        for ((room_no, latitude, longitude, team, playerId, name, image, level, status) in items) {
-            var bmp =
-                BitmapFactory.decodeResource(MapActivity.sContext.resources, R.drawable.ic_player)
-            if (image!!.isNotEmpty()) {
-//                bmp = MyIon.getIon(MapActivity.sContext, bmp, image!!)
-                bmp = Bitmap.createScaledBitmap(
-                    bmp,
-                    (bmp.width * 0.2).toInt(),
-                    (bmp.height * 0.2).toInt(),
-                    true
-                )
-            }
+    private fun setPeopleLocation(
+        items: ArrayList<RoomInfo>,
+        marker: ArrayList<Marker>
+    ) {
+        for ((_, latitude, longitude, _, _, playerId, name, image, level, _) in items) {
+            val latLng = LatLng(latitude!!, longitude!!)
 
             //player
-            MultiActivity.mMarkerPlayer.add(
-                MapActivity.sGoogleMap!!.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(latitude!!, longitude!!))
-                        .icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                        .title(name)
-                        .snippet("Level : $level")
+            if (image == EMPTY) {
+                setListMarker(
+                    marker,
+                    MapActivity.sGoogleMap,
+                    latLng,
+                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                    name!!,
+                    level!!.toString()
                 )
-            )
+            } else {
+                Glide.with(MapActivity.sContext)
+                    .asBitmap()
+                    .load("$BASE_URL../profiles/${image}")
+                    .circleCrop()
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            setListMarker(
+                                marker,
+                                MapActivity.sGoogleMap,
+                                latLng,
+                                BitmapDescriptorFactory.fromBitmap(resource),
+                                name!!,
+                                level!!.toString()
+                            )
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                            setListMarker(
+                                marker,
+                                MapActivity.sGoogleMap,
+                                latLng,
+                                BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                                name!!,
+                                level!!.toString()
+                            )
+                        }
+                    })
+            }
 
             //Circle
-            val latLng = LatLng(latitude, longitude)
-            if (MainActivity.sPlayerItem.playerId == playerId) {
-                MultiActivity.mCircle = MapActivity.sGoogleMap!!.addCircle(
-                    CircleOptions()
-                        .center(latLng)
-                        .radius(Commons.ONE_HUNDRED_METER.toDouble())
-                        .fillColor(R.color.colorWhite)
-                        .strokeColor(android.R.color.white)
-                        .strokeWidth(5f)
-                )
+            if (MapActivity.sContext.getPrefLogin(PLAYER_ID) == playerId) {
+                setCircle(MapActivity.sGoogleMap, latLng)
             }
         }
     }

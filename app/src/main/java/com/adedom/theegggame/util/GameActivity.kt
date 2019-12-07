@@ -20,8 +20,8 @@ abstract class GameActivity : AppCompatActivity() {
 
     val TAG = "GameActivity"
     private lateinit var mViewModel: BaseActivityViewModel
-    private val mHandlerRefresh = Handler()
-    private var mPlayerId: String? = null
+    var playerId: String? = null
+    private val mHandlerFetch = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +40,12 @@ abstract class GameActivity : AppCompatActivity() {
         Setting.locationListener(this, true)
 
         // todo music
-        mPlayerId = this.getPrefLogin(PLAYER_ID)
-        mViewModel.setState(mPlayerId!!, ONLINE).observe(this, Observer {
+        playerId = this.getPrefLogin(PLAYER_ID)
+        mViewModel.setState(playerId!!, ONLINE).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
 
-        mRunnableRefresh.run()
+        mRunnableFetch.run()
     }
 
     override fun onPause() {
@@ -54,24 +54,24 @@ abstract class GameActivity : AppCompatActivity() {
 
         // music
 
-        mViewModel.setState(mPlayerId!!, OFFLINE).observe(this, Observer {
+        mViewModel.setState(playerId!!, OFFLINE).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
 
-        mHandlerRefresh.removeCallbacks(mRunnableRefresh)
+        mHandlerFetch.removeCallbacks(mRunnableFetch)
     }
 
     open fun gameLoop() {}
 
     override fun onBackPressed() {
-        mHandlerRefresh.removeCallbacks(mRunnableRefresh)
+        mHandlerFetch.removeCallbacks(mRunnableFetch)
         super.onBackPressed()
     }
 
-    private val mRunnableRefresh = object : Runnable {
+    private val mRunnableFetch = object : Runnable {
         override fun run() {
             gameLoop()
-            mHandlerRefresh.postDelayed(this, 5000)
+            mHandlerFetch.postDelayed(this, 5000)
         }
     }
 

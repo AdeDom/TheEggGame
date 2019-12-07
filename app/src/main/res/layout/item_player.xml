@@ -9,17 +9,17 @@
         android:id="@+id/mImgProfile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/ic_player" />
 
     <TextView
         android:id="@+id/mTvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_weight="1"
-        android:text="Name"
+        android:text="@string/name"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/black" />
 
@@ -28,8 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginRight="10dp"
-        android:text="Level"
+        android:layout_marginEnd="10dp"
+        android:text="@string/level"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black" />
 

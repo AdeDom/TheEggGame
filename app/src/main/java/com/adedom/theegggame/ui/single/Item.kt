@@ -5,8 +5,11 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.imageMarker
-import com.adedom.utility.removeItemMarker
-import com.adedom.utility.setItemMarker
+import com.adedom.utility.removeListMarker
+import com.adedom.utility.setListMarker
+import com.adedom.utility.titleItem
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
 class Item(
@@ -15,7 +18,7 @@ class Item(
 ) { // 2/12/19
 
     init {
-        removeItemMarker(mMarkerMyItem)
+        removeListMarker(mMarkerMyItem)
         var bmp: Bitmap? = null
         for ((itemId, latitude, longitude) in singles) {
             when (itemId) {
@@ -24,7 +27,13 @@ class Item(
                 3 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_mystery_item)
             }
 
-            setItemMarker(MapActivity.sGoogleMap, latitude, longitude, itemId, bmp, mMarkerMyItem)
+            setListMarker(
+                mMarkerMyItem,
+                MapActivity.sGoogleMap,
+                LatLng(latitude, longitude),
+                BitmapDescriptorFactory.fromBitmap(bmp),
+                titleItem(itemId)
+            )
         }
     }
 

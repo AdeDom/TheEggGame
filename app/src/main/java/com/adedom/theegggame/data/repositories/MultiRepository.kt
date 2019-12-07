@@ -142,4 +142,26 @@ class MultiRepository(private val api: MultiApi) {
             })
         return liveData
     }
+
+    fun setLatlng(
+        roomNo: String,
+        playerId: String,
+        latitude: Double,
+        longitude: Double
+    ): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+        api.setLatlng(roomNo, playerId, latitude, longitude)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
 }

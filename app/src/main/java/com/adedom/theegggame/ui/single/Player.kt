@@ -15,23 +15,23 @@ import com.google.android.gms.maps.model.LatLng
 class Player(latLng: LatLng) { // 2/12/19
 
     init {
-        removeMyMarker(myLocation)
+        removeMarker(myLocation)
         removeCircle(myCircle)
 
         setMyLocation(latLng)
-        setMyCircle(MapActivity.sGoogleMap, latLng)
+        setCircle(MapActivity.sGoogleMap, latLng)
     }
 
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayerItem
 
         if (player.image == EMPTY) {
-            setMyMarker(
+            setMarker(
                 MapActivity.sGoogleMap!!,
                 latLng,
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                 player.name!!,
-                player.level!!,
-                BitmapDescriptorFactory.fromResource(R.drawable.ic_player)
+                "Level : ${player.level}"
             )
         } else {
             Glide.with(MapActivity.sContext)
@@ -43,22 +43,22 @@ class Player(latLng: LatLng) { // 2/12/19
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                        setMyMarker(
+                        setMarker(
                             MapActivity.sGoogleMap!!,
                             latLng,
+                            BitmapDescriptorFactory.fromBitmap(resource),
                             player.name!!,
-                            player.level!!,
-                            BitmapDescriptorFactory.fromBitmap(resource)
+                            "Level : ${player.level}"
                         )
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {
-                        setMyMarker(
+                        setMarker(
                             MapActivity.sGoogleMap!!,
                             latLng,
+                            BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                             player.name!!,
-                            player.level!!,
-                            BitmapDescriptorFactory.fromResource(R.drawable.ic_player)
+                            "Level : ${player.level}"
                         )
                     }
                 })

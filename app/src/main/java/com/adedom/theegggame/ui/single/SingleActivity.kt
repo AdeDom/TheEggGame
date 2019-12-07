@@ -121,8 +121,8 @@ class SingleActivity : MapActivity() { // 2/12/19
             }
         }
 
-        val playerId = MainActivity.sPlayerItem.playerId
-        mViewModel.insertItem(playerId!!, myItem, values).observe(this, Observer {
+        val playerId = this.getPrefLogin(PLAYER_ID)
+        mViewModel.insertItem(playerId, myItem, values).observe(this, Observer {
             if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
         })
     }

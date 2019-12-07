@@ -34,49 +34,15 @@ class MainActivity : GameActivity() { // 2/12/19
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val factory = MainActivityFactory(
-            PlayerRepository(PlayerApi())
-        )
-        mViewModel = ViewModelProviders.of(this,factory).get(MainActivityViewModel::class.java)
+        val factory = MainActivityFactory(PlayerRepository(PlayerApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java)
 
-        if (checkLogin()) return
+        init()
 
-        setEvents()
+        if (checkPlayer()) return
     }
 
-    private fun checkLogin(): Boolean {
-        val playerId = this.getPrefLogin(PLAYER_ID)
-        if (playerId == EMPTY) {
-            this.login(
-                LoginActivity::class.java,
-                username = this.getPrefLogin(USERNAME)
-            )
-            return true
-        } else {
-            mViewModel.getPlayers(playerId).observe(this, Observer {
-                if (it.playerId == null) {
-                    this.login(LoginActivity::class.java)
-                } else {
-                    sPlayerItem = it
-                    GameActivity.sContext.toast(R.string.welcome)
-                    setWidgets()
-                }
-            })
-        }
-        return false
-    }
-
-    private fun setWidgets() {
-        if (sPlayerItem.image != EMPTY) {
-            mImgProfile.loadProfile(sPlayerItem.image!!)
-        }
-
-        mTvName.text = sPlayerItem.name
-        val level = "Level : ${sPlayerItem.level}"
-        mTvLevel.text = level
-    }
-
-    private fun setEvents() {
+    private fun init() {
         mBtnSingle.setOnClickListener {
             startActivity(Intent(baseContext, SingleActivity::class.java))
         }
@@ -101,10 +67,37 @@ class MainActivity : GameActivity() { // 2/12/19
         }
     }
 
+    private fun checkPlayer(): Boolean {
+        if (playerId == EMPTY) {
+            this.login(
+                LoginActivity::class.java,
+                username = this.getPrefLogin(USERNAME)
+            )
+            return true
+        } else {
+            baseContext.toast(R.string.welcome)
+        }
+        return false
+    }
+
+    override fun gameLoop() {
+        mViewModel.getPlayers(playerId!!).observe(this, Observer {
+            if (it.playerId == null) {
+                this.login(LoginActivity::class.java)
+            } else {
+                sPlayerItem = it
+                if (sPlayerItem.image != EMPTY) mImgProfile.loadProfile(sPlayerItem.image!!)
+                mTvName.text = sPlayerItem.name
+                val level = "Level : ${sPlayerItem.level}"
+                mTvLevel.text = level
+            }
+        })
+    }
+
     override fun onBackPressed() {
         if (mCountExit > 0) finishAffinity()
         mCountExit++
         Handler().postDelayed({ mCountExit = 0 }, 2000)
-        sContext.toast(R.string.on_back_pressed)
+        baseContext.toast(R.string.on_back_pressed)
     }
 }

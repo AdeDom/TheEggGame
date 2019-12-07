@@ -12,7 +12,6 @@ import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
-import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.MyGrid
@@ -103,7 +102,6 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
 
     private fun setReady(ready: String) {
         val roomNo = sRoom.room_no
-        val playerId = MainActivity.sPlayerItem.playerId
         mViewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
@@ -111,14 +109,12 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
 
     private fun setTeam(team: String) {
         val roomNo = sRoom.room_no
-        val playerId = MainActivity.sPlayerItem.playerId
         mViewModel.setTeam(roomNo!!, playerId!!, team).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
     }
 
     override fun onBackPressed() {
-        val playerId = MainActivity.sPlayerItem.playerId
         mViewModel.deletePlayer(sRoom.room_no!!, playerId!!).observe(this, Observer {
             if (it.result == COMPLETED) finish()
         })

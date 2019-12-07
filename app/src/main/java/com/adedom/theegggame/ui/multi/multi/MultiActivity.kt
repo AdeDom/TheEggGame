@@ -3,36 +3,41 @@ package com.adedom.theegggame.ui.multi.multi
 import android.location.Location
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
+import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
+import com.adedom.utility.FAILED
+import com.adedom.utility.failed
 import com.adedom.utility.setCamera
-import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MultiActivity : MapActivity(), Commons { // 5/8/62
 
-//todo     mHandlerCountdown.removeCallbacks(mRunnableCountdown)
-
     private lateinit var mViewModel: MultiActivityViewModel
-//    private val mRoomInfoItem = arrayListOf<RoomInfo>()
-//    private val mHandlerCountdown = Handler()
-//    private var mLatLng: LatLng? = null
-//    private var mIsRndItem = true
-//    private var mIsFinishGame = true
-//    private var mIsDialogFightGame = true
-//    private var scoreTeamA = ""
-//    private var scoreTeamB = ""
+    private var mRoomInfo = arrayListOf<RoomInfo>()
+    private val mMarkerPlayer by lazy { arrayListOf<Marker>() }
+
+    private var mTime: Int = 900
+    private var scoreTeamA = 0
+    private var scoreTeamB = 0
+
+    val playerId = MainActivity.sPlayerItem.playerId
+    val roomNo = RoomInfoActivity.sRoom.room_no
+
+    private var mIsRndItem = true
+    private var mIsDialogFightGame = true
 
     companion object {
         val mMultiItem = arrayListOf<Multi>()
         val mMarkerItem = arrayListOf<Marker>()
-        val mMarkerPlayer = arrayListOf<Marker>()
-        var mCircle: Circle? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +47,6 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
         mViewModel = ViewModelProviders.of(this, factory).get(MultiActivityViewModel::class.java)
 
         init()
-
-//        mRunnableCountdown.run()
     }
 
     private fun init() {
@@ -51,93 +54,74 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
         mTvBlue.visibility = View.VISIBLE
-        mTvTime.visibility = View.VISIBLE
     }
 
-//    private val mRunnableCountdown = object : Runnable {
-//        override fun run() {
-//            if (mIsFinishGame) {
-//                mIsFinishGame = false
-//                mHandlerCountdown.postDelayed(this, Commons.FIFTEEN_MINUTES)
-//            } else {
-//                finishGame()
-//            }
-//        }
-//    }
+    override fun gameLoop() {
+        mTime -= 1
+
+        val score = scoreTeamA + scoreTeamB
+        if (score >= 5) {
+            finish()
+        } else {
+            mTvTime.text = mTime.toString()
+            mTvRed.text = scoreTeamA.toString()
+            mTvBlue.text = scoreTeamB.toString()
+        }
+    }
 
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
         setCamera(sGoogleMap, sLatLng)
 
-//        setLatlng()
-//        feedRoomInfo()
+        setLatlng()
+
+        fetchRoomInfo()
+
+//        Item()
+//        checkNewItem()
 //        checkRadius()
 //        fightGame()
 //        setScore()
-//        checkFinishGame()
     }
 
-//    private fun setLatlng() {
-//        val sql = "UPDATE tbl_room_info SET \n" +
-//                "latitude = '${mLatLng!!.latitude.toString().trim()}',\n" +
-//                "longitude = '${mLatLng!!.longitude.toString().trim()}'\n" +
-//                "WHERE player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}'"
-//        MyConnect.executeQuery(sql)
-//    }
-//
-//    private fun feedRoomInfo() {
-//        mRoomInfoItem.clear()
-//        val sql =
-//            "SELECT ri.room_no,p.id,p.name,p.image,p.level,ri.latitude,ri.longitude,ri.team,ri.status_id\n" +
-//                    "FROM tbl_room_info AS ri , tbl_player AS p\n" +
-//                    "WHERE ri.room_no = '${RoomInfoActivity.sRoom.room_no!!.trim()}' AND ri.player_id = p.id\n" +
-//                    "ORDER BY ri.id ASC"
-//        MyConnect.executeQuery(sql, object : MyResultSet {
-//            override fun onResponse(rs: ResultSet) {
-//                while (rs.next()) {
-//                    val item = RoomInfo(
-//                        rs.getString(1),
-//                        rs.getDouble(2),
-//                        rs.getDouble(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getInt(8),
-//                        rs.getString(9)
-//                    )
-//                    mRoomInfoItem.add(item)
-//                }
-//
-//                Player(mRoomInfoItem)
-//                Item()
-//                checkNewItem()
-//            }
-//        })
-//    }
-//
+    private fun setLatlng() {
+        val lat = sLatLng.latitude
+        val lng = sLatLng.longitude
+        mViewModel.setLatlng(roomNo!!, playerId!!, lat, lng).observe(this, Observer {
+            if (it.result == FAILED) baseContext.failed()
+        })
+    }
+
+    private fun fetchRoomInfo() {
+        mViewModel.getRoomInfo(roomNo!!).observe(this, Observer {
+            mRoomInfo = it as ArrayList<RoomInfo>
+            Player(mRoomInfo, mMarkerPlayer)
+        })
+    }
+
 //    private fun checkNewItem() {
-//        if (mRoomInfoItem[0].playerId == MainActivity.sPlayerItem.playerId
-//            && mRoomInfoItem[0].latitude != Commons.LATLNG_ZERO
-//            && mRoomInfoItem[0].longitude != Commons.LATLNG_ZERO
+//        if (mRoomInfo[0].playerId == playerId
+//            && mRoomInfo[0].latitude != Commons.LATLNG_ZERO
+//            && mRoomInfo[0].longitude != Commons.LATLNG_ZERO
 //            && mIsRndItem
 //        ) {
 //            mIsRndItem = false
 //            Item(mLatLng!!)
-//        } else if (mRoomInfoItem[0].playerId != MainActivity.sPlayerItem.playerId
-//            && mRoomInfoItem[0].latitude != Commons.LATLNG_ZERO
-//            && mRoomInfoItem[0].longitude != Commons.LATLNG_ZERO
+//        } else if (mRoomInfo[0].playerId != playerId
+//            && mRoomInfo[0].latitude != Commons.LATLNG_ZERO
+//            && mRoomInfo[0].longitude != Commons.LATLNG_ZERO
 //            && mIsRndItem
 //        ) {
 //            mIsRndItem = false
-//            for (i in mRoomInfoItem.indices) {
+//            for (i in mRoomInfo.indices) {
 //                val distance = FloatArray(1)
 //                Location.distanceBetween(
 //                    mLatLng!!.latitude, mLatLng!!.longitude,
-//                    mRoomInfoItem[i].latitude!!, mRoomInfoItem[i].longitude!!, distance
+//                    mRoomInfo[i].latitude!!, mRoomInfo[i].longitude!!, distance
 //                )
 //
 //                if (distance[0] > Commons.THREE_KILOMETER) {
@@ -161,7 +145,7 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 //                MyMediaPlayer.getSound(baseContext, R.raw.keep)
 //
 //                val sql =
-//                    "UPDATE tbl_multi SET player_id = '${MainActivity.sPlayerItem.playerId!!.trim()}', " +
+//                    "UPDATE tbl_multi SET player_id = '${playerId}', " +
 //                            "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
 //                MyConnect.executeQuery(sql)
 //            }
@@ -171,15 +155,15 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 //    private fun fightGame() {
 //        //todo check fighting game
 //
-//        for (i in mRoomInfoItem.indices) {
-//            if (mRoomInfoItem[i].playerId != MainActivity.sPlayerItem.playerId
-//                && mRoomInfoItem[i].latitude != Commons.LATLNG_ZERO
-//                && mRoomInfoItem[i].longitude != Commons.LATLNG_ZERO
+//        for (i in mRoomInfo.indices) {
+//            if (mRoomInfo[i].playerId != playerId
+//                && mRoomInfo[i].latitude != Commons.LATLNG_ZERO
+//                && mRoomInfo[i].longitude != Commons.LATLNG_ZERO
 //            ) {
 //                val distance = FloatArray(1)
 //                Location.distanceBetween(
 //                    mLatLng!!.latitude, mLatLng!!.longitude,
-//                    mRoomInfoItem[i].latitude!!, mRoomInfoItem[i].longitude!!, distance
+//                    mRoomInfo[i].latitude!!, mRoomInfo[i].longitude!!, distance
 //                )
 //
 //                if (distance[0] > Commons.ONE_FIFTY_HUNDRED_METER) {
@@ -192,7 +176,7 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 //                    mIsDialogFightGame = false
 //
 //                    for (item in mMultiItem) {
-//                        if (item.player_id == mRoomInfoItem[i].playerId) {
+//                        if (item.player_id == mRoomInfo[i].playerId) {
 //                            val dialog =
 //                                FightGameDialog()
 //                            dialog.show(supportFragmentManager, null)
@@ -216,7 +200,6 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 //                } else {
 //                    "0"
 //                }
-//                mTvRed.text = scoreTeamA
 //            }
 //        })
 //
@@ -229,31 +212,8 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 //                } else {
 //                    "0"
 //                }
-//                mTvBlue.text = scoreTeamB
 //            }
 //        })
 //    }
-//
-//    private fun checkFinishGame() {
-//        val numA = scoreTeamA.trim().toInt()
-//        val numB = scoreTeamB.trim().toInt()
-//        val total = numA + numB
-//        if (total >= 5) {
-//            finishGame()
-//        }
-//    }
-//
-//    private fun finishGame() {
-//        mHandlerCountdown.removeCallbacks(mRunnableCountdown)
-//
-//        val sql =
-//            "DELETE FROM tbl_multi WHERE room_no = '${RoomInfoActivity.sRoom.room_no.toString()}'"
-//        MyConnect.executeQuery(sql)
-//
-//        val intent = Intent()
-//        intent.putExtra("values1", scoreTeamA.trim())
-//        intent.putExtra("values2", scoreTeamB.trim())
-//        setResult(RESULT_OK, intent)
-//        finish()
-//    }
+
 }
