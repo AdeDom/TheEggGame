@@ -84,6 +84,15 @@ interface MultiApi {
         @Field(VALUES1) roomNo: String
     ): Call<List<Multi>>
 
+    @FormUrlEncoded
+    @POST("insert-multi.php")
+    fun insertMulti(
+        @Field(VALUES1) roomNo: String,
+        @Field(VALUES2) latitude: Double,
+        @Field(VALUES3) longitude: Double,
+        @Field(VALUES4) playerId: String
+    ): Call<JsonResponse>
+
     companion object {
         operator fun invoke(): MultiApi {
             return RetrofitClient.instance()

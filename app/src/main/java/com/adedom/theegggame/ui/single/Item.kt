@@ -14,9 +14,9 @@ class Item(singles: ArrayList<Single>) { // 2/12/19
         var bmp: Bitmap? = null
         for ((itemId, latitude, longitude) in singles) {
             when (itemId) {
-                1 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_egg)
-                2 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_mystery_box)
-                3 -> bmp = imageMarker(MapActivity.sContext, R.drawable.ic_mystery_item)
+                1 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_egg)
+                2 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_mystery_box)
+                3 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_mystery_item)
             }
 
             setListMarker(

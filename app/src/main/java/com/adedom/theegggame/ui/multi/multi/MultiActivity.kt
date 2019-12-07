@@ -6,28 +6,27 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
+import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
-import com.adedom.utility.FAILED
-import com.adedom.utility.failed
-import com.adedom.utility.setCamera
+import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class MultiActivity : MapActivity(), Commons { // 5/8/62
+class MultiActivity : MapActivity() { // 5/8/62
 
     private lateinit var mViewModel: MultiActivityViewModel
+    private lateinit var mRoomInfo: ArrayList<RoomInfo>
 
     private var mTime: Int = 900
     private var scoreTeamA = 0
     private var scoreTeamB = 0
 
     val playerId = MainActivity.sPlayerItem.playerId
-    val roomNo = RoomInfoActivity.sRoom.room_no
+    val room = RoomInfoActivity.sRoom
 
-    private var mIsRndItem = true
     private var mIsDialogFightGame = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +46,7 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
         mTvBlue.visibility = View.VISIBLE
+
     }
 
     override fun gameLoop() {
@@ -73,9 +73,6 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 
         fetchMulti()
 
-        //todo rnd + insert item
-
-//        checkNewItem()
 //        checkRadius()
 //        fightGame()
 //        setScore()
@@ -84,51 +81,60 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
     private fun setLatlng() {
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        mViewModel.setLatlng(roomNo!!, playerId!!, lat, lng).observe(this, Observer {
+        mViewModel.setLatlng(room.room_no!!, playerId!!, lat, lng).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
     }
 
     private fun fetchRoomInfo() {
-        mViewModel.getRoomInfo(roomNo!!).observe(this, Observer {
+        mViewModel.getRoomInfo(room.room_no!!).observe(this, Observer {
             Player(it)
+
+            mRoomInfo = it as ArrayList<RoomInfo>
+            rndItem()
         })
     }
 
     private fun fetchMulti() {
-        mViewModel.getMulti(roomNo!!).observe(this, Observer {
+        mViewModel.getMulti(room.room_no!!).observe(this, Observer {
             Item(it)
         })
     }
 
-//    private fun checkNewItem() {
-//        if (mRoomInfo[0].playerId == playerId
-//            && mRoomInfo[0].latitude != Commons.LATLNG_ZERO
-//            && mRoomInfo[0].longitude != Commons.LATLNG_ZERO
-//            && mIsRndItem
-//        ) {
-//            mIsRndItem = false
-//            Item(mLatLng!!)
-//        } else if (mRoomInfo[0].playerId != playerId
-//            && mRoomInfo[0].latitude != Commons.LATLNG_ZERO
-//            && mRoomInfo[0].longitude != Commons.LATLNG_ZERO
-//            && mIsRndItem
-//        ) {
-//            mIsRndItem = false
-//            for (i in mRoomInfo.indices) {
-//                val distance = FloatArray(1)
-//                Location.distanceBetween(
-//                    mLatLng!!.latitude, mLatLng!!.longitude,
-//                    mRoomInfo[i].latitude!!, mRoomInfo[i].longitude!!, distance
-//                )
-//
-//                if (distance[0] > Commons.THREE_KILOMETER) {
-//                    Item(mLatLng!!)
-//                }
-//            }
-//        }
-//    }
-//
+    private fun rndItem() {
+        if (room.status == HEAD && switchMulti == GameSwitch.ON) {
+            switchMulti = GameSwitch.OFF
+            for (i in 0 until NUMBER_OF_ITEM) {
+                val roomNo = room.room_no
+                val lat = rndLatLng(sLatLng.latitude)
+                val lng = rndLatLng(sLatLng.longitude)
+                mViewModel.insertMulti(roomNo!!, lat, lng, playerId!!).observe(this, Observer {
+                    if (it.result == FAILED) baseContext.failed()
+                })
+            }
+        } else if (mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO &&
+            room.status == TAIL && switchMulti == GameSwitch.ON
+        ) {
+            switchMulti = GameSwitch.OFF
+            for (i in mRoomInfo.indices) {
+                val distance = FloatArray(1)
+                Location.distanceBetween(
+                    sLatLng.latitude, sLatLng.longitude,
+                    mRoomInfo[i].latitude!!, mRoomInfo[i].longitude!!, distance
+                )
+
+                if (distance[0] > THREE_KILOMETER) {
+                    val roomNo = room.room_no
+                    val lat = rndLatLng(sLatLng.latitude)
+                    val lng = rndLatLng(sLatLng.longitude)
+                    mViewModel.insertMulti(roomNo!!, lat, lng, playerId!!).observe(this, Observer {
+                        if (it.result == FAILED) baseContext.failed()
+                    })
+                }
+            }
+        }
+    }
+
 //    private fun checkRadius() {
 //        for (i in mMultiItem.indices) {
 //            val distance = FloatArray(1)

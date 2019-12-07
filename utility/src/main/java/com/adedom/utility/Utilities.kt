@@ -3,6 +3,8 @@ package com.adedom.utility
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -91,4 +93,8 @@ fun checkPassword(editText1: EditText, editText2: EditText, error: String): Bool
         return true
     }
     return false
+}
+
+fun Context.imageMarker(image: Int): Bitmap {
+    return BitmapFactory.decodeResource(this.resources, image)
 }

@@ -12,7 +12,7 @@ import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : MapActivity() { // 2/12/19
+class SingleActivity : MapActivity() { // 7/12/19
 
     private lateinit var mViewModel: SingleActivityViewModel
 
@@ -46,8 +46,8 @@ class SingleActivity : MapActivity() { // 2/12/19
 
         rndItem(sLatLng)
 
-        if (switchItem == GameSwitch.ON) {
-            switchItem = GameSwitch.OFF
+        if (switchSingle == GameSwitch.ON) {
+            switchSingle = GameSwitch.OFF
             Item(single)
         }
 
@@ -74,12 +74,12 @@ class SingleActivity : MapActivity() { // 2/12/19
 
                 markerItems[i].remove()
                 single.removeAt(i)
-                switchItem = GameSwitch.ON
+                switchSingle = GameSwitch.ON
                 return
             }
 
             if (distance[0] > TWO_KILOMETER) {
-                switchItem = GameSwitch.ON
+                switchSingle = GameSwitch.ON
                 single.removeAt(i)
                 return
             }

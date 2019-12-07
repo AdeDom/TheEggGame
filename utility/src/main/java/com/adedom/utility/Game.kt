@@ -1,8 +1,5 @@
 package com.adedom.utility
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -16,9 +13,13 @@ const val RADIUS_ONE_HUNDRED_METER = 100.0
 const val TWO_KILOMETER = 2000.0F
 const val ONE_HUNDRED_METER = 100.0F
 const val TWO_HUNDRED_METER = 200.0
-const val ITEM_MIN = 5
+const val NUMBER_OF_ITEM = 5
+const val MIN_ITEM = 5
 const val MAX_ITEM = 10
 const val FIFTEEN_MINUTE = 900L
+const val THREE_KILOMETER = 3000.0F
+const val LATLNG_ZERO = 0.0
+
 const val ROOM = "room"
 const val HEAD = "head"
 const val TAIL = "tail"
@@ -37,7 +38,8 @@ val markerPlayers by lazy { arrayListOf<Marker>() }
 val markerItems by lazy { arrayListOf<Marker>() }
 
 var switchCamera = GameSwitch.ON
-var switchItem = GameSwitch.ON
+var switchSingle = GameSwitch.ON
+var switchMulti = GameSwitch.ON
 
 fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
     if (switchCamera == GameSwitch.ON) {
@@ -100,18 +102,11 @@ fun setListMarker(
     )
 }
 
-fun rndLatLng(latLng: Double, meter: Double): Double {
+fun rndLatLng(latLng: Double): Double {
     var rnd = Math.random() / 100 // < 0.01
-    rnd += meter / 100000 // 200 Meter
+    rnd += TWO_HUNDRED_METER / 100000 // 200 Meter
     val s = String.format("%.7f", rnd)
-
-    var ll: Double
-    ll = if ((0..1).random() == 0) {
-        latLng + s.toDouble()
-    } else {
-        latLng - s.toDouble()
-    }
-
+    var ll: Double = if ((0..1).random() == 0) latLng + s.toDouble() else latLng - s.toDouble()
     ll = String.format("%.7f", ll).toDouble()
     return ll
 }
@@ -124,10 +119,6 @@ fun titleItem(itemId: Int): String {
         3 -> name = "Mystery Item"
     }
     return name
-}
-
-fun imageMarker(context: Context, image: Int): Bitmap {
-    return BitmapFactory.decodeResource(context.resources, image)
 }
 
 fun detailItem(itemId: Int, values: Int): String {
@@ -144,13 +135,13 @@ fun detailItem(itemId: Int, values: Int): String {
 }
 
 fun rndItem(latLng: LatLng) {
-    if (single.size < ITEM_MIN) {
-        val numItem = (ITEM_MIN..MAX_ITEM).random()
+    if (single.size < MIN_ITEM) {
+        val numItem = (MIN_ITEM..MAX_ITEM).random()
         for (i in 0 until numItem) {
             val item = Single(
                 (1..3).random(),
-                rndLatLng(latLng.latitude, TWO_HUNDRED_METER),
-                rndLatLng(latLng.longitude, TWO_HUNDRED_METER)
+                rndLatLng(latLng.latitude),
+                rndLatLng(latLng.longitude)
             )
             single.add(item)
         }
