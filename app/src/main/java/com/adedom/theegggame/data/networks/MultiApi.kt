@@ -1,6 +1,7 @@
 package com.adedom.theegggame.data.networks
 
 import com.adedom.theegggame.data.models.JsonResponse
+import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.utility.VALUES1
@@ -76,6 +77,12 @@ interface MultiApi {
         @Field(VALUES3) latitude: Double,
         @Field(VALUES4) longitude: Double
     ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("get-multi.php")
+    fun getMulti(
+        @Field(VALUES1) roomNo: String
+    ): Call<List<Multi>>
 
     companion object {
         operator fun invoke(): MultiApi {

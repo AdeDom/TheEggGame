@@ -6,8 +6,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.Multi
-import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
@@ -16,14 +14,11 @@ import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.FAILED
 import com.adedom.utility.failed
 import com.adedom.utility.setCamera
-import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     private lateinit var mViewModel: MultiActivityViewModel
-    private var mRoomInfo = arrayListOf<RoomInfo>()
-    private val mMarkerPlayer by lazy { arrayListOf<Marker>() }
 
     private var mTime: Int = 900
     private var scoreTeamA = 0
@@ -34,11 +29,6 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     private var mIsRndItem = true
     private var mIsDialogFightGame = true
-
-    companion object {
-        val mMultiItem = arrayListOf<Multi>()
-        val mMarkerItem = arrayListOf<Marker>()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +71,10 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 
         fetchRoomInfo()
 
-//        Item()
+        fetchMulti()
+
+        //todo rnd + insert item
+
 //        checkNewItem()
 //        checkRadius()
 //        fightGame()
@@ -98,8 +91,13 @@ class MultiActivity : MapActivity(), Commons { // 5/8/62
 
     private fun fetchRoomInfo() {
         mViewModel.getRoomInfo(roomNo!!).observe(this, Observer {
-            mRoomInfo = it as ArrayList<RoomInfo>
-            Player(mRoomInfo, mMarkerPlayer)
+            Player(it)
+        })
+    }
+
+    private fun fetchMulti() {
+        mViewModel.getMulti(roomNo!!).observe(this, Observer {
+            Item(it)
         })
     }
 

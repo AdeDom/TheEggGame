@@ -22,6 +22,10 @@ const val FIFTEEN_MINUTE = 900L
 
 var myLocation: Marker? = null
 var myCircle: Circle? = null
+
+val markerPlayers by lazy { arrayListOf<Marker>() }
+val markerItems by lazy { arrayListOf<Marker>() }
+
 var switch = GameSwitch.ON
 
 fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
@@ -68,14 +72,14 @@ fun setCircle(googleMap: GoogleMap?, latLng: LatLng) {
 }
 
 fun setListMarker(
-    myItem: ArrayList<Marker>,
+    markers: ArrayList<Marker>,
     googleMap: GoogleMap?,
     latLng: LatLng,
     icon: BitmapDescriptor,
-    title: String,
+    title: String? = null,
     snippet: String? = null
 ) {
-    myItem.add(
+    markers.add(
         googleMap!!.addMarker(
             MarkerOptions().position(latLng)
                 .icon(icon)

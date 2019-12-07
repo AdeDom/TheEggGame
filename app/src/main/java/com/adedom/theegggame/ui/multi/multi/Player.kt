@@ -11,28 +11,24 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 
-class Player(items: ArrayList<RoomInfo>, marker: ArrayList<Marker>) { // 7/12/19
+class Player(items: List<RoomInfo>) { // 7/12/19
 
     init {
-        removeListMarker(marker)
+        removeListMarker(markerPlayers)
         removeCircle(myCircle)
 
-        setPeopleLocation(items, marker)
+        setPeopleLocation(items as ArrayList<RoomInfo>)
     }
 
-    private fun setPeopleLocation(
-        items: ArrayList<RoomInfo>,
-        marker: ArrayList<Marker>
-    ) {
+    private fun setPeopleLocation(items: ArrayList<RoomInfo>) {
         for ((_, latitude, longitude, _, _, playerId, name, image, level, _) in items) {
             val latLng = LatLng(latitude!!, longitude!!)
 
             //player
             if (image == EMPTY) {
                 setListMarker(
-                    marker,
+                    markerPlayers,
                     MapActivity.sGoogleMap,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
@@ -50,7 +46,7 @@ class Player(items: ArrayList<RoomInfo>, marker: ArrayList<Marker>) { // 7/12/19
                             transition: Transition<in Bitmap>?
                         ) {
                             setListMarker(
-                                marker,
+                                markerPlayers,
                                 MapActivity.sGoogleMap,
                                 latLng,
                                 BitmapDescriptorFactory.fromBitmap(resource),
@@ -61,7 +57,7 @@ class Player(items: ArrayList<RoomInfo>, marker: ArrayList<Marker>) { // 7/12/19
 
                         override fun onLoadCleared(placeholder: Drawable?) {
                             setListMarker(
-                                marker,
+                                markerPlayers,
                                 MapActivity.sGoogleMap,
                                 latLng,
                                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player),

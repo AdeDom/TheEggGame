@@ -4,21 +4,14 @@ import android.graphics.Bitmap
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.MapActivity
-import com.adedom.utility.imageMarker
-import com.adedom.utility.removeListMarker
-import com.adedom.utility.setListMarker
-import com.adedom.utility.titleItem
+import com.adedom.utility.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 
-class Item(
-    singles: ArrayList<Single>,
-    mMarkerMyItem: ArrayList<Marker>
-) { // 2/12/19
+class Item(singles: ArrayList<Single>) { // 2/12/19
 
     init {
-        removeListMarker(mMarkerMyItem)
+        removeListMarker(markerItems)
         var bmp: Bitmap? = null
         for ((itemId, latitude, longitude) in singles) {
             when (itemId) {
@@ -28,7 +21,7 @@ class Item(
             }
 
             setListMarker(
-                mMarkerMyItem,
+                markerItems,
                 MapActivity.sGoogleMap,
                 LatLng(latitude, longitude),
                 BitmapDescriptorFactory.fromBitmap(bmp),

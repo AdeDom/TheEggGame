@@ -3,6 +3,7 @@ package com.adedom.theegggame.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adedom.theegggame.data.models.JsonResponse
+import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
@@ -157,6 +158,19 @@ class MultiRepository(private val api: MultiApi) {
                     call: Call<JsonResponse>,
                     response: Response<JsonResponse>
                 ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
+    fun getMulti(roomNo: String): LiveData<List<Multi>> {
+        val liveData = MutableLiveData<List<Multi>>()
+        api.getMulti(roomNo)
+            .enqueue(object : Callback<List<Multi>> {
+                override fun onFailure(call: Call<List<Multi>>, t: Throwable) {}
+                override fun onResponse(call: Call<List<Multi>>, response: Response<List<Multi>>) {
                     if (!response.isSuccessful) return
                     liveData.value = response.body()
                 }

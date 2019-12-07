@@ -12,7 +12,6 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : MapActivity() { // 2/12/19
@@ -20,7 +19,6 @@ class SingleActivity : MapActivity() { // 2/12/19
     private lateinit var mViewModel: SingleActivityViewModel
     private var mSwitchItem = GameSwitch.ON
     private val mSingleItem by lazy { arrayListOf<Single>() }
-    private val mMarkerMyItem by lazy { arrayListOf<Marker>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +50,7 @@ class SingleActivity : MapActivity() { // 2/12/19
 
         if (mSwitchItem == GameSwitch.ON) {
             mSwitchItem = GameSwitch.OFF
-            Item(mSingleItem, mMarkerMyItem)
+            Item(mSingleItem)
         }
 
         checkRadius(sLatLng)
@@ -85,7 +83,7 @@ class SingleActivity : MapActivity() { // 2/12/19
 
             if (distance[0] < ONE_HUNDRED_METER) {
                 keepItem(mSingleItem[i].itemId)
-                mMarkerMyItem[i].remove()
+                markerItems[i].remove()
                 mSingleItem.removeAt(i)
                 mSwitchItem = GameSwitch.ON
                 return
