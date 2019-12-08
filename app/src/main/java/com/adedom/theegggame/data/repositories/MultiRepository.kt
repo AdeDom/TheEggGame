@@ -2,12 +2,8 @@ package com.adedom.theegggame.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adedom.theegggame.data.models.JsonResponse
-import com.adedom.theegggame.data.models.Multi
-import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.data.models.*
 import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.utility.Score
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -19,6 +19,8 @@ import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : GameActivity() { // 2/12/19
 
@@ -27,7 +29,6 @@ class MainActivity : GameActivity() { // 2/12/19
 
     companion object {
         lateinit var sPlayerItem: Player
-        val sTimeStamp = System.currentTimeMillis() / 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,9 @@ class MainActivity : GameActivity() { // 2/12/19
 
         val factory = MainActivityFactory(PlayerRepository(PlayerApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java)
+
+        timeStamp = System.currentTimeMillis() / 1000
+        randomKey = UUID.randomUUID().toString()
 
         init()
 
@@ -74,10 +78,19 @@ class MainActivity : GameActivity() { // 2/12/19
                 username = this.getPrefLogin(USERNAME)
             )
             return true
-        } else {
-            baseContext.toast(R.string.welcome)
-        }
+        } else insertLogs()
         return false
+    }
+
+    private fun insertLogs() {
+        val dateIn = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+        val timeIn = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+        val playerId = this.getPrefLogin(PLAYER_ID)
+        mViewModel.insertLogs(randomKey, dateIn, timeIn, playerId).observe(this, Observer {
+            if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
+        })
     }
 
     override fun gameLoop() {

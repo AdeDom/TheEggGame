@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.data.repositories.MultiRepository
-import com.adedom.utility.Score
 
 class MultiActivityViewModel(private val repository: MultiRepository) : ViewModel() {
 

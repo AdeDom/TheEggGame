@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.SingleApi
 import com.adedom.theegggame.data.repositories.SingleRepository
-import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
@@ -83,7 +82,7 @@ class SingleActivity : MapActivity() { // 7/12/19
     }
 
     private fun keepItem(index: Int) {
-        val (myItem, values) = getItemValues(index, MainActivity.sTimeStamp)
+        val (myItem, values) = getItemValues(index, timeStamp)
         val playerId = this.getPrefLogin(PLAYER_ID)
         mViewModel.insertItem(playerId, myItem, values).observe(this, Observer {
             if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))

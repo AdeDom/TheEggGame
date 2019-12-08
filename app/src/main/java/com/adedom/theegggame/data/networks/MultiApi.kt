@@ -1,10 +1,10 @@
 package com.adedom.theegggame.data.networks
 
-import com.adedom.theegggame.data.models.JsonResponse
-import com.adedom.theegggame.data.models.Multi
-import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.utility.*
+import com.adedom.theegggame.data.models.*
+import com.adedom.utility.VALUES1
+import com.adedom.utility.VALUES2
+import com.adedom.utility.VALUES3
+import com.adedom.utility.VALUES4
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

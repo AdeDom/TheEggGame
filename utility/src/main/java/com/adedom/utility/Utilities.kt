@@ -22,6 +22,9 @@ const val PLAYER_ID = "player_id"
 const val USERNAME = "username"
 const val EMPTY = "empty"
 
+var timeStamp: Long = 0
+var randomKey :String = ""
+
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }

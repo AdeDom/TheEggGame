@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.adedom.theegggame.data.networks.RetrofitClient
 import com.adedom.utility.*
 import com.google.gson.annotations.SerializedName
@@ -15,19 +16,21 @@ import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import java.text.SimpleDateFormat
+import java.util.*
 
 abstract class GameActivity : AppCompatActivity() {
 
     val TAG = "GameActivity"
-    private lateinit var mViewModel: BaseActivityViewModel
+    private lateinit var mViewModel: GameActivityViewModel
     var playerId: String? = null
     private val mHandlerFetch = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = BaseActivityFactory(BaseRepository(BaseApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(BaseActivityViewModel::class.java)
+        val factory = GameActivityFactory(GameRepository(GameApi()))
+        mViewModel = ViewModelProviders.of(this, factory).get(GameActivityViewModel::class.java)
 
         sActivity = this@GameActivity
         sContext = baseContext
@@ -40,6 +43,7 @@ abstract class GameActivity : AppCompatActivity() {
         Setting.locationListener(this, true)
 
         // todo music
+
         playerId = this.getPrefLogin(PLAYER_ID)
         mViewModel.setState(playerId!!, ONLINE).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
@@ -54,11 +58,19 @@ abstract class GameActivity : AppCompatActivity() {
 
         // music
 
+        mHandlerFetch.removeCallbacks(mRunnableFetch)
+
         mViewModel.setState(playerId!!, OFFLINE).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
 
-        mHandlerFetch.removeCallbacks(mRunnableFetch)
+        val dateOut = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+        val timeOut = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+        mViewModel.updateLogs(randomKey, dateOut, timeOut).observe(this, Observer {
+            if (it.result == FAILED) baseContext.failed()
+        })
     }
 
     open fun gameLoop() {}
@@ -81,29 +93,33 @@ abstract class GameActivity : AppCompatActivity() {
     }
 }
 
-class BaseActivityViewModel(private val repository: BaseRepository) : ViewModel() {
-    fun setState(playerId: String, state: String): LiveData<BaseEntity> {
+class GameActivityViewModel(private val repository: GameRepository) : ViewModel() {
+    fun setState(playerId: String, state: String): LiveData<GameEntity> {
         return repository.setState(playerId, state)
+    }
+
+    fun updateLogs(randomKey: String, dateOut: String, timeOut: String): LiveData<GameEntity> {
+        return repository.updateLogs(randomKey, dateOut, timeOut)
     }
 }
 
 @Suppress("UNCHECKED_CAST")
-class BaseActivityFactory(private val repository: BaseRepository) :
+class GameActivityFactory(private val repository: GameRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return BaseActivityViewModel(repository) as T
+        return GameActivityViewModel(repository) as T
     }
 }
 
-class BaseRepository(private val api: BaseApi) {
-    fun setState(playerId: String, state: String): LiveData<BaseEntity> {
-        val liveData = MutableLiveData<BaseEntity>()
+class GameRepository(private val api: GameApi) {
+    fun setState(playerId: String, state: String): LiveData<GameEntity> {
+        val liveData = MutableLiveData<GameEntity>()
         api.setState(playerId, state)
-            .enqueue(object : Callback<BaseEntity> {
-                override fun onFailure(call: Call<BaseEntity>, t: Throwable) {}
+            .enqueue(object : Callback<GameEntity> {
+                override fun onFailure(call: Call<GameEntity>, t: Throwable) {}
                 override fun onResponse(
-                    call: Call<BaseEntity>,
-                    response: Response<BaseEntity>
+                    call: Call<GameEntity>,
+                    response: Response<GameEntity>
                 ) {
                     if (!response.isSuccessful) return
                     liveData.value = response.body()
@@ -111,22 +127,44 @@ class BaseRepository(private val api: BaseApi) {
             })
         return liveData
     }
+
+    fun updateLogs(randomKey: String, dateOut: String, timeOut: String): LiveData<GameEntity> {
+        val liveData = MutableLiveData<GameEntity>()
+        api.updateLogs(randomKey, dateOut, timeOut)
+            .enqueue(object : Callback<GameEntity> {
+                override fun onFailure(call: Call<GameEntity>, t: Throwable) {}
+                override fun onResponse(call: Call<GameEntity>, response: Response<GameEntity>) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
 }
 
-interface BaseApi {
+interface GameApi {
     @FormUrlEncoded
     @POST("set-state.php")
     fun setState(
         @Field(VALUES1) playerId: String,
         @Field(VALUES2) state: String
-    ): Call<BaseEntity>
+    ): Call<GameEntity>
+
+    @FormUrlEncoded
+    @POST("update-logs.php")
+    fun updateLogs(
+        @Field(VALUES1) randomKey: String,
+        @Field(VALUES2) dateOut: String,
+        @Field(VALUES3) timeOut: String
+    ): Call<GameEntity>
 
     companion object {
-        operator fun invoke(): BaseApi {
+        operator fun invoke(): GameApi {
             return RetrofitClient.instance()
-                .create(BaseApi::class.java)
+                .create(GameApi::class.java)
         }
     }
 }
 
-data class BaseEntity(@SerializedName(RESULT) val result: String? = null)
+data class GameEntity(@SerializedName(RESULT) val result: String? = null)
