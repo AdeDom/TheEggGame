@@ -6,6 +6,7 @@ import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.utility.Score
 
 class MultiActivityViewModel(private val repository: MultiRepository) : ViewModel() {
 
@@ -28,6 +29,19 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         longitude: Double
     ): LiveData<JsonResponse> {
         return repository.insertMulti(roomNo, latitude, longitude)
+    }
+
+    fun insertMultiCollection(
+        multiId: String,
+        roomNo: String,
+        playerId: String,
+        team: String
+    ): LiveData<JsonResponse> {
+        return repository.insertMultiCollection(multiId, roomNo, playerId, team)
+    }
+
+    fun getMultiScore(roomNo: String): LiveData<Score> {
+        return repository.getMultiScore(roomNo)
     }
 
 }

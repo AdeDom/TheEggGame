@@ -8,6 +8,5 @@ data class Multi(
     @SerializedName(VALUES2) val room_no: String,
     @SerializedName(VALUES3) val latitude: Double,
     @SerializedName(VALUES4) val longitude: Double,
-    @SerializedName(VALUES5) val player_id: String,
-    @SerializedName(VALUES6) val status: String
+    @SerializedName(VALUES5) val status: String
 )

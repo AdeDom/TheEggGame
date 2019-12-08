@@ -27,6 +27,7 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
 
     companion object {
         lateinit var sRoom: Room
+        lateinit var sTeam: String
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,11 +63,22 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
         mTvRoomNo.text = sRoom.room_no
         mTvName.text = sRoom.name
         mTvPeople.text = sRoom.people
-        if (sRoom.status == HEAD) mBtnGo.text = getString(R.string.go)
+        if (sRoom.status == HEAD) {
+            sTeam = TEAM_A
+            mBtnGo.text = getString(R.string.go)
+        } else {
+            sTeam = TEAM_B
+        }
 
         mBtnGo.setOnClickListener { getReadyToStartGame() }
-        mImgTeamA.setOnClickListener { setTeam(TEAM_A) }
-        mImgTeamB.setOnClickListener { setTeam(TEAM_B) }
+        mImgTeamA.setOnClickListener {
+            sTeam = TEAM_A
+            setTeam()
+        }
+        mImgTeamB.setOnClickListener {
+            sTeam = TEAM_B
+            setTeam()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -107,9 +119,9 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
         })
     }
 
-    private fun setTeam(team: String) {
+    private fun setTeam() {
         val roomNo = sRoom.room_no
-        mViewModel.setTeam(roomNo!!, playerId!!, team).observe(this, Observer {
+        mViewModel.setTeam(roomNo!!, playerId!!, sTeam).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
     }

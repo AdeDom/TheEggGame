@@ -4,10 +4,7 @@ import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.utility.VALUES1
-import com.adedom.utility.VALUES2
-import com.adedom.utility.VALUES3
-import com.adedom.utility.VALUES4
+import com.adedom.utility.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -79,18 +76,33 @@ interface MultiApi {
     ): Call<JsonResponse>
 
     @FormUrlEncoded
-    @POST("get-multi.php")
-    fun getMulti(
-        @Field(VALUES1) roomNo: String
-    ): Call<List<Multi>>
-
-    @FormUrlEncoded
     @POST("insert-multi.php")
     fun insertMulti(
         @Field(VALUES1) roomNo: String,
         @Field(VALUES2) latitude: Double,
         @Field(VALUES3) longitude: Double
     ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("get-multi.php")
+    fun getMulti(
+        @Field(VALUES1) roomNo: String
+    ): Call<List<Multi>>
+
+    @FormUrlEncoded
+    @POST("insert-multi-collection.php")
+    fun insertMultiCollection(
+        @Field(VALUES1) multiId: String,
+        @Field(VALUES2) roomNo: String,
+        @Field(VALUES3) playerId: String,
+        @Field(VALUES4) team: String
+    ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("get-multi-score.php")
+    fun getMultiScore(
+        @Field(VALUES1) roomNo: String
+    ): Call<Score>
 
     companion object {
         operator fun invoke(): MultiApi {

@@ -16,7 +16,7 @@ const val TWO_HUNDRED_METER = 200.0
 const val NUMBER_OF_ITEM = 5
 const val MIN_ITEM = 5
 const val MAX_ITEM = 10
-const val FIFTEEN_MINUTE = 900L
+const val FIFTEEN_MINUTE = 900
 const val THREE_KILOMETER = 3000.0F
 const val LATLNG_ZERO = 0.0
 
@@ -127,8 +127,6 @@ fun detailItem(itemId: Int, values: Int): String {
         2 -> name = "Egg I" // egg false
         3 -> name = "Egg II" // hide egg + radius
         4 -> name = "Egg III" // stun
-        5 -> name = "Egg IV" // angel
-        6 -> name = "Egg V" // devil
     }
     return name
 }
@@ -152,19 +150,19 @@ fun getItemValues(i: Int, timeStamp: Long): Pair<Int, Int> {
     var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
     val timeNow = System.currentTimeMillis() / 1000
-    if (timeNow > timeStamp + FIFTEEN_MINUTE) values *= 2 // Multiply 2
+    if (timeNow > timeStamp + FIFTEEN_MINUTE.toLong()) values *= 2 // Multiply 2
 
     when (myItem) {
         2 -> { // mystery box
             myItem = (1..2).random() // random exp and item*/
             values += (1..20).random() // mystery box + 20 point.
             if (myItem == 2) {
-                myItem = (2..6).random() // random item
+                myItem = (2..4).random() // random item
                 values = 1
             }
         }
         3 -> { // item
-            myItem = (2..6).random()
+            myItem = (2..4).random()
             values = 1
         }
     }

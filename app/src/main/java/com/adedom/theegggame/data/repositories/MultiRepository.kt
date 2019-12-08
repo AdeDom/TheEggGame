@@ -7,6 +7,7 @@ import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
+import com.adedom.utility.Score
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -197,5 +198,43 @@ class MultiRepository(private val api: MultiApi) {
             })
         return liveData
     }
+
+    fun insertMultiCollection(
+        multiId: String,
+        roomNo: String,
+        playerId: String,
+        team: String
+    ): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
+        api.insertMultiCollection(multiId, roomNo, playerId, team)
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
+    fun getMultiScore(roomNo: String): LiveData<Score> {
+        val liveData = MutableLiveData<Score>()
+        api.getMultiScore(roomNo)
+            .enqueue(object : Callback<Score> {
+                override fun onFailure(call: Call<Score>, t: Throwable) {}
+                override fun onResponse(
+                    call: Call<Score>,
+                    response: Response<Score>
+                ) {
+                    if (!response.isSuccessful) return
+                    liveData.value = response.body()
+                }
+            })
+        return liveData
+    }
+
 
 }

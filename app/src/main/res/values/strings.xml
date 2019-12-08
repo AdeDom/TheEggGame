@@ -56,5 +56,7 @@
     <string name="exit">Exit</string>
     <string name="create_room">Create room</string>
     <string name="time">Time</string>
+    <string name="the_egg_game">The Egg Game</string>
+    <string name="time_out">Time out</string>
 
 </resources>

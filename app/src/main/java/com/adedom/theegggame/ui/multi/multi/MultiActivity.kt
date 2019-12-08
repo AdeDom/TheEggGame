@@ -18,20 +18,20 @@ import kotlinx.android.synthetic.main.activity_map.*
 
 class MultiActivity : MapActivity() { // 5/8/62
 
+    // TODO: 25/05/2562 toast name
+
     private lateinit var mViewModel: MultiActivityViewModel
 
     private var mRoomInfo = ArrayList<RoomInfo>()
     private var mMulti = ArrayList<Multi>()
     private var switchItem = GameSwitch.ON
 
-    private var mTime: Int = 900
+    private var mTime: Int = FIFTEEN_MINUTE
     private var scoreTeamA = 0
     private var scoreTeamB = 0
 
     val playerId = MainActivity.sPlayerItem.playerId
     val room = RoomInfoActivity.sRoom
-
-    private var mIsDialogFightGame = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +57,61 @@ class MultiActivity : MapActivity() { // 5/8/62
 
         rndItem()
 
-        val score = scoreTeamA + scoreTeamB
-        if (score >= 5) {
-            finish()
-        } else {
-            mTvTime.text = mTime.toString()
-            mTvRed.text = scoreTeamA.toString()
-            mTvBlue.text = scoreTeamB.toString()
+        checkRadius()
+
+        when {
+            scoreTeamA + scoreTeamB >= 5 -> {
+                finish()
+                baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")
+            }
+            mTime == 0 -> {
+                finish()
+                baseContext.toast(R.string.time_out)
+                baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")
+            }
+            else -> {
+                mTvTime.text = mTime.toString()
+                mTvRed.text = scoreTeamA.toString()
+                mTvBlue.text = scoreTeamB.toString()
+            }
+        }
+    }
+
+    private fun rndItem() {
+        if (mRoomInfo.size == 0) return
+        if (room.status == HEAD && switchItem == GameSwitch.ON &&
+            mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO
+        ) {
+            switchItem = GameSwitch.OFF
+            for (i in 0 until NUMBER_OF_ITEM) insertMulti()
+        } else if (room.status == TAIL && switchItem == GameSwitch.ON && mMulti.size != 0) {
+            switchItem = GameSwitch.OFF
+            mMulti.forEach { multi ->
+                val distance = FloatArray(1)
+                Location.distanceBetween(
+                    sLatLng.latitude, sLatLng.longitude,
+                    multi.latitude, multi.longitude, distance
+                )
+
+                if (distance[0] > THREE_KILOMETER) insertMulti()
+            }
+        }
+    }
+
+    private fun checkRadius() {
+        mMulti.forEachIndexed { index, multi ->
+            val distance = FloatArray(1)
+            Location.distanceBetween(
+                sLatLng.latitude, sLatLng.longitude,
+                multi.latitude, multi.longitude, distance
+            )
+
+            if (distance[0] < ONE_HUNDRED_METER) {
+                insertMultiCollection(multi.multi_id)
+                mMulti.removeAt(index)
+                Item(mMulti)
+                return
+            }
         }
     }
 
@@ -78,9 +126,9 @@ class MultiActivity : MapActivity() { // 5/8/62
 
         fetchMulti()
 
-//        checkRadius()
+        setScore()
+
 //        fightGame()
-//        setScore()
     }
 
     private fun setLatlng() {
@@ -109,27 +157,6 @@ class MultiActivity : MapActivity() { // 5/8/62
         })
     }
 
-    private fun rndItem() {
-        if (mRoomInfo.size == 0) return
-        if (room.status == HEAD && switchItem == GameSwitch.ON &&
-            mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO
-        ) {
-            switchItem = GameSwitch.OFF
-            for (i in 0 until NUMBER_OF_ITEM) insertMulti()
-        } else if (room.status == TAIL && switchItem == GameSwitch.ON && mMulti.size != 0) {
-            switchItem = GameSwitch.OFF
-            mMulti.forEach { multi ->
-                val distance = FloatArray(1)
-                Location.distanceBetween(
-                    sLatLng.latitude, sLatLng.longitude,
-                    multi.latitude, multi.longitude, distance
-                )
-
-                if (distance[0] > THREE_KILOMETER) insertMulti()
-            }
-        }
-    }
-
     private fun insertMulti() {
         val roomNo = room.room_no
         val lat = rndLatLng(sLatLng.latitude)
@@ -139,27 +166,22 @@ class MultiActivity : MapActivity() { // 5/8/62
         })
     }
 
-//    private fun checkRadius() {
-//        for (i in mMultiItem.indices) {
-//            val distance = FloatArray(1)
-//            Location.distanceBetween(
-//                mLatLng!!.latitude, mLatLng!!.longitude,
-//                mMultiItem[i].latitude, mMultiItem[i].longitude, distance
-//            )
-//
-//            if (distance[0] < Commons.ONE_HUNDRED_METER) {
-//                // TODO: 25/05/2562 toast name
-//
-//                MyMediaPlayer.getSound(baseContext, R.raw.keep)
-//
-//                val sql =
-//                    "UPDATE tbl_multi SET player_id = '${playerId}', " +
-//                            "status_id = '0' WHERE id = '${mMultiItem[i].id.trim()}'"
-//                MyConnect.executeQuery(sql)
-//            }
-//        }
-//    }
-//
+    private fun insertMultiCollection(multiId: String) {
+        val team = RoomInfoActivity.sTeam
+        mViewModel.insertMultiCollection(multiId, room.room_no!!, playerId!!, team)
+            .observe(this, Observer {
+                if (it.result == COMPLETED) baseContext.toast(R.string.the_egg_game)
+            })
+    }
+
+    private fun setScore() {
+        mViewModel.getMultiScore(room.room_no!!).observe(this, Observer {
+            scoreTeamA = it.teamA
+            scoreTeamB = it.teamB
+        })
+    }
+
+    //region fightGame
 //    private fun fightGame() {
 //        //todo check fighting game
 //
@@ -195,33 +217,5 @@ class MultiActivity : MapActivity() { // 5/8/62
 //            }
 //        }
 //    }
-//
-//    private fun setScore() {
-//        //todo clear player before
-//
-//        val sqlA = "SELECT COUNT(*) FROM tbl_room_info AS ri , tbl_multi AS mu\n" +
-//                "WHERE ri.player_id = mu.player_id AND ri.team = 'A'"
-//        MyConnect.executeQuery(sqlA, object : MyResultSet {
-//            override fun onResponse(rs: ResultSet) {
-//                scoreTeamA = if (rs.next()) {
-//                    rs.getString(1)
-//                } else {
-//                    "0"
-//                }
-//            }
-//        })
-//
-//        val sqlB = "SELECT COUNT(*) FROM tbl_room_info AS ri , tbl_multi AS mu\n" +
-//                "WHERE ri.player_id = mu.player_id AND ri.team = 'B'"
-//        MyConnect.executeQuery(sqlB, object : MyResultSet {
-//            override fun onResponse(rs: ResultSet) {
-//                scoreTeamB = if (rs.next()) {
-//                    rs.getString(1)
-//                } else {
-//                    "0"
-//                }
-//            }
-//        })
-//    }
-
+    //endregion
 }

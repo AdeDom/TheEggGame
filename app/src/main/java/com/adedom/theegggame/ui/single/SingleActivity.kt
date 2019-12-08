@@ -37,15 +37,7 @@ class SingleActivity : MapActivity() { // 7/12/19
         }
     }
 
-    override fun onLocationChanged(location: Location?) {
-        super.onLocationChanged(location)
-
-        setCamera(sGoogleMap, sLatLng)
-
-        Player(sLatLng)
-
-        rndItem(sLatLng)
-
+    override fun gameLoop() {
         if (switchItem == GameSwitch.ON) {
             switchItem = GameSwitch.OFF
             Item(single)
@@ -54,36 +46,48 @@ class SingleActivity : MapActivity() { // 7/12/19
         checkRadius()
     }
 
+    override fun onLocationChanged(location: Location?) {
+        super.onLocationChanged(location)
+        setCamera(sGoogleMap, sLatLng)
+
+        Player(sLatLng)
+
+        rndItem(sLatLng)
+    }
+
     private fun checkRadius() {
-        for (i in 0 until single.size) {
+        single.forEachIndexed { index, item ->
             val distance = FloatArray(1)
             Location.distanceBetween(
                 sLatLng.latitude,
                 sLatLng.longitude,
-                single[i].latitude,
-                single[i].longitude,
+                item.latitude,
+                item.longitude,
                 distance
             )
 
             if (distance[0] < ONE_HUNDRED_METER) {
-                val (myItem, values) = getItemValues(i, MainActivity.sTimeStamp)
-                val playerId = this.getPrefLogin(PLAYER_ID)
-                mViewModel.insertItem(playerId, myItem, values).observe(this, Observer {
-                    if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
-                })
-
-                markerItems[i].remove()
-                single.removeAt(i)
+                keepItem(index)
+                markerItems[index].remove()
+                single.removeAt(index)
                 switchItem = GameSwitch.ON
                 return
             }
 
             if (distance[0] > TWO_KILOMETER) {
                 switchItem = GameSwitch.ON
-                single.removeAt(i)
+                single.removeAt(index)
                 return
             }
         }
+    }
+
+    private fun keepItem(index: Int) {
+        val (myItem, values) = getItemValues(index, MainActivity.sTimeStamp)
+        val playerId = this.getPrefLogin(PLAYER_ID)
+        mViewModel.insertItem(playerId, myItem, values).observe(this, Observer {
+            if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
+        })
     }
 
 }
