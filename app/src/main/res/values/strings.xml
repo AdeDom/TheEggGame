@@ -58,5 +58,6 @@
     <string name="time">Time</string>
     <string name="the_egg_game">The Egg Game</string>
     <string name="time_out">Time out</string>
+    <string name="zero">0</string>
 
 </resources>

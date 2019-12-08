@@ -51,11 +51,11 @@ class LoginActivity : GameActivity() { // 2/12/19
         val password = mEdtPassword.text.toString().trim()
 
         mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
-            if (it.playerId == null) {
+            if (it.result == null) {
                 mEdtPassword.text.clear()
                 baseContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)
             } else {
-                this.login(MainActivity::class.java, it.playerId, username)
+                this.login(MainActivity::class.java, it.result, username)
             }
         })
     }

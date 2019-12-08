@@ -112,10 +112,10 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
         val name = mEdtName.text.toString().trim()
 
         mViewModel.insertPlayer(username, password, name, mImageUri).observe(this, Observer {
-            if (it.playerId == FAILED) {
+            if (it.result == FAILED) {
                 GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
             } else {
-                activity!!.login(MainActivity::class.java, it.playerId!!, username)
+                activity!!.login(MainActivity::class.java, it.result!!, username)
             }
         })
     }

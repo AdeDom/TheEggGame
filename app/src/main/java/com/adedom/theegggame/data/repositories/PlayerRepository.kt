@@ -11,12 +11,12 @@ import retrofit2.Response
 
 class PlayerRepository(private val api: PlayerApi) {
 
-    fun getPlayerIdLogin(username: String, password: String): LiveData<Player> {
-        val liveData = MutableLiveData<Player>()
+    fun getPlayerIdLogin(username: String, password: String): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
         api.getPlayerIdLogin(username, password)
-            .enqueue(object : Callback<Player> {
-                override fun onFailure(call: Call<Player>, t: Throwable) {}
-                override fun onResponse(call: Call<Player>, response: Response<Player>) {
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+                override fun onResponse(call: Call<JsonResponse>, response: Response<JsonResponse>) {
                     if (!response.isSuccessful) return
                     liveData.value = response.body()
                 }
@@ -42,12 +42,15 @@ class PlayerRepository(private val api: PlayerApi) {
         password: String,
         name: String,
         image: String
-    ): LiveData<Player> {
-        val liveData = MutableLiveData<Player>()
+    ): LiveData<JsonResponse> {
+        val liveData = MutableLiveData<JsonResponse>()
         api.insertPlayer(username, password, name, image)
-            .enqueue(object : Callback<Player> {
-                override fun onFailure(call: Call<Player>, t: Throwable) {}
-                override fun onResponse(call: Call<Player>, response: Response<Player>) {
+            .enqueue(object : Callback<JsonResponse> {
+                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
+                override fun onResponse(
+                    call: Call<JsonResponse>,
+                    response: Response<JsonResponse>
+                ) {
                     if (!response.isSuccessful) return
                     liveData.value = response.body()
                 }

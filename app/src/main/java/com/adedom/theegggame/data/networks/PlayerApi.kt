@@ -18,7 +18,7 @@ interface PlayerApi {
     fun getPlayerIdLogin(
         @Field(VALUES1) username: String,
         @Field(VALUES2) password: String
-    ): Call<Player>
+    ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("get-player.php")
@@ -33,7 +33,7 @@ interface PlayerApi {
         @Field(VALUES2) password: String,
         @Field(VALUES3) name: String,
         @Field(VALUES4) image: String
-    ): Call<Player>
+    ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("get-player-rank.php")
