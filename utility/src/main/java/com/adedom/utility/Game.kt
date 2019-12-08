@@ -38,8 +38,7 @@ val markerPlayers by lazy { arrayListOf<Marker>() }
 val markerItems by lazy { arrayListOf<Marker>() }
 
 var switchCamera = GameSwitch.ON
-var switchSingle = GameSwitch.ON
-var switchMulti = GameSwitch.ON
+var switchItem = GameSwitch.ON
 
 fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
     if (switchCamera == GameSwitch.ON) {

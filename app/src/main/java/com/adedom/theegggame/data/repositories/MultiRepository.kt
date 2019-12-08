@@ -181,11 +181,10 @@ class MultiRepository(private val api: MultiApi) {
     fun insertMulti(
         roomNo: String,
         latitude: Double,
-        longitude: Double,
-        playerId: String
+        longitude: Double
     ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertMulti(roomNo, latitude, longitude, playerId)
+        api.insertMulti(roomNo, latitude, longitude)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
                 override fun onResponse(

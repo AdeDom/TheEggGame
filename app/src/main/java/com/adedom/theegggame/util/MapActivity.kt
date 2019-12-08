@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.adedom.theegggame.R
 import com.adedom.utility.GameSwitch
 import com.adedom.utility.switchCamera
-import com.adedom.utility.switchSingle
+import com.adedom.utility.switchItem
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
@@ -104,7 +104,7 @@ abstract class MapActivity : AppCompatActivity(),
         super.onResume()
         mRunnableFetch.run()
 
-        switchSingle = GameSwitch.ON
+        switchItem = GameSwitch.ON
         switchCamera = GameSwitch.ON
 
         if (mGoogleApiClient.isConnected) startLocationUpdate()
@@ -114,7 +114,7 @@ abstract class MapActivity : AppCompatActivity(),
         super.onPause()
         mHandlerFetch.removeCallbacks(mRunnableFetch)
 
-        switchSingle = GameSwitch.OFF
+        switchItem = GameSwitch.OFF
         switchCamera = GameSwitch.OFF
 
         if (mGoogleApiClient.isConnected) stopLocationUpdate()

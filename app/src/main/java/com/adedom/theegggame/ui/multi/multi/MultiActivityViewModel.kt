@@ -25,10 +25,9 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
     fun insertMulti(
         roomNo: String,
         latitude: Double,
-        longitude: Double,
-        playerId: String
+        longitude: Double
     ): LiveData<JsonResponse> {
-        return repository.insertMulti(roomNo, latitude, longitude, playerId)
+        return repository.insertMulti(roomNo, latitude, longitude)
     }
 
 }

@@ -89,8 +89,7 @@ interface MultiApi {
     fun insertMulti(
         @Field(VALUES1) roomNo: String,
         @Field(VALUES2) latitude: Double,
-        @Field(VALUES3) longitude: Double,
-        @Field(VALUES4) playerId: String
+        @Field(VALUES3) longitude: Double
     ): Call<JsonResponse>
 
     companion object {

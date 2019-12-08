@@ -46,8 +46,8 @@ class SingleActivity : MapActivity() { // 7/12/19
 
         rndItem(sLatLng)
 
-        if (switchSingle == GameSwitch.ON) {
-            switchSingle = GameSwitch.OFF
+        if (switchItem == GameSwitch.ON) {
+            switchItem = GameSwitch.OFF
             Item(single)
         }
 
@@ -74,12 +74,12 @@ class SingleActivity : MapActivity() { // 7/12/19
 
                 markerItems[i].remove()
                 single.removeAt(i)
-                switchSingle = GameSwitch.ON
+                switchItem = GameSwitch.ON
                 return
             }
 
             if (distance[0] > TWO_KILOMETER) {
-                switchSingle = GameSwitch.ON
+                switchItem = GameSwitch.ON
                 single.removeAt(i)
                 return
             }

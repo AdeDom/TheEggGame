@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
+import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
@@ -18,7 +19,10 @@ import kotlinx.android.synthetic.main.activity_map.*
 class MultiActivity : MapActivity() { // 5/8/62
 
     private lateinit var mViewModel: MultiActivityViewModel
-    private lateinit var mRoomInfo: ArrayList<RoomInfo>
+
+    private var mRoomInfo = ArrayList<RoomInfo>()
+    private var mMulti = ArrayList<Multi>()
+    private var switchItem = GameSwitch.ON
 
     private var mTime: Int = 900
     private var scoreTeamA = 0
@@ -46,11 +50,12 @@ class MultiActivity : MapActivity() { // 5/8/62
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
         mTvBlue.visibility = View.VISIBLE
-
     }
 
     override fun gameLoop() {
         mTime -= 1
+
+        rndItem()
 
         val score = scoreTeamA + scoreTeamB
         if (score >= 5) {
@@ -88,51 +93,50 @@ class MultiActivity : MapActivity() { // 5/8/62
 
     private fun fetchRoomInfo() {
         mViewModel.getRoomInfo(room.room_no!!).observe(this, Observer {
-            Player(it)
-
-            mRoomInfo = it as ArrayList<RoomInfo>
-            rndItem()
+            if (it != mRoomInfo) {
+                mRoomInfo = it as ArrayList<RoomInfo>
+                Player(mRoomInfo)
+            }
         })
     }
 
     private fun fetchMulti() {
         mViewModel.getMulti(room.room_no!!).observe(this, Observer {
-            Item(it)
+            if (it != mMulti) {
+                mMulti = it as ArrayList<Multi>
+                Item(mMulti)
+            }
         })
     }
 
     private fun rndItem() {
-        if (room.status == HEAD && switchMulti == GameSwitch.ON) {
-            switchMulti = GameSwitch.OFF
-            for (i in 0 until NUMBER_OF_ITEM) {
-                val roomNo = room.room_no
-                val lat = rndLatLng(sLatLng.latitude)
-                val lng = rndLatLng(sLatLng.longitude)
-                mViewModel.insertMulti(roomNo!!, lat, lng, playerId!!).observe(this, Observer {
-                    if (it.result == FAILED) baseContext.failed()
-                })
-            }
-        } else if (mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO &&
-            room.status == TAIL && switchMulti == GameSwitch.ON
+        if (mRoomInfo.size == 0) return
+        if (room.status == HEAD && switchItem == GameSwitch.ON &&
+            mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO
         ) {
-            switchMulti = GameSwitch.OFF
-            for (i in mRoomInfo.indices) {
+            switchItem = GameSwitch.OFF
+            for (i in 0 until NUMBER_OF_ITEM) insertMulti()
+        } else if (room.status == TAIL && switchItem == GameSwitch.ON && mMulti.size != 0) {
+            switchItem = GameSwitch.OFF
+            mMulti.forEach { multi ->
                 val distance = FloatArray(1)
                 Location.distanceBetween(
                     sLatLng.latitude, sLatLng.longitude,
-                    mRoomInfo[i].latitude!!, mRoomInfo[i].longitude!!, distance
+                    multi.latitude, multi.longitude, distance
                 )
 
-                if (distance[0] > THREE_KILOMETER) {
-                    val roomNo = room.room_no
-                    val lat = rndLatLng(sLatLng.latitude)
-                    val lng = rndLatLng(sLatLng.longitude)
-                    mViewModel.insertMulti(roomNo!!, lat, lng, playerId!!).observe(this, Observer {
-                        if (it.result == FAILED) baseContext.failed()
-                    })
-                }
+                if (distance[0] > THREE_KILOMETER) insertMulti()
             }
         }
+    }
+
+    private fun insertMulti() {
+        val roomNo = room.room_no
+        val lat = rndLatLng(sLatLng.latitude)
+        val lng = rndLatLng(sLatLng.longitude)
+        mViewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
+            if (it.result == FAILED) baseContext.failed()
+        })
     }
 
 //    private fun checkRadius() {

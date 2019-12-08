@@ -12,16 +12,12 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
-class Player(items: List<RoomInfo>) { // 7/12/19
+class Player(items: ArrayList<RoomInfo>) { // 7/12/19
 
     init {
         removeListMarker(markerPlayers)
         removeCircle(myCircle)
 
-        setPeopleLocation(items as ArrayList<RoomInfo>)
-    }
-
-    private fun setPeopleLocation(items: ArrayList<RoomInfo>) {
         for ((_, latitude, longitude, _, _, playerId, name, image, level, _) in items) {
             val latLng = LatLng(latitude!!, longitude!!)
 
