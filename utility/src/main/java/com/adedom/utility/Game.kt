@@ -173,3 +173,5 @@ fun ready(): String {
     ready = if (ready == "unready") "ready" else "unready"
     return ready
 }
+
+fun getLevel(level: Int?): String = "Level : $level"

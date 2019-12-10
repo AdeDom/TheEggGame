@@ -10,5 +10,4 @@ class CreateRoomDialogViewModel(private val repository: MultiRepository) : ViewM
     fun insertRoom(name: String, people: String, playerId: String): LiveData<JsonResponse> {
         return repository.insertRoom(name, people, playerId)
     }
-
 }

@@ -20,7 +20,7 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
-class CreateRoomDialog : DialogFragment() { //5/12/19
+class CreateRoomDialog : DialogFragment() {
 
     private lateinit var mViewModel: CreateRoomDialogViewModel
     private lateinit var mEdtName: EditText
@@ -57,7 +57,7 @@ class CreateRoomDialog : DialogFragment() { //5/12/19
     private fun createRoom() {
         if (mEdtName.isEmpty(getString(R.string.error_room_name))) return
 
-        val name = mEdtName.text.toString().trim()
+        val name = mEdtName.getContent()
         val people = mNumberPicker.value.toString().trim()
         val playerId = GameActivity.sContext.getPrefLogin(PLAYER_ID)
         mViewModel.insertRoom(name, people, playerId!!).observe(this, Observer {

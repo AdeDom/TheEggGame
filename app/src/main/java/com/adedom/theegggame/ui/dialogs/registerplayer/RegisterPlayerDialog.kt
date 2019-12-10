@@ -22,9 +22,9 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterPlayerDialog : DialogFragment() { // 2/12/19
+class RegisterPlayerDialog : DialogFragment() {
 
-    val TAG = "MyTag"
+    val TAG = "RegisterPlayerDialog"
     private lateinit var mViewModel: RegisterPlayerDialogViewModel
     private lateinit var mEdtUsername: EditText
     private lateinit var mEdtPassword: EditText
@@ -35,13 +35,10 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
     private var mImageUri = "empty"
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
 
-        val factory =
-            RegisterPlayerDialogFactory(
-                PlayerRepository(PlayerApi())
-            )
-        mViewModel = ViewModelProviders.of(this, factory).get(RegisterPlayerDialogViewModel::class.java)
+        val factory = RegisterPlayerDialogFactory(PlayerRepository(PlayerApi()))
+        mViewModel =
+            ViewModelProviders.of(this, factory).get(RegisterPlayerDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
@@ -107,9 +104,9 @@ class RegisterPlayerDialog : DialogFragment() { // 2/12/19
         //todo upload image
         Log.d(TAG, ">>$mImageUri")
 
-        val username = mEdtUsername.text.toString().trim()
-        val password = mEdtPassword.text.toString().trim()
-        val name = mEdtName.text.toString().trim()
+        val username = mEdtUsername.getContent()
+        val password = mEdtPassword.getContent()
+        val name = mEdtName.getContent()
 
         mViewModel.insertPlayer(username, password, name, mImageUri).observe(this, Observer {
             if (it.result == FAILED) {

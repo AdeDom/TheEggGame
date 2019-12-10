@@ -14,11 +14,10 @@ import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.MyGrid
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_room.*
 
-class RoomActivity : GameActivity() { // 5/12/19
+class RoomActivity : GameActivity() {
 
     private lateinit var mViewModel: RoomActivityViewModel
     private lateinit var mAdapter: RoomAdapter
@@ -33,14 +32,14 @@ class RoomActivity : GameActivity() { // 5/12/19
         init()
     }
 
-    override fun gameLoop() = fetchRoom()
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun gameLoop() = fetchRoom()
 
     private fun init() {
         toolbar.title = getString(R.string.multi_player)
@@ -51,7 +50,7 @@ class RoomActivity : GameActivity() { // 5/12/19
 
         mRecyclerView.also {
             it.layoutManager = GridLayoutManager(baseContext, 2)
-            it.addItemDecoration(MyGrid(2, MyGrid.dpToPx(10, resources), true))
+            it.addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
             it.adapter = mAdapter
         }
 

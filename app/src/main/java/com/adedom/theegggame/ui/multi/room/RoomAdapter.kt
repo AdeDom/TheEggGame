@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_rv_room.view.*
 class RoomAdapter : RecyclerView.Adapter<RoomAdapter.RoomHolder>() {
 
     private var rooms = arrayListOf<Room>()
-    lateinit var onItemClick: (Room) -> Unit
+    var onItemClick: ((Room) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_room, parent, false)
@@ -36,7 +36,7 @@ class RoomAdapter : RecyclerView.Adapter<RoomAdapter.RoomHolder>() {
     inner class RoomHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                onItemClick(rooms[adapterPosition])
+                onItemClick?.invoke(rooms[adapterPosition])
             }
         }
     }

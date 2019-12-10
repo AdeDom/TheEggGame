@@ -13,7 +13,7 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : GameActivity() { // 2/12/19
+class LoginActivity : GameActivity() {
 
     private lateinit var mViewModel: LoginActivityViewModel
 
@@ -47,8 +47,8 @@ class LoginActivity : GameActivity() { // 2/12/19
             mEdtPassword.isEmpty(getString(R.string.error_password)) -> return
         }
 
-        val username = mEdtUsername.text.toString().trim()
-        val password = mEdtPassword.text.toString().trim()
+        val username = mEdtUsername.getContent()
+        val password = mEdtPassword.getContent()
 
         mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.result == null) {

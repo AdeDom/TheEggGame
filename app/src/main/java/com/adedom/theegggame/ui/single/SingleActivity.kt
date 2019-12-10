@@ -11,7 +11,7 @@ import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : MapActivity() { // 7/12/19
+class SingleActivity : MapActivity() {
 
     private lateinit var mViewModel: SingleActivityViewModel
 

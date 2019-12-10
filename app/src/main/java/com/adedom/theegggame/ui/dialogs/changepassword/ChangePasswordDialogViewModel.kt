@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class ChangePasswordDialogViewModel(private val repository: PlayerRepository) :
-    ViewModel() { // 2/12/19
+class ChangePasswordDialogViewModel(private val repository: PlayerRepository) : ViewModel() {
 
     fun updatePassword(
         playerId: String,
@@ -15,5 +14,4 @@ class ChangePasswordDialogViewModel(private val repository: PlayerRepository) :
     ): LiveData<JsonResponse> {
         return repository.updatePassword(playerId, oldPassword, newPassword)
     }
-
 }

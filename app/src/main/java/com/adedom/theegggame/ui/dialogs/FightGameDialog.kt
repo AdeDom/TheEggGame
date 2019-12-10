@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
 
-class FightGameDialog : DialogFragment() { // 5/8/62
+class FightGameDialog : DialogFragment() {
 
     private lateinit var mTvScore: TextView
     private lateinit var mBtnOne: Button

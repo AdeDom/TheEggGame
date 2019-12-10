@@ -16,9 +16,7 @@ import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class MultiActivity : MapActivity() { // 5/8/62
-
-    // TODO: 25/05/2562 toast name
+class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
 
     private lateinit var mViewModel: MultiActivityViewModel
 
@@ -60,6 +58,7 @@ class MultiActivity : MapActivity() { // 5/8/62
         checkRadius()
 
         when {
+            //todo dialog finish game && bonus team win
             scoreTeamA + scoreTeamB >= 5 -> {
                 finish()
                 baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")

@@ -5,12 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class LoginActivityViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
-
-    val TAG = "MyTag"
+class LoginActivityViewModel(private val repository: PlayerRepository) : ViewModel() {
 
     fun getPlayerIdLogin(username: String, password: String): LiveData<JsonResponse> {
         return repository.getPlayerIdLogin(username, password)
     }
-
 }

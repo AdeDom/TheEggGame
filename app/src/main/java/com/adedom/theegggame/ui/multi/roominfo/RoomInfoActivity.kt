@@ -14,12 +14,11 @@ import com.adedom.theegggame.data.networks.MultiApi
 import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.MyGrid
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_rv_room.*
 
-class RoomInfoActivity : GameActivity() { // 6/12/19
+class RoomInfoActivity : GameActivity() {
 
     private lateinit var mViewModel: RoomInfoActivityViewModel
     private lateinit var mAdapter: RoomInfoAdapter
@@ -42,11 +41,6 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
         init()
     }
 
-    override fun gameLoop() {
-        fetchRoomInfo()
-        startGame()
-    }
-
     private fun init() {
         toolbar.title = getString(R.string.multi_player)
         setSupportActionBar(toolbar)
@@ -56,7 +50,9 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
 
         mRecyclerView.also {
             it.layoutManager = GridLayoutManager(baseContext, 2)
-            it.addItemDecoration(MyGrid(2, MyGrid.dpToPx(10, resources), true)) // init
+            it.addItemDecoration(
+                ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true)
+            ) // init
             it.adapter = mAdapter
         }
 
@@ -79,6 +75,11 @@ class RoomInfoActivity : GameActivity() { // 6/12/19
             sTeam = TEAM_B
             setTeam()
         }
+    }
+
+    override fun gameLoop() {
+        fetchRoomInfo()
+        startGame()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

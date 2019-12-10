@@ -8,7 +8,7 @@ import com.adedom.theegggame.data.networks.BaseApi
 import com.adedom.theegggame.data.repositories.BaseRepository
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class MainActivityViewModel(private val repository: PlayerRepository) : ViewModel() { // 2/12/19
+class MainActivityViewModel(private val repository: PlayerRepository) : ViewModel() {
 
     fun getPlayers(playerId: String): LiveData<Player> {
         return repository.getPlayers(playerId)

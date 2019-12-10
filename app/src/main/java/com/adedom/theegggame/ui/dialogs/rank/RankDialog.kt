@@ -17,9 +17,8 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 
-class RankDialog : DialogFragment() { // 2/12/19
+class RankDialog : DialogFragment() {
 
-    val TAG = "RankDialog"
     private lateinit var mViewModel: RankDialogViewModel
     private lateinit var mAdapter: RankAdapter
     private lateinit var mRecyclerView: RecyclerView
@@ -30,9 +29,7 @@ class RankDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val factory = RankDialogFactory(
-            PlayerRepository(PlayerApi())
-        )
+        val factory = RankDialogFactory(PlayerRepository(PlayerApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(RankDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_rank, null)

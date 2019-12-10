@@ -12,7 +12,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
-class Player(items: ArrayList<RoomInfo>) { // 7/12/19
+class Player(items: ArrayList<RoomInfo>) {
 
     init {
         removeListMarker(markerPlayers)
@@ -29,7 +29,7 @@ class Player(items: ArrayList<RoomInfo>) { // 7/12/19
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     name!!,
-                    level!!.toString()
+                    getLevel(level)
                 )
             } else {
                 Glide.with(MapActivity.sContext)
@@ -47,7 +47,7 @@ class Player(items: ArrayList<RoomInfo>) { // 7/12/19
                                 latLng,
                                 BitmapDescriptorFactory.fromBitmap(resource),
                                 name!!,
-                                level!!.toString()
+                                getLevel(level)
                             )
                         }
 
@@ -58,7 +58,7 @@ class Player(items: ArrayList<RoomInfo>) { // 7/12/19
                                 latLng,
                                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                                 name!!,
-                                level!!.toString()
+                                getLevel(level)
                             )
                         }
                     })

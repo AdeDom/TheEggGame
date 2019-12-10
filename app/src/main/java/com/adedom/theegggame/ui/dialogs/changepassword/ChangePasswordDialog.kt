@@ -16,9 +16,8 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 
-class ChangePasswordDialog : DialogFragment() { // 2/12/19
+class ChangePasswordDialog : DialogFragment() {
 
-    val TAG = "UpdatePlayerDialog"
     private lateinit var mViewModel: ChangePasswordDialogViewModel
     private lateinit var mPlayer: Player
     private lateinit var mEdtUsername: EditText
@@ -29,11 +28,9 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val factory =
-            ChangePasswordDialogFactory(
-                PlayerRepository(PlayerApi())
-            )
-        mViewModel = ViewModelProviders.of(this,factory).get(ChangePasswordDialogViewModel::class.java)
+        val factory = ChangePasswordDialogFactory(PlayerRepository(PlayerApi()))
+        mViewModel =
+            ViewModelProviders.of(this, factory).get(ChangePasswordDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_change_password, null)
 
@@ -74,8 +71,8 @@ class ChangePasswordDialog : DialogFragment() { // 2/12/19
             ) -> return
         }
 
-        val oldPassword = mEdtOldPassword.text.toString().trim()
-        val newPassword = mEdtNewPassword.text.toString().trim()
+        val oldPassword = mEdtOldPassword.getContent()
+        val newPassword = mEdtNewPassword.getContent()
 
         mViewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {

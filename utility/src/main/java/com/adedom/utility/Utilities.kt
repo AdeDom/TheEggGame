@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val COMPLETED = "completed"
 const val FAILED = "failed"
@@ -22,8 +24,11 @@ const val PLAYER_ID = "player_id"
 const val USERNAME = "username"
 const val EMPTY = "empty"
 
+const val DATE = "date"
+const val TIME = "time"
+
 var timeStamp: Long = 0
-var randomKey :String = ""
+var randomKey: String = ""
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
@@ -101,3 +106,16 @@ fun checkPassword(editText1: EditText, editText2: EditText, error: String): Bool
 fun Context.imageMarker(image: Int): Bitmap {
     return BitmapFactory.decodeResource(this.resources, image)
 }
+
+fun getDateTime(dateTime: String): String {
+    return if (dateTime == DATE) {
+        SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+    } else {
+        SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+            .format(Calendar.getInstance().time)
+    }
+}
+
+fun EditText.getContent(): String = this.text.toString().trim()
+

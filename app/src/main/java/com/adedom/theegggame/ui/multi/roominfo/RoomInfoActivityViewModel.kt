@@ -12,9 +12,7 @@ class RoomInfoActivityViewModel(private val repository: MultiRepository) : ViewM
         return repository.deletePlayer(roomNo, playerId)
     }
 
-    fun getRoomInfo(roomNo: String): LiveData<List<RoomInfo>> {
-        return repository.getRoomInfo(roomNo)
-    }
+    fun getRoomInfo(roomNo: String): LiveData<List<RoomInfo>> = repository.getRoomInfo(roomNo)
 
     fun setTeam(roomNo: String, playerId: String, team: String): LiveData<JsonResponse> {
         return repository.setTeam(roomNo, playerId, team)
@@ -24,8 +22,6 @@ class RoomInfoActivityViewModel(private val repository: MultiRepository) : ViewM
         return repository.setReady(roomNo, playerId, status)
     }
 
-    fun setRoomOff(roomNo: String): LiveData<JsonResponse> {
-        return repository.setRoomOff(roomNo)
-    }
+    fun setRoomOff(roomNo: String): LiveData<JsonResponse> = repository.setRoomOff(roomNo)
 
 }

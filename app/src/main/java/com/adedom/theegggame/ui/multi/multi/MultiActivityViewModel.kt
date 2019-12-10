@@ -40,8 +40,6 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         return repository.insertMultiCollection(multiId, roomNo, playerId, team)
     }
 
-    fun getMultiScore(roomNo: String): LiveData<Score> {
-        return repository.getMultiScore(roomNo)
-    }
+    fun getMultiScore(roomNo: String): LiveData<Score> = repository.getMultiScore(roomNo)
 
 }

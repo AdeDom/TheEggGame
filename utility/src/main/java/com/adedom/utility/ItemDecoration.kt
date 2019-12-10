@@ -1,4 +1,4 @@
-package com.adedom.theegggame.util
+package com.adedom.utility
 
 import android.content.res.Resources
 import android.graphics.Rect
@@ -7,7 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.roundToInt
 
-class MyGrid(
+class ItemDecoration(
     private val spanCount: Int,
     private val spacing: Int,
     private val includeEdge: Boolean

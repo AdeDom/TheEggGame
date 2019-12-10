@@ -9,7 +9,7 @@ import com.adedom.utility.setListMarker
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
-class Item(multiple: ArrayList<Multi>) { // 7/12/19
+class Item(multiple: ArrayList<Multi>) {
 
     init {
         removeListMarker(markerItems)

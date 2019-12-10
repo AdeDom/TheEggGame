@@ -14,7 +14,7 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.PLAYER
 import com.adedom.utility.login
 
-class SettingDialog : DialogFragment() { // 2/12/19
+class SettingDialog : DialogFragment() {
 
     private lateinit var mBtnChange: Button
     private lateinit var mBtnLogout: Button
@@ -48,8 +48,7 @@ class SettingDialog : DialogFragment() { // 2/12/19
             val bundle = Bundle()
             bundle.putParcelable(PLAYER, MainActivity.sPlayerItem)
 
-            val dialog =
-                ChangePasswordDialog()
+            val dialog = ChangePasswordDialog()
             dialog.arguments = bundle
             dialog.show(activity!!.supportFragmentManager, null)
         }
@@ -70,7 +69,6 @@ class SettingDialog : DialogFragment() { // 2/12/19
     private fun exitDialog() {
         val builder = AlertDialog.Builder(activity!!)
         builder.setTitle(R.string.exit)
-            .setMessage("Confirm exit?")
             .setIcon(R.drawable.ic_exit)
             .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
             .setNegativeButton(R.string.yes) { dialog, which ->

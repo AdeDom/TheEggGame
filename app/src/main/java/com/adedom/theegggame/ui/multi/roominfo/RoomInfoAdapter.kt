@@ -49,8 +49,7 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
 
         holder.itemView.mTvName.text = name
 
-        val l = "Level : $level"
-        holder.itemView.mTvLevel.text = l
+        holder.itemView.mTvLevel.text = getLevel(level)
 
         if (status == READY) {
             holder.itemView.mImgReady.background = ContextCompat.getDrawable(

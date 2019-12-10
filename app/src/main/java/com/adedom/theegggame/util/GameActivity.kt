@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import androidx.lifecycle.Observer
 import com.adedom.theegggame.data.networks.RetrofitClient
 import com.adedom.utility.*
 import com.google.gson.annotations.SerializedName
@@ -16,8 +15,6 @@ import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
-import java.text.SimpleDateFormat
-import java.util.*
 
 abstract class GameActivity : AppCompatActivity() {
 
@@ -64,13 +61,10 @@ abstract class GameActivity : AppCompatActivity() {
             if (it.result == FAILED) baseContext.failed()
         })
 
-        val dateOut = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
-            .format(Calendar.getInstance().time)
-        val timeOut = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
-            .format(Calendar.getInstance().time)
-        mViewModel.updateLogs(randomKey, dateOut, timeOut).observe(this, Observer {
-            if (it.result == FAILED) baseContext.failed()
-        })
+        mViewModel.updateLogs(randomKey, getDateTime(DATE), getDateTime(TIME))
+            .observe(this, Observer {
+                if (it.result == FAILED) baseContext.failed()
+            })
     }
 
     open fun gameLoop() {}

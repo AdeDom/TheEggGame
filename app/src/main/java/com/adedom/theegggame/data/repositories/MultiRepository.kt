@@ -232,5 +232,4 @@ class MultiRepository(private val api: MultiApi) {
         return liveData
     }
 
-
 }
