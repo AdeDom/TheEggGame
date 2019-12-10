@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -118,4 +120,14 @@ fun getDateTime(dateTime: String): String {
 }
 
 fun EditText.getContent(): String = this.text.toString().trim()
+
+fun EditText.textChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(editable: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
+}
 

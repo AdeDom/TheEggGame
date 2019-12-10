@@ -2,8 +2,6 @@ package com.adedom.theegggame.ui.dialogs.rank
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
+import com.adedom.utility.textChanged
 
 class RankDialog : DialogFragment() {
 
@@ -59,15 +58,7 @@ class RankDialog : DialogFragment() {
             it.adapter = mAdapter
         }
 
-        mEdtSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                fetchPlayer(text.toString())
-            }
-        })
+        mEdtSearch.textChanged { fetchPlayer(it) }
 
         mBtnRank10.setOnClickListener { fetchPlayer(limit = "10") }
         mBtnRank50.setOnClickListener { fetchPlayer(limit = "50") }

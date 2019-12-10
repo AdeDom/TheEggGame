@@ -41,7 +41,7 @@
                     android:background="@drawable/shape_edit"
                     android:drawableEnd="@drawable/ic_search"
                     android:drawableTint="#aaa"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:hint="@string/search"
                     android:maxLines="1"
                     android:textAppearance="?android:attr/textAppearanceMedium"

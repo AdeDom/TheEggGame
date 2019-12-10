@@ -41,4 +41,7 @@ dependencies {
 
     //recycler
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    //swipe menu list view
+    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
 }

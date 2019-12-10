@@ -1,1 +1,1 @@
-include ':app', ':utility'
+include ':app', ':utility', ':admin'

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp">
+
+    <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="2">
+
+        <ImageView
+                android:id="@+id/mIvImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_rowSpan="2"
+                android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+                android:id="@+id/mTvName"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/name" />
+
+        <TextView
+                android:id="@+id/mTvPlayerId"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/player_id" />
+
+        <TextView
+                android:id="@+id/mTvLevel"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:text="@string/level" />
+
+        <ImageView
+                android:id="@+id/mIvState"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@mipmap/ic_launcher_round" />
+    </GridLayout>
+
+</RelativeLayout>
