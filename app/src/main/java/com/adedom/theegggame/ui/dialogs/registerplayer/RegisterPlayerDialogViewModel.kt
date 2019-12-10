@@ -11,8 +11,10 @@ class RegisterPlayerDialogViewModel(private val repository: PlayerRepository) : 
         username: String,
         password: String,
         name: String,
-        image: String
+        image: String,
+        date: String,
+        time: String
     ): LiveData<JsonResponse> {
-        return repository.insertPlayer(username, password, name, image)
+        return repository.insertPlayer(username, password, name, image, date, time)
     }
 }

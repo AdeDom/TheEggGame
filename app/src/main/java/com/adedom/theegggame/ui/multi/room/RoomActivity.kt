@@ -60,7 +60,9 @@ class RoomActivity : GameActivity() {
 
         mAdapter.onItemClick = { room ->
             val playerId = this.getPrefLogin(PLAYER_ID)
-            mViewModel.insertRoomInfo(room.room_no!!, playerId).observe(this, Observer {
+            val date = getDateTime(DATE)
+            val time = getDateTime(TIME)
+            mViewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
                 if (it.result == COMPLETED) {
                     startActivity(
                         Intent(baseContext, RoomInfoActivity::class.java)

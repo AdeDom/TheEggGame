@@ -1,10 +1,7 @@
 package com.adedom.theegggame.data.networks
 
 import com.adedom.theegggame.data.models.*
-import com.adedom.utility.VALUES1
-import com.adedom.utility.VALUES2
-import com.adedom.utility.VALUES3
-import com.adedom.utility.VALUES4
+import com.adedom.utility.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -20,7 +17,9 @@ interface MultiApi {
     @POST("insert-room-info.php")
     fun insertRoomInfo(
         @Field(VALUES1) roomNo: String,
-        @Field(VALUES2) playerId: String
+        @Field(VALUES2) playerId: String,
+        @Field(VALUES3) date: String,
+        @Field(VALUES4) time: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
@@ -28,7 +27,9 @@ interface MultiApi {
     fun insertRoom(
         @Field(VALUES1) name: String,
         @Field(VALUES2) people: String,
-        @Field(VALUES3) playerId: String
+        @Field(VALUES3) playerId: String,
+        @Field(VALUES4) date: String,
+        @Field(VALUES5) time: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
@@ -95,7 +96,11 @@ interface MultiApi {
         @Field(VALUES1) multiId: String,
         @Field(VALUES2) roomNo: String,
         @Field(VALUES3) playerId: String,
-        @Field(VALUES4) team: String
+        @Field(VALUES4) team: String,
+        @Field(VALUES5) latitude: Double,
+        @Field(VALUES6) longitude: Double,
+        @Field(VALUES7) date: String,
+        @Field(VALUES8) time: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded

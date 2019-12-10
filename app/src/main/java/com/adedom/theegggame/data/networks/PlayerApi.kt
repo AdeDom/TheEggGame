@@ -2,10 +2,7 @@ package com.adedom.theegggame.data.networks
 
 import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.models.Player
-import com.adedom.utility.VALUES1
-import com.adedom.utility.VALUES2
-import com.adedom.utility.VALUES3
-import com.adedom.utility.VALUES4
+import com.adedom.utility.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -32,7 +29,9 @@ interface PlayerApi {
         @Field(VALUES1) username: String,
         @Field(VALUES2) password: String,
         @Field(VALUES3) name: String,
-        @Field(VALUES4) image: String
+        @Field(VALUES4) image: String,
+        @Field(VALUES5) date: String,
+        @Field(VALUES6) time: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded

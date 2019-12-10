@@ -107,13 +107,16 @@ class RegisterPlayerDialog : DialogFragment() {
         val username = mEdtUsername.getContent()
         val password = mEdtPassword.getContent()
         val name = mEdtName.getContent()
+        val date = getDateTime(DATE)
+        val time = getDateTime(TIME)
 
-        mViewModel.insertPlayer(username, password, name, mImageUri).observe(this, Observer {
-            if (it.result == FAILED) {
-                GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
-            } else {
-                activity!!.login(MainActivity::class.java, it.result!!, username)
-            }
-        })
+        mViewModel.insertPlayer(username, password, name, mImageUri, date, time)
+            .observe(this, Observer {
+                if (it.result == FAILED) {
+                    GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
+                } else {
+                    activity!!.login(MainActivity::class.java, it.result!!, username)
+                }
+            })
     }
 }

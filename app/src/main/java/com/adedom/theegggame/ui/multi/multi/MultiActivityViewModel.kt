@@ -35,9 +35,22 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         multiId: String,
         roomNo: String,
         playerId: String,
-        team: String
+        team: String,
+        latitude: Double,
+        longitude: Double,
+        date: String,
+        time: String
     ): LiveData<JsonResponse> {
-        return repository.insertMultiCollection(multiId, roomNo, playerId, team)
+        return repository.insertMultiCollection(
+            multiId,
+            roomNo,
+            playerId,
+            team,
+            latitude,
+            longitude,
+            date,
+            time
+        )
     }
 
     fun getMultiScore(roomNo: String): LiveData<Score> = repository.getMultiScore(roomNo)

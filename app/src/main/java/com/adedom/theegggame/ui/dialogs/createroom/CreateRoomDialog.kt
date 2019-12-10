@@ -60,7 +60,9 @@ class CreateRoomDialog : DialogFragment() {
         val name = mEdtName.getContent()
         val people = mNumberPicker.value.toString().trim()
         val playerId = GameActivity.sContext.getPrefLogin(PLAYER_ID)
-        mViewModel.insertRoom(name, people, playerId!!).observe(this, Observer {
+        val date = getDateTime(DATE)
+        val time = getDateTime(TIME)
+        mViewModel.insertRoom(name, people, playerId, date, time).observe(this, Observer {
             if (it.result == FAILED) {
                 GameActivity.sContext.failed()
             } else {

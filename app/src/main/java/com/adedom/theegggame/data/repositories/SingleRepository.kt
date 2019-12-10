@@ -10,9 +10,17 @@ import retrofit2.Response
 
 class SingleRepository(private val api: SingleApi) {
 
-    fun insertItem(playerId: String, itemId: Int, qty: Int): LiveData<JsonResponse> {
+    fun insertItem(
+        playerId: String,
+        itemId: Int,
+        qty: Int,
+        latitude: Double,
+        longitude: Double,
+        date: String,
+        time: String
+    ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertItem(playerId, itemId, qty)
+        api.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
                 override fun onResponse(

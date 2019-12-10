@@ -82,11 +82,16 @@ class SingleActivity : MapActivity() {
     }
 
     private fun keepItem(index: Int) {
-        val (myItem, values) = getItemValues(index, timeStamp)
         val playerId = this.getPrefLogin(PLAYER_ID)
-        mViewModel.insertItem(playerId, myItem, values).observe(this, Observer {
-            if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
-        })
+        val (myItem, values) = getItemValues(index, timeStamp)
+        val lat = sLatLng.latitude
+        val lng = sLatLng.longitude
+        val date = getDateTime(DATE)
+        val time = getDateTime(TIME)
+        mViewModel.insertItem(playerId, myItem, values, lat, lng, date, time)
+            .observe(this, Observer {
+                if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
+            })
     }
 
 }

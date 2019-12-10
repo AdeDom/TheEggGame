@@ -41,10 +41,12 @@ class PlayerRepository(private val api: PlayerApi) {
         username: String,
         password: String,
         name: String,
-        image: String
+        image: String,
+        date: String,
+        time: String
     ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertPlayer(username, password, name, image)
+        api.insertPlayer(username, password, name, image,date, time)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
                 override fun onResponse(

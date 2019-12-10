@@ -166,11 +166,18 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     }
 
     private fun insertMultiCollection(multiId: String) {
-        val team = RoomInfoActivity.sTeam
-        mViewModel.insertMultiCollection(multiId, room.room_no!!, playerId!!, team)
-            .observe(this, Observer {
-                if (it.result == COMPLETED) baseContext.toast(R.string.the_egg_game)
-            })
+        mViewModel.insertMultiCollection(
+            multiId,
+            room.room_no!!,
+            playerId!!,
+            RoomInfoActivity.sTeam,
+            sLatLng.latitude,
+            sLatLng.longitude,
+            getDateTime(DATE),
+            getDateTime(TIME)
+        ).observe(this, Observer {
+            if (it.result == COMPLETED) baseContext.toast(R.string.the_egg_game)
+        })
     }
 
     private fun setScore() {

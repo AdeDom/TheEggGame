@@ -24,9 +24,14 @@ class MultiRepository(private val api: MultiApi) {
         return liveData
     }
 
-    fun insertRoomInfo(roomNo: String, playerId: String): LiveData<JsonResponse> {
+    fun insertRoomInfo(
+        roomNo: String,
+        playerId: String,
+        date: String,
+        time: String
+    ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertRoomInfo(roomNo, playerId)
+        api.insertRoomInfo(roomNo, playerId, date, time)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
 
@@ -41,9 +46,15 @@ class MultiRepository(private val api: MultiApi) {
         return liveData
     }
 
-    fun insertRoom(name: String, people: String, playerId: String): LiveData<JsonResponse> {
+    fun insertRoom(
+        name: String,
+        people: String,
+        playerId: String,
+        date: String,
+        time: String
+    ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertRoom(name, people, playerId)
+        api.insertRoom(name, people, playerId, date, time)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
 
@@ -199,10 +210,14 @@ class MultiRepository(private val api: MultiApi) {
         multiId: String,
         roomNo: String,
         playerId: String,
-        team: String
+        team: String,
+        latitude: Double,
+        longitude: Double,
+        date: String,
+        time: String
     ): LiveData<JsonResponse> {
         val liveData = MutableLiveData<JsonResponse>()
-        api.insertMultiCollection(multiId, roomNo, playerId, team)
+        api.insertMultiCollection(multiId, roomNo, playerId, team, latitude, longitude, date, time)
             .enqueue(object : Callback<JsonResponse> {
                 override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
                 override fun onResponse(
