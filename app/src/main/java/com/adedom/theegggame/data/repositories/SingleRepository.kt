@@ -1,14 +1,9 @@
 package com.adedom.theegggame.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.adedom.theegggame.data.models.JsonResponse
 import com.adedom.theegggame.data.networks.SingleApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.adedom.theegggame.util.ApiRequest
 
-class SingleRepository(private val api: SingleApi) {
+class SingleRepository(private val api: SingleApi) : ApiRequest() {
 
     fun insertItem(
         playerId: String,
@@ -18,20 +13,6 @@ class SingleRepository(private val api: SingleApi) {
         longitude: Double,
         date: String,
         time: String
-    ): LiveData<JsonResponse> {
-        val liveData = MutableLiveData<JsonResponse>()
-        api.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
-            .enqueue(object : Callback<JsonResponse> {
-                override fun onFailure(call: Call<JsonResponse>, t: Throwable) {}
-                override fun onResponse(
-                    call: Call<JsonResponse>,
-                    response: Response<JsonResponse>
-                ) {
-                    if (!response.isSuccessful) return
-                    liveData.value = response.body()
-                }
-            })
-        return liveData
-    }
+    ) = apiRequest { api.insertItem(playerId, itemId, qty, latitude, longitude, date, time) }
 
 }

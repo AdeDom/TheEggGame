@@ -5,13 +5,14 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.data.networks.RetrofitClient
 import com.adedom.utility.*
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -88,13 +89,10 @@ abstract class GameActivity : AppCompatActivity() {
 }
 
 class GameActivityViewModel(private val repository: GameRepository) : ViewModel() {
-    fun setState(playerId: String, state: String): LiveData<GameEntity> {
-        return repository.setState(playerId, state)
-    }
+    fun setState(playerId: String, state: String) = repository.setState(playerId, state)
 
-    fun updateLogs(randomKey: String, dateOut: String, timeOut: String): LiveData<GameEntity> {
-        return repository.updateLogs(randomKey, dateOut, timeOut)
-    }
+    fun updateLogs(randomKey: String, dateOut: String, timeOut: String) =
+        repository.updateLogs(randomKey, dateOut, timeOut)
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -105,36 +103,11 @@ class GameActivityFactory(private val repository: GameRepository) :
     }
 }
 
-class GameRepository(private val api: GameApi) {
-    fun setState(playerId: String, state: String): LiveData<GameEntity> {
-        val liveData = MutableLiveData<GameEntity>()
-        api.setState(playerId, state)
-            .enqueue(object : Callback<GameEntity> {
-                override fun onFailure(call: Call<GameEntity>, t: Throwable) {}
-                override fun onResponse(
-                    call: Call<GameEntity>,
-                    response: Response<GameEntity>
-                ) {
-                    if (!response.isSuccessful) return
-                    liveData.value = response.body()
-                }
-            })
-        return liveData
-    }
+class GameRepository(private val api: GameApi) : ApiRequest() {
+    fun setState(playerId: String, state: String) = apiRequest { api.setState(playerId, state) }
 
-    fun updateLogs(randomKey: String, dateOut: String, timeOut: String): LiveData<GameEntity> {
-        val liveData = MutableLiveData<GameEntity>()
-        api.updateLogs(randomKey, dateOut, timeOut)
-            .enqueue(object : Callback<GameEntity> {
-                override fun onFailure(call: Call<GameEntity>, t: Throwable) {}
-                override fun onResponse(call: Call<GameEntity>, response: Response<GameEntity>) {
-                    if (!response.isSuccessful) return
-                    liveData.value = response.body()
-                }
-            })
-        return liveData
-    }
-
+    fun updateLogs(randomKey: String, dateOut: String, timeOut: String) =
+        apiRequest { api.updateLogs(randomKey, dateOut, timeOut) }
 }
 
 interface GameApi {

@@ -1,35 +1,19 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.models.JsonResponse
-import com.adedom.theegggame.data.models.Multi
-import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.data.repositories.MultiRepository
 
 class MultiActivityViewModel(private val repository: MultiRepository) : ViewModel() {
 
-    fun setLatlng(
-        roomNo: String,
-        playerId: String,
-        latitude: Double,
-        longitude: Double
-    ): LiveData<JsonResponse> {
-        return repository.setLatlng(roomNo, playerId, latitude, longitude)
-    }
+    fun setLatlng(roomNo: String, playerId: String, latitude: Double, longitude: Double) =
+        repository.setLatlng(roomNo, playerId, latitude, longitude)
 
-    fun getRoomInfo(roomNo: String): LiveData<List<RoomInfo>> = repository.getRoomInfo(roomNo)
+    fun getRoomInfo(roomNo: String) = repository.getRoomInfo(roomNo)
 
-    fun getMulti(roomNo: String): LiveData<List<Multi>> = repository.getMulti(roomNo)
+    fun getMulti(roomNo: String) = repository.getMulti(roomNo)
 
-    fun insertMulti(
-        roomNo: String,
-        latitude: Double,
-        longitude: Double
-    ): LiveData<JsonResponse> {
-        return repository.insertMulti(roomNo, latitude, longitude)
-    }
+    fun insertMulti(roomNo: String, latitude: Double, longitude: Double) =
+        repository.insertMulti(roomNo, latitude, longitude)
 
     fun insertMultiCollection(
         multiId: String,
@@ -40,19 +24,17 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         longitude: Double,
         date: String,
         time: String
-    ): LiveData<JsonResponse> {
-        return repository.insertMultiCollection(
-            multiId,
-            roomNo,
-            playerId,
-            team,
-            latitude,
-            longitude,
-            date,
-            time
-        )
-    }
+    ) = repository.insertMultiCollection(
+        multiId,
+        roomNo,
+        playerId,
+        team,
+        latitude,
+        longitude,
+        date,
+        time
+    )
 
-    fun getMultiScore(roomNo: String): LiveData<Score> = repository.getMultiScore(roomNo)
+    fun getMultiScore(roomNo: String) = repository.getMultiScore(roomNo)
 
 }
