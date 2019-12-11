@@ -27,7 +27,7 @@ class Player(items: ArrayList<RoomInfo>) {
                     getLevel(it.level)
                 )
             } else {
-                loadBitmap(
+                loadBitmapList(
                     MapActivity.sContext,
                     it.image!!,
                     MapActivity.sGoogleMap!!,

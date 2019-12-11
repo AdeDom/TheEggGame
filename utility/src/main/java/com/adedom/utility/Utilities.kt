@@ -232,3 +232,43 @@ fun loadBitmap(
             }
         })
 }
+
+fun loadBitmapList(
+    context: Context,
+    image: String,
+    googleMap: GoogleMap,
+    latLng: LatLng,
+    title: String,
+    snippet: Int
+) {
+    Glide.with(context)
+        .asBitmap()
+        .load("$BASE_URL../profiles/${image}")
+        .circleCrop()
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(
+                resource: Bitmap,
+                transition: Transition<in Bitmap>?
+            ) {
+                setListMarker(
+                    markerPlayers,
+                    googleMap,
+                    latLng,
+                    BitmapDescriptorFactory.fromBitmap(resource),
+                    title,
+                    getLevel(snippet)
+                )
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+                setListMarker(
+                    markerPlayers,
+                    googleMap,
+                    latLng,
+                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                    title,
+                    getLevel(snippet)
+                )
+            }
+        })
+}
