@@ -12,6 +12,8 @@ import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.PLAYER
+import com.adedom.utility.dialog
+import com.adedom.utility.exitDialog
 import com.adedom.utility.login
 
 class SettingDialog : DialogFragment() {
@@ -21,16 +23,13 @@ class SettingDialog : DialogFragment() {
     private lateinit var mBtnExit: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_setting, null)
+        super.onCreateDialog(savedInstanceState)
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-            .setIcon(R.drawable.ic_setting)
-            .setTitle(R.string.setting)
+        val view = activity!!.layoutInflater.inflate(R.layout.dialog_setting, null)
 
         init(view)
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_setting, R.string.setting)
     }
 
     private fun init(view: View) {
@@ -61,18 +60,7 @@ class SettingDialog : DialogFragment() {
         }
 
         mBtnExit.setOnClickListener {
-            dialog!!.dismiss()
-            exitDialog()
+            AlertDialog.Builder(activity!!).exitDialog { GameActivity.sActivity.finishAffinity() }
         }
-    }
-
-    private fun exitDialog() {
-        val builder = AlertDialog.Builder(activity!!)
-        builder.setTitle(R.string.exit)
-            .setIcon(R.drawable.ic_exit)
-            .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
-            .setNegativeButton(R.string.yes) { dialog, which ->
-                GameActivity.sActivity.finishAffinity()
-            }.show()
     }
 }

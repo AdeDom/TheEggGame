@@ -5,11 +5,19 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,6 +39,8 @@ const val TIME = "time"
 
 var timeStamp: Long = 0
 var randomKey: String = ""
+
+var countExit = 0
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
@@ -131,3 +141,50 @@ fun EditText.textChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
+fun AlertDialog.Builder.dialog(view: View, icon: Int, title: Int) =
+    this.setView(view).setIcon(icon).setTitle(title).create()
+
+fun EditText.failed(message: String = "") {
+    this.also {
+        it.requestFocus()
+        it.error = message
+    }
+}
+
+fun RecyclerView.recyclerVertical(rv: (RecyclerView) -> Unit) {
+    this.also {
+        it.layoutManager = LinearLayoutManager(context)
+        it.setHasFixedSize(true)
+        rv.invoke(it)
+    }
+}
+
+fun RecyclerView.recyclerGrid(rv: (RecyclerView) -> Unit) {
+    this.also {
+        it.layoutManager = GridLayoutManager(context, 2)
+        it.addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
+        rv.invoke(it)
+    }
+}
+
+fun AlertDialog.Builder.exitDialog(negative: () -> Unit) {
+    this.setIcon(R.drawable.ic_exit_black)
+        .setTitle(R.string.exit)
+        .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
+        .setNegativeButton(R.string.yes) { dialog, which ->
+            negative.invoke()
+        }.show()
+}
+
+fun Activity.exitMain() {
+    if (countExit > 0) this.finishAffinity()
+    countExit++
+    Handler().postDelayed({ countExit = 0 }, 2000)
+    baseContext.toast(R.string.on_back_pressed)
+}
+
+fun AppCompatActivity.toolbar(toolbar: Toolbar, title: String) {
+    toolbar.title = title
+    setSupportActionBar(toolbar)
+    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+}

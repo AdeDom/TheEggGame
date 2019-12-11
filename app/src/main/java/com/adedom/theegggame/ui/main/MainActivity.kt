@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
@@ -24,7 +23,6 @@ import java.util.*
 class MainActivity : GameActivity() {
 
     private lateinit var mViewModel: MainActivityViewModel
-    private var mCountExit = 0
 
     companion object {
         lateinit var sPlayerItem: Player
@@ -102,10 +100,5 @@ class MainActivity : GameActivity() {
         })
     }
 
-    override fun onBackPressed() {
-        if (mCountExit > 0) finishAffinity()
-        mCountExit++
-        Handler().postDelayed({ mCountExit = 0 }, 2000)
-        baseContext.toast(R.string.on_back_pressed)
-    }
+    override fun onBackPressed() = this.exitMain()
 }

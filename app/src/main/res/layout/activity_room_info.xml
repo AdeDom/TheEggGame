@@ -17,7 +17,7 @@
 
     <include
             android:id="@+id/head"
-            layout="@layout/item_rv_room"
+            layout="@layout/item_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bar"

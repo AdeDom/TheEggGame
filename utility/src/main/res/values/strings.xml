@@ -2,5 +2,9 @@
     <string name="app_name">Utility</string>
     <string name="completed">Completed</string>
     <string name="failed">Failed</string>
+    <string name="exit">Exit</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="on_back_pressed">Press back again to exit</string>
 
 </resources>

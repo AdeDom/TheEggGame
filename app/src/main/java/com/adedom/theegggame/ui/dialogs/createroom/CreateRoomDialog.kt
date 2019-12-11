@@ -28,20 +28,17 @@ class CreateRoomDialog : DialogFragment() {
     private lateinit var mBtnCreateRoom: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
 
         val factory = CreateRoomDialogFactory(MultiRepository(MultiApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(CreateRoomDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_create_room, null)
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-            .setIcon(R.drawable.ic_add_black)
-            .setTitle(R.string.create_room)
-
         init(view)
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!)
+            .dialog(view, R.drawable.ic_add_black, R.string.create_room)
     }
 
     private fun init(view: View) {

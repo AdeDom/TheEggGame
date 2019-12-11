@@ -8,8 +8,6 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 class RegisterPlayerDialogFactory(private val repository: PlayerRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return RegisterPlayerDialogViewModel(
-            repository
-        ) as T
+        return RegisterPlayerDialogViewModel(repository) as T
     }
 }

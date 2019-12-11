@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
+import com.adedom.utility.dialog
 
 class FightGameDialog : DialogFragment() {
 
@@ -27,22 +28,18 @@ class FightGameDialog : DialogFragment() {
     private val mHandlerRndButton = Handler()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
+
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_fight_game, null)
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-            .setTitle(R.string.fight_game)
-
-        // todo fighting game
-
-        bindWidgets(view)
-        setEvents()
+        init(view)
         mRunnableRndButton.run()
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!)
+            .dialog(view, R.drawable.ic_fight_red, R.string.fight_game)
     }
 
-    private fun bindWidgets(view: View) {
+    private fun init(view: View) {
         mTvScore = view.findViewById(R.id.mTvScore) as TextView
         mBtnOne = view.findViewById(R.id.mBtnOne) as Button
         mBtnTwo = view.findViewById(R.id.mBtnTwo) as Button
@@ -54,18 +51,16 @@ class FightGameDialog : DialogFragment() {
         mBtnEight = view.findViewById(R.id.mBtnEight) as Button
         mBtnNine = view.findViewById(R.id.mBtnNine) as Button
         mBtnGiveUp = view.findViewById(R.id.mBtnGiveUp) as Button
-    }
 
-    private fun setEvents() {
-        mBtnOne.setOnClickListener { view -> setScore(view) }
-        mBtnTwo.setOnClickListener { view -> setScore(view) }
-        mBtnThree.setOnClickListener { view -> setScore(view) }
-        mBtnFour.setOnClickListener { view -> setScore(view) }
-        mBtnFive.setOnClickListener { view -> setScore(view) }
-        mBtnSix.setOnClickListener { view -> setScore(view) }
-        mBtnSeven.setOnClickListener { view -> setScore(view) }
-        mBtnEight.setOnClickListener { view -> setScore(view) }
-        mBtnNine.setOnClickListener { view -> setScore(view) }
+        mBtnOne.setOnClickListener { v -> setScore(v) }
+        mBtnTwo.setOnClickListener { v -> setScore(v) }
+        mBtnThree.setOnClickListener { v -> setScore(v) }
+        mBtnFour.setOnClickListener { v -> setScore(v) }
+        mBtnFive.setOnClickListener { v -> setScore(v) }
+        mBtnSix.setOnClickListener { v -> setScore(v) }
+        mBtnSeven.setOnClickListener { v -> setScore(v) }
+        mBtnEight.setOnClickListener { v -> setScore(v) }
+        mBtnNine.setOnClickListener { v -> setScore(v) }
         mBtnGiveUp.setOnClickListener {
             mHandlerRndButton.removeCallbacks(mRunnableRndButton)
             dialog!!.dismiss()

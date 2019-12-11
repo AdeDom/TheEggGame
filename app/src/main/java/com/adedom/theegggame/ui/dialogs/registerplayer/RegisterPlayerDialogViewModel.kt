@@ -13,5 +13,4 @@ class RegisterPlayerDialogViewModel(private val repository: PlayerRepository) : 
         date: String,
         time: String
     ) = repository.insertPlayer(username, password, name, image, date, time)
-
 }

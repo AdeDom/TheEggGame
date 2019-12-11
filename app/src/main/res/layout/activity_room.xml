@@ -30,7 +30,7 @@
             android:paddingBottom="100dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
-            tools:listitem="@layout/item_rv_room" />
+            tools:listitem="@layout/item_room" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mFloatingActionButton"

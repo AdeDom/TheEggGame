@@ -25,9 +25,7 @@ class SingleActivity : MapActivity() {
     }
 
     private fun init() {
-        toolbar.title = getString(R.string.single_player)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        this.toolbar(toolbar, getString(R.string.single_player))
 
         mFloatingActionButton.setOnClickListener {
             baseContext.completed()
@@ -42,7 +40,9 @@ class SingleActivity : MapActivity() {
             Item(single)
         }
 
-        checkRadius()
+        rndMultiItem(sLatLng)
+
+        checkRadius(sLatLng) { keepItem(it) }
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -50,35 +50,6 @@ class SingleActivity : MapActivity() {
         setCamera(sGoogleMap, sLatLng)
 
         Player(sLatLng)
-
-        rndItem(sLatLng)
-    }
-
-    private fun checkRadius() {
-        single.forEachIndexed { index, item ->
-            val distance = FloatArray(1)
-            Location.distanceBetween(
-                sLatLng.latitude,
-                sLatLng.longitude,
-                item.latitude,
-                item.longitude,
-                distance
-            )
-
-            if (distance[0] < ONE_HUNDRED_METER) {
-                keepItem(index)
-                markerItems[index].remove()
-                single.removeAt(index)
-                switchItem = GameSwitch.ON
-                return
-            }
-
-            if (distance[0] > TWO_KILOMETER) {
-                switchItem = GameSwitch.ON
-                single.removeAt(index)
-                return
-            }
-        }
     }
 
     private fun keepItem(index: Int) {

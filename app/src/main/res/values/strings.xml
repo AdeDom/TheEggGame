@@ -5,8 +5,8 @@
     <string name="h2p">How to play</string>
     <string name="single">Single player</string>
     <string name="multi">Multi player</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
+<!--    <string name="yes">YES</string>-->
+<!--    <string name="no">NO</string>-->
     <string name="can_not_use_single">Can not use mode Single Player!!!</string>
     <string name="least_one_person_per_team">Arrange at least 1 team per team</string>
     <string name="player_not_ready">The player is not ready yet</string>
@@ -18,7 +18,7 @@
     <string name="start_game">Start Game</string>
     <string name="fight_game">Fight Game</string>
     <string name="welcome">Welcome to The Egg Game</string>
-    <string name="on_back_pressed">Press back again to exit</string>
+<!--    <string name="on_back_pressed">Press back again to exit</string>-->
     <string name="register">Register</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -53,7 +53,7 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="successfully">Successfully</string>
-    <string name="exit">Exit</string>
+<!--    <string name="exit">Exit</string>-->
     <string name="create_room">Create room</string>
     <string name="time">Time</string>
     <string name="the_egg_game">The Egg Game</string>

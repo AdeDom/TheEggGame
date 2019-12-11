@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import kotlinx.android.synthetic.main.item_rv_room.view.*
+import kotlinx.android.synthetic.main.item_room.view.*
 
 class RoomAdapter : RecyclerView.Adapter<RoomAdapter.RoomHolder>() {
 
@@ -14,7 +14,7 @@ class RoomAdapter : RecyclerView.Adapter<RoomAdapter.RoomHolder>() {
     var onItemClick: ((Room) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_room, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room, parent, false)
         return RoomHolder(view)
     }
 

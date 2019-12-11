@@ -9,11 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
+import com.adedom.utility.dialog
+import com.adedom.utility.recyclerVertical
 import com.adedom.utility.textChanged
 
 class RankDialog : DialogFragment() {
@@ -27,20 +28,18 @@ class RankDialog : DialogFragment() {
     private lateinit var mBtnRank100: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
 
         val factory = RankDialogFactory(PlayerRepository(PlayerApi()))
         mViewModel = ViewModelProviders.of(this, factory).get(RankDialogViewModel::class.java)
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_rank, null)
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-
         init(view)
 
         fetchPlayer()
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_rank, R.string.rank)
     }
 
     private fun init(view: View) {
@@ -52,11 +51,7 @@ class RankDialog : DialogFragment() {
 
         mAdapter = RankAdapter()
 
-        mRecyclerView.also {
-            it.layoutManager = LinearLayoutManager(context)
-            it.setHasFixedSize(true)
-            it.adapter = mAdapter
-        }
+        mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
         mEdtSearch.textChanged { fetchPlayer(it) }
 

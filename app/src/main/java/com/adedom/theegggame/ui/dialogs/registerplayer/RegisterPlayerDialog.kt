@@ -35,6 +35,7 @@ class RegisterPlayerDialog : DialogFragment() {
     private var mImageUri = "empty"
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
 
         val factory = RegisterPlayerDialogFactory(PlayerRepository(PlayerApi()))
         mViewModel =
@@ -42,14 +43,9 @@ class RegisterPlayerDialog : DialogFragment() {
 
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-            .setIcon(R.drawable.ic_player)
-            .setTitle(R.string.register)
-
         init(view)
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_player, R.string.register)
     }
 
     private fun init(view: View) {

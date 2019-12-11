@@ -18,23 +18,23 @@ class Player(items: ArrayList<RoomInfo>) {
         removeListMarker(markerPlayers)
         removeCircle(myCircle)
 
-        for ((_, latitude, longitude, _, _, playerId, name, image, level, _) in items) {
-            val latLng = LatLng(latitude!!, longitude!!)
+        items.forEach {
+            val latLng = LatLng(it.latitude!!, it.longitude!!)
 
             //player
-            if (image == EMPTY) {
+            if (it.image == EMPTY) {
                 setListMarker(
                     markerPlayers,
                     MapActivity.sGoogleMap,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                    name!!,
-                    getLevel(level)
+                    it.name!!,
+                    getLevel(it.level)
                 )
             } else {
                 Glide.with(MapActivity.sContext)
                     .asBitmap()
-                    .load("$BASE_URL../profiles/${image}")
+                    .load("$BASE_URL../profiles/${it.image}")
                     .circleCrop()
                     .into(object : CustomTarget<Bitmap>() {
                         override fun onResourceReady(
@@ -46,8 +46,8 @@ class Player(items: ArrayList<RoomInfo>) {
                                 MapActivity.sGoogleMap,
                                 latLng,
                                 BitmapDescriptorFactory.fromBitmap(resource),
-                                name!!,
-                                getLevel(level)
+                                it.name!!,
+                                getLevel(it.level)
                             )
                         }
 
@@ -57,15 +57,15 @@ class Player(items: ArrayList<RoomInfo>) {
                                 MapActivity.sGoogleMap,
                                 latLng,
                                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                                name!!,
-                                getLevel(level)
+                                it.name!!,
+                                getLevel(it.level)
                             )
                         }
                     })
             }
 
             //Circle
-            if (MapActivity.sContext.getPrefLogin(PLAYER_ID) == playerId) {
+            if (MapActivity.sContext.getPrefLogin(PLAYER_ID) == it.playerId) {
                 setCircle(MapActivity.sGoogleMap, latLng)
             }
         }

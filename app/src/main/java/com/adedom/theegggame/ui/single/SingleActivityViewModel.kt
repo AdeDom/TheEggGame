@@ -14,5 +14,4 @@ class SingleActivityViewModel(private val repository: SingleRepository) : ViewMo
         date: String,
         time: String
     ) = repository.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
-
 }

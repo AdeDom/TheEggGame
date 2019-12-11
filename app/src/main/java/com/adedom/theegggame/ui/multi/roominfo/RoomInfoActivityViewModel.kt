@@ -16,5 +16,4 @@ class RoomInfoActivityViewModel(private val repository: MultiRepository) : ViewM
         repository.setReady(roomNo, playerId, status)
 
     fun setRoomOff(roomNo: String) = repository.setRoomOff(roomNo)
-
 }

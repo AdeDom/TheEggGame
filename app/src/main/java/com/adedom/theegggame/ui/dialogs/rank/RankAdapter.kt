@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
+import com.adedom.utility.EMPTY
 import com.adedom.utility.loadProfile
 import kotlinx.android.synthetic.main.item_player.view.*
 
@@ -21,9 +22,7 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankHolder>() {
     override fun onBindViewHolder(holder: RankHolder, position: Int) {
         val player = players[position]
 
-        if (players[position].image!!.isNotEmpty()) {
-            holder.itemView.mImgProfile.loadProfile(player.image!!)
-        }
+        if (player.image != EMPTY) holder.itemView.mImgProfile.loadProfile(player.image!!)
         holder.itemView.mTvName.text = player.name
         holder.itemView.mTvLevel.text = player.level.toString()
     }

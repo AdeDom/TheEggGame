@@ -7,5 +7,4 @@ class LoginActivityViewModel(private val repository: PlayerRepository) : ViewMod
 
     fun getPlayerIdLogin(username: String, password: String) =
         repository.getPlayerIdLogin(username, password)
-
 }

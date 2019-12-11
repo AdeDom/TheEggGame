@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.networks.MultiApi
@@ -42,40 +41,37 @@ class RoomActivity : GameActivity() {
     override fun gameLoop() = fetchRoom()
 
     private fun init() {
-        toolbar.title = getString(R.string.multi_player)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        this.toolbar(toolbar, getString(R.string.multi_player))
 
         mAdapter = RoomAdapter()
 
-        mRecyclerView.also {
-            it.layoutManager = GridLayoutManager(baseContext, 2)
-            it.addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
-            it.adapter = mAdapter
-        }
+        mRecyclerView.recyclerGrid { it.adapter = mAdapter }
 
         mFloatingActionButton.setOnClickListener {
             CreateRoomDialog().show(supportFragmentManager, null)
         }
 
-        mAdapter.onItemClick = { room ->
-            val playerId = this.getPrefLogin(PLAYER_ID)
-            val date = getDateTime(DATE)
-            val time = getDateTime(TIME)
-            mViewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
-                if (it.result == COMPLETED) {
-                    startActivity(
-                        Intent(baseContext, RoomInfoActivity::class.java)
-                            .putExtra(ROOM, Room(null, room.room_no, room.name, room.people, TAIL))
-                    )
-                } else {
-                    baseContext.toast(R.string.full, Toast.LENGTH_LONG)
-                }
-            })
-        }
+        mAdapter.onItemClick = { room -> joinRoom(room) }
+    }
+
+    private fun joinRoom(room: Room) {
+        val playerId = this.getPrefLogin(PLAYER_ID)
+        val date = getDateTime(DATE)
+        val time = getDateTime(TIME)
+        mViewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
+            if (it.result == COMPLETED) {
+                startActivity(
+                    Intent(baseContext, RoomInfoActivity::class.java)
+                        .putExtra(ROOM, Room(null, room.room_no, room.name, room.people, TAIL))
+                )
+            } else {
+                baseContext.toast(R.string.full, Toast.LENGTH_LONG)
+            }
+        })
     }
 
     private fun fetchRoom() = mViewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
 
 }
+
 

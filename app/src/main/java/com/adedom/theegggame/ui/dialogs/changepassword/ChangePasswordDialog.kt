@@ -27,6 +27,7 @@ class ChangePasswordDialog : DialogFragment() {
     private lateinit var mBtnChangePassword: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
 
         val factory = ChangePasswordDialogFactory(PlayerRepository(PlayerApi()))
         mViewModel =
@@ -36,14 +37,10 @@ class ChangePasswordDialog : DialogFragment() {
 
         mPlayer = arguments!!.getParcelable(PLAYER)!!
 
-        val builder = AlertDialog.Builder(activity!!)
-            .setView(view)
-            .setIcon(R.drawable.ic_change)
-            .setTitle(R.string.change_password)
-
         init(view)
 
-        return builder.create()
+        return AlertDialog.Builder(activity!!)
+            .dialog(view, R.drawable.ic_change, R.string.change_password)
     }
 
     private fun init(view: View) {
@@ -80,8 +77,7 @@ class ChangePasswordDialog : DialogFragment() {
                     dialog!!.dismiss()
                     GameActivity.sContext.toast(R.string.successfully)
                 } else {
-                    mEdtOldPassword.requestFocus()
-                    mEdtOldPassword.error = getString(R.string.password_incorrect)
+                    mEdtOldPassword.failed(getString(R.string.password_incorrect))
                 }
             })
     }

@@ -13,11 +13,11 @@ class Item(multiple: ArrayList<Multi>) {
 
     init {
         removeListMarker(markerItems)
-        for (multi in multiple) {
+        multiple.forEach {
             setListMarker(
                 markerItems,
                 MapActivity.sGoogleMap,
-                LatLng(multi.latitude, multi.longitude),
+                LatLng(it.latitude, it.longitude),
                 BitmapDescriptorFactory.fromResource(R.drawable.the_egg_game)
             )
         }

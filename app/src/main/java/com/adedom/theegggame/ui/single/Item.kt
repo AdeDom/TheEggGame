@@ -12,8 +12,8 @@ class Item(singles: ArrayList<Single>) {
     init {
         removeListMarker(markerItems)
         var bmp: Bitmap? = null
-        for ((itemId, latitude, longitude) in singles) {
-            when (itemId) {
+        singles.forEach {
+            when (it.itemId) {
                 1 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_egg)
                 2 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_mystery_box)
                 3 -> bmp = MapActivity.sContext.imageMarker(R.drawable.ic_mystery_item)
@@ -22,9 +22,9 @@ class Item(singles: ArrayList<Single>) {
             setListMarker(
                 markerItems,
                 MapActivity.sGoogleMap,
-                LatLng(latitude, longitude),
+                LatLng(it.latitude, it.longitude),
                 BitmapDescriptorFactory.fromBitmap(bmp),
-                titleItem(itemId)
+                titleItem(it.itemId)
             )
         }
     }

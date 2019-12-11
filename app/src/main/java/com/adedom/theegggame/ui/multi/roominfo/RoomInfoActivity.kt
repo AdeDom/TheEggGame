@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
@@ -16,7 +15,7 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_room_info.*
-import kotlinx.android.synthetic.main.item_rv_room.*
+import kotlinx.android.synthetic.main.item_room.*
 
 class RoomInfoActivity : GameActivity() {
 
@@ -41,20 +40,19 @@ class RoomInfoActivity : GameActivity() {
         init()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun init() {
-        toolbar.title = getString(R.string.multi_player)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        this.toolbar(toolbar, getString(R.string.multi_player))
 
         mAdapter = RoomInfoAdapter()
 
-        mRecyclerView.also {
-            it.layoutManager = GridLayoutManager(baseContext, 2)
-            it.addItemDecoration(
-                ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true)
-            ) // init
-            it.adapter = mAdapter
-        }
+        mRecyclerView.recyclerGrid { it.adapter = mAdapter }
 
         mTvRoomNo.text = sRoom.room_no
         mTvName.text = sRoom.name
@@ -62,9 +60,7 @@ class RoomInfoActivity : GameActivity() {
         if (sRoom.status == HEAD) {
             sTeam = TEAM_A
             mBtnGo.text = getString(R.string.go)
-        } else {
-            sTeam = TEAM_B
-        }
+        } else sTeam = TEAM_B
 
         mBtnGo.setOnClickListener { getReadyToStartGame() }
         mImgTeamA.setOnClickListener {
@@ -80,13 +76,6 @@ class RoomInfoActivity : GameActivity() {
     override fun gameLoop() {
         fetchRoomInfo()
         startGame()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun getReadyToStartGame() {
@@ -108,9 +97,7 @@ class RoomInfoActivity : GameActivity() {
                 }
                 count == mRoomInfo.lastIndex -> setReady(ready())
             }
-        } else {
-            setReady(ready())
-        }
+        } else setReady(ready())
     }
 
     private fun setReady(ready: String) {

@@ -1,7 +1,6 @@
 package com.adedom.theegggame.ui.login
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
@@ -32,8 +31,7 @@ class LoginActivity : GameActivity() {
         mEdtUsername.setText(username)
 
         mBtnReg.setOnClickListener {
-            RegisterPlayerDialog()
-                .show(supportFragmentManager, null)
+            RegisterPlayerDialog().show(supportFragmentManager, null)
         }
         mBtnLogin.setOnClickListener { loginToMain() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }
@@ -52,8 +50,7 @@ class LoginActivity : GameActivity() {
 
         mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.result == null) {
-                mEdtPassword.text.clear()
-                baseContext.toast(R.string.username_password_incorrect, Toast.LENGTH_LONG)
+                mEdtPassword.failed(getString(R.string.username_password_incorrect))
             } else {
                 this.login(MainActivity::class.java, it.result, username)
             }

@@ -1,5 +1,6 @@
 package com.adedom.utility
 
+import android.location.Location
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -131,7 +132,7 @@ fun detailItem(itemId: Int, values: Int): String {
     return name
 }
 
-fun rndItem(latLng: LatLng) {
+fun rndMultiItem(latLng: LatLng) {
     if (single.size < MIN_ITEM) {
         val numItem = (MIN_ITEM..MAX_ITEM).random()
         for (i in 0 until numItem) {
@@ -175,3 +176,59 @@ fun ready(): String {
 }
 
 fun getLevel(level: Int?): String = "Level : $level"
+
+fun checkRadius(latLng: LatLng, insertItem: (Int) -> Unit) {
+    single.forEachIndexed { index, item ->
+        val distance = FloatArray(1)
+        Location.distanceBetween(
+            latLng.latitude,
+            latLng.longitude,
+            item.latitude,
+            item.longitude,
+            distance
+        )
+
+        if (distance[0] < ONE_HUNDRED_METER) {
+            insertItem.invoke(index)
+            markerItems[index].remove()
+            single.removeAt(index)
+            switchItem = GameSwitch.ON
+            return
+        }
+
+        if (distance[0] > TWO_KILOMETER) {
+            switchItem = GameSwitch.ON
+            single.removeAt(index)
+            return
+        }
+    }
+}
+
+fun rndMultiItem(
+    status: String,
+    roomInfoSize: Int,
+    multiSize: Int,
+    head: () -> Unit,
+    tail: () -> Unit
+) {
+    when {
+        status == HEAD && switchItem == GameSwitch.ON && roomInfoSize != 0 -> {
+            switchItem = GameSwitch.OFF
+            for (i in 0 until NUMBER_OF_ITEM) head.invoke()
+        }
+        status == TAIL && switchItem == GameSwitch.ON && multiSize != 0 -> {
+            switchItem = GameSwitch.OFF
+            tail.invoke()
+        }
+    }
+}
+
+fun distanceOver(latLng1: LatLng, latLng2: LatLng, distance: Float, over: () -> Unit) {
+    val d = FloatArray(1)
+    Location.distanceBetween(
+        latLng1.latitude, latLng1.longitude,
+        latLng2.latitude, latLng2.longitude, d
+    )
+
+    if (d[0] > distance) over.invoke()
+}

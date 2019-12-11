@@ -8,8 +8,6 @@ import com.adedom.theegggame.data.repositories.MultiRepository
 class RoomActivityFactory(private val repository: MultiRepository) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return RoomActivityViewModel(
-            repository
-        ) as T
+        return RoomActivityViewModel(repository) as T
     }
 }

@@ -8,51 +8,29 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_rank" />
-
-        <TextView
-                android:layout_width="wrap_content"
+        <EditText
+                android:id="@+id/mEdtSearch"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/rank"
+                android:background="@drawable/shape_edit"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawableTint="#aaa"
+                android:hint="@string/search"
+                android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <EditText
-                    android:id="@+id/mEdtSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/shape_edit"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:drawableTint="#aaa"
-                    android:gravity="end"
-                    android:hint="@string/search"
-                    android:maxLines="1"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#3F51B5" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:textColor="#3F51B5" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingBottom="100dp"

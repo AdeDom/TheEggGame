@@ -16,8 +16,7 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomInfoHolder =
         RoomInfoHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_room_info, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_room_info, parent, false)
         )
 
     override fun getItemCount(): Int = items.size
@@ -62,7 +61,6 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {
                 R.drawable.shape_oval_red
             )
         }
-
     }
 
     fun setList(items: List<RoomInfo>) {

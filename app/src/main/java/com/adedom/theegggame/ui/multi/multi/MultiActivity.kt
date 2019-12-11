@@ -14,6 +14,7 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
@@ -41,9 +42,7 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     }
 
     private fun init() {
-        toolbar.title = getString(R.string.multi_player)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        this.toolbar(toolbar, getString(R.string.multi_player))
 
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
@@ -53,7 +52,13 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     override fun gameLoop() {
         mTime -= 1
 
-        rndItem()
+        rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {
+            mMulti.forEach {
+                distanceOver(sLatLng, LatLng(it.latitude, it.longitude), THREE_KILOMETER) {
+                    insertMulti()
+                }
+            }
+        })
 
         checkRadius()
 
@@ -72,27 +77,6 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
                 mTvTime.text = mTime.toString()
                 mTvRed.text = scoreTeamA.toString()
                 mTvBlue.text = scoreTeamB.toString()
-            }
-        }
-    }
-
-    private fun rndItem() {
-        if (mRoomInfo.size == 0) return
-        if (room.status == HEAD && switchItem == GameSwitch.ON &&
-            mRoomInfo[0].latitude != LATLNG_ZERO && mRoomInfo[0].longitude != LATLNG_ZERO
-        ) {
-            switchItem = GameSwitch.OFF
-            for (i in 0 until NUMBER_OF_ITEM) insertMulti()
-        } else if (room.status == TAIL && switchItem == GameSwitch.ON && mMulti.size != 0) {
-            switchItem = GameSwitch.OFF
-            mMulti.forEach { multi ->
-                val distance = FloatArray(1)
-                Location.distanceBetween(
-                    sLatLng.latitude, sLatLng.longitude,
-                    multi.latitude, multi.longitude, distance
-                )
-
-                if (distance[0] > THREE_KILOMETER) insertMulti()
             }
         }
     }

@@ -11,5 +11,4 @@ class MainActivityViewModel(private val repository: PlayerRepository) : ViewMode
 
     fun insertLogs(randomKey: String, dateIn: String, timeIn: String, playerId: String) =
         BaseRepository(BaseApi()).insertLogs(randomKey, dateIn, timeIn, playerId)
-
 }
