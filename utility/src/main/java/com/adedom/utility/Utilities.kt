@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +20,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -187,4 +193,42 @@ fun AppCompatActivity.toolbar(toolbar: Toolbar, title: String) {
     toolbar.title = title
     setSupportActionBar(toolbar)
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+}
+
+fun loadBitmap(
+    context: Context,
+    image: String,
+    googleMap: GoogleMap,
+    latLng: LatLng,
+    title: String,
+    snippet: Int
+) {
+    Glide.with(context)
+        .asBitmap()
+        .load("$BASE_URL../profiles/${image}")
+        .circleCrop()
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(
+                resource: Bitmap,
+                transition: Transition<in Bitmap>?
+            ) {
+                setMarker(
+                    googleMap,
+                    latLng,
+                    BitmapDescriptorFactory.fromBitmap(resource),
+                    title,
+                    getLevel(snippet)
+                )
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+                setMarker(
+                    googleMap,
+                    latLng,
+                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                    title,
+                    getLevel(snippet)
+                )
+            }
+        })
 }
