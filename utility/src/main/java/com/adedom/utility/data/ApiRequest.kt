@@ -1,4 +1,4 @@
-package com.adedom.theegggame.util
+package com.adedom.utility.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData

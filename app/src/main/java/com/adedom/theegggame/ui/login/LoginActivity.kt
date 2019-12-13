@@ -52,7 +52,7 @@ class LoginActivity : GameActivity() {
             if (it.result == null) {
                 mEdtPassword.failed(getString(R.string.username_password_incorrect))
             } else {
-                this.login(MainActivity::class.java, it.result, username)
+                this.login(MainActivity::class.java, it.result!!, username)
             }
         })
     }

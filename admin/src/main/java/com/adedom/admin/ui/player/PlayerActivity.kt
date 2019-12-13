@@ -1,12 +1,9 @@
 package com.adedom.admin.ui.player
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
@@ -15,19 +12,19 @@ import com.adedom.admin.data.networks.BaseApi
 import com.adedom.admin.data.repositories.BaseRepository
 import com.adedom.utility.createSwipeMenu
 import com.adedom.utility.textChanged
+import com.adedom.utility.util.BaseActivity
 import com.baoyz.swipemenulistview.SwipeMenuListView
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : AppCompatActivity() {
+class PlayerActivity : BaseActivity() {
 
-    val TAG = "MyTag"
     private lateinit var mViewModel: PlayerActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
-        val factory = PlayerActivityFactory(BaseRepository(BaseApi()))
+        factory.viewModel = { PlayerActivityViewModel(BaseRepository(BaseApi.invoke())) }
         mViewModel = ViewModelProviders.of(this, factory).get(PlayerActivityViewModel::class.java)
 
         init()
@@ -70,14 +67,6 @@ class PlayerActivity : AppCompatActivity() {
         mFloatingActionButton.setOnClickListener {
             //todo insert
         }
-
-        mEtSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                //todo search
-            }
-        })
 
         mEtSearch.textChanged {
             Log.d(TAG, ">>$it")

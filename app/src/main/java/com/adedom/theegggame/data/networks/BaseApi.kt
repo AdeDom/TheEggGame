@@ -1,10 +1,6 @@
 package com.adedom.theegggame.data.networks
 
-import com.adedom.theegggame.data.models.JsonResponse
-import com.adedom.utility.VALUES1
-import com.adedom.utility.VALUES2
-import com.adedom.utility.VALUES3
-import com.adedom.utility.VALUES4
+import com.adedom.utility.data.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

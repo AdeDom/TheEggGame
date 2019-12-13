@@ -19,6 +19,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adedom.utility.data.BASE_URL
+import com.adedom.utility.util.ItemDecoration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -168,7 +170,13 @@ fun RecyclerView.recyclerVertical(rv: (RecyclerView) -> Unit) {
 fun RecyclerView.recyclerGrid(rv: (RecyclerView) -> Unit) {
     this.also {
         it.layoutManager = GridLayoutManager(context, 2)
-        it.addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
+        it.addItemDecoration(
+            ItemDecoration(
+                2,
+                ItemDecoration.dpToPx(10, resources),
+                true
+            )
+        )
         rv.invoke(it)
     }
 }

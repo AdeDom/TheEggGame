@@ -1,7 +1,7 @@
 package com.adedom.theegggame.data.repositories
 
 import com.adedom.theegggame.data.networks.SingleApi
-import com.adedom.theegggame.util.ApiRequest
+import com.adedom.utility.data.ApiRequest
 
 class SingleRepository(private val api: SingleApi) : ApiRequest() {
 

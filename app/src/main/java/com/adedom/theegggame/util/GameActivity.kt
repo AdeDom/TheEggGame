@@ -9,8 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.theegggame.data.networks.RetrofitClient
 import com.adedom.utility.*
+import com.adedom.utility.data.*
+import com.adedom.utility.util.Setting
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Field

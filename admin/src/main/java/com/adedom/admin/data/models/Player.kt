@@ -1,6 +1,6 @@
 package com.adedom.admin.data.models
 
-import com.adedom.utility.*
+import com.adedom.utility.data.*
 import com.google.gson.annotations.SerializedName
 
 data class Player(

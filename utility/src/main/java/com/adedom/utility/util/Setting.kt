@@ -1,4 +1,4 @@
-package com.adedom.utility
+package com.adedom.utility.util
 
 import android.Manifest
 import android.app.Activity

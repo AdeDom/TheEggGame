@@ -1,4 +1,4 @@
-package com.adedom.utility
+package com.adedom.utility.data
 
 private val HOST = "192.168.43.22"
 val BASE_URL = "http://$HOST/the-egg-game/api/"
