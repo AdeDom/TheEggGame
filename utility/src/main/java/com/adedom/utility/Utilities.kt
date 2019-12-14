@@ -197,7 +197,7 @@ fun Activity.exitMain() {
     baseContext.toast(R.string.on_back_pressed)
 }
 
-fun AppCompatActivity.toolbar(toolbar: Toolbar, title: String) {
+fun AppCompatActivity.setToolbar(toolbar: Toolbar, title: String) {
     toolbar.title = title
     setSupportActionBar(toolbar)
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)

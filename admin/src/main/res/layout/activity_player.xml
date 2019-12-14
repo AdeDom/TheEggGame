@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:paddingStart="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
+        style="@style/RelativeLayout"
+        android:paddingBottom="@dimen/zero"
         tools:context=".ui.player.PlayerActivity">
+
+    <include
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/toolbar" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/mSwipeRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            style="@style/SwipeRefreshLayout"
+            android:layout_below="@id/top">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="100dp"
+                style="@style/RecyclerView"
                 tools:listitem="@layout/item_player" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mFloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_search_white" />
+            style="@style/FloatingActionButton" />
 
 </RelativeLayout>

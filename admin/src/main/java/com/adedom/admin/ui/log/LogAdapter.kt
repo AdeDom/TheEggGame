@@ -36,5 +36,4 @@ class LogAdapter : RecyclerView.Adapter<LogAdapter.LogHolder>() {
     }
 
     inner class LogHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
 }

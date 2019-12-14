@@ -25,7 +25,7 @@ class SingleActivity : MapActivity() {
     }
 
     private fun init() {
-        this.toolbar(toolbar, getString(R.string.single_player))
+        this.setToolbar(toolbar, getString(R.string.single_player))
 
         mFloatingActionButton.setOnClickListener {
             baseContext.completed()

@@ -6,5 +6,4 @@ import com.adedom.admin.data.repositories.BaseRepository
 class PlayerActivityViewModel(private val repository: BaseRepository) : ViewModel() {
 
     fun getPlayers(search: String) = repository.getPlayers(search)
-
 }

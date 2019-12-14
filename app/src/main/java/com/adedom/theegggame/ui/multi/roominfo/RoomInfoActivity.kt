@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.multi.roominfo
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -40,15 +39,8 @@ class RoomInfoActivity : GameActivity() {
         init()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun init() {
-        this.toolbar(toolbar, getString(R.string.multi_player))
+        this.setToolbar(toolbar, getString(R.string.multi_player))
 
         mAdapter = RoomInfoAdapter()
 

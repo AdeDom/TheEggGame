@@ -34,6 +34,5 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerHolder>() {
         notifyDataSetChanged()
     }
 
-    class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
+    inner class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

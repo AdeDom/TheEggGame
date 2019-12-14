@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.multi.room
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,17 +30,10 @@ class RoomActivity : GameActivity() {
         init()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun gameLoop() = fetchRoom()
 
     private fun init() {
-        this.toolbar(toolbar, getString(R.string.multi_player))
+        this.setToolbar(toolbar, getString(R.string.multi_player))
 
         mAdapter = RoomAdapter()
 

@@ -7,8 +7,10 @@ import com.adedom.admin.R
 import com.adedom.admin.data.networks.BaseApi
 import com.adedom.admin.data.repositories.BaseRepository
 import com.adedom.utility.recyclerVertical
+import com.adedom.utility.setToolbar
 import com.adedom.utility.util.BaseActivity
 import kotlinx.android.synthetic.main.activity_player.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class LogActivity : BaseActivity<LogActivityViewModel>() {
 
@@ -27,6 +29,8 @@ class LogActivity : BaseActivity<LogActivityViewModel>() {
     }
 
     private fun init() {
+        this.setToolbar(toolbar, getString(R.string.report3))
+
         mAdapter = LogAdapter()
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }

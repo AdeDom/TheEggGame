@@ -1,67 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/RelativeLayout"
         tools:context="ui.MainActivity">
 
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/WrapWrap"
             android:layout_centerInParent="true"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
         <TextView
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextViewLarge"
                 android:text="@string/report" />
 
         <Button
                 android:id="@+id/mBtPlayer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/player" />
+                style="@style/Button"
+                android:text="@string/report1" />
 
         <Button
                 android:id="@+id/mBtItemCollection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/item_collection" />
+                style="@style/Button"
+                android:text="@string/report2" />
 
         <Button
                 android:id="@+id/mBtLog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/log" />
-
-        <!--        <Button-->
-        <!--                android:id="@+id/mBtnPlayer"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="@string/player" />-->
-
-        <!--        <Button-->
-        <!--                android:id="@+id/mBtnPlayer"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="@string/player" />-->
-
-        <!--        <Button-->
-        <!--                android:id="@+id/mBtnPlayer"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="@string/player" />-->
-
-        <!--        <Button-->
-        <!--                android:id="@+id/mBtnPlayer"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="@string/player" />-->
-
-
+                style="@style/Button"
+                android:text="@string/report3" />
     </LinearLayout>
-
 </RelativeLayout>
+

@@ -1,11 +1,87 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">casual</item>
+    </style>
+
+    <style name="MatchMatch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapWrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchWrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapMatch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="RelativeLayout" parent="MatchMatch">
+        <item name="android:background">@drawable/shape_bg</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="RelativeLayoutItem" parent="MatchWrap">
+        <item name="android:layout_marginStart">@dimen/large</item>
+        <item name="android:layout_marginTop">@dimen/large</item>
+        <item name="android:layout_marginEnd">@dimen/large</item>
+    </style>
+
+    <style name="TextView" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">casual</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextViewLarge" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">casual</item>
+    </style>
+
+    <style name="Button" parent="WrapWrap">
+        <item name="android:layout_marginTop">@dimen/large</item>
+        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_width">250dp</item>
+    </style>
+
+    <style name="SwipeRefreshLayout" parent="MatchMatch" />
+
+    <style name="RecyclerView" parent="MatchMatch">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingBottom">100dp</item>
+    </style>
+
+    <style name="FloatingActionButton" parent="WrapWrap">
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:src">@drawable/ic_search_white</item>
+    </style>
+
+    <style name="ImageView">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:src">@drawable/ic_player</item>
     </style>
 
 </resources>

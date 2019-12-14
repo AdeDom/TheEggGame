@@ -1,35 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp">
-
+        style="@style/RelativeLayoutItem">
 
     <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher_round" />
+            style="@style/ImageView" />
 
     <TextView
             android:id="@+id/tvName"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
+            style="@style/TextView"
+            android:layout_marginStart="@dimen/medium"
             android:layout_toEndOf="@+id/ivImage"
             android:text="@string/name" />
 
     <TextView
             android:id="@+id/tvPlayerId"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextView"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:text="@string/player_id" />
 
 </RelativeLayout>

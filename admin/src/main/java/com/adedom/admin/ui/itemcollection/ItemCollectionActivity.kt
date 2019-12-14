@@ -7,8 +7,10 @@ import com.adedom.admin.R
 import com.adedom.admin.data.networks.BaseApi
 import com.adedom.admin.data.repositories.BaseRepository
 import com.adedom.utility.recyclerVertical
+import com.adedom.utility.setToolbar
 import com.adedom.utility.util.BaseActivity
 import kotlinx.android.synthetic.main.activity_item_collection.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
 
@@ -25,10 +27,11 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
         init()
 
         fetchItemCollection()
-
     }
 
     private fun init() {
+        this.setToolbar(toolbar, getString(R.string.report2))
+
         mAdapter = ItemCollectionAdapter()
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }

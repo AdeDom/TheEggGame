@@ -11,10 +11,22 @@
             android:roundIcon="@drawable/the_egg_game"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.log.LogActivity"></activity>
-        <activity android:name=".ui.itemcollection.ItemCollectionActivity" />
-        <activity android:name=".ui.player.PlayerActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity
+                android:name=".ui.log.LogActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+                android:name=".ui.itemcollection.ItemCollectionActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+                android:name=".ui.player.PlayerActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+                android:name=".ui.MainActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

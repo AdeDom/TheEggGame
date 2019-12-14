@@ -49,6 +49,5 @@ class ItemCollectionAdapter : RecyclerView.Adapter<ItemCollectionAdapter.ItemCol
         notifyDataSetChanged()
     }
 
-    class ItemCollectionHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
+    inner class ItemCollectionHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

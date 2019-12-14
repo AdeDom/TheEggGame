@@ -42,7 +42,7 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     }
 
     private fun init() {
-        this.toolbar(toolbar, getString(R.string.multi_player))
+        this.setToolbar(toolbar, getString(R.string.multi_player))
 
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE

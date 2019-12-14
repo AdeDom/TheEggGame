@@ -6,5 +6,4 @@ import com.adedom.admin.data.repositories.BaseRepository
 class ItemCollectionActivityViewModel(private val repository: BaseRepository) : ViewModel() {
 
     fun getItemCollection() = repository.getItemCollection()
-
 }
