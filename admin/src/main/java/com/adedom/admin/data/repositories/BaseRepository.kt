@@ -7,4 +7,8 @@ class BaseRepository(private val api: BaseApi) : ApiRequest() {
 
     fun getPlayers(search: String) = apiRequest { api.getPlayers(search) }
 
+    fun getItemCollection() = apiRequest { api.getItemCollection() }
+
+    fun getLogs() = apiRequest { api.getLogs() }
+
 }

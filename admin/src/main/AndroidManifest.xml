@@ -11,7 +11,8 @@
             android:roundIcon="@drawable/the_egg_game"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.ItemCollectionActivity"></activity>
+        <activity android:name=".ui.log.LogActivity"></activity>
+        <activity android:name=".ui.itemcollection.ItemCollectionActivity" />
         <activity android:name=".ui.player.PlayerActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>

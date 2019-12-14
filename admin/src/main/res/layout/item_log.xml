@@ -16,62 +16,55 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="15"
-                android:src="@drawable/ic_player" />
+                android:src="@mipmap/ic_launcher_round" />
 
-        <LinearLayout
+        <TextView
+                android:id="@+id/tvName"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_weight="45"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/tvName"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
-            <TextView
-                    android:id="@+id/tvPlace"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/place" />
-        </LinearLayout>
+                android:layout_weight="40"
+                android:text="@string/name" />
 
         <GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_weight="45"
                 android:columnCount="2"
                 android:rowCount="2">
 
-            <ImageView
-                    android:id="@+id/ivItem"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/ic_launcher_round" />
-
             <TextView
-                    android:id="@+id/tvQty"
+                    android:id="@+id/tvDateIn"
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:text="@string/date" />
+
+            <TextView
+                    android:id="@+id/tvTimeIn"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/qty" />
+                    android:text="@string/time" />
 
             <TextView
-                    android:id="@+id/tvDateTime"
+                    android:id="@+id/tvDateOut"
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnSpan="2"
-                    android:text="@string/date_time" />
+                    android:text="@string/date" />
+
+            <TextView
+                    android:id="@+id/tvTimeOut"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/time" />
         </GridLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

@@ -31,35 +31,35 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_collection" />
 
-<!--        <Button-->
-<!--                android:id="@+id/mBtnPlayer"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/player" />-->
+        <Button
+                android:id="@+id/mBtLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/log" />
 
-<!--        <Button-->
-<!--                android:id="@+id/mBtnPlayer"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/player" />-->
+        <!--        <Button-->
+        <!--                android:id="@+id/mBtnPlayer"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/player" />-->
 
-<!--        <Button-->
-<!--                android:id="@+id/mBtnPlayer"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/player" />-->
+        <!--        <Button-->
+        <!--                android:id="@+id/mBtnPlayer"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/player" />-->
 
-<!--        <Button-->
-<!--                android:id="@+id/mBtnPlayer"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/player" />-->
+        <!--        <Button-->
+        <!--                android:id="@+id/mBtnPlayer"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/player" />-->
 
-<!--        <Button-->
-<!--                android:id="@+id/mBtnPlayer"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/player" />-->
+        <!--        <Button-->
+        <!--                android:id="@+id/mBtnPlayer"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/player" />-->
 
 
     </LinearLayout>

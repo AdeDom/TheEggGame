@@ -4,4 +4,7 @@
     <string name="place">Place</string>
     <string name="date_time">Date Time</string>
     <string name="qty">Qty</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="log">Log</string>
 </resources>

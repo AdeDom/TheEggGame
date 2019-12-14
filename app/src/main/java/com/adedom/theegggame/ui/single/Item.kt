@@ -1,7 +1,6 @@
 package com.adedom.theegggame.ui.single
 
 import android.graphics.Bitmap
-import com.adedom.theegggame.R
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
