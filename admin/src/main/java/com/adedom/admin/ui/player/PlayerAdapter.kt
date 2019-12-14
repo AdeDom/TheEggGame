@@ -1,57 +1,39 @@
 package com.adedom.admin.ui.player
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.adedom.admin.R
 import com.adedom.admin.data.models.Player
 import com.adedom.utility.EMPTY
-import com.adedom.utility.OFFLINE
-import com.adedom.utility.getLevel
 import com.adedom.utility.loadProfile
-import java.util.*
+import kotlinx.android.synthetic.main.item_player.view.*
 
-class PlayerAdapter(
-    private val mContext: Context,
-    private val players: ArrayList<Player>
-) : ArrayAdapter<Player>(mContext, 0, players) {
+class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerHolder>() {
 
-    override fun getView(
-        position: Int,
-        convertView: View?,
-        parent: ViewGroup
-    ): View {
-        var view = convertView
-        val holder: ViewHolder
-        if (view == null) {
-            val inflater = LayoutInflater.from(mContext)
-            view = inflater.inflate(R.layout.item_player, parent, false)
-            holder = ViewHolder(view)
-            view.tag = holder
-        } else {
-            holder = view.tag as ViewHolder
-        }
+    private var players = ArrayList<Player>()
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerHolder =
+        PlayerHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_player, parent, false)
+        )
+
+    override fun getItemCount(): Int = players.size
+
+    override fun onBindViewHolder(holder: PlayerHolder, position: Int) {
         val player = players[position]
-        holder.tvName.text = player.name
-        holder.tvPlayerId.text = player.playerId
-        holder.tvLevel.text = getLevel(player.level)
-        if (player.image != EMPTY) holder.ivImage.loadProfile(player.image!!)
-        if (player.state == OFFLINE) holder.ivState.visibility = View.INVISIBLE
-
-        return view!!
+        if (player.image != EMPTY) holder.itemView.ivImage.loadProfile(player.image!!)
+        holder.itemView.tvName.text = player.name
+        holder.itemView.tvPlayerId.text = player.playerId
     }
 
-    inner class ViewHolder(view: View) {
-        val tvName = view.findViewById(R.id.mTvName) as TextView
-        val tvPlayerId = view.findViewById(R.id.mTvPlayerId) as TextView
-        val tvLevel = view.findViewById(R.id.mTvLevel) as TextView
-        val ivImage = view.findViewById(R.id.mIvImage) as ImageView
-        val ivState = view.findViewById(R.id.mIvState) as ImageView
+    fun setList(players: List<Player>) {
+        this.players = players as ArrayList<Player>
+        notifyDataSetChanged()
     }
+
+    class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

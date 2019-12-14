@@ -5,6 +5,6 @@ import com.adedom.utility.data.ApiRequest
 
 class BaseRepository(private val api: BaseApi) : ApiRequest() {
 
-    fun getPlayers() = apiRequest { api.getPlayers() }
+    fun getPlayers(search: String) = apiRequest { api.getPlayers(search) }
 
 }

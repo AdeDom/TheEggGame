@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Admin</string>
-    <string name="player">Player</string>
-    <string name="report">Report</string>
-    <string name="name">Name</string>
-    <string name="player_id">Player Id</string>
-    <string name="level">Level</string>
-    <string name="state">State</string>
-    <string name="search">Search</string>
+    <string name="item_collection">Item Collection</string>
+    <string name="place">Place</string>
+    <string name="date_time">Date Time</string>
+    <string name="qty">Qty</string>
 </resources>

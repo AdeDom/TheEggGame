@@ -1,6 +1,5 @@
 package com.adedom.utility.data
 
-import com.adedom.utility.data.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

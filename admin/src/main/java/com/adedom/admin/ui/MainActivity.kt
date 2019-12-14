@@ -18,8 +18,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        mBtnPlayer.setOnClickListener {
+        mBtPlayer.setOnClickListener {
             startActivity(Intent(baseContext, PlayerActivity::class.java))
+        }
+
+        mBtItemCollection.setOnClickListener {
+            
         }
     }
 }

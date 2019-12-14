@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingBottom="100dp"
-                tools:listitem="@layout/item_player" />
+                tools:listitem="@layout/item_single_collection" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
