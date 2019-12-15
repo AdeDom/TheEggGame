@@ -1,4 +1,4 @@
-package com.adedom.admin.ui.itemcollection
+package com.adedom.admin.ui.logs
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -9,33 +9,33 @@ import com.adedom.utility.recyclerVertical
 import com.adedom.utility.setToolbar
 import kotlinx.android.synthetic.main.activity_base.*
 
-class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
+class LogsActivity : BaseActivity<LogsActivityViewModel>() {
 
-    private lateinit var mAdapter: ItemCollectionAdapter
+    private lateinit var mAdapter: LogsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(ItemCollectionActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LogsActivityViewModel::class.java)
 
         init()
 
-        fetchItemCollection()
+        fetchLogs()
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.report2))
+        this.setToolbar(toolbar, getString(R.string.report3))
 
-        mAdapter = ItemCollectionAdapter()
+        mAdapter = LogsAdapter()
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.setOnRefreshListener { fetchItemCollection() }
+        mSwipeRefreshLayout.setOnRefreshListener { fetchLogs() }
     }
 
-    private fun fetchItemCollection() {
+    private fun fetchLogs() {
         mSwipeRefreshLayout.isRefreshing = true
-        viewModel.getItemCollection().observe(this, Observer {
+        viewModel.getLogs().observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
             mAdapter.setList(it)
         })

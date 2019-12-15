@@ -1,9 +1,8 @@
 package com.adedom.admin.ui.itemcollection
 
-import androidx.lifecycle.ViewModel
-import com.adedom.admin.data.repositories.BaseRepository
+import com.adedom.admin.util.BaseViewModel
 
-class ItemCollectionActivityViewModel(private val repository: BaseRepository) : ViewModel() {
+class ItemCollectionActivityViewModel : BaseViewModel() {
 
     fun getItemCollection() = repository.getItemCollection()
 }

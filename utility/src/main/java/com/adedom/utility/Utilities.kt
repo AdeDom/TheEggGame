@@ -1,6 +1,8 @@
 package com.adedom.utility
 
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,6 +11,7 @@ import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateFormat
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -129,10 +132,10 @@ fun Context.imageMarker(image: Int): Bitmap {
 
 fun getDateTime(dateTime: String): String {
     return if (dateTime == DATE) {
-        SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
+        SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             .format(Calendar.getInstance().time)
     } else {
-        SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+        SimpleDateFormat("HH:mm", Locale.ENGLISH)
             .format(Calendar.getInstance().time)
     }
 }
@@ -279,4 +282,39 @@ fun loadBitmapList(
                 )
             }
         })
+}
+
+fun Context.datePickerDialog(date: (Int, Int, Int) -> Unit) {
+    val c = Calendar.getInstance()
+    val year = c.get(Calendar.YEAR)
+    val month = c.get(Calendar.MONTH)
+    val day = c.get(Calendar.DAY_OF_MONTH)
+
+    val dpd = DatePickerDialog(
+        this,
+        DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            date.invoke(year, month + 1, dayOfMonth)
+        },
+        year,
+        month,
+        day
+    )
+    dpd.show()
+}
+
+fun Context.timePickerDialog(time: (Int, Int) -> Unit) {
+    val c = Calendar.getInstance()
+    val hour = c.get(Calendar.HOUR_OF_DAY)
+    val minute = c.get(Calendar.MINUTE)
+
+    val t = TimePickerDialog(
+        this,
+        TimePickerDialog.OnTimeSetListener { timePicker, hourOfDay, minute ->
+            time.invoke(hourOfDay, minute)
+        },
+        hour,
+        minute,
+        DateFormat.is24HourFormat(this)
+    )
+    t.show()
 }

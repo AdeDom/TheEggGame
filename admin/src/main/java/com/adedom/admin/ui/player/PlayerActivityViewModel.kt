@@ -1,9 +1,8 @@
 package com.adedom.admin.ui.player
 
-import androidx.lifecycle.ViewModel
-import com.adedom.admin.data.repositories.BaseRepository
+import com.adedom.admin.util.BaseViewModel
 
-class PlayerActivityViewModel(private val repository: BaseRepository) : ViewModel() {
+class PlayerActivityViewModel : BaseViewModel() {
 
     fun getPlayers(search: String) = repository.getPlayers(search)
 }

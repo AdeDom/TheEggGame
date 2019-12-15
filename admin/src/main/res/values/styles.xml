@@ -33,6 +33,12 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <style name="RelativeLayoutDialog" parent="MatchMatch">
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:padding">@dimen/large</item>
+    </style>
+
     <style name="RelativeLayoutItem" parent="MatchWrap">
         <item name="android:layout_marginStart">@dimen/large</item>
         <item name="android:layout_marginTop">@dimen/large</item>
@@ -82,6 +88,22 @@
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:src">@drawable/ic_player</item>
+    </style>
+
+    <style name="ImageViewDate">
+        <item name="android:layout_width">@dimen/dateTime</item>
+        <item name="android:layout_height">@dimen/dateTime</item>
+        <item name="android:src">@drawable/ic_date_black</item>
+    </style>
+
+    <style name="ImageViewTime">
+        <item name="android:layout_width">@dimen/dateTime</item>
+        <item name="android:layout_height">@dimen/dateTime</item>
+        <item name="android:src">@drawable/ic_time_black</item>
+    </style>
+
+    <style name="EditText" parent="MatchWrap">
+        <item name="android:background">@drawable/shape_et</item>
     </style>
 
 </resources>

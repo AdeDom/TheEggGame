@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/RelativeLayoutDialog"
+        tools:context=".ui.player.PlayerDialog">
+
+    <LinearLayout
+            style="@style/MatchWrap"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/MatchWrap">
+
+            <EditText
+                    android:id="@+id/mEtSearch"
+                    style="@style/EditText"
+                    android:drawableEnd="@drawable/ic_search_black"
+                    android:hint="@string/search" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <GridLayout
+                style="@style/MatchWrap"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/medium"
+                android:columnCount="4"
+                android:rowCount="5">
+
+            <TextView
+                    style="@style/TextView"
+                    android:layout_columnSpan="4"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/date_time" />
+
+            <TextView
+                    style="@style/TextView"
+                    android:layout_columnSpan="4"
+                    android:text="@string/begin" />
+
+            <ImageView
+                    android:id="@+id/mIvDateBegin"
+                    style="@style/ImageViewDate"
+                    android:layout_columnWeight="10" />
+
+            <TextView
+                    android:id="@+id/mTvDateBegin"
+                    style="@style/TextView"
+                    android:layout_columnWeight="40"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/date" />
+
+            <ImageView
+                    android:id="@+id/mIvTimeBegin"
+                    style="@style/ImageViewTime"
+                    android:layout_columnWeight="10" />
+
+            <TextView
+                    android:id="@+id/mTvTimeBegin"
+                    style="@style/TextView"
+                    android:layout_columnWeight="40"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/time" />
+
+            <TextView
+                    style="@style/TextView"
+                    android:layout_columnSpan="4"
+                    android:text="@string/end" />
+
+            <ImageView
+                    android:id="@+id/mIvDateEnd"
+                    style="@style/ImageViewDate"
+                    android:layout_columnWeight="10" />
+
+            <TextView
+                    android:id="@+id/mTvDateEnd"
+                    style="@style/TextView"
+                    android:layout_columnWeight="40"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/date" />
+
+            <ImageView
+                    android:id="@+id/mIvTimeEnd"
+                    style="@style/ImageViewTime"
+                    android:layout_columnWeight="10" />
+
+            <TextView
+                    android:id="@+id/mTvTimeEnd"
+                    style="@style/TextView"
+                    android:layout_columnWeight="40"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/time" />
+        </GridLayout>
+
+        <Button
+                android:id="@+id/mBtSearch"
+                style="@style/Button"
+                android:text="@string/search" />
+
+    </LinearLayout>
+
+</RelativeLayout>

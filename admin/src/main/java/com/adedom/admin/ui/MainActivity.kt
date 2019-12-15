@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.adedom.admin.R
 import com.adedom.admin.ui.itemcollection.ItemCollectionActivity
-import com.adedom.admin.ui.log.LogActivity
+import com.adedom.admin.ui.logs.LogsActivity
 import com.adedom.admin.ui.player.PlayerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBtLog.setOnClickListener {
-            startActivity(Intent(baseContext, LogActivity::class.java))
+            startActivity(Intent(baseContext, LogsActivity::class.java))
         }
     }
 }

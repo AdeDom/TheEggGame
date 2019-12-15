@@ -1,7 +1,7 @@
 package com.adedom.admin.data.networks
 
 import com.adedom.admin.data.models.ItemCollection
-import com.adedom.admin.data.models.Log
+import com.adedom.admin.data.models.Logs
 import com.adedom.admin.data.models.Player
 import com.adedom.utility.data.RetrofitClient
 import com.adedom.utility.data.VALUES1
@@ -22,7 +22,7 @@ interface BaseApi {
     fun getItemCollection(): Call<List<ItemCollection>>
 
     @POST("admin-get-logs.php")
-    fun getLogs(): Call<List<Log>>
+    fun getLogs(): Call<List<Logs>>
 
     companion object {
         operator fun invoke(): BaseApi {

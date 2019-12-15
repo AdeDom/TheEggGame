@@ -4,24 +4,20 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
-import com.adedom.admin.data.networks.BaseApi
-import com.adedom.admin.data.repositories.BaseRepository
+import com.adedom.admin.util.BaseActivity
+import com.adedom.utility.OnAttachListener
 import com.adedom.utility.recyclerVertical
 import com.adedom.utility.setToolbar
-import com.adedom.utility.util.BaseActivity
-import kotlinx.android.synthetic.main.activity_player.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.activity_base.*
 
-class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
+class PlayerActivity : BaseActivity<PlayerActivityViewModel>(), OnAttachListener {
 
     private lateinit var mAdapter: PlayerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_player)
 
-        factory.viewModel = { PlayerActivityViewModel(BaseRepository(BaseApi.invoke())) }
-        viewModel = ViewModelProviders.of(this, factory).get(PlayerActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(PlayerActivityViewModel::class.java)
 
         init()
 
@@ -35,16 +31,10 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.also {
-            it.setColorSchemeResources(
-                android.R.color.holo_red_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_blue_light
-            )
-            it.setOnRefreshListener {
-                fetchPlayers()
-            }
+        mSwipeRefreshLayout.setOnRefreshListener { fetchPlayers() }
+
+        mFloatingActionButton.setOnClickListener {
+            PlayerDialog().show(supportFragmentManager, null)
         }
     }
 
@@ -54,6 +44,10 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
             mSwipeRefreshLayout.isRefreshing = false
             mAdapter.setList(it)
         })
+    }
+
+    override fun onAttach(search: String) {
+        fetchPlayers(search)
     }
 
 }

@@ -3,7 +3,7 @@ package com.adedom.admin.data.models
 import com.adedom.utility.data.*
 import com.google.gson.annotations.SerializedName
 
-data class Log(
+data class Logs(
     @SerializedName(VALUES1) val name: String,
     @SerializedName(VALUES2) val image: String,
     @SerializedName(VALUES3) val dateIn: String,

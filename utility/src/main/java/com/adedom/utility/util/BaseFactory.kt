@@ -4,10 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 @Suppress("UNCHECKED_CAST")
-class BaseFactory : ViewModelProvider.NewInstanceFactory() {
-    var viewModel: (() -> ViewModel)? = null
+class BaseFactory(private val viewModel: () -> ViewModel) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return viewModel?.invoke() as T
+        return viewModel.invoke() as T
     }
 }
-
