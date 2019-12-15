@@ -6,7 +6,6 @@
 
     <LinearLayout
             style="@style/MatchWrap"
-            android:gravity="center"
             android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout style="@style/MatchWrap">
@@ -18,11 +17,55 @@
                     android:hint="@string/search" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+                style="@style/MatchWrap"
+                android:layout_marginTop="@dimen/medium"
+                android:background="@color/gray"
+                android:padding="@dimen/medium">
+
+            <TextView
+                    style="@style/TextView"
+                    android:text="@string/level" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/mSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_marginStart="@dimen/medium" />
+        </LinearLayout>
+
+        <LinearLayout
+                style="@style/MatchWrap"
+                android:layout_marginTop="@dimen/medium"
+                android:background="@color/gray"
+                android:padding="@dimen/medium">
+
+            <TextView
+                    style="@style/TextView"
+                    android:text="@string/state" />
+
+            <CheckBox
+                    android:id="@+id/mCheckOnline"
+                    style="@style/WrapWrap"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/online" />
+
+            <CheckBox
+                    android:id="@+id/mCheckOffline"
+                    style="@style/WrapWrap"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/offline" />
+
+        </LinearLayout>
+
         <GridLayout
                 style="@style/MatchWrap"
-                android:layout_gravity="start"
                 android:layout_marginTop="@dimen/medium"
+                android:background="@color/gray"
                 android:columnCount="4"
+                android:padding="@dimen/medium"
                 android:rowCount="5">
 
             <TextView
@@ -93,8 +136,32 @@
         <Button
                 android:id="@+id/mBtSearch"
                 style="@style/Button"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/search" />
 
     </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="156dp">
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday" />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday" />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday" />
+    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>

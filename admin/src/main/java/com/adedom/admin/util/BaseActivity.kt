@@ -7,12 +7,24 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.adedom.admin.R
+import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_base.*
 
 abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
 
     val TAG = "BaseActivity"
     lateinit var viewModel: VM
+
+    init {
+        search = ""
+        spinnerLevel = 0
+        isCheckOnline = true
+        isCheckOffline = true
+        dateBegin = DATE_BEGIN
+        timeBegin = TIME_BEGIN
+        dateEnd = DATE_NOW
+        timeEnd = TIME_NOW
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,12 +1,14 @@
 package com.adedom.admin.ui.itemcollection
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.utility.recyclerVertical
 import com.adedom.utility.setToolbar
+import com.adedom.utility.toast
 import kotlinx.android.synthetic.main.activity_base.*
 
 class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
@@ -37,6 +39,7 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getItemCollection().observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
+            if (it.isEmpty()) baseContext.toast(R.string.search_data_not_found, Toast.LENGTH_LONG)
             mAdapter.setList(it)
         })
     }
