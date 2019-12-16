@@ -33,6 +33,10 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
         mSwipeRefreshLayout.setOnRefreshListener { fetchItemCollection() }
+
+        mFloatingActionButton.setOnClickListener {
+            ItemCollectionDialog().show(supportFragmentManager, null)
+        }
     }
 
     private fun fetchItemCollection() {

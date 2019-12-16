@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_single_collection.view.*
 
 class ItemCollectionAdapter :
     BaseAdapter<ItemCollection>({ R.layout.item_single_collection }, { holder, position, items ->
-        val (name, image, itemId, qty, latitude, longitude, date, time) = items[position]
+        val (name, image, _, _, itemId, qty, latitude, longitude, date, time) = items[position]
 
         if (image != EMPTY) holder.itemView.ivImage.loadProfile(image)
         when (itemId) {

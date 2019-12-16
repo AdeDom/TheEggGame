@@ -22,4 +22,9 @@
     <string name="online">Online</string>
 
     <string name="search_data_not_found">Search data not found</string>
+    <string name="name">Name</string>
+    <string name="item">Item</string>
+    <string name="locality">Locality</string>
+    <string name="area">Area</string>
+    <string name="sub_area">Sub area</string>
 </resources>

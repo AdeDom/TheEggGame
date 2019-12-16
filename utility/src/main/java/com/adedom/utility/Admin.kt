@@ -4,6 +4,8 @@ import android.content.Context
 import android.location.Geocoder
 import android.widget.ArrayAdapter
 
+val TAG = "MyTag"
+
 const val DATE_BEGIN = "0000-00-00"
 const val TIME_BEGIN = "00:00"
 
@@ -23,6 +25,24 @@ fun Context.getLocality(latitude: Double, longitude: Double): String {
     val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
     return if (list[0].locality != null) {
         list[0].locality
+    } else {
+        "unknown"
+    }
+}
+
+fun Context.getAdminArea(latitude: Double, longitude: Double): String {
+    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
+    return if (list[0].adminArea != null) {
+        list[0].adminArea
+    } else {
+        "unknown"
+    }
+}
+
+fun Context.getSubAdminArea(latitude: Double, longitude: Double): String {
+    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
+    return if (list[0].subAdminArea != null) {
+        list[0].subAdminArea
     } else {
         "unknown"
     }
