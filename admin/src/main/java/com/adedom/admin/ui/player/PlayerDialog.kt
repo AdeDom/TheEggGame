@@ -1,121 +1,50 @@
 package com.adedom.admin.ui.player
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.fragment.app.DialogFragment
 import com.adedom.admin.R
-import com.adedom.admin.util.OnAttachListener
+import com.adedom.admin.util.BaseDialogFragment
 import com.adedom.utility.*
 
-class PlayerDialog : DialogFragment() {
-
-    private lateinit var mListener: OnAttachListener
-    private lateinit var mEtSearch: EditText
-    private lateinit var mSpinner: AppCompatSpinner
-    private lateinit var mCheckOnline: CheckBox
-    private lateinit var mCheckOffline: CheckBox
-    private lateinit var mIvDateBegin: ImageView
-    private lateinit var mIvTimeBegin: ImageView
-    private lateinit var mTvDateBegin: TextView
-    private lateinit var mTvTimeBegin: TextView
-    private lateinit var mIvDateEnd: ImageView
-    private lateinit var mIvTimeEnd: ImageView
-    private lateinit var mTvDateEnd: TextView
-    private lateinit var mTvTimeEnd: TextView
-    private lateinit var mBtSearch: Button
-    private var mDateBegin: String = dateBegin
-    private var mTimeBegin: String = timeBegin
-    private var mDateEnd: String = dateEnd
-    private var mTimeEnd: String = timeEnd
+class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_player, null)
-
-        init(view)
-
-        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_player, R.string.player)
+        init(bView)
+        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_player, R.string.player)
     }
 
     private fun init(view: View) {
-        mEtSearch = view.findViewById(R.id.mEtSearch) as EditText
-        mSpinner = view.findViewById(R.id.mSpinner) as AppCompatSpinner
-        mCheckOnline = view.findViewById(R.id.mCheckOnline) as CheckBox
-        mCheckOffline = view.findViewById(R.id.mCheckOffline) as CheckBox
-        mIvDateBegin = view.findViewById(R.id.mIvDateBegin) as ImageView
-        mIvTimeBegin = view.findViewById(R.id.mIvTimeBegin) as ImageView
-        mTvDateBegin = view.findViewById(R.id.mTvDateBegin) as TextView
-        mTvTimeBegin = view.findViewById(R.id.mTvTimeBegin) as TextView
-        mIvDateEnd = view.findViewById(R.id.mIvDateEnd) as ImageView
-        mIvTimeEnd = view.findViewById(R.id.mIvTimeEnd) as ImageView
-        mTvDateEnd = view.findViewById(R.id.mTvDateEnd) as TextView
-        mTvTimeEnd = view.findViewById(R.id.mTvTimeEnd) as TextView
-        mBtSearch = view.findViewById(R.id.mBtSearch) as Button
+        val etSearch = view.findViewById(R.id.mEtSearch) as EditText
+        val spinner = view.findViewById(R.id.mSpinner) as AppCompatSpinner
+        val checkOnline = view.findViewById(R.id.mCheckOnline) as CheckBox
+        val checkOffline = view.findViewById(R.id.mCheckOffline) as CheckBox
+        val btSearch = view.findViewById(R.id.mBtSearch) as Button
 
-        mEtSearch.setText(search)
+        etSearch.setText(search)
 
-        mSpinner.adapter = context!!.spinnerLevel()
-        mSpinner.setSelection(spinnerLevel)
-
-        mCheckOnline.isChecked = isCheckOnline
-        mCheckOffline.isChecked = isCheckOffline
-
-        mTvDateBegin.text = dateBegin
-        mTvTimeBegin.text = timeBegin
-        mTvDateEnd.text = dateEnd
-        mTvTimeEnd.text = timeEnd
-
-        mIvDateBegin.setOnClickListener {
-            context!!.datePickerDialog { year, month, dayOfMonth ->
-                mDateBegin = "$year-$month-$dayOfMonth"
-                mTvDateBegin.text = mDateBegin
-            }
+        spinner.also {
+            it.adapter = context!!.spinnerLevel()
+            it.setSelection(spinnerLevel)
         }
 
-        mIvTimeBegin.setOnClickListener {
-            context!!.timePickerDialog { hourOfDay, minute ->
-                mTimeBegin = "$hourOfDay:$minute"
-                mTvTimeBegin.text = mTimeBegin
-            }
-        }
+        checkOnline.isChecked = isCheckOnline
 
-        mIvDateEnd.setOnClickListener {
-            context!!.datePickerDialog { year, month, dayOfMonth ->
-                mDateEnd = "$year-$month-$dayOfMonth"
-                mTvDateEnd.text = mDateEnd
-            }
-        }
+        checkOffline.isChecked = isCheckOffline
 
-        mIvTimeEnd.setOnClickListener {
-            context!!.timePickerDialog { hourOfDay, minute ->
-                mTimeEnd = "$hourOfDay:$minute"
-                mTvTimeEnd.text = mTimeEnd
-            }
-        }
-
-        mBtSearch.setOnClickListener {
+        btSearch.setOnClickListener {
             dialog!!.dismiss()
-            search = mEtSearch.getContent()
-            spinnerLevel = mSpinner.selectedItemPosition
-            isCheckOnline = mCheckOnline.isChecked
-            isCheckOffline = mCheckOffline.isChecked
-            dateBegin = mDateBegin
-            timeBegin = mTimeBegin
-            dateEnd = mDateEnd
-            timeEnd = mTimeEnd
-            mListener.onAttach()
+            search = etSearch.getContent()
+            spinnerLevel = spinner.selectedItemPosition
+            isCheckOnline = checkOnline.isChecked
+            isCheckOffline = checkOffline.isChecked
+            listener.onAttach()
         }
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mListener = context as OnAttachListener
-    }
-
 }

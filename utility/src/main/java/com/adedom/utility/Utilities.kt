@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.utility.data.BASE_URL
 import com.adedom.utility.util.ItemDecoration
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.maps.GoogleMap
@@ -86,6 +87,7 @@ fun Context.getPrefLogin(key: String): String {
 fun ImageView.loadCircle(url: String) {
     Glide.with(this)
         .load(url)
+        .apply(RequestOptions.placeholderOf(R.drawable.ic_player))
         .circleCrop()
         .into(this)
 }
@@ -93,6 +95,7 @@ fun ImageView.loadCircle(url: String) {
 fun ImageView.loadProfile(image: String) {
     Glide.with(this)
         .load("$BASE_URL../profiles/$image")
+        .apply(RequestOptions.placeholderOf(R.drawable.ic_player))
         .circleCrop()
         .into(this)
 }

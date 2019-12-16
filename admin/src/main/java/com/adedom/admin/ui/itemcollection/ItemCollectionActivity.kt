@@ -43,4 +43,8 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
             mAdapter.setList(it)
         })
     }
+
+    override fun onAttach() {
+
+    }
 }

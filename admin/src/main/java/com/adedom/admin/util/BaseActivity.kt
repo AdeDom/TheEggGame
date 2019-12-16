@@ -1,7 +1,5 @@
 package com.adedom.admin.util
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +8,7 @@ import com.adedom.admin.R
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_base.*
 
-abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VM : ViewModel> : AppCompatActivity(), OnAttachListener {
 
     val TAG = "BaseActivity"
     lateinit var viewModel: VM
@@ -30,9 +28,6 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
-        sActivity = this@BaseActivity
-        sContext = baseContext
-
         mSwipeRefreshLayout.also {
             it.setColorSchemeResources(
                 android.R.color.holo_red_light,
@@ -48,10 +43,5 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity() {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    companion object {
-        lateinit var sActivity: Activity
-        lateinit var sContext: Context
     }
 }
