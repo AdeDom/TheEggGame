@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
@@ -40,7 +39,8 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
         mRecyclerView.recyclerGrid { it.adapter = mAdapter }
 
         mFloatingActionButton.setOnClickListener {
-            CreateRoomDialog().show(supportFragmentManager, null)
+            CreateRoomDialog()
+                .show(supportFragmentManager, null)
         }
 
         mAdapter.onItemClick = { room -> joinRoom(room) }

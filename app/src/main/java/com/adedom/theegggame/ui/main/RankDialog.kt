@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs.rank
+package com.adedom.theegggame.ui.main
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,20 +6,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.networks.PlayerApi
-import com.adedom.theegggame.data.repositories.PlayerRepository
+import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.utility.extension.dialog
 import com.adedom.utility.extension.recyclerVertical
 import com.adedom.utility.extension.textChanged
 
-class RankDialog : DialogFragment() {
+class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_rank}) {
 
-    private lateinit var mViewModel: RankDialogViewModel
     private lateinit var mAdapter: RankAdapter
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEdtSearch: EditText
@@ -30,16 +27,13 @@ class RankDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val factory = RankDialogFactory(PlayerRepository(PlayerApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(RankDialogViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_rank, null)
-
-        init(view)
+        init(bView)
 
         fetchPlayer()
 
-        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_rank, R.string.rank)
+        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_rank, R.string.rank)
     }
 
     private fun init(view: View) {
@@ -61,7 +55,7 @@ class RankDialog : DialogFragment() {
     }
 
     private fun fetchPlayer(search: String = "", limit: String = "") {
-        mViewModel.getPlayerRank(search, limit).observe(this, Observer {
+        viewModel.getPlayerRank(search, limit).observe(this, Observer {
             mAdapter.setList(it)
         })
     }

@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs.registerplayer
+package com.adedom.theegggame.ui.login
 
 import android.app.Activity
 import android.app.Dialog
@@ -11,22 +11,19 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.networks.PlayerApi
-import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.adedom.utility.extension.*
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterPlayerDialog : DialogFragment() {
+class RegisterPlayerDialog :
+    BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_add_update }) {
 
-    val TAG = "RegisterPlayerDialog"
-    private lateinit var mViewModel: RegisterPlayerDialogViewModel
     private lateinit var mEdtUsername: EditText
     private lateinit var mEdtPassword: EditText
     private lateinit var mEdtRePassword: EditText
@@ -38,15 +35,11 @@ class RegisterPlayerDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val factory = RegisterPlayerDialogFactory(PlayerRepository(PlayerApi()))
-        mViewModel =
-            ViewModelProviders.of(this, factory).get(RegisterPlayerDialogViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
 
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_add_update, null)
+        init(bView)
 
-        init(view)
-
-        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_player, R.string.register)
+        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_player, R.string.register)
     }
 
     private fun init(view: View) {
@@ -107,7 +100,7 @@ class RegisterPlayerDialog : DialogFragment() {
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
 
-        mViewModel.insertPlayer(username, password, name, mImageUri, date, time)
+        viewModel.insertPlayer(username, password, name, mImageUri, date, time)
             .observe(this, Observer {
                 if (it.result == FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)

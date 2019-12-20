@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs.createroom
+package com.adedom.theegggame.ui.multi.room
 
 import android.app.Dialog
 import android.content.Intent
@@ -7,23 +7,21 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
+import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
 import com.adedom.utility.extension.*
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
-class CreateRoomDialog : DialogFragment() {
+class CreateRoomDialog :
+    BaseDialogFragment<RoomActivityViewModel>({ R.layout.dialog_create_room }) {
 
-    private lateinit var mViewModel: CreateRoomDialogViewModel
     private lateinit var mEdtName: EditText
     private lateinit var mNumberPicker: ScrollableNumberPicker
     private lateinit var mBtnCreateRoom: Button
@@ -31,15 +29,12 @@ class CreateRoomDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val factory = CreateRoomDialogFactory(MultiRepository(MultiApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(CreateRoomDialogViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
 
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_create_room, null)
-
-        init(view)
+        init(bView)
 
         return AlertDialog.Builder(activity!!)
-            .dialog(view, R.drawable.ic_add_black, R.string.create_room)
+            .dialog(bView, R.drawable.ic_add_black, R.string.create_room)
     }
 
     private fun init(view: View) {
@@ -60,7 +55,7 @@ class CreateRoomDialog : DialogFragment() {
         val playerId = GameActivity.sContext.getPrefLogin(PLAYER_ID)
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        mViewModel.insertRoom(name, people, playerId, date, time).observe(this, Observer {
+        viewModel.insertRoom(name, people, playerId, date, time).observe(this, Observer {
             if (it.result == FAILED) {
                 GameActivity.sContext.failed()
             } else {

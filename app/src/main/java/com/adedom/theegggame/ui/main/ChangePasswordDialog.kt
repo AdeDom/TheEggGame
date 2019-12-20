@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs.changepassword
+package com.adedom.theegggame.ui.main
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,22 +6,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.data.networks.PlayerApi
-import com.adedom.theegggame.data.repositories.PlayerRepository
+import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.COMPLETED
 import com.adedom.utility.PLAYER
 import com.adedom.utility.checkPassword
 import com.adedom.utility.extension.*
 
-class ChangePasswordDialog : DialogFragment() {
+class ChangePasswordDialog :
+    BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
 
-    private lateinit var mViewModel: ChangePasswordDialogViewModel
     private lateinit var mPlayer: Player
     private lateinit var mEdtUsername: EditText
     private lateinit var mEdtOldPassword: EditText
@@ -32,18 +30,14 @@ class ChangePasswordDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val factory = ChangePasswordDialogFactory(PlayerRepository(PlayerApi()))
-        mViewModel =
-            ViewModelProviders.of(this, factory).get(ChangePasswordDialogViewModel::class.java)
-
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_change_password, null)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         mPlayer = arguments!!.getParcelable(PLAYER)!!
 
-        init(view)
+        init(bView)
 
         return AlertDialog.Builder(activity!!)
-            .dialog(view, R.drawable.ic_change, R.string.change_password)
+            .dialog(bView, R.drawable.ic_change, R.string.change_password)
     }
 
     private fun init(view: View) {
@@ -74,7 +68,7 @@ class ChangePasswordDialog : DialogFragment() {
         val oldPassword = mEdtOldPassword.getContent()
         val newPassword = mEdtNewPassword.getContent()
 
-        mViewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
+        viewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {
                 if (it.result == COMPLETED) {
                     dialog!!.dismiss()

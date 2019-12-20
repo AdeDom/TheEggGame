@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<E : Any>(
+abstract class BaseAdapter<E>(
     private val resource: () -> Int,
     private val bindView: (holder: BaseAdapter<E>.BaseHolder, position: Int, items: ArrayList<E>) -> Unit
 ) : RecyclerView.Adapter<BaseAdapter<E>.BaseHolder>() {
 
     private var items = ArrayList<E>()
+    var onItemClick: ((E) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder =
         BaseHolder(
@@ -28,5 +29,11 @@ abstract class BaseAdapter<E : Any>(
         notifyDataSetChanged()
     }
 
-    inner class BaseHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class BaseHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(items[adapterPosition])
+            }
+        }
+    }
 }

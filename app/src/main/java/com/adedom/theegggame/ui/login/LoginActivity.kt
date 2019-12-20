@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.dialogs.registerplayer.RegisterPlayerDialog
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.USERNAME
@@ -27,7 +26,8 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         mEdtUsername.setText(username)
 
         mBtnReg.setOnClickListener {
-            RegisterPlayerDialog().show(supportFragmentManager, null)
+            RegisterPlayerDialog()
+                .show(supportFragmentManager, null)
         }
         mBtnLogin.setOnClickListener { loginToMain() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }

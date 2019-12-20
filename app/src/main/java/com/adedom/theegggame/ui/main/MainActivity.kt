@@ -6,10 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.ui.dialogs.AboutDialog
-import com.adedom.theegggame.ui.dialogs.MissionDialog
-import com.adedom.theegggame.ui.dialogs.SettingDialog
-import com.adedom.theegggame.ui.dialogs.rank.RankDialog
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity

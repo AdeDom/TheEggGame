@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.dialogs
+package com.adedom.theegggame.ui.multi.multi
 
 import android.app.Dialog
 import android.os.Bundle
