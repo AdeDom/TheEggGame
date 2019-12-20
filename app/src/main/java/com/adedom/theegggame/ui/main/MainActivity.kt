@@ -43,20 +43,16 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
             startActivity(Intent(baseContext, RoomActivity::class.java))
         }
         mIvMission.setOnClickListener {
-            MissionDialog()
-                .show(supportFragmentManager, null)
+            MissionDialog().show(supportFragmentManager, null)
         }
         mIvRank.setOnClickListener {
-            RankDialog()
-                .show(supportFragmentManager, null)
+            RankDialog().show(supportFragmentManager, null)
         }
         mIvAbout.setOnClickListener {
-            AboutDialog()
-                .show(supportFragmentManager, null)
+            AboutDialog().show(supportFragmentManager, null)
         }
         mIvSetting.setOnClickListener {
-            SettingDialog()
-                .show(supportFragmentManager, null)
+            SettingDialog().show(supportFragmentManager, null)
         }
     }
 
@@ -72,11 +68,12 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     private fun insertLogs() {
+        val date = getDateTime(DATE)
+        val time = getDateTime(TIME)
         val playerId = this.getPrefLogin(PLAYER_ID)
-        viewModel.insertLogs(randomKey, getDateTime(DATE), getDateTime(TIME), playerId)
-            .observe(this, Observer {
-                if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
-            })
+        viewModel.insertLogs(randomKey, date, time, playerId).observe(this, Observer {
+            if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
+        })
     }
 
     override fun gameLoop() {

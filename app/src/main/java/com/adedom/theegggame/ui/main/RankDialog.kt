@@ -18,11 +18,6 @@ import com.adedom.utility.extension.textChanged
 class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_rank}) {
 
     private lateinit var mAdapter: RankAdapter
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mEdtSearch: EditText
-    private lateinit var mBtnRank10: Button
-    private lateinit var mBtnRank50: Button
-    private lateinit var mBtnRank100: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
@@ -37,21 +32,21 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
     }
 
     private fun init(view: View) {
-        mEdtSearch = view.findViewById(R.id.mEtSearch) as EditText
-        mBtnRank10 = view.findViewById(R.id.mBtRank10) as Button
-        mBtnRank50 = view.findViewById(R.id.mBtRank50) as Button
-        mBtnRank100 = view.findViewById(R.id.mBtRank100) as Button
-        mRecyclerView = view.findViewById(R.id.mRecyclerView) as RecyclerView
+        val etSearch = view.findViewById(R.id.mEtSearch) as EditText
+        val btRank10 = view.findViewById(R.id.mBtRank10) as Button
+        val btRank50 = view.findViewById(R.id.mBtRank50) as Button
+        val btRank100 = view.findViewById(R.id.mBtRank100) as Button
+        val recyclerView = view.findViewById(R.id.mRecyclerView) as RecyclerView
 
         mAdapter = RankAdapter()
 
-        mRecyclerView.recyclerVertical { it.adapter = mAdapter }
+        recyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mEdtSearch.textChanged { fetchPlayers(it) }
+        etSearch.textChanged { fetchPlayers(it) }
 
-        mBtnRank10.setOnClickListener { fetchPlayers(limit = "10") }
-        mBtnRank50.setOnClickListener { fetchPlayers(limit = "50") }
-        mBtnRank100.setOnClickListener { fetchPlayers(limit = "100") }
+        btRank10.setOnClickListener { fetchPlayers(limit = "10") }
+        btRank50.setOnClickListener { fetchPlayers(limit = "50") }
+        btRank100.setOnClickListener { fetchPlayers(limit = "100") }
     }
 
     private fun fetchPlayers(search: String = "", limit: String = "") {

@@ -21,11 +21,9 @@ class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
 
     private lateinit var mPlayer: Player
-    private lateinit var mEtUsername: EditText
     private lateinit var mEtOldPassword: EditText
     private lateinit var mEtNewPassword: EditText
     private lateinit var mEtRePassword: EditText
-    private lateinit var mBtChangePassword: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
@@ -41,15 +39,15 @@ class ChangePasswordDialog :
     }
 
     private fun init(view: View) {
-        mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
         mEtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
         mEtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
         mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
-        mBtChangePassword = view.findViewById(R.id.mBtSave) as Button
 
-        mEtUsername.setText(mPlayer.username)
+        val etUsername = view.findViewById(R.id.mEtUsername) as EditText
+        val btChangePassword = view.findViewById(R.id.mBtSave) as Button
 
-        mBtChangePassword.setOnClickListener { changePassword() }
+        etUsername.setText(mPlayer.username)
+        btChangePassword.setOnClickListener { changePassword() }
     }
 
     private fun changePassword() {

@@ -16,10 +16,6 @@ import com.adedom.utility.extension.login
 
 class SettingDialog : DialogFragment() {
 
-    private lateinit var mBtnChange: Button
-    private lateinit var mBtnLogout: Button
-    private lateinit var mBtnExit: Button
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
@@ -35,11 +31,11 @@ class SettingDialog : DialogFragment() {
 
         //todo update name & profile
 
-        mBtnChange = view.findViewById(R.id.mBtChangePassword) as Button
-        mBtnLogout = view.findViewById(R.id.mBtLogout) as Button
-        mBtnExit = view.findViewById(R.id.mBtExit) as Button
+        val btChangePassword = view.findViewById(R.id.mBtChangePassword) as Button
+        val btLogout = view.findViewById(R.id.mBtLogout) as Button
+        val btExit = view.findViewById(R.id.mBtExit) as Button
 
-        mBtnChange.setOnClickListener {
+        btChangePassword.setOnClickListener {
             dialog!!.dismiss()
 
             val bundle = Bundle()
@@ -50,14 +46,14 @@ class SettingDialog : DialogFragment() {
             dialog.show(activity!!.supportFragmentManager, null)
         }
 
-        mBtnLogout.setOnClickListener {
+        btLogout.setOnClickListener {
             activity!!.login(
                 LoginActivity::class.java,
                 username = MainActivity.sPlayer.username!!
             )
         }
 
-        mBtnExit.setOnClickListener {
+        btExit.setOnClickListener {
             AlertDialog.Builder(activity!!).exitDialog { GameActivity.sActivity.finishAffinity() }
         }
     }
