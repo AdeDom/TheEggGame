@@ -8,18 +8,17 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
+import com.adedom.utility.extension.recyclerGrid
+import com.adedom.utility.extension.setToolbar
+import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
 
-class RoomInfoActivity : GameActivity() {
+class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
-    private lateinit var mViewModel: RoomInfoActivityViewModel
     private lateinit var mAdapter: RoomInfoAdapter
     private var mRoomInfo = arrayListOf<RoomInfo>()
 
@@ -32,8 +31,7 @@ class RoomInfoActivity : GameActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_info)
 
-        val factory = RoomInfoActivityFactory(MultiRepository(MultiApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(RoomInfoActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RoomInfoActivityViewModel::class.java)
 
         sRoom = intent.getParcelableExtra(ROOM) as Room
 
@@ -95,27 +93,27 @@ class RoomInfoActivity : GameActivity() {
 
     private fun setReady(ready: String) {
         val roomNo = sRoom.room_no
-        mViewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
+        viewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
     }
 
     private fun setTeam() {
         val roomNo = sRoom.room_no
-        mViewModel.setTeam(roomNo!!, playerId!!, sTeam).observe(this, Observer {
+        viewModel.setTeam(roomNo!!, playerId!!, sTeam).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
     }
 
     override fun onBackPressed() {
-        mViewModel.deletePlayer(sRoom.room_no!!, playerId!!).observe(this, Observer {
+        viewModel.deletePlayer(sRoom.room_no!!, playerId!!).observe(this, Observer {
             if (it.result == COMPLETED) finish()
         })
         super.onBackPressed()
     }
 
     private fun fetchRoomInfo() {
-        mViewModel.getRoomInfo(sRoom.room_no!!).observe(this, Observer {
+        viewModel.getRoomInfo(sRoom.room_no!!).observe(this, Observer {
             mRoomInfo = it as ArrayList<RoomInfo>
             mAdapter.setList(it)
         })
@@ -128,7 +126,7 @@ class RoomInfoActivity : GameActivity() {
 
     private fun startGame() {
         if (mRoomInfo.size == mRoomInfo.count { it.status == READY } && mRoomInfo.size != 0) {
-            mViewModel.setRoomOff(sRoom.room_no!!).observe(this, Observer {
+            viewModel.setRoomOff(sRoom.room_no!!).observe(this, Observer {
                 if (it.result == COMPLETED) {
                     finish()
                     startActivity(Intent(baseContext, MultiActivity::class.java))

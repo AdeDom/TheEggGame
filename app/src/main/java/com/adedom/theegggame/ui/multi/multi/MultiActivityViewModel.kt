@@ -1,19 +1,18 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.util.BaseViewModel
 
-class MultiActivityViewModel(private val repository: MultiRepository) : ViewModel() {
+class MultiActivityViewModel : BaseViewModel() {
 
     fun setLatlng(roomNo: String, playerId: String, latitude: Double, longitude: Double) =
-        repository.setLatlng(roomNo, playerId, latitude, longitude)
+        multiRepository.setLatlng(roomNo, playerId, latitude, longitude)
 
-    fun getRoomInfo(roomNo: String) = repository.getRoomInfo(roomNo)
+    fun getRoomInfo(roomNo: String) = multiRepository.getRoomInfo(roomNo)
 
-    fun getMulti(roomNo: String) = repository.getMulti(roomNo)
+    fun getMulti(roomNo: String) = multiRepository.getMulti(roomNo)
 
     fun insertMulti(roomNo: String, latitude: Double, longitude: Double) =
-        repository.insertMulti(roomNo, latitude, longitude)
+        multiRepository.insertMulti(roomNo, latitude, longitude)
 
     fun insertMultiCollection(
         multiId: String,
@@ -24,7 +23,7 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         longitude: Double,
         date: String,
         time: String
-    ) = repository.insertMultiCollection(
+    ) = multiRepository.insertMultiCollection(
         multiId,
         roomNo,
         playerId,
@@ -35,6 +34,6 @@ class MultiActivityViewModel(private val repository: MultiRepository) : ViewMode
         time
     )
 
-    fun getMultiScore(roomNo: String) = repository.getMultiScore(roomNo)
+    fun getMultiScore(roomNo: String) = multiRepository.getMultiScore(roomNo)
 
 }

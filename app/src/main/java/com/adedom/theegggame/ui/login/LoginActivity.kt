@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.networks.PlayerApi
-import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.registerplayer.RegisterPlayerDialog
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
@@ -13,16 +11,13 @@ import com.adedom.utility.USERNAME
 import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : GameActivity() {
-
-    private lateinit var mViewModel: LoginActivityViewModel
+class LoginActivity : GameActivity<LoginActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val factory = LoginActivityFactory(PlayerRepository(PlayerApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(LoginActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
 
         init()
     }
@@ -49,7 +44,7 @@ class LoginActivity : GameActivity() {
         val username = mEdtUsername.getContent()
         val password = mEdtPassword.getContent()
 
-        mViewModel.getPlayerIdLogin(username, password).observe(this, Observer {
+        viewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.result == null) {
                 mEdtPassword.failed(getString(R.string.username_password_incorrect))
             } else {

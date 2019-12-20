@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.networks.SingleApi
-import com.adedom.theegggame.data.repositories.SingleRepository
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
 import com.adedom.utility.extension.completed
@@ -15,15 +13,12 @@ import com.adedom.utility.extension.setToolbar
 import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : MapActivity() {
-
-    private lateinit var mViewModel: SingleActivityViewModel
+class SingleActivity : MapActivity<SingleActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = SingleActivityFactory(SingleRepository(SingleApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(SingleActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
 
         init()
     }
@@ -63,7 +58,7 @@ class SingleActivity : MapActivity() {
         val lng = sLatLng.longitude
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        mViewModel.insertItem(playerId, myItem, values, lat, lng, date, time)
+        viewModel.insertItem(playerId, myItem, values, lat, lng, date, time)
             .observe(this, Observer {
                 if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
             })

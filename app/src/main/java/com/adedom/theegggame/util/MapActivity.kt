@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import com.adedom.theegggame.R
 import com.adedom.utility.GameSwitch
 import com.adedom.utility.switchCamera
@@ -23,13 +24,14 @@ import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 
-abstract class MapActivity : AppCompatActivity(),
+abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
     OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
 
     val TAG = "MapActivity"
+    lateinit var viewModel: VM
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mLocationRequest: LocationRequest
     private val mHandlerFetch = Handler()

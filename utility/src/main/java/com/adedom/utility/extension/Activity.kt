@@ -19,7 +19,7 @@ fun Activity.login(
     this.startActivity(Intent(baseContext, c).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 }
 
-fun Activity.exitMain() {
+fun Activity.exitApplication() {
     if (countExit > 0) this.finishAffinity()
     countExit++
     Handler().postDelayed({ countExit = 0 }, 2000)

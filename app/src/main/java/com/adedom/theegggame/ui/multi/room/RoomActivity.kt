@@ -7,26 +7,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
+import com.adedom.utility.extension.getPrefLogin
+import com.adedom.utility.extension.recyclerGrid
+import com.adedom.utility.extension.setToolbar
+import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_room.*
 
-class RoomActivity : GameActivity() {
+class RoomActivity : GameActivity<RoomActivityViewModel>() {
 
-    private lateinit var mViewModel: RoomActivityViewModel
     private lateinit var mAdapter: RoomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        val factory = RoomActivityFactory(MultiRepository(MultiApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(RoomActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
 
         init()
     }
@@ -51,7 +50,7 @@ class RoomActivity : GameActivity() {
         val playerId = this.getPrefLogin(PLAYER_ID)
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        mViewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
+        viewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
             if (it.result == COMPLETED) {
                 startActivity(
                     Intent(baseContext, RoomInfoActivity::class.java)
@@ -63,7 +62,7 @@ class RoomActivity : GameActivity() {
         })
     }
 
-    private fun fetchRoom() = mViewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
+    private fun fetchRoom() = viewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
 
 }
 

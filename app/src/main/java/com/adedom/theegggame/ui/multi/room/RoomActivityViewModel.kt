@@ -1,12 +1,11 @@
 package com.adedom.theegggame.ui.multi.room
 
-import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.util.BaseViewModel
 
-class RoomActivityViewModel(private val repository: MultiRepository) : ViewModel() {
+class RoomActivityViewModel : BaseViewModel() {
 
-    fun getRooms() = repository.getRooms()
+    fun getRooms() = multiRepository.getRooms()
 
     fun insertRoomInfo(roomNo: String, playerId: String, date: String, time: String) =
-        repository.insertRoomInfo(roomNo, playerId, date, time)
+        multiRepository.insertRoomInfo(roomNo, playerId, date, time)
 }

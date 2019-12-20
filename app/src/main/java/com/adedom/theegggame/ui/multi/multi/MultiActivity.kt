@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
-import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
@@ -20,13 +18,10 @@ import com.adedom.utility.extension.toast
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
-class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
-
-    private lateinit var mViewModel: MultiActivityViewModel
+class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/2562 toast name
 
     private var mRoomInfo = ArrayList<RoomInfo>()
     private var mMulti = ArrayList<Multi>()
-    private var switchItem = GameSwitch.ON
 
     private var mTime: Int = FIFTEEN_MINUTE
     private var scoreTeamA = 0
@@ -38,8 +33,7 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = MultiActivityFactory(MultiRepository(MultiApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(MultiActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MultiActivityViewModel::class.java)
 
         init()
     }
@@ -120,13 +114,13 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     private fun setLatlng() {
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        mViewModel.setLatlng(room.room_no!!, playerId!!, lat, lng).observe(this, Observer {
+        viewModel.setLatlng(room.room_no!!, playerId!!, lat, lng).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
     }
 
     private fun fetchRoomInfo() {
-        mViewModel.getRoomInfo(room.room_no!!).observe(this, Observer {
+        viewModel.getRoomInfo(room.room_no!!).observe(this, Observer {
             if (it != mRoomInfo) {
                 mRoomInfo = it as ArrayList<RoomInfo>
                 Player(mRoomInfo)
@@ -135,7 +129,7 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     }
 
     private fun fetchMulti() {
-        mViewModel.getMulti(room.room_no!!).observe(this, Observer {
+        viewModel.getMulti(room.room_no!!).observe(this, Observer {
             if (it != mMulti) {
                 mMulti = it as ArrayList<Multi>
                 Item(mMulti)
@@ -147,13 +141,13 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
         val roomNo = room.room_no
         val lat = rndLatLng(sLatLng.latitude)
         val lng = rndLatLng(sLatLng.longitude)
-        mViewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
+        viewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })
     }
 
     private fun insertMultiCollection(multiId: String) {
-        mViewModel.insertMultiCollection(
+        viewModel.insertMultiCollection(
             multiId,
             room.room_no!!,
             playerId!!,
@@ -168,7 +162,7 @@ class MultiActivity : MapActivity() { // TODO: 25/05/2562 toast name
     }
 
     private fun setScore() {
-        mViewModel.getMultiScore(room.room_no!!).observe(this, Observer {
+        viewModel.getMultiScore(room.room_no!!).observe(this, Observer {
             scoreTeamA = it.teamA
             scoreTeamB = it.teamB
         })

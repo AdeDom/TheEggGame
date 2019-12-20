@@ -1,10 +1,9 @@
 package com.adedom.theegggame.ui.login
 
-import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.repositories.PlayerRepository
+import com.adedom.theegggame.util.BaseViewModel
 
-class LoginActivityViewModel(private val repository: PlayerRepository) : ViewModel() {
+class LoginActivityViewModel : BaseViewModel() {
 
     fun getPlayerIdLogin(username: String, password: String) =
-        repository.getPlayerIdLogin(username, password)
+        playerRepository.getPlayerIdLogin(username, password)
 }

@@ -17,6 +17,21 @@ interface BaseApi {
         @Field(VALUES4) playerId: String
     ): Call<JsonResponse>
 
+    @FormUrlEncoded
+    @POST("update-logs.php")
+    fun updateLogs(
+        @Field(VALUES1) randomKey: String,
+        @Field(VALUES2) dateOut: String,
+        @Field(VALUES3) timeOut: String
+    ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("set-state.php")
+    fun setState(
+        @Field(VALUES1) playerId: String,
+        @Field(VALUES2) state: String
+    ): Call<JsonResponse>
+
     companion object {
         operator fun invoke(): BaseApi {
             return RetrofitClient.instance()

@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.data.networks.PlayerApi
-import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.AboutDialog
 import com.adedom.theegggame.ui.dialogs.MissionDialog
 import com.adedom.theegggame.ui.dialogs.SettingDialog
@@ -21,9 +19,7 @@ import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : GameActivity() {
-
-    private lateinit var mViewModel: MainActivityViewModel
+class MainActivity : GameActivity<MainActivityViewModel>() {
 
     companion object {
         lateinit var sPlayerItem: Player
@@ -33,11 +29,10 @@ class MainActivity : GameActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val factory = MainActivityFactory(PlayerRepository(PlayerApi()))
-        mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         timeStamp = System.currentTimeMillis() / 1000
-        randomKey = UUID.randomUUID().toString()
+        randomKey = UUID.randomUUID().toString().replace("-", "")
 
         init()
 
@@ -82,14 +77,14 @@ class MainActivity : GameActivity() {
 
     private fun insertLogs() {
         val playerId = this.getPrefLogin(PLAYER_ID)
-        mViewModel.insertLogs(randomKey, getDateTime(DATE), getDateTime(TIME), playerId)
+        viewModel.insertLogs(randomKey, getDateTime(DATE), getDateTime(TIME), playerId)
             .observe(this, Observer {
                 if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
             })
     }
 
     override fun gameLoop() {
-        mViewModel.getPlayers(playerId!!).observe(this, Observer {
+        viewModel.getPlayers(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
                 this.login(LoginActivity::class.java)
             } else {
@@ -101,5 +96,5 @@ class MainActivity : GameActivity() {
         })
     }
 
-    override fun onBackPressed() = this.exitMain()
+    override fun onBackPressed() = this.exitApplication()
 }

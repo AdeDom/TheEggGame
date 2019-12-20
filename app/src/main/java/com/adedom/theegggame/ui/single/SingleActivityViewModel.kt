@@ -1,9 +1,8 @@
 package com.adedom.theegggame.ui.single
 
-import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.repositories.SingleRepository
+import com.adedom.theegggame.util.BaseViewModel
 
-class SingleActivityViewModel(private val repository: SingleRepository) : ViewModel() {
+class SingleActivityViewModel : BaseViewModel() {
 
     fun insertItem(
         playerId: String,
@@ -13,5 +12,5 @@ class SingleActivityViewModel(private val repository: SingleRepository) : ViewMo
         longitude: Double,
         date: String,
         time: String
-    ) = repository.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
+    ) = singleRepository.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
 }

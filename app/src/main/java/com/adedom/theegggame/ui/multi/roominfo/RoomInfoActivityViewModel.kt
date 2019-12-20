@@ -1,19 +1,19 @@
 package com.adedom.theegggame.ui.multi.roominfo
 
-import androidx.lifecycle.ViewModel
-import com.adedom.theegggame.data.repositories.MultiRepository
+import com.adedom.theegggame.util.BaseViewModel
 
-class RoomInfoActivityViewModel(private val repository: MultiRepository) : ViewModel() {
+class RoomInfoActivityViewModel : BaseViewModel() {
 
-    fun deletePlayer(roomNo: String, playerId: String) = repository.deletePlayer(roomNo, playerId)
+    fun deletePlayer(roomNo: String, playerId: String) =
+        multiRepository.deletePlayer(roomNo, playerId)
 
-    fun getRoomInfo(roomNo: String) = repository.getRoomInfo(roomNo)
+    fun getRoomInfo(roomNo: String) = multiRepository.getRoomInfo(roomNo)
 
     fun setTeam(roomNo: String, playerId: String, team: String) =
-        repository.setTeam(roomNo, playerId, team)
+        multiRepository.setTeam(roomNo, playerId, team)
 
     fun setReady(roomNo: String, playerId: String, status: String) =
-        repository.setReady(roomNo, playerId, status)
+        multiRepository.setReady(roomNo, playerId, status)
 
-    fun setRoomOff(roomNo: String) = repository.setRoomOff(roomNo)
+    fun setRoomOff(roomNo: String) = multiRepository.setRoomOff(roomNo)
 }

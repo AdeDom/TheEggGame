@@ -50,7 +50,7 @@ fun getDateTime(dateTime: String): String {
         SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             .format(Calendar.getInstance().time)
     } else {
-        SimpleDateFormat("HH:mm", Locale.ENGLISH)
+        SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
             .format(Calendar.getInstance().time)
     }
 }
