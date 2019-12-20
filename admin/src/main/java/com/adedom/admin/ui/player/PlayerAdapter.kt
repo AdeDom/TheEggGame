@@ -3,7 +3,7 @@ package com.adedom.admin.ui.player
 import com.adedom.admin.R
 import com.adedom.admin.data.models.Player
 import com.adedom.utility.EMPTY
-import com.adedom.utility.loadProfile
+import com.adedom.utility.extension.loadProfile
 import com.adedom.utility.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_player.view.*
 

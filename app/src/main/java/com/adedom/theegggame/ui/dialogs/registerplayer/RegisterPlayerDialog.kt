@@ -20,6 +20,7 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.*
 import com.theartofdev.edmodo.cropper.CropImage
 
 class RegisterPlayerDialog : DialogFragment() {

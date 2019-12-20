@@ -14,7 +14,10 @@ import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.utility.*
+import com.adedom.utility.COMPLETED
+import com.adedom.utility.PLAYER
+import com.adedom.utility.checkPassword
+import com.adedom.utility.extension.*
 
 class ChangePasswordDialog : DialogFragment() {
 

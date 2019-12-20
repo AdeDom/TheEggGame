@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.networks.PlayerApi
 import com.adedom.theegggame.data.repositories.PlayerRepository
-import com.adedom.utility.dialog
-import com.adedom.utility.recyclerVertical
-import com.adedom.utility.textChanged
+import com.adedom.utility.extension.dialog
+import com.adedom.utility.extension.recyclerVertical
+import com.adedom.utility.extension.textChanged
 
 class RankDialog : DialogFragment() {
 

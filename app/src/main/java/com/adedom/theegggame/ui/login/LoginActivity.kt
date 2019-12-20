@@ -9,7 +9,8 @@ import com.adedom.theegggame.data.repositories.PlayerRepository
 import com.adedom.theegggame.ui.dialogs.registerplayer.RegisterPlayerDialog
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.utility.*
+import com.adedom.utility.USERNAME
+import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : GameActivity() {

@@ -12,9 +12,9 @@ import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.PLAYER
-import com.adedom.utility.dialog
-import com.adedom.utility.exitDialog
-import com.adedom.utility.login
+import com.adedom.utility.extension.dialog
+import com.adedom.utility.extension.exitDialog
+import com.adedom.utility.extension.login
 
 class SettingDialog : DialogFragment() {
 

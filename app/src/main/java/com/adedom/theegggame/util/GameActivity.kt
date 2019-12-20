@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.utility.*
 import com.adedom.utility.data.*
+import com.adedom.utility.extension.*
 import com.adedom.utility.util.Setting
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call

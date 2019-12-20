@@ -10,7 +10,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
-import com.adedom.utility.*
+import com.adedom.utility.extension.dialog
+import com.adedom.utility.extension.getContent
+import com.adedom.utility.extension.spinnerLevel
+import com.adedom.utility.isCheckOffline
+import com.adedom.utility.isCheckOnline
+import com.adedom.utility.name
+import com.adedom.utility.spinnerLevel
 
 class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 

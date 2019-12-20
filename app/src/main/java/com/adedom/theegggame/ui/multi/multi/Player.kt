@@ -4,6 +4,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 

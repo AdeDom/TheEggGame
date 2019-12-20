@@ -6,7 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
-import com.adedom.utility.*
+import com.adedom.utility.extension.recyclerVertical
+import com.adedom.utility.extension.setToolbar
+import com.adedom.utility.extension.toast
+import com.adedom.utility.isCheckOffline
+import com.adedom.utility.isCheckOnline
+import com.adedom.utility.name
+import com.adedom.utility.spinnerLevel
 import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {

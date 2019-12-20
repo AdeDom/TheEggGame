@@ -18,6 +18,7 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.*
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
 class CreateRoomDialog : DialogFragment() {

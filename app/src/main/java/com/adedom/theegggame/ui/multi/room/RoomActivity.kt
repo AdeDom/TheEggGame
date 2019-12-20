@@ -13,6 +13,7 @@ import com.adedom.theegggame.ui.dialogs.createroom.CreateRoomDialog
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_room.*
 
 class RoomActivity : GameActivity() {

@@ -1,4 +1,4 @@
-package com.adedom.utility
+package com.adedom.utility.data
 
 data class Single(
     val itemId: Int,

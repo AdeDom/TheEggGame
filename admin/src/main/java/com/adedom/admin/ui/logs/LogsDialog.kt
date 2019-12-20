@@ -9,7 +9,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
-import com.adedom.utility.*
+import com.adedom.utility.dateBegin
+import com.adedom.utility.dateEnd
+import com.adedom.utility.extension.datePickerDialog
+import com.adedom.utility.extension.dialog
+import com.adedom.utility.extension.timePickerDialog
+import com.adedom.utility.timeBegin
+import com.adedom.utility.timeEnd
 
 class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
 

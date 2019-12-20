@@ -14,6 +14,9 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.failed
+import com.adedom.utility.extension.setToolbar
+import com.adedom.utility.extension.toast
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 

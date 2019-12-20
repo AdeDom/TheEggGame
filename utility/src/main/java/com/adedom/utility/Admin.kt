@@ -1,9 +1,5 @@
 package com.adedom.utility
 
-import android.content.Context
-import android.location.Geocoder
-import android.widget.ArrayAdapter
-
 val TAG = "MyTag"
 
 const val DATE_BEGIN = "0000-00-00"
@@ -20,40 +16,3 @@ var dateBegin = DATE_BEGIN
 var timeBegin = TIME_BEGIN
 var dateEnd = DATE_NOW
 var timeEnd = TIME_NOW
-
-fun Context.getLocality(latitude: Double, longitude: Double): String {
-    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
-    return if (list[0].locality != null) {
-        list[0].locality
-    } else {
-        "unknown"
-    }
-}
-
-fun Context.getAdminArea(latitude: Double, longitude: Double): String {
-    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
-    return if (list[0].adminArea != null) {
-        list[0].adminArea
-    } else {
-        "unknown"
-    }
-}
-
-fun Context.getSubAdminArea(latitude: Double, longitude: Double): String {
-    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
-    return if (list[0].subAdminArea != null) {
-        list[0].subAdminArea
-    } else {
-        "unknown"
-    }
-}
-
-fun Context.spinnerLevel(): ArrayAdapter<Int> {
-    val list = ArrayList<Int>()
-    for (i in 0..99) list.add(i)
-    val adapter = ArrayAdapter<Int>(
-        this, android.R.layout.simple_spinner_item, list
-    )
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-    return adapter
-}

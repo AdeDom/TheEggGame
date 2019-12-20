@@ -6,9 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
-import com.adedom.utility.recyclerVertical
-import com.adedom.utility.setToolbar
-import com.adedom.utility.toast
+import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_item_collection.*
 
 class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {

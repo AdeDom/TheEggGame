@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.utility.*
+import com.adedom.utility.extension.loadProfile
 import kotlinx.android.synthetic.main.item_room_info.view.*
 
 class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoHolder>() {

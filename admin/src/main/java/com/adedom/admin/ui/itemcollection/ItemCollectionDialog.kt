@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
-import com.adedom.utility.dialog
+import com.adedom.utility.extension.dialog
 
 class ItemCollectionDialog : BaseDialogFragment({ R.layout.dialog_item_collection }) {
 

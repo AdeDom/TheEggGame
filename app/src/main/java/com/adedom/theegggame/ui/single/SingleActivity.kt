@@ -9,6 +9,10 @@ import com.adedom.theegggame.data.networks.SingleApi
 import com.adedom.theegggame.data.repositories.SingleRepository
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.completed
+import com.adedom.utility.extension.getPrefLogin
+import com.adedom.utility.extension.setToolbar
+import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : MapActivity() {

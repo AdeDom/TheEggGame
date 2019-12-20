@@ -1,6 +1,7 @@
 package com.adedom.utility
 
 import android.location.Location
+import com.adedom.utility.data.Single
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*

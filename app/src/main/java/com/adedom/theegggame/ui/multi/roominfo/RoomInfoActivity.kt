@@ -13,6 +13,7 @@ import com.adedom.theegggame.data.repositories.MultiRepository
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
+import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
 

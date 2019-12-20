@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.utility.dialog
+import com.adedom.utility.extension.dialog
 
 class FightGameDialog : DialogFragment() {
 

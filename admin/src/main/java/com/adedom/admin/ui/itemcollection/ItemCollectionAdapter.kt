@@ -3,8 +3,8 @@ package com.adedom.admin.ui.itemcollection
 import com.adedom.admin.R
 import com.adedom.admin.data.models.ItemCollection
 import com.adedom.utility.EMPTY
-import com.adedom.utility.getLocality
-import com.adedom.utility.loadProfile
+import com.adedom.utility.extension.getLocality
+import com.adedom.utility.extension.loadProfile
 import com.adedom.utility.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_single_collection.view.*
 

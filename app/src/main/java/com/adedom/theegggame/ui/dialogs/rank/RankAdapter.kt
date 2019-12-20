@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.utility.EMPTY
-import com.adedom.utility.loadProfile
+import com.adedom.utility.extension.loadProfile
 import kotlinx.android.synthetic.main.item_player.view.*
 
 class RankAdapter : RecyclerView.Adapter<RankAdapter.RankHolder>() {
