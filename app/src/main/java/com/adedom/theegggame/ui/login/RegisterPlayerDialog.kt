@@ -24,12 +24,12 @@ import com.theartofdev.edmodo.cropper.CropImage
 class RegisterPlayerDialog :
     BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_add_update }) {
 
-    private lateinit var mEdtUsername: EditText
-    private lateinit var mEdtPassword: EditText
-    private lateinit var mEdtRePassword: EditText
-    private lateinit var mEdtName: EditText
-    private lateinit var mImgProfile: ImageView
-    private lateinit var mBtnRegister: Button
+    private lateinit var mEtUsername: EditText
+    private lateinit var mEtPassword: EditText
+    private lateinit var mEtRePassword: EditText
+    private lateinit var mEtName: EditText
+    private lateinit var mIvProfile: ImageView
+    private lateinit var mBtRegister: Button
     private var mImageUri = "empty"
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -44,15 +44,15 @@ class RegisterPlayerDialog :
     }
 
     private fun init(view: View) {
-        mEdtUsername = view.findViewById(R.id.mEtUsername) as EditText
-        mEdtPassword = view.findViewById(R.id.mEtPassword) as EditText
-        mEdtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
-        mEdtName = view.findViewById(R.id.mEtName) as EditText
-        mImgProfile = view.findViewById(R.id.mIvProfile) as ImageView
-        mBtnRegister = view.findViewById(R.id.mBtSave) as Button
+        mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
+        mEtPassword = view.findViewById(R.id.mEtPassword) as EditText
+        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+        mEtName = view.findViewById(R.id.mEtName) as EditText
+        mIvProfile = view.findViewById(R.id.mIvProfile) as ImageView
+        mBtRegister = view.findViewById(R.id.mBtSave) as Button
 
-        mImgProfile.setOnClickListener { selectImage() }
-        mBtnRegister.setOnClickListener { registerPlayer() }
+        mIvProfile.setOnClickListener { selectImage() }
+        mBtRegister.setOnClickListener { registerPlayer() }
     }
 
     private fun selectImage() {
@@ -70,7 +70,7 @@ class RegisterPlayerDialog :
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
                 mImageUri = result.uri.toString()
-                mImgProfile.loadCircle(mImageUri)
+                mIvProfile.loadCircle(mImageUri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 GameActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
             }
@@ -79,15 +79,15 @@ class RegisterPlayerDialog :
 
     private fun registerPlayer() {
         when {
-            mEdtUsername.isEmpty(getString(R.string.error_username)) -> return
-            mEdtPassword.isEmpty(getString(R.string.error_password)) -> return
-            mEdtRePassword.isEmpty(getString(R.string.error_re_password)) -> return
-            mEdtName.isEmpty(getString(R.string.error_name)) -> return
-            mEdtUsername.checkLess4(getString(R.string.error_username_less)) -> return
-            mEdtPassword.checkLess4(getString(R.string.error_password_less)) -> return
+            mEtUsername.isEmpty(getString(R.string.error_username)) -> return
+            mEtPassword.isEmpty(getString(R.string.error_password)) -> return
+            mEtRePassword.isEmpty(getString(R.string.error_re_password)) -> return
+            mEtName.isEmpty(getString(R.string.error_name)) -> return
+            mEtUsername.checkLess4(getString(R.string.error_username_less)) -> return
+            mEtPassword.checkLess4(getString(R.string.error_password_less)) -> return
             checkPassword(
-                mEdtPassword,
-                mEdtRePassword,
+                mEtPassword,
+                mEtRePassword,
                 getString(R.string.error_password_not_match)
             ) -> return
         }
@@ -95,9 +95,9 @@ class RegisterPlayerDialog :
         //todo upload image
         Log.d(TAG, ">>$mImageUri")
 
-        val username = mEdtUsername.getContent()
-        val password = mEdtPassword.getContent()
-        val name = mEdtName.getContent()
+        val username = mEtUsername.getContent()
+        val password = mEtPassword.getContent()
+        val name = mEtName.getContent()
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
         viewModel.insertPlayer(username, password, name, mImageUri, date, time)

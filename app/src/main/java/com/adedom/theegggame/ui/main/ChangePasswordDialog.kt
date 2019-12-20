@@ -21,11 +21,11 @@ class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
 
     private lateinit var mPlayer: Player
-    private lateinit var mEdtUsername: EditText
-    private lateinit var mEdtOldPassword: EditText
-    private lateinit var mEdtNewPassword: EditText
-    private lateinit var mEdtRePassword: EditText
-    private lateinit var mBtnChangePassword: Button
+    private lateinit var mEtUsername: EditText
+    private lateinit var mEtOldPassword: EditText
+    private lateinit var mEtNewPassword: EditText
+    private lateinit var mEtRePassword: EditText
+    private lateinit var mBtChangePassword: Button
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
@@ -41,32 +41,32 @@ class ChangePasswordDialog :
     }
 
     private fun init(view: View) {
-        mEdtUsername = view.findViewById(R.id.mEtUsername) as EditText
-        mEdtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
-        mEdtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
-        mEdtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
-        mBtnChangePassword = view.findViewById(R.id.mBtSave) as Button
+        mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
+        mEtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
+        mEtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
+        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+        mBtChangePassword = view.findViewById(R.id.mBtSave) as Button
 
-        mEdtUsername.setText(mPlayer.username)
+        mEtUsername.setText(mPlayer.username)
 
-        mBtnChangePassword.setOnClickListener { changePassword() }
+        mBtChangePassword.setOnClickListener { changePassword() }
     }
 
     private fun changePassword() {
         when {
-            mEdtOldPassword.isEmpty(getString(R.string.error_password)) -> return
-            mEdtNewPassword.isEmpty(getString(R.string.error_password)) -> return
-            mEdtRePassword.isEmpty(getString(R.string.error_password)) -> return
-            mEdtNewPassword.checkLess4(getString(R.string.error_password_less)) -> return
+            mEtOldPassword.isEmpty(getString(R.string.error_password)) -> return
+            mEtNewPassword.isEmpty(getString(R.string.error_password)) -> return
+            mEtRePassword.isEmpty(getString(R.string.error_password)) -> return
+            mEtNewPassword.checkLess4(getString(R.string.error_password_less)) -> return
             checkPassword(
-                mEdtNewPassword,
-                mEdtRePassword,
+                mEtNewPassword,
+                mEtRePassword,
                 getString(R.string.error_password_not_match)
             ) -> return
         }
 
-        val oldPassword = mEdtOldPassword.getContent()
-        val newPassword = mEdtNewPassword.getContent()
+        val oldPassword = mEtOldPassword.getContent()
+        val newPassword = mEtNewPassword.getContent()
 
         viewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {
@@ -74,7 +74,7 @@ class ChangePasswordDialog :
                     dialog!!.dismiss()
                     GameActivity.sContext.toast(R.string.successfully)
                 } else {
-                    mEdtOldPassword.failed(getString(R.string.password_incorrect))
+                    mEtOldPassword.failed(getString(R.string.password_incorrect))
                 }
             })
     }
