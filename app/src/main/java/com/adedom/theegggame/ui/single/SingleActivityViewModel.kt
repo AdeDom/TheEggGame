@@ -4,7 +4,7 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class SingleActivityViewModel : BaseViewModel() {
 
-    fun insertItem(
+    fun insertItemCollection(
         playerId: String,
         itemId: Int,
         qty: Int,
@@ -12,5 +12,13 @@ class SingleActivityViewModel : BaseViewModel() {
         longitude: Double,
         date: String,
         time: String
-    ) = singleRepository.insertItem(playerId, itemId, qty, latitude, longitude, date, time)
+    ) = singleRepository.insertItemCollection(
+        playerId,
+        itemId,
+        qty,
+        latitude,
+        longitude,
+        date,
+        time
+    )
 }

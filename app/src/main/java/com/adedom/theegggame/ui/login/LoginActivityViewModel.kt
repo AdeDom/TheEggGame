@@ -4,8 +4,8 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class LoginActivityViewModel : BaseViewModel() {
 
-    fun getPlayerIdLogin(username: String, password: String) =
-        playerRepository.getPlayerIdLogin(username, password)
+    fun getPlayerId(username: String, password: String) =
+        playerRepository.getPlayerId(username, password)
 
     fun insertPlayer(
         username: String,

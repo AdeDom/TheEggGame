@@ -31,7 +31,7 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
 
         init(bView)
 
-        fetchPlayer()
+        fetchPlayers()
 
         return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_rank, R.string.rank)
     }
@@ -47,15 +47,15 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mEdtSearch.textChanged { fetchPlayer(it) }
+        mEdtSearch.textChanged { fetchPlayers(it) }
 
-        mBtnRank10.setOnClickListener { fetchPlayer(limit = "10") }
-        mBtnRank50.setOnClickListener { fetchPlayer(limit = "50") }
-        mBtnRank100.setOnClickListener { fetchPlayer(limit = "100") }
+        mBtnRank10.setOnClickListener { fetchPlayers(limit = "10") }
+        mBtnRank50.setOnClickListener { fetchPlayers(limit = "50") }
+        mBtnRank100.setOnClickListener { fetchPlayers(limit = "100") }
     }
 
-    private fun fetchPlayer(search: String = "", limit: String = "") {
-        viewModel.getPlayerRank(search, limit).observe(this, Observer {
+    private fun fetchPlayers(search: String = "", limit: String = "") {
+        viewModel.getPlayers(search, limit).observe(this, Observer {
             mAdapter.setList(it)
         })
     }

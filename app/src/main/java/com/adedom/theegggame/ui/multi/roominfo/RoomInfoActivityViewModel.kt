@@ -4,8 +4,8 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class RoomInfoActivityViewModel : BaseViewModel() {
 
-    fun deletePlayer(roomNo: String, playerId: String) =
-        multiRepository.deletePlayer(roomNo, playerId)
+    fun deletePlayerRoomInfo(roomNo: String, playerId: String) =
+        multiRepository.deletePlayerRoomInfo(roomNo, playerId)
 
     fun getRoomInfo(roomNo: String) = multiRepository.getRoomInfo(roomNo)
 

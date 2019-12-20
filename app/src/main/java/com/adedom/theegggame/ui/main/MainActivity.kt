@@ -18,7 +18,7 @@ import java.util.*
 class MainActivity : GameActivity<MainActivityViewModel>() {
 
     companion object {
-        lateinit var sPlayerItem: Player
+        lateinit var sPlayer: Player
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,14 +80,14 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     override fun gameLoop() {
-        viewModel.getPlayers(playerId!!).observe(this, Observer {
+        viewModel.getPlayer(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
                 this.login(LoginActivity::class.java)
             } else {
-                sPlayerItem = it
-                if (sPlayerItem.image != EMPTY) mIvProfile.loadProfile(sPlayerItem.image!!)
-                mTvName.text = sPlayerItem.name
-                mTvLevel.text = getLevel(sPlayerItem.level)
+                sPlayer = it
+                if (sPlayer.image != EMPTY) mIvProfile.loadProfile(sPlayer.image!!)
+                mTvName.text = sPlayer.name
+                mTvLevel.text = getLevel(sPlayer.level)
             }
         })
     }

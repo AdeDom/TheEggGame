@@ -106,7 +106,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     }
 
     override fun onBackPressed() {
-        viewModel.deletePlayer(sRoom.room_no!!, playerId!!).observe(this, Observer {
+        viewModel.deletePlayerRoomInfo(sRoom.room_no!!, playerId!!).observe(this, Observer {
             if (it.result == COMPLETED) finish()
         })
         super.onBackPressed()

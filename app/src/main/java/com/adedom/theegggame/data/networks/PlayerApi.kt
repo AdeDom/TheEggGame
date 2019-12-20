@@ -10,15 +10,15 @@ import retrofit2.http.POST
 interface PlayerApi {
 
     @FormUrlEncoded
-    @POST("get-player-id-login.php")
-    fun getPlayerIdLogin(
+    @POST("get-player-id.php")
+    fun getPlayerId(
         @Field(VALUES1) username: String,
         @Field(VALUES2) password: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("get-player.php")
-    fun getPlayers(
+    fun getPlayer(
         @Field(VALUES1) playerId: String
     ): Call<Player>
 
@@ -34,8 +34,8 @@ interface PlayerApi {
     ): Call<JsonResponse>
 
     @FormUrlEncoded
-    @POST("get-player-rank.php")
-    fun getPlayerRank(
+    @POST("get-players.php")
+    fun getPlayers(
         @Field(VALUES1) search: String,
         @Field(VALUES2) limit: String
     ): Call<List<Player>>

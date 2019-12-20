@@ -5,10 +5,12 @@ import com.adedom.utility.data.ApiRequest
 
 class PlayerRepository(private val api: PlayerApi) : ApiRequest() {
 
-    fun getPlayerIdLogin(username: String, password: String) =
-        apiRequest { api.getPlayerIdLogin(username, password) }
+    fun getPlayerId(username: String, password: String) =
+        apiRequest { api.getPlayerId(username, password) }
 
-    fun getPlayers(playerId: String) = apiRequest { api.getPlayers(playerId) }
+    fun getPlayer(playerId: String) = apiRequest { api.getPlayer(playerId) }
+
+    fun getPlayers(search: String, limit: String) = apiRequest { api.getPlayers(search, limit) }
 
     fun insertPlayer(
         username: String,
@@ -18,9 +20,6 @@ class PlayerRepository(private val api: PlayerApi) : ApiRequest() {
         date: String,
         time: String
     ) = apiRequest { api.insertPlayer(username, password, name, image, date, time) }
-
-    fun getPlayerRank(search: String, limit: String) =
-        apiRequest { api.getPlayerRank(search, limit) }
 
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         apiRequest { api.updatePassword(playerId, oldPassword, newPassword) }

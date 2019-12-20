@@ -43,7 +43,7 @@ class SettingDialog : DialogFragment() {
             dialog!!.dismiss()
 
             val bundle = Bundle()
-            bundle.putParcelable(PLAYER, MainActivity.sPlayerItem)
+            bundle.putParcelable(PLAYER, MainActivity.sPlayer)
 
             val dialog = ChangePasswordDialog()
             dialog.arguments = bundle
@@ -53,7 +53,7 @@ class SettingDialog : DialogFragment() {
         mBtnLogout.setOnClickListener {
             activity!!.login(
                 LoginActivity::class.java,
-                username = MainActivity.sPlayerItem.username!!
+                username = MainActivity.sPlayer.username!!
             )
         }
 

@@ -13,7 +13,7 @@ import retrofit2.http.POST
 
 interface MultiApi {
 
-    @GET("get-room.php")
+    @GET("get-rooms.php")
     fun getRooms(): Call<List<Room>>
 
     @FormUrlEncoded
@@ -37,7 +37,7 @@ interface MultiApi {
 
     @FormUrlEncoded
     @POST("delete-player-room-info.php")
-    fun deletePlayer(
+    fun deletePlayerRoomInfo(
         @Field(VALUES1) roomNo: String,
         @Field(VALUES2) playerId: String
     ): Call<JsonResponse>

@@ -5,7 +5,7 @@ import com.adedom.utility.data.ApiRequest
 
 class SingleRepository(private val api: SingleApi) : ApiRequest() {
 
-    fun insertItem(
+    fun insertItemCollection(
         playerId: String,
         itemId: Int,
         qty: Int,
@@ -13,6 +13,16 @@ class SingleRepository(private val api: SingleApi) : ApiRequest() {
         longitude: Double,
         date: String,
         time: String
-    ) = apiRequest { api.insertItem(playerId, itemId, qty, latitude, longitude, date, time) }
+    ) = apiRequest {
+        api.insertItemCollection(
+            playerId,
+            itemId,
+            qty,
+            latitude,
+            longitude,
+            date,
+            time
+        )
+    }
 
 }

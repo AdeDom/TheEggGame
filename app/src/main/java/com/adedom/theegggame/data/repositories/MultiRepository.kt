@@ -7,29 +7,17 @@ class MultiRepository(private val api: MultiApi) : ApiRequest() {
 
     fun getRooms() = apiRequest { api.getRooms() }
 
+    fun getRoomInfo(roomNo: String) = apiRequest { api.getRoomInfo(roomNo) }
+
+    fun getMulti(roomNo: String) = apiRequest { api.getMulti(roomNo) }
+
+    fun getMultiScore(roomNo: String) = apiRequest { api.getMultiScore(roomNo) }
+
     fun insertRoomInfo(roomNo: String, playerId: String, date: String, time: String) =
         apiRequest { api.insertRoomInfo(roomNo, playerId, date, time) }
 
     fun insertRoom(name: String, people: String, playerId: String, date: String, time: String) =
         apiRequest { api.insertRoom(name, people, playerId, date, time) }
-
-    fun deletePlayer(roomNo: String, playerId: String) =
-        apiRequest { api.deletePlayer(roomNo, playerId) }
-
-    fun getRoomInfo(roomNo: String) = apiRequest { api.getRoomInfo(roomNo) }
-
-    fun setTeam(roomNo: String, playerId: String, team: String) =
-        apiRequest { api.setTeam(roomNo, playerId, team) }
-
-    fun setReady(roomNo: String, playerId: String, status: String) =
-        apiRequest { api.setReady(roomNo, playerId, status) }
-
-    fun setRoomOff(roomNo: String) = apiRequest { api.setRoomOff(roomNo) }
-
-    fun setLatlng(roomNo: String, playerId: String, latitude: Double, longitude: Double) =
-        apiRequest { api.setLatlng(roomNo, playerId, latitude, longitude) }
-
-    fun getMulti(roomNo: String) = apiRequest { api.getMulti(roomNo) }
 
     fun insertMulti(roomNo: String, latitude: Double, longitude: Double) =
         apiRequest { api.insertMulti(roomNo, latitude, longitude) }
@@ -56,6 +44,18 @@ class MultiRepository(private val api: MultiApi) : ApiRequest() {
         )
     }
 
-    fun getMultiScore(roomNo: String) = apiRequest { api.getMultiScore(roomNo) }
+    fun setTeam(roomNo: String, playerId: String, team: String) =
+        apiRequest { api.setTeam(roomNo, playerId, team) }
+
+    fun setReady(roomNo: String, playerId: String, status: String) =
+        apiRequest { api.setReady(roomNo, playerId, status) }
+
+    fun setRoomOff(roomNo: String) = apiRequest { api.setRoomOff(roomNo) }
+
+    fun setLatlng(roomNo: String, playerId: String, latitude: Double, longitude: Double) =
+        apiRequest { api.setLatlng(roomNo, playerId, latitude, longitude) }
+
+    fun deletePlayerRoomInfo(roomNo: String, playerId: String) =
+        apiRequest { api.deletePlayerRoomInfo(roomNo, playerId) }
 
 }

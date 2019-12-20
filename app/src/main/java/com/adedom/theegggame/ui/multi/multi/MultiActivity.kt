@@ -27,7 +27,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
     private var scoreTeamA = 0
     private var scoreTeamB = 0
 
-    val playerId = MainActivity.sPlayerItem.playerId
+    val playerId = MainActivity.sPlayer.playerId
     val room = RoomInfoActivity.sRoom
 
     override fun onCreate(savedInstanceState: Bundle?) {

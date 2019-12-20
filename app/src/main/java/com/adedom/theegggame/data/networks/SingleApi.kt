@@ -10,7 +10,7 @@ interface SingleApi {
 
     @FormUrlEncoded
     @POST("insert-item-collection.php")
-    fun insertItem(
+    fun insertItemCollection(
         @Field(VALUES1) playerId: String,
         @Field(VALUES2) itemId: Int,
         @Field(VALUES3) qty: Int,

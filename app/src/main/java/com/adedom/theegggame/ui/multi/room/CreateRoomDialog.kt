@@ -42,7 +42,7 @@ class CreateRoomDialog :
         mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
         mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
 
-        mEdtName.setText(MainActivity.sPlayerItem.name)
+        mEdtName.setText(MainActivity.sPlayer.name)
 
         mBtnCreateRoom.setOnClickListener { createRoom() }
     }

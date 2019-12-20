@@ -4,9 +4,9 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class MainActivityViewModel : BaseViewModel() {
 
-    fun getPlayers(playerId: String) = playerRepository.getPlayers(playerId)
+    fun getPlayer(playerId: String) = playerRepository.getPlayer(playerId)
 
-    fun getPlayerRank(search: String, limit: String) = playerRepository.getPlayerRank(search, limit)
+    fun getPlayers(search: String, limit: String) = playerRepository.getPlayers(search, limit)
 
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         playerRepository.updatePassword(playerId, oldPassword, newPassword)

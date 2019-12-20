@@ -58,7 +58,7 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
         val lng = sLatLng.longitude
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.insertItem(playerId, myItem, values, lat, lng, date, time)
+        viewModel.insertItemCollection(playerId, myItem, values, lat, lng, date, time)
             .observe(this, Observer {
                 if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
             })
