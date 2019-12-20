@@ -41,16 +41,16 @@ class FightGameDialog : DialogFragment() {
 
     private fun init(view: View) {
         mTvScore = view.findViewById(R.id.mTvScore) as TextView
-        mBtnOne = view.findViewById(R.id.mBtnOne) as Button
-        mBtnTwo = view.findViewById(R.id.mBtnTwo) as Button
-        mBtnThree = view.findViewById(R.id.mBtnThree) as Button
-        mBtnFour = view.findViewById(R.id.mBtnFour) as Button
-        mBtnFive = view.findViewById(R.id.mBtnFive) as Button
-        mBtnSix = view.findViewById(R.id.mBtnSix) as Button
-        mBtnSeven = view.findViewById(R.id.mBtnSeven) as Button
-        mBtnEight = view.findViewById(R.id.mBtnEight) as Button
-        mBtnNine = view.findViewById(R.id.mBtnNine) as Button
-        mBtnGiveUp = view.findViewById(R.id.mBtnGiveUp) as Button
+        mBtnOne = view.findViewById(R.id.mBtOne) as Button
+        mBtnTwo = view.findViewById(R.id.mBtTwo) as Button
+        mBtnThree = view.findViewById(R.id.mBtThree) as Button
+        mBtnFour = view.findViewById(R.id.mBtFour) as Button
+        mBtnFive = view.findViewById(R.id.mBtFive) as Button
+        mBtnSix = view.findViewById(R.id.mBtSix) as Button
+        mBtnSeven = view.findViewById(R.id.mBtSeven) as Button
+        mBtnEight = view.findViewById(R.id.mBtEight) as Button
+        mBtnNine = view.findViewById(R.id.mBtNine) as Button
+        mBtnGiveUp = view.findViewById(R.id.mBtGiveUp) as Button
 
         mBtnOne.setOnClickListener { v -> setScore(v) }
         mBtnTwo.setOnClickListener { v -> setScore(v) }

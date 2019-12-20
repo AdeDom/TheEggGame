@@ -22,14 +22,12 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
     }
 
     private fun init() {
-        val username = this.getPrefLogin(USERNAME)
-        mEdtUsername.setText(username)
+        mEtUsername.setText(this.getPrefLogin(USERNAME))
 
-        mBtnReg.setOnClickListener {
-            RegisterPlayerDialog()
-                .show(supportFragmentManager, null)
+        mBtRegister.setOnClickListener {
+            RegisterPlayerDialog().show(supportFragmentManager, null)
         }
-        mBtnLogin.setOnClickListener { loginToMain() }
+        mBtLogin.setOnClickListener { loginToMain() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }
     }
 
@@ -37,16 +35,16 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         // TODO: 20/05/2562 login one user only
 
         when {
-            mEdtUsername.isEmpty(getString(R.string.error_username)) -> return
-            mEdtPassword.isEmpty(getString(R.string.error_password)) -> return
+            mEtUsername.isEmpty(getString(R.string.error_username)) -> return
+            mEtPassword.isEmpty(getString(R.string.error_password)) -> return
         }
 
-        val username = mEdtUsername.getContent()
-        val password = mEdtPassword.getContent()
+        val username = mEtUsername.getContent()
+        val password = mEtPassword.getContent()
 
         viewModel.getPlayerIdLogin(username, password).observe(this, Observer {
             if (it.result == null) {
-                mEdtPassword.failed(getString(R.string.username_password_incorrect))
+                mEtPassword.failed(getString(R.string.username_password_incorrect))
             } else {
                 this.login(MainActivity::class.java, it.result!!, username)
             }

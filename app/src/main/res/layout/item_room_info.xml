@@ -14,14 +14,14 @@
             android:layout_height="wrap_content">
 
         <ImageView
-                android:id="@+id/mImgKing"
+                android:id="@+id/mIvKing"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_king"
                 android:visibility="invisible" />
 
         <ImageView
-                android:id="@+id/mImgProfile"
+                android:id="@+id/mIvProfile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
@@ -53,7 +53,7 @@
                 android:textColor="@android:color/black" />
 
         <ImageView
-                android:id="@+id/mImgReady"
+                android:id="@+id/mIvReady"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"/>

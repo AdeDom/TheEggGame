@@ -39,16 +39,17 @@ class RegisterPlayerDialog :
 
         init(bView)
 
-        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_player, R.string.register)
+        return AlertDialog.Builder(activity!!)
+            .dialog(bView, R.drawable.ic_player, R.string.register)
     }
 
     private fun init(view: View) {
-        mEdtUsername = view.findViewById(R.id.mEdtUsername) as EditText
-        mEdtPassword = view.findViewById(R.id.mEdtPassword) as EditText
-        mEdtRePassword = view.findViewById(R.id.mEdtRePassword) as EditText
-        mEdtName = view.findViewById(R.id.mEdtName) as EditText
-        mImgProfile = view.findViewById(R.id.mImgProfile) as ImageView
-        mBtnRegister = view.findViewById(R.id.mBtnSave) as Button
+        mEdtUsername = view.findViewById(R.id.mEtUsername) as EditText
+        mEdtPassword = view.findViewById(R.id.mEtPassword) as EditText
+        mEdtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+        mEdtName = view.findViewById(R.id.mEtName) as EditText
+        mImgProfile = view.findViewById(R.id.mIvProfile) as ImageView
+        mBtnRegister = view.findViewById(R.id.mBtSave) as Button
 
         mImgProfile.setOnClickListener { selectImage() }
         mBtnRegister.setOnClickListener { registerPlayer() }
@@ -99,7 +100,6 @@ class RegisterPlayerDialog :
         val name = mEdtName.getContent()
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-
         viewModel.insertPlayer(username, password, name, mImageUri, date, time)
             .observe(this, Observer {
                 if (it.result == FAILED) {

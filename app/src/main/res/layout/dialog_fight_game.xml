@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="0"
+        android:text="@string/zero"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <GridLayout
@@ -23,63 +23,63 @@
         android:rowCount="3">
 
         <Button
-            android:id="@+id/mBtnOne"
+            android:id="@+id/mBtOne"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnTwo"
+            android:id="@+id/mBtTwo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnThree"
+            android:id="@+id/mBtThree"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnFour"
+            android:id="@+id/mBtFour"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnFive"
+            android:id="@+id/mBtFive"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnSix"
+            android:id="@+id/mBtSix"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnSeven"
+            android:id="@+id/mBtSeven"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnEight"
+            android:id="@+id/mBtEight"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
             android:background="@drawable/shape_btn_fight_gray" />
 
         <Button
-            android:id="@+id/mBtnNine"
+            android:id="@+id/mBtNine"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
@@ -87,10 +87,10 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/mBtnGiveUp"
+        android:id="@+id/mBtGiveUp"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Give up" />
+        android:text="@string/give_up" />
 </LinearLayout>

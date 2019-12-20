@@ -50,15 +50,15 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
         mTvPeople.text = sRoom.people
         if (sRoom.status == HEAD) {
             sTeam = TEAM_A
-            mBtnGo.text = getString(R.string.go)
+            mBtGo.text = getString(R.string.go)
         } else sTeam = TEAM_B
 
-        mBtnGo.setOnClickListener { getReadyToStartGame() }
-        mImgTeamA.setOnClickListener {
+        mBtGo.setOnClickListener { getReadyToStartGame() }
+        mIvTeamA.setOnClickListener {
             sTeam = TEAM_A
             setTeam()
         }
-        mImgTeamB.setOnClickListener {
+        mIvTeamB.setOnClickListener {
             sTeam = TEAM_B
             setTeam()
         }

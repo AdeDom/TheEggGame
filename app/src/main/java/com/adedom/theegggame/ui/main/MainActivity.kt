@@ -36,25 +36,25 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     private fun init() {
-        mBtnSingle.setOnClickListener {
+        mBtSingle.setOnClickListener {
             startActivity(Intent(baseContext, SingleActivity::class.java))
         }
-        mBtnMulti.setOnClickListener {
+        mBtMulti.setOnClickListener {
             startActivity(Intent(baseContext, RoomActivity::class.java))
         }
-        mImgMission.setOnClickListener {
+        mIvMission.setOnClickListener {
             MissionDialog()
                 .show(supportFragmentManager, null)
         }
-        mImgRank.setOnClickListener {
+        mIvRank.setOnClickListener {
             RankDialog()
                 .show(supportFragmentManager, null)
         }
-        mImgAbout.setOnClickListener {
+        mIvAbout.setOnClickListener {
             AboutDialog()
                 .show(supportFragmentManager, null)
         }
-        mImgSetting.setOnClickListener {
+        mIvSetting.setOnClickListener {
             SettingDialog()
                 .show(supportFragmentManager, null)
         }
@@ -85,7 +85,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
                 this.login(LoginActivity::class.java)
             } else {
                 sPlayerItem = it
-                if (sPlayerItem.image != EMPTY) mImgProfile.loadProfile(sPlayerItem.image!!)
+                if (sPlayerItem.image != EMPTY) mIvProfile.loadProfile(sPlayerItem.image!!)
                 mTvName.text = sPlayerItem.name
                 mTvLevel.text = getLevel(sPlayerItem.level)
             }

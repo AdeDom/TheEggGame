@@ -35,9 +35,9 @@ class SettingDialog : DialogFragment() {
 
         //todo update name & profile
 
-        mBtnChange = view.findViewById(R.id.mBtnChange) as Button
-        mBtnLogout = view.findViewById(R.id.mBtnLogout) as Button
-        mBtnExit = view.findViewById(R.id.mBtnExit) as Button
+        mBtnChange = view.findViewById(R.id.mBtChangePassword) as Button
+        mBtnLogout = view.findViewById(R.id.mBtLogout) as Button
+        mBtnExit = view.findViewById(R.id.mBtExit) as Button
 
         mBtnChange.setOnClickListener {
             dialog!!.dismiss()

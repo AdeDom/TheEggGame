@@ -24,7 +24,7 @@
                 android:rowCount="2">
 
             <ImageView
-                    android:id="@+id/mImgProfile"
+                    android:id="@+id/mIvProfile"
                     style="@style/ImageViewPlayer"
                     android:layout_rowSpan="2"
                     android:contentDescription="@string/player" />
@@ -43,7 +43,7 @@
         </GridLayout>
 
         <Button
-                android:id="@+id/mBtnSingle"
+                android:id="@+id/mBtSingle"
                 style="@style/Button"
                 android:layout_width="@dimen/buttonWidthMain"
                 android:layout_height="@dimen/buttonHeightMain"
@@ -51,7 +51,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-                android:id="@+id/mBtnMulti"
+                android:id="@+id/mBtMulti"
                 style="@style/Button"
                 android:layout_width="@dimen/buttonWidthMain"
                 android:layout_height="@dimen/buttonHeightMain"
@@ -66,7 +66,7 @@
         <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
-                    android:id="@+id/mImgMission"
+                    android:id="@+id/mIvMission"
                     style="@style/ImageViewPlayer"
                     android:src="@drawable/ic_mission"
                     android:contentDescription="@string/mission" />
@@ -79,7 +79,7 @@
         <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
-                    android:id="@+id/mImgRank"
+                    android:id="@+id/mIvRank"
                     style="@style/ImageViewPlayer"
                     android:src="@drawable/ic_rank"
                     android:contentDescription="@string/rank" />
@@ -92,7 +92,7 @@
         <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
-                    android:id="@+id/mImgAbout"
+                    android:id="@+id/mIvAbout"
                     style="@style/ImageViewPlayer"
                     android:src="@drawable/ic_h2p"
                     android:contentDescription="@string/about" />
@@ -105,7 +105,7 @@
         <LinearLayout style="@style/LinearLayoutButton">
 
             <ImageView
-                    android:id="@+id/mImgSetting"
+                    android:id="@+id/mIvSetting"
                     style="@style/ImageViewPlayer"
                     android:src="@drawable/ic_setting"
                     android:contentDescription="@string/setting" />

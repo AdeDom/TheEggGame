@@ -21,7 +21,7 @@
             android:id="@+id/mTvRoomNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="15"
+            android:text="@string/ten"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black" />
 

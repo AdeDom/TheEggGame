@@ -41,11 +41,11 @@ class ChangePasswordDialog :
     }
 
     private fun init(view: View) {
-        mEdtUsername = view.findViewById(R.id.mEdtUsername) as EditText
-        mEdtOldPassword = view.findViewById(R.id.mEdtOldPassword) as EditText
-        mEdtNewPassword = view.findViewById(R.id.mEdtNewPassword) as EditText
-        mEdtRePassword = view.findViewById(R.id.mEdtRePassword) as EditText
-        mBtnChangePassword = view.findViewById(R.id.mBtnSave) as Button
+        mEdtUsername = view.findViewById(R.id.mEtUsername) as EditText
+        mEdtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
+        mEdtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
+        mEdtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+        mBtnChangePassword = view.findViewById(R.id.mBtSave) as Button
 
         mEdtUsername.setText(mPlayer.username)
 

@@ -13,13 +13,12 @@
             android:layout_height="wrap_content">
 
         <EditText
-                android:id="@+id/mEdtSearch"
+                android:id="@+id/mEtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/shape_edit"
                 android:drawableEnd="@drawable/ic_search"
-                android:drawableTint="#aaa"
                 android:hint="@string/search"
                 android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -43,29 +42,29 @@
             android:orientation="horizontal">
 
         <Button
-                android:id="@+id/mBtnRank10"
+                android:id="@+id/mBtRank10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="10" />
+                android:text="@string/ten" />
 
         <Button
-                android:id="@+id/mBtnRank50"
+                android:id="@+id/mBtRank50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="50" />
+                android:text="@string/fifty" />
 
         <Button
-                android:id="@+id/mBtnRank100"
+                android:id="@+id/mBtRank100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/shape_bg_linear"
                 android:drawableTop="@drawable/ic_rank_small"
-                android:text="100" />
+                android:text="@string/hundred" />
     </LinearLayout>
 </LinearLayout>

@@ -38,9 +38,9 @@ class CreateRoomDialog :
     }
 
     private fun init(view: View) {
-        mEdtName = view.findViewById(R.id.mEdtName) as EditText
+        mEdtName = view.findViewById(R.id.mEtName) as EditText
         mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
-        mBtnCreateRoom = view.findViewById(R.id.mBtnCreateRoom) as Button
+        mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
 
         mEdtName.setText(MainActivity.sPlayerItem.name)
 

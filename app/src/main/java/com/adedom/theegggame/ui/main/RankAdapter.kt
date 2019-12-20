@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_player.view.*
 
 class RankAdapter : BaseAdapter<Player>({ R.layout.item_player }, { holder, position, items ->
     val player = items[position]
-    if (player.image != EMPTY) holder.itemView.mImgProfile.loadProfile(player.image!!)
+    if (player.image != EMPTY) holder.itemView.mIvProfile.loadProfile(player.image!!)
     holder.itemView.mTvName.text = player.name
     holder.itemView.mTvLevel.text = player.level.toString()
 })

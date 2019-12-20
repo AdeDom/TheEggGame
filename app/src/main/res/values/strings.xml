@@ -50,6 +50,11 @@
     <string name="time">Time</string>
     <string name="the_egg_game">The Egg Game</string>
     <string name="time_out">Time out</string>
+    <string name="give_up">Give up</string>
     <string name="zero">0</string>
+    <string name="ten">10</string>
+    <string name="fifty">50</string>
+    <string name="hundred">100</string>
+    <string name="logout">Logout</string>
 
 </resources>

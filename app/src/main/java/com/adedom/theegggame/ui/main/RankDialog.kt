@@ -37,10 +37,10 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
     }
 
     private fun init(view: View) {
-        mEdtSearch = view.findViewById(R.id.mEdtSearch) as EditText
-        mBtnRank10 = view.findViewById(R.id.mBtnRank10) as Button
-        mBtnRank50 = view.findViewById(R.id.mBtnRank50) as Button
-        mBtnRank100 = view.findViewById(R.id.mBtnRank100) as Button
+        mEdtSearch = view.findViewById(R.id.mEtSearch) as EditText
+        mBtnRank10 = view.findViewById(R.id.mBtRank10) as Button
+        mBtnRank50 = view.findViewById(R.id.mBtRank50) as Button
+        mBtnRank100 = view.findViewById(R.id.mBtRank100) as Button
         mRecyclerView = view.findViewById(R.id.mRecyclerView) as RecyclerView
 
         mAdapter = RankAdapter()

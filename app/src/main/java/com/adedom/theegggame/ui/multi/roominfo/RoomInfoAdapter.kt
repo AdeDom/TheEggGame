@@ -31,21 +31,21 @@ class RoomInfoAdapter :
             }
         }
 
-        if (position == 0) holder.itemView.mImgKing.visibility = View.VISIBLE
+        if (position == 0) holder.itemView.mIvKing.visibility = View.VISIBLE
 
-        if (image != EMPTY) holder.itemView.mImgProfile.loadProfile(image!!)
+        if (image != EMPTY) holder.itemView.mIvProfile.loadProfile(image!!)
 
         holder.itemView.mTvName.text = name
 
         holder.itemView.mTvLevel.text = getLevel(level)
 
         if (status == READY) {
-            holder.itemView.mImgReady.background = ContextCompat.getDrawable(
+            holder.itemView.mIvReady.background = ContextCompat.getDrawable(
                 holder.itemView.context,
                 R.drawable.shape_oval_green
             )
         } else {
-            holder.itemView.mImgReady.background = ContextCompat.getDrawable(
+            holder.itemView.mIvReady.background = ContextCompat.getDrawable(
                 holder.itemView.context,
                 R.drawable.shape_oval_red
             )
