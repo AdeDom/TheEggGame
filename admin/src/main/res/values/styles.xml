@@ -106,4 +106,29 @@
         <item name="android:background">@drawable/shape_et</item>
     </style>
 
+    <style name="AppBarLayout" parent="MatchWrap">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+    </style>
+
+    <style name="Toolbar" parent="MatchWrap">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="layout_collapseMode">pin</item>
+        <item name="title">@string/toolbar</item>
+        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
+    </style>
+
+    <style name="CollapsingToolbarLayout" parent="MatchWrap">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+        <item name="expandedTitleTextAppearance">@android:color/transparent</item>
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
+    </style>
+
+    <style name="include" parent="MatchWrap">
+        <item name="android:layout_margin">@dimen/large</item>
+        <item name="layout_collapseMode">parallax</item>
+    </style>
+
 </resources>

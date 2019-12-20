@@ -12,7 +12,7 @@ const val TIME_BEGIN = "00:00"
 val DATE_NOW = getDateTime(DATE)
 val TIME_NOW = getDateTime(TIME)
 
-var search = ""
+var name = ""
 var spinnerLevel = 0
 var isCheckOnline = true
 var isCheckOffline = true

@@ -27,24 +27,24 @@
             <TextView
                     android:id="@+id/tvDateIn"
                     style="@style/TextView"
-                    android:text="@string/date" />
+                    android:text="@string/date_in" />
 
             <TextView
                     android:id="@+id/tvTimeIn"
                     style="@style/TextView"
                     android:layout_marginStart="@dimen/medium"
-                    android:text="@string/time" />
+                    android:text="@string/time_in" />
 
             <TextView
                     android:id="@+id/tvDateOut"
                     style="@style/TextView"
-                    android:text="@string/date" />
+                    android:text="@string/date_out" />
 
             <TextView
                     android:id="@+id/tvTimeOut"
                     style="@style/TextView"
                     android:layout_marginStart="@dimen/medium"
-                    android:text="@string/time" />
+                    android:text="@string/time_out" />
         </GridLayout>
     </LinearLayout>
 </RelativeLayout>

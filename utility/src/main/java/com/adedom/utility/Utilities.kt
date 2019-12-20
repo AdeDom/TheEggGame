@@ -159,31 +159,31 @@ fun AlertDialog.Builder.dialog(view: View, icon: Int, title: Int) =
     this.setView(view).setIcon(icon).setTitle(title).create()
 
 fun EditText.failed(message: String = "") {
-    this.also {
-        it.requestFocus()
-        it.error = message
+    this.apply {
+        requestFocus()
+        error = message
     }
 }
 
 fun RecyclerView.recyclerVertical(rv: (RecyclerView) -> Unit) {
-    this.also {
-        it.layoutManager = LinearLayoutManager(context)
-        it.setHasFixedSize(true)
-        rv.invoke(it)
+    this.apply {
+        layoutManager = LinearLayoutManager(context)
+        setHasFixedSize(true)
+        rv.invoke(this)
     }
 }
 
 fun RecyclerView.recyclerGrid(rv: (RecyclerView) -> Unit) {
-    this.also {
-        it.layoutManager = GridLayoutManager(context, 2)
-        it.addItemDecoration(
+    this.apply {
+        layoutManager = GridLayoutManager(context, 2)
+        addItemDecoration(
             ItemDecoration(
                 2,
                 ItemDecoration.dpToPx(10, resources),
                 true
             )
         )
-        rv.invoke(it)
+        rv.invoke(this)
     }
 }
 

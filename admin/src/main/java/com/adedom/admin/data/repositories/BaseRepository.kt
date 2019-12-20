@@ -5,8 +5,8 @@ import com.adedom.utility.data.ApiRequest
 
 class BaseRepository(private val api: BaseApi) : ApiRequest() {
 
-    fun getPlayers(search: String, level: String, online: Boolean, offline: Boolean) =
-        apiRequest { api.getPlayers(search, level, online, offline) }
+    fun getPlayers(name: String, level: String, online: Boolean, offline: Boolean) =
+        apiRequest { api.getPlayers(name, level, online, offline) }
 
     fun getItemCollection() = apiRequest { api.getItemCollection() }
 

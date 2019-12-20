@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.utility.*
-import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
@@ -15,6 +15,7 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_player)
 
         viewModel = ViewModelProviders.of(this).get(PlayerActivityViewModel::class.java)
 
@@ -30,7 +31,15 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.setOnRefreshListener { fetchPlayers() }
+        mSwipeRefreshLayout.apply {
+            setColorSchemeResources(
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_blue_light
+            )
+            setOnRefreshListener { fetchPlayers() }
+        }
 
         mFloatingActionButton.setOnClickListener {
             PlayerDialog().show(supportFragmentManager, null)
@@ -38,13 +47,13 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     }
 
     private fun fetchPlayers(
-        search: String = "",
+        name: String = "",
         level: String = "",
         online: Boolean = true,
         offline: Boolean = true
     ) {
         mSwipeRefreshLayout.isRefreshing = true
-        viewModel.getPlayers(search, level, online, offline).observe(this, Observer {
+        viewModel.getPlayers(name, level, online, offline).observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
             if (it.isEmpty()) baseContext.toast(R.string.search_data_not_found, Toast.LENGTH_LONG)
             mAdapter.setList(it)
@@ -52,7 +61,7 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     }
 
     override fun onAttach() {
-        fetchPlayers(search, spinnerLevel.toString(), isCheckOnline, isCheckOffline)
+        fetchPlayers(name, spinnerLevel.toString(), isCheckOnline, isCheckOffline)
     }
 
 }

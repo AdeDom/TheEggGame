@@ -9,7 +9,7 @@ import com.adedom.admin.util.BaseActivity
 import com.adedom.utility.recyclerVertical
 import com.adedom.utility.setToolbar
 import com.adedom.utility.toast
-import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.activity_item_collection.*
 
 class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
 
@@ -17,6 +17,7 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_item_collection)
 
         viewModel = ViewModelProviders.of(this).get(ItemCollectionActivityViewModel::class.java)
 
@@ -32,7 +33,15 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.setOnRefreshListener { fetchItemCollection() }
+        mSwipeRefreshLayout.apply {
+            setColorSchemeResources(
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_blue_light
+            )
+            setOnRefreshListener { fetchItemCollection() }
+        }
 
         mFloatingActionButton.setOnClickListener {
             ItemCollectionDialog().show(supportFragmentManager, null)

@@ -27,7 +27,7 @@
             <TextView
                     android:id="@+id/tvPlace"
                     style="@style/TextView"
-                    android:text="@string/place" />
+                    android:text="@string/locality" />
         </LinearLayout>
 
         <GridLayout
@@ -40,7 +40,7 @@
                     android:id="@+id/ivItem"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@drawable/ic_egg" />
 
             <TextView
                     android:id="@+id/tvQty"

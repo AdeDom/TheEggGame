@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.utility.*
-import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.activity_logs.*
 
 class LogsActivity : BaseActivity<LogsActivityViewModel>() {
 
@@ -15,6 +15,7 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_logs)
 
         viewModel = ViewModelProviders.of(this).get(LogsActivityViewModel::class.java)
 
@@ -30,7 +31,15 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.setOnRefreshListener { fetchLogs() }
+        mSwipeRefreshLayout.apply {
+            setColorSchemeResources(
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_blue_light
+            )
+            setOnRefreshListener { fetchLogs() }
+        }
 
         mFloatingActionButton.setOnClickListener {
             LogsDialog().show(supportFragmentManager, null)

@@ -21,13 +21,13 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
     }
 
     private fun init(view: View) {
-        val etSearch = view.findViewById(R.id.mEtSearch) as EditText
+        val etName = view.findViewById(R.id.mEtName) as EditText
         val spinner = view.findViewById(R.id.mSpinner) as AppCompatSpinner
         val checkOnline = view.findViewById(R.id.mCheckOnline) as CheckBox
         val checkOffline = view.findViewById(R.id.mCheckOffline) as CheckBox
         val btSearch = view.findViewById(R.id.mBtSearch) as Button
 
-        etSearch.setText(search)
+        etName.setText(name)
 
         spinner.also {
             it.adapter = context!!.spinnerLevel()
@@ -40,7 +40,7 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 
         btSearch.setOnClickListener {
             dialog!!.dismiss()
-            search = etSearch.getContent()
+            name = etName.getContent()
             spinnerLevel = spinner.selectedItemPosition
             isCheckOnline = checkOnline.isChecked
             isCheckOffline = checkOffline.isChecked

@@ -11,10 +11,10 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/MatchWrap">
 
             <EditText
-                    android:id="@+id/mEtSearch"
+                    android:id="@+id/mEtName"
                     style="@style/EditText"
                     android:drawableEnd="@drawable/ic_search_black"
-                    android:hint="@string/search" />
+                    android:hint="@string/name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout

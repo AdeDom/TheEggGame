@@ -27,4 +27,10 @@
     <string name="locality">Locality</string>
     <string name="area">Area</string>
     <string name="sub_area">Sub area</string>
+    <string name="date_in">Date In</string>
+    <string name="time_in">Time In</string>
+    <string name="date_out">Date Out</string>
+    <string name="time_out">Time Out</string>
+
+    <string name="toolbar">Toolbar</string>
 </resources>

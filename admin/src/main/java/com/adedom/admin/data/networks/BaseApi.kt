@@ -14,7 +14,7 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("admin-get-players.php")
     fun getPlayers(
-        @Field(VALUES1) search: String,
+        @Field(VALUES1) name: String,
         @Field(VALUES2) level: String,
         @Field(VALUES3) online: Boolean,
         @Field(VALUES4) offline: Boolean
