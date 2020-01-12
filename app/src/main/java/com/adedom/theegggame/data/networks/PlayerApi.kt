@@ -30,7 +30,8 @@ interface PlayerApi {
         @Field(VALUES3) name: String,
         @Field(VALUES4) image: String,
         @Field(VALUES5) date: String,
-        @Field(VALUES6) time: String
+        @Field(VALUES6) time: String,
+        @Field(VALUES7) gender: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded

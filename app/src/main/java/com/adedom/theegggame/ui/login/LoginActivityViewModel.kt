@@ -13,6 +13,7 @@ class LoginActivityViewModel : BaseViewModel() {
         name: String,
         image: String,
         date: String,
-        time: String
-    ) = playerRepository.insertPlayer(username, password, name, image, date, time)
+        time: String,
+        gender: String
+    ) = playerRepository.insertPlayer(username, password, name, image, date, time, gender)
 }

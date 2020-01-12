@@ -17,24 +17,37 @@ class Player(items: ArrayList<RoomInfo>) {
             val latLng = LatLng(it.latitude!!, it.longitude!!)
 
             //player
-            if (it.image == EMPTY) {
-                setListMarker(
-                    markerPlayers,
-                    MapActivity.sGoogleMap,
-                    latLng,
-                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                    it.name!!,
-                    getLevel(it.level)
-                )
-            } else {
-                loadBitmapList(
-                    MapActivity.sContext,
-                    it.image!!,
-                    MapActivity.sGoogleMap!!,
-                    latLng,
-                    it.name!!,
-                    it.level!!
-                )
+            when {
+                it.image == EMPTY && it.gender == MALE -> {
+                    setListMarker(
+                        markerPlayers,
+                        MapActivity.sGoogleMap,
+                        latLng,
+                        BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                        it.name!!,
+                        getLevel(it.level)
+                    )
+                }
+                it.image == EMPTY && it.gender == FEMALE -> {
+                    setListMarker(
+                        markerPlayers,
+                        MapActivity.sGoogleMap,
+                        latLng,
+                        BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
+                        it.name!!,
+                        getLevel(it.level)
+                    )
+                }
+                it.image != EMPTY -> {
+                    loadBitmapList(
+                        MapActivity.sContext,
+                        it.image!!,
+                        MapActivity.sGoogleMap!!,
+                        latLng,
+                        it.name!!,
+                        it.level!!
+                    )
+                }
             }
 
             //Circle

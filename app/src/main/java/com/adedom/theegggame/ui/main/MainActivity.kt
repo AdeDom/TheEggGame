@@ -11,7 +11,10 @@ import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
+import com.adedom.utility.extension.exitApplication
+import com.adedom.utility.extension.getPrefLogin
+import com.adedom.utility.extension.login
+import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -82,7 +85,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
                 this.login(LoginActivity::class.java)
             } else {
                 sPlayer = it
-                if (sPlayer.image != EMPTY) mIvProfile.loadProfile(sPlayer.image!!)
+                setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)
                 mTvName.text = sPlayer.name
                 mTvLevel.text = getLevel(sPlayer.level)
             }

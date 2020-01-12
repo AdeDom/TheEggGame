@@ -11,7 +11,8 @@ data class Player(
     @SerializedName(VALUES3) val name: String? = null,
     @SerializedName(VALUES4) val image: String? = null,
     @SerializedName(VALUES5) val level: Int? = null,
-    @SerializedName(VALUES6) val state: String? = null
+    @SerializedName(VALUES6) val state: String? = null,
+    @SerializedName(VALUES7) val gender: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -19,6 +20,7 @@ data class Player(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
         parcel.readString()
     )
 
@@ -29,6 +31,7 @@ data class Player(
         parcel.writeString(image)
         parcel.writeValue(level)
         parcel.writeString(state)
+        parcel.writeString(gender)
     }
 
     override fun describeContents(): Int {

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:orientation="vertical"
         android:padding="10dp">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,6 +60,36 @@
                 android:background="@drawable/shape_edit"
                 android:hint="@string/name" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <GridLayout
+            style="@style/MatchWrap"
+            android:layout_marginTop="@dimen/large"
+            android:columnCount="3"
+            android:rowCount="1">
+
+        <TextView
+                style="@style/TextView"
+                android:text="@string/gender" />
+
+        <RadioGroup
+                style="@style/WrapWrap"
+                android:layout_columnWeight="1"
+                android:orientation="horizontal">
+
+            <RadioButton
+                    android:id="@+id/mRbMale"
+                    style="@style/WrapWrap"
+                    android:layout_marginStart="@dimen/medium"
+                    android:checked="true"
+                    android:text="@string/male" />
+
+            <RadioButton
+                    android:id="@+id/mRbFemale"
+                    style="@style/WrapWrap"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/female" />
+        </RadioGroup>
+    </GridLayout>
 
     <ImageView
             android:id="@+id/mIvProfile"

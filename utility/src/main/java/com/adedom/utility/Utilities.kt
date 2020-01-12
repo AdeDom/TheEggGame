@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.EditText
+import android.widget.ImageView
 import com.adedom.utility.data.BASE_URL
+import com.adedom.utility.extension.loadProfile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -133,4 +135,16 @@ fun loadBitmapList(
                 )
             }
         })
+}
+
+fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
+    when {
+        image == EMPTY && gender == MALE -> {
+            ivImage.setImageResource(R.drawable.ic_player)
+        }
+        image == EMPTY && gender == FEMALE -> {
+            ivImage.setImageResource(R.drawable.ic_player_female)
+        }
+        image != EMPTY -> ivImage.loadProfile(image)
+    }
 }

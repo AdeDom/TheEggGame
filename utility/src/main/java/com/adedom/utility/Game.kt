@@ -11,6 +11,7 @@ enum class GameSwitch {
 }
 
 const val CAMERA_ZOOM = 15F
+const val CAMERA_ZOOM_MIN = 12F
 const val RADIUS_ONE_HUNDRED_METER = 100.0
 const val TWO_KILOMETER = 2000.0F
 const val ONE_HUNDRED_METER = 100.0F
@@ -47,6 +48,7 @@ fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
         switchCamera = GameSwitch.OFF
         val update = CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
         googleMap!!.animateCamera(update)
+        googleMap.setMinZoomPreference(CAMERA_ZOOM_MIN)
     }
 }
 

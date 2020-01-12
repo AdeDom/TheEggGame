@@ -6,10 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,9 +25,12 @@ class RegisterDialog :
     private lateinit var mEtPassword: EditText
     private lateinit var mEtRePassword: EditText
     private lateinit var mEtName: EditText
+    private lateinit var mRbMale: RadioButton
+    private lateinit var mRbFemale: RadioButton
     private lateinit var mIvProfile: ImageView
     private lateinit var mBtRegister: Button
-    private var mImageUri = "empty"
+    private var gender = MALE
+    private var mImageUri = EMPTY
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
@@ -48,8 +48,19 @@ class RegisterDialog :
         mEtPassword = view.findViewById(R.id.mEtPassword) as EditText
         mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
         mEtName = view.findViewById(R.id.mEtName) as EditText
+        mRbMale = view.findViewById(R.id.mRbMale) as RadioButton
+        mRbFemale = view.findViewById(R.id.mRbFemale) as RadioButton
         mIvProfile = view.findViewById(R.id.mIvProfile) as ImageView
         mBtRegister = view.findViewById(R.id.mBtSave) as Button
+
+        mRbMale.setOnClickListener {
+            gender = MALE
+            if (mImageUri == EMPTY) mIvProfile.setImageResource(R.drawable.ic_player)
+        }
+        mRbFemale.setOnClickListener {
+            gender = FEMALE
+            if (mImageUri == EMPTY) mIvProfile.setImageResource(R.drawable.ic_player_female)
+        }
 
         mIvProfile.setOnClickListener { selectImage() }
         mBtRegister.setOnClickListener { register() }
@@ -100,7 +111,7 @@ class RegisterDialog :
         val name = mEtName.getContent()
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.register(username, password, name, mImageUri, date, time)
+        viewModel.register(username, password, name, mImageUri, date, time, gender)
             .observe(this, Observer {
                 if (it.result == FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)

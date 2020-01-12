@@ -19,23 +19,35 @@ class Player(latLng: LatLng) {
 
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayer
-        if (player.image == EMPTY) {
-            setMarker(
-                MapActivity.sGoogleMap!!,
-                latLng,
-                BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                player.name!!,
-                getLevel(player.level)
-            )
-        } else {
-            loadBitmap(
-                MapActivity.sContext,
-                player.image!!,
-                MapActivity.sGoogleMap!!,
-                latLng,
-                player.name!!,
-                player.level!!
-            )
+        when {
+            player.image == EMPTY && player.gender == MALE -> {
+                setMarker(
+                    MapActivity.sGoogleMap!!,
+                    latLng,
+                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                    player.name!!,
+                    getLevel(player.level)
+                )
+            }
+            player.image == EMPTY && player.gender == FEMALE -> {
+                setMarker(
+                    MapActivity.sGoogleMap!!,
+                    latLng,
+                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
+                    player.name!!,
+                    getLevel(player.level)
+                )
+            }
+            player.image != EMPTY -> {
+                loadBitmap(
+                    MapActivity.sContext,
+                    player.image!!,
+                    MapActivity.sGoogleMap!!,
+                    latLng,
+                    player.name!!,
+                    player.level!!
+                )
+            }
         }
     }
 

@@ -14,4 +14,7 @@
     <string name="state">State</string>
     <string name="search">Search</string>
 
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>
