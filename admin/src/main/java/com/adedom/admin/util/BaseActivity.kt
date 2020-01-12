@@ -16,6 +16,8 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity(), OnAttachListe
         spinnerIndexEnd = 98
         isCheckOnline = true
         isCheckOffline = true
+        isCheckMale = true
+        isCheckFemale = true
         dateBegin = DATE_BEGIN
         timeBegin = TIME_BEGIN
         dateEnd = DATE_NOW

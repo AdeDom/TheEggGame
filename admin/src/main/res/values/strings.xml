@@ -34,4 +34,7 @@
 
     <string name="toolbar">Toolbar</string>
     <string name="to">To</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>

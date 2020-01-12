@@ -54,14 +54,20 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
         levelStart: String = "1",
         levelEnd: String = "99",
         online: Boolean = true,
-        offline: Boolean = true
+        offline: Boolean = true,
+        male: Boolean = true,
+        female: Boolean = true
     ) {
         mSwipeRefreshLayout.isRefreshing = true
-        viewModel.getPlayers(name, levelStart, levelEnd, online, offline).observe(this, Observer {
-            mSwipeRefreshLayout.isRefreshing = false
-            if (it.isEmpty()) baseContext.toast(R.string.search_data_not_found, Toast.LENGTH_LONG)
-            mAdapter.setList(it)
-        })
+        viewModel.getPlayers(name, levelStart, levelEnd, online, offline, male, female)
+            .observe(this, Observer {
+                mSwipeRefreshLayout.isRefreshing = false
+                if (it.isEmpty()) baseContext.toast(
+                    R.string.search_data_not_found,
+                    Toast.LENGTH_LONG
+                )
+                mAdapter.setList(it)
+            })
     }
 
     override fun onAttach() {
@@ -70,7 +76,9 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
             spinnerIndexStart.plus(1).toString(),
             spinnerIndexEnd.plus(1).toString(),
             isCheckOnline,
-            isCheckOffline
+            isCheckOffline,
+            isCheckMale,
+            isCheckFemale
         )
     }
 

@@ -9,6 +9,8 @@ class PlayerActivityViewModel : BaseViewModel() {
         levelStart: String,
         levelEnd: String,
         online: Boolean,
-        offline: Boolean
-    ) = repository.getPlayers(name, levelStart, levelEnd, online, offline)
+        offline: Boolean,
+        male: Boolean,
+        female: Boolean
+    ) = repository.getPlayers(name, levelStart, levelEnd, online, offline, male, female)
 }

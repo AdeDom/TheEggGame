@@ -10,8 +10,10 @@ class BaseRepository(private val api: BaseApi) : ApiRequest() {
         levelStart: String,
         levelEnd: String,
         online: Boolean,
-        offline: Boolean
-    ) = apiRequest { api.getPlayers(name, levelStart, levelEnd, online, offline) }
+        offline: Boolean,
+        male: Boolean,
+        female: Boolean
+    ) = apiRequest { api.getPlayers(name, levelStart, levelEnd, online, offline, male, female) }
 
     fun getItemCollection() = apiRequest { api.getItemCollection() }
 

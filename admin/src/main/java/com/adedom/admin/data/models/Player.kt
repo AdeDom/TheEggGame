@@ -12,5 +12,6 @@ data class Player(
     @SerializedName(VALUES6) val level: Int? = null,
     @SerializedName(VALUES7) val state: String? = null,
     @SerializedName(VALUES8) val date: String? = null,
-    @SerializedName(VALUES9) val time: String? = null
+    @SerializedName(VALUES9) val time: String? = null,
+    @SerializedName(VALUES10) val gender: String? = null
 )

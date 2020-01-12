@@ -18,7 +18,9 @@ interface BaseApi {
         @Field(VALUES2) levelStart: String,
         @Field(VALUES3) levelEnd: String,
         @Field(VALUES4) online: Boolean,
-        @Field(VALUES5) offline: Boolean
+        @Field(VALUES5) offline: Boolean,
+        @Field(VALUES6) male: Boolean,
+        @Field(VALUES7) female: Boolean
     ): Call<List<Player>>
 
     @POST("admin-get-item-collection.php")

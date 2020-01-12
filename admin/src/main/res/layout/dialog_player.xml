@@ -57,6 +57,32 @@
 
             <TextView
                     style="@style/TextView"
+                    android:text="@string/gender" />
+
+            <CheckBox
+                    android:id="@+id/mCheckMale"
+                    style="@style/WrapWrap"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/male" />
+
+            <CheckBox
+                    android:id="@+id/mCheckFemale"
+                    style="@style/WrapWrap"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_marginStart="@dimen/large"
+                    android:text="@string/female" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="@style/MatchWrap"
+                android:layout_marginTop="@dimen/medium"
+                android:background="@color/gray"
+                android:padding="@dimen/medium">
+
+            <TextView
+                    style="@style/TextView"
                     android:text="@string/state" />
 
             <CheckBox

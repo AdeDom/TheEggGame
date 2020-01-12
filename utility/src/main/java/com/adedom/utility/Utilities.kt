@@ -25,6 +25,8 @@ const val PREF_LOGIN = "PREF_LOGIN"
 const val PLAYER_ID = "player_id"
 const val USERNAME = "username"
 const val EMPTY = "empty"
+const val MALE = "M"
+const val FEMALE = "F"
 
 const val DATE = "date"
 const val TIME = "time"

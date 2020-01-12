@@ -29,6 +29,8 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
         val spinnerEnd = view.findViewById(R.id.mSpinnerEnd) as AppCompatSpinner
         val checkOnline = view.findViewById(R.id.mCheckOnline) as CheckBox
         val checkOffline = view.findViewById(R.id.mCheckOffline) as CheckBox
+        val checkMale = view.findViewById(R.id.mCheckMale) as CheckBox
+        val checkFemale = view.findViewById(R.id.mCheckFemale) as CheckBox
         val btSearch = view.findViewById(R.id.mBtSearch) as Button
 
         etName.setText(name)
@@ -42,6 +44,9 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
             setSelection(spinnerIndexEnd)
         }
 
+        checkMale.isChecked = isCheckMale
+        checkFemale.isChecked = isCheckFemale
+
         checkOnline.isChecked = isCheckOnline
         checkOffline.isChecked = isCheckOffline
 
@@ -52,6 +57,8 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
             spinnerIndexEnd = spinnerEnd.selectedItemPosition
             isCheckOnline = checkOnline.isChecked
             isCheckOffline = checkOffline.isChecked
+            isCheckMale = checkMale.isChecked
+            isCheckFemale = checkFemale.isChecked
             listener.onAttach()
         }
     }
