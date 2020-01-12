@@ -9,7 +9,8 @@ val DATE_NOW = getDateTime(DATE)
 val TIME_NOW = getDateTime(TIME)
 
 var name = ""
-var spinnerLevel = 0
+var spinnerIndexStart = 0
+var spinnerIndexEnd = 98
 var isCheckOnline = true
 var isCheckOffline = true
 var dateBegin = DATE_BEGIN

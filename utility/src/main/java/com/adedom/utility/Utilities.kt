@@ -30,7 +30,7 @@ const val DATE = "date"
 const val TIME = "time"
 
 var timeStamp: Long = 0
-var randomKey: String = ""
+var rndkey: String = ""
 
 var countExit = 0
 

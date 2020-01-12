@@ -23,27 +23,9 @@ fun Context.getLocality(latitude: Double, longitude: Double): String {
     }
 }
 
-fun Context.getAdminArea(latitude: Double, longitude: Double): String {
-    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
-    return if (list[0].adminArea != null) {
-        list[0].adminArea
-    } else {
-        "unknown"
-    }
-}
-
-fun Context.getSubAdminArea(latitude: Double, longitude: Double): String {
-    val list = Geocoder(this).getFromLocation(latitude, longitude, 1)
-    return if (list[0].subAdminArea != null) {
-        list[0].subAdminArea
-    } else {
-        "unknown"
-    }
-}
-
 fun Context.spinnerLevel(): ArrayAdapter<Int> {
     val list = ArrayList<Int>()
-    for (i in 0..99) list.add(i)
+    for (i in 1..99) list.add(i)
     val adapter = ArrayAdapter<Int>(
         this, android.R.layout.simple_spinner_item, list
     )

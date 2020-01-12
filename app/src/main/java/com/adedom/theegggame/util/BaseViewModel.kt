@@ -13,6 +13,6 @@ import com.adedom.theegggame.data.repositories.SingleRepository
 abstract class BaseViewModel : ViewModel() {
     val baseRepository by lazy { BaseRepository(BaseApi.invoke()) }
     val playerRepository by lazy { PlayerRepository(PlayerApi.invoke()) }
-    val multiRepository by lazy { MultiRepository(MultiApi.invoke()) }
     val singleRepository by lazy { SingleRepository(SingleApi.invoke()) }
+    val multiRepository by lazy { MultiRepository(MultiApi.invoke()) }
 }

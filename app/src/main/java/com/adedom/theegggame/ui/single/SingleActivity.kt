@@ -41,7 +41,7 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
 
         rndMultiItem(sLatLng)
 
-        checkRadius(sLatLng) { keepItem(it) }
+        checkRadius(sLatLng) { keepItemSingle(it) }
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -51,14 +51,14 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
         Player(sLatLng)
     }
 
-    private fun keepItem(index: Int) {
+    private fun keepItemSingle(index: Int) {
         val playerId = this.getPrefLogin(PLAYER_ID)
         val (myItem, values) = getItemValues(index, timeStamp)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.insertItemCollection(playerId, myItem, values, lat, lng, date, time)
+        viewModel.keepItemSingle(playerId, myItem, values, lat, lng, date, time)
             .observe(this, Observer {
                 if (it.result == COMPLETED) baseContext.toast(detailItem(myItem, values))
             })

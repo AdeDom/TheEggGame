@@ -17,22 +17,37 @@
                     android:hint="@string/name" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <GridLayout
                 style="@style/MatchWrap"
                 android:layout_marginTop="@dimen/medium"
                 android:background="@color/gray"
-                android:padding="@dimen/medium">
+                android:columnCount="4"
+                android:padding="@dimen/medium"
+                android:rowCount="1">
 
             <TextView
                     style="@style/TextView"
+                    android:layout_columnWeight="10"
                     android:text="@string/level" />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/mSpinner"
-                    android:layout_width="match_parent"
+                    android:id="@+id/mSpinnerStart"
                     android:layout_height="@dimen/widgets"
+                    android:layout_columnWeight="40"
                     android:layout_marginStart="@dimen/medium" />
-        </LinearLayout>
+
+            <TextView
+                    style="@style/TextView"
+                    android:layout_columnWeight="10"
+                    android:layout_gravity="center"
+                    android:text="@string/to" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/mSpinnerEnd"
+                    android:layout_height="@dimen/widgets"
+                    android:layout_columnWeight="40"
+                    android:layout_marginStart="@dimen/medium" />
+        </GridLayout>
 
         <LinearLayout
                 style="@style/MatchWrap"

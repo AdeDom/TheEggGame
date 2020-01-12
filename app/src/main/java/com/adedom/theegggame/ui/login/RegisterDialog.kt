@@ -21,7 +21,7 @@ import com.adedom.utility.*
 import com.adedom.utility.extension.*
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterPlayerDialog :
+class RegisterDialog :
     BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_add_update }) {
 
     private lateinit var mEtUsername: EditText
@@ -52,7 +52,7 @@ class RegisterPlayerDialog :
         mBtRegister = view.findViewById(R.id.mBtSave) as Button
 
         mIvProfile.setOnClickListener { selectImage() }
-        mBtRegister.setOnClickListener { registerPlayer() }
+        mBtRegister.setOnClickListener { register() }
     }
 
     private fun selectImage() {
@@ -77,7 +77,7 @@ class RegisterPlayerDialog :
         }
     }
 
-    private fun registerPlayer() {
+    private fun register() {
         when {
             mEtUsername.isEmpty(getString(R.string.error_username)) -> return
             mEtPassword.isEmpty(getString(R.string.error_password)) -> return
@@ -100,7 +100,7 @@ class RegisterPlayerDialog :
         val name = mEtName.getContent()
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.insertPlayer(username, password, name, mImageUri, date, time)
+        viewModel.register(username, password, name, mImageUri, date, time)
             .observe(this, Observer {
                 if (it.result == FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)

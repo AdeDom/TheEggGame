@@ -39,8 +39,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
         mRecyclerView.recyclerGrid { it.adapter = mAdapter }
 
         mFloatingActionButton.setOnClickListener {
-            CreateRoomDialog()
-                .show(supportFragmentManager, null)
+            CreateRoomDialog().show(supportFragmentManager, null)
         }
 
         mAdapter.onItemClick = { room -> joinRoom(room) }
@@ -50,7 +49,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
         val playerId = this.getPrefLogin(PLAYER_ID)
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.insertRoomInfo(room.room_no!!, playerId, date, time).observe(this, Observer {
+        viewModel.joinRoom(room.room_no!!, playerId, date, time).observe(this, Observer {
             if (it.result == COMPLETED) {
                 startActivity(
                     Intent(baseContext, RoomInfoActivity::class.java)

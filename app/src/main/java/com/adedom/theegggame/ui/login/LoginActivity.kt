@@ -25,13 +25,13 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         mEtUsername.setText(this.getPrefLogin(USERNAME))
 
         mBtRegister.setOnClickListener {
-            RegisterPlayerDialog().show(supportFragmentManager, null)
+            RegisterDialog().show(supportFragmentManager, null)
         }
-        mBtLogin.setOnClickListener { loginToMain() }
+        mBtLogin.setOnClickListener { login() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }
     }
 
-    private fun loginToMain() {
+    private fun login() {
         // TODO: 20/05/2562 login one user only
 
         when {

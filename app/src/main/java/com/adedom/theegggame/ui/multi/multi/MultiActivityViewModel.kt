@@ -14,7 +14,7 @@ class MultiActivityViewModel : BaseViewModel() {
     fun insertMulti(roomNo: String, latitude: Double, longitude: Double) =
         multiRepository.insertMulti(roomNo, latitude, longitude)
 
-    fun insertMultiCollection(
+    fun keepItemMulti(
         multiId: String,
         roomNo: String,
         playerId: String,
@@ -34,6 +34,6 @@ class MultiActivityViewModel : BaseViewModel() {
         time
     )
 
-    fun getMultiScore(roomNo: String) = multiRepository.getMultiScore(roomNo)
+    fun getScore(roomNo: String) = multiRepository.getMultiScore(roomNo)
 
 }

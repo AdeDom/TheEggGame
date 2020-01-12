@@ -7,7 +7,7 @@ class LoginActivityViewModel : BaseViewModel() {
     fun getPlayerId(username: String, password: String) =
         playerRepository.getPlayerId(username, password)
 
-    fun insertPlayer(
+    fun register(
         username: String,
         password: String,
         name: String,

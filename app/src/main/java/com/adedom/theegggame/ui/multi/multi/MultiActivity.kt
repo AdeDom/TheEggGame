@@ -87,7 +87,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
             )
 
             if (distance[0] < ONE_HUNDRED_METER) {
-                insertMultiCollection(multi.multi_id)
+                keepItemMulti(multi.multi_id)
                 mMulti.removeAt(index)
                 Item(mMulti)
                 return
@@ -106,7 +106,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
 
         fetchMulti()
 
-        setScore()
+        fetchScore()
 
 //        fightGame()
     }
@@ -146,8 +146,8 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         })
     }
 
-    private fun insertMultiCollection(multiId: String) {
-        viewModel.insertMultiCollection(
+    private fun keepItemMulti(multiId: String) {
+        viewModel.keepItemMulti(
             multiId,
             room.room_no!!,
             playerId!!,
@@ -161,8 +161,8 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         })
     }
 
-    private fun setScore() {
-        viewModel.getMultiScore(room.room_no!!).observe(this, Observer {
+    private fun fetchScore() {
+        viewModel.getScore(room.room_no!!).observe(this, Observer {
             scoreTeamA = it.teamA
             scoreTeamB = it.teamB
         })

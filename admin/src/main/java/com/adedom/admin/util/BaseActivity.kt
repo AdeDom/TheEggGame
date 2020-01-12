@@ -12,7 +12,8 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity(), OnAttachListe
 
     init {
         name = ""
-        spinnerLevel = 0
+        spinnerIndexStart = 0
+        spinnerIndexEnd = 98
         isCheckOnline = true
         isCheckOffline = true
         dateBegin = DATE_BEGIN

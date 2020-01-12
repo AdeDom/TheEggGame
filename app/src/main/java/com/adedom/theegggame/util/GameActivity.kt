@@ -66,7 +66,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
             if (it.result == FAILED) baseContext.failed()
         })
 
-        mViewModel.updateLogs(randomKey, getDateTime(DATE), getDateTime(TIME))
+        mViewModel.updateLogs(rndkey, getDateTime(DATE), getDateTime(TIME))
             .observe(this, Observer {
                 if (it.result == FAILED) baseContext.failed()
             })
@@ -95,6 +95,6 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 class GameActivityViewModel: BaseViewModel() {
     fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
 
-    fun updateLogs(randomKey: String, dateOut: String, timeOut: String) =
-        baseRepository.updateLogs(randomKey, dateOut, timeOut)
+    fun updateLogs(key: String, dateOut: String, timeOut: String) =
+        baseRepository.updateLogs(key, dateOut, timeOut)
 }

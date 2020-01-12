@@ -15,9 +15,10 @@ interface BaseApi {
     @POST("admin-get-players.php")
     fun getPlayers(
         @Field(VALUES1) name: String,
-        @Field(VALUES2) level: String,
-        @Field(VALUES3) online: Boolean,
-        @Field(VALUES4) offline: Boolean
+        @Field(VALUES2) levelStart: String,
+        @Field(VALUES3) levelEnd: String,
+        @Field(VALUES4) online: Boolean,
+        @Field(VALUES5) offline: Boolean
     ): Call<List<Player>>
 
     @POST("admin-get-item-collection.php")

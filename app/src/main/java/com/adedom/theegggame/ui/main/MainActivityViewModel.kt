@@ -6,11 +6,12 @@ class MainActivityViewModel : BaseViewModel() {
 
     fun getPlayer(playerId: String) = playerRepository.getPlayer(playerId)
 
-    fun getPlayers(search: String, limit: String) = playerRepository.getPlayers(search, limit)
+    fun rank(search: String, limit: String) = playerRepository.getPlayers(search, limit)
 
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         playerRepository.updatePassword(playerId, oldPassword, newPassword)
 
-    fun insertLogs(randomKey: String, dateIn: String, timeIn: String, playerId: String) =
-        baseRepository.insertLogs(randomKey, dateIn, timeIn, playerId)
+    fun insertLogs(key: String, dateIn: String, timeIn: String, playerId: String) =
+        baseRepository.insertLogs(key, dateIn, timeIn, playerId)
 }
+

@@ -6,9 +6,11 @@ class RoomActivityViewModel : BaseViewModel() {
 
     fun getRooms() = multiRepository.getRooms()
 
-    fun insertRoomInfo(roomNo: String, playerId: String, date: String, time: String) =
+    fun joinRoom(roomNo: String, playerId: String, date: String, time: String) =
         multiRepository.insertRoomInfo(roomNo, playerId, date, time)
 
-    fun insertRoom(name: String, people: String, playerId: String, date: String, time: String) =
+    fun createRoom(name: String, people: String, playerId: String, date: String, time: String) =
         multiRepository.insertRoom(name, people, playerId, date, time)
 }
+
+

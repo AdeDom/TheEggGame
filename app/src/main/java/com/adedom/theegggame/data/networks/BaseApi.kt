@@ -11,7 +11,7 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("insert-logs.php")
     fun insertLogs(
-        @Field(VALUES1) randomKey: String,
+        @Field(VALUES1) key: String,
         @Field(VALUES2) dateIn: String,
         @Field(VALUES3) timeIn: String,
         @Field(VALUES4) playerId: String
@@ -20,7 +20,7 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("update-logs.php")
     fun updateLogs(
-        @Field(VALUES1) randomKey: String,
+        @Field(VALUES1) key: String,
         @Field(VALUES2) dateOut: String,
         @Field(VALUES3) timeOut: String
     ): Call<JsonResponse>

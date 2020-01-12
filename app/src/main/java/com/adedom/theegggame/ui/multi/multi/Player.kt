@@ -4,7 +4,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
+import com.adedom.utility.extension.getPrefLogin
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
@@ -12,7 +12,6 @@ class Player(items: ArrayList<RoomInfo>) {
 
     init {
         removeListMarker(markerPlayers)
-        removeCircle(myCircle)
 
         items.forEach {
             val latLng = LatLng(it.latitude!!, it.longitude!!)
@@ -40,6 +39,7 @@ class Player(items: ArrayList<RoomInfo>) {
 
             //Circle
             if (MapActivity.sContext.getPrefLogin(PLAYER_ID) == it.playerId) {
+                removeCircle(myCircle)
                 setCircle(MapActivity.sGoogleMap, latLng)
             }
         }

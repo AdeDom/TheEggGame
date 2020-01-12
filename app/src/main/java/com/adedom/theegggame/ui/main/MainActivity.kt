@@ -28,7 +28,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         timeStamp = System.currentTimeMillis() / 1000
-        randomKey = UUID.randomUUID().toString().replace("-", "")
+        rndkey = UUID.randomUUID().toString().replace("-", "")
 
         init()
 
@@ -71,7 +71,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
         val playerId = this.getPrefLogin(PLAYER_ID)
-        viewModel.insertLogs(randomKey, date, time, playerId).observe(this, Observer {
+        viewModel.insertLogs(rndkey, date, time, playerId).observe(this, Observer {
             if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
         })
     }

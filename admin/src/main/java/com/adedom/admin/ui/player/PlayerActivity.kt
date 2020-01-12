@@ -6,13 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
+import com.adedom.utility.*
 import com.adedom.utility.extension.recyclerVertical
 import com.adedom.utility.extension.setToolbar
 import com.adedom.utility.extension.toast
-import com.adedom.utility.isCheckOffline
-import com.adedom.utility.isCheckOnline
-import com.adedom.utility.name
-import com.adedom.utility.spinnerLevel
 import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
@@ -54,12 +51,13 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
     private fun fetchPlayers(
         name: String = "",
-        level: String = "",
+        levelStart: String = "1",
+        levelEnd: String = "99",
         online: Boolean = true,
         offline: Boolean = true
     ) {
         mSwipeRefreshLayout.isRefreshing = true
-        viewModel.getPlayers(name, level, online, offline).observe(this, Observer {
+        viewModel.getPlayers(name, levelStart, levelEnd, online, offline).observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
             if (it.isEmpty()) baseContext.toast(R.string.search_data_not_found, Toast.LENGTH_LONG)
             mAdapter.setList(it)
@@ -67,7 +65,13 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     }
 
     override fun onAttach() {
-        fetchPlayers(name, spinnerLevel.toString(), isCheckOnline, isCheckOffline)
+        fetchPlayers(
+            name,
+            spinnerIndexStart.plus(1).toString(),
+            spinnerIndexEnd.plus(1).toString(),
+            isCheckOnline,
+            isCheckOffline
+        )
     }
 
 }

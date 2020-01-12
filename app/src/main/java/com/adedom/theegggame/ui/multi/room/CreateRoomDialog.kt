@@ -22,7 +22,7 @@ import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 class CreateRoomDialog :
     BaseDialogFragment<RoomActivityViewModel>({ R.layout.dialog_create_room }) {
 
-    private lateinit var mEdtName: EditText
+    private lateinit var mEtName: EditText
     private lateinit var mNumberPicker: ScrollableNumberPicker
     private lateinit var mBtnCreateRoom: Button
 
@@ -38,24 +38,24 @@ class CreateRoomDialog :
     }
 
     private fun init(view: View) {
-        mEdtName = view.findViewById(R.id.mEtName) as EditText
+        mEtName = view.findViewById(R.id.mEtName) as EditText
         mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
         mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
 
-        mEdtName.setText(MainActivity.sPlayer.name)
+        mEtName.setText(MainActivity.sPlayer.name)
 
         mBtnCreateRoom.setOnClickListener { createRoom() }
     }
 
     private fun createRoom() {
-        if (mEdtName.isEmpty(getString(R.string.error_room_name))) return
+        if (mEtName.isEmpty(getString(R.string.error_room_name))) return
 
-        val name = mEdtName.getContent()
+        val name = mEtName.getContent()
         val people = mNumberPicker.value.toString().trim()
         val playerId = GameActivity.sContext.getPrefLogin(PLAYER_ID)
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        viewModel.insertRoom(name, people, playerId, date, time).observe(this, Observer {
+        viewModel.createRoom(name, people, playerId, date, time).observe(this, Observer {
             if (it.result == FAILED) {
                 GameActivity.sContext.failed()
             } else {

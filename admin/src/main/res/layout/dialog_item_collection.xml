@@ -28,54 +28,6 @@
                     android:layout_marginStart="@dimen/medium" />
         </LinearLayout>
 
-        <LinearLayout
-                style="@style/MatchWrap"
-                android:layout_marginTop="@dimen/medium"
-                android:background="@color/gray"
-                android:padding="@dimen/medium">
-
-            <TextView
-                    style="@style/TextView"
-                    android:text="@string/area" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/widgets"
-                    android:layout_marginStart="@dimen/medium" />
-        </LinearLayout>
-
-        <LinearLayout
-                style="@style/MatchWrap"
-                android:layout_marginTop="@dimen/medium"
-                android:background="@color/gray"
-                android:padding="@dimen/medium">
-
-            <TextView
-                    style="@style/TextView"
-                    android:text="@string/sub_area" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/widgets"
-                    android:layout_marginStart="@dimen/medium" />
-        </LinearLayout>
-
-        <LinearLayout
-                style="@style/MatchWrap"
-                android:layout_marginTop="@dimen/medium"
-                android:background="@color/gray"
-                android:padding="@dimen/medium">
-
-            <TextView
-                    style="@style/TextView"
-                    android:text="@string/locality" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/widgets"
-                    android:layout_marginStart="@dimen/medium" />
-        </LinearLayout>
-
         <GridLayout
                 style="@style/MatchWrap"
                 android:layout_marginTop="@dimen/medium"

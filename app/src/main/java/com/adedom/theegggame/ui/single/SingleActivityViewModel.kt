@@ -4,7 +4,7 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class SingleActivityViewModel : BaseViewModel() {
 
-    fun insertItemCollection(
+    fun keepItemSingle(
         playerId: String,
         itemId: Int,
         qty: Int,

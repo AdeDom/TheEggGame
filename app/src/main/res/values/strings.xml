@@ -3,8 +3,6 @@
     <string name="google_maps_key">AIzaSyA0X_TUK3iYed_8q7tiGzup3TworGgYEfo</string>
 
     <string name="h2p">How to play</string>
-    <string name="single">Single player</string>
-    <string name="multi">Multi player</string>
     <string name="can_not_use_single">Can not use mode Single Player!!!</string>
     <string name="least_one_person_per_team">Arrange at least 1 team per team</string>
     <string name="player_not_ready">The player is not ready yet</string>
