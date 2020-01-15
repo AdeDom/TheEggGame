@@ -13,6 +13,7 @@ import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.setReady
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
@@ -85,12 +86,12 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
                     baseContext.toast(R.string.least_one_person_per_team, Toast.LENGTH_LONG)
                     return
                 }
-                count == mRoomInfo.lastIndex -> setReady(ready())
+                count == mRoomInfo.lastIndex -> setRoomReady(setReady())
             }
-        } else setReady(ready())
+        } else setRoomReady(setReady())
     }
 
-    private fun setReady(ready: String) {
+    private fun setRoomReady(ready: String) {
         val roomNo = sRoom.room_no
         viewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
@@ -120,7 +121,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
     override fun onPause() {
         super.onPause()
-        setReady(UNREADY)
+        setRoomReady(UNREADY)
     }
 
     private fun startGame() {

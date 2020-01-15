@@ -9,7 +9,7 @@ import com.adedom.library.extension.getPrefFile
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.MapActivity
+import com.adedom.theegggame.util.*
 import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_map.*
 

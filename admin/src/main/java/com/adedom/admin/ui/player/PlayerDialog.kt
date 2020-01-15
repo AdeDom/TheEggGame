@@ -9,11 +9,10 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
 import com.adedom.admin.R
-import com.adedom.admin.util.BaseDialogFragment
+import com.adedom.admin.util.*
 import com.adedom.admin.util.extension.spinnerLevel
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.getContent
-import com.adedom.utility.*
 
 class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 

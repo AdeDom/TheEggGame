@@ -3,8 +3,12 @@ package com.adedom.theegggame.ui.single
 import android.graphics.Bitmap
 import com.adedom.library.extension.resourceBitmap
 import com.adedom.theegggame.util.MapActivity
-import com.adedom.utility.*
+import com.adedom.theegggame.util.removeListMarker
+import com.adedom.theegggame.util.titleItem
+import com.adedom.utility.R
 import com.adedom.utility.data.Single
+import com.adedom.utility.markerItems
+import com.adedom.utility.setListMarker
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 

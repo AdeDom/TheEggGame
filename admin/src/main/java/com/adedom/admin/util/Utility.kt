@@ -1,6 +1,8 @@
-package com.adedom.utility
+package com.adedom.admin.util
 
-val TAG = "MyTag"
+import com.adedom.utility.DATE
+import com.adedom.utility.TIME
+import com.adedom.utility.getDateTime
 
 const val DATE_BEGIN = "0000-00-00"
 const val TIME_BEGIN = "00:00"

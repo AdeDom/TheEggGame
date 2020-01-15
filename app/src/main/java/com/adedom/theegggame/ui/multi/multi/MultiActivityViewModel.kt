@@ -42,4 +42,6 @@ class MultiActivityViewModel : BaseViewModel() {
         var scoreTeamA = 0
         var scoreTeamB = 0
     }
+
+
 }

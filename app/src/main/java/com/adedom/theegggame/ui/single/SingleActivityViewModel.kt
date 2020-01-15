@@ -22,3 +22,4 @@ class SingleActivityViewModel : BaseViewModel() {
         time
     )
 }
+

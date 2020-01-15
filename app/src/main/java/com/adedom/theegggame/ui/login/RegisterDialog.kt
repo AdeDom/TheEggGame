@@ -15,6 +15,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.checkPassword
 import com.adedom.theegggame.util.extension.login
 import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage

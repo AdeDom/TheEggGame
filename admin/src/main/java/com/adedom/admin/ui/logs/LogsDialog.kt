@@ -8,14 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
-import com.adedom.admin.util.BaseDialogFragment
+import com.adedom.admin.util.*
 import com.adedom.library.extension.dialogDatePicker
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogTimePicker
-import com.adedom.utility.dateBegin
-import com.adedom.utility.dateEnd
-import com.adedom.utility.timeBegin
-import com.adedom.utility.timeEnd
 
 class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
 

@@ -16,7 +16,7 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sTi
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamA
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
-import com.adedom.theegggame.util.MapActivity
+import com.adedom.theegggame.util.*
 import com.adedom.utility.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
