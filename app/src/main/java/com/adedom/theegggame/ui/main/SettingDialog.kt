@@ -6,13 +6,14 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.adedom.library.extension.dialogExit
+import com.adedom.library.extension.dialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.extension.login
+import com.adedom.utility.EMPTY
 import com.adedom.utility.PLAYER
-import com.adedom.utility.extension.dialog
-import com.adedom.utility.extension.exitDialog
-import com.adedom.utility.extension.login
 
 class SettingDialog : DialogFragment() {
 
@@ -23,7 +24,8 @@ class SettingDialog : DialogFragment() {
 
         init(view)
 
-        return AlertDialog.Builder(activity!!).dialog(view, R.drawable.ic_setting, R.string.setting)
+        return AlertDialog.Builder(activity!!)
+            .dialogFragment(view, R.drawable.ic_setting, R.string.setting)
     }
 
     private fun init(view: View) {
@@ -49,12 +51,13 @@ class SettingDialog : DialogFragment() {
         btLogout.setOnClickListener {
             activity!!.login(
                 LoginActivity::class.java,
-                username = MainActivity.sPlayer.username!!
+                EMPTY,
+                MainActivity.sPlayer.username!!
             )
         }
 
         btExit.setOnClickListener {
-            AlertDialog.Builder(activity!!).exitDialog { GameActivity.sActivity.finishAffinity() }
+            AlertDialog.Builder(activity!!).dialogExit { GameActivity.sActivity.finishAffinity() }
         }
     }
 }

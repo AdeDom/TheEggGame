@@ -10,12 +10,13 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.extension.login
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
 import com.theartofdev.edmodo.cropper.CropImage
 
 class RegisterDialog :
@@ -40,7 +41,7 @@ class RegisterDialog :
         init(bView)
 
         return AlertDialog.Builder(activity!!)
-            .dialog(bView, R.drawable.ic_player, R.string.register)
+            .dialogFragment(bView, R.drawable.ic_player, R.string.register)
     }
 
     private fun init(view: View) {

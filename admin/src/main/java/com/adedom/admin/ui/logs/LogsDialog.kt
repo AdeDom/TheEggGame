@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
+import com.adedom.library.extension.dialogDatePicker
+import com.adedom.library.extension.dialogFragment
+import com.adedom.library.extension.dialogTimePicker
 import com.adedom.utility.dateBegin
 import com.adedom.utility.dateEnd
-import com.adedom.utility.extension.datePickerDialog
-import com.adedom.utility.extension.dialog
-import com.adedom.utility.extension.timePickerDialog
 import com.adedom.utility.timeBegin
 import com.adedom.utility.timeEnd
 
@@ -23,7 +23,7 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
         super.onCreateDialog(savedInstanceState)
         init(bView)
         return AlertDialog.Builder(activity!!)
-            .dialog(bView, R.drawable.ic_date_black, R.string.logs)
+            .dialogFragment(bView, R.drawable.ic_date_black, R.string.logs)
     }
 
     private fun init(view: View) {
@@ -48,28 +48,28 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
         tvTimeEnd.text = timeEnd
 
         ivDateBegin.setOnClickListener {
-            context!!.datePickerDialog { year, month, dayOfMonth ->
+            context!!.dialogDatePicker { year, month, dayOfMonth ->
                 dBegin = "$year-$month-$dayOfMonth"
                 tvDateBegin.text = dBegin
             }
         }
 
         ivTimeBegin.setOnClickListener {
-            context!!.timePickerDialog { hourOfDay, minute ->
+            context!!.dialogTimePicker { hourOfDay, minute ->
                 tBegin = "$hourOfDay:$minute"
                 tvTimeBegin.text = tBegin
             }
         }
 
         ivDateEnd.setOnClickListener {
-            context!!.datePickerDialog { year, month, dayOfMonth ->
+            context!!.dialogDatePicker { year, month, dayOfMonth ->
                 dEnd = "$year-$month-$dayOfMonth"
                 tvDateEnd.text = dEnd
             }
         }
 
         ivTimeEnd.setOnClickListener {
-            context!!.timePickerDialog { hourOfDay, minute ->
+            context!!.dialogTimePicker { hourOfDay, minute ->
                 tEnd = "$hourOfDay:$minute"
                 tvTimeEnd.text = tEnd
             }

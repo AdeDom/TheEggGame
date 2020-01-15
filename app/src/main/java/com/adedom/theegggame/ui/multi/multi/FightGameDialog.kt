@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.adedom.library.extension.dialogFragment
 import com.adedom.theegggame.R
-import com.adedom.utility.extension.dialog
 
 class FightGameDialog : DialogFragment() {
 
@@ -36,7 +36,7 @@ class FightGameDialog : DialogFragment() {
         mRunnableRndButton.run()
 
         return AlertDialog.Builder(activity!!)
-            .dialog(view, R.drawable.ic_fight_red, R.string.fight_game)
+            .dialogFragment(view, R.drawable.ic_fight_red, R.string.fight_game)
     }
 
     private fun init(view: View) {

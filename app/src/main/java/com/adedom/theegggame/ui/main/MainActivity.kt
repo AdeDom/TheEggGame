@@ -4,17 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.exitApplication
+import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.extension.login
 import com.adedom.utility.*
-import com.adedom.utility.extension.exitApplication
-import com.adedom.utility.extension.getPrefLogin
-import com.adedom.utility.extension.login
-import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -63,7 +63,8 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         if (playerId == EMPTY) {
             this.login(
                 LoginActivity::class.java,
-                username = this.getPrefLogin(USERNAME)
+                EMPTY,
+                this.getPrefFile(USERNAME)
             )
             return true
         } else insertLogs()
@@ -73,7 +74,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     private fun insertLogs() {
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
-        val playerId = this.getPrefLogin(PLAYER_ID)
+        val playerId = this.getPrefFile(PLAYER_ID)
         viewModel.insertLogs(rndkey, date, time, playerId).observe(this, Observer {
             if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
         })
@@ -82,7 +83,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     override fun gameLoop() {
         viewModel.getPlayer(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
-                this.login(LoginActivity::class.java)
+                this.login(LoginActivity::class.java, EMPTY, "")
             } else {
                 sPlayer = it
                 setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)

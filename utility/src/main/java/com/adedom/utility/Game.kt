@@ -19,9 +19,10 @@ const val TWO_HUNDRED_METER = 200.0
 const val NUMBER_OF_ITEM = 5
 const val MIN_ITEM = 5
 const val MAX_ITEM = 10
-const val FIFTEEN_MINUTE = 900
+const val FIFTEEN_MINUTE = 60
 const val THREE_KILOMETER = 3000.0F
 const val LATLNG_ZERO = 0.0
+const val START_GAME_CODE = 3006
 
 const val ROOM = "room"
 const val HEAD = "head"
@@ -31,6 +32,7 @@ const val TEAM_B = "B"
 const val READY = "ready"
 const val UNREADY = "unready"
 
+var team: String = ""
 var ready = "unready"
 
 var myLocation: Marker? = null

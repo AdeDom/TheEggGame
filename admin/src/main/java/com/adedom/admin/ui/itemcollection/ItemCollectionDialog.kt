@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
-import com.adedom.utility.extension.dialog
+import com.adedom.library.extension.dialogFragment
 
 class ItemCollectionDialog : BaseDialogFragment({ R.layout.dialog_item_collection }) {
 
@@ -14,7 +14,7 @@ class ItemCollectionDialog : BaseDialogFragment({ R.layout.dialog_item_collectio
         super.onCreateDialog(savedInstanceState)
         init(bView)
         return AlertDialog.Builder(activity!!)
-            .dialog(bView, R.drawable.ic_egg, R.string.item_collection)
+            .dialogFragment(bView, R.drawable.ic_egg, R.string.item_collection)
     }
 
     private fun init(view: View) {

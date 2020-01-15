@@ -3,11 +3,15 @@ package com.adedom.theegggame.ui.login
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.failed
+import com.adedom.library.extension.getContent
+import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.isEmpty
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.extension.login
 import com.adedom.utility.USERNAME
-import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : GameActivity<LoginActivityViewModel>() {
@@ -22,16 +26,16 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
     }
 
     private fun init() {
-        mEtUsername.setText(this.getPrefLogin(USERNAME))
+        mEtUsername.setText(this.getPrefFile(USERNAME))
 
         mBtRegister.setOnClickListener {
             RegisterDialog().show(supportFragmentManager, null)
         }
-        mBtLogin.setOnClickListener { login() }
+        mBtLogin.setOnClickListener { login1() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }
     }
 
-    private fun login() {
+    private fun login1() {
         // TODO: 20/05/2562 login one user only
 
         when {

@@ -5,16 +5,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.failed
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sTime
+import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamA
+import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.failed
-import com.adedom.utility.extension.setToolbar
-import com.adedom.utility.extension.toast
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
@@ -22,10 +25,6 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
 
     private var mRoomInfo = ArrayList<RoomInfo>()
     private var mMulti = ArrayList<Multi>()
-
-    private var mTime: Int = FIFTEEN_MINUTE
-    private var scoreTeamA = 0
-    private var scoreTeamB = 0
 
     val playerId = MainActivity.sPlayer.playerId
     val room = RoomInfoActivity.sRoom
@@ -39,7 +38,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.multi_player))
+        this.setToolbar(toolbar, getString(R.string.multi_player), true)
 
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
@@ -47,7 +46,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
     }
 
     override fun gameLoop() {
-        mTime -= 1
+        sTime -= 1
 
         rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {
             mMulti.forEach {
@@ -63,15 +62,20 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
             //todo dialog finish game && bonus team win
             scoreTeamA + scoreTeamB >= 5 -> {
                 finish()
+                baseContext.toast(R.string.end_game)
                 baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")
             }
-            mTime == 0 -> {
-                finish()
-                baseContext.toast(R.string.time_out)
-                baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")
+            sTime <= 0 -> {
+                val bundle = Bundle()
+                bundle.putString(TEAM_A, scoreTeamA.toString())
+                bundle.putString(TEAM_B, scoreTeamB.toString())
+
+                val dialog = EndGameDialog()
+                dialog.arguments = bundle
+                dialog.show(supportFragmentManager, null)
             }
             else -> {
-                mTvTime.text = mTime.toString()
+                mTvTime.text = sTime.toString()
                 mTvRed.text = scoreTeamA.toString()
                 mTvBlue.text = scoreTeamB.toString()
             }
@@ -151,7 +155,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
             multiId,
             room.room_no!!,
             playerId!!,
-            RoomInfoActivity.sTeam,
+            team,
             sLatLng.latitude,
             sLatLng.longitude,
             getDateTime(DATE),

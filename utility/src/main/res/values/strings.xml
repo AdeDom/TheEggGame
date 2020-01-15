@@ -5,7 +5,7 @@
     <string name="exit">Exit</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="on_back_pressed">Press back again to exit</string>
+    <string name="finish_affinity">Press back again to exit</string>
     <string name="player">Player</string>
 
     <string name="name">Name</string>

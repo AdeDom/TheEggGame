@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.util.BaseDialogFragment
@@ -15,7 +16,6 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.COMPLETED
 import com.adedom.utility.PLAYER
 import com.adedom.utility.checkPassword
-import com.adedom.utility.extension.*
 
 class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
@@ -35,7 +35,7 @@ class ChangePasswordDialog :
         init(bView)
 
         return AlertDialog.Builder(activity!!)
-            .dialog(bView, R.drawable.ic_change, R.string.change_password)
+            .dialogFragment(bView, R.drawable.ic_change, R.string.change_password)
     }
 
     private fun init(view: View) {

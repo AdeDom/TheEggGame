@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.failed
+import com.adedom.library.extension.getPrefFile
 import com.adedom.utility.*
-import com.adedom.utility.extension.failed
-import com.adedom.utility.extension.getPrefLogin
 import com.adedom.utility.util.Setting
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
@@ -46,7 +46,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
         // todo music
 
-        playerId = this.getPrefLogin(PLAYER_ID)
+        playerId = this.getPrefFile(PLAYER_ID)
         mViewModel.setState(playerId!!, ONLINE).observe(this, Observer {
             if (it.result == FAILED) baseContext.failed()
         })

@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.recyclerGrid
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.recyclerGrid
-import com.adedom.utility.extension.setToolbar
-import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
 
@@ -24,7 +24,6 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
     companion object {
         lateinit var sRoom: Room
-        lateinit var sTeam: String
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.multi_player))
+        this.setToolbar(toolbar, getString(R.string.multi_player), true)
 
         mAdapter = RoomInfoAdapter()
 
@@ -49,17 +48,17 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
         mTvName.text = sRoom.name
         mTvPeople.text = sRoom.people
         if (sRoom.status == HEAD) {
-            sTeam = TEAM_A
+            team = TEAM_A
             mBtGo.text = getString(R.string.go)
-        } else sTeam = TEAM_B
+        } else team = TEAM_B
 
         mBtGo.setOnClickListener { getReadyToStartGame() }
         mIvTeamA.setOnClickListener {
-            sTeam = TEAM_A
+            team = TEAM_A
             setTeam()
         }
         mIvTeamB.setOnClickListener {
-            sTeam = TEAM_B
+            team = TEAM_B
             setTeam()
         }
     }
@@ -100,7 +99,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
     private fun setTeam() {
         val roomNo = sRoom.room_no
-        viewModel.setTeam(roomNo!!, playerId!!, sTeam).observe(this, Observer {
+        viewModel.setTeam(roomNo!!, playerId!!, team).observe(this, Observer {
             if (it.result == COMPLETED) fetchRoomInfo()
         })
     }

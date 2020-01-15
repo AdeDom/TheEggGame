@@ -6,8 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
+import com.adedom.library.extension.recyclerVertical
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
 import kotlinx.android.synthetic.main.activity_logs.*
 
 class LogsActivity : BaseActivity<LogsActivityViewModel>() {
@@ -26,7 +28,7 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.report3))
+        this.setToolbar(toolbar, getString(R.string.report3), true)
 
         mAdapter = LogsAdapter()
 

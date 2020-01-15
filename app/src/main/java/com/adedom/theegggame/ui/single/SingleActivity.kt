@@ -4,13 +4,13 @@ import android.location.Location
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.completed
+import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.completed
-import com.adedom.utility.extension.getPrefLogin
-import com.adedom.utility.extension.setToolbar
-import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : MapActivity<SingleActivityViewModel>() {
@@ -24,7 +24,7 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.single_player))
+        this.setToolbar(toolbar, getString(R.string.single_player), true)
 
         mFloatingActionButton.setOnClickListener {
             baseContext.completed()
@@ -52,7 +52,7 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
     }
 
     private fun keepItemSingle(index: Int) {
-        val playerId = this.getPrefLogin(PLAYER_ID)
+        val playerId = this.getPrefFile(PLAYER_ID)
         val (myItem, values) = getItemValues(index, timeStamp)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude

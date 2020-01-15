@@ -1,6 +1,7 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import com.adedom.theegggame.util.BaseViewModel
+import com.adedom.utility.FIFTEEN_MINUTE
 
 class MultiActivityViewModel : BaseViewModel() {
 
@@ -36,4 +37,9 @@ class MultiActivityViewModel : BaseViewModel() {
 
     fun getScore(roomNo: String) = multiRepository.getMultiScore(roomNo)
 
+    companion object {
+        var sTime: Int = FIFTEEN_MINUTE
+        var scoreTeamA = 0
+        var scoreTeamB = 0
+    }
 }

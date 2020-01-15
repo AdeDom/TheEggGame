@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
+import com.adedom.library.extension.recyclerVertical
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.utility.*
-import com.adedom.utility.extension.recyclerVertical
-import com.adedom.utility.extension.setToolbar
-import com.adedom.utility.extension.toast
 import kotlinx.android.synthetic.main.activity_player.*
 
 class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
@@ -28,7 +28,7 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     }
 
     private fun init() {
-        this.setToolbar(toolbar, getString(R.string.report1))
+        this.setToolbar(toolbar, getString(R.string.report1), true)
 
         mAdapter = PlayerAdapter()
 

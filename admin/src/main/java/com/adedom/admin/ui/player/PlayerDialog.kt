@@ -10,17 +10,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseDialogFragment
+import com.adedom.admin.util.extension.spinnerLevel
+import com.adedom.library.extension.dialogFragment
+import com.adedom.library.extension.getContent
 import com.adedom.utility.*
-import com.adedom.utility.extension.dialog
-import com.adedom.utility.extension.getContent
-import com.adedom.utility.extension.spinnerLevel
 
 class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
         init(bView)
-        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_player, R.string.player)
+        return AlertDialog.Builder(activity!!).dialogFragment(bView, R.drawable.ic_player, R.string.player)
     }
 
     private fun init(view: View) {

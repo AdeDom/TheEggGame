@@ -9,11 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.adedom.library.extension.dialogFragment
+import com.adedom.library.extension.recyclerVertical
+import com.adedom.library.extension.textChanged
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.BaseDialogFragment
-import com.adedom.utility.extension.dialog
-import com.adedom.utility.extension.recyclerVertical
-import com.adedom.utility.extension.textChanged
 
 class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_rank}) {
 
@@ -28,7 +28,7 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
 
         fetchPlayers()
 
-        return AlertDialog.Builder(activity!!).dialog(bView, R.drawable.ic_rank, R.string.rank)
+        return AlertDialog.Builder(activity!!).dialogFragment(bView, R.drawable.ic_rank, R.string.rank)
     }
 
     private fun init(view: View) {

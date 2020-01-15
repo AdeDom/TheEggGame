@@ -1,7 +1,7 @@
 package com.adedom.theegggame.data.repositories
 
+import com.adedom.library.data.ApiRequest
 import com.adedom.theegggame.data.networks.MultiApi
-import com.adedom.utility.data.ApiRequest
 
 class MultiRepository(private val api: MultiApi) : ApiRequest() {
 

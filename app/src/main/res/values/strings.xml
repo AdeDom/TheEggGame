@@ -54,5 +54,6 @@
     <string name="fifty">50</string>
     <string name="hundred">100</string>
     <string name="logout">Logout</string>
+    <string name="end_game">End game</string>
 
 </resources>

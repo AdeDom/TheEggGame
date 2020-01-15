@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.extension.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.ui.main.MainActivity
@@ -16,7 +17,6 @@ import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.utility.*
-import com.adedom.utility.extension.*
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
 class CreateRoomDialog :
@@ -34,7 +34,7 @@ class CreateRoomDialog :
         init(bView)
 
         return AlertDialog.Builder(activity!!)
-            .dialog(bView, R.drawable.ic_add_black, R.string.create_room)
+            .dialogFragment(bView, R.drawable.ic_add_black, R.string.create_room)
     }
 
     private fun init(view: View) {
@@ -52,7 +52,7 @@ class CreateRoomDialog :
 
         val name = mEtName.getContent()
         val people = mNumberPicker.value.toString().trim()
-        val playerId = GameActivity.sContext.getPrefLogin(PLAYER_ID)
+        val playerId = GameActivity.sContext.getPrefFile(PLAYER_ID)
         val date = getDateTime(DATE)
         val time = getDateTime(TIME)
         viewModel.createRoom(name, people, playerId, date, time).observe(this, Observer {

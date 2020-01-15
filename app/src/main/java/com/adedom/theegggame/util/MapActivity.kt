@@ -1,6 +1,7 @@
 package com.adedom.theegggame.util
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.location.Location
 import android.os.Bundle
@@ -39,6 +40,7 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
     companion object {
         var sGoogleMap: GoogleMap? = null
         lateinit var sContext: Context
+        lateinit var sActivity: Activity
         var sIsCamera = false
         var sLatLng = LatLng(0.0, 0.0)
     }
@@ -50,6 +52,7 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         sIsCamera = true
         sContext = baseContext
+        sActivity = this
         setMapAndLocation()
     }
 
