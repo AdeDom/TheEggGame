@@ -1,6 +1,7 @@
 package com.adedom.theegggame.data.networks
 
-import com.adedom.utility.data.*
+import com.adedom.library.data.*
+import com.adedom.utility.data.BASE_URL
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -34,7 +35,7 @@ interface BaseApi {
 
     companion object {
         operator fun invoke(): BaseApi {
-            return RetrofitClient.instance()
+            return RetrofitClient.instance(BASE_URL)
                 .create(BaseApi::class.java)
         }
     }

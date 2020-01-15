@@ -1,10 +1,11 @@
 package com.adedom.theegggame.data.networks
 
+import com.adedom.library.data.*
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.data.models.Score
-import com.adedom.utility.data.*
+import com.adedom.utility.data.BASE_URL
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -114,7 +115,7 @@ interface MultiApi {
 
     companion object {
         operator fun invoke(): MultiApi {
-            return RetrofitClient.instance()
+            return RetrofitClient.instance(BASE_URL)
                 .create(MultiApi::class.java)
         }
     }

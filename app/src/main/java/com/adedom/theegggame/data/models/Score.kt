@@ -1,7 +1,6 @@
 package com.adedom.theegggame.data.models
 
-import com.adedom.utility.data.VALUES1
-import com.adedom.utility.data.VALUES2
+import com.adedom.library.data.*
 import com.google.gson.annotations.SerializedName
 
 data class Score(
