@@ -1,4 +1,4 @@
-package com.adedom.utility.util
+package com.adedom.theegggame.util
 
 import android.content.Context
 import android.media.MediaPlayer

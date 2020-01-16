@@ -1,10 +1,10 @@
 package com.adedom.admin.data.networks
 
+import com.adedom.admin.data.BASE_URL
 import com.adedom.admin.data.models.ItemCollection
 import com.adedom.admin.data.models.Logs
 import com.adedom.admin.data.models.Player
 import com.adedom.library.data.*
-import com.adedom.utility.data.BASE_URL
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

@@ -1,12 +1,12 @@
 package com.adedom.admin.ui.itemcollection
 
 import com.adedom.admin.R
+import com.adedom.admin.data.imageUrl
 import com.adedom.admin.data.models.ItemCollection
 import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.getLocality
 import com.adedom.library.extension.loadCircle
-import com.adedom.utility.data.imageUrl
-import com.adedom.utility.util.BaseAdapter
+import com.adedom.library.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_single_collection.view.*
 
 class ItemCollectionAdapter :

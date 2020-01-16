@@ -2,10 +2,10 @@ package com.adedom.theegggame.ui.multi.roominfo
 
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.adedom.library.util.BaseAdapter
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.*
-import com.adedom.utility.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_room_info.view.*
 
 class RoomInfoAdapter :

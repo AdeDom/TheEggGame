@@ -9,9 +9,9 @@ import com.adedom.library.util.myLocation
 import com.adedom.library.util.setCircle
 import com.adedom.library.util.setMarker
 import com.adedom.theegggame.R
+import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.*
-import com.adedom.utility.data.imageUrl
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 

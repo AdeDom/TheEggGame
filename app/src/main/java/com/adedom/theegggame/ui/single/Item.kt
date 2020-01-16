@@ -4,11 +4,11 @@ import android.graphics.Bitmap
 import com.adedom.library.extension.removeMarkerList
 import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.extension.setMarkerList
+import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.markerItems
 import com.adedom.theegggame.util.titleItem
 import com.adedom.utility.R
-import com.adedom.utility.data.Single
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 

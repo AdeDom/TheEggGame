@@ -1,11 +1,11 @@
 package com.adedom.admin.ui.logs
 
 import com.adedom.admin.R
+import com.adedom.admin.data.imageUrl
 import com.adedom.admin.data.models.Logs
 import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.loadCircle
-import com.adedom.utility.data.imageUrl
-import com.adedom.utility.util.BaseAdapter
+import com.adedom.library.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_log.view.*
 
 class LogsAdapter : BaseAdapter<Logs>({ R.layout.item_log }, { holder, position, items ->

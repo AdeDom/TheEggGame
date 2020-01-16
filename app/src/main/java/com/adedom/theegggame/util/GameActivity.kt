@@ -13,9 +13,8 @@ import com.adedom.library.data.KEY_DATE
 import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
+import com.adedom.library.util.Setting
 import com.adedom.library.util.getDateTime
-import com.adedom.utility.*
-import com.adedom.utility.util.Setting
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
