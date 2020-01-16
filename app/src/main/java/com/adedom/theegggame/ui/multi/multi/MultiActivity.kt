@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.data.KEY_DATE
+import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
+import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
@@ -17,7 +20,6 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sco
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.*
-import com.adedom.utility.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
@@ -119,7 +121,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
         viewModel.setLatlng(room.room_no!!, playerId!!, lat, lng).observe(this, Observer {
-            if (it.result == FAILED) baseContext.failed()
+            if (it.result == KEY_FAILED) baseContext.failed()
         })
     }
 
@@ -146,7 +148,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         val lat = rndLatLng(sLatLng.latitude)
         val lng = rndLatLng(sLatLng.longitude)
         viewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
-            if (it.result == FAILED) baseContext.failed()
+            if (it.result == KEY_FAILED) baseContext.failed()
         })
     }
 
@@ -158,10 +160,10 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
             team,
             sLatLng.latitude,
             sLatLng.longitude,
-            getDateTime(DATE),
-            getDateTime(TIME)
+            getDateTime(KEY_DATE),
+            getDateTime(KEY_TIME)
         ).observe(this, Observer {
-            if (it.result == COMPLETED) baseContext.toast(R.string.the_egg_game)
+            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.the_egg_game)
         })
     }
 

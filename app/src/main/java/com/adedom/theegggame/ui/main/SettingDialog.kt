@@ -6,14 +6,14 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.dialogExit
 import com.adedom.library.extension.dialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_PLAYER
 import com.adedom.theegggame.util.extension.login
-import com.adedom.utility.EMPTY
-import com.adedom.utility.PLAYER
 
 class SettingDialog : DialogFragment() {
 
@@ -41,7 +41,7 @@ class SettingDialog : DialogFragment() {
             dialog!!.dismiss()
 
             val bundle = Bundle()
-            bundle.putParcelable(PLAYER, MainActivity.sPlayer)
+            bundle.putParcelable(KEY_PLAYER, MainActivity.sPlayer)
 
             val dialog = ChangePasswordDialog()
             dialog.arguments = bundle
@@ -51,7 +51,7 @@ class SettingDialog : DialogFragment() {
         btLogout.setOnClickListener {
             activity!!.login(
                 LoginActivity::class.java,
-                EMPTY,
+                KEY_EMPTY,
                 MainActivity.sPlayer.username!!
             )
         }

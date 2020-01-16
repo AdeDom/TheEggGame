@@ -2,17 +2,53 @@ package com.adedom.theegggame.util
 
 import android.location.Location
 import android.widget.EditText
-import com.adedom.utility.*
+import android.widget.ImageView
+import com.adedom.library.data.KEY_EMPTY
+import com.adedom.library.extension.loadCircle
+import com.adedom.utility.R
 import com.adedom.utility.data.Single
+import com.adedom.utility.data.imageUrl
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
+enum class GameSwitch {
+    ON, OFF
+}
+
+const val CAMERA_ZOOM = 15F
+const val CAMERA_ZOOM_MIN = 12F
+const val RADIUS_ONE_HUNDRED_METER = 100.0
+const val TWO_KILOMETER = 2000.0F
+const val ONE_HUNDRED_METER = 100.0F
+const val TWO_HUNDRED_METER = 200.0
+const val NUMBER_OF_ITEM = 5
+const val MIN_ITEM = 5
+const val MAX_ITEM = 10
+const val FIFTEEN_MINUTE = 60
+const val THREE_KILOMETER = 3000.0F
+
+const val ROOM = "room"
+const val HEAD = "head"
+const val TAIL = "tail"
+const val TEAM_A = "A"
+const val TEAM_B = "B"
+const val READY = "ready"
+const val UNREADY = "unready"
+
+var team: String = ""
+var ready = "unready"
+
+val single by lazy { arrayListOf<Single>() }
+val markerPlayers by lazy { arrayListOf<Marker>() }
+val markerItems by lazy { arrayListOf<Marker>() }
+
 var switchCamera = GameSwitch.ON
 var switchItem = GameSwitch.ON
+
+var timeStamp: Long = 0
+var rndkey: String = ""
 
 fun checkPassword(editText1: EditText, editText2: EditText, error: String): Boolean {
     val edt1 = editText1.text.toString().trim()
@@ -32,25 +68,6 @@ fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
         googleMap!!.animateCamera(update)
         googleMap.setMinZoomPreference(CAMERA_ZOOM_MIN)
     }
-}
-
-fun removeMarker(marker: Marker?) = marker?.remove()
-
-fun removeCircle(circle: Circle?) = circle?.remove()
-
-fun removeListMarker(markers: ArrayList<Marker>) {
-    for (marker in markers) marker.remove()
-    markers.clear()
-}
-
-fun setCircle(googleMap: GoogleMap?, latLng: LatLng) {
-    myCircle = googleMap!!.addCircle(
-        CircleOptions().center(latLng)
-            .radius(RADIUS_ONE_HUNDRED_METER)
-            .fillColor(R.color.colorWhite)
-            .strokeColor(android.R.color.white)
-            .strokeWidth(5f)
-    )
 }
 
 fun rndMultiItem(latLng: LatLng) {
@@ -181,3 +198,18 @@ fun rndLatLng(latLng: Double): Double {
     ll = String.format("%.7f", ll).toDouble()
     return ll
 }
+
+fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
+    when {
+        image == KEY_EMPTY && gender == KEY_MALE -> {
+            ivImage.setImageResource(R.drawable.ic_player)
+        }
+        image == KEY_EMPTY && gender == KEY_FEMALE -> {
+            ivImage.setImageResource(R.drawable.ic_player_female)
+        }
+        image != KEY_EMPTY -> ivImage.loadCircle(imageUrl(image))
+    }
+}
+
+fun getLevel(level: Int?): String = "Level : $level"
+

@@ -9,8 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.data.KEY_DATE
+import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
+import com.adedom.library.util.getDateTime
 import com.adedom.utility.*
 import com.adedom.utility.util.Setting
 
@@ -46,9 +49,9 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
         // todo music
 
-        playerId = this.getPrefFile(PLAYER_ID)
-        mViewModel.setState(playerId!!, ONLINE).observe(this, Observer {
-            if (it.result == FAILED) baseContext.failed()
+        playerId = this.getPrefFile(KEY_PLAYER_ID)
+        mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
+            if (it.result == KEY_FAILED) baseContext.failed()
         })
 
         mRunnableFetch.run()
@@ -62,13 +65,13 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
         mHandlerFetch.removeCallbacks(mRunnableFetch)
 
-        mViewModel.setState(playerId!!, OFFLINE).observe(this, Observer {
-            if (it.result == FAILED) baseContext.failed()
+        mViewModel.setState(playerId!!, KEY_OFFLINE).observe(this, Observer {
+            if (it.result == KEY_FAILED) baseContext.failed()
         })
 
-        mViewModel.updateLogs(rndkey, getDateTime(DATE), getDateTime(TIME))
+        mViewModel.updateLogs(rndkey, getDateTime(KEY_DATE), getDateTime(KEY_TIME))
             .observe(this, Observer {
-                if (it.result == FAILED) baseContext.failed()
+                if (it.result == KEY_FAILED) baseContext.failed()
             })
     }
 

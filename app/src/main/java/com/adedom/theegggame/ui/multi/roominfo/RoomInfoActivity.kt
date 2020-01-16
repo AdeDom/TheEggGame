@@ -12,9 +12,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.setReady
-import com.adedom.utility.*
+import com.adedom.theegggame.util.*
 import kotlinx.android.synthetic.main.activity_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
 
@@ -94,20 +92,20 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     private fun setRoomReady(ready: String) {
         val roomNo = sRoom.room_no
         viewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
-            if (it.result == COMPLETED) fetchRoomInfo()
+            if (it.result == KEY_COMPLETED) fetchRoomInfo()
         })
     }
 
     private fun setTeam() {
         val roomNo = sRoom.room_no
         viewModel.setTeam(roomNo!!, playerId!!, team).observe(this, Observer {
-            if (it.result == COMPLETED) fetchRoomInfo()
+            if (it.result == KEY_COMPLETED) fetchRoomInfo()
         })
     }
 
     override fun onBackPressed() {
         viewModel.deletePlayerRoomInfo(sRoom.room_no!!, playerId!!).observe(this, Observer {
-            if (it.result == COMPLETED) finish()
+            if (it.result == KEY_COMPLETED) finish()
         })
         super.onBackPressed()
     }
@@ -127,7 +125,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     private fun startGame() {
         if (mRoomInfo.size == mRoomInfo.count { it.status == READY } && mRoomInfo.size != 0) {
             viewModel.setRoomOff(sRoom.room_no!!).observe(this, Observer {
-                if (it.result == COMPLETED) {
+                if (it.result == KEY_COMPLETED) {
                     finish()
                     startActivity(Intent(baseContext, MultiActivity::class.java))
                     baseContext.toast(R.string.start_game)

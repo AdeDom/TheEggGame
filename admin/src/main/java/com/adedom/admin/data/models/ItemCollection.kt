@@ -4,14 +4,14 @@ import com.adedom.library.data.*
 import com.google.gson.annotations.SerializedName
 
 data class ItemCollection(
-    @SerializedName(VALUES1) val name: String,
-    @SerializedName(VALUES2) val image: String,
-    @SerializedName(VALUES3) val collectionId: String,
-    @SerializedName(VALUES4) val playerId: String,
-    @SerializedName(VALUES5) val itemId: Int,
-    @SerializedName(VALUES6) val qty: Int,
-    @SerializedName(VALUES7) val latitude: Double,
-    @SerializedName(VALUES8) val longitude: Double,
-    @SerializedName(VALUES9) val date: String,
-    @SerializedName(VALUES10) val time: String
+    @SerializedName(KEY_VALUES1) val name: String,
+    @SerializedName(KEY_VALUES2) val image: String,
+    @SerializedName(KEY_VALUES3) val collectionId: String,
+    @SerializedName(KEY_VALUES4) val playerId: String,
+    @SerializedName(KEY_VALUES5) val itemId: Int,
+    @SerializedName(KEY_VALUES6) val qty: Int,
+    @SerializedName(KEY_VALUES7) val latitude: Double,
+    @SerializedName(KEY_VALUES8) val longitude: Double,
+    @SerializedName(KEY_VALUES9) val date: String,
+    @SerializedName(KEY_VALUES10) val time: String
 )

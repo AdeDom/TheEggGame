@@ -4,17 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.data.KEY_DATE
+import com.adedom.library.data.KEY_EMPTY
+import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.exitApplication
 import com.adedom.library.extension.getPrefFile
 import com.adedom.library.extension.toast
+import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
-import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.login
-import com.adedom.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -35,7 +38,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
 
         init()
 
-        if (checkPlayer()) return
+        if (verifyPlayer()) return
     }
 
     private fun init() {
@@ -59,31 +62,33 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         }
     }
 
-    private fun checkPlayer(): Boolean {
-        if (playerId == EMPTY) {
+    private fun verifyPlayer(): Boolean {
+        return if (this.getPrefFile(KEY_PLAYER_ID) != KEY_EMPTY && this.getPrefFile(KEY_USERNAME) != "") {
+            insertLogs()
+            false
+        } else {
             this.login(
                 LoginActivity::class.java,
-                EMPTY,
-                this.getPrefFile(USERNAME)
+                KEY_EMPTY,
+                this.getPrefFile(KEY_USERNAME)
             )
-            return true
-        } else insertLogs()
-        return false
+            true
+        }
     }
 
     private fun insertLogs() {
-        val date = getDateTime(DATE)
-        val time = getDateTime(TIME)
-        val playerId = this.getPrefFile(PLAYER_ID)
+        val date = getDateTime(KEY_DATE)
+        val time = getDateTime(KEY_TIME)
+        val playerId = this.getPrefFile(KEY_PLAYER_ID)
         viewModel.insertLogs(rndkey, date, time, playerId).observe(this, Observer {
-            if (it.result == COMPLETED) baseContext.toast(R.string.welcome)
+            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
         })
     }
 
     override fun gameLoop() {
         viewModel.getPlayer(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
-                this.login(LoginActivity::class.java, EMPTY, "")
+                this.login(LoginActivity::class.java, KEY_EMPTY, "")
             } else {
                 sPlayer = it
                 setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)

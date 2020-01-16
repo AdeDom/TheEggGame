@@ -15,13 +15,13 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("admin-get-players.php")
     fun getPlayers(
-        @Field(VALUES1) name: String,
-        @Field(VALUES2) levelStart: String,
-        @Field(VALUES3) levelEnd: String,
-        @Field(VALUES4) online: Boolean,
-        @Field(VALUES5) offline: Boolean,
-        @Field(VALUES6) male: Boolean,
-        @Field(VALUES7) female: Boolean
+        @Field(KEY_VALUES1) name: String,
+        @Field(KEY_VALUES2) levelStart: String,
+        @Field(KEY_VALUES3) levelEnd: String,
+        @Field(KEY_VALUES4) online: Boolean,
+        @Field(KEY_VALUES5) offline: Boolean,
+        @Field(KEY_VALUES6) male: Boolean,
+        @Field(KEY_VALUES7) female: Boolean
     ): Call<List<Player>>
 
     @POST("admin-get-item-collection.php")
@@ -30,10 +30,10 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("admin-get-logs.php")
     fun getLogs(
-        @Field(VALUES1) dateBegin: String,
-        @Field(VALUES2) timeBegin: String,
-        @Field(VALUES3) dateEnd: String,
-        @Field(VALUES4) timeEnd: String
+        @Field(KEY_VALUES1) dateBegin: String,
+        @Field(KEY_VALUES2) timeBegin: String,
+        @Field(KEY_VALUES3) dateEnd: String,
+        @Field(KEY_VALUES4) timeEnd: String
     ): Call<List<Logs>>
 
     companion object {

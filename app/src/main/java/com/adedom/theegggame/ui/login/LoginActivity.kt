@@ -10,8 +10,8 @@ import com.adedom.library.extension.isEmpty
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_USERNAME
 import com.adedom.theegggame.util.extension.login
-import com.adedom.utility.USERNAME
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : GameActivity<LoginActivityViewModel>() {
@@ -26,7 +26,7 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
     }
 
     private fun init() {
-        mEtUsername.setText(this.getPrefFile(USERNAME))
+        mEtUsername.setText(this.getPrefFile(KEY_USERNAME))
 
         mBtRegister.setOnClickListener {
             RegisterDialog().show(supportFragmentManager, null)

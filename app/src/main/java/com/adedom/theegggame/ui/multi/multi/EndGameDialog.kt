@@ -10,8 +10,8 @@ import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.BaseDialogFragment
 import com.adedom.theegggame.util.MapActivity
-import com.adedom.utility.TEAM_A
-import com.adedom.utility.TEAM_B
+import com.adedom.theegggame.util.TEAM_A
+import com.adedom.theegggame.util.TEAM_B
 
 class EndGameDialog : BaseDialogFragment<MultiActivityViewModel>({ R.layout.dialog_end_game }) {
 

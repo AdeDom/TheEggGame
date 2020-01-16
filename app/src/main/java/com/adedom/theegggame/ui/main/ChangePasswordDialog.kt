@@ -11,11 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.util.BaseDialogFragment
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.checkPassword
-import com.adedom.utility.COMPLETED
-import com.adedom.utility.PLAYER
+import com.adedom.theegggame.util.*
 
 class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
@@ -30,7 +26,7 @@ class ChangePasswordDialog :
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        mPlayer = arguments!!.getParcelable(PLAYER)!!
+        mPlayer = arguments!!.getParcelable(KEY_PLAYER)!!
 
         init(bView)
 
@@ -68,7 +64,7 @@ class ChangePasswordDialog :
 
         viewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
             .observe(this, Observer {
-                if (it.result == COMPLETED) {
+                if (it.result == KEY_COMPLETED) {
                     dialog!!.dismiss()
                     GameActivity.sContext.toast(R.string.successfully)
                 } else {

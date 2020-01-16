@@ -12,25 +12,25 @@ interface BaseApi {
     @FormUrlEncoded
     @POST("insert-logs.php")
     fun insertLogs(
-        @Field(VALUES1) key: String,
-        @Field(VALUES2) dateIn: String,
-        @Field(VALUES3) timeIn: String,
-        @Field(VALUES4) playerId: String
+        @Field(KEY_VALUES1) key: String,
+        @Field(KEY_VALUES2) dateIn: String,
+        @Field(KEY_VALUES3) timeIn: String,
+        @Field(KEY_VALUES4) playerId: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("update-logs.php")
     fun updateLogs(
-        @Field(VALUES1) key: String,
-        @Field(VALUES2) dateOut: String,
-        @Field(VALUES3) timeOut: String
+        @Field(KEY_VALUES1) key: String,
+        @Field(KEY_VALUES2) dateOut: String,
+        @Field(KEY_VALUES3) timeOut: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("set-state.php")
     fun setState(
-        @Field(VALUES1) playerId: String,
-        @Field(VALUES2) state: String
+        @Field(KEY_VALUES1) playerId: String,
+        @Field(KEY_VALUES2) state: String
     ): Call<JsonResponse>
 
     companion object {

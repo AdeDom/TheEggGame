@@ -2,18 +2,18 @@ package com.adedom.theegggame.util.extension
 
 import android.app.Activity
 import android.content.Intent
+import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.setPrefFile
-import com.adedom.utility.EMPTY
-import com.adedom.utility.PLAYER_ID
-import com.adedom.utility.USERNAME
+import com.adedom.theegggame.util.KEY_PLAYER_ID
+import com.adedom.theegggame.util.KEY_USERNAME
 
 fun Activity.login(
     c: Class<*>,
-    playerId: String = EMPTY,
+    playerId: String = KEY_EMPTY,
     username: String = ""
 ) {
-    setPrefFile(PLAYER_ID, playerId)
-    setPrefFile(USERNAME, username)
+    setPrefFile(KEY_PLAYER_ID, playerId)
+    setPrefFile(KEY_USERNAME, username)
     this.finishAffinity()
     this.startActivity(Intent(baseContext, c).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 }

@@ -13,41 +13,41 @@ interface PlayerApi {
     @FormUrlEncoded
     @POST("get-player-id.php")
     fun getPlayerId(
-        @Field(VALUES1) username: String,
-        @Field(VALUES2) password: String
+        @Field(KEY_VALUES1) username: String,
+        @Field(KEY_VALUES2) password: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("get-player.php")
     fun getPlayer(
-        @Field(VALUES1) playerId: String
+        @Field(KEY_VALUES1) playerId: String
     ): Call<Player>
 
     @FormUrlEncoded
     @POST("insert-player.php")
     fun insertPlayer(
-        @Field(VALUES1) username: String,
-        @Field(VALUES2) password: String,
-        @Field(VALUES3) name: String,
-        @Field(VALUES4) image: String,
-        @Field(VALUES5) date: String,
-        @Field(VALUES6) time: String,
-        @Field(VALUES7) gender: String
+        @Field(KEY_VALUES1) username: String,
+        @Field(KEY_VALUES2) password: String,
+        @Field(KEY_VALUES3) name: String,
+        @Field(KEY_VALUES4) image: String,
+        @Field(KEY_VALUES5) date: String,
+        @Field(KEY_VALUES6) time: String,
+        @Field(KEY_VALUES7) gender: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("get-players.php")
     fun getPlayers(
-        @Field(VALUES1) search: String,
-        @Field(VALUES2) limit: String
+        @Field(KEY_VALUES1) search: String,
+        @Field(KEY_VALUES2) limit: String
     ): Call<List<Player>>
 
     @FormUrlEncoded
     @POST("update-password.php")
     fun updatePassword(
-        @Field(VALUES1) playerId: String,
-        @Field(VALUES2) oldPassword: String,
-        @Field(VALUES3) newPassword: String
+        @Field(KEY_VALUES1) playerId: String,
+        @Field(KEY_VALUES2) oldPassword: String,
+        @Field(KEY_VALUES3) newPassword: String
     ): Call<JsonResponse>
 
     companion object {

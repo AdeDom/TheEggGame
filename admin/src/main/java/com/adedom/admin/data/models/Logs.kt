@@ -4,10 +4,10 @@ import com.adedom.library.data.*
 import com.google.gson.annotations.SerializedName
 
 data class Logs(
-    @SerializedName(VALUES1) val name: String,
-    @SerializedName(VALUES2) val image: String,
-    @SerializedName(VALUES3) val dateIn: String,
-    @SerializedName(VALUES4) val timeIn: String,
-    @SerializedName(VALUES5) val dateOut: String,
-    @SerializedName(VALUES6) val timeOut: String
+    @SerializedName(KEY_VALUES1) val name: String,
+    @SerializedName(KEY_VALUES2) val image: String,
+    @SerializedName(KEY_VALUES3) val dateIn: String,
+    @SerializedName(KEY_VALUES4) val timeIn: String,
+    @SerializedName(KEY_VALUES5) val dateOut: String,
+    @SerializedName(KEY_VALUES6) val timeOut: String
 )

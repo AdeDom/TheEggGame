@@ -1,31 +1,34 @@
 package com.adedom.theegggame.ui.single
 
-import com.adedom.library.util.loadBitmap
+import com.adedom.library.data.KEY_EMPTY
+import com.adedom.library.extension.loadBitmap
+import com.adedom.library.extension.removeCircle
+import com.adedom.library.extension.removeMarker
+import com.adedom.library.util.myCircle
+import com.adedom.library.util.myLocation
+import com.adedom.library.util.setCircle
+import com.adedom.library.util.setMarker
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.MapActivity
-import com.adedom.theegggame.util.removeCircle
-import com.adedom.theegggame.util.removeMarker
-import com.adedom.theegggame.util.setCircle
-import com.adedom.utility.*
-import com.adedom.utility.data.BASE_URL
+import com.adedom.theegggame.util.*
+import com.adedom.utility.data.imageUrl
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
 class Player(latLng: LatLng) {
 
     init {
-        removeMarker(myLocation)
-        removeCircle(myCircle)
+        myLocation?.removeMarker()
+        myCircle?.removeCircle()
 
         setMyLocation(latLng)
-        setCircle(MapActivity.sGoogleMap, latLng)
+        setCircle(MapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
     }
 
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayer
         when {
-            player.image == EMPTY && player.gender == MALE -> {
+            player.image == KEY_EMPTY && player.gender == KEY_MALE -> {
                 setMarker(
                     MapActivity.sGoogleMap!!,
                     latLng,
@@ -34,7 +37,7 @@ class Player(latLng: LatLng) {
                     getLevel(player.level)
                 )
             }
-            player.image == EMPTY && player.gender == FEMALE -> {
+            player.image == KEY_EMPTY && player.gender == KEY_FEMALE -> {
                 setMarker(
                     MapActivity.sGoogleMap!!,
                     latLng,
@@ -43,27 +46,24 @@ class Player(latLng: LatLng) {
                     getLevel(player.level)
                 )
             }
-            player.image != EMPTY -> {
-                loadBitmap(
-                    MapActivity.sContext,
-                    "$BASE_URL../profiles/${player.image}", {
-                        setMarker(
-                            MapActivity.sGoogleMap!!,
-                            latLng,
-                            BitmapDescriptorFactory.fromBitmap(it),
-                            player.name!!,
-                            getLevel(player.level)
-                        )
-                    }, {
-                        setMarker(
-                            MapActivity.sGoogleMap!!,
-                            latLng,
-                            BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                            player.name!!,
-                            getLevel(player.level)
-                        )
-                    }
-                )
+            player.image != KEY_EMPTY -> {
+                MapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
+                    setMarker(
+                        MapActivity.sGoogleMap!!,
+                        latLng,
+                        BitmapDescriptorFactory.fromBitmap(it),
+                        player.name!!,
+                        getLevel(player.level)
+                    )
+                }, {
+                    setMarker(
+                        MapActivity.sGoogleMap!!,
+                        latLng,
+                        BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                        player.name!!,
+                        getLevel(player.level)
+                    )
+                })
             }
         }
     }

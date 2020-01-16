@@ -2,7 +2,7 @@ package com.adedom.admin.ui.player
 
 import com.adedom.admin.R
 import com.adedom.admin.data.models.Player
-import com.adedom.utility.setImageProfile
+import com.adedom.admin.util.setImageProfile
 import com.adedom.utility.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_player.view.*
 

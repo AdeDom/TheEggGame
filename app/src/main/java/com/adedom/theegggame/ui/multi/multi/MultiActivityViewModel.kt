@@ -1,7 +1,7 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import com.adedom.theegggame.util.BaseViewModel
-import com.adedom.utility.FIFTEEN_MINUTE
+import com.adedom.theegggame.util.FIFTEEN_MINUTE
 
 class MultiActivityViewModel : BaseViewModel() {
 

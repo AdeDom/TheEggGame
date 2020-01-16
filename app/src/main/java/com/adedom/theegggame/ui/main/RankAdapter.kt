@@ -2,7 +2,7 @@ package com.adedom.theegggame.ui.main
 
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.utility.setImageProfile
+import com.adedom.theegggame.util.setImageProfile
 import com.adedom.utility.util.BaseAdapter
 import kotlinx.android.synthetic.main.item_player.view.*
 

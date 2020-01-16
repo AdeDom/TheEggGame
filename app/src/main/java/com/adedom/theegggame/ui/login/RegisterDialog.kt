@@ -10,14 +10,15 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.adedom.library.data.KEY_DATE
+import com.adedom.library.data.KEY_EMPTY
+import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.*
+import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.BaseDialogFragment
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.checkPassword
+import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.login
-import com.adedom.utility.*
 import com.theartofdev.edmodo.cropper.CropImage
 
 class RegisterDialog :
@@ -31,8 +32,8 @@ class RegisterDialog :
     private lateinit var mRbFemale: RadioButton
     private lateinit var mIvProfile: ImageView
     private lateinit var mBtRegister: Button
-    private var gender = MALE
-    private var mImageUri = EMPTY
+    private var gender = KEY_MALE
+    private var mImageUri = KEY_EMPTY
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
@@ -56,12 +57,12 @@ class RegisterDialog :
         mBtRegister = view.findViewById(R.id.mBtSave) as Button
 
         mRbMale.setOnClickListener {
-            gender = MALE
-            if (mImageUri == EMPTY) mIvProfile.setImageResource(R.drawable.ic_player)
+            gender = KEY_MALE
+            if (mImageUri == KEY_EMPTY) mIvProfile.setImageResource(R.drawable.ic_player)
         }
         mRbFemale.setOnClickListener {
-            gender = FEMALE
-            if (mImageUri == EMPTY) mIvProfile.setImageResource(R.drawable.ic_player_female)
+            gender = KEY_FEMALE
+            if (mImageUri == KEY_EMPTY) mIvProfile.setImageResource(R.drawable.ic_player_female)
         }
 
         mIvProfile.setOnClickListener { selectImage() }
@@ -111,11 +112,11 @@ class RegisterDialog :
         val username = mEtUsername.getContent()
         val password = mEtPassword.getContent()
         val name = mEtName.getContent()
-        val date = getDateTime(DATE)
-        val time = getDateTime(TIME)
+        val date = getDateTime(KEY_DATE)
+        val time = getDateTime(KEY_TIME)
         viewModel.register(username, password, name, mImageUri, date, time, gender)
             .observe(this, Observer {
-                if (it.result == FAILED) {
+                if (it.result == KEY_FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
                 } else {
                     activity!!.login(MainActivity::class.java, it.result!!, username)

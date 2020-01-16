@@ -12,13 +12,13 @@ interface SingleApi {
     @FormUrlEncoded
     @POST("insert-item-collection.php")
     fun insertItemCollection(
-        @Field(VALUES1) playerId: String,
-        @Field(VALUES2) itemId: Int,
-        @Field(VALUES3) qty: Int,
-        @Field(VALUES4) latitude: Double,
-        @Field(VALUES5) longitude: Double,
-        @Field(VALUES6) date: String,
-        @Field(VALUES7) time: String
+        @Field(KEY_VALUES1) playerId: String,
+        @Field(KEY_VALUES2) itemId: Int,
+        @Field(KEY_VALUES3) qty: Int,
+        @Field(KEY_VALUES4) latitude: Double,
+        @Field(KEY_VALUES5) longitude: Double,
+        @Field(KEY_VALUES6) date: String,
+        @Field(KEY_VALUES7) time: String
     ): Call<JsonResponse>
 
     companion object {
