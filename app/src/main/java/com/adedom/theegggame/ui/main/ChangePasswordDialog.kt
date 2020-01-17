@@ -51,7 +51,7 @@ class ChangePasswordDialog :
             mEtOldPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtNewPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtRePassword.isEmpty(getString(R.string.error_password)) -> return
-            mEtNewPassword.checkLess4(getString(R.string.error_password_less)) -> return
+            mEtNewPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
             checkPassword(
                 mEtNewPassword,
                 mEtRePassword,

@@ -15,10 +15,10 @@ class ItemCollectionAdapter :
 
         if (image != KEY_EMPTY) holder.itemView.ivImage.loadCircle(imageUrl(image))
         when (itemId) {
-            1 -> holder.itemView.ivItem.setImageResource(com.adedom.utility.R.drawable.ic_egg)
-            2 -> holder.itemView.ivItem.setImageResource(com.adedom.utility.R.drawable.ic_egg_i)
-            3 -> holder.itemView.ivItem.setImageResource(com.adedom.utility.R.drawable.ic_egg_ii)
-            4 -> holder.itemView.ivItem.setImageResource(com.adedom.utility.R.drawable.ic_egg_iii)
+            1 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg)
+            2 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg_i)
+            3 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg_ii)
+            4 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg_iii)
         }
 
         holder.itemView.tvName.text = name

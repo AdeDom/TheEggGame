@@ -3,7 +3,6 @@ package com.adedom.admin.util
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
-import com.adedom.utility.*
 
 abstract class BaseActivity<VM : ViewModel> : AppCompatActivity(), OnAttachListener {
 

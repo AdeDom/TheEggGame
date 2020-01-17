@@ -13,8 +13,6 @@
     <string name="report2">รายงานการเก็บไอเทม(ผู้เล่นเดี่ยว)</string>
     <string name="report3">รายงานประวัติการเข้าสู่ระบบ</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="begin">Begin</string>
     <string name="end">End</string>
     <string name="state">State</string>
@@ -35,4 +33,19 @@
     <string name="toolbar">Toolbar</string>
     <string name="to">To</string>
 
+    <string name="completed">Completed</string>
+    <string name="failed">Failed</string>
+    <string name="exit">Exit</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="finish_affinity">Press back again to exit</string>
+    <string name="player">Player</string>
+
+    <string name="player_id">Player Id</string>
+    <string name="level">Level</string>
+    <string name="search">Search</string>
+
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>

@@ -5,9 +5,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.loadCircle
+import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.data.models.Single
-import com.adedom.utility.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng

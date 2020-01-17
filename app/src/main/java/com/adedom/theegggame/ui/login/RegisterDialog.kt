@@ -97,8 +97,8 @@ class RegisterDialog :
             mEtPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtRePassword.isEmpty(getString(R.string.error_re_password)) -> return
             mEtName.isEmpty(getString(R.string.error_name)) -> return
-            mEtUsername.checkLess4(getString(R.string.error_username_less)) -> return
-            mEtPassword.checkLess4(getString(R.string.error_password_less)) -> return
+            mEtUsername.verifyLength(4, getString(R.string.error_username_less)) -> return
+            mEtPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
             checkPassword(
                 mEtPassword,
                 mEtRePassword,

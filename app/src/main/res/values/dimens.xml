@@ -7,9 +7,9 @@
     <dimen name="buttonHeightMain">60dp</dimen>
     <dimen name="mainLarge">250dp</dimen>
 
-<!--    <dimen name="large">10dp</dimen>-->
-<!--    <dimen name="medium">5dp</dimen>-->
-<!--    <dimen name="little">2dp</dimen>-->
-<!--    <dimen name="layout">20dp</dimen>-->
-<!--    <dimen name="zero">0dp</dimen>-->
+    <dimen name="large">8dp</dimen>
+    <dimen name="medium">4dp</dimen>
+    <dimen name="little">2dp</dimen>
+    <dimen name="layout">16dp</dimen>
+    <dimen name="zero">0dp</dimen>
 </resources>

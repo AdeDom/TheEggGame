@@ -1,21 +1,21 @@
 package com.adedom.theegggame.ui.single
 
 import android.graphics.Bitmap
-import com.adedom.library.extension.removeMarkerList
+import com.adedom.library.extension.removeMarkers
 import com.adedom.library.extension.resourceBitmap
-import com.adedom.library.extension.setMarkerList
+import com.adedom.library.extension.setMarkers
+import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.MapActivity
 import com.adedom.theegggame.util.markerItems
 import com.adedom.theegggame.util.titleItem
-import com.adedom.utility.R
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
 class Item(singles: ArrayList<Single>) {
 
     init {
-        markerItems.removeMarkerList()
+        markerItems.removeMarkers()
         var bmp: Bitmap? = null
         singles.forEach {
             when (it.itemId) {
@@ -24,7 +24,7 @@ class Item(singles: ArrayList<Single>) {
                 3 -> bmp = MapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
             }
 
-            markerItems.setMarkerList(
+            markerItems.setMarkers(
                 MapActivity.sGoogleMap,
                 LatLng(it.latitude, it.longitude),
                 BitmapDescriptorFactory.fromBitmap(bmp),

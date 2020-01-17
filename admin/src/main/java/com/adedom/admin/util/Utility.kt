@@ -1,13 +1,13 @@
 package com.adedom.admin.util
 
 import android.widget.ImageView
+import com.adedom.admin.R
 import com.adedom.admin.data.imageUrl
 import com.adedom.library.data.KEY_DATE
 import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.loadCircle
 import com.adedom.library.util.getDateTime
-import com.adedom.utility.R
 
 const val DATE_BEGIN = "0000-00-00"
 const val TIME_BEGIN = "00:00"

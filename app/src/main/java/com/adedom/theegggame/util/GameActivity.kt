@@ -13,7 +13,7 @@ import com.adedom.library.data.KEY_DATE
 import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
-import com.adedom.library.util.Setting
+import com.adedom.library.util.SettingPermissionAndLocation
 import com.adedom.library.util.getDateTime
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
@@ -32,7 +32,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         sActivity = this@GameActivity
         sContext = baseContext
 
-        Setting(sActivity, sContext)
+        SettingPermissionAndLocation(sActivity, sContext)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -44,7 +44,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Setting.locationListener(this, true)
+        SettingPermissionAndLocation.locationListener(sActivity, true)
 
         // todo music
 
@@ -58,7 +58,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        Setting.locationListener(this, false)
+        SettingPermissionAndLocation.locationListener(sActivity, false)
 
         // music
 
@@ -94,7 +94,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
     }
 }
 
-class GameActivityViewModel: BaseViewModel() {
+class GameActivityViewModel : BaseViewModel() {
     fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
 
     fun updateLogs(key: String, dateOut: String, timeOut: String) =

@@ -14,14 +14,14 @@ import com.google.android.gms.maps.model.LatLng
 class Player(items: ArrayList<RoomInfo>) {
 
     init {
-        markerPlayers.removeMarkerList()
+        markerPlayers.removeMarkers()
         items.forEach { item ->
             val latLng = LatLng(item.latitude!!, item.longitude!!)
 
             //player
             when {
                 item.image == KEY_EMPTY && item.gender == KEY_MALE -> {
-                    markerPlayers.setMarkerList(
+                    markerPlayers.setMarkers(
                         MapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
@@ -30,7 +30,7 @@ class Player(items: ArrayList<RoomInfo>) {
                     )
                 }
                 item.image == KEY_EMPTY && item.gender == KEY_FEMALE -> {
-                    markerPlayers.setMarkerList(
+                    markerPlayers.setMarkers(
                         MapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
@@ -40,7 +40,7 @@ class Player(items: ArrayList<RoomInfo>) {
                 }
                 item.image != KEY_EMPTY -> {
                     MapActivity.sContext.loadBitmap(imageUrl(item.image!!), {
-                        markerPlayers.setMarkerList(
+                        markerPlayers.setMarkers(
                             MapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromBitmap(it),
@@ -48,7 +48,7 @@ class Player(items: ArrayList<RoomInfo>) {
                             getLevel(item.level)
                         )
                     }, {
-                        markerPlayers.setMarkerList(
+                        markerPlayers.setMarkers(
                             MapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
