@@ -12,6 +12,6 @@ class AboutDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        return AlertDialog.Builder(activity!!).dialogFragment(bView, R.drawable.ic_h2p, R.string.about)
+        return AlertDialog.Builder(activity!!).dialogFragment(v, R.drawable.ic_h2p, R.string.about)
     }
 }

@@ -4,6 +4,7 @@ import android.location.Location
 import android.widget.EditText
 import android.widget.ImageView
 import com.adedom.library.data.KEY_EMPTY
+import com.adedom.library.extension.getContent
 import com.adedom.library.extension.loadCircle
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
@@ -50,10 +51,10 @@ var switchItem = GameSwitch.ON
 var timeStamp: Long = 0
 var rndkey: String = ""
 
-fun checkPassword(editText1: EditText, editText2: EditText, error: String): Boolean {
-    val edt1 = editText1.text.toString().trim()
-    val edt2 = editText2.text.toString().trim()
-    if (edt1 != edt2) {
+fun verifyPasswordMatching(editText1: EditText, editText2: EditText, error: String = ""): Boolean {
+    val et1 = editText1.getContent()
+    val et2 = editText2.getContent()
+    if (et1 != et2) {
         editText2.requestFocus()
         editText2.error = error
         return true

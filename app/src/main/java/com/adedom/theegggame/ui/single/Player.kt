@@ -22,7 +22,7 @@ class Player(latLng: LatLng) {
         myCircle?.removeCircle()
 
         setMyLocation(latLng)
-        setCircle(MapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
+        setCircle(GoogleMapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
     }
 
     private fun setMyLocation(latLng: LatLng) {
@@ -30,7 +30,7 @@ class Player(latLng: LatLng) {
         when {
             player.image == KEY_EMPTY && player.gender == KEY_MALE -> {
                 setMarker(
-                    MapActivity.sGoogleMap!!,
+                    GoogleMapActivity.sGoogleMap!!,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     player.name!!,
@@ -39,7 +39,7 @@ class Player(latLng: LatLng) {
             }
             player.image == KEY_EMPTY && player.gender == KEY_FEMALE -> {
                 setMarker(
-                    MapActivity.sGoogleMap!!,
+                    GoogleMapActivity.sGoogleMap!!,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                     player.name!!,
@@ -47,9 +47,9 @@ class Player(latLng: LatLng) {
                 )
             }
             player.image != KEY_EMPTY -> {
-                MapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
+                GoogleMapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
                     setMarker(
-                        MapActivity.sGoogleMap!!,
+                        GoogleMapActivity.sGoogleMap!!,
                         latLng,
                         BitmapDescriptorFactory.fromBitmap(it),
                         player.name!!,
@@ -57,7 +57,7 @@ class Player(latLng: LatLng) {
                     )
                 }, {
                     setMarker(
-                        MapActivity.sGoogleMap!!,
+                        GoogleMapActivity.sGoogleMap!!,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                         player.name!!,

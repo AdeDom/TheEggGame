@@ -10,7 +10,7 @@ import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
+import com.adedom.library.extension.dialogNegative
 import com.adedom.theegggame.R
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -22,23 +22,22 @@ import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 
-abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
+abstract class GoogleMapActivity(
+    private val interval: Long
+) : AppCompatActivity(),
     OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
 
-    val TAG = "MapActivity"
-    lateinit var viewModel: VM
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mLocationRequest: LocationRequest
-    private val mHandlerFetch = Handler()
+    private lateinit var mHandler: Handler
 
     companion object {
-        var sGoogleMap: GoogleMap? = null
         lateinit var sContext: Context
         lateinit var sActivity: Activity
-        var sIsCamera = false
+        var sGoogleMap: GoogleMap? = null
         var sLatLng = LatLng(0.0, 0.0)
     }
 
@@ -47,10 +46,13 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
         setContentView(R.layout.activity_map)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        sIsCamera = true
+
         sContext = baseContext
         sActivity = this
+
         setMapAndLocation()
+
+        mHandler = Handler()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -62,7 +64,7 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
 
     private fun setMapAndLocation() {
         val mapFragment = fragmentManager.findFragmentById(R.id.mapFragment) as MapFragment
-        mapFragment.getMapAsync(this@MapActivity)
+        mapFragment.getMapAsync(this@GoogleMapActivity)
 
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addApi(LocationServices.API)
@@ -72,8 +74,8 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
         mGoogleApiClient.connect()
 
         mLocationRequest = LocationRequest()
-            .setInterval(5000)
-            .setFastestInterval(3000)
+            .setInterval(interval)
+            .setFastestInterval(interval)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
     }
 
@@ -86,9 +88,8 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
         )
     }
 
-    private fun stopLocationUpdate() {
+    private fun stopLocationUpdate() =
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this)
-    }
 
     override fun onStart() {
         super.onStart()
@@ -96,43 +97,30 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
     }
 
     override fun onStop() {
-        if (mGoogleApiClient.isConnected) {
-            mGoogleApiClient.disconnect()
-        }
+        if (mGoogleApiClient.isConnected) mGoogleApiClient.disconnect()
         super.onStop()
     }
 
     override fun onResume() {
         super.onResume()
-        mRunnableFetch.run()
 
-        switchItem = GameSwitch.ON
-        switchCamera = GameSwitch.ON
+        mRunnable.run()
 
         if (mGoogleApiClient.isConnected) startLocationUpdate()
     }
 
     override fun onPause() {
         super.onPause()
-        mHandlerFetch.removeCallbacks(mRunnableFetch)
-
-        switchItem = GameSwitch.OFF
-        switchCamera = GameSwitch.OFF
+        mHandler.removeCallbacks(mRunnable)
 
         if (mGoogleApiClient.isConnected) stopLocationUpdate()
     }
 
-    override fun onConnected(p0: Bundle?) {
-        startLocationUpdate()
-    }
+    override fun onConnected(p0: Bundle?) = startLocationUpdate()
 
-    override fun onConnectionSuspended(p0: Int) {
-        mGoogleApiClient.connect()
-    }
+    override fun onConnectionSuspended(p0: Int) = mGoogleApiClient.connect()
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-
-    }
+    override fun onConnectionFailed(p0: ConnectionResult) {}
 
     override fun onLocationChanged(location: Location?) {
         if (sLatLng.latitude == location!!.latitude &&
@@ -149,21 +137,16 @@ abstract class MapActivity<VM : ViewModel> : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
-        mHandlerFetch.removeCallbacks(mRunnableFetch)
-        val builder = AlertDialog.Builder(this@MapActivity)
-        builder.setTitle(R.string.exit)
-            .setPositiveButton(R.string.no) { dialog, which -> dialog.dismiss() }
-            .setNegativeButton(R.string.yes) { dialog, which -> finish() }.show()
+        mHandler.removeCallbacks(mRunnable)
+        AlertDialog.Builder(this@GoogleMapActivity).dialogNegative(R.string.exit) { finish() }
     }
 
-    open fun gameLoop() {}
+    open fun onActivityRunning() {}
 
-    private val mRunnableFetch = object : Runnable {
+    private val mRunnable = object : Runnable {
         override fun run() {
-            gameLoop()
-            mHandlerFetch.postDelayed(this, 1000)
+            onActivityRunning()
+            mHandler.postDelayed(this, 1000)
         }
     }
 }
-
-

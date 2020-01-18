@@ -6,7 +6,7 @@ import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.extension.setMarkers
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
-import com.adedom.theegggame.util.MapActivity
+import com.adedom.theegggame.util.GoogleMapActivity
 import com.adedom.theegggame.util.markerItems
 import com.adedom.theegggame.util.titleItem
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -19,13 +19,13 @@ class Item(singles: ArrayList<Single>) {
         var bmp: Bitmap? = null
         singles.forEach {
             when (it.itemId) {
-                1 -> bmp = MapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
-                2 -> bmp = MapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
-                3 -> bmp = MapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
+                1 -> bmp = GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
+                2 -> bmp = GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
+                3 -> bmp = GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
             }
 
             markerItems.setMarkers(
-                MapActivity.sGoogleMap,
+                GoogleMapActivity.sGoogleMap,
                 LatLng(it.latitude, it.longitude),
                 BitmapDescriptorFactory.fromBitmap(bmp),
                 titleItem(it.itemId)

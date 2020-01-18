@@ -32,10 +32,10 @@ class CreateRoomDialog :
 
         viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
 
-        init(bView)
+        init(v)
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_add_black, R.string.create_room)
+            .dialogFragment(v, R.drawable.ic_add_black, R.string.create_room)
     }
 
     private fun init(view: View) {

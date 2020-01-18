@@ -13,6 +13,6 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
         super.onCreateDialog(savedInstanceState)
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_mission, R.string.mission)
+            .dialogFragment(v, R.drawable.ic_mission, R.string.mission)
     }
 }

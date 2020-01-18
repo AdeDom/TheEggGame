@@ -23,7 +23,9 @@ import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
-class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/2562 toast name
+class MultiActivity : GoogleMapActivity(5000) { // TODO: 25/05/2562 toast name
+
+    lateinit var viewModel: MultiActivityViewModel
 
     private var mRoomInfo = ArrayList<RoomInfo>()
     private var mMulti = ArrayList<Multi>()
@@ -39,6 +41,18 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        switchItem = GameSwitch.ON
+        switchCamera = GameSwitch.ON
+    }
+
+    override fun onPause() {
+        super.onPause()
+        switchItem = GameSwitch.OFF
+        switchCamera = GameSwitch.OFF
+    }
+
     private fun init() {
         this.setToolbar(toolbar, getString(R.string.multi_player), true)
 
@@ -47,7 +61,7 @@ class MultiActivity : MapActivity<MultiActivityViewModel>() { // TODO: 25/05/256
         mTvBlue.visibility = View.VISIBLE
     }
 
-    override fun gameLoop() {
+    override fun onActivityRunning() {
         sTime -= 1
 
         rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {

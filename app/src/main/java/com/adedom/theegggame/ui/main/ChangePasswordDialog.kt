@@ -28,10 +28,10 @@ class ChangePasswordDialog :
 
         mPlayer = arguments!!.getParcelable(KEY_PLAYER)!!
 
-        init(bView)
+        init(v)
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_change, R.string.change_password)
+            .dialogFragment(v, R.drawable.ic_change, R.string.change_password)
     }
 
     private fun init(view: View) {
@@ -52,7 +52,7 @@ class ChangePasswordDialog :
             mEtNewPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtRePassword.isEmpty(getString(R.string.error_password)) -> return
             mEtNewPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
-            checkPassword(
+            verifyPasswordMatching(
                 mEtNewPassword,
                 mEtRePassword,
                 getString(R.string.error_password_not_match)

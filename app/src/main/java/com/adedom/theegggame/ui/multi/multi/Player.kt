@@ -22,7 +22,7 @@ class Player(items: ArrayList<RoomInfo>) {
             when {
                 item.image == KEY_EMPTY && item.gender == KEY_MALE -> {
                     markerPlayers.setMarkers(
-                        MapActivity.sGoogleMap,
+                        GoogleMapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                         item.name!!,
@@ -31,7 +31,7 @@ class Player(items: ArrayList<RoomInfo>) {
                 }
                 item.image == KEY_EMPTY && item.gender == KEY_FEMALE -> {
                     markerPlayers.setMarkers(
-                        MapActivity.sGoogleMap,
+                        GoogleMapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                         item.name!!,
@@ -39,9 +39,9 @@ class Player(items: ArrayList<RoomInfo>) {
                     )
                 }
                 item.image != KEY_EMPTY -> {
-                    MapActivity.sContext.loadBitmap(imageUrl(item.image!!), {
+                    GoogleMapActivity.sContext.loadBitmap(imageUrl(item.image!!), {
                         markerPlayers.setMarkers(
-                            MapActivity.sGoogleMap!!,
+                            GoogleMapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromBitmap(it),
                             item.name,
@@ -49,7 +49,7 @@ class Player(items: ArrayList<RoomInfo>) {
                         )
                     }, {
                         markerPlayers.setMarkers(
-                            MapActivity.sGoogleMap!!,
+                            GoogleMapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                             item.name,
@@ -60,9 +60,9 @@ class Player(items: ArrayList<RoomInfo>) {
             }
 
             //Circle
-            if (MapActivity.sContext.getPrefFile(KEY_PLAYER_ID) == item.playerId) {
+            if (GoogleMapActivity.sContext.getPrefFile(KEY_PLAYER_ID) == item.playerId) {
                 myCircle?.removeCircle()
-                setCircle(MapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
+                setCircle(GoogleMapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
             }
         }
     }

@@ -3,7 +3,6 @@
     <string name="google_maps_key">AIzaSyA0X_TUK3iYed_8q7tiGzup3TworGgYEfo</string>
 
     <string name="h2p">How to play</string>
-    <string name="can_not_use_single">Can not use mode Single Player!!!</string>
     <string name="least_one_person_per_team">Arrange at least 1 team per team</string>
     <string name="player_not_ready">The player is not ready yet</string>
     <string name="error_room_name">Please enter room name</string>
@@ -33,7 +32,6 @@
     <string name="red">Red</string>
     <string name="blue">Blue</string>
     <string name="exit_message">Do you want to exit the game?</string>
-
     <string name="error_username">Please enter username</string>
     <string name="error_password">Please enter password</string>
     <string name="error_re_password">Please enter Re - password</string>
@@ -56,21 +54,10 @@
     <string name="hundred">100</string>
     <string name="logout">Logout</string>
     <string name="end_game">End game</string>
-
-    <string name="completed">Completed</string>
-    <string name="failed">Failed</string>
-    <string name="exit">Exit</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
-    <string name="finish_affinity">Press back again to exit</string>
     <string name="player">Player</string>
-
     <string name="name">Name</string>
-    <string name="player_id">Player Id</string>
     <string name="level">Level</string>
-    <string name="state">State</string>
     <string name="search">Search</string>
-
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>

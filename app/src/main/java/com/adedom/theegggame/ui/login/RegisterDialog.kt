@@ -24,6 +24,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 class RegisterDialog :
     BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_add_update }) {
 
+    val TAG = "MyTag"
     private lateinit var mEtUsername: EditText
     private lateinit var mEtPassword: EditText
     private lateinit var mEtRePassword: EditText
@@ -40,10 +41,10 @@ class RegisterDialog :
 
         viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
 
-        init(bView)
+        init(v)
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_player, R.string.register)
+            .dialogFragment(v, R.drawable.ic_player, R.string.register)
     }
 
     private fun init(view: View) {
@@ -99,7 +100,7 @@ class RegisterDialog :
             mEtName.isEmpty(getString(R.string.error_name)) -> return
             mEtUsername.verifyLength(4, getString(R.string.error_username_less)) -> return
             mEtPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
-            checkPassword(
+            verifyPasswordMatching(
                 mEtPassword,
                 mEtRePassword,
                 getString(R.string.error_password_not_match)

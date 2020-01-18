@@ -24,11 +24,11 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        init(bView)
+        init(v)
 
         fetchPlayers()
 
-        return AlertDialog.Builder(activity!!).dialogFragment(bView, R.drawable.ic_rank, R.string.rank)
+        return AlertDialog.Builder(activity!!).dialogFragment(v, R.drawable.ic_rank, R.string.rank)
     }
 
     private fun init(view: View) {

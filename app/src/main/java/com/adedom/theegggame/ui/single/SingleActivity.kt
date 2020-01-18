@@ -15,7 +15,9 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.util.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : MapActivity<SingleActivityViewModel>() {
+class SingleActivity : GoogleMapActivity(5000) {
+
+    lateinit var viewModel: SingleActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,18 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
         viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
 
         init()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        switchItem = GameSwitch.ON
+        switchCamera = GameSwitch.ON
+    }
+
+    override fun onPause() {
+        super.onPause()
+        switchItem = GameSwitch.OFF
+        switchCamera = GameSwitch.OFF
     }
 
     private fun init() {
@@ -35,7 +49,7 @@ class SingleActivity : MapActivity<SingleActivityViewModel>() {
         }
     }
 
-    override fun gameLoop() {
+    override fun onActivityRunning() {
         if (switchItem == GameSwitch.ON) {
             switchItem = GameSwitch.OFF
             Item(single)

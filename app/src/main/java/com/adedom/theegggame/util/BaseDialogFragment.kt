@@ -6,15 +6,15 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
 
-abstract class BaseDialogFragment<VM : ViewModel>(private val resource: () -> Int) :
-    DialogFragment() {
+abstract class BaseDialogFragment<VM : ViewModel>(
+    private val resource: () -> Int
+) : DialogFragment() {
 
-    val TAG = "BaseDialogFragment"
     lateinit var viewModel: VM
-    lateinit var bView: View
+    lateinit var v: View
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        bView = activity!!.layoutInflater.inflate(resource.invoke(), null)
+        v = activity!!.layoutInflater.inflate(resource.invoke(), null)
         return super.onCreateDialog(savedInstanceState)
     }
 }
