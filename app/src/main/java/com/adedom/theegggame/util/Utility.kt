@@ -1,16 +1,12 @@
 package com.adedom.theegggame.util
 
 import android.location.Location
-import android.widget.EditText
 import android.widget.ImageView
-import com.adedom.library.data.KEY_EMPTY
-import com.adedom.library.extension.getContent
 import com.adedom.library.extension.loadCircle
+import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.data.models.Single
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
@@ -18,8 +14,6 @@ enum class GameSwitch {
     ON, OFF
 }
 
-const val CAMERA_ZOOM = 15F
-const val CAMERA_ZOOM_MIN = 12F
 const val RADIUS_ONE_HUNDRED_METER = 100.0
 const val TWO_KILOMETER = 2000.0F
 const val ONE_HUNDRED_METER = 100.0F
@@ -45,31 +39,28 @@ val single by lazy { arrayListOf<Single>() }
 val markerPlayers by lazy { arrayListOf<Marker>() }
 val markerItems by lazy { arrayListOf<Marker>() }
 
-var switchCamera = GameSwitch.ON
 var switchItem = GameSwitch.ON
 
 var timeStamp: Long = 0
 var rndkey: String = ""
 
-fun verifyPasswordMatching(editText1: EditText, editText2: EditText, error: String = ""): Boolean {
-    val et1 = editText1.getContent()
-    val et2 = editText2.getContent()
-    if (et1 != et2) {
-        editText2.requestFocus()
-        editText2.error = error
-        return true
-    }
-    return false
-}
+//fun EditText.isMatching(editText: EditText, error: String = ""): Boolean {
+//    if (this.getContent() != editText.getContent()) {
+//        editText.requestFocus()
+//        editText.error = error
+//        return true
+//    }
+//    return false
+//}
 
-fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
-    if (switchCamera == GameSwitch.ON) {
-        switchCamera = GameSwitch.OFF
-        val update = CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
-        googleMap!!.animateCamera(update)
-        googleMap.setMinZoomPreference(CAMERA_ZOOM_MIN)
-    }
-}
+//fun setCamera(googleMap: GoogleMap?, latLng: LatLng) {
+//    if (switchCamera == GameSwitch.ON) {
+//        switchCamera = GameSwitch.OFF
+//        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
+//        googleMap!!.animateCamera(cameraUpdate)
+//        googleMap.setMinZoomPreference(CAMERA_ZOOM_MIN)
+//    }
+//}
 
 fun rndMultiItem(latLng: LatLng) {
     if (single.size < MIN_ITEM) {

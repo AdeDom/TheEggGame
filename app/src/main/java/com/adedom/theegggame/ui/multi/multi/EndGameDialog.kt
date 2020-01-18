@@ -7,9 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.toast
+import com.adedom.library.util.BaseDialogFragment
+import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.BaseDialogFragment
-import com.adedom.theegggame.util.GoogleMapActivity
 import com.adedom.theegggame.util.TEAM_A
 import com.adedom.theegggame.util.TEAM_B
 

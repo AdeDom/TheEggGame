@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_EMPTY
-import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.exitApplication
 import com.adedom.library.extension.getPrefFile
 import com.adedom.library.extension.toast
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.KEY_EMPTY
+import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player

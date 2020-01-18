@@ -1,6 +1,8 @@
 package com.adedom.theegggame.data.networks
 
-import com.adedom.library.data.*
+import com.adedom.library.data.JsonResponse
+import com.adedom.library.data.RetrofitClient
+import com.adedom.library.util.*
 import com.adedom.theegggame.data.BASE_URL
 import retrofit2.Call
 import retrofit2.http.Field

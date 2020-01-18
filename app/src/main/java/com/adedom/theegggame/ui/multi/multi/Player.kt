@@ -1,7 +1,8 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.*
+import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.KEY_EMPTY
 import com.adedom.library.util.myCircle
 import com.adedom.library.util.setCircle
 import com.adedom.theegggame.R

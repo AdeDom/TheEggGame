@@ -4,9 +4,9 @@ import android.graphics.Bitmap
 import com.adedom.library.extension.removeMarkers
 import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.extension.setMarkers
+import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
-import com.adedom.theegggame.util.GoogleMapActivity
 import com.adedom.theegggame.util.markerItems
 import com.adedom.theegggame.util.titleItem
 import com.google.android.gms.maps.model.BitmapDescriptorFactory

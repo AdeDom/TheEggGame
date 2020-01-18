@@ -8,10 +8,10 @@ import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.admin.util.DATE_BEGIN
 import com.adedom.admin.util.TIME_BEGIN
-import com.adedom.library.data.KEY_DATE
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
+import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.getDateTime
 import kotlinx.android.synthetic.main.activity_logs.*
 

@@ -1,6 +1,6 @@
 package com.adedom.theegggame.data.models
 
-import com.adedom.library.data.*
+import com.adedom.library.util.*
 import com.google.gson.annotations.SerializedName
 
 data class Multi(

@@ -3,8 +3,8 @@ package com.adedom.admin.ui.logs
 import com.adedom.admin.util.BaseViewModel
 import com.adedom.admin.util.DATE_BEGIN
 import com.adedom.admin.util.TIME_BEGIN
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_TIME
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 
 class LogsActivityViewModel : BaseViewModel() {

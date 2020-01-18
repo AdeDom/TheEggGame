@@ -1,17 +1,16 @@
 package com.adedom.theegggame.ui.single
 
-import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.loadBitmap
 import com.adedom.library.extension.removeCircle
 import com.adedom.library.extension.removeMarker
-import com.adedom.library.util.myCircle
-import com.adedom.library.util.myLocation
-import com.adedom.library.util.setCircle
-import com.adedom.library.util.setMarker
+import com.adedom.library.util.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.KEY_FEMALE
+import com.adedom.theegggame.util.KEY_MALE
+import com.adedom.theegggame.util.RADIUS_ONE_HUNDRED_METER
+import com.adedom.theegggame.util.getLevel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 

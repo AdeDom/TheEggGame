@@ -9,9 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
+import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_COMPLETED
+import com.adedom.theegggame.util.KEY_PLAYER
 
 class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
@@ -51,9 +54,8 @@ class ChangePasswordDialog :
             mEtOldPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtNewPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtRePassword.isEmpty(getString(R.string.error_password)) -> return
-            mEtNewPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
-            verifyPasswordMatching(
-                mEtNewPassword,
+            mEtNewPassword.isLength(4, getString(R.string.error_password_less)) -> return
+            mEtNewPassword.isMatching(
                 mEtRePassword,
                 getString(R.string.error_password_not_match)
             ) -> return

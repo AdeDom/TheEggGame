@@ -2,7 +2,7 @@ package com.adedom.theegggame.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.adedom.library.data.*
+import com.adedom.library.util.*
 import com.google.gson.annotations.SerializedName
 
 data class Room(

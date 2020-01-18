@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.textChanged
+import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.BaseDialogFragment
 
 class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_rank}) {
 

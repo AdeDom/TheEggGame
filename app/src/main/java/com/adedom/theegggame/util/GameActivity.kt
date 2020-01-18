@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.SettingPermissionAndLocation
 import com.adedom.library.util.getDateTime
 

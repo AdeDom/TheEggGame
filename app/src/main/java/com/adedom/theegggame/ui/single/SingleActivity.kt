@@ -2,25 +2,26 @@ package com.adedom.theegggame.ui.single
 
 import android.location.Location
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_TIME
-import com.adedom.library.extension.completed
-import com.adedom.library.extension.getPrefFile
-import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
+import com.adedom.library.extension.*
+import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.*
 import kotlinx.android.synthetic.main.activity_map.*
 
-class SingleActivity : GoogleMapActivity(5000) {
+class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
-    lateinit var viewModel: SingleActivityViewModel
+    private lateinit var viewModel: SingleActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_map)
 
         viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
 
@@ -30,13 +31,11 @@ class SingleActivity : GoogleMapActivity(5000) {
     override fun onResume() {
         super.onResume()
         switchItem = GameSwitch.ON
-        switchCamera = GameSwitch.ON
     }
 
     override fun onPause() {
         super.onPause()
         switchItem = GameSwitch.OFF
-        switchCamera = GameSwitch.OFF
     }
 
     private fun init() {
@@ -60,9 +59,15 @@ class SingleActivity : GoogleMapActivity(5000) {
         checkRadius(sLatLng) { keepItemSingle(it) }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        AlertDialog.Builder(this@SingleActivity).dialogNegative(R.string.exit) { finish() }
+    }
+
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
-        setCamera(sGoogleMap, sLatLng)
+
+        setCamera(15F, 12F)
 
         Player(sLatLng)
     }

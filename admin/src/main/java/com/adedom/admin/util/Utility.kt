@@ -3,8 +3,8 @@ package com.adedom.admin.util
 import android.widget.ImageView
 import com.adedom.admin.R
 import com.adedom.admin.data.imageUrl
-import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.loadCircle
+import com.adedom.library.util.KEY_EMPTY
 
 fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
     when {

@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.adedom.library.data.KEY_EMPTY
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogNegative
+import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity

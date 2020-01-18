@@ -10,14 +10,14 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_EMPTY
-import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.*
-import com.adedom.library.util.getDateTime
+import com.adedom.library.util.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_FAILED
+import com.adedom.theegggame.util.KEY_FEMALE
+import com.adedom.theegggame.util.KEY_MALE
 import com.adedom.theegggame.util.extension.login
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -98,10 +98,9 @@ class RegisterDialog :
             mEtPassword.isEmpty(getString(R.string.error_password)) -> return
             mEtRePassword.isEmpty(getString(R.string.error_re_password)) -> return
             mEtName.isEmpty(getString(R.string.error_name)) -> return
-            mEtUsername.verifyLength(4, getString(R.string.error_username_less)) -> return
-            mEtPassword.verifyLength(4, getString(R.string.error_password_less)) -> return
-            verifyPasswordMatching(
-                mEtPassword,
+            mEtUsername.isLength(4, getString(R.string.error_username_less)) -> return
+            mEtPassword.isLength(4, getString(R.string.error_password_less)) -> return
+            mEtPassword.isMatching(
                 mEtRePassword,
                 getString(R.string.error_password_not_match)
             ) -> return

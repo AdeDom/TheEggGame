@@ -9,9 +9,10 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.data.KEY_DATE
-import com.adedom.library.data.KEY_TIME
 import com.adedom.library.extension.*
+import com.adedom.library.util.BaseDialogFragment
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
