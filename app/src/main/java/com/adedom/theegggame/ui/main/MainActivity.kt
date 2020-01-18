@@ -19,7 +19,6 @@ import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.login
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : GameActivity<MainActivityViewModel>() {
 
@@ -32,9 +31,6 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-
-        timeStamp = System.currentTimeMillis() / 1000
-        rndkey = UUID.randomUUID().toString().replace("-", "")
 
         init()
 
@@ -80,9 +76,10 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
         val playerId = this.getPrefFile(KEY_PLAYER_ID)
-        viewModel.insertLogs(rndkey, date, time, playerId).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
-        })
+        viewModel.insertLogs(MainActivityViewModel.rndkey, date, time, playerId)
+            .observe(this, Observer {
+                if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
+            })
     }
 
     override fun gameLoop() {

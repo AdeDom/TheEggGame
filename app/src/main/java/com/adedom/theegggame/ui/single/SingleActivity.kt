@@ -2,16 +2,21 @@ package com.adedom.theegggame.ui.single
 
 import android.location.Location
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.*
+import com.adedom.library.extension.completed
+import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.ui.main.MainActivityViewModel
+import com.adedom.theegggame.util.GameSwitch
+import com.adedom.theegggame.util.KEY_COMPLETED
+import com.adedom.theegggame.util.KEY_PLAYER_ID
 import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
@@ -30,12 +35,12 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     override fun onResume() {
         super.onResume()
-        switchItem = GameSwitch.ON
+        viewModel.switchItem = GameSwitch.ON
     }
 
     override fun onPause() {
         super.onPause()
-        switchItem = GameSwitch.OFF
+        viewModel.switchItem = GameSwitch.OFF
     }
 
     private fun init() {
@@ -49,39 +54,36 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     override fun onActivityRunning() {
-        if (switchItem == GameSwitch.ON) {
-            switchItem = GameSwitch.OFF
-            Item(single)
+        if (viewModel.switchItem == GameSwitch.ON) {
+            viewModel.switchItem = GameSwitch.OFF
+            Item(viewModel.single)
         }
 
-        rndMultiItem(sLatLng)
+        viewModel.rndMultiItem(sLatLng)
 
-        checkRadius(sLatLng) { keepItemSingle(it) }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        AlertDialog.Builder(this@SingleActivity).dialogNegative(R.string.exit) { finish() }
+        viewModel.checkRadius(sLatLng) { keepItemSingle(it) }
     }
 
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        setCamera(15F, 12F)
+//        setCamera(15F, 12F)
 
         Player(sLatLng)
     }
 
     private fun keepItemSingle(index: Int) {
         val playerId = this.getPrefFile(KEY_PLAYER_ID)
-        val (myItem, values) = getItemValues(index, timeStamp)
+        val (myItem, values) = viewModel.getItemValues(index, MainActivityViewModel.timeStamp)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
         viewModel.keepItemSingle(playerId, myItem, values, lat, lng, date, time)
             .observe(this, Observer {
-                if (it.result == KEY_COMPLETED) baseContext.toast(detailItem(myItem, values))
+                if (it.result == KEY_COMPLETED) baseContext.toast(
+                    viewModel.detailItem(myItem, values)
+                )
             })
     }
 

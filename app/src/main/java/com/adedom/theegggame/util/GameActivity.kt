@@ -13,8 +13,8 @@ import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.SettingPermissionAndLocation
 import com.adedom.library.util.getDateTime
+import com.adedom.theegggame.ui.main.MainActivityViewModel
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
@@ -32,7 +32,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         sActivity = this@GameActivity
         sContext = baseContext
 
-        SettingPermissionAndLocation(sActivity, sContext)
+//        SettingPermissionAndLocation(sActivity, sContext)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -44,7 +44,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        SettingPermissionAndLocation.locationListener(sActivity, true)
+//        SettingPermissionAndLocation.locationListener(sActivity, true)
 
         // todo music
 
@@ -58,7 +58,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        SettingPermissionAndLocation.locationListener(sActivity, false)
+//        SettingPermissionAndLocation.locationListener(sActivity, false)
 
         // music
 
@@ -68,10 +68,13 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
 
-        mViewModel.updateLogs(rndkey, getDateTime(KEY_DATE), getDateTime(KEY_TIME))
-            .observe(this, Observer {
-                if (it.result == KEY_FAILED) baseContext.failed()
-            })
+        mViewModel.updateLogs(
+            MainActivityViewModel.rndkey,
+            getDateTime(KEY_DATE),
+            getDateTime(KEY_TIME)
+        ).observe(this, Observer {
+            if (it.result == KEY_FAILED) baseContext.failed()
+        })
     }
 
     open fun gameLoop() {}

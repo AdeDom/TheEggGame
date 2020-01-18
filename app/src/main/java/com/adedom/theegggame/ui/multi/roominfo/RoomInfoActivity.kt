@@ -47,17 +47,17 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
         mTvName.text = sRoom.name
         mTvPeople.text = sRoom.people
         if (sRoom.status == HEAD) {
-            team = TEAM_A
+            RoomInfoActivityViewModel.team = TEAM_A
             mBtGo.text = getString(R.string.go)
-        } else team = TEAM_B
+        } else RoomInfoActivityViewModel.team = TEAM_B
 
         mBtGo.setOnClickListener { getReadyToStartGame() }
         mIvTeamA.setOnClickListener {
-            team = TEAM_A
+            RoomInfoActivityViewModel.team = TEAM_A
             setTeam()
         }
         mIvTeamB.setOnClickListener {
-            team = TEAM_B
+            RoomInfoActivityViewModel.team = TEAM_B
             setTeam()
         }
     }
@@ -69,7 +69,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
     private fun getReadyToStartGame() {
         if (sRoom.status == HEAD) {
-            val count = mRoomInfo.count { it.status == READY }
+            val count = mRoomInfo.count { it.status == KEY_READY }
             val teamA = mRoomInfo.count { it.team == TEAM_A }
             val teamB = mRoomInfo.count { it.team == TEAM_B }
 
@@ -84,23 +84,24 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
                     baseContext.toast(R.string.least_one_person_per_team, Toast.LENGTH_LONG)
                     return
                 }
-                count == mRoomInfo.lastIndex -> setRoomReady(setReady())
+                count == mRoomInfo.lastIndex -> setRoomReady(viewModel.getReady())
             }
-        } else setRoomReady(setReady())
+        } else setRoomReady(viewModel.getReady())
     }
 
     private fun setRoomReady(ready: String) {
         val roomNo = sRoom.room_no
-        viewModel.setReady(roomNo!!, playerId!!, ready).observe(this, Observer {
+        viewModel.getReady(roomNo!!, playerId!!, ready).observe(this, Observer {
             if (it.result == KEY_COMPLETED) fetchRoomInfo()
         })
     }
 
     private fun setTeam() {
         val roomNo = sRoom.room_no
-        viewModel.setTeam(roomNo!!, playerId!!, team).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) fetchRoomInfo()
-        })
+        viewModel.setTeam(roomNo!!, playerId!!, RoomInfoActivityViewModel.team)
+            .observe(this, Observer {
+                if (it.result == KEY_COMPLETED) fetchRoomInfo()
+            })
     }
 
     override fun onBackPressed() {
@@ -119,11 +120,11 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
     override fun onPause() {
         super.onPause()
-        setRoomReady(UNREADY)
+        setRoomReady(KEY_UNREADY)
     }
 
     private fun startGame() {
-        if (mRoomInfo.size == mRoomInfo.count { it.status == READY } && mRoomInfo.size != 0) {
+        if (mRoomInfo.size == mRoomInfo.count { it.status == KEY_READY } && mRoomInfo.size != 0) {
             viewModel.setRoomOff(sRoom.room_no!!).observe(this, Observer {
                 if (it.result == KEY_COMPLETED) {
                     finish()

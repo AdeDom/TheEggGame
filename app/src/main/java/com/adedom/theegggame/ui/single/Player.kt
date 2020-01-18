@@ -7,9 +7,9 @@ import com.adedom.library.util.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.ui.main.MainActivity
+import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.KEY_FEMALE
 import com.adedom.theegggame.util.KEY_MALE
-import com.adedom.theegggame.util.RADIUS_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.getLevel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -21,7 +21,7 @@ class Player(latLng: LatLng) {
         myCircle?.removeCircle()
 
         setMyLocation(latLng)
-        setCircle(GoogleMapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
+        setCircle(GoogleMapActivity.sGoogleMap, latLng, CIRCLE_ONE_HUNDRED_METER)
     }
 
     private fun setMyLocation(latLng: LatLng) {

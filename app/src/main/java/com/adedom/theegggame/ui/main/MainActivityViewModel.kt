@@ -1,8 +1,11 @@
 package com.adedom.theegggame.ui.main
 
+import com.adedom.library.util.getKeyUUID
 import com.adedom.theegggame.util.BaseViewModel
 
 class MainActivityViewModel : BaseViewModel() {
+
+    var timeStamp: Long = 0
 
     fun getPlayer(playerId: String) = playerRepository.getPlayer(playerId)
 
@@ -13,5 +16,11 @@ class MainActivityViewModel : BaseViewModel() {
 
     fun insertLogs(key: String, dateIn: String, timeIn: String, playerId: String) =
         baseRepository.insertLogs(key, dateIn, timeIn, playerId)
+
+    companion object {
+        var rndkey: String = getKeyUUID()
+        var timeStamp: Long = System.currentTimeMillis() / 1000
+    }
+
 }
 

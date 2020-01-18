@@ -5,16 +5,15 @@ import com.adedom.library.extension.setMarkers
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
-import com.adedom.theegggame.util.markerItems
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
 class Item(multiple: ArrayList<Multi>) {
 
     init {
-        markerItems.removeMarkers()
+        MultiActivityViewModel.markerItems.removeMarkers()
         multiple.forEach {
-            markerItems.setMarkers(
+            MultiActivityViewModel.markerItems.setMarkers(
                 GoogleMapActivity.sGoogleMap,
                 LatLng(it.latitude, it.longitude),
                 BitmapDescriptorFactory.fromResource(R.drawable.the_egg_game)

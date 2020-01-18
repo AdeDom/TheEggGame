@@ -38,7 +38,7 @@ class RoomInfoAdapter :
 
         holder.itemView.mTvLevel.text = getLevel(level)
 
-        if (status == READY) {
+        if (status == KEY_READY) {
             holder.itemView.mIvReady.background = ContextCompat.getDrawable(
                 holder.itemView.context,
                 R.drawable.shape_oval_green

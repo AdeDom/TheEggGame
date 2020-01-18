@@ -3,10 +3,8 @@ package com.adedom.theegggame.ui.multi.multi
 import android.location.Location
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.dialogNegative
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
@@ -22,6 +20,7 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sTi
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamA
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
+import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
@@ -48,12 +47,12 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 
     override fun onResume() {
         super.onResume()
-        switchItem = GameSwitch.ON
+        viewModel.switchItem = GameSwitch.ON
     }
 
     override fun onPause() {
         super.onPause()
-        switchItem = GameSwitch.OFF
+        viewModel.switchItem = GameSwitch.OFF
     }
 
     private fun init() {
@@ -67,9 +66,13 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onActivityRunning() {
         sTime -= 1
 
-        rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {
+        viewModel.rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {
             mMulti.forEach {
-                distanceOver(sLatLng, LatLng(it.latitude, it.longitude), THREE_KILOMETER) {
+                viewModel.distanceOver(
+                    sLatLng,
+                    LatLng(it.latitude, it.longitude),
+                    RADIUS_THREE_KILOMETER
+                ) {
                     insertMulti()
                 }
             }
@@ -109,7 +112,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
                 multi.latitude, multi.longitude, distance
             )
 
-            if (distance[0] < ONE_HUNDRED_METER) {
+            if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
                 keepItemMulti(multi.multi_id)
                 mMulti.removeAt(index)
                 Item(mMulti)
@@ -118,15 +121,10 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        AlertDialog.Builder(this@MultiActivity).dialogNegative(R.string.exit) { finish() }
-    }
-
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        setCamera(15F, 12F)
+//        setCamera(15F, 12F)
 
         setLatlng()
 
@@ -167,8 +165,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 
     private fun insertMulti() {
         val roomNo = room.room_no
-        val lat = rndLatLng(sLatLng.latitude)
-        val lng = rndLatLng(sLatLng.longitude)
+        val lat = viewModel.rndLatLng(sLatLng.latitude)
+        val lng = viewModel.rndLatLng(sLatLng.longitude)
         viewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
@@ -179,7 +177,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
             multiId,
             room.room_no!!,
             playerId!!,
-            team,
+            RoomInfoActivityViewModel.team,
             sLatLng.latitude,
             sLatLng.longitude,
             getDateTime(KEY_DATE),

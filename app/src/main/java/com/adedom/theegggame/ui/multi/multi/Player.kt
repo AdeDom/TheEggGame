@@ -15,14 +15,14 @@ import com.google.android.gms.maps.model.LatLng
 class Player(items: ArrayList<RoomInfo>) {
 
     init {
-        markerPlayers.removeMarkers()
+        MultiActivityViewModel.markerPlayers.removeMarkers()
         items.forEach { item ->
             val latLng = LatLng(item.latitude!!, item.longitude!!)
 
             //player
             when {
                 item.image == KEY_EMPTY && item.gender == KEY_MALE -> {
-                    markerPlayers.setMarkers(
+                    MultiActivityViewModel.markerPlayers.setMarkers(
                         GoogleMapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
@@ -31,7 +31,7 @@ class Player(items: ArrayList<RoomInfo>) {
                     )
                 }
                 item.image == KEY_EMPTY && item.gender == KEY_FEMALE -> {
-                    markerPlayers.setMarkers(
+                    MultiActivityViewModel.markerPlayers.setMarkers(
                         GoogleMapActivity.sGoogleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
@@ -41,7 +41,7 @@ class Player(items: ArrayList<RoomInfo>) {
                 }
                 item.image != KEY_EMPTY -> {
                     GoogleMapActivity.sContext.loadBitmap(imageUrl(item.image!!), {
-                        markerPlayers.setMarkers(
+                        MultiActivityViewModel.markerPlayers.setMarkers(
                             GoogleMapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromBitmap(it),
@@ -49,7 +49,7 @@ class Player(items: ArrayList<RoomInfo>) {
                             getLevel(item.level)
                         )
                     }, {
-                        markerPlayers.setMarkers(
+                        MultiActivityViewModel.markerPlayers.setMarkers(
                             GoogleMapActivity.sGoogleMap!!,
                             latLng,
                             BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
@@ -63,7 +63,7 @@ class Player(items: ArrayList<RoomInfo>) {
             //Circle
             if (GoogleMapActivity.sContext.getPrefFile(KEY_PLAYER_ID) == item.playerId) {
                 myCircle?.removeCircle()
-                setCircle(GoogleMapActivity.sGoogleMap, latLng, RADIUS_ONE_HUNDRED_METER)
+                setCircle(GoogleMapActivity.sGoogleMap, latLng, CIRCLE_ONE_HUNDRED_METER)
             }
         }
     }
