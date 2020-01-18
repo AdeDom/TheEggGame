@@ -5,13 +5,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
-import com.adedom.admin.util.*
+import com.adedom.admin.util.BaseActivity
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
+class PlayerActivity : BaseActivity<PlayerActivityViewModel>() /*,OnAttachPlayer*/ {
 
     private lateinit var mAdapter: PlayerAdapter
 
@@ -71,14 +71,15 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
     override fun onAttach() {
         fetchPlayers(
-            name,
-            spinnerIndexStart.plus(1).toString(),
-            spinnerIndexEnd.plus(1).toString(),
-            isCheckOnline,
-            isCheckOffline,
-            isCheckMale,
-            isCheckFemale
+            PlayerActivityViewModel.name,
+            PlayerActivityViewModel.spinnerIndexStart.plus(1).toString(),
+            PlayerActivityViewModel.spinnerIndexEnd.plus(1).toString(),
+            PlayerActivityViewModel.isCheckOnline,
+            PlayerActivityViewModel.isCheckOffline,
+            PlayerActivityViewModel.isCheckMale,
+            PlayerActivityViewModel.isCheckFemale
         )
+
     }
 
 }

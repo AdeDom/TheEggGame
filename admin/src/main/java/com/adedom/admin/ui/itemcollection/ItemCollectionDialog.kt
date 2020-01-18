@@ -12,9 +12,9 @@ class ItemCollectionDialog : BaseDialogFragment({ R.layout.dialog_item_collectio
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        init(bView)
+        init(v)
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_egg, R.string.item_collection)
+            .dialogFragment(v, R.drawable.ic_egg, R.string.item_collection)
     }
 
     private fun init(view: View) {

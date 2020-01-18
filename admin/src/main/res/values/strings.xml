@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Admin</string>
     <string name="item_collection">Item Collection</string>
-    <string name="place">Place</string>
     <string name="date_time">Date Time</string>
     <string name="qty">Qty</string>
     <string name="date">Date</string>
@@ -23,8 +22,6 @@
     <string name="name">Name</string>
     <string name="item">Item</string>
     <string name="locality">Locality</string>
-    <string name="area">Area</string>
-    <string name="sub_area">Sub area</string>
     <string name="date_in">Date In</string>
     <string name="time_in">Time In</string>
     <string name="date_out">Date Out</string>
@@ -33,12 +30,6 @@
     <string name="toolbar">Toolbar</string>
     <string name="to">To</string>
 
-    <string name="completed">Completed</string>
-    <string name="failed">Failed</string>
-    <string name="exit">Exit</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
-    <string name="finish_affinity">Press back again to exit</string>
     <string name="player">Player</string>
 
     <string name="player_id">Player Id</string>

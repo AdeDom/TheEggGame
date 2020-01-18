@@ -9,7 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
 import com.adedom.admin.R
-import com.adedom.admin.util.*
+import com.adedom.admin.util.BaseDialogFragment
 import com.adedom.admin.util.extension.spinnerLevel
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.getContent
@@ -18,8 +18,9 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        init(bView)
-        return AlertDialog.Builder(activity!!).dialogFragment(bView, R.drawable.ic_player, R.string.player)
+        init(v)
+        return AlertDialog.Builder(activity!!)
+            .dialogFragment(v, R.drawable.ic_player, R.string.player)
     }
 
     private fun init(view: View) {
@@ -32,32 +33,32 @@ class PlayerDialog : BaseDialogFragment({ R.layout.dialog_player }) {
         val checkFemale = view.findViewById(R.id.mCheckFemale) as CheckBox
         val btSearch = view.findViewById(R.id.mBtSearch) as Button
 
-        etName.setText(name)
+        etName.setText(PlayerActivityViewModel.name)
 
         spinnerStart.apply {
             adapter = context!!.spinnerLevel()
-            setSelection(spinnerIndexStart)
+            setSelection(PlayerActivityViewModel.spinnerIndexStart)
         }
         spinnerEnd.apply {
             adapter = context!!.spinnerLevel()
-            setSelection(spinnerIndexEnd)
+            setSelection(PlayerActivityViewModel.spinnerIndexEnd)
         }
 
-        checkMale.isChecked = isCheckMale
-        checkFemale.isChecked = isCheckFemale
+        checkMale.isChecked = PlayerActivityViewModel.isCheckMale
+        checkFemale.isChecked = PlayerActivityViewModel.isCheckFemale
 
-        checkOnline.isChecked = isCheckOnline
-        checkOffline.isChecked = isCheckOffline
+        checkOnline.isChecked = PlayerActivityViewModel.isCheckOnline
+        checkOffline.isChecked = PlayerActivityViewModel.isCheckOffline
 
         btSearch.setOnClickListener {
             dialog!!.dismiss()
-            name = etName.getContent()
-            spinnerIndexStart = spinnerStart.selectedItemPosition
-            spinnerIndexEnd = spinnerEnd.selectedItemPosition
-            isCheckOnline = checkOnline.isChecked
-            isCheckOffline = checkOffline.isChecked
-            isCheckMale = checkMale.isChecked
-            isCheckFemale = checkFemale.isChecked
+            PlayerActivityViewModel.name = etName.getContent()
+            PlayerActivityViewModel.spinnerIndexStart = spinnerStart.selectedItemPosition
+            PlayerActivityViewModel.spinnerIndexEnd = spinnerEnd.selectedItemPosition
+            PlayerActivityViewModel.isCheckOnline = checkOnline.isChecked
+            PlayerActivityViewModel.isCheckOffline = checkOffline.isChecked
+            PlayerActivityViewModel.isCheckMale = checkMale.isChecked
+            PlayerActivityViewModel.isCheckFemale = checkFemale.isChecked
             listener.onAttach()
         }
     }

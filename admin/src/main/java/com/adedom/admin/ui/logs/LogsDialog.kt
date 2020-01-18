@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
-import com.adedom.admin.util.*
+import com.adedom.admin.util.BaseDialogFragment
 import com.adedom.library.extension.dialogDatePicker
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogTimePicker
@@ -17,9 +17,9 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        init(bView)
+        init(v)
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(bView, R.drawable.ic_date_black, R.string.logs)
+            .dialogFragment(v, R.drawable.ic_date_black, R.string.logs)
     }
 
     private fun init(view: View) {
@@ -33,15 +33,15 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
         val tvTimeEnd = view.findViewById(R.id.mTvTimeEnd) as TextView
         val btSearch = view.findViewById(R.id.mBtSearch) as Button
 
-        var dBegin = dateBegin
-        var tBegin = timeBegin
-        var dEnd = dateEnd
-        var tEnd = timeEnd
+        var dBegin = LogsActivityViewModel.dateBegin
+        var tBegin = LogsActivityViewModel.timeBegin
+        var dEnd = LogsActivityViewModel.dateEnd
+        var tEnd = LogsActivityViewModel.timeEnd
 
-        tvDateBegin.text = dateBegin
-        tvTimeBegin.text = timeBegin
-        tvDateEnd.text = dateEnd
-        tvTimeEnd.text = timeEnd
+        tvDateBegin.text = LogsActivityViewModel.dateBegin
+        tvTimeBegin.text = LogsActivityViewModel.timeBegin
+        tvDateEnd.text = LogsActivityViewModel.dateEnd
+        tvTimeEnd.text = LogsActivityViewModel.timeEnd
 
         ivDateBegin.setOnClickListener {
             context!!.dialogDatePicker { year, month, dayOfMonth ->
@@ -73,10 +73,10 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
 
         btSearch.setOnClickListener {
             dialog!!.dismiss()
-            dateBegin = dBegin
-            timeBegin = tBegin
-            dateEnd = dEnd
-            timeEnd = tEnd
+            LogsActivityViewModel.dateBegin = dBegin
+            LogsActivityViewModel.timeBegin = tBegin
+            LogsActivityViewModel.dateEnd = dEnd
+            LogsActivityViewModel.timeEnd = tEnd
             listener.onAttach()
         }
     }

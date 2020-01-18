@@ -5,10 +5,14 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
-import com.adedom.admin.util.*
+import com.adedom.admin.util.BaseActivity
+import com.adedom.admin.util.DATE_BEGIN
+import com.adedom.admin.util.TIME_BEGIN
+import com.adedom.library.data.KEY_DATE
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
+import com.adedom.library.util.getDateTime
 import kotlinx.android.synthetic.main.activity_logs.*
 
 class LogsActivity : BaseActivity<LogsActivityViewModel>() {
@@ -51,8 +55,8 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
     private fun fetchLogs(
         dateBegin: String = DATE_BEGIN,
         timeBegin: String = TIME_BEGIN,
-        dateEnd: String = DATE_NOW,
-        timeEnd: String = "23:59"
+        dateEnd: String = getDateTime(KEY_DATE),
+        timeEnd: String = "23:59:59"
     ) {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getLogs(dateBegin, timeBegin, dateEnd, timeEnd).observe(this, Observer {
@@ -62,6 +66,13 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
         })
     }
 
-    override fun onAttach() = fetchLogs(dateBegin, timeBegin, dateEnd, timeEnd)
+    override fun onAttach() {
+        fetchLogs(
+            LogsActivityViewModel.dateBegin,
+            LogsActivityViewModel.timeBegin,
+            LogsActivityViewModel.dateEnd,
+            LogsActivityViewModel.timeEnd
+        )
+    }
 
 }

@@ -7,8 +7,10 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 
 abstract class BaseDialogFragment(private val resource: () -> Int) : DialogFragment() {
+
+    val TAG = "BaseDialogFragment"
     lateinit var listener: OnAttachListener
-    lateinit var bView: View
+    lateinit var v: View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -16,7 +18,7 @@ abstract class BaseDialogFragment(private val resource: () -> Int) : DialogFragm
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        bView = activity!!.layoutInflater.inflate(resource.invoke(), null)
+        v = activity!!.layoutInflater.inflate(resource.invoke(), null)
         return super.onCreateDialog(savedInstanceState)
     }
 }
