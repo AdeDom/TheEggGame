@@ -18,7 +18,7 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_FAILED
 import com.adedom.theegggame.util.KEY_FEMALE
 import com.adedom.theegggame.util.KEY_MALE
-import com.adedom.theegggame.util.extension.login
+import com.adedom.theegggame.util.extension.loginSuccess
 import com.theartofdev.edmodo.cropper.CropImage
 
 class RegisterDialog :
@@ -119,7 +119,7 @@ class RegisterDialog :
                 if (it.result == KEY_FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
                 } else {
-                    activity!!.login(MainActivity::class.java, it.result!!, username)
+                    activity!!.loginSuccess(MainActivity::class.java, it.result!!, username)
                 }
             })
     }

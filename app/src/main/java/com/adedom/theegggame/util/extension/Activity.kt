@@ -7,7 +7,7 @@ import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.util.KEY_PLAYER_ID
 import com.adedom.theegggame.util.KEY_USERNAME
 
-fun Activity.login(
+fun Activity.loginSuccess(
     c: Class<*>,
     playerId: String = KEY_EMPTY,
     username: String = ""

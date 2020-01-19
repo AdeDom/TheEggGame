@@ -13,7 +13,6 @@ import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.GameSwitch
 import com.adedom.theegggame.util.KEY_COMPLETED
 import com.adedom.theegggame.util.KEY_PLAYER_ID
@@ -31,6 +30,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
 
         init()
+
+        viewModel.itemBonus = 0
     }
 
     override fun onResume() {
@@ -61,7 +62,10 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         viewModel.rndMultiItem(sLatLng)
 
+        viewModel.rndItemBonus(sLatLng)
+
         viewModel.checkRadius(sLatLng) { keepItemSingle(it) }
+
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -74,16 +78,16 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     private fun keepItemSingle(index: Int) {
         val playerId = this.getPrefFile(KEY_PLAYER_ID)
-        val (myItem, values) = viewModel.getItemValues(index, MainActivityViewModel.timeStamp)
+        val (myItem, values) = viewModel.getItemValues(index)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
         viewModel.keepItemSingle(playerId, myItem, values, lat, lng, date, time)
             .observe(this, Observer {
-                if (it.result == KEY_COMPLETED) baseContext.toast(
-                    viewModel.detailItem(myItem, values)
-                )
+                if (it.result == KEY_COMPLETED) {
+                    baseContext.toast(viewModel.detailItem(myItem, values))
+                }
             })
     }
 

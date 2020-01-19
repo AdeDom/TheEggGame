@@ -13,7 +13,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_PLAYER
-import com.adedom.theegggame.util.extension.login
+import com.adedom.theegggame.util.extension.loginSuccess
 
 class SettingDialog : DialogFragment() {
 
@@ -49,7 +49,7 @@ class SettingDialog : DialogFragment() {
         }
 
         btLogout.setOnClickListener {
-            activity!!.login(
+            activity!!.loginSuccess(
                 LoginActivity::class.java,
                 KEY_EMPTY,
                 MainActivity.sPlayer.username!!

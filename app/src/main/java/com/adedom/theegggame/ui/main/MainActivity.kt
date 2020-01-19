@@ -17,7 +17,7 @@ import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.*
-import com.adedom.theegggame.util.extension.login
+import com.adedom.theegggame.util.extension.loginSuccess
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : GameActivity<MainActivityViewModel>() {
@@ -63,7 +63,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
             insertLogs()
             false
         } else {
-            this.login(
+            this.loginSuccess(
                 LoginActivity::class.java,
                 KEY_EMPTY,
                 this.getPrefFile(KEY_USERNAME)
@@ -85,7 +85,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     override fun gameLoop() {
         viewModel.getPlayer(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
-                this.login(LoginActivity::class.java, KEY_EMPTY, "")
+                this.loginSuccess(LoginActivity::class.java, KEY_EMPTY, "")
             } else {
                 sPlayer = it
                 setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)

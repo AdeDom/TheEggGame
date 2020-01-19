@@ -19,7 +19,6 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sTime
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamA
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.model.LatLng
@@ -29,11 +28,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 
     private lateinit var viewModel: MultiActivityViewModel
 
-    private var mRoomInfo = ArrayList<RoomInfo>()
-    private var mMulti = ArrayList<Multi>()
-
-    val playerId = MainActivity.sPlayer.playerId
-    val room = RoomInfoActivity.sRoom
+    private val room = RoomInfoActivityViewModel.sRoom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,17 +61,21 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onActivityRunning() {
         sTime -= 1
 
-        viewModel.rndMultiItem(room.status!!, mRoomInfo.size, mMulti.size, { insertMulti() }, {
-            mMulti.forEach {
-                viewModel.distanceOver(
-                    sLatLng,
-                    LatLng(it.latitude, it.longitude),
-                    RADIUS_THREE_KILOMETER
-                ) {
-                    insertMulti()
+        viewModel.rndMultiItem(
+            room.status!!,
+            viewModel.mRoomInfo.size,
+            viewModel.mMulti.size,
+            { insertMulti() }, {
+                viewModel.mMulti.forEach {
+                    viewModel.distanceOver(
+                        sLatLng,
+                        LatLng(it.latitude, it.longitude),
+                        RADIUS_THREE_KILOMETER
+                    ) {
+                        insertMulti()
+                    }
                 }
-            }
-        })
+            })
 
         checkRadius()
 
@@ -105,7 +104,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     private fun checkRadius() {
-        mMulti.forEachIndexed { index, multi ->
+        viewModel.mMulti.forEachIndexed { index, multi ->
             val distance = FloatArray(1)
             Location.distanceBetween(
                 sLatLng.latitude, sLatLng.longitude,
@@ -114,8 +113,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 
             if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
                 keepItemMulti(multi.multi_id)
-                mMulti.removeAt(index)
-                Item(mMulti)
+                viewModel.mMulti.removeAt(index)
+                Item(viewModel.mMulti)
                 return
             }
         }
@@ -124,7 +123,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-//        setCamera(15F, 12F)
+        setCamera(15F, 12F)
 
         setLatlng()
 
@@ -140,25 +139,25 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     private fun setLatlng() {
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        viewModel.setLatlng(room.room_no!!, playerId!!, lat, lng).observe(this, Observer {
+        viewModel.setLatlng(room.room_no!!, MainActivity.sPlayer.playerId!!, lat, lng).observe(this, Observer {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
     }
 
     private fun fetchRoomInfo() {
         viewModel.getRoomInfo(room.room_no!!).observe(this, Observer {
-            if (it != mRoomInfo) {
-                mRoomInfo = it as ArrayList<RoomInfo>
-                Player(mRoomInfo)
+            if (it != viewModel.mRoomInfo) {
+                viewModel.mRoomInfo = it as ArrayList<RoomInfo>
+                Player(viewModel.mRoomInfo)
             }
         })
     }
 
     private fun fetchMulti() {
         viewModel.getMulti(room.room_no!!).observe(this, Observer {
-            if (it != mMulti) {
-                mMulti = it as ArrayList<Multi>
-                Item(mMulti)
+            if (it != viewModel.mMulti) {
+                viewModel.mMulti = it as ArrayList<Multi>
+                Item(viewModel.mMulti)
             }
         })
     }
@@ -176,7 +175,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         viewModel.keepItemMulti(
             multiId,
             room.room_no!!,
-            playerId!!,
+            MainActivity.sPlayer.playerId!!,
             RoomInfoActivityViewModel.team,
             sLatLng.latitude,
             sLatLng.longitude,

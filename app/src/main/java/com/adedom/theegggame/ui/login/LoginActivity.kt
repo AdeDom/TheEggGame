@@ -11,7 +11,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_USERNAME
-import com.adedom.theegggame.util.extension.login
+import com.adedom.theegggame.util.extension.loginSuccess
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : GameActivity<LoginActivityViewModel>() {
@@ -31,11 +31,11 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         mBtRegister.setOnClickListener {
             RegisterDialog().show(supportFragmentManager, null)
         }
-        mBtLogin.setOnClickListener { login1() }
+        mBtLogin.setOnClickListener { login() }
         mTvForgotPassword.setOnClickListener { baseContext.failed() }
     }
 
-    private fun login1() {
+    private fun login() {
         // TODO: 20/05/2562 login one user only
 
         when {
@@ -48,9 +48,9 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
 
         viewModel.getPlayerId(username, password).observe(this, Observer {
             if (it.result == null) {
-                mEtPassword.failed(getString(R.string.username_password_incorrect))
+                mEtPassword.failed(getString(R.string.login_incorrect))
             } else {
-                this.login(MainActivity::class.java, it.result!!, username)
+                this.loginSuccess(MainActivity::class.java, it.result!!, username)
             }
         })
     }

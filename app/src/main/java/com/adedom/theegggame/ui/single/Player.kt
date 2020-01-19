@@ -8,8 +8,6 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
-import com.adedom.theegggame.util.KEY_FEMALE
-import com.adedom.theegggame.util.KEY_MALE
 import com.adedom.theegggame.util.getLevel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -26,8 +24,32 @@ class Player(latLng: LatLng) {
 
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayer
-        when {
-            player.image == KEY_EMPTY && player.gender == KEY_MALE -> {
+        SingleActivityViewModel.setImageProfile(player.image,player.gender,{
+            setMarker(
+                GoogleMapActivity.sGoogleMap!!,
+                latLng,
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
+                player.name!!,
+                getLevel(player.level)
+            )
+        },{
+            setMarker(
+                GoogleMapActivity.sGoogleMap!!,
+                latLng,
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
+                player.name!!,
+                getLevel(player.level)
+            )
+        },{
+            GoogleMapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
+                setMarker(
+                    GoogleMapActivity.sGoogleMap!!,
+                    latLng,
+                    BitmapDescriptorFactory.fromBitmap(it),
+                    player.name!!,
+                    getLevel(player.level)
+                )
+            }, {
                 setMarker(
                     GoogleMapActivity.sGoogleMap!!,
                     latLng,
@@ -35,36 +57,8 @@ class Player(latLng: LatLng) {
                     player.name!!,
                     getLevel(player.level)
                 )
-            }
-            player.image == KEY_EMPTY && player.gender == KEY_FEMALE -> {
-                setMarker(
-                    GoogleMapActivity.sGoogleMap!!,
-                    latLng,
-                    BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
-                    player.name!!,
-                    getLevel(player.level)
-                )
-            }
-            player.image != KEY_EMPTY -> {
-                GoogleMapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
-                    setMarker(
-                        GoogleMapActivity.sGoogleMap!!,
-                        latLng,
-                        BitmapDescriptorFactory.fromBitmap(it),
-                        player.name!!,
-                        getLevel(player.level)
-                    )
-                }, {
-                    setMarker(
-                        GoogleMapActivity.sGoogleMap!!,
-                        latLng,
-                        BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-                        player.name!!,
-                        getLevel(player.level)
-                    )
-                })
-            }
-        }
+            })
+        })
     }
 
 }

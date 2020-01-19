@@ -1,6 +1,9 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import android.location.Location
+import com.adedom.library.util.KEY_EMPTY
+import com.adedom.theegggame.data.models.Multi
+import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -8,6 +11,8 @@ import com.google.android.gms.maps.model.Marker
 class MultiActivityViewModel : BaseViewModel() {
 
     var switchItem = GameSwitch.ON
+    var mRoomInfo = ArrayList<RoomInfo>()
+    var mMulti = ArrayList<Multi>()
 
     fun setLatlng(roomNo: String, playerId: String, latitude: Double, longitude: Double) =
         multiRepository.setLatlng(roomNo, playerId, latitude, longitude)
@@ -82,9 +87,23 @@ class MultiActivityViewModel : BaseViewModel() {
     companion object {
         val markerPlayers by lazy { arrayListOf<Marker>() }
         val markerItems by lazy { arrayListOf<Marker>() }
-        var sTime: Int = TIME_FIFTEEN_MINUTE
+        var sTime: Int = TIME_FIVE_MINUTE
         var scoreTeamA = 0
         var scoreTeamB = 0
+
+        fun setImageProfile(
+            image: String?,
+            gender: String?,
+            male: () -> Unit,
+            female: () -> Unit,
+            loadImage: () -> Unit
+        ) {
+            when {
+                image == KEY_EMPTY && gender == KEY_MALE -> male.invoke()
+                image == KEY_EMPTY && gender == KEY_FEMALE -> female.invoke()
+                image != KEY_EMPTY -> loadImage.invoke()
+            }
+        }
     }
 
 }

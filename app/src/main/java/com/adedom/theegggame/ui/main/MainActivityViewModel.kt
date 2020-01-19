@@ -5,8 +5,6 @@ import com.adedom.theegggame.util.BaseViewModel
 
 class MainActivityViewModel : BaseViewModel() {
 
-    var timeStamp: Long = 0
-
     fun getPlayer(playerId: String) = playerRepository.getPlayer(playerId)
 
     fun rank(search: String, limit: String) = playerRepository.getPlayers(search, limit)

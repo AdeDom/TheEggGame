@@ -16,6 +16,7 @@ const val HEAD = "head"
 const val TAIL = "tail"
 const val TEAM_A = "A"
 const val TEAM_B = "B"
+const val THE_EGG_GAME = "The Egg Game"
 
 const val CIRCLE_ONE_HUNDRED_METER = 100.0
 const val RADIUS_TWO_KILOMETER = 2000.0F
@@ -25,4 +26,7 @@ const val RADIUS_THREE_KILOMETER = 3000.0F
 const val NUMBER_OF_ITEM = 5
 const val MIN_ITEM = 5
 const val MAX_ITEM = 10
-const val TIME_FIFTEEN_MINUTE = 900
+const val TIME_FIVE_MINUTE = 300
+
+const val ITEM_EGG_NORMAL = 1
+

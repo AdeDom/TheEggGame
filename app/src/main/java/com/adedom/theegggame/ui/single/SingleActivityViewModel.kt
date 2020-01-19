@@ -1,7 +1,13 @@
 package com.adedom.theegggame.ui.single
 
+import android.graphics.Bitmap
 import android.location.Location
+import com.adedom.library.extension.resourceBitmap
+import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.KEY_EMPTY
+import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
+import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -10,6 +16,8 @@ class SingleActivityViewModel : BaseViewModel() {
 
     val single by lazy { arrayListOf<Single>() }
     var switchItem = GameSwitch.ON
+
+    var itemBonus: Int = 0
 
     fun keepItemSingle(
         playerId: String,
@@ -35,6 +43,7 @@ class SingleActivityViewModel : BaseViewModel() {
             1 -> name = "Experience point"
             2 -> name = "Mystery Box"
             3 -> name = "Mystery Item"
+            4 -> name = "Bonus"
         }
         return name
     }
@@ -44,7 +53,7 @@ class SingleActivityViewModel : BaseViewModel() {
         when (itemId) {
             1 -> name = "Experience point : $values"
             2 -> name = "Egg I" // egg false
-            3 -> name = "Egg II" // hide egg + radius
+            3 -> name = "Egg II" // radius
             4 -> name = "Egg III" // stun
         }
         return name
@@ -63,6 +72,7 @@ class SingleActivityViewModel : BaseViewModel() {
 
             if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
                 insertItem.invoke(index)
+                if (item.itemId == ITEM_EGG_NORMAL) itemBonus++ // Bonus
                 markerItems[index].remove()
                 single.removeAt(index)
                 switchItem = GameSwitch.ON
@@ -100,18 +110,21 @@ class SingleActivityViewModel : BaseViewModel() {
         return ll
     }
 
-    fun getItemValues(i: Int, timeStamp: Long): Pair<Int, Int> {
+    fun getItemValues(i: Int): Pair<Int, Int> {
         var myItem = single[i].itemId // item Id
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
+        val timeStart = MainActivityViewModel.timeStamp
         val timeNow = System.currentTimeMillis() / 1000
-        if (timeNow > timeStamp + TIME_FIFTEEN_MINUTE.toLong()) values *= 2 // Multiply 2
+        if (timeNow > timeStart + TIME_FIVE_MINUTE.toLong()) values *= 2 // Multiply 2
 
         when (myItem) {
             2 -> { // mystery box
                 myItem = (1..2).random() // random exp and item*/
                 values += (1..20).random() // mystery box + 20 point.
-                if (myItem == 2) {
+                if (myItem == 1) {
+                    itemBonus++
+                } else {
                     myItem = (2..4).random() // random item
                     values = 1
                 }
@@ -120,12 +133,50 @@ class SingleActivityViewModel : BaseViewModel() {
                 myItem = (2..4).random()
                 values = 1
             }
+            4 -> {// Bonus
+                myItem = 1
+                values = (300..399).random()
+            }
         }
         return Pair(myItem, values)
     }
 
-    companion object{
+    fun rndItemBonus(latLng: LatLng) {
+        if (itemBonus % 3 == 0 && itemBonus != 0) {
+            itemBonus = 0
+            for (i in 1..MAX_ITEM) {
+                val item = Single(4, rndLatLng(latLng.latitude), rndLatLng(latLng.longitude))
+                single.add(item)
+            }
+        }
+    }
+
+    companion object {
         val markerItems by lazy { arrayListOf<Marker>() }
+
+        fun setImageProfile(
+            image: String?,
+            gender: String?,
+            male: () -> Unit,
+            female: () -> Unit,
+            loadImage: () -> Unit
+        ) {
+            when {
+                image == KEY_EMPTY && gender == KEY_MALE -> male.invoke()
+                image == KEY_EMPTY && gender == KEY_FEMALE -> female.invoke()
+                image != KEY_EMPTY -> loadImage.invoke()
+            }
+        }
+
+        fun getItemBitmap(itemId: Int): Bitmap {
+            return when (itemId) {
+                1 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
+                2 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
+                3 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
+                4 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg_bonus)
+                else -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_image_black)
+            }
+        }
     }
 }
 
