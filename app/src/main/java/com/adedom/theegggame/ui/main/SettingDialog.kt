@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogNegative
+import com.adedom.library.util.BaseDialogFragment
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
@@ -15,17 +15,15 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_PLAYER
 import com.adedom.theegggame.util.extension.loginSuccess
 
-class SettingDialog : DialogFragment() {
+class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_setting }) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_setting, null)
-
-        init(view)
+        init(v)
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(view, R.drawable.ic_setting, R.string.setting)
+            .dialogFragment(v, R.drawable.ic_setting, R.string.setting)
     }
 
     private fun init(view: View) {

@@ -11,7 +11,7 @@ import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : BaseActivity<PlayerActivityViewModel>() /*,OnAttachPlayer*/ {
+class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
 
     private lateinit var mAdapter: PlayerAdapter
 
@@ -55,7 +55,9 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() /*,OnAttachPlayer
         online: Boolean = true,
         offline: Boolean = true,
         male: Boolean = true,
-        female: Boolean = true
+        female: Boolean = true,
+        ls: Int = 1,
+        le: Int = 99
     ) {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getPlayers(name, levelStart, levelEnd, online, offline, male, female)

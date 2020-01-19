@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/shape_edit"
-                android:drawableEnd="@drawable/ic_search"
+                android:drawableEnd="@drawable/ic_search_black"
                 android:hint="@string/search"
                 android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"

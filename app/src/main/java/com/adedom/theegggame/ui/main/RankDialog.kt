@@ -15,7 +15,7 @@ import com.adedom.library.extension.textChanged
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 
-class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_rank}) {
+class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_rank }) {
 
     private lateinit var mAdapter: RankAdapter
 
@@ -28,7 +28,8 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({R.layout.dialog_ra
 
         fetchPlayers()
 
-        return AlertDialog.Builder(activity!!).dialogFragment(v, R.drawable.ic_rank, R.string.rank)
+        return AlertDialog.Builder(activity!!)
+            .dialogFragment(v, R.drawable.ic_rank_small, R.string.rank)
     }
 
     private fun init(view: View) {

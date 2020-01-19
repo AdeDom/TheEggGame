@@ -87,7 +87,7 @@ class MultiActivityViewModel : BaseViewModel() {
     companion object {
         val markerPlayers by lazy { arrayListOf<Marker>() }
         val markerItems by lazy { arrayListOf<Marker>() }
-        var sTime: Int = TIME_FIVE_MINUTE
+        var sTime: Int = TIME_FIFTEEN_MINUTE
         var scoreTeamA = 0
         var scoreTeamB = 0
 
