@@ -4,18 +4,14 @@ import android.location.Location
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.completed
-import com.adedom.library.extension.getPrefFile
-import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
+import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_TIME
 import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.GameSwitch
-import com.adedom.theegggame.util.KEY_COMPLETED
-import com.adedom.theegggame.util.KEY_PLAYER_ID
+import com.adedom.theegggame.util.*
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_map.*
 
 class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
@@ -71,9 +67,18 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-//        setCamera(15F, 12F)
+        //todo setCamera
+
+        baseContext.setLocality(mTvLocality, sLatLng)
 
         Player(sLatLng)
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        super.onMapReady(googleMap)
+        sGoogleMap!!.setMarkerConstant(druBkk, druIcon, DRU_TITLE, DRU_SNIPPET)
+        sGoogleMap!!.setMarkerConstant(druSp, druIcon, DRU_TITLE, DRU_SNIPPET)
     }
 
     private fun keepItemSingle(index: Int) {

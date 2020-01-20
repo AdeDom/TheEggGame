@@ -1,5 +1,16 @@
 package com.adedom.theegggame.util
 
+import com.adedom.theegggame.R
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+
+const val DRU_TITLE = "DRU"
+const val DRU_SNIPPET = "Dhonburi rajabhat university"
+val druIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.dru_logo)
+val druBkk: LatLng = LatLng(13.7337910, 100.4911897)
+val druSp: LatLng = LatLng(13.5228417, 100.7525409)
+
 const val KEY_COMPLETED = "completed"
 const val KEY_FAILED = "failed"
 const val KEY_PLAYER = "player"

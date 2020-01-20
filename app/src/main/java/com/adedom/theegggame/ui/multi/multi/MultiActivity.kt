@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.failed
-import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
+import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_TIME
@@ -21,6 +19,7 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sco
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
@@ -123,7 +122,9 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        setCamera(15F, 12F)
+//        setCamera(15F, 12F)
+
+        baseContext.setLocality(mTvLocality, sLatLng)
 
         setLatlng()
 
@@ -134,6 +135,12 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         fetchScore()
 
 //        fightGame()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        super.onMapReady(googleMap)
+        sGoogleMap!!.setMarkerConstant(druBkk, druIcon, DRU_TITLE, DRU_SNIPPET)
+        sGoogleMap!!.setMarkerConstant(druSp, druIcon, DRU_TITLE, DRU_SNIPPET)
     }
 
     private fun setLatlng() {
