@@ -19,6 +19,7 @@ import com.adedom.theegggame.util.KEY_FAILED
 import com.adedom.theegggame.util.KEY_FEMALE
 import com.adedom.theegggame.util.KEY_MALE
 import com.adedom.theegggame.util.extension.loginSuccess
+import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
 class RegisterDialog :
@@ -60,14 +61,25 @@ class RegisterDialog :
         mRbMale.setOnClickListener {
             gender = KEY_MALE
             if (mImageUri == KEY_EMPTY) mIvProfile.setImageResource(R.drawable.ic_player)
+
+            GameActivity.sContext.playSoundClick()
         }
         mRbFemale.setOnClickListener {
             gender = KEY_FEMALE
             if (mImageUri == KEY_EMPTY) mIvProfile.setImageResource(R.drawable.ic_player_female)
+
+            GameActivity.sContext.playSoundClick()
         }
 
-        mIvProfile.setOnClickListener { selectImage() }
-        mBtRegister.setOnClickListener { register() }
+        mIvProfile.setOnClickListener {
+            selectImage()
+            GameActivity.sContext.playSoundClick()
+        }
+
+        mBtRegister.setOnClickListener {
+            register()
+            GameActivity.sContext.playSoundClick()
+        }
     }
 
     private fun selectImage() {

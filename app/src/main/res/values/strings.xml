@@ -61,4 +61,6 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="sound_amp_music"><![CDATA[Sound & Music]]></string>
+    <string name="change_name_amp_image"><![CDATA[Change name & image]]></string>
 </resources>

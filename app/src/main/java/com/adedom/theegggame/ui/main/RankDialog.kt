@@ -1,5 +1,6 @@
 package com.adedom.theegggame.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,8 @@ import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.textChanged
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
+import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.extension.playSoundClick
 
 class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_rank }) {
 
@@ -32,6 +35,7 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_r
             .dialogFragment(v, R.drawable.ic_rank_small, R.string.rank)
     }
 
+    @SuppressLint("WrongViewCast")
     private fun init(view: View) {
         val etSearch = view.findViewById(R.id.mEtSearch) as EditText
         val btRank10 = view.findViewById(R.id.mBtRank10) as Button
@@ -45,9 +49,18 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_r
 
         etSearch.textChanged { fetchPlayers(it) }
 
-        btRank10.setOnClickListener { fetchPlayers(limit = "10") }
-        btRank50.setOnClickListener { fetchPlayers(limit = "50") }
-        btRank100.setOnClickListener { fetchPlayers(limit = "100") }
+        btRank10.setOnClickListener {
+            fetchPlayers(limit = "10")
+            GameActivity.sContext.playSoundClick()
+        }
+        btRank50.setOnClickListener {
+            fetchPlayers(limit = "50")
+            GameActivity.sContext.playSoundClick()
+        }
+        btRank100.setOnClickListener {
+            fetchPlayers(limit = "100")
+            GameActivity.sContext.playSoundClick()
+        }
     }
 
     private fun fetchPlayers(search: String = "", limit: String = "") {

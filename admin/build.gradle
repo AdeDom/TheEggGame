@@ -54,5 +54,5 @@ dependencies {
     //Location & Map
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
-    implementation 'com.github.pathiphon:Dom:0.1.7'
+    implementation 'com.github.pathiphon:Dom:0.1.9'
 }

@@ -17,6 +17,9 @@ const val TAIL = "tail"
 const val TEAM_A = "A"
 const val TEAM_B = "B"
 const val THE_EGG_GAME = "The Egg Game"
+const val SOUND_MUSIC_ON = "sound_music_on"
+const val SOUND_MUSIC_OFF = "sound_music_off"
+const val SOUND_MUSIC = "sound_music"
 
 const val CIRCLE_ONE_HUNDRED_METER = 100.0
 const val RADIUS_TWO_KILOMETER = 2000.0F

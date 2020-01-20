@@ -18,6 +18,7 @@ import com.adedom.theegggame.ui.multi.room.RoomActivity
 import com.adedom.theegggame.ui.single.SingleActivity
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.loginSuccess
+import com.adedom.theegggame.util.extension.playSoundClick
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : GameActivity<MainActivityViewModel>() {
@@ -40,21 +41,27 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     private fun init() {
         mBtSingle.setOnClickListener {
             startActivity(Intent(baseContext, SingleActivity::class.java))
+            baseContext.playSoundClick()
         }
         mBtMulti.setOnClickListener {
             startActivity(Intent(baseContext, RoomActivity::class.java))
+            baseContext.playSoundClick()
         }
         mIvMission.setOnClickListener {
             MissionDialog().show(supportFragmentManager, null)
+            baseContext.playSoundClick()
         }
         mIvRank.setOnClickListener {
             RankDialog().show(supportFragmentManager, null)
+            baseContext.playSoundClick()
         }
         mIvAbout.setOnClickListener {
             AboutDialog().show(supportFragmentManager, null)
+            baseContext.playSoundClick()
         }
         mIvSetting.setOnClickListener {
             SettingDialog().show(supportFragmentManager, null)
+            baseContext.playSoundClick()
         }
     }
 
@@ -96,4 +103,5 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     override fun onBackPressed() = this.exitApplication()
+
 }

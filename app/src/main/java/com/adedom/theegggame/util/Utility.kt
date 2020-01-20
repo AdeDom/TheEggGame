@@ -20,3 +20,6 @@ fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
 
 fun getLevel(level: Int?): String = "Level : $level"
 
+
+
+

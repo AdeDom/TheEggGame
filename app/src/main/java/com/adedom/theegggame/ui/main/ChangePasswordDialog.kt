@@ -15,6 +15,7 @@ import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_COMPLETED
 import com.adedom.theegggame.util.KEY_PLAYER
+import com.adedom.theegggame.util.extension.playSoundClick
 
 class ChangePasswordDialog :
     BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
@@ -46,7 +47,10 @@ class ChangePasswordDialog :
         val btChangePassword = view.findViewById(R.id.mBtSave) as Button
 
         etUsername.setText(mPlayer.username)
-        btChangePassword.setOnClickListener { changePassword() }
+        btChangePassword.setOnClickListener {
+            changePassword()
+            GameActivity.sContext.playSoundClick()
+        }
     }
 
     private fun changePassword() {

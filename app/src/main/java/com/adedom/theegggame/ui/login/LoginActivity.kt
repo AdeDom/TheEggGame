@@ -12,6 +12,7 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_USERNAME
 import com.adedom.theegggame.util.extension.loginSuccess
+import com.adedom.theegggame.util.extension.playSoundClick
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : GameActivity<LoginActivityViewModel>() {
@@ -30,9 +31,18 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
 
         mBtRegister.setOnClickListener {
             RegisterDialog().show(supportFragmentManager, null)
+            GameActivity.sContext.playSoundClick()
         }
-        mBtLogin.setOnClickListener { login() }
-        mTvForgotPassword.setOnClickListener { baseContext.failed() }
+
+        mBtLogin.setOnClickListener {
+            login()
+            GameActivity.sContext.playSoundClick()
+        }
+
+        mTvForgotPassword.setOnClickListener {
+            baseContext.failed()
+            GameActivity.sContext.playSoundClick()
+        }
     }
 
     private fun login() {

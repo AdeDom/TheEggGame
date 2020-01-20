@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getPrefFile
-import com.adedom.library.util.KEY_DATE
-import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.getDateTime
+import com.adedom.library.extension.setPrefFile
+import com.adedom.library.util.*
+import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivityViewModel
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
@@ -33,12 +33,13 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         sContext = baseContext
 
 //        SettingPermissionAndLocation(sActivity, sContext)
+
+        if (getPrefFile(SOUND_MUSIC) == "") setPrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
+        if (item!!.itemId == android.R.id.home) onBackPressed()
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -46,7 +47,8 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         super.onResume()
 //        SettingPermissionAndLocation.locationListener(sActivity, true)
 
-        // todo music
+        if (getPrefFile(SOUND_MUSIC) == SOUND_MUSIC_ON)
+            playMusic(sContext, R.raw.music)
 
         playerId = this.getPrefFile(KEY_PLAYER_ID)
         mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
@@ -60,7 +62,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         super.onPause()
 //        SettingPermissionAndLocation.locationListener(sActivity, false)
 
-        // music
+        pauseMusic()
 
         mHandlerFetch.removeCallbacks(mRunnableFetch)
 
