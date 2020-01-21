@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mission" />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/large">
+
+    <LinearLayout style="@style/WrapWrap">
+
+        <TextView
+                android:id="@+id/tvDeliveryLogin"
+                style="@style/TextViewLarge"
+                android:text="@string/delivery_login" />
+
+        <ImageView
+                android:id="@+id/ivCorrect"
+                android:visibility="gone"
+                android:layout_width="@dimen/correct"
+                android:layout_height="@dimen/correct"
+                android:layout_marginStart="@dimen/correct"
+                android:src="@drawable/ic_correct" />
+    </LinearLayout>
+
+<!--    todo single player 3 egg-->
+
+<!--    todo multi player 1 round-->
+
 </LinearLayout>

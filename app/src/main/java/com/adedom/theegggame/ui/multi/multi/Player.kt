@@ -56,7 +56,7 @@ class Player(items: ArrayList<RoomInfo>) {
             })
 
             //Circle
-            if (GoogleMapActivity.sContext.getPrefFile(KEY_PLAYER_ID) == item.playerId) {
+            if (GoogleMapActivity.sContext.readPrefFile(KEY_PLAYER_ID) == item.playerId) {
                 myCircle?.removeCircle()
                 GoogleMapActivity.sGoogleMap!!.setCircle( latLng, CIRCLE_ONE_HUNDRED_METER)
             }

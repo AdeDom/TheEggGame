@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
-import com.adedom.library.extension.getPrefFile
-import com.adedom.library.extension.setPrefFile
+import com.adedom.library.extension.readPrefFile
+import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.*
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivityViewModel
@@ -34,7 +34,6 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
 //        SettingPermissionAndLocation(sActivity, sContext)
 
-        if (getPrefFile(SOUND_MUSIC) == "") setPrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -47,10 +46,10 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         super.onResume()
 //        SettingPermissionAndLocation.locationListener(sActivity, true)
 
-        if (getPrefFile(SOUND_MUSIC) == SOUND_MUSIC_ON)
+        if (readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_ON)
             playMusic(sContext, R.raw.music)
 
-        playerId = this.getPrefFile(KEY_PLAYER_ID)
+        playerId = this.readPrefFile(KEY_PLAYER_ID)
         mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
             if (it.result == KEY_FAILED) baseContext.failed()
         })

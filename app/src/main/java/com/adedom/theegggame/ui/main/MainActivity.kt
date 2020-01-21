@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.exitApplication
-import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.toast
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_EMPTY
@@ -36,6 +36,9 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         init()
 
         if (verifyPlayer()) return
+
+        viewModel.writeFile()
+
     }
 
     private fun init() {
@@ -66,14 +69,14 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     private fun verifyPlayer(): Boolean {
-        return if (this.getPrefFile(KEY_PLAYER_ID) != KEY_EMPTY && this.getPrefFile(KEY_USERNAME) != "") {
+        return if (this.readPrefFile(KEY_PLAYER_ID) != KEY_EMPTY && this.readPrefFile(KEY_USERNAME) != "") {
             insertLogs()
             false
         } else {
             this.loginSuccess(
                 LoginActivity::class.java,
                 KEY_EMPTY,
-                this.getPrefFile(KEY_USERNAME)
+                this.readPrefFile(KEY_USERNAME)
             )
             true
         }
@@ -82,7 +85,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     private fun insertLogs() {
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
-        val playerId = this.getPrefFile(KEY_PLAYER_ID)
+        val playerId = this.readPrefFile(KEY_PLAYER_ID)
         viewModel.insertLogs(MainActivityViewModel.rndkey, date, time, playerId)
             .observe(this, Observer {
                 if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)

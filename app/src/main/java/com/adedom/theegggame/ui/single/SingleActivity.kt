@@ -6,9 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
-import com.adedom.library.util.KEY_DATE
-import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.*
 import com.google.android.gms.maps.GoogleMap
@@ -82,13 +79,11 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     private fun keepItemSingle(index: Int) {
-        val playerId = this.getPrefFile(KEY_PLAYER_ID)
+        val playerId = this.readPrefFile(KEY_PLAYER_ID)
         val (myItem, values) = viewModel.getItemValues(index)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        val date = getDateTime(KEY_DATE)
-        val time = getDateTime(KEY_TIME)
-        viewModel.keepItemSingle(playerId, myItem, values, lat, lng, date, time)
+        viewModel.keepItemSingle(playerId, myItem, values, lat, lng)
             .observe(this, Observer {
                 if (it.result == KEY_COMPLETED) {
                     baseContext.toast(viewModel.detailItem(myItem, values))

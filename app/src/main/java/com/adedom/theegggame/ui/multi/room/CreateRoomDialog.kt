@@ -54,7 +54,7 @@ class CreateRoomDialog :
 
         val name = mEtName.getContent()
         val people = mNumberPicker.value.toString().trim()
-        val playerId = GameActivity.sContext.getPrefFile(KEY_PLAYER_ID)
+        val playerId = GameActivity.sContext.readPrefFile(KEY_PLAYER_ID)
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
         viewModel.createRoom(name, people, playerId, date, time).observe(this, Observer {

@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
-import com.adedom.library.extension.getPrefFile
 import com.adedom.library.extension.isEmpty
+import com.adedom.library.extension.readPrefFile
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
@@ -27,21 +27,21 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
     }
 
     private fun init() {
-        mEtUsername.setText(this.getPrefFile(KEY_USERNAME))
+        mEtUsername.setText(this.readPrefFile(KEY_USERNAME))
 
         mBtRegister.setOnClickListener {
             RegisterDialog().show(supportFragmentManager, null)
-            GameActivity.sContext.playSoundClick()
+            sContext.playSoundClick()
         }
 
         mBtLogin.setOnClickListener {
             login()
-            GameActivity.sContext.playSoundClick()
+            sContext.playSoundClick()
         }
 
         mTvForgotPassword.setOnClickListener {
             baseContext.failed()
-            GameActivity.sContext.playSoundClick()
+            sContext.playSoundClick()
         }
     }
 

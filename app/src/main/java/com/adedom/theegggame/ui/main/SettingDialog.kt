@@ -8,8 +8,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogNegative
-import com.adedom.library.extension.getPrefFile
-import com.adedom.library.extension.setPrefFile
+import com.adedom.library.extension.readPrefFile
+import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.library.util.playMusic
@@ -43,7 +43,7 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
         val btLogout = view.findViewById(R.id.mBtLogout) as Button
         val btExit = view.findViewById(R.id.mBtExit) as Button
 
-        if (GameActivity.sContext.getPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF)
+        if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF)
             ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
         else ivSoundMusic.setImageResource(R.drawable.ic_sound_music_on)
 
@@ -61,12 +61,12 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
         }
 
         btSoundMusic.setOnClickListener {
-            if (GameActivity.sContext.getPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF) {
-                GameActivity.sContext.setPrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
+            if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF) {
+                GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
                 ivSoundMusic.setImageResource(R.drawable.ic_sound_music_on)
                 playMusic(GameActivity.sContext, R.raw.music)
             } else {
-                GameActivity.sContext.setPrefFile(SOUND_MUSIC, SOUND_MUSIC_OFF)
+                GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_OFF)
                 ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
                 stopMusic()
             }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.getPrefFile
+import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.recyclerGrid
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
@@ -48,7 +48,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
     }
 
     private fun joinRoom(room: Room) {
-        val playerId = this.getPrefFile(KEY_PLAYER_ID)
+        val playerId = this.readPrefFile(KEY_PLAYER_ID)
         val date = getDateTime(KEY_DATE)
         val time = getDateTime(KEY_TIME)
         viewModel.joinRoom(room.room_no!!, playerId, date, time).observe(this, Observer {

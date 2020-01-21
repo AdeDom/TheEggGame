@@ -20,22 +20,12 @@ class SingleActivityViewModel : BaseViewModel() {
     var itemBonus: Int = 0
 
     fun keepItemSingle(
-        playerId: String,
+        playerId: String?,
         itemId: Int,
         qty: Int,
         latitude: Double,
-        longitude: Double,
-        date: String,
-        time: String
-    ) = singleRepository.insertItemCollection(
-        playerId,
-        itemId,
-        qty,
-        latitude,
-        longitude,
-        date,
-        time
-    )
+        longitude: Double
+    ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
     fun titleItem(itemId: Int): String {
         var name = ""

@@ -1,7 +1,11 @@
 package com.adedom.theegggame.ui.main
 
+import com.adedom.library.extension.readPrefFile
+import com.adedom.library.extension.writePrefFile
+import com.adedom.library.util.KEY_DATE
+import com.adedom.library.util.getDateTime
 import com.adedom.library.util.getKeyUUID
-import com.adedom.theegggame.util.BaseViewModel
+import com.adedom.theegggame.util.*
 
 class MainActivityViewModel : BaseViewModel() {
 
@@ -12,8 +16,34 @@ class MainActivityViewModel : BaseViewModel() {
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         playerRepository.updatePassword(playerId, oldPassword, newPassword)
 
+    fun missionComplete(
+        playerId: String?,
+        itemId: Int = 1,
+        qty: Int = 300,
+        latitude: Double = 19.116585,
+        longitude: Double = 99.847193
+    ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
+
     fun insertLogs(key: String, dateIn: String, timeIn: String, playerId: String) =
         baseRepository.insertLogs(key, dateIn, timeIn, playerId)
+
+    fun writeFile() {
+        if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == "")
+            GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
+
+        //delivery
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) != getDateTime(KEY_DATE)) {
+            GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
+            GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
+        }
+
+    }
 
     companion object {
         var rndkey: String = getKeyUUID()
