@@ -2,11 +2,14 @@ package com.adedom.theegggame.ui.multi.multi
 
 import android.location.Location
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
@@ -16,6 +19,8 @@ import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.sco
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.scoreTeamB
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.extension.playMusicGame
+import com.adedom.theegggame.util.extension.setSoundMusic
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
@@ -39,11 +44,29 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onResume() {
         super.onResume()
         viewModel.switchItem = GameSwitch.ON
+
+        sContext.playMusicGame()
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.switchItem = GameSwitch.OFF
+
+        pauseMusic()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_map, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == R.id.action_sound_music) {
+            sContext.setSoundMusic()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun init() {
@@ -122,8 +145,6 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
-
-//        setCamera(15F, 12F)
 
         baseContext.setLocality(mTvLocality, sLatLng)
 

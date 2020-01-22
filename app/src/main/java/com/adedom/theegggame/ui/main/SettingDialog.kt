@@ -9,16 +9,17 @@ import androidx.appcompat.app.AlertDialog
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogNegative
 import com.adedom.library.extension.readPrefFile
-import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.library.util.KEY_EMPTY
-import com.adedom.library.util.playMusic
-import com.adedom.library.util.stopMusic
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_PLAYER
+import com.adedom.theegggame.util.SOUND_MUSIC
+import com.adedom.theegggame.util.SOUND_MUSIC_OFF
 import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
+import com.adedom.theegggame.util.extension.setSoundMusic
 
 class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_setting }) {
 
@@ -61,16 +62,10 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
         }
 
         btSoundMusic.setOnClickListener {
-            if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF) {
-                GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
-                ivSoundMusic.setImageResource(R.drawable.ic_sound_music_on)
-                playMusic(GameActivity.sContext, R.raw.music)
-            } else {
-                GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_OFF)
-                ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
-                stopMusic()
-            }
-
+            GameActivity.sContext.setSoundMusic(
+                { ivSoundMusic.setImageResource(R.drawable.ic_sound_music_on) }, {
+                    ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
+                })
             GameActivity.sContext.playSoundClick()
         }
 

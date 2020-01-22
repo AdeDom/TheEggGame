@@ -12,9 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.util.pauseMusic
-import com.adedom.library.util.playMusic
-import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivityViewModel
+import com.adedom.theegggame.util.extension.playMusicGame
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
@@ -46,8 +45,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         super.onResume()
 //        SettingPermissionAndLocation.locationListener(sActivity, true)
 
-        if (readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_ON)
-            playMusic(sContext, R.raw.music)
+        sContext.playMusicGame()
 
         playerId = this.readPrefFile(KEY_PLAYER_ID)
         mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
