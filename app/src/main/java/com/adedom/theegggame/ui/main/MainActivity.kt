@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.exitApplication
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.toast
-import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.KEY_EMPTY
-import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.ui.login.LoginActivity
@@ -83,13 +80,10 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     private fun insertLogs() {
-        val date = getDateTime(KEY_DATE)
-        val time = getDateTime(KEY_TIME)
         val playerId = this.readPrefFile(KEY_PLAYER_ID)
-        viewModel.insertLogs(MainActivityViewModel.rndkey, date, time, playerId)
-            .observe(this, Observer {
-                if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
-            })
+        viewModel.insertLogs(MainActivityViewModel.keyLogs, playerId).observe(this, Observer {
+            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
+        })
     }
 
     override fun gameLoop() {

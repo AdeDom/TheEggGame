@@ -4,8 +4,6 @@ import com.adedom.library.data.JsonResponse
 import com.adedom.library.data.RetrofitClient
 import com.adedom.library.util.KEY_VALUES1
 import com.adedom.library.util.KEY_VALUES2
-import com.adedom.library.util.KEY_VALUES3
-import com.adedom.library.util.KEY_VALUES4
 import com.adedom.theegggame.data.BASE_URL
 import retrofit2.Call
 import retrofit2.http.Field
@@ -18,17 +16,13 @@ interface BaseApi {
     @POST("insert-logs.php")
     fun insertLogs(
         @Field(KEY_VALUES1) key: String,
-        @Field(KEY_VALUES2) dateIn: String,
-        @Field(KEY_VALUES3) timeIn: String,
-        @Field(KEY_VALUES4) playerId: String
+        @Field(KEY_VALUES2) playerId: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded
     @POST("update-logs.php")
     fun updateLogs(
-        @Field(KEY_VALUES1) key: String,
-        @Field(KEY_VALUES2) dateOut: String,
-        @Field(KEY_VALUES3) timeOut: String
+        @Field(KEY_VALUES1) key: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded

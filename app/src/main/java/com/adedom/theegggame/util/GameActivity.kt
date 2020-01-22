@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.readPrefFile
-import com.adedom.library.extension.writePrefFile
-import com.adedom.library.util.*
+import com.adedom.library.util.pauseMusic
+import com.adedom.library.util.playMusic
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivityViewModel
 
@@ -69,11 +69,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
 
-        mViewModel.updateLogs(
-            MainActivityViewModel.rndkey,
-            getDateTime(KEY_DATE),
-            getDateTime(KEY_TIME)
-        ).observe(this, Observer {
+        mViewModel.updateLogs(MainActivityViewModel.keyLogs).observe(this, Observer {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
     }
@@ -101,6 +97,5 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 class GameActivityViewModel : BaseViewModel() {
     fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
 
-    fun updateLogs(key: String, dateOut: String, timeOut: String) =
-        baseRepository.updateLogs(key, dateOut, timeOut)
+    fun updateLogs(key: String) = baseRepository.updateLogs(key)
 }

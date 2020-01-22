@@ -24,8 +24,8 @@ class MainActivityViewModel : BaseViewModel() {
         longitude: Double = 99.847193
     ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
-    fun insertLogs(key: String, dateIn: String, timeIn: String, playerId: String) =
-        baseRepository.insertLogs(key, dateIn, timeIn, playerId)
+    fun insertLogs(key: String, playerId: String) =
+        baseRepository.insertLogs(key, playerId)
 
     fun writeFile() {
         if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == "")
@@ -46,7 +46,7 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     companion object {
-        var rndkey: String = getKeyUUID()
+        var keyLogs: String = getKeyUUID()
         var timeStamp: Long = System.currentTimeMillis() / 1000
     }
 

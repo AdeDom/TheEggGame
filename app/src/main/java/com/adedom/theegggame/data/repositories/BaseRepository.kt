@@ -5,11 +5,9 @@ import com.adedom.theegggame.data.networks.BaseApi
 
 class BaseRepository(private val api: BaseApi) : ApiRequest() {
 
-    fun insertLogs(key: String, dateIn: String, timeIn: String, playerId: String) =
-        apiRequest { api.insertLogs(key, dateIn, timeIn, playerId) }
+    fun insertLogs(key: String, playerId: String) = apiRequest { api.insertLogs(key, playerId) }
 
-    fun updateLogs(key: String, dateOut: String, timeOut: String) =
-        apiRequest { api.updateLogs(key, dateOut, timeOut) }
+    fun updateLogs(key: String) = apiRequest { api.updateLogs(key) }
 
     fun setState(playerId: String, state: String) = apiRequest { api.setState(playerId, state) }
 
