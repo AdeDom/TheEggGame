@@ -32,9 +32,7 @@ interface PlayerApi {
         @Field(KEY_VALUES2) password: String,
         @Field(KEY_VALUES3) name: String,
         @Field(KEY_VALUES4) image: String,
-        @Field(KEY_VALUES5) date: String,
-        @Field(KEY_VALUES6) time: String,
-        @Field(KEY_VALUES7) gender: String
+        @Field(KEY_VALUES5) gender: String
     ): Call<JsonResponse>
 
     @FormUrlEncoded

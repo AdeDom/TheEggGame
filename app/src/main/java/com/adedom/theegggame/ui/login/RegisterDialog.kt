@@ -11,7 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
-import com.adedom.library.util.*
+import com.adedom.library.util.BaseDialogFragment
+import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
@@ -124,9 +125,7 @@ class RegisterDialog :
         val username = mEtUsername.getContent()
         val password = mEtPassword.getContent()
         val name = mEtName.getContent()
-        val date = getDateTime(KEY_DATE)
-        val time = getDateTime(KEY_TIME)
-        viewModel.register(username, password, name, mImageUri, date, time, gender)
+        viewModel.register(username, password, name, mImageUri, gender)
             .observe(this, Observer {
                 if (it.result == KEY_FAILED) {
                     GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
