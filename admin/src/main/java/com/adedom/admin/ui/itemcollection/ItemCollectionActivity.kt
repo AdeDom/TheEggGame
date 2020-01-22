@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.library.extension.recyclerVertical
+import com.adedom.library.extension.setSwipeRefresh
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
 import kotlinx.android.synthetic.main.activity_item_collection.*
@@ -33,15 +34,7 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.apply {
-            setColorSchemeResources(
-                android.R.color.holo_red_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_blue_light
-            )
-            setOnRefreshListener { fetchItemCollection() }
-        }
+        mSwipeRefreshLayout.setSwipeRefresh { fetchItemCollection() }
 
         mFloatingActionButton.setOnClickListener {
             ItemCollectionDialog().show(supportFragmentManager, null)

@@ -9,6 +9,7 @@ import com.adedom.admin.util.BaseActivity
 import com.adedom.admin.util.DATE_BEGIN
 import com.adedom.admin.util.TIME_BEGIN
 import com.adedom.library.extension.recyclerVertical
+import com.adedom.library.extension.setSwipeRefresh
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
 import com.adedom.library.util.KEY_DATE
@@ -37,15 +38,7 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
 
         mRecyclerView.recyclerVertical { it.adapter = mAdapter }
 
-        mSwipeRefreshLayout.apply {
-            setColorSchemeResources(
-                android.R.color.holo_red_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_blue_light
-            )
-            setOnRefreshListener { fetchLogs() }
-        }
+        mSwipeRefreshLayout.setSwipeRefresh { fetchLogs() }
 
         mFloatingActionButton.setOnClickListener {
             LogsDialog().show(supportFragmentManager, null)
