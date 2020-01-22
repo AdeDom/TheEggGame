@@ -2,7 +2,9 @@ package com.adedom.theegggame.ui.single
 
 import android.graphics.Bitmap
 import android.location.Location
+import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.resourceBitmap
+import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
@@ -137,6 +139,13 @@ class SingleActivityViewModel : BaseViewModel() {
             for (i in 1..MAX_ITEM) {
                 val item = Single(4, rndLatLng(latLng.latitude), rndLatLng(latLng.longitude))
                 single.add(item)
+            }
+
+            if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_MISSION_UNSUCCESSFUL) {
+                GoogleMapActivity.sContext.writePrefFile(
+                    KEY_MISSION_SINGLE_GAME,
+                    KEY_MISSION_SUCCESSFUL
+                )
             }
         }
     }

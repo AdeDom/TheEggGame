@@ -14,10 +14,7 @@ import com.adedom.library.extension.toast
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.KEY_COMPLETED
-import com.adedom.theegggame.util.KEY_MISSION_DELIVERY
-import com.adedom.theegggame.util.KEY_MISSION_SUCCESSFUL
+import com.adedom.theegggame.util.*
 
 class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_mission }) {
 
@@ -33,20 +30,54 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
     }
 
     private fun init(v: View) {
-        val tvDeliveryLogin = v.findViewById(R.id.tvDeliveryLogin) as TextView
-        val ivCorrect = v.findViewById(R.id.ivCorrect) as ImageView
+        val tvMissionDelivery = v.findViewById(R.id.tvMissionDelivery) as TextView
+        val tvMissionSingle = v.findViewById(R.id.tvMissionSingle) as TextView
+        val tvMissionMulti = v.findViewById(R.id.tvMissionMulti) as TextView
+        val ivCorrectDelivery = v.findViewById(R.id.ivCorrectDelivery) as ImageView
+        val ivCorrectSingle = v.findViewById(R.id.ivCorrectSingle) as ImageView
+        val ivCorrectMulti = v.findViewById(R.id.ivCorrectMulti) as ImageView
 
         if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == KEY_MISSION_SUCCESSFUL) {
-            ivCorrect.visibility = View.VISIBLE
+            ivCorrectDelivery.visibility = View.VISIBLE
         } else {
-            tvDeliveryLogin.setOnClickListener {
+            tvMissionDelivery.setOnClickListener {
                 GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_SUCCESSFUL)
-                ivCorrect.visibility = View.VISIBLE
-
+                ivCorrectDelivery.visibility = View.VISIBLE
                 missionComplete(R.string.delivery_login)
+                tvMissionDelivery.isClickable = false
             }
         }
 
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE) == KEY_MISSION_SUCCESSFUL)
+            ivCorrectSingle.visibility = View.VISIBLE
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI) == KEY_MISSION_SUCCESSFUL)
+            ivCorrectMulti.visibility = View.VISIBLE
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_MISSION_SUCCESSFUL) {
+            tvMissionSingle.setOnClickListener {
+                GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_SUCCESSFUL)
+                GameActivity.sContext.writePrefFile(
+                    KEY_MISSION_SINGLE_GAME,
+                    KEY_MISSION_SINGLE_GAME
+                )
+                ivCorrectSingle.visibility = View.VISIBLE
+                missionComplete(R.string.mission_single)
+                tvMissionSingle.isClickable = false
+            }
+        }
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_MISSION_SUCCESSFUL) {
+            tvMissionMulti.setOnClickListener {
+                GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_SUCCESSFUL)
+                GameActivity.sContext.writePrefFile(
+                    KEY_MISSION_MULTI_GAME,
+                    KEY_MISSION_MULTI_GAME
+                )
+                ivCorrectMulti.visibility = View.VISIBLE
+                missionComplete(R.string.multi_player)
+                tvMissionMulti.isClickable = false
+            }
+        }
 
     }
 

@@ -3,8 +3,8 @@ package com.adedom.admin.ui.itemcollection
 import com.adedom.admin.R
 import com.adedom.admin.data.imageUrl
 import com.adedom.admin.data.models.ItemCollection
-import com.adedom.admin.util.KEY_FIRST_GAME
 import com.adedom.admin.util.KEY_LATLNG_ZERO
+import com.adedom.admin.util.KEY_OTHER
 import com.adedom.library.extension.getLocality
 import com.adedom.library.extension.loadCircle
 import com.adedom.library.util.BaseAdapter
@@ -26,7 +26,7 @@ class ItemCollectionAdapter :
         holder.itemView.tvName.text = name
         holder.itemView.tvQty.text = qty.toString()
 
-        val place = if (latitude == KEY_LATLNG_ZERO && longitude == KEY_LATLNG_ZERO) KEY_FIRST_GAME
+        val place = if (latitude == KEY_LATLNG_ZERO && longitude == KEY_LATLNG_ZERO) KEY_OTHER
         else holder.itemView.tvPlace.context.getLocality(latitude, longitude)
         holder.itemView.tvPlace.text = place
 

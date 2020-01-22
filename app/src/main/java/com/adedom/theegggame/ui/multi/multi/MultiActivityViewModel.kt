@@ -1,6 +1,9 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import android.location.Location
+import com.adedom.library.extension.readPrefFile
+import com.adedom.library.extension.writePrefFile
+import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
@@ -78,6 +81,15 @@ class MultiActivityViewModel : BaseViewModel() {
         var ll: Double = if ((0..1).random() == 0) latLng + s.toDouble() else latLng - s.toDouble()
         ll = String.format("%.7f", ll).toDouble()
         return ll
+    }
+
+    fun mission() {
+        if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_MISSION_UNSUCCESSFUL) {
+            GoogleMapActivity.sContext.writePrefFile(
+                KEY_MISSION_MULTI_GAME,
+                KEY_MISSION_SUCCESSFUL
+            )
+        }
     }
 
     companion object {

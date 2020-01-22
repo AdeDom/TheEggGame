@@ -20,8 +20,8 @@ class MainActivityViewModel : BaseViewModel() {
         playerId: String?,
         itemId: Int = 1,
         qty: Int = 300,
-        latitude: Double = 19.116585,
-        longitude: Double = 99.847193
+        latitude: Double = 0.0,
+        longitude: Double = 0.0
     ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
     fun insertLogs(key: String, playerId: String) =
@@ -37,10 +37,26 @@ class MainActivityViewModel : BaseViewModel() {
         if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == "")
             GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
 
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_UNSUCCESSFUL)
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE_GAME, KEY_MISSION_UNSUCCESSFUL)
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_UNSUCCESSFUL)
+
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == "")
+            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
+
         //delivery
         if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) != getDateTime(KEY_DATE)) {
             GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
             GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
+            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_UNSUCCESSFUL)
+            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE_GAME, KEY_MISSION_UNSUCCESSFUL)
+            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_UNSUCCESSFUL)
+            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
         }
 
     }

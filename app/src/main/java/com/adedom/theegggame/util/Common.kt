@@ -18,9 +18,12 @@ const val KEY_ONLINE = "online"
 const val KEY_OFFLINE = "offline"
 const val KEY_PLAYER_ID = "player_id"
 const val KEY_USERNAME = "username"
-const val KEY_MISSION = "mission"
 const val KEY_MISSION_DATE = "mission_date"
 const val KEY_MISSION_DELIVERY = "mission_delivery"
+const val KEY_MISSION_SINGLE = "mission_single"
+const val KEY_MISSION_SINGLE_GAME = "mission_single_game"
+const val KEY_MISSION_MULTI = "mission_multi"
+const val KEY_MISSION_MULTI_GAME = "mission_multi_game"
 const val KEY_MISSION_UNSUCCESSFUL = "mission_unsuccessful"
 const val KEY_MISSION_SUCCESSFUL = "mission_successful"
 const val KEY_MALE = "M"
@@ -46,7 +49,7 @@ const val NUMBER_OF_ITEM = 5
 const val MIN_ITEM = 5
 const val MAX_ITEM = 10
 const val TIME_FIVE_MINUTE = 300
-const val TIME_FIFTEEN_MINUTE = 900
+const val TIME_FIFTEEN_MINUTE = 60
 
 const val ITEM_EGG_NORMAL = 1
 

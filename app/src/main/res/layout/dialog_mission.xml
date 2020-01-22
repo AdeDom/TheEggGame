@@ -9,21 +9,49 @@
     <LinearLayout style="@style/WrapWrap">
 
         <TextView
-                android:id="@+id/tvDeliveryLogin"
+                android:id="@+id/tvMissionDelivery"
                 style="@style/TextViewLarge"
                 android:text="@string/delivery_login" />
 
         <ImageView
-                android:id="@+id/ivCorrect"
-                android:visibility="gone"
+                android:id="@+id/ivCorrectDelivery"
                 android:layout_width="@dimen/correct"
                 android:layout_height="@dimen/correct"
                 android:layout_marginStart="@dimen/correct"
-                android:src="@drawable/ic_correct" />
+                android:src="@drawable/ic_correct"
+                android:visibility="gone" />
     </LinearLayout>
 
-<!--    todo single player 3 egg-->
+    <LinearLayout style="@style/WrapWrap">
 
-<!--    todo multi player 1 round-->
+        <TextView
+                android:id="@+id/tvMissionSingle"
+                style="@style/TextViewLarge"
+                android:text="@string/mission_single" />
+
+        <ImageView
+                android:id="@+id/ivCorrectSingle"
+                android:layout_width="@dimen/correct"
+                android:layout_height="@dimen/correct"
+                android:layout_marginStart="@dimen/correct"
+                android:src="@drawable/ic_correct"
+                android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/WrapWrap">
+
+        <TextView
+                android:id="@+id/tvMissionMulti"
+                style="@style/TextViewLarge"
+                android:text="@string/mission_multi" />
+
+        <ImageView
+                android:id="@+id/ivCorrectMulti"
+                android:layout_width="@dimen/correct"
+                android:layout_height="@dimen/correct"
+                android:layout_marginStart="@dimen/correct"
+                android:src="@drawable/ic_correct"
+                android:visibility="gone" />
+    </LinearLayout>
 
 </LinearLayout>

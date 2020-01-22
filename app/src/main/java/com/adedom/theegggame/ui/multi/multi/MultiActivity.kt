@@ -78,11 +78,15 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         when {
             //todo dialog finish game && bonus team win
             scoreTeamA + scoreTeamB >= 5 -> {
+                viewModel.mission()
+
                 finish()
                 baseContext.toast(R.string.end_game)
                 baseContext.toast("TEAM A = $scoreTeamA\nTEAM B = $scoreTeamB")
             }
             sTime <= 0 -> {
+                viewModel.mission()
+
                 val bundle = Bundle()
                 bundle.putString(TEAM_A, scoreTeamA.toString())
                 bundle.putString(TEAM_B, scoreTeamB.toString())
