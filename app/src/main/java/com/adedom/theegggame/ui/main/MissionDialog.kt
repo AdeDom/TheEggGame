@@ -46,6 +46,8 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
                 missionComplete(R.string.delivery_login)
             }
         }
+
+
     }
 
     private fun missionComplete(messages: Int) {
