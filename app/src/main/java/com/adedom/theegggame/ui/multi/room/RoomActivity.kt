@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.recyclerGrid
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
-import com.adedom.library.util.KEY_DATE
-import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
+import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_COMPLETED
+import com.adedom.theegggame.util.ROOM
+import com.adedom.theegggame.util.TAIL
 import kotlinx.android.synthetic.main.activity_room.*
 
 class RoomActivity : GameActivity<RoomActivityViewModel>() {
@@ -48,10 +48,8 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
     }
 
     private fun joinRoom(room: Room) {
-        val playerId = this.readPrefFile(KEY_PLAYER_ID)
-        val date = getDateTime(KEY_DATE)
-        val time = getDateTime(KEY_TIME)
-        viewModel.joinRoom(room.room_no!!, playerId, date, time).observe(this, Observer {
+        val playerId = MainActivity.sPlayer.playerId
+        viewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
             if (it.result == KEY_COMPLETED) {
                 startActivity(
                     Intent(baseContext, RoomInfoActivity::class.java)

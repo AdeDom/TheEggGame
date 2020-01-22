@@ -23,9 +23,7 @@ interface MultiApi {
     @POST("insert-room-info.php")
     fun insertRoomInfo(
         @Field(KEY_VALUES1) roomNo: String,
-        @Field(KEY_VALUES2) playerId: String,
-        @Field(KEY_VALUES3) date: String,
-        @Field(KEY_VALUES4) time: String
+        @Field(KEY_VALUES2) playerId: String?
     ): Call<JsonResponse>
 
     @FormUrlEncoded
@@ -33,9 +31,7 @@ interface MultiApi {
     fun insertRoom(
         @Field(KEY_VALUES1) name: String,
         @Field(KEY_VALUES2) people: String,
-        @Field(KEY_VALUES3) playerId: String,
-        @Field(KEY_VALUES4) date: String,
-        @Field(KEY_VALUES5) time: String
+        @Field(KEY_VALUES3) playerId: String?
     ): Call<JsonResponse>
 
     @FormUrlEncoded

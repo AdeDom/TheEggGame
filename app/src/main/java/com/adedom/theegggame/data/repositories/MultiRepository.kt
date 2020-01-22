@@ -13,11 +13,11 @@ class MultiRepository(private val api: MultiApi) : ApiRequest() {
 
     fun getMultiScore(roomNo: String) = apiRequest { api.getMultiScore(roomNo) }
 
-    fun insertRoomInfo(roomNo: String, playerId: String, date: String, time: String) =
-        apiRequest { api.insertRoomInfo(roomNo, playerId, date, time) }
+    fun insertRoomInfo(roomNo: String, playerId: String?) =
+        apiRequest { api.insertRoomInfo(roomNo, playerId) }
 
-    fun insertRoom(name: String, people: String, playerId: String, date: String, time: String) =
-        apiRequest { api.insertRoom(name, people, playerId, date, time) }
+    fun insertRoom(name: String, people: String, playerId: String?) =
+        apiRequest { api.insertRoom(name, people, playerId) }
 
     fun insertMulti(roomNo: String, latitude: Double, longitude: Double) =
         apiRequest { api.insertMulti(roomNo, latitude, longitude) }
