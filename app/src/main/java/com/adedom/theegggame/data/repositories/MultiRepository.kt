@@ -25,12 +25,10 @@ class MultiRepository(private val api: MultiApi) : ApiRequest() {
     fun insertMultiCollection(
         multiId: String,
         roomNo: String,
-        playerId: String,
+        playerId: String?,
         team: String,
         latitude: Double,
-        longitude: Double,
-        date: String,
-        time: String
+        longitude: Double
     ) = apiRequest {
         api.insertMultiCollection(
             multiId,
@@ -38,9 +36,7 @@ class MultiRepository(private val api: MultiApi) : ApiRequest() {
             playerId,
             team,
             latitude,
-            longitude,
-            date,
-            time
+            longitude
         )
     }
 

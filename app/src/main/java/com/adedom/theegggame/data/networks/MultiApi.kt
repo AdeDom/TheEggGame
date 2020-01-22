@@ -97,12 +97,10 @@ interface MultiApi {
     fun insertMultiCollection(
         @Field(KEY_VALUES1) multiId: String,
         @Field(KEY_VALUES2) roomNo: String,
-        @Field(KEY_VALUES3) playerId: String,
+        @Field(KEY_VALUES3) playerId: String?,
         @Field(KEY_VALUES4) team: String,
         @Field(KEY_VALUES5) latitude: Double,
-        @Field(KEY_VALUES6) longitude: Double,
-        @Field(KEY_VALUES7) date: String,
-        @Field(KEY_VALUES8) time: String
+        @Field(KEY_VALUES6) longitude: Double
     ): Call<JsonResponse>
 
     @FormUrlEncoded

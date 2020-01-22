@@ -7,9 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
-import com.adedom.library.util.KEY_DATE
-import com.adedom.library.util.KEY_TIME
-import com.adedom.library.util.getDateTime
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
@@ -182,12 +179,10 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         viewModel.keepItemMulti(
             multiId,
             room.room_no!!,
-            MainActivity.sPlayer.playerId!!,
+            MainActivity.sPlayer.playerId,
             RoomInfoActivityViewModel.team,
             sLatLng.latitude,
-            sLatLng.longitude,
-            getDateTime(KEY_DATE),
-            getDateTime(KEY_TIME)
+            sLatLng.longitude
         ).observe(this, Observer {
             if (it.result == KEY_COMPLETED) baseContext.toast(R.string.the_egg_game)
         })
