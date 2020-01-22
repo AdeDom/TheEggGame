@@ -2,14 +2,14 @@ package com.adedom.theegggame.ui.multi.roominfo
 
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.adedom.library.util.BaseAdapter
+import com.adedom.library.util.BaseRecyclerViewAdapter
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.*
 import kotlinx.android.synthetic.main.item_room_info.view.*
 
 class RoomInfoAdapter :
-    BaseAdapter<RoomInfo>({ R.layout.item_room_info }, { holder, position, items ->
+    BaseRecyclerViewAdapter<RoomInfo>({ R.layout.item_room_info }, { holder, position, items ->
         val (_, _, _, team, status, _, name, image, level, state, gender) = items[position]
         if (state == KEY_OFFLINE) {
             holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(

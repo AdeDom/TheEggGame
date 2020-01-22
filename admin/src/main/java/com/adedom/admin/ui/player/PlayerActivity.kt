@@ -55,9 +55,7 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
         online: Boolean = true,
         offline: Boolean = true,
         male: Boolean = true,
-        female: Boolean = true,
-        ls: Int = 1,
-        le: Int = 99
+        female: Boolean = true
     ) {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getPlayers(name, levelStart, levelEnd, online, offline, male, female)

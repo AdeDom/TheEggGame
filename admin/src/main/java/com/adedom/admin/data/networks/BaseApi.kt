@@ -25,8 +25,12 @@ interface BaseApi {
         @Field(KEY_VALUES7) female: Boolean
     ): Call<List<Player>>
 
+    @FormUrlEncoded
     @POST("admin-get-item-collection.php")
-    fun getItemCollection(): Call<List<ItemCollection>>
+    fun getItemCollection(
+        @Field(KEY_VALUES1) name: String,
+        @Field(KEY_VALUES2) itemId: Int
+    ): Call<List<ItemCollection>>
 
     @FormUrlEncoded
     @POST("admin-get-logs.php")

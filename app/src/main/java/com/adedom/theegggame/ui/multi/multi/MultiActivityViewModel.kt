@@ -8,6 +8,7 @@ import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.extension.playSoundKeep
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
@@ -89,6 +90,23 @@ class MultiActivityViewModel : BaseViewModel() {
                 KEY_MISSION_MULTI_GAME,
                 KEY_MISSION_SUCCESSFUL
             )
+        }
+    }
+
+    fun checkRadius(keepItem:(String)->Unit) {
+        mMulti.forEachIndexed { index, multi ->
+            val distance = FloatArray(1)
+            Location.distanceBetween(
+                GoogleMapActivity.sLatLng.latitude, GoogleMapActivity.sLatLng.longitude,
+                multi.latitude, multi.longitude, distance
+            )
+
+            if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
+                mMulti.removeAt(index)
+                GoogleMapActivity.sContext.playSoundKeep() // sound
+                keepItem.invoke(multi.multi_id)
+                return
+            }
         }
     }
 

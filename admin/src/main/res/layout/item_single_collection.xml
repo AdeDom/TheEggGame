@@ -38,8 +38,8 @@
 
             <ImageView
                     android:id="@+id/ivItem"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/image_egg"
+                    android:layout_height="@dimen/image_egg"
                     android:src="@drawable/ic_egg" />
 
             <TextView

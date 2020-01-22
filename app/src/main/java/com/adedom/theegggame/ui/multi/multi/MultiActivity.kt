@@ -96,7 +96,10 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
                 }
             })
 
-        checkRadius()
+        viewModel.checkRadius {
+            keepItemMulti(it)
+            Item(viewModel.mMulti)
+        }
 
         when {
             //todo dialog finish game && bonus team win
@@ -122,23 +125,6 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
                 mTvTime.text = sTime.toString()
                 mTvRed.text = scoreTeamA.toString()
                 mTvBlue.text = scoreTeamB.toString()
-            }
-        }
-    }
-
-    private fun checkRadius() {
-        viewModel.mMulti.forEachIndexed { index, multi ->
-            val distance = FloatArray(1)
-            Location.distanceBetween(
-                sLatLng.latitude, sLatLng.longitude,
-                multi.latitude, multi.longitude, distance
-            )
-
-            if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
-                keepItemMulti(multi.multi_id)
-                viewModel.mMulti.removeAt(index)
-                Item(viewModel.mMulti)
-                return
             }
         }
     }

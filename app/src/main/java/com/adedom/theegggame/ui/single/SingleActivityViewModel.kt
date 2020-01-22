@@ -11,6 +11,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.extension.playSoundKeep
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
@@ -68,6 +69,7 @@ class SingleActivityViewModel : BaseViewModel() {
                 markerItems[index].remove()
                 single.removeAt(index)
                 switchItem = GameSwitch.ON
+                GoogleMapActivity.sContext.playSoundKeep() // sound
                 return
             }
 

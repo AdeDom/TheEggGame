@@ -9,8 +9,9 @@
             android:orientation="vertical">
 
         <EditText
+                android:id="@+id/etName"
                 style="@style/EditText"
-                android:text="@string/name" />
+                android:hint="@string/name" />
 
         <LinearLayout
                 style="@style/MatchWrap"
@@ -22,9 +23,10 @@
                     style="@style/TextView"
                     android:text="@string/item" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
+            <Spinner
+                    android:id="@+id/spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/widgets"
+                    android:layout_height="60dp"
                     android:layout_marginStart="@dimen/medium" />
         </LinearLayout>
 
@@ -48,24 +50,24 @@
                     android:text="@string/begin" />
 
             <ImageView
-                    android:id="@+id/mIvDateBegin"
+                    android:id="@+id/ivDateBegin"
                     style="@style/ImageViewDate"
                     android:layout_columnWeight="10" />
 
             <TextView
-                    android:id="@+id/mTvDateBegin"
+                    android:id="@+id/tvDateBegin"
                     style="@style/TextView"
                     android:layout_columnWeight="40"
                     android:layout_marginStart="@dimen/medium"
                     android:text="@string/date" />
 
             <ImageView
-                    android:id="@+id/mIvTimeBegin"
+                    android:id="@+id/ivTimeBegin"
                     style="@style/ImageViewTime"
                     android:layout_columnWeight="10" />
 
             <TextView
-                    android:id="@+id/mTvTimeBegin"
+                    android:id="@+id/tvTimeBegin"
                     style="@style/TextView"
                     android:layout_columnWeight="40"
                     android:layout_marginStart="@dimen/medium"
@@ -77,24 +79,24 @@
                     android:text="@string/end" />
 
             <ImageView
-                    android:id="@+id/mIvDateEnd"
+                    android:id="@+id/ivDateEnd"
                     style="@style/ImageViewDate"
                     android:layout_columnWeight="10" />
 
             <TextView
-                    android:id="@+id/mTvDateEnd"
+                    android:id="@+id/tvDateEnd"
                     style="@style/TextView"
                     android:layout_columnWeight="40"
                     android:layout_marginStart="@dimen/medium"
                     android:text="@string/date" />
 
             <ImageView
-                    android:id="@+id/mIvTimeEnd"
+                    android:id="@+id/ivTimeEnd"
                     style="@style/ImageViewTime"
                     android:layout_columnWeight="10" />
 
             <TextView
-                    android:id="@+id/mTvTimeEnd"
+                    android:id="@+id/tvTimeEnd"
                     style="@style/TextView"
                     android:layout_columnWeight="40"
                     android:layout_marginStart="@dimen/medium"
@@ -102,7 +104,7 @@
         </GridLayout>
 
         <Button
-                android:id="@+id/mBtSearch"
+                android:id="@+id/btSearch"
                 style="@style/Button"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/search" />

@@ -8,4 +8,5 @@
 
     <dimen name="dateTime">50dp</dimen>
     <dimen name="widgets">40dp</dimen>
+    <dimen name="image_egg">40dp</dimen>
 </resources>

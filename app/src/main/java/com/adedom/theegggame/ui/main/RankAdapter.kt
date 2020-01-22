@@ -1,12 +1,12 @@
 package com.adedom.theegggame.ui.main
 
-import com.adedom.library.util.BaseAdapter
+import com.adedom.library.util.BaseRecyclerViewAdapter
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.util.setImageProfile
 import kotlinx.android.synthetic.main.item_player.view.*
 
-class RankAdapter : BaseAdapter<Player>({ R.layout.item_player }, { holder, position, items ->
+class RankAdapter : BaseRecyclerViewAdapter<Player>({ R.layout.item_player }, { holder, position, items ->
     val player = items[position]
     setImageProfile(holder.itemView.mIvProfile, player.image!!, player.gender!!)
     holder.itemView.mTvName.text = player.name

@@ -48,9 +48,9 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
         }
     }
 
-    private fun fetchItemCollection() {
+    private fun fetchItemCollection(name: String = "", itemId: Int = 0) {
         mSwipeRefreshLayout.isRefreshing = true
-        viewModel.getItemCollection().observe(this, Observer {
+        viewModel.getItemCollection(name, itemId).observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
             if (it.isEmpty()) baseContext.toast(R.string.search_data_not_found, Toast.LENGTH_LONG)
             mAdapter.setList(it)
@@ -58,6 +58,10 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
     }
 
     override fun onAttach() {
-
+        fetchItemCollection(
+            ItemCollectionActivityViewModel.name,
+            ItemCollectionActivityViewModel.itemId
+        )
     }
+
 }
