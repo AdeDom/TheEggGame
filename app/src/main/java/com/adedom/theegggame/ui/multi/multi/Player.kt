@@ -1,52 +1,60 @@
 package com.adedom.theegggame.ui.multi.multi
 
+import android.content.Context
 import com.adedom.library.extension.*
-import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.KEY_PLAYER_ID
 import com.adedom.theegggame.util.getLevel
+import com.adedom.theegggame.util.setImageProfile
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 
-class Player(items: ArrayList<RoomInfo>) {
+class Player(
+    context: Context,
+    googleMap: GoogleMap?,
+    items: ArrayList<RoomInfo>,
+    markerPlayers: ArrayList<Marker>
+) {
 
     init {
-        MultiActivityViewModel.markerPlayers.removeMarkers()
+        markerPlayers.removeMarkers()
         items.forEach { item ->
             val latLng = LatLng(item.latitude!!, item.longitude!!)
 
             //player
-            MultiActivityViewModel.setImageProfile(item.image, item.gender, {
-                MultiActivityViewModel.markerPlayers.setMarkers(
-                    GoogleMapActivity.sGoogleMap,
+            setImageProfile(item.image, item.gender, {
+                markerPlayers.setMarkers(
+                    googleMap,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     item.name!!,
                     getLevel(item.level)
                 )
             }, {
-                MultiActivityViewModel.markerPlayers.setMarkers(
-                    GoogleMapActivity.sGoogleMap,
+                markerPlayers.setMarkers(
+                    googleMap,
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                     item.name!!,
                     getLevel(item.level)
                 )
             }, {
-                GoogleMapActivity.sContext.loadBitmap(imageUrl(item.image!!), {
-                    MultiActivityViewModel.markerPlayers.setMarkers(
-                        GoogleMapActivity.sGoogleMap!!,
+                context.loadBitmap(imageUrl(item.image!!), {
+                    markerPlayers.setMarkers(
+                        googleMap,
                         latLng,
                         BitmapDescriptorFactory.fromBitmap(it),
                         item.name,
                         getLevel(item.level)
                     )
                 }, {
-                    MultiActivityViewModel.markerPlayers.setMarkers(
-                        GoogleMapActivity.sGoogleMap!!,
+                    markerPlayers.setMarkers(
+                        googleMap,
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                         item.name,
@@ -56,9 +64,9 @@ class Player(items: ArrayList<RoomInfo>) {
             })
 
             //Circle
-            if (GoogleMapActivity.sContext.readPrefFile(KEY_PLAYER_ID) == item.playerId) {
+            if (context.readPrefFile(KEY_PLAYER_ID) == item.playerId) {
                 myCircle?.removeCircle()
-                GoogleMapActivity.sGoogleMap!!.setCircle( latLng, CIRCLE_ONE_HUNDRED_METER)
+                googleMap!!.setCircle(latLng, CIRCLE_ONE_HUNDRED_METER)
             }
         }
     }
