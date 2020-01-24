@@ -1,13 +1,9 @@
 package com.adedom.theegggame.ui.single
 
-import android.graphics.Bitmap
 import android.location.Location
 import com.adedom.library.extension.readPrefFile
-import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
-import com.adedom.library.util.KEY_EMPTY
-import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.*
@@ -18,6 +14,7 @@ import com.google.android.gms.maps.model.Marker
 class SingleActivityViewModel : BaseViewModel() {
 
     val single by lazy { arrayListOf<Single>() }
+    val markerItems by lazy { arrayListOf<Marker>() }
     var switchItem = GameSwitch.ON
 
     var itemBonus: Int = 0
@@ -148,34 +145,6 @@ class SingleActivityViewModel : BaseViewModel() {
                     KEY_MISSION_SINGLE_GAME,
                     KEY_MISSION_SUCCESSFUL
                 )
-            }
-        }
-    }
-
-    companion object {
-        val markerItems by lazy { arrayListOf<Marker>() }
-
-        fun setImageProfile(
-            image: String?,
-            gender: String?,
-            male: () -> Unit,
-            female: () -> Unit,
-            loadImage: () -> Unit
-        ) {
-            when {
-                image == KEY_EMPTY && gender == KEY_MALE -> male.invoke()
-                image == KEY_EMPTY && gender == KEY_FEMALE -> female.invoke()
-                image != KEY_EMPTY -> loadImage.invoke()
-            }
-        }
-
-        fun getItemBitmap(itemId: Int): Bitmap {
-            return when (itemId) {
-                1 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
-                2 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
-                3 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
-                4 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg_bonus)
-                else -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_image_black)
             }
         }
     }

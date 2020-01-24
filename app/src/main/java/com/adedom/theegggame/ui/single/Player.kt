@@ -1,51 +1,53 @@
 package com.adedom.theegggame.ui.single
 
+import android.content.Context
 import com.adedom.library.extension.*
-import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.getLevel
+import com.adedom.theegggame.util.setImageProfile
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
-class Player(latLng: LatLng) {
+class Player(private val context: Context, private val googleMap: GoogleMap?, latLng: LatLng) {
 
     init {
         myMarker?.removeMarker()
         myCircle?.removeCircle()
 
         setMyLocation(latLng)
-        GoogleMapActivity.sGoogleMap!!.setCircle(latLng, CIRCLE_ONE_HUNDRED_METER)
+        googleMap!!.setCircle(latLng, CIRCLE_ONE_HUNDRED_METER)
     }
 
     private fun setMyLocation(latLng: LatLng) {
         val player = MainActivity.sPlayer
-        SingleActivityViewModel.setImageProfile(player.image, player.gender, {
-            GoogleMapActivity.sGoogleMap!!.setMarker(
+        setImageProfile(player.image, player.gender, {
+            googleMap!!.setMarker(
                 latLng,
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                 player.name!!,
                 getLevel(player.level)
             )
         }, {
-            GoogleMapActivity.sGoogleMap!!.setMarker(
+            googleMap!!.setMarker(
                 latLng,
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                 player.name!!,
                 getLevel(player.level)
             )
         }, {
-            GoogleMapActivity.sContext.loadBitmap(imageUrl(player.image!!), {
-                GoogleMapActivity.sGoogleMap!!.setMarker(
+            context.loadBitmap(imageUrl(player.image!!), {
+                googleMap!!.setMarker(
                     latLng,
                     BitmapDescriptorFactory.fromBitmap(it),
                     player.name!!,
                     getLevel(player.level)
                 )
             }, {
-                GoogleMapActivity.sGoogleMap!!.setMarker(
+                googleMap!!.setMarker(
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     player.name!!,

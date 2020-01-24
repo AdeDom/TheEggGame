@@ -64,7 +64,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         this.setToolbar(toolbar, getString(R.string.single_player), true)
 
         mFloatingActionButton.setOnClickListener {
-            baseContext.completed()
+            sContext.completed()
 
             //todo backpack item
         }
@@ -73,7 +73,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     override fun onActivityRunning() {
         if (viewModel.switchItem == GameSwitch.ON) {
             viewModel.switchItem = GameSwitch.OFF
-            Item(viewModel.single)
+            Item(sGoogleMap, viewModel.single, viewModel.markerItems)
         }
 
         viewModel.rndMultiItem(sLatLng)
@@ -87,9 +87,9 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        baseContext.setLocality(mTvLocality, sLatLng)
+        sContext.setLocality(mTvLocality, sLatLng)
 
-        Player(sLatLng)
+        Player(sContext, sGoogleMap, sLatLng)
 
     }
 
@@ -107,7 +107,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         viewModel.keepItemSingle(playerId, myItem, values, lat, lng)
             .observe(this, Observer {
                 if (it.result == KEY_COMPLETED) {
-                    baseContext.toast(viewModel.detailItem(myItem, values))
+                    sContext.toast(viewModel.detailItem(myItem, values))
                 }
             })
     }
