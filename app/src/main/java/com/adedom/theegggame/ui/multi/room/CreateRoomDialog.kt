@@ -3,7 +3,6 @@ package com.adedom.theegggame.ui.multi.room
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -36,16 +35,16 @@ class CreateRoomDialog :
 
         viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
 
-        init(v)
+        init()
 
         return AlertDialog.Builder(activity!!)
             .dialogFragment(v, R.drawable.ic_add_black, R.string.create_room)
     }
 
-    private fun init(view: View) {
-        mEtName = view.findViewById(R.id.mEtName) as EditText
-        mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
-        mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
+    private fun init() {
+        mEtName = v.findViewById(R.id.mEtName) as EditText
+        mNumberPicker = v.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
+        mBtnCreateRoom = v.findViewById(R.id.mBtCreateRoom) as Button
 
         mEtName.setText(MainActivity.sPlayer.name)
 

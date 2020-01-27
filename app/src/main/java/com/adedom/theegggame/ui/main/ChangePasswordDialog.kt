@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.main
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -32,19 +31,19 @@ class ChangePasswordDialog :
 
         mPlayer = arguments!!.getParcelable(KEY_PLAYER)!!
 
-        init(v)
+        init()
 
         return AlertDialog.Builder(activity!!)
             .dialogFragment(v, R.drawable.ic_change, R.string.change_password)
     }
 
-    private fun init(view: View) {
-        mEtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
-        mEtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
-        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+    private fun init() {
+        mEtOldPassword = v.findViewById(R.id.mEtOldPassword) as EditText
+        mEtNewPassword = v.findViewById(R.id.mEtNewPassword) as EditText
+        mEtRePassword = v.findViewById(R.id.mEtRePassword) as EditText
 
-        val etUsername = view.findViewById(R.id.mEtUsername) as EditText
-        val btChangePassword = view.findViewById(R.id.mBtSave) as Button
+        val etUsername = v.findViewById(R.id.mEtUsername) as EditText
+        val btChangePassword = v.findViewById(R.id.mBtSave) as Button
 
         etUsername.setText(mPlayer.username)
         btChangePassword.setOnClickListener {

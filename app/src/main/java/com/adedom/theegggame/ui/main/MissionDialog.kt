@@ -23,13 +23,13 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        init(v)
+        init()
 
         return AlertDialog.Builder(activity!!)
             .dialogFragment(v, R.drawable.ic_mission, R.string.mission)
     }
 
-    private fun init(v: View) {
+    private fun init() {
         val tvMissionDelivery = v.findViewById(R.id.tvMissionDelivery) as TextView
         val tvMissionSingle = v.findViewById(R.id.tvMissionSingle) as TextView
         val tvMissionMulti = v.findViewById(R.id.tvMissionMulti) as TextView

@@ -55,7 +55,7 @@
                 android:layout_marginEnd="@dimen/large"
                 android:layout_toStartOf="@+id/mIvTeamB"
                 android:contentDescription="@string/red"
-                android:src="@drawable/shape_bg_player_red" />
+                android:src="@drawable/shape_team_a" />
 
         <ImageView
                 android:id="@+id/mIvTeamB"
@@ -64,6 +64,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/large"
                 android:contentDescription="@string/blue"
-                android:src="@drawable/shape_bg_player_blue" />
+                android:src="@drawable/shape_team_b" />
     </RelativeLayout>
 </RelativeLayout>

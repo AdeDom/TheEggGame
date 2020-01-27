@@ -2,7 +2,6 @@ package com.adedom.theegggame.ui.main
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
@@ -26,23 +25,23 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        init(v)
+        init()
 
         return AlertDialog.Builder(activity!!)
             .dialogFragment(v, R.drawable.ic_setting, R.string.setting)
     }
 
-    private fun init(view: View) {
+    private fun init() {
         //todo sound
 
         //todo update name & profile
 
-        val btChangeNameImage = view.findViewById(R.id.mBtChangeNameImage) as Button
-        val btChangePassword = view.findViewById(R.id.mBtChangePassword) as Button
-        val ivSoundMusic = view.findViewById(R.id.mIvSoundMusic) as ImageView
-        val btSoundMusic = view.findViewById(R.id.mBtSoundMusic) as Button
-        val btLogout = view.findViewById(R.id.mBtLogout) as Button
-        val btExit = view.findViewById(R.id.mBtExit) as Button
+        val btChangeNameImage = v.findViewById(R.id.mBtChangeNameImage) as Button
+        val btChangePassword = v.findViewById(R.id.mBtChangePassword) as Button
+        val ivSoundMusic = v.findViewById(R.id.mIvSoundMusic) as ImageView
+        val btSoundMusic = v.findViewById(R.id.mBtSoundMusic) as Button
+        val btLogout = v.findViewById(R.id.mBtLogout) as Button
+        val btExit = v.findViewById(R.id.mBtExit) as Button
 
         if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF)
             ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)

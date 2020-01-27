@@ -1,14 +1,12 @@
 package com.adedom.theegggame.util
 
-import android.graphics.Bitmap
 import android.widget.ImageView
 import com.adedom.library.extension.loadCircle
-import com.adedom.library.extension.resourceBitmap
-import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.library.util.getKeyUUID
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
+import com.google.android.gms.maps.model.LatLng
 
 var keyLogs: String = getKeyUUID()
 var timeStamp: Long = System.currentTimeMillis() / 1000
@@ -39,15 +37,22 @@ fun setImageProfile(
     }
 }
 
-fun getItemBitmap(itemId: Int): Bitmap {
-    return when (itemId) {
-        1 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
-        2 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
-        3 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
-        4 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg_bonus)
-        else -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_image_black)
-    }
-}
-
 fun getLevel(level: Int?): String = "Level : $level"
 
+fun rndLatLng(latLng: LatLng): Pair<Double, Double> {
+    var rndLat = Math.random() / 100 // < 0.01
+    rndLat += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
+    val strLat = String.format("%.7f", rndLat)
+    val latitude: Double = if ((0..1).random() == 0) latLng.latitude + strLat.toDouble()
+    else latLng.latitude - strLat.toDouble()
+
+    var rndLng = Math.random() / 100 // < 0.01
+    rndLng += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
+    val strLng = String.format("%.7f", rndLng)
+    val longitude: Double = if ((0..1).random() == 0) latLng.longitude + strLng.toDouble()
+    else latLng.longitude - strLng.toDouble()
+
+    val lat = String.format("%.7f", latitude).toDouble()
+    val lng = String.format("%.7f", longitude).toDouble()
+    return Pair(lat, lng)
+}

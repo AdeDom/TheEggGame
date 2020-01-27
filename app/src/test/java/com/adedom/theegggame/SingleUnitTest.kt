@@ -1,14 +1,30 @@
 package com.adedom.theegggame
 
+import androidx.lifecycle.Observer
 import com.adedom.theegggame.ui.single.SingleActivityViewModel
+import org.junit.Test
 
 class SingleUnitTest {
 
-    val sing = SingleActivityViewModel()
+    val single = SingleActivityViewModel()
+
+    @Test
+    fun testTitleItem() {
+        val title = single.titleItem(4)
+
+        println(title)
+    }
+
+    @Test
+    fun testDetailItem() {
+        val detail = single.detailItem(5, 0)
+
+        println(detail)
+    }
 
 //    @Test
-//    fun testRndLatlng() {
-//        val (lat, lng) = sing.rndLatLng(LatLng(13.6021314, 100.6978833))
-//        println(">>$lat , $lng")
+//    fun testKeepItemSingle() {
+//        single.keepItemSingle("1", 2, 3, 4.5, 6.7)
 //    }
+
 }

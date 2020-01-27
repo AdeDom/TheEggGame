@@ -4,6 +4,7 @@ import android.location.Location
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
@@ -27,25 +28,23 @@ class SingleActivityViewModel : BaseViewModel() {
     ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
     fun titleItem(itemId: Int): String {
-        var name = ""
-        when (itemId) {
-            1 -> name = "Experience point"
-            2 -> name = "Mystery Box"
-            3 -> name = "Mystery Item"
-            4 -> name = "Bonus"
+        return when (itemId) {
+            1 -> "Experience point"
+            2 -> "Mystery Box"
+            3 -> "Mystery Item"
+            4 -> "Bonus"
+            else -> KEY_EMPTY
         }
-        return name
     }
 
     fun detailItem(itemId: Int, values: Int): String {
-        var name = ""
-        when (itemId) {
-            1 -> name = "Experience point : $values"
-            2 -> name = "Egg I" // egg false
-            3 -> name = "Egg II" // radius
-            4 -> name = "Egg III" // stun
+        return when (itemId) {
+            1 -> "Experience point : $values"
+            2 -> "Egg I : $values" // egg false
+            3 -> "Egg II : $values" // radius
+            4 -> "Egg III : $values" // stun
+            else -> KEY_EMPTY
         }
-        return name
     }
 
     fun checkRadius(latLng: LatLng, insertItem: (Int) -> Unit) {
@@ -86,24 +85,6 @@ class SingleActivityViewModel : BaseViewModel() {
                 single.add(item)
             }
         }
-    }
-
-    private fun rndLatLng(latLng: LatLng): Pair<Double, Double> {
-        var rndLat = Math.random() / 100 // < 0.01
-        rndLat += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-        val strLat = String.format("%.7f", rndLat)
-        val latitude: Double = if ((0..1).random() == 0) latLng.latitude + strLat.toDouble()
-        else latLng.latitude - strLat.toDouble()
-
-        var rndLng = Math.random() / 100 // < 0.01
-        rndLng += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-        val strLng = String.format("%.7f", rndLng)
-        val longitude: Double = if ((0..1).random() == 0) latLng.longitude + strLng.toDouble()
-        else latLng.longitude - strLng.toDouble()
-
-        val lat = String.format("%.7f", latitude).toDouble()
-        val lng = String.format("%.7f", longitude).toDouble()
-        return Pair(lat, lng)
     }
 
     fun getItemValues(i: Int): Pair<Int, Int> {

@@ -3,7 +3,6 @@ package com.adedom.theegggame.ui.main
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -27,7 +26,7 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_r
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        init(v)
+        init()
 
         fetchPlayers()
 
@@ -36,12 +35,12 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_r
     }
 
     @SuppressLint("WrongViewCast")
-    private fun init(view: View) {
-        val etSearch = view.findViewById(R.id.mEtSearch) as EditText
-        val btRank10 = view.findViewById(R.id.mBtRank10) as Button
-        val btRank50 = view.findViewById(R.id.mBtRank50) as Button
-        val btRank100 = view.findViewById(R.id.mBtRank100) as Button
-        val recyclerView = view.findViewById(R.id.mRecyclerView) as RecyclerView
+    private fun init() {
+        val etSearch = v.findViewById(R.id.mEtSearch) as EditText
+        val btRank10 = v.findViewById(R.id.mBtRank10) as Button
+        val btRank50 = v.findViewById(R.id.mBtRank50) as Button
+        val btRank100 = v.findViewById(R.id.mBtRank100) as Button
+        val recyclerView = v.findViewById(R.id.mRecyclerView) as RecyclerView
 
         mAdapter = RankAdapter()
 

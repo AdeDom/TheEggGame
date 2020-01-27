@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -43,21 +42,21 @@ class RegisterDialog :
 
         viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
 
-        init(v)
+        init()
 
         return AlertDialog.Builder(activity!!)
             .dialogFragment(v, R.drawable.ic_player, R.string.register)
     }
 
-    private fun init(view: View) {
-        mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
-        mEtPassword = view.findViewById(R.id.mEtPassword) as EditText
-        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
-        mEtName = view.findViewById(R.id.mEtName) as EditText
-        mRbMale = view.findViewById(R.id.mRbMale) as RadioButton
-        mRbFemale = view.findViewById(R.id.mRbFemale) as RadioButton
-        mIvProfile = view.findViewById(R.id.mIvProfile) as ImageView
-        mBtRegister = view.findViewById(R.id.mBtSave) as Button
+    private fun init() {
+        mEtUsername = v.findViewById(R.id.mEtUsername) as EditText
+        mEtPassword = v.findViewById(R.id.mEtPassword) as EditText
+        mEtRePassword = v.findViewById(R.id.mEtRePassword) as EditText
+        mEtName = v.findViewById(R.id.mEtName) as EditText
+        mRbMale = v.findViewById(R.id.mRbMale) as RadioButton
+        mRbFemale = v.findViewById(R.id.mRbFemale) as RadioButton
+        mIvProfile = v.findViewById(R.id.mIvProfile) as ImageView
+        mBtRegister = v.findViewById(R.id.mBtSave) as Button
 
         mRbMale.setOnClickListener {
             gender = KEY_MALE

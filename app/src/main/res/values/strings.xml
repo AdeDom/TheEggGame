@@ -69,4 +69,12 @@
     <string name="delivery_login">Delivery login</string>
     <string name="mission_single">Mission single</string>
     <string name="mission_multi">Mission multi</string>
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+    <string name="team">Team</string>
+    <string name="score">Score</string>
+    <string name="win">Win</string>
+    <string name="lose">Lose</string>
+    <string name="always">Always</string>
+    <string name="bonus">Bonus</string>
 </resources>

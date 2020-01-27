@@ -1,5 +1,7 @@
 package com.adedom.theegggame.ui.multi.multi
 
+import android.app.Activity
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
@@ -86,23 +88,23 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
             Item(multiItems, markerItems)
         }
 
-        viewModel.checkEndGame({ scoreTeamA, scoreTeamB ->
+        viewModel.checkEndGame({ scoreTeamA, scoreTeamB, team ->
+            val intent = Intent()
+            intent.putExtra(TEAM, team)
+            intent.putExtra(TEAM_A, scoreTeamA.toString())
+            intent.putExtra(TEAM_B, scoreTeamB.toString())
+            setResult(Activity.RESULT_OK, intent)
             finish()
-            sContext.toast(R.string.end_game)
-            sContext.toast("TEAM A = $scoreTeamA \nTEAM B = $scoreTeamB ")
-        }, { scoreTeamA, scoreTeamB ->
-            val bundle = Bundle()
-            bundle.putString(TEAM_A, scoreTeamA.toString())
-            bundle.putString(TEAM_B, scoreTeamB.toString())
-
-            val dialog = EndGameDialog()
-            dialog.arguments = bundle
-            dialog.show(supportFragmentManager, null)
         }, { scoreTeamA, scoreTeamB, time ->
             mTvTime.text = time.toString()
             mTvRed.text = scoreTeamA.toString()
             mTvBlue.text = scoreTeamB.toString()
         })
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_CANCELED)
+        super.onBackPressed()
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -154,7 +156,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     private fun insertMulti() {
-        viewModel.insertMulti(sLatLng).observe(this, Observer {
+        val (lat, lng) = rndLatLng(sLatLng)
+        viewModel.insertMulti(lat, lng).observe(this, Observer {
             if (it.result == KEY_FAILED) sContext.failed()
         })
     }

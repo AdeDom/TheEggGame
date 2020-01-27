@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/MatchWrap"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+    <TextView
+            android:id="@+id/tvBonus"
+            style="@style/TextViewLarge"
+            android:text="@string/zero" />
+
+    <ImageView
+            android:id="@+id/ivWheel"
+            android:layout_width="@dimen/wheel"
+            android:layout_height="@dimen/wheel"
+            android:src="@drawable/roulette" />
+
+    <Button
+            android:id="@+id/btBonus"
+            style="@style/Button"
+            android:text="@string/bonus" />
+
+</LinearLayout>

@@ -20,12 +20,12 @@ class RoomInfoAdapter :
             if (team == TEAM_A) {
                 holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
                     holder.itemView.context,
-                    R.drawable.shape_bg_player_red
+                    R.drawable.shape_team_a
                 )
             } else {
                 holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
                     holder.itemView.context,
-                    R.drawable.shape_bg_player_blue
+                    R.drawable.shape_team_b
                 )
             }
         }

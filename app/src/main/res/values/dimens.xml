@@ -13,4 +13,5 @@
     <dimen name="little">2dp</dimen>
     <dimen name="layout">16dp</dimen>
     <dimen name="zero">0dp</dimen>
+    <dimen name="wheel">300dp</dimen>
 </resources>

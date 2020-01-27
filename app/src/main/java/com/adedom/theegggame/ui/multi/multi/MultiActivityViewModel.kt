@@ -1,8 +1,6 @@
 package com.adedom.theegggame.ui.multi.multi
 
 import android.location.Location
-import androidx.lifecycle.LiveData
-import com.adedom.library.data.JsonResponse
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
@@ -35,10 +33,8 @@ class MultiActivityViewModel : BaseViewModel() {
 
     fun getMulti() = multiRepository.getMulti(room.room_no!!)
 
-    fun insertMulti(latLng: LatLng): LiveData<JsonResponse> {
-        val (lat, lng) = rndLatLng(latLng)
-        return multiRepository.insertMulti(room.room_no!!, lat, lng)
-    }
+    fun insertMulti(lat: Double, lng: Double) =
+        multiRepository.insertMulti(room.room_no!!, lat, lng)
 
     fun keepItemMulti(multiId: String, playerId: String?, latitude: Double, longitude: Double) =
         multiRepository.insertMultiCollection(
@@ -84,24 +80,6 @@ class MultiActivityViewModel : BaseViewModel() {
         }
     }
 
-    private fun rndLatLng(latLng: LatLng): Pair<Double, Double> {
-        var rndLat = Math.random() / 100 // < 0.01
-        rndLat += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-        val strLat = String.format("%.7f", rndLat)
-        val latitude: Double = if ((0..1).random() == 0) latLng.latitude + strLat.toDouble()
-        else latLng.latitude - strLat.toDouble()
-
-        var rndLng = Math.random() / 100 // < 0.01
-        rndLng += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-        val strLng = String.format("%.7f", rndLng)
-        val longitude: Double = if ((0..1).random() == 0) latLng.longitude + strLng.toDouble()
-        else latLng.longitude - strLng.toDouble()
-
-        val lat = String.format("%.7f", latitude).toDouble()
-        val lng = String.format("%.7f", longitude).toDouble()
-        return Pair(lat, lng)
-    }
-
     private fun mission() {
         if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_MISSION_UNSUCCESSFUL) {
             GoogleMapActivity.sContext.writePrefFile(
@@ -129,18 +107,17 @@ class MultiActivityViewModel : BaseViewModel() {
     }
 
     fun checkEndGame(
-        end: (Int, Int) -> Unit,
-        timeOut: (Int, Int) -> Unit,
+        end: (Int, Int, String) -> Unit,
         play: (Int, Int, Int) -> Unit
     ) {
         when {
             scoreTeamA + scoreTeamB >= 5 -> {
                 mission()
-                end.invoke(scoreTeamA, scoreTeamB)
+                end.invoke(scoreTeamA, scoreTeamB, team)
             }
             time <= 0 -> {
                 mission()
-                timeOut.invoke(scoreTeamA, scoreTeamB)
+                end.invoke(scoreTeamA, scoreTeamB, team)
             }
             else -> play.invoke(scoreTeamA, scoreTeamB, time)
         }

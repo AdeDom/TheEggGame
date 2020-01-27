@@ -1,5 +1,6 @@
 package com.adedom.theegggame.ui.multi.roominfo
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.ui.multi.multi.EndGameDialog
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.*
 import kotlinx.android.synthetic.main.activity_room_info.*
@@ -101,15 +103,38 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     private fun startGame() {
         viewModel.setRoomOff().observe(this, Observer {
             if (it.result == KEY_COMPLETED) {
-                finish()
-                startActivity(
+                startActivityForResult(
                     Intent(baseContext, MultiActivity::class.java)
                         .putExtra(ROOM, viewModel.room)
                         .putExtra(TEAM, viewModel.team)
+                    , KEY_REQUEST_CODE
                 )
                 baseContext.toast(R.string.start_game)
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when {
+            requestCode != KEY_REQUEST_CODE -> finish()
+            resultCode == Activity.RESULT_CANCELED -> finish()
+            resultCode == Activity.RESULT_OK -> {
+                val team = data!!.getStringExtra(TEAM)
+                val teamA = data.getStringExtra(TEAM_A)
+                val teamB = data.getStringExtra(TEAM_B)
+
+                val bundle = Bundle()
+                bundle.putString(TEAM, team)
+                bundle.putString(TEAM_A, teamA)
+                bundle.putString(TEAM_B, teamB)
+
+                val dialog = EndGameDialog()
+                dialog.arguments = bundle
+                dialog.show(supportFragmentManager, null)
+                dialog.isCancelable = false
+            }
+        }
     }
 
 }

@@ -60,4 +60,6 @@ class RoomInfoActivityViewModel : BaseViewModel() {
         val numReady = roomInfo.count { it.status == KEY_READY }
         if (roomInfoSize == numReady && roomInfoSize != 0) play.invoke()
     }
+
+
 }

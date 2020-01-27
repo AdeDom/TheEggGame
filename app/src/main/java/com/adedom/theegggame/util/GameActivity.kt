@@ -75,6 +75,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onBackPressed() {
         mHandlerFetch.removeCallbacks(mRunnableFetch)
+        finish()
         super.onBackPressed()
     }
 
