@@ -4,7 +4,6 @@ import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.KEY_DATE
 import com.adedom.library.util.getDateTime
-import com.adedom.library.util.getKeyUUID
 import com.adedom.theegggame.util.*
 
 class MainActivityViewModel : BaseViewModel() {
@@ -59,11 +58,6 @@ class MainActivityViewModel : BaseViewModel() {
             GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
         }
 
-    }
-
-    companion object {
-        var keyLogs: String = getKeyUUID()
-        var timeStamp: Long = System.currentTimeMillis() / 1000
     }
 
 }

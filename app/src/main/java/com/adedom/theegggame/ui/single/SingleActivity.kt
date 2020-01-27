@@ -29,7 +29,6 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         init()
 
-        viewModel.itemBonus = 0
     }
 
     override fun onResume() {
@@ -63,6 +62,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     private fun init() {
         this.setToolbar(toolbar, getString(R.string.single_player), true)
 
+        viewModel.itemBonus = 0
+
         mFloatingActionButton.setOnClickListener {
             sContext.completed()
 
@@ -71,9 +72,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     override fun onActivityRunning() {
-        if (viewModel.switchItem == GameSwitch.ON) {
-            viewModel.switchItem = GameSwitch.OFF
-            Item(sGoogleMap, viewModel.single, viewModel.markerItems)
+        viewModel.checkItem { single, markerItems ->
+            Item(sGoogleMap, single, markerItems)
         }
 
         viewModel.rndMultiItem(sLatLng)

@@ -6,8 +6,12 @@ import com.adedom.library.extension.loadCircle
 import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.KEY_EMPTY
+import com.adedom.library.util.getKeyUUID
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
+
+var keyLogs: String = getKeyUUID()
+var timeStamp: Long = System.currentTimeMillis() / 1000
 
 fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
     when {
@@ -46,6 +50,4 @@ fun getItemBitmap(itemId: Int): Bitmap {
 }
 
 fun getLevel(level: Int?): String = "Level : $level"
-
-
 

@@ -81,7 +81,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
 
     private fun insertLogs() {
         val playerId = this.readPrefFile(KEY_PLAYER_ID)
-        viewModel.insertLogs(MainActivityViewModel.keyLogs, playerId).observe(this, Observer {
+        viewModel.insertLogs(keyLogs, playerId).observe(this, Observer {
             if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
         })
     }

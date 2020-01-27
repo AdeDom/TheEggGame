@@ -5,7 +5,6 @@ import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.theegggame.data.models.Single
-import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
 import com.google.android.gms.maps.model.LatLng
@@ -13,8 +12,8 @@ import com.google.android.gms.maps.model.Marker
 
 class SingleActivityViewModel : BaseViewModel() {
 
-    val single by lazy { arrayListOf<Single>() }
-    val markerItems by lazy { arrayListOf<Marker>() }
+    private val single by lazy { arrayListOf<Single>() }
+    private val markerItems by lazy { arrayListOf<Marker>() }
     var switchItem = GameSwitch.ON
 
     var itemBonus: Int = 0
@@ -82,30 +81,36 @@ class SingleActivityViewModel : BaseViewModel() {
         if (single.size < MIN_ITEM) {
             val numItem = (MIN_ITEM..MAX_ITEM).random()
             for (i in 0 until numItem) {
-                val item = Single(
-                    (1..3).random(),
-                    rndLatLng(latLng.latitude),
-                    rndLatLng(latLng.longitude)
-                )
+                val (lat, lng) = rndLatLng(latLng)
+                val item = Single((1..3).random(), lat, lng)
                 single.add(item)
             }
         }
     }
 
-    private fun rndLatLng(latLng: Double): Double {
-        var rnd = Math.random() / 100 // < 0.01
-        rnd += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-        val s = String.format("%.7f", rnd)
-        var ll: Double = if ((0..1).random() == 0) latLng + s.toDouble() else latLng - s.toDouble()
-        ll = String.format("%.7f", ll).toDouble()
-        return ll
+    private fun rndLatLng(latLng: LatLng): Pair<Double, Double> {
+        var rndLat = Math.random() / 100 // < 0.01
+        rndLat += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
+        val strLat = String.format("%.7f", rndLat)
+        val latitude: Double = if ((0..1).random() == 0) latLng.latitude + strLat.toDouble()
+        else latLng.latitude - strLat.toDouble()
+
+        var rndLng = Math.random() / 100 // < 0.01
+        rndLng += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
+        val strLng = String.format("%.7f", rndLng)
+        val longitude: Double = if ((0..1).random() == 0) latLng.longitude + strLng.toDouble()
+        else latLng.longitude - strLng.toDouble()
+
+        val lat = String.format("%.7f", latitude).toDouble()
+        val lng = String.format("%.7f", longitude).toDouble()
+        return Pair(lat, lng)
     }
 
     fun getItemValues(i: Int): Pair<Int, Int> {
         var myItem = single[i].itemId // item Id
         var values = (Math.random() * 100).toInt() + 20 // number values && minimum 20
 
-        val timeStart = MainActivityViewModel.timeStamp
+        val timeStart = timeStamp
         val timeNow = System.currentTimeMillis() / 1000
         if (timeNow > timeStart + TIME_FIVE_MINUTE.toLong()) values *= 2 // Multiply 2
 
@@ -136,7 +141,8 @@ class SingleActivityViewModel : BaseViewModel() {
         if (itemBonus % 3 == 0 && itemBonus != 0) {
             itemBonus = 0
             for (i in 1..MAX_ITEM) {
-                val item = Single(4, rndLatLng(latLng.latitude), rndLatLng(latLng.longitude))
+                val (lat, lng) = rndLatLng(latLng)
+                val item = Single(4, lat, lng)
                 single.add(item)
             }
 
@@ -146,6 +152,13 @@ class SingleActivityViewModel : BaseViewModel() {
                     KEY_MISSION_SUCCESSFUL
                 )
             }
+        }
+    }
+
+    fun checkItem(item: (ArrayList<Single>, ArrayList<Marker>) -> Unit) {
+        if (switchItem == GameSwitch.ON) {
+            switchItem = GameSwitch.OFF
+            item.invoke(single, markerItems)
         }
     }
 }

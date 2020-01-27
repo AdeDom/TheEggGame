@@ -12,14 +12,13 @@ import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
+import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playMusicGame
 import com.adedom.theegggame.util.extension.setSoundMusic
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_map.*
 
 class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05/2562 toast name
@@ -32,6 +31,9 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         setContentView(R.layout.activity_map)
 
         viewModel = ViewModelProviders.of(this).get(MultiActivityViewModel::class.java)
+
+        viewModel.room = intent.getParcelableExtra(ROOM) as Room
+        viewModel.team = intent.getStringExtra(TEAM) as String
 
         init()
     }
@@ -67,6 +69,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     private fun init() {
         this.setToolbar(toolbar, getString(R.string.multi_player), true)
 
+        viewModel.time = TIME_FIFTEEN_MINUTE
+
         mTvTime.visibility = View.VISIBLE
         mTvRed.visibility = View.VISIBLE
         mTvBlue.visibility = View.VISIBLE
@@ -75,53 +79,30 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onActivityRunning() {
         viewModel.time -= 1
 
-        viewModel.rndMultiItem(
-            viewModel.room.status!!,
-            viewModel.roomInfoItems.size,
-            viewModel.multiItems.size,
-            { insertMulti() }, {
-                viewModel.multiItems.forEach {
-                    viewModel.distanceOver(
-                        sLatLng,
-                        LatLng(it.latitude, it.longitude),
-                        RADIUS_THREE_KILOMETER
-                    ) {
-                        insertMulti()
-                    }
-                }
-            })
+        viewModel.rndMultiItem { insertMulti() }
 
-        viewModel.checkRadius {
-            keepItemMulti(it)
-            Item(viewModel.multiItems, viewModel.markerItems)
+        viewModel.checkRadius { multi_id, multiItems, markerItems ->
+            keepItemMulti(multi_id)
+            Item(multiItems, markerItems)
         }
 
-        when {
-            //todo dialog finish game && bonus team win
-            viewModel.scoreTeamA + viewModel.scoreTeamB >= 5 -> {
-                viewModel.mission()
+        viewModel.checkEndGame({ scoreTeamA, scoreTeamB ->
+            finish()
+            sContext.toast(R.string.end_game)
+            sContext.toast("TEAM A = $scoreTeamA \nTEAM B = $scoreTeamB ")
+        }, { scoreTeamA, scoreTeamB ->
+            val bundle = Bundle()
+            bundle.putString(TEAM_A, scoreTeamA.toString())
+            bundle.putString(TEAM_B, scoreTeamB.toString())
 
-                finish()
-                sContext.toast(R.string.end_game)
-                sContext.toast("TEAM A = ${viewModel.scoreTeamA}\nTEAM B = ${viewModel.scoreTeamB}")
-            }
-            viewModel.time <= 0 -> {
-                viewModel.mission()
-
-                val bundle = Bundle()
-                bundle.putString(TEAM_A, viewModel.scoreTeamA.toString())
-                bundle.putString(TEAM_B, viewModel.scoreTeamB.toString())
-
-                val dialog = EndGameDialog()
-                dialog.arguments = bundle
-                dialog.show(supportFragmentManager, null)
-            }
-            else -> {
-                mTvTime.text = viewModel.time.toString()
-                mTvRed.text = viewModel.scoreTeamA.toString()
-                mTvBlue.text = viewModel.scoreTeamB.toString()
-            }
-        }
+            val dialog = EndGameDialog()
+            dialog.arguments = bundle
+            dialog.show(supportFragmentManager, null)
+        }, { scoreTeamA, scoreTeamB, time ->
+            mTvTime.text = time.toString()
+            mTvRed.text = scoreTeamA.toString()
+            mTvBlue.text = scoreTeamB.toString()
+        })
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -149,14 +130,13 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     private fun setLatlng() {
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        viewModel.setLatlng(viewModel.room.room_no!!, MainActivity.sPlayer.playerId!!, lat, lng)
-            .observe(this, Observer {
-                if (it.result == KEY_FAILED) sContext.failed()
-            })
+        viewModel.setLatlng(MainActivity.sPlayer.playerId!!, lat, lng).observe(this, Observer {
+            if (it.result == KEY_FAILED) sContext.failed()
+        })
     }
 
     private fun fetchRoomInfo() {
-        viewModel.getRoomInfo(viewModel.room.room_no!!).observe(this, Observer {
+        viewModel.getRoomInfo().observe(this, Observer {
             if (it != viewModel.roomInfoItems) {
                 viewModel.roomInfoItems = it as ArrayList<RoomInfo>
                 Player(sContext, sGoogleMap, viewModel.roomInfoItems, viewModel.markerPlayers)
@@ -165,7 +145,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     private fun fetchMulti() {
-        viewModel.getMulti(viewModel.room.room_no!!).observe(this, Observer {
+        viewModel.getMulti().observe(this, Observer {
             if (it != viewModel.multiItems) {
                 viewModel.multiItems = it as ArrayList<Multi>
                 Item(viewModel.multiItems, viewModel.markerItems)
@@ -174,10 +154,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     private fun insertMulti() {
-        val roomNo = viewModel.room.room_no
-        val lat = viewModel.rndLatLng(sLatLng.latitude)
-        val lng = viewModel.rndLatLng(sLatLng.longitude)
-        viewModel.insertMulti(roomNo!!, lat, lng).observe(this, Observer {
+        viewModel.insertMulti(sLatLng).observe(this, Observer {
             if (it.result == KEY_FAILED) sContext.failed()
         })
     }
@@ -185,9 +162,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     private fun keepItemMulti(multiId: String) {
         viewModel.keepItemMulti(
             multiId,
-            viewModel.room.room_no!!,
             MainActivity.sPlayer.playerId,
-            RoomInfoActivityViewModel.team,
             sLatLng.latitude,
             sLatLng.longitude
         ).observe(this, Observer {
@@ -196,7 +171,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     private fun fetchScore() {
-        viewModel.getScore(viewModel.room.room_no!!).observe(this, Observer {
+        viewModel.getScore().observe(this, Observer {
             viewModel.scoreTeamA = it.teamA
             viewModel.scoreTeamB = it.teamB
         })

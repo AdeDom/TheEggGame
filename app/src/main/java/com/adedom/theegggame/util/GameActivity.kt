@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.util.pauseMusic
-import com.adedom.theegggame.ui.main.MainActivityViewModel
 import com.adedom.theegggame.util.extension.playMusicGame
 
 abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
@@ -67,7 +66,7 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
 
-        mViewModel.updateLogs(MainActivityViewModel.keyLogs).observe(this, Observer {
+        mViewModel.updateLogs(keyLogs).observe(this, Observer {
             if (it.result == KEY_FAILED) baseContext.failed()
         })
     }
