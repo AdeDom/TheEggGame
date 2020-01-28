@@ -16,6 +16,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playMusicGame
@@ -88,11 +89,9 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
             Item(multiItems, markerItems)
         }
 
-        viewModel.checkEndGame({ scoreTeamA, scoreTeamB, team ->
+        viewModel.checkEndGame({ scoreTeamA, scoreTeamB ->
             val intent = Intent()
-            intent.putExtra(TEAM, team)
-            intent.putExtra(TEAM_A, scoreTeamA.toString())
-            intent.putExtra(TEAM_B, scoreTeamB.toString())
+            intent.putExtra(SCORE, Score(scoreTeamA, scoreTeamB))
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, { scoreTeamA, scoreTeamB, time ->

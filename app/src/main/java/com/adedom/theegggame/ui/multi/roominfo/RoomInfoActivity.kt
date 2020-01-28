@@ -11,6 +11,7 @@ import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.ui.multi.multi.EndGameDialog
 import com.adedom.theegggame.ui.multi.multi.MultiActivity
 import com.adedom.theegggame.util.*
@@ -120,14 +121,11 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
             requestCode != KEY_REQUEST_CODE -> finish()
             resultCode == Activity.RESULT_CANCELED -> finish()
             resultCode == Activity.RESULT_OK -> {
-                val team = data!!.getStringExtra(TEAM)
-                val teamA = data.getStringExtra(TEAM_A)
-                val teamB = data.getStringExtra(TEAM_B)
+                val score = data!!.getParcelableExtra(SCORE) as Score
 
                 val bundle = Bundle()
-                bundle.putString(TEAM, team)
-                bundle.putString(TEAM_A, teamA)
-                bundle.putString(TEAM_B, teamB)
+                bundle.putString(TEAM, viewModel.team)
+                bundle.putParcelable(SCORE, score)
 
                 val dialog = EndGameDialog()
                 dialog.arguments = bundle

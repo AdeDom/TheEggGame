@@ -56,8 +56,6 @@ dependencies {
     //scroll
     implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
 
-    implementation 'com.github.pathiphon:Dom:0.2.6'
+    implementation 'com.github.pathiphon:Dom:0.2.7'
 
-    //test
-//    implementation 'androidx.test:runner:1.2.0'
 }

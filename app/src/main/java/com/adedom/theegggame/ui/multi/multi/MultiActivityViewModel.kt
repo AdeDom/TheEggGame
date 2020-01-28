@@ -107,17 +107,17 @@ class MultiActivityViewModel : BaseViewModel() {
     }
 
     fun checkEndGame(
-        end: (Int, Int, String) -> Unit,
+        end: (Int, Int) -> Unit,
         play: (Int, Int, Int) -> Unit
     ) {
         when {
             scoreTeamA + scoreTeamB >= 5 -> {
                 mission()
-                end.invoke(scoreTeamA, scoreTeamB, team)
+                end.invoke(scoreTeamA, scoreTeamB)
             }
             time <= 0 -> {
                 mission()
-                end.invoke(scoreTeamA, scoreTeamB, team)
+                end.invoke(scoreTeamA, scoreTeamB)
             }
             else -> play.invoke(scoreTeamA, scoreTeamB, time)
         }

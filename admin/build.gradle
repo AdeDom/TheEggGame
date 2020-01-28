@@ -48,5 +48,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
 
-    implementation 'com.github.pathiphon:Dom:0.2.6'
+    implementation 'com.github.pathiphon:Dom:0.2.7'
+
 }

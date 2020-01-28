@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
+import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
 
@@ -24,8 +25,7 @@ class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>({ R.layout.d
 
     private fun init() {
         val team = arguments!!.getString(TEAM)!!
-        val teamA = arguments!!.getString(TEAM_A)!!
-        val teamB = arguments!!.getString(TEAM_B)!!
+        val (teamA, teamB) = arguments!!.getParcelable<Score>(SCORE) as Score
 
         val tvTeamA = v.findViewById(R.id.tvTeamA) as TextView
         val tvTeamB = v.findViewById(R.id.tvTeamB) as TextView
@@ -33,8 +33,8 @@ class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>({ R.layout.d
         val tvScoreB = v.findViewById(R.id.tvScoreB) as TextView
         val btEndGame = v.findViewById(R.id.btEndGame) as Button
 
-        tvScoreA.text = teamA
-        tvScoreB.text = teamB
+        tvScoreA.text = teamA.toString()
+        tvScoreB.text = teamB.toString()
 
         val teamWin: String
         when {
