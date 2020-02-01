@@ -13,7 +13,6 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Player
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_COMPLETED
-import com.adedom.theegggame.util.KEY_PLAYER
 import com.adedom.theegggame.util.extension.playSoundClick
 
 class ChangePasswordDialog :
@@ -29,12 +28,12 @@ class ChangePasswordDialog :
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        mPlayer = arguments!!.getParcelable(KEY_PLAYER)!!
+        mPlayer = MainActivity.sPlayer
 
         init()
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_change, R.string.change_password)
+            .dialogFragment(v, R.drawable.ic_password, R.string.change_password)
     }
 
     private fun init() {

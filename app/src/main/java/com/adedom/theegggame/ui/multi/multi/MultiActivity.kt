@@ -9,7 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.*
+import com.adedom.library.extension.failed
+import com.adedom.library.extension.setMarkerConstant
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
@@ -109,7 +112,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        sContext.setLocality(mTvLocality, sLatLng)
+//        sContext.setLocality(mTvLocality, sLatLng)
 
         setLatlng()
 

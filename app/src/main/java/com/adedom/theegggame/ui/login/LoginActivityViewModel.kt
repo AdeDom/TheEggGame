@@ -14,4 +14,5 @@ class LoginActivityViewModel : BaseViewModel() {
         image: String,
         gender: String
     ) = playerRepository.insertPlayer(username, password, name, image, gender)
+
 }

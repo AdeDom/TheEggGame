@@ -12,6 +12,9 @@ class MainActivityViewModel : BaseViewModel() {
 
     fun rank(search: String, limit: String) = playerRepository.getPlayers(search, limit)
 
+    fun updateProfile(playerId: String?, name: String, image: String, gender: String) =
+        playerRepository.updateProfile(playerId, name, image, gender)
+
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         playerRepository.updatePassword(playerId, oldPassword, newPassword)
 

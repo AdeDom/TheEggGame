@@ -39,7 +39,8 @@
     <string name="error_username_less">Please enter your username no less than 4 characters</string>
     <string name="error_password_less">Please enter your password no less than 4 characters</string>
     <string name="error_password_not_match">Passwords do not match</string>
-    <string name="change_password">Change Password</string>
+    <string name="change_password">Change password</string>
+    <string name="change_profile">Change profile</string>
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="successfully">Successfully</string>
@@ -62,7 +63,6 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="sound_amp_music"><![CDATA[Sound & Music]]></string>
-    <string name="change_name_amp_image"><![CDATA[Change name & image]]></string>
     <string name="how_to_play">วิธีการเล่น</string>
     <string name="detail_single_player">\t\t\tแบบเล่นคนเดียว คือ การเก็บไอเทมตามพิกัดต่างๆ เพื่อเพิ่มเลเวล เมื่อผู้เล่นได้เดินไปถึงตามพิกัดนั้น ในระยะทางห่างจากไอเทมน้อยกว่า 100 เมตร เกมจะทำการเก็บไอเทมให้อัตโนมัติ และหากผู้เล่นอยู่ห่างจากไอเทมเป็นระยะทาง 2 กิโลเมตร เกมจะสุ่มไอเทมออกมาใหม่ เพื่อให้ผู้เล่น ได้เก็บไอเทมในบริเวณนั้นแทน</string>
     <string name="detail_multi_player">\t\t\tแบบเล่นเป็นทีม คือ ผู้เล่นต้องสร้างห้องหรือเข้าร่วมห้องเพื่อจัดทีมการแข่งขัน โดยการแบ่งเป็น 2 ทีม เพื่อแข่งขันกันในการเก็บไอเทมให้ครบ 5 ไอเทม ภายในระยะเวลา 15 นาที ถ้าหาก 2 ทีม อยู่ในพิกัดที่ใกล้กันจะต้องต่อสู้กันเพื่อแย่งชิงไอเทม หากทีมไหนแพ้จะต้องเสียไอเทมที่เก็บก่อนหน้าให้กับทีมที่ชนะ ผู้เล่นที่เป็นฝ่ายชนะจะได้รับโบนัสเพิ่ม และได้เล่นเกมต่อไปเพื่อสุ่มแต้มเพิ่มเลเวล</string>

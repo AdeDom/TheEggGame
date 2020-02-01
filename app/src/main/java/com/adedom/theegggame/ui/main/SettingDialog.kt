@@ -13,7 +13,6 @@ import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.KEY_PLAYER
 import com.adedom.theegggame.util.SOUND_MUSIC
 import com.adedom.theegggame.util.SOUND_MUSIC_OFF
 import com.adedom.theegggame.util.extension.loginSuccess
@@ -32,11 +31,7 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
     }
 
     private fun init() {
-        //todo sound
-
-        //todo update name & profile
-
-        val btChangeNameImage = v.findViewById(R.id.mBtChangeNameImage) as Button
+        val btChangeProfile = v.findViewById(R.id.mBtChangeProfile) as Button
         val btChangePassword = v.findViewById(R.id.mBtChangePassword) as Button
         val ivSoundMusic = v.findViewById(R.id.mIvSoundMusic) as ImageView
         val btSoundMusic = v.findViewById(R.id.mBtSoundMusic) as Button
@@ -47,16 +42,15 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
             ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
         else ivSoundMusic.setImageResource(R.drawable.ic_sound_music_on)
 
+        btChangeProfile.setOnClickListener {
+            dialog!!.dismiss()
+            ChangeProfileDialog().show(activity!!.supportFragmentManager, null)
+            GameActivity.sContext.playSoundClick()
+        }
+
         btChangePassword.setOnClickListener {
             dialog!!.dismiss()
-
-            val bundle = Bundle()
-            bundle.putParcelable(KEY_PLAYER, MainActivity.sPlayer)
-
-            val dialog = ChangePasswordDialog()
-            dialog.arguments = bundle
-            dialog.show(activity!!.supportFragmentManager, null)
-
+            ChangePasswordDialog().show(activity!!.supportFragmentManager, null)
             GameActivity.sContext.playSoundClick()
         }
 

@@ -17,6 +17,10 @@ class ItemCollectionAdapter :
             val (name, image, _, _, itemId, qty, latitude, longitude, date, time) = items[position]
 
             if (image != KEY_EMPTY) holder.itemView.ivImage.loadCircle(imageUrl(image))
+
+            //todo setImageProfile
+//            setImageProfile(holder.itemView.ivImage, image, gender)
+
             when (itemId) {
                 1 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg)
                 2 -> holder.itemView.ivItem.setImageResource(R.drawable.ic_egg_i)

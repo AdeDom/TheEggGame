@@ -1,4 +1,4 @@
-package com.adedom.theegggame.ui.login
+package com.adedom.theegggame.ui.main
 
 import android.app.Activity
 import android.app.Dialog
@@ -14,58 +14,59 @@ import com.adedom.library.extension.*
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.KEY_FAILED
-import com.adedom.theegggame.util.KEY_FEMALE
-import com.adedom.theegggame.util.KEY_MALE
-import com.adedom.theegggame.util.extension.loginSuccess
+import com.adedom.theegggame.data.models.Player
+import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_register }) {
+class ChangeProfileDialog :
+    BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_profile }) {
 
-    private lateinit var mEtUsername: EditText
-    private lateinit var mEtPassword: EditText
-    private lateinit var mEtRePassword: EditText
+    private lateinit var mPlayer: Player
     private lateinit var mEtName: EditText
     private lateinit var mRbMale: RadioButton
     private lateinit var mRbFemale: RadioButton
     private lateinit var mIvProfile: ImageView
-    private lateinit var mBtRegister: Button
-    private var gender = KEY_MALE
+    private lateinit var mGender: String
     private var mBitMap: Bitmap? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+
+        mPlayer = MainActivity.sPlayer
 
         init()
 
         return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_player, R.string.register)
+            .dialogFragment(v, R.drawable.ic_profile, R.string.change_profile)
     }
 
     private fun init() {
-        mEtUsername = v.findViewById(R.id.mEtUsername) as EditText
-        mEtPassword = v.findViewById(R.id.mEtPassword) as EditText
-        mEtRePassword = v.findViewById(R.id.mEtRePassword) as EditText
+        mGender = mPlayer.gender!!
+
         mEtName = v.findViewById(R.id.mEtName) as EditText
         mRbMale = v.findViewById(R.id.mRbMale) as RadioButton
         mRbFemale = v.findViewById(R.id.mRbFemale) as RadioButton
         mIvProfile = v.findViewById(R.id.mIvProfile) as ImageView
-        mBtRegister = v.findViewById(R.id.mBtSave) as Button
+        val btChangeProfile = v.findViewById(R.id.mBtSave) as Button
+
+        mEtName.setText(mPlayer.name!!)
+        if (mPlayer.gender == KEY_MALE) mRbMale.isChecked = true else mRbFemale.isChecked = true
+        setImageProfile(mIvProfile, mPlayer.image!!, mPlayer.gender!!)
 
         mRbMale.setOnClickListener {
-            gender = KEY_MALE
-            if (mBitMap == null) mIvProfile.setImageResource(R.drawable.ic_player)
+            mGender = KEY_MALE
+            if (mPlayer.image == KEY_EMPTY && mBitMap == null)
+                mIvProfile.setImageResource(R.drawable.ic_player)
 
             GameActivity.sContext.playSoundClick()
         }
         mRbFemale.setOnClickListener {
-            gender = KEY_FEMALE
-            if (mBitMap == null) mIvProfile.setImageResource(R.drawable.ic_player_female)
+            mGender = KEY_FEMALE
+            if (mPlayer.image == KEY_EMPTY && mBitMap == null)
+                mIvProfile.setImageResource(R.drawable.ic_player_female)
 
             GameActivity.sContext.playSoundClick()
         }
@@ -75,8 +76,8 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>({ R.layout.dia
             GameActivity.sContext.playSoundClick()
         }
 
-        mBtRegister.setOnClickListener {
-            register()
+        btChangeProfile.setOnClickListener {
+            changeProfile()
             GameActivity.sContext.playSoundClick()
         }
     }
@@ -103,32 +104,17 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>({ R.layout.dia
         }
     }
 
-    private fun register() {
-        when {
-            mEtUsername.isEmpty(getString(R.string.error_username)) -> return
-            mEtPassword.isEmpty(getString(R.string.error_password)) -> return
-            mEtRePassword.isEmpty(getString(R.string.error_re_password)) -> return
-            mEtName.isEmpty(getString(R.string.error_name)) -> return
-            mEtUsername.isLength(4, getString(R.string.error_username_less)) -> return
-            mEtPassword.isLength(4, getString(R.string.error_password_less)) -> return
-            mEtPassword.isMatching(
-                mEtRePassword,
-                getString(R.string.error_password_not_match)
-            ) -> return
-        }
+    private fun changeProfile() {
+        if (mEtName.isEmpty(getString(R.string.error_password))) return
 
-        val username = mEtUsername.getContent()
-        val password = mEtPassword.getContent()
         val name = mEtName.getContent()
         val image = if (mBitMap == null) KEY_EMPTY else mBitMap!!.imageToString()
-        viewModel.register(username, password, name, image, gender)
-            .observe(this, Observer {
-                if (it.result == KEY_FAILED) {
-                    GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
-                } else {
-                    activity!!.loginSuccess(MainActivity::class.java, it.result!!, username)
-                }
-            })
-    }
 
+        viewModel.updateProfile(mPlayer.playerId, name, image, mGender).observe(this, Observer {
+            if (it.result == KEY_COMPLETED) {
+                dialog!!.dismiss()
+                GameActivity.sContext.toast(R.string.successfully)
+            }
+        })
+    }
 }
