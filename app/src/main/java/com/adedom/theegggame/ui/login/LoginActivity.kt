@@ -46,8 +46,6 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
     }
 
     private fun login() {
-        // TODO: 20/05/2562 login one user only
-
         when {
             mEtUsername.isEmpty(getString(R.string.error_username)) -> return
             mEtPassword.isEmpty(getString(R.string.error_password)) -> return
