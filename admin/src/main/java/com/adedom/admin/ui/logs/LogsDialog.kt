@@ -44,28 +44,28 @@ class LogsDialog : BaseDialogFragment({ R.layout.dialog_logs }) {
         tvTimeEnd.text = LogsActivityViewModel.timeEnd
 
         ivDateBegin.setOnClickListener {
-            context!!.dialogDatePicker { year, month, dayOfMonth ->
+            activity!!.dialogDatePicker { year, month, dayOfMonth ->
                 dBegin = "$year-$month-$dayOfMonth"
                 tvDateBegin.text = dBegin
             }
         }
 
         ivTimeBegin.setOnClickListener {
-            context!!.dialogTimePicker { hourOfDay, minute ->
+            activity!!.dialogTimePicker { hourOfDay, minute ->
                 tBegin = "$hourOfDay:$minute"
                 tvTimeBegin.text = tBegin
             }
         }
 
         ivDateEnd.setOnClickListener {
-            context!!.dialogDatePicker { year, month, dayOfMonth ->
+            activity!!.dialogDatePicker { year, month, dayOfMonth ->
                 dEnd = "$year-$month-$dayOfMonth"
                 tvDateEnd.text = dEnd
             }
         }
 
         ivTimeEnd.setOnClickListener {
-            context!!.dialogTimePicker { hourOfDay, minute ->
+            activity!!.dialogTimePicker { hourOfDay, minute ->
                 tEnd = "$hourOfDay:$minute"
                 tvTimeEnd.text = tEnd
             }
