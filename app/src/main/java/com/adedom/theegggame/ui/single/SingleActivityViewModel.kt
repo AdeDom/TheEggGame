@@ -4,11 +4,11 @@ import android.location.Location
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
 import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.GoogleMapActivity.Companion.sLatLng
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
 class SingleActivityViewModel : BaseViewModel() {
@@ -27,32 +27,12 @@ class SingleActivityViewModel : BaseViewModel() {
         longitude: Double
     ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
-    fun titleItem(itemId: Int): String {
-        return when (itemId) {
-            1 -> "Experience point"
-            2 -> "Mystery Box"
-            3 -> "Mystery Item"
-            4 -> "Bonus"
-            else -> KEY_EMPTY
-        }
-    }
-
-    fun detailItem(itemId: Int, values: Int): String {
-        return when (itemId) {
-            1 -> "Experience point : $values"
-            2 -> "Egg I : $values" // egg false
-            3 -> "Egg II : $values" // radius
-            4 -> "Egg III : $values" // stun
-            else -> KEY_EMPTY
-        }
-    }
-
-    fun checkRadius(latLng: LatLng, insertItem: (Int) -> Unit) {
+    fun checkRadius( insertItem: (Int) -> Unit) {
         single.forEachIndexed { index, item ->
             val distance = FloatArray(1)
             Location.distanceBetween(
-                latLng.latitude,
-                latLng.longitude,
+                sLatLng.latitude,
+                sLatLng.longitude,
                 item.latitude,
                 item.longitude,
                 distance
@@ -76,14 +56,24 @@ class SingleActivityViewModel : BaseViewModel() {
         }
     }
 
-    fun rndMultiItem(latLng: LatLng) {
+    fun rndMultiItem() {
         if (single.size < MIN_ITEM) {
             val numItem = (MIN_ITEM..MAX_ITEM).random()
             for (i in 0 until numItem) {
-                val (lat, lng) = rndLatLng(latLng)
+                val (lat, lng) = rndLatLng(sLatLng)
                 val item = Single((1..3).random(), lat, lng)
                 single.add(item)
             }
+        }
+    }
+
+    fun itemMessages(itemId: Int, values: Int): String {
+        return when (itemId) {
+            1 -> "Experience point : $values"
+            2 -> "Egg I : $values" // egg false
+            3 -> "Egg II : $values" // radius
+            4 -> "Egg III : $values" // stun
+            else -> KEY_EMPTY
         }
     }
 
@@ -118,11 +108,11 @@ class SingleActivityViewModel : BaseViewModel() {
         return Pair(myItem, values)
     }
 
-    fun rndItemBonus(latLng: LatLng) {
+    fun rndItemBonus() {
         if (itemBonus % 3 == 0 && itemBonus != 0) {
             itemBonus = 0
             for (i in 1..MAX_ITEM) {
-                val (lat, lng) = rndLatLng(latLng)
+                val (lat, lng) = rndLatLng(sLatLng)
                 val item = Single(4, lat, lng)
                 single.add(item)
             }

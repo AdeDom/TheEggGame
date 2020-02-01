@@ -46,16 +46,12 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu_map, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.action_sound_music) {
-            sContext.setSoundMusic()
-            return true
-        }
+        if (item!!.itemId == R.id.action_sound_music) sContext.setSoundMusic()
         return super.onOptionsItemSelected(item)
     }
 
@@ -65,22 +61,19 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         viewModel.itemBonus = 0
 
         mFloatingActionButton.setOnClickListener {
-            sContext.completed()
-
             //todo backpack item
         }
     }
 
     override fun onActivityRunning() {
-        viewModel.checkItem { single, markerItems ->
-            Item(sGoogleMap, single, markerItems)
-        }
 
-        viewModel.rndMultiItem(sLatLng)
+        viewModel.checkItem { single, markerItems -> Item(single, markerItems) }
 
-        viewModel.rndItemBonus(sLatLng)
+        viewModel.rndMultiItem()
 
-        viewModel.checkRadius(sLatLng) { keepItemSingle(it) }
+        viewModel.rndItemBonus()
+
+        viewModel.checkRadius { keepItemSingle(it) }
 
     }
 
@@ -89,7 +82,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         sContext.setLocality(mTvLocality, sLatLng)
 
-        Player(sContext, sGoogleMap, sLatLng)
+        Player()
 
     }
 
@@ -104,12 +97,9 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         val (myItem, values) = viewModel.getItemValues(index)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        viewModel.keepItemSingle(playerId, myItem, values, lat, lng)
-            .observe(this, Observer {
-                if (it.result == KEY_COMPLETED) {
-                    sContext.toast(viewModel.detailItem(myItem, values))
-                }
-            })
+        viewModel.keepItemSingle(playerId, myItem, values, lat, lng).observe(this, Observer {
+            if (it.result == KEY_COMPLETED) sContext.toast(viewModel.itemMessages(myItem, values))
+        })
     }
 
 }
