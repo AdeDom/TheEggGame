@@ -43,6 +43,15 @@ interface PlayerApi {
     ): Call<List<Player>>
 
     @FormUrlEncoded
+    @POST("update-profile.php")
+    fun updateProfile(
+        @Field(KEY_VALUES1) playerId: String?,
+        @Field(KEY_VALUES2) name: String,
+        @Field(KEY_VALUES3) image: String,
+        @Field(KEY_VALUES4) gender: String
+    ): Call<JsonResponse>
+
+    @FormUrlEncoded
     @POST("update-password.php")
     fun updatePassword(
         @Field(KEY_VALUES1) playerId: String,
