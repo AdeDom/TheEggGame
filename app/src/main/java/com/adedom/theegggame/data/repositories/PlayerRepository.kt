@@ -20,6 +20,9 @@ class PlayerRepository(private val api: PlayerApi) : ApiRequest() {
         gender: String
     ) = apiRequest { api.insertPlayer(username, password, name, image, gender) }
 
+    fun updateProfile(playerId: String?, name: String, image: String, gender: String) =
+        apiRequest { api.updateProfile(playerId, name, image, gender) }
+
     fun updatePassword(playerId: String, oldPassword: String, newPassword: String) =
         apiRequest { api.updatePassword(playerId, oldPassword, newPassword) }
 
