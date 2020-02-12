@@ -5,16 +5,16 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.readPrefFile
+import com.adedom.library.util.PathiphonActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.util.extension.playMusicGame
 
-abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
+abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
 
     val TAG = "GameActivity"
     lateinit var viewModel: VM
@@ -30,8 +30,6 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
         sActivity = this@GameActivity
         sContext = baseContext
 
-//        SettingPermissionAndLocation(sActivity, sContext)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -42,7 +40,6 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-//        SettingPermissionAndLocation.locationListener(sActivity, true)
 
         sContext.playMusicGame()
 
@@ -56,7 +53,6 @@ abstract class GameActivity<VM : ViewModel> : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-//        SettingPermissionAndLocation.locationListener(sActivity, false)
 
         pauseMusic()
 
