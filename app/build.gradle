@@ -35,7 +35,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Material
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
     //Location & Map
     implementation 'com.google.android.gms:play-services-location:17.0.0'
@@ -56,6 +56,6 @@ dependencies {
     //scroll
     implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
 
-    implementation 'com.github.pathiphon:Dom:0.2.9'
+    implementation 'com.github.pathiphon:Dom:0.3.2'
 
 }
