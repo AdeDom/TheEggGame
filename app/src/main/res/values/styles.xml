@@ -84,6 +84,7 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">casual</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
 
     <style name="TextViewSmall" parent="TextView">
@@ -93,6 +94,7 @@
     <style name="TextViewLarge" parent="TextView">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textColor">#7986CB</item>
     </style>
 

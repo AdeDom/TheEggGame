@@ -77,4 +77,6 @@
     <string name="lose">Lose</string>
     <string name="always">Always</string>
     <string name="bonus">Bonus</string>
+    <string name="backpack">Backpack</string>
+
 </resources>
