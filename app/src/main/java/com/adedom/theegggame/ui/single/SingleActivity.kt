@@ -75,6 +75,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         viewModel.checkRadius { keepItemSingle(it) }
 
+        viewModel.createBot { Bot() }
+
     }
 
     override fun onLocationChanged(location: Location?) {

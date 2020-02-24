@@ -6,8 +6,10 @@ import com.adedom.library.util.GoogleMapActivity.Companion.sGoogleMap
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.imageUrl
 import com.adedom.theegggame.data.models.RoomInfo
+import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.circlePlayer
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.KEY_PLAYER_ID
+import com.adedom.theegggame.util.extension.addCircleOptions
 import com.adedom.theegggame.util.getLevel
 import com.adedom.theegggame.util.setImageProfile
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -63,8 +65,8 @@ class Player(
 
             //Circle
             if (sContext.readPrefFile(KEY_PLAYER_ID) == item.playerId) {
-                myCircle?.removeCircle()
-                sGoogleMap!!.setCircle(latLng, CIRCLE_ONE_HUNDRED_METER)
+                circlePlayer?.removeCircle()
+                circlePlayer = sGoogleMap!!.addCircleOptions(latLng, CIRCLE_ONE_HUNDRED_METER)
             }
         }
     }

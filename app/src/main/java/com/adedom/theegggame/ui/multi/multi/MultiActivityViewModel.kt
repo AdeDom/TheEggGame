@@ -9,6 +9,7 @@ import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
+import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
@@ -121,6 +122,10 @@ class MultiActivityViewModel : BaseViewModel() {
             }
             else -> play.invoke(scoreTeamA, scoreTeamB, time)
         }
+    }
+
+    companion object{
+        var circlePlayer: Circle? = null
     }
 
 }

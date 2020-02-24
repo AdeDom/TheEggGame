@@ -9,6 +9,7 @@ import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
+import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.Marker
 
 class SingleActivityViewModel : BaseViewModel() {
@@ -118,6 +119,7 @@ class SingleActivityViewModel : BaseViewModel() {
                 val item = Single(4, lat, lng)
                 single.add(item)
             }
+            switchItem = GameSwitch.ON
 
             if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_MISSION_UNSUCCESSFUL) {
                 GoogleMapActivity.sContext.writePrefFile(
@@ -133,6 +135,17 @@ class SingleActivityViewModel : BaseViewModel() {
             switchItem = GameSwitch.OFF
             item.invoke(single, markerItems)
         }
+    }
+
+    fun createBot(bot: () -> Unit) {
+        val bonus = single.filter { it.itemId == 4 }
+        if (bonus.count() > 1) bot.invoke()
+    }
+
+    companion object {
+        var markerPlayer: Marker? = null
+        var markerBot: Marker? = null
+        var circlePlayer: Circle? = null
     }
 }
 
