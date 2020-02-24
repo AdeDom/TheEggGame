@@ -27,7 +27,9 @@ class SingleActivityViewModel : BaseViewModel() {
         longitude: Double
     ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
 
-    fun checkRadius( insertItem: (Int) -> Unit) {
+    fun fetchBackpack(playerId: String?) = singleRepository.fetchBackpack(playerId)
+
+    fun checkRadius(insertItem: (Int) -> Unit) {
         single.forEachIndexed { index, item ->
             val distance = FloatArray(1)
             Location.distanceBetween(

@@ -13,4 +13,6 @@ class SingleRepository(private val api: SingleApi) : ApiRequest() {
         longitude: Double
     ) = apiRequest { api.insertItemCollection(playerId, itemId, qty, latitude, longitude) }
 
+    fun fetchBackpack(playerId: String?) = apiRequest { api.fetchBackpack(playerId) }
+
 }

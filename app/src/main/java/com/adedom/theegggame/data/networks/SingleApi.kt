@@ -4,6 +4,7 @@ import com.adedom.library.data.JsonResponse
 import com.adedom.library.data.RetrofitClient
 import com.adedom.library.util.*
 import com.adedom.theegggame.data.BASE_URL
+import com.adedom.theegggame.data.models.Backpack
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -20,6 +21,12 @@ interface SingleApi {
         @Field(KEY_VALUES4) latitude: Double,
         @Field(KEY_VALUES5) longitude: Double
     ): Call<JsonResponse>
+
+    @FormUrlEncoded
+    @POST("get-backpack.php")
+    fun fetchBackpack(
+        @Field(KEY_VALUES1) playerId: String?
+    ): Call<Backpack>
 
     companion object {
         operator fun invoke(): SingleApi {

@@ -61,7 +61,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         viewModel.itemBonus = 0
 
         mFloatingActionButton.setOnClickListener {
-            //todo backpack item
+            BackpackDialog().show(supportFragmentManager, null)
         }
     }
 
