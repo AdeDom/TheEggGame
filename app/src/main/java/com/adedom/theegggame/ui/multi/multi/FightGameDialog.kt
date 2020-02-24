@@ -1,18 +1,18 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import android.app.Dialog
-import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import com.adedom.library.extension.dialogFragment
+import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 
-class FightGameDialog : DialogFragment() {
+class FightGameDialog : BaseDialogFragment<MultiActivityViewModel>(
+    { R.layout.dialog_fight_game },
+    { R.drawable.ic_fight_red },
+    { R.string.fight_game }
+) {
 
     private lateinit var mTvScore: TextView
     private lateinit var mBtnOne: Button
@@ -27,19 +27,8 @@ class FightGameDialog : DialogFragment() {
     private lateinit var mBtnGiveUp: Button
     private val mHandlerRndButton = Handler()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
-        val view = activity!!.layoutInflater.inflate(R.layout.dialog_fight_game, null)
-
-        init(view)
-        mRunnableRndButton.run()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(view, R.drawable.ic_fight_red, R.string.fight_game)
-    }
-
-    private fun init(view: View) {
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         mTvScore = view.findViewById(R.id.mTvScore) as TextView
         mBtnOne = view.findViewById(R.id.mBtOne) as Button
         mBtnTwo = view.findViewById(R.id.mBtTwo) as Button
@@ -65,6 +54,8 @@ class FightGameDialog : DialogFragment() {
             mHandlerRndButton.removeCallbacks(mRunnableRndButton)
             dialog!!.dismiss()
         }
+
+        mRunnableRndButton.run()
     }
 
     private fun setScore(view: View) {

@@ -1,37 +1,30 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import android.app.Dialog
-import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import com.adedom.library.extension.dialogFragment
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.*
 
-class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>({ R.layout.dialog_end_game }) {
+class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
+    { R.layout.dialog_end_game },
+    { R.drawable.the_egg_game },
+    { R.string.end_game }
+) {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.the_egg_game, R.string.end_game)
-    }
-
-    private fun init() {
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         val team = arguments!!.getString(TEAM)!!
         val (teamA, teamB) = arguments!!.getParcelable<Score>(SCORE) as Score
 
-        val tvTeamA = v.findViewById(R.id.tvTeamA) as TextView
-        val tvTeamB = v.findViewById(R.id.tvTeamB) as TextView
-        val tvScoreA = v.findViewById(R.id.tvScoreA) as TextView
-        val tvScoreB = v.findViewById(R.id.tvScoreB) as TextView
-        val btEndGame = v.findViewById(R.id.btEndGame) as Button
+        val tvTeamA = view.findViewById(R.id.tvTeamA) as TextView
+        val tvTeamB = view.findViewById(R.id.tvTeamB) as TextView
+        val tvScoreA = view.findViewById(R.id.tvScoreA) as TextView
+        val tvScoreB = view.findViewById(R.id.tvScoreB) as TextView
+        val btEndGame = view.findViewById(R.id.btEndGame) as Button
 
         tvScoreA.text = teamA.toString()
         tvScoreB.text = teamB.toString()
@@ -62,7 +55,6 @@ class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>({ R.layout.d
                 BonusGameDialog().show(activity!!.supportFragmentManager, null)
             }
         } else btEndGame.setOnClickListener { GameActivity.sActivity.finish() }
-
     }
 
 }

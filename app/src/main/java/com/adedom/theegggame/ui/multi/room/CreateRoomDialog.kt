@@ -1,14 +1,11 @@
 package com.adedom.theegggame.ui.multi.room
 
-import android.app.Dialog
 import android.content.Intent
-import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.isEmpty
@@ -23,28 +20,23 @@ import com.adedom.theegggame.util.KEY_FAILED
 import com.adedom.theegggame.util.ROOM
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
-class CreateRoomDialog :
-    BaseDialogFragment<RoomActivityViewModel>({ R.layout.dialog_create_room }) {
+class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
+    { R.layout.dialog_create_room },
+    { R.drawable.ic_add_black },
+    { R.string.create_room }
+) {
 
     private lateinit var mEtName: EditText
     private lateinit var mNumberPicker: ScrollableNumberPicker
     private lateinit var mBtnCreateRoom: Button
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
 
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_add_black, R.string.create_room)
-    }
-
-    private fun init() {
-        mEtName = v.findViewById(R.id.mEtName) as EditText
-        mNumberPicker = v.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
-        mBtnCreateRoom = v.findViewById(R.id.mBtCreateRoom) as Button
+        mEtName = view.findViewById(R.id.mEtName) as EditText
+        mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
+        mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
 
         mEtName.setText(MainActivity.sPlayer.name)
 
