@@ -1,13 +1,11 @@
 package com.adedom.theegggame.ui.login
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
@@ -23,7 +21,11 @@ import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>({ R.layout.dialog_register }) {
+class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
+    { R.layout.dialog_register },
+    { R.drawable.ic_player },
+    { R.string.register }
+) {
 
     private lateinit var mEtUsername: EditText
     private lateinit var mEtPassword: EditText
@@ -36,26 +38,18 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>({ R.layout.dia
     private var gender = KEY_MALE
     private var mBitMap: Bitmap? = null
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
 
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_player, R.string.register)
-    }
-
-    private fun init() {
-        mEtUsername = v.findViewById(R.id.mEtUsername) as EditText
-        mEtPassword = v.findViewById(R.id.mEtPassword) as EditText
-        mEtRePassword = v.findViewById(R.id.mEtRePassword) as EditText
-        mEtName = v.findViewById(R.id.mEtName) as EditText
-        mRbMale = v.findViewById(R.id.mRbMale) as RadioButton
-        mRbFemale = v.findViewById(R.id.mRbFemale) as RadioButton
-        mIvProfile = v.findViewById(R.id.mIvProfile) as ImageView
-        mBtRegister = v.findViewById(R.id.mBtSave) as Button
+        mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
+        mEtPassword = view.findViewById(R.id.mEtPassword) as EditText
+        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
+        mEtName = view.findViewById(R.id.mEtName) as EditText
+        mRbMale = view.findViewById(R.id.mRbMale) as RadioButton
+        mRbFemale = view.findViewById(R.id.mRbFemale) as RadioButton
+        mIvProfile = view.findViewById(R.id.mIvProfile) as ImageView
+        mBtRegister = view.findViewById(R.id.mBtSave) as Button
 
         mRbMale.setOnClickListener {
             gender = KEY_MALE

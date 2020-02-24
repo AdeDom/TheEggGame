@@ -1,13 +1,11 @@
 package com.adedom.theegggame.ui.main
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
@@ -19,8 +17,11 @@ import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
-class ChangeProfileDialog :
-    BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_profile }) {
+class ChangeProfileDialog : BaseDialogFragment<MainActivityViewModel>(
+    { R.layout.dialog_change_profile },
+    { R.drawable.ic_profile },
+    { R.string.change_profile }
+) {
 
     private lateinit var mPlayer: Player
     private lateinit var mEtName: EditText
@@ -30,27 +31,19 @@ class ChangeProfileDialog :
     private lateinit var mGender: String
     private var mBitMap: Bitmap? = null
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         mPlayer = MainActivity.sPlayer
 
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_profile, R.string.change_profile)
-    }
-
-    private fun init() {
         mGender = mPlayer.gender!!
 
-        mEtName = v.findViewById(R.id.mEtName) as EditText
-        mRbMale = v.findViewById(R.id.mRbMale) as RadioButton
-        mRbFemale = v.findViewById(R.id.mRbFemale) as RadioButton
-        mIvProfile = v.findViewById(R.id.mIvProfile) as ImageView
-        val btChangeProfile = v.findViewById(R.id.mBtSave) as Button
+        mEtName = view.findViewById(R.id.mEtName) as EditText
+        mRbMale = view.findViewById(R.id.mRbMale) as RadioButton
+        mRbFemale = view.findViewById(R.id.mRbFemale) as RadioButton
+        mIvProfile = view.findViewById(R.id.mIvProfile) as ImageView
+        val btChangeProfile = view.findViewById(R.id.mBtSave) as Button
 
         mEtName.setText(mPlayer.name!!)
         if (mPlayer.gender == KEY_MALE) mRbMale.isChecked = true else mRbFemale.isChecked = true

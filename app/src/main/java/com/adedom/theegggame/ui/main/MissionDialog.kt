@@ -1,14 +1,10 @@
 package com.adedom.theegggame.ui.main
 
-import android.app.Dialog
-import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.toast
 import com.adedom.library.extension.writePrefFile
@@ -16,26 +12,22 @@ import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.*
 
-class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_mission }) {
+class MissionDialog : BaseDialogFragment<MainActivityViewModel>(
+    { R.layout.dialog_mission },
+    { R.drawable.ic_mission },
+    { R.string.mission }
+) {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_mission, R.string.mission)
-    }
-
-    private fun init() {
-        val tvMissionDelivery = v.findViewById(R.id.tvMissionDelivery) as TextView
-        val tvMissionSingle = v.findViewById(R.id.tvMissionSingle) as TextView
-        val tvMissionMulti = v.findViewById(R.id.tvMissionMulti) as TextView
-        val ivCorrectDelivery = v.findViewById(R.id.ivCorrectDelivery) as ImageView
-        val ivCorrectSingle = v.findViewById(R.id.ivCorrectSingle) as ImageView
-        val ivCorrectMulti = v.findViewById(R.id.ivCorrectMulti) as ImageView
+        val tvMissionDelivery = view.findViewById(R.id.tvMissionDelivery) as TextView
+        val tvMissionSingle = view.findViewById(R.id.tvMissionSingle) as TextView
+        val tvMissionMulti = view.findViewById(R.id.tvMissionMulti) as TextView
+        val ivCorrectDelivery = view.findViewById(R.id.ivCorrectDelivery) as ImageView
+        val ivCorrectSingle = view.findViewById(R.id.ivCorrectSingle) as ImageView
+        val ivCorrectMulti = view.findViewById(R.id.ivCorrectMulti) as ImageView
 
         if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == KEY_MISSION_SUCCESSFUL) {
             ivCorrectDelivery.visibility = View.VISIBLE
@@ -78,7 +70,6 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialo
                 tvMissionMulti.isClickable = false
             }
         }
-
     }
 
     private fun missionComplete(messages: Int) {

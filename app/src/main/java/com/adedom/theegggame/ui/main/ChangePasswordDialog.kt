@@ -1,10 +1,8 @@
 package com.adedom.theegggame.ui.main
 
-import android.app.Dialog
-import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.library.extension.*
@@ -15,34 +13,29 @@ import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_COMPLETED
 import com.adedom.theegggame.util.extension.playSoundClick
 
-class ChangePasswordDialog :
-    BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_change_password }) {
+class ChangePasswordDialog : BaseDialogFragment<MainActivityViewModel>(
+    { R.layout.dialog_change_password },
+    { R.drawable.ic_password },
+    { R.string.change_password }
+) {
 
     private lateinit var mPlayer: Player
     private lateinit var mEtOldPassword: EditText
     private lateinit var mEtNewPassword: EditText
     private lateinit var mEtRePassword: EditText
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
+    override fun initDialog(view: View) {
+        super.initDialog(view)
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         mPlayer = MainActivity.sPlayer
 
-        init()
+        mEtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
+        mEtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText
+        mEtRePassword = view.findViewById(R.id.mEtRePassword) as EditText
 
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_password, R.string.change_password)
-    }
-
-    private fun init() {
-        mEtOldPassword = v.findViewById(R.id.mEtOldPassword) as EditText
-        mEtNewPassword = v.findViewById(R.id.mEtNewPassword) as EditText
-        mEtRePassword = v.findViewById(R.id.mEtRePassword) as EditText
-
-        val etUsername = v.findViewById(R.id.mEtUsername) as EditText
-        val btChangePassword = v.findViewById(R.id.mBtSave) as Button
+        val etUsername = view.findViewById(R.id.mEtUsername) as EditText
+        val btChangePassword = view.findViewById(R.id.mBtSave) as Button
 
         etUsername.setText(mPlayer.username)
         btChangePassword.setOnClickListener {

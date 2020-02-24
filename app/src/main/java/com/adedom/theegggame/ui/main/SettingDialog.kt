@@ -1,11 +1,9 @@
 package com.adedom.theegggame.ui.main
 
-import android.app.Dialog
-import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
-import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.dialogNegative
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.util.BaseDialogFragment
@@ -19,24 +17,20 @@ import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.adedom.theegggame.util.extension.setSoundMusic
 
-class SettingDialog : BaseDialogFragment<MainActivityViewModel>({ R.layout.dialog_setting }) {
+class SettingDialog : BaseDialogFragment<MainActivityViewModel>(
+    { R.layout.dialog_setting },
+    {R.drawable.ic_setting},
+    {R.string.setting}
+) {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-
-        init()
-
-        return AlertDialog.Builder(activity!!)
-            .dialogFragment(v, R.drawable.ic_setting, R.string.setting)
-    }
-
-    private fun init() {
-        val btChangeProfile = v.findViewById(R.id.mBtChangeProfile) as Button
-        val btChangePassword = v.findViewById(R.id.mBtChangePassword) as Button
-        val ivSoundMusic = v.findViewById(R.id.mIvSoundMusic) as ImageView
-        val btSoundMusic = v.findViewById(R.id.mBtSoundMusic) as Button
-        val btLogout = v.findViewById(R.id.mBtLogout) as Button
-        val btExit = v.findViewById(R.id.mBtExit) as Button
+    override fun initDialog(view: View) {
+        super.initDialog(view)
+        val btChangeProfile = view.findViewById(R.id.mBtChangeProfile) as Button
+        val btChangePassword = view.findViewById(R.id.mBtChangePassword) as Button
+        val ivSoundMusic = view.findViewById(R.id.mIvSoundMusic) as ImageView
+        val btSoundMusic = view.findViewById(R.id.mBtSoundMusic) as Button
+        val btLogout = view.findViewById(R.id.mBtLogout) as Button
+        val btExit = view.findViewById(R.id.mBtExit) as Button
 
         if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_OFF)
             ivSoundMusic.setImageResource(R.drawable.ic_sound_music_off)
