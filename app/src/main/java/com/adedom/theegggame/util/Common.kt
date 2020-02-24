@@ -54,8 +54,8 @@ const val NUMBER_OF_ITEM = 5
 const val MIN_ITEM = 5
 const val MAX_ITEM = 10
 const val TIME_FIVE_MINUTE = 300
-//const val TIME_FIFTEEN_MINUTE = 900
-const val TIME_FIFTEEN_MINUTE = 60
+const val TIME_FIFTEEN_MINUTE = 900
+//const val TIME_FIFTEEN_MINUTE = 60
 
 const val ITEM_EGG_NORMAL = 1
 

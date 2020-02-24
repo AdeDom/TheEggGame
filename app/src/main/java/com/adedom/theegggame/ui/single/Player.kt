@@ -1,8 +1,6 @@
 package com.adedom.theegggame.ui.single
 
-import com.adedom.library.extension.loadBitmap
-import com.adedom.library.extension.removeCircle
-import com.adedom.library.extension.removeMarker
+import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity.Companion.sContext
 import com.adedom.library.util.GoogleMapActivity.Companion.sGoogleMap
 import com.adedom.library.util.GoogleMapActivity.Companion.sLatLng
@@ -12,8 +10,6 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.single.SingleActivityViewModel.Companion.circlePlayer
 import com.adedom.theegggame.ui.single.SingleActivityViewModel.Companion.markerPlayer
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
-import com.adedom.theegggame.util.extension.addCircleOptions
-import com.adedom.theegggame.util.extension.addMarkerOptions
 import com.adedom.theegggame.util.getLevel
 import com.adedom.theegggame.util.setImageProfile
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
