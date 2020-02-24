@@ -24,7 +24,7 @@ class MultiActivityViewModel : BaseViewModel() {
     var scoreTeamB: Int = 0
 
     lateinit var room: Room
-    var team: String = ""
+    lateinit var team: String
 
     fun setLatlng(playerId: String, latitude: Double, longitude: Double) =
         multiRepository.setLatlng(room.room_no!!, playerId, latitude, longitude)

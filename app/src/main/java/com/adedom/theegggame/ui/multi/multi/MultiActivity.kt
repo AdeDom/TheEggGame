@@ -9,10 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.adedom.library.extension.failed
-import com.adedom.library.extension.setMarkerConstant
-import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
+import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
@@ -27,7 +24,7 @@ import com.adedom.theegggame.util.extension.setSoundMusic
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_map.*
 
-class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05/2562 toast name
+class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     private lateinit var viewModel: MultiActivityViewModel
 
@@ -59,16 +56,12 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu_map, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.action_sound_music) {
-            sContext.setSoundMusic()
-            return true
-        }
+        if (item!!.itemId == R.id.action_sound_music) sContext.setSoundMusic()
         return super.onOptionsItemSelected(item)
     }
 
@@ -112,7 +105,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-//        sContext.setLocality(mTvLocality, sLatLng)
+        sContext.setLocality(mTvLocality, sLatLng)
 
         setLatlng()
 
@@ -143,7 +136,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         viewModel.getRoomInfo().observe(this, Observer {
             if (it != viewModel.roomInfoItems) {
                 viewModel.roomInfoItems = it as ArrayList<RoomInfo>
-                Player(sContext, sGoogleMap, viewModel.roomInfoItems, viewModel.markerPlayers)
+                Player(viewModel.roomInfoItems, viewModel.markerPlayers)
             }
         })
     }
@@ -182,10 +175,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
         })
     }
 
-    //region fightGame
 //    private fun fightGame() {
-//        //todo check fighting game
-//
 //        for (i in mRoomInfo.indices) {
 //            if (mRoomInfo[i].playerId != playerId
 //                && mRoomInfo[i].latitude != Commons.LATLNG_ZERO
@@ -218,5 +208,5 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) { // TODO: 25/05
 //            }
 //        }
 //    }
-    //endregion
+
 }
