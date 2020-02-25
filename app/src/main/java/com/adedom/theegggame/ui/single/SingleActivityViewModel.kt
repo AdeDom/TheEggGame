@@ -1,15 +1,16 @@
 package com.adedom.theegggame.ui.single
 
-import android.location.Location
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
-import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.GoogleMapActivity.Companion.sContext
 import com.adedom.library.util.GoogleMapActivity.Companion.sLatLng
 import com.adedom.library.util.KEY_EMPTY
+import com.adedom.library.util.distanceBetween
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
 import com.google.android.gms.maps.model.Circle
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
 class SingleActivityViewModel : BaseViewModel() {
@@ -17,8 +18,8 @@ class SingleActivityViewModel : BaseViewModel() {
     private val single by lazy { arrayListOf<Single>() }
     private val markerItems by lazy { arrayListOf<Marker>() }
     var switchItem = GameSwitch.ON
-
     var itemBonus: Int = 0
+    lateinit var latLngBot: LatLng
 
     fun keepItemSingle(
         playerId: String?,
@@ -32,26 +33,24 @@ class SingleActivityViewModel : BaseViewModel() {
 
     fun checkRadius(insertItem: (Int) -> Unit) {
         single.forEachIndexed { index, item ->
-            val distance = FloatArray(1)
-            Location.distanceBetween(
+            val distance = distanceBetween(
                 sLatLng.latitude,
                 sLatLng.longitude,
                 item.latitude,
-                item.longitude,
-                distance
+                item.longitude
             )
 
-            if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
+            if (distance < RADIUS_ONE_HUNDRED_METER) {
                 insertItem.invoke(index)
                 if (item.itemId == ITEM_EGG_NORMAL) itemBonus++ // Bonus
                 markerItems[index].remove()
                 single.removeAt(index)
                 switchItem = GameSwitch.ON
-                GoogleMapActivity.sContext.playSoundKeep() // sound
+                sContext.playSoundKeep() // sound
                 return
             }
 
-            if (distance[0] > RADIUS_TWO_KILOMETER) {
+            if (distance > RADIUS_TWO_KILOMETER) {
                 switchItem = GameSwitch.ON
                 single.removeAt(index)
                 return
@@ -119,10 +118,12 @@ class SingleActivityViewModel : BaseViewModel() {
                 val item = Single(4, lat, lng)
                 single.add(item)
             }
+            val (lat, lng) = rndLatLng(sLatLng)
+            latLngBot = LatLng(lat, lng)
             switchItem = GameSwitch.ON
 
-            if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_MISSION_UNSUCCESSFUL) {
-                GoogleMapActivity.sContext.writePrefFile(
+            if (sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_MISSION_UNSUCCESSFUL) {
+                sContext.writePrefFile(
                     KEY_MISSION_SINGLE_GAME,
                     KEY_MISSION_SUCCESSFUL
                 )
@@ -137,9 +138,64 @@ class SingleActivityViewModel : BaseViewModel() {
         }
     }
 
-    fun createBot(bot: () -> Unit) {
+    fun bot(bot: (LatLng) -> Unit) {
         val bonus = single.filter { it.itemId == 4 }
-        if (bonus.count() > 1) bot.invoke()
+        if (bonus.count() == 0) return
+
+        var botLat = latLngBot.latitude
+        var botLng = latLngBot.longitude
+
+        val alf = ArrayList<Float>()
+        single.forEach { alf.add(distanceBetween(botLat, botLng, it.latitude, it.longitude)) }
+        val nearIndex = alf.indexOf(alf.min())
+
+        val nearLat = single[nearIndex].latitude
+        val nearLng = single[nearIndex].longitude
+
+        alf.clear()
+        val d1 =
+            distanceBetween(nearLat, nearLng, botLat + KEY_DISTANCE_BOT, botLng + KEY_DISTANCE_BOT)
+        val d2 =
+            distanceBetween(nearLat, nearLng, botLat + KEY_DISTANCE_BOT, botLng - KEY_DISTANCE_BOT)
+        val d3 =
+            distanceBetween(nearLat, nearLng, botLat - KEY_DISTANCE_BOT, botLng + KEY_DISTANCE_BOT)
+        val d4 =
+            distanceBetween(nearLat, nearLng, botLat - KEY_DISTANCE_BOT, botLng - KEY_DISTANCE_BOT)
+        alf.add(d1)
+        alf.add(d2)
+        alf.add(d3)
+        alf.add(d4)
+
+        when (alf.indexOf(alf.min())) {
+            0 -> {
+                botLat += KEY_DISTANCE_BOT
+                botLng += KEY_DISTANCE_BOT
+            }
+            1 -> {
+                botLat += KEY_DISTANCE_BOT
+                botLng -= KEY_DISTANCE_BOT
+            }
+            2 -> {
+                botLat -= KEY_DISTANCE_BOT
+                botLng += KEY_DISTANCE_BOT
+            }
+            3 -> {
+                botLat -= KEY_DISTANCE_BOT
+                botLng -= KEY_DISTANCE_BOT
+            }
+        }
+        botLat = String.format("%.7f", botLat).toDouble()
+        botLng = String.format("%.7f", botLng).toDouble()
+        latLngBot = LatLng(botLat, botLng)
+
+        bot.invoke(latLngBot)
+
+        val destroyed = distanceBetween(nearLat, nearLng, botLat, botLng)
+        if (destroyed < RADIUS_ONE_HUNDRED_METER) {
+            single.removeAt(nearIndex)
+            switchItem = GameSwitch.ON
+        }
+
     }
 
     companion object {
@@ -147,5 +203,5 @@ class SingleActivityViewModel : BaseViewModel() {
         var markerBot: Marker? = null
         var circlePlayer: Circle? = null
     }
-}
 
+}

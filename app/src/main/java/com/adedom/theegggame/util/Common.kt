@@ -42,6 +42,7 @@ const val THE_EGG_GAME = "The Egg Game"
 const val SOUND_MUSIC_ON = "sound_music_on"
 const val SOUND_MUSIC_OFF = "sound_music_off"
 const val SOUND_MUSIC = "sound_music"
+const val KEY_BOT = "Bot"
 
 const val KEY_REQUEST_CODE = 3006
 
@@ -56,6 +57,9 @@ const val MAX_ITEM = 10
 const val TIME_FIVE_MINUTE = 300
 const val TIME_FIFTEEN_MINUTE = 900
 //const val TIME_FIFTEEN_MINUTE = 60
+
+//const val KEY_DISTANCE_BOT = 0.00001
+const val KEY_DISTANCE_BOT = 0.0005
 
 const val ITEM_EGG_NORMAL = 1
 
