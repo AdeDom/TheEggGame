@@ -79,7 +79,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     }
 
-    override fun onLocationChanged(location: Location) {
+    override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
         sContext.setLocality(mTvLocality, sLatLng)
@@ -88,7 +88,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
+    override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
         sGoogleMap!!.setMarkerConstant(druBkk, druIcon, DRU_TITLE, DRU_SNIPPET)
         sGoogleMap!!.setMarkerConstant(druSp, druIcon, DRU_TITLE, DRU_SNIPPET)
