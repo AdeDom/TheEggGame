@@ -1,9 +1,10 @@
 package com.adedom.theegggame.ui.multi.multi
 
-import android.location.Location
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.writePrefFile
-import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.GoogleMapActivity.Companion.sContext
+import com.adedom.library.util.GoogleMapActivity.Companion.sLatLng
+import com.adedom.library.util.distanceBetween
 import com.adedom.theegggame.data.models.Multi
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.RoomInfo
@@ -50,13 +51,12 @@ class MultiActivityViewModel : BaseViewModel() {
     fun getScore() = multiRepository.getMultiScore(room.room_no!!)
 
     private fun distanceOver(latLng1: LatLng, latLng2: LatLng, distance: Float, over: () -> Unit) {
-        val d = FloatArray(1)
-        Location.distanceBetween(
+        val d = distanceBetween(
             latLng1.latitude, latLng1.longitude,
-            latLng2.latitude, latLng2.longitude, d
+            latLng2.latitude, latLng2.longitude
         )
 
-        if (d[0] > distance) over.invoke()
+        if (d > distance) over.invoke()
     }
 
     fun rndMultiItem(rnd: () -> Unit) {
@@ -70,7 +70,7 @@ class MultiActivityViewModel : BaseViewModel() {
 
                 multiItems.forEach {
                     distanceOver(
-                        GoogleMapActivity.sLatLng,
+                        sLatLng,
                         LatLng(it.latitude, it.longitude),
                         RADIUS_THREE_KILOMETER
                     ) {
@@ -82,8 +82,8 @@ class MultiActivityViewModel : BaseViewModel() {
     }
 
     private fun mission() {
-        if (GoogleMapActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_MISSION_UNSUCCESSFUL) {
-            GoogleMapActivity.sContext.writePrefFile(
+        if (sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_MISSION_UNSUCCESSFUL) {
+            sContext.writePrefFile(
                 KEY_MISSION_MULTI_GAME,
                 KEY_MISSION_SUCCESSFUL
             )
@@ -92,16 +92,15 @@ class MultiActivityViewModel : BaseViewModel() {
 
     fun checkRadius(keepItem: (String, ArrayList<Multi>, ArrayList<Marker>) -> Unit) {
         multiItems.forEachIndexed { index, multi ->
-            val distance = FloatArray(1)
-            Location.distanceBetween(
-                GoogleMapActivity.sLatLng.latitude, GoogleMapActivity.sLatLng.longitude,
-                multi.latitude, multi.longitude, distance
+            val distance = distanceBetween(
+                sLatLng.latitude, sLatLng.longitude,
+                multi.latitude, multi.longitude
             )
 
-            if (distance[0] < RADIUS_ONE_HUNDRED_METER) {
+            if (distance < RADIUS_ONE_HUNDRED_METER) {
                 multiItems.removeAt(index)
                 keepItem.invoke(multi.multi_id, multiItems, markerItems)
-                GoogleMapActivity.sContext.playSoundKeep() // sound
+                sContext.playSoundKeep() // sound
                 return
             }
         }
@@ -124,7 +123,7 @@ class MultiActivityViewModel : BaseViewModel() {
         }
     }
 
-    companion object{
+    companion object {
         var circlePlayer: Circle? = null
     }
 
