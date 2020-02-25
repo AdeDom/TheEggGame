@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import com.adedom.library.extension.removeMarkers
 import com.adedom.library.extension.resourceBitmap
 import com.adedom.library.extension.setMarkers
-import com.adedom.library.util.GoogleMapActivity
+import com.adedom.library.util.GoogleMapActivity.Companion.sContext
 import com.adedom.library.util.GoogleMapActivity.Companion.sGoogleMap
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
@@ -30,11 +30,11 @@ class Item(singles: ArrayList<Single>, markerItems: ArrayList<Marker>) {
 
     private fun itemDetails(itemId: Int): Pair<Bitmap, String> {
         val bmp = when (itemId) {
-            1 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg)
-            2 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_box)
-            3 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_mystery_item)
-            4 -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_egg_bonus)
-            else -> GoogleMapActivity.sContext.resourceBitmap(R.drawable.ic_image_black)
+            1 -> sContext.resourceBitmap(R.drawable.ic_egg)
+            2 -> sContext.resourceBitmap(R.drawable.ic_mystery_box)
+            3 -> sContext.resourceBitmap(R.drawable.ic_mystery_item)
+            4 -> sContext.resourceBitmap(R.drawable.ic_egg_bonus)
+            else -> sContext.resourceBitmap(R.drawable.ic_image_black)
         }
 
         val str = when (itemId) {
