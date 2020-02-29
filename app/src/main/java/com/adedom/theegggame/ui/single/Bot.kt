@@ -17,8 +17,8 @@ class Bot(latLng: LatLng) {
         markerBot = sGoogleMap!!.addMarkerOptions(
             latLng,
             BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
-            KEY_BOT,
-            getLevel(99)
+            KEY_BOT.first,
+            getLevel(KEY_BOT.second)
         )
     }
 

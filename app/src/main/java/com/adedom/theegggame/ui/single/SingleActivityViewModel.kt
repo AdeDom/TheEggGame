@@ -145,10 +145,14 @@ class SingleActivityViewModel : BaseViewModel() {
         var botLat = latLngBot.latitude
         var botLng = latLngBot.longitude
 
+        // (1)
         val alf = ArrayList<Float>()
         single.forEach { alf.add(distanceBetween(botLat, botLng, it.latitude, it.longitude)) }
+
+        // (2)
         val nearIndex = alf.indexOf(alf.min())
 
+        // (3)
         val nearLat = single[nearIndex].latitude
         val nearLng = single[nearIndex].longitude
 
@@ -166,6 +170,7 @@ class SingleActivityViewModel : BaseViewModel() {
         alf.add(d3)
         alf.add(d4)
 
+        // (4)
         when (alf.indexOf(alf.min())) {
             0 -> {
                 botLat += KEY_DISTANCE_BOT
@@ -184,12 +189,15 @@ class SingleActivityViewModel : BaseViewModel() {
                 botLng -= KEY_DISTANCE_BOT
             }
         }
+
+        // (5)
         botLat = String.format("%.7f", botLat).toDouble()
         botLng = String.format("%.7f", botLng).toDouble()
         latLngBot = LatLng(botLat, botLng)
 
         bot.invoke(latLngBot)
 
+        // (6)
         val destroyed = distanceBetween(nearLat, nearLng, botLat, botLng)
         if (destroyed < RADIUS_ONE_HUNDRED_METER) {
             single.removeAt(nearIndex)

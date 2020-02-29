@@ -42,7 +42,8 @@ const val THE_EGG_GAME = "The Egg Game"
 const val SOUND_MUSIC_ON = "sound_music_on"
 const val SOUND_MUSIC_OFF = "sound_music_off"
 const val SOUND_MUSIC = "sound_music"
-const val KEY_BOT = "Bot"
+
+val KEY_BOT = Pair("Bot", 99)
 
 const val KEY_REQUEST_CODE = 3006
 
