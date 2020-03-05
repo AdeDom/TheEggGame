@@ -14,7 +14,7 @@
             android:id="@+id/ivWheel"
             android:layout_width="@dimen/wheel"
             android:layout_height="@dimen/wheel"
-            android:src="@drawable/roulette" />
+            android:src="@drawable/bonus_wheel" />
 
     <Button
             android:id="@+id/btBonus"
