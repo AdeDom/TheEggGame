@@ -48,8 +48,10 @@ class BonusGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
 
                 onClick++
                 if (onClick >= 3) {
-                    dialog!!.dismiss()
+                    //TODO insert bonus
+
                     GameActivity.sContext.toast("Experience point : $bonus")
+                    GameActivity.sActivity.finish()
                 }
             }
             ivWheel.startAnimation(rotate)
