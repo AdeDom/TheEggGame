@@ -68,11 +68,12 @@
             <ImageView
                     android:id="@+id/mIvMission"
                     style="@style/ImageViewPlayer"
-                    android:src="@drawable/ic_mission"
-                    android:contentDescription="@string/mission" />
+                    android:contentDescription="@string/mission"
+                    android:src="@drawable/ic_mission" />
 
             <TextView
                     style="@style/TextViewSmall"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/mission" />
         </LinearLayout>
 
@@ -81,11 +82,12 @@
             <ImageView
                     android:id="@+id/mIvRank"
                     style="@style/ImageViewPlayer"
-                    android:src="@drawable/ic_rank_small"
-                    android:contentDescription="@string/rank" />
+                    android:contentDescription="@string/rank"
+                    android:src="@drawable/ic_rank_small" />
 
             <TextView
                     style="@style/TextViewSmall"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/rank" />
         </LinearLayout>
 
@@ -94,11 +96,12 @@
             <ImageView
                     android:id="@+id/mIvAbout"
                     style="@style/ImageViewPlayer"
-                    android:src="@drawable/ic_h2p"
-                    android:contentDescription="@string/about" />
+                    android:contentDescription="@string/about"
+                    android:src="@drawable/ic_h2p" />
 
             <TextView
                     style="@style/TextViewSmall"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/about" />
         </LinearLayout>
 
@@ -107,11 +110,12 @@
             <ImageView
                     android:id="@+id/mIvSetting"
                     style="@style/ImageViewPlayer"
-                    android:src="@drawable/ic_setting"
-                    android:contentDescription="@string/setting" />
+                    android:contentDescription="@string/setting"
+                    android:src="@drawable/ic_setting" />
 
             <TextView
                     style="@style/TextViewSmall"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/setting" />
         </LinearLayout>
     </LinearLayout>
