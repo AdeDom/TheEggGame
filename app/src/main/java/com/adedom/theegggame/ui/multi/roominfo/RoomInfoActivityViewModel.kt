@@ -13,7 +13,7 @@ class RoomInfoActivityViewModel : BaseViewModel() {
     private var _ready = KEY_UNREADY
     lateinit var room: Room
     var roomInfo = arrayListOf<RoomInfo>()
-    var team: String = ""
+    var team: String = KEY_STRING
 
     fun deletePlayerRoomInfo(playerId: String) =
         multiRepository.deletePlayerRoomInfo(room.room_no!!, playerId)

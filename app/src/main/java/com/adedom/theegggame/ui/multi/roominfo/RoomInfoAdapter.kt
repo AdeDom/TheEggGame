@@ -10,43 +10,33 @@ import kotlinx.android.synthetic.main.item_room_info.view.*
 
 class RoomInfoAdapter :
     BaseRecyclerViewAdapter<RoomInfo>({ R.layout.item_room_info }, { holder, position, items ->
+        val view = holder.itemView
+        val context = holder.itemView.context
         val (_, _, _, team, status, _, name, image, level, state, gender) = items[position]
         if (state == KEY_OFFLINE) {
-            holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
-                holder.itemView.context,
-                R.drawable.shape_bg_gray
-            )
+            view.mBgPlayer.background = ContextCompat.getDrawable(context, R.drawable.shape_bg_gray)
         } else {
             if (team == TEAM_A) {
-                holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.shape_team_a
-                )
+                view.mBgPlayer.background =
+                    ContextCompat.getDrawable(context, R.drawable.shape_team_a)
             } else {
-                holder.itemView.mBgPlayer.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.shape_team_b
-                )
+                view.mBgPlayer.background =
+                    ContextCompat.getDrawable(context, R.drawable.shape_team_b)
             }
         }
 
-        if (position == 0) holder.itemView.mIvKing.visibility = View.VISIBLE
+        if (position == 0) view.mIvKing.visibility = View.VISIBLE
 
-        setImageProfile(holder.itemView.mIvProfile, image!!, gender!!)
+        setImageProfile(view.mIvProfile, image!!, gender!!)
 
-        holder.itemView.mTvName.text = name
+        view.mTvName.text = name
 
-        holder.itemView.mTvLevel.text = getLevel(level)
+        view.mTvLevel.text = context.resources.getString(R.string.level, level)
 
         if (status == KEY_READY) {
-            holder.itemView.mIvReady.background = ContextCompat.getDrawable(
-                holder.itemView.context,
-                R.drawable.shape_oval_green
-            )
+            view.mIvReady.background =
+                ContextCompat.getDrawable(context, R.drawable.shape_oval_green)
         } else {
-            holder.itemView.mIvReady.background = ContextCompat.getDrawable(
-                holder.itemView.context,
-                R.drawable.shape_oval_red
-            )
+            view.mIvReady.background = ContextCompat.getDrawable(context, R.drawable.shape_oval_red)
         }
     })

@@ -12,6 +12,7 @@ import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.GameActivity.Companion.sContext
 import com.adedom.theegggame.util.extension.onAnimationEnd
 
 class BonusGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
@@ -50,7 +51,7 @@ class BonusGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
                 if (onClick >= 3) {
                     //TODO insert bonus
 
-                    GameActivity.sContext.toast("Experience point : $bonus")
+                    sContext.toast(sContext.resources.getString(R.string.experience_point, bonus))
                     GameActivity.sActivity.finish()
                 }
             }

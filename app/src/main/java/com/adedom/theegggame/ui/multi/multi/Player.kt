@@ -9,7 +9,6 @@ import com.adedom.theegggame.data.models.RoomInfo
 import com.adedom.theegggame.ui.multi.multi.MultiActivityViewModel.Companion.circlePlayer
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
 import com.adedom.theegggame.util.KEY_PLAYER_ID
-import com.adedom.theegggame.util.getLevel
 import com.adedom.theegggame.util.setImageProfile
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -32,7 +31,7 @@ class Player(
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     item.name!!,
-                    getLevel(item.level)
+                    sContext.resources.getString(R.string.level, item.level)
                 )
             }, {
                 markerPlayers.setMarkers(
@@ -40,7 +39,7 @@ class Player(
                     latLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                     item.name!!,
-                    getLevel(item.level)
+                    sContext.resources.getString(R.string.level, item.level)
                 )
             }, {
                 sContext.loadBitmap(imageUrl(item.image!!), {
@@ -49,7 +48,7 @@ class Player(
                         latLng,
                         BitmapDescriptorFactory.fromBitmap(it),
                         item.name,
-                        getLevel(item.level)
+                        sContext.resources.getString(R.string.level, item.level)
                     )
                 }, {
                     markerPlayers.setMarkers(
@@ -57,7 +56,7 @@ class Player(
                         latLng,
                         BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                         item.name,
-                        getLevel(item.level)
+                        sContext.resources.getString(R.string.level, item.level)
                     )
                 })
             })

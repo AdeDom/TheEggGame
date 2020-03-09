@@ -61,11 +61,11 @@ class FightGameDialog : BaseDialogFragment<MultiActivityViewModel>(
     private fun setScore(view: View) {
         //todo first win only
 
-        val s = view.tag.toString()
-        if (s == "1") {
+        val s = view.tag.toString().toInt()
+        if (s == 1) {
             val num = mTvScore.text.toString().toInt() + 1
             mTvScore.text = num.toString()
-        } else if (s == "0") {
+        } else if (s == 0) {
             var num = mTvScore.text.toString().toInt()
             if (num <= 0) {
                 mTvScore.text = "0"
