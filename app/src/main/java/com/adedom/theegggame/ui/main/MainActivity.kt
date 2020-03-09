@@ -66,7 +66,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     }
 
     private fun verifyPlayer(): Boolean {
-        return if (this.readPrefFile(KEY_PLAYER_ID) != KEY_EMPTY && this.readPrefFile(KEY_USERNAME) != "") {
+        return if (this.readPrefFile(KEY_PLAYER_ID) != KEY_EMPTY && this.readPrefFile(KEY_USERNAME) != KEY_STRING) {
             insertLogs()
             false
         } else {
@@ -89,7 +89,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
     override fun gameLoop() {
         viewModel.getPlayer(playerId!!).observe(this, Observer {
             if (it.playerId == null) {
-                this.loginSuccess(LoginActivity::class.java, KEY_EMPTY, "")
+                this.loginSuccess(LoginActivity::class.java, KEY_EMPTY, KEY_STRING)
             } else {
                 sPlayer = it
                 setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)
