@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
+import com.adedom.admin.util.KEY_STRING
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setSwipeRefresh
 import com.adedom.library.extension.setToolbar
@@ -42,9 +43,9 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     }
 
     private fun fetchPlayers(
-        name: String = "",
-        levelStart: String = "1",
-        levelEnd: String = "99",
+        name: String = KEY_STRING,
+        levelStart: Int = 1,
+        levelEnd: Int = 99,
         online: Boolean = true,
         offline: Boolean = true,
         male: Boolean = true,
@@ -65,8 +66,8 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
     override fun onAttach() {
         fetchPlayers(
             PlayerActivityViewModel.name,
-            PlayerActivityViewModel.spinnerIndexStart.plus(1).toString(),
-            PlayerActivityViewModel.spinnerIndexEnd.plus(1).toString(),
+            PlayerActivityViewModel.spinnerIndexStart.plus(1),
+            PlayerActivityViewModel.spinnerIndexEnd.plus(1),
             PlayerActivityViewModel.isCheckOnline,
             PlayerActivityViewModel.isCheckOffline,
             PlayerActivityViewModel.isCheckMale,

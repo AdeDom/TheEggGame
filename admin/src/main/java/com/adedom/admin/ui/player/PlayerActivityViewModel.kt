@@ -1,13 +1,14 @@
 package com.adedom.admin.ui.player
 
 import com.adedom.admin.util.BaseViewModel
+import com.adedom.admin.util.KEY_STRING
 
 class PlayerActivityViewModel : BaseViewModel() {
 
     fun getPlayers(
         name: String,
-        levelStart: String,
-        levelEnd: String,
+        levelStart: Int,
+        levelEnd: Int,
         online: Boolean,
         offline: Boolean,
         male: Boolean,
@@ -15,7 +16,7 @@ class PlayerActivityViewModel : BaseViewModel() {
     ) = repository.getPlayers(name, levelStart, levelEnd, online, offline, male, female)
 
     companion object {
-        var name = ""
+        var name = KEY_STRING
         var spinnerIndexStart = 0
         var spinnerIndexEnd = 98
         var isCheckOnline = true
