@@ -90,8 +90,18 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         super.onMapReady(googleMap)
-        sGoogleMap!!.setMarkerConstant(druBkk, druIcon, DRU_TITLE, DRU_SNIPPET)
-        sGoogleMap!!.setMarkerConstant(druSp, druIcon, DRU_TITLE, DRU_SNIPPET)
+        sGoogleMap!!.setMarkerConstant(
+            druBkk,
+            druIcon,
+            getString(R.string.dru_title),
+            getString(R.string.dru_snippet)
+        )
+        sGoogleMap!!.setMarkerConstant(
+            druSp,
+            druIcon,
+            getString(R.string.dru_title),
+            getString(R.string.dru_snippet)
+        )
     }
 
     private fun keepItemSingle(index: Int) {

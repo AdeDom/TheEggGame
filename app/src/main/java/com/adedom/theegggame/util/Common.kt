@@ -5,8 +5,6 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
-const val DRU_TITLE = "DRU"
-const val DRU_SNIPPET = "Dhonburi rajabhat university"
 val druIcon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.dru_logo)
 val druBkk: LatLng = LatLng(13.7337910, 100.4911897)
 val druSp: LatLng = LatLng(13.5228417, 100.7525409)
@@ -14,7 +12,6 @@ val druSp: LatLng = LatLng(13.5228417, 100.7525409)
 const val KEY_STRING = ""
 const val KEY_COMPLETED = "completed"
 const val KEY_FAILED = "failed"
-const val KEY_PLAYER = "player"
 const val KEY_ONLINE = "online"
 const val KEY_OFFLINE = "offline"
 const val KEY_PLAYER_ID = "player_id"
@@ -39,15 +36,10 @@ const val TEAM_A = "A"
 const val TEAM_B = "B"
 const val TEAM_ALWAYS = "always"
 const val SCORE = "score"
-const val THE_EGG_GAME = "The Egg Game"
 const val SOUND_MUSIC_ON = "sound_music_on"
 const val SOUND_MUSIC_OFF = "sound_music_off"
 const val SOUND_MUSIC = "sound_music"
 const val KEY_LATLNG = "%.7f"
-const val KEY_EXP = "Experience point"
-const val KEY_MYSTERY_BOX = "Mystery Box"
-const val KEY_MYSTERY_ITEM = "Mystery Item"
-const val KEY_BONUS = "Bonus"
 
 val KEY_BOT = Pair("Bot", 99)
 

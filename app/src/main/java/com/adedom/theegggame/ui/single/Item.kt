@@ -9,10 +9,6 @@ import com.adedom.library.util.GoogleMapActivity.Companion.sGoogleMap
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
-import com.adedom.theegggame.util.KEY_BONUS
-import com.adedom.theegggame.util.KEY_EXP
-import com.adedom.theegggame.util.KEY_MYSTERY_BOX
-import com.adedom.theegggame.util.KEY_MYSTERY_ITEM
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -42,10 +38,10 @@ class Item(singles: ArrayList<Single>, markerItems: ArrayList<Marker>) {
         }
 
         val str = when (itemId) {
-            1 -> KEY_EXP
-            2 -> KEY_MYSTERY_BOX
-            3 -> KEY_MYSTERY_ITEM
-            4 -> KEY_BONUS
+            1 -> sContext.resources.getString(R.string.exp)
+            2 -> sContext.resources.getString(R.string.mystery_box)
+            3 -> sContext.resources.getString(R.string.mystery_item)
+            4 -> sContext.resources.getString(R.string.bonus)
             else -> KEY_EMPTY
         }
 

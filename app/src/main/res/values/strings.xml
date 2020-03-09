@@ -82,5 +82,10 @@
     <string name="egg_i">Egg I : %1$d</string>
     <string name="egg_ii">Egg II : %1$d</string>
     <string name="egg_iii">Egg III : %1$d</string>
+    <string name="dru_title">DRU</string>
+    <string name="dru_snippet">Dhonburi rajabhat university</string>
+    <string name="exp">Experience point</string>
+    <string name="mystery_box">Mystery Box</string>
+    <string name="mystery_item">Mystery Item</string>
 
 </resources>
