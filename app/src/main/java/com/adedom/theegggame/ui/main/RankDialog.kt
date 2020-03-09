@@ -11,6 +11,7 @@ import com.adedom.library.extension.textChanged
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.GameActivity
+import com.adedom.theegggame.util.KEY_STRING
 import com.adedom.theegggame.util.extension.playSoundClick
 
 class RankDialog : BaseDialogFragment<MainActivityViewModel>(
@@ -38,22 +39,22 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>(
         etSearch.textChanged { fetchPlayers(it) }
 
         btRank10.setOnClickListener {
-            fetchPlayers(limit = "10")
+            fetchPlayers(limit = 10)
             GameActivity.sContext.playSoundClick()
         }
         btRank50.setOnClickListener {
-            fetchPlayers(limit = "50")
+            fetchPlayers(limit = 50)
             GameActivity.sContext.playSoundClick()
         }
         btRank100.setOnClickListener {
-            fetchPlayers(limit = "100")
+            fetchPlayers(limit = 100)
             GameActivity.sContext.playSoundClick()
         }
 
         fetchPlayers()
     }
 
-    private fun fetchPlayers(search: String = "", limit: String = "") {
+    private fun fetchPlayers(search: String = KEY_STRING, limit: Int = 0) {
         viewModel.rank(search, limit).observe(this, Observer {
             mAdapter.setList(it)
         })

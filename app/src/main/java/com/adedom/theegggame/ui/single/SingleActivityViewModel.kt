@@ -6,6 +6,7 @@ import com.adedom.library.util.GoogleMapActivity.Companion.sContext
 import com.adedom.library.util.GoogleMapActivity.Companion.sLatLng
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.library.util.distanceBetween
+import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Single
 import com.adedom.theegggame.util.*
 import com.adedom.theegggame.util.extension.playSoundKeep
@@ -71,10 +72,10 @@ class SingleActivityViewModel : BaseViewModel() {
 
     fun itemMessages(itemId: Int, values: Int): String {
         return when (itemId) {
-            1 -> "Experience point : $values"
-            2 -> "Egg I : $values" // egg false
-            3 -> "Egg II : $values" // radius
-            4 -> "Egg III : $values" // stun
+            1 -> sContext.resources.getString(R.string.experience_point, values)
+            2 -> sContext.resources.getString(R.string.egg_i, values) // egg false
+            3 -> sContext.resources.getString(R.string.egg_ii, values) // radius
+            4 -> sContext.resources.getString(R.string.egg_iii, values) // stun
             else -> KEY_EMPTY
         }
     }
@@ -191,8 +192,8 @@ class SingleActivityViewModel : BaseViewModel() {
         }
 
         // (5)
-        botLat = String.format("%.7f", botLat).toDouble()
-        botLng = String.format("%.7f", botLng).toDouble()
+        botLat = String.format(KEY_LATLNG, botLat).toDouble()
+        botLng = String.format(KEY_LATLNG, botLng).toDouble()
         latLngBot = LatLng(botLat, botLng)
 
         bot.invoke(latLngBot)

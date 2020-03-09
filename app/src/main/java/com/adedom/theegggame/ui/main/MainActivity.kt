@@ -94,7 +94,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
                 sPlayer = it
                 setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)
                 mTvName.text = sPlayer.name
-                mTvLevel.text = getLevel(sPlayer.level)
+                mTvLevel.text = getString(R.string.level, sPlayer.level)
             }
         })
     }

@@ -10,7 +10,6 @@ import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.ui.single.SingleActivityViewModel.Companion.circlePlayer
 import com.adedom.theegggame.ui.single.SingleActivityViewModel.Companion.markerPlayer
 import com.adedom.theegggame.util.CIRCLE_ONE_HUNDRED_METER
-import com.adedom.theegggame.util.getLevel
 import com.adedom.theegggame.util.setImageProfile
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -28,14 +27,14 @@ class Player {
                 sLatLng,
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                 player.name!!,
-                getLevel(player.level)
+                sContext.resources.getString(R.string.level, player.level)
             )
         }, {
             markerPlayer = sGoogleMap!!.addMarkerOptions(
                 sLatLng,
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_player_female),
                 player.name!!,
-                getLevel(player.level)
+                sContext.resources.getString(R.string.level, player.level)
             )
         }, {
             sContext.loadBitmap(imageUrl(player.image!!), {
@@ -43,14 +42,14 @@ class Player {
                     sLatLng,
                     BitmapDescriptorFactory.fromBitmap(it),
                     player.name!!,
-                    getLevel(player.level)
+                    sContext.resources.getString(R.string.level, player.level)
                 )
             }, {
                 markerPlayer = sGoogleMap!!.addMarkerOptions(
                     sLatLng,
                     BitmapDescriptorFactory.fromResource(R.drawable.ic_player),
                     player.name!!,
-                    getLevel(player.level)
+                    sContext.resources.getString(R.string.level, player.level)
                 )
             })
         })

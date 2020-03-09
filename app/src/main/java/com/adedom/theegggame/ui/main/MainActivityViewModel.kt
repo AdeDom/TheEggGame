@@ -10,7 +10,7 @@ class MainActivityViewModel : BaseViewModel() {
 
     fun getPlayer(playerId: String) = playerRepository.getPlayer(playerId)
 
-    fun rank(search: String, limit: String) = playerRepository.getPlayers(search, limit)
+    fun rank(search: String, limit: Int) = playerRepository.getPlayers(search, limit)
 
     fun updateProfile(playerId: String?, name: String, image: String, gender: String) =
         playerRepository.updateProfile(playerId, name, image, gender)
@@ -30,25 +30,25 @@ class MainActivityViewModel : BaseViewModel() {
         baseRepository.insertLogs(key, playerId)
 
     fun writeFile() {
-        if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == "")
+        if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == KEY_STRING)
             GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_UNSUCCESSFUL)
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE_GAME, KEY_MISSION_UNSUCCESSFUL)
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_UNSUCCESSFUL)
 
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == "")
+        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_STRING)
             GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
 
         //delivery
