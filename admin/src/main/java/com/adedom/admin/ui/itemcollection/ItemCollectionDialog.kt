@@ -7,8 +7,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.adedom.admin.R
 import com.adedom.admin.data.models.Egg
-import com.adedom.admin.util.BaseActivity
-import com.adedom.admin.util.BaseDialogFragment
+import com.adedom.admin.util.*
 import com.adedom.library.extension.dialogFragment
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.setSpinner
@@ -55,10 +54,10 @@ class ItemCollectionDialog : BaseDialogFragment({ R.layout.dialog_item_collectio
 
     private fun dataEgg(): ArrayList<Egg> {
         val items = ArrayList<Egg>()
-        items.add(Egg(1, "Egg", R.drawable.ic_egg))
-        items.add(Egg(2, "Egg I", R.drawable.ic_egg_i))
-        items.add(Egg(3, "Egg II", R.drawable.ic_egg_ii))
-        items.add(Egg(4, "Egg III", R.drawable.ic_egg_iii))
+        items.add(Egg(1, KEY_EGG, R.drawable.ic_egg))
+        items.add(Egg(2, KEY_EGG_I, R.drawable.ic_egg_i))
+        items.add(Egg(3, KEY_EGG_II, R.drawable.ic_egg_ii))
+        items.add(Egg(4, KEY_EGG_III, R.drawable.ic_egg_iii))
         return items
     }
 }

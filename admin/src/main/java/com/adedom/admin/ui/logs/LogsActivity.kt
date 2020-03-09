@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.admin.util.DATE_BEGIN
+import com.adedom.admin.util.KEY_DAY_MAX
 import com.adedom.admin.util.TIME_BEGIN
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setSwipeRefresh
@@ -49,7 +50,7 @@ class LogsActivity : BaseActivity<LogsActivityViewModel>() {
         dateBegin: String = DATE_BEGIN,
         timeBegin: String = TIME_BEGIN,
         dateEnd: String = getDateTime(KEY_DATE),
-        timeEnd: String = "23:59:59"
+        timeEnd: String = KEY_DAY_MAX
     ) {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getLogs(dateBegin, timeBegin, dateEnd, timeEnd).observe(this, Observer {
