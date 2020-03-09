@@ -57,7 +57,7 @@
     <string name="end_game">End game</string>
     <string name="player">Player</string>
     <string name="name">Name</string>
-    <string name="level">Level</string>
+    <string name="level">Level : %1$d</string>
     <string name="search">Search</string>
     <string name="gender">Gender</string>
     <string name="male">Male</string>
@@ -78,5 +78,9 @@
     <string name="always">Always</string>
     <string name="bonus">Bonus</string>
     <string name="backpack">Backpack</string>
+    <string name="experience_point">Experience point : %1$d</string>
+    <string name="egg_i">Egg I : %1$d</string>
+    <string name="egg_ii">Egg II : %1$d</string>
+    <string name="egg_iii">Egg III : %1$d</string>
 
 </resources>
