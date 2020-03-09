@@ -7,8 +7,8 @@ class BaseRepository(private val api: BaseApi) : ApiRequest() {
 
     fun getPlayers(
         name: String,
-        levelStart: String,
-        levelEnd: String,
+        levelStart: Int,
+        levelEnd: Int,
         online: Boolean,
         offline: Boolean,
         male: Boolean,

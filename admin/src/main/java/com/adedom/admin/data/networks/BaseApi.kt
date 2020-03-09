@@ -17,8 +17,8 @@ interface BaseApi {
     @POST("admin-get-players.php")
     fun getPlayers(
         @Field(KEY_VALUES1) name: String,
-        @Field(KEY_VALUES2) levelStart: String,
-        @Field(KEY_VALUES3) levelEnd: String,
+        @Field(KEY_VALUES2) levelStart: Int,
+        @Field(KEY_VALUES3) levelEnd: Int,
         @Field(KEY_VALUES4) online: Boolean,
         @Field(KEY_VALUES5) offline: Boolean,
         @Field(KEY_VALUES6) male: Boolean,
