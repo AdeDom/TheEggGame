@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
+import com.adedom.admin.util.KEY_STRING
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.setSwipeRefresh
 import com.adedom.library.extension.setToolbar
@@ -41,7 +42,7 @@ class ItemCollectionActivity : BaseActivity<ItemCollectionActivityViewModel>() {
         }
     }
 
-    private fun fetchItemCollection(name: String = "", itemId: Int = 0) {
+    private fun fetchItemCollection(name: String = KEY_STRING, itemId: Int = 0) {
         mSwipeRefreshLayout.isRefreshing = true
         viewModel.getItemCollection(name, itemId).observe(this, Observer {
             mSwipeRefreshLayout.isRefreshing = false
