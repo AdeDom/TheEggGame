@@ -39,7 +39,7 @@ interface PlayerApi {
     @POST("get-players.php")
     fun getPlayers(
         @Field(KEY_VALUES1) search: String,
-        @Field(KEY_VALUES2) limit: String
+        @Field(KEY_VALUES2) limit: Int
     ): Call<List<Player>>
 
     @FormUrlEncoded

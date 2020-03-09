@@ -10,7 +10,7 @@ class PlayerRepository(private val api: PlayerApi) : ApiRequest() {
 
     fun getPlayer(playerId: String) = apiRequest { api.getPlayer(playerId) }
 
-    fun getPlayers(search: String, limit: String) = apiRequest { api.getPlayers(search, limit) }
+    fun getPlayers(search: String, limit: Int) = apiRequest { api.getPlayers(search, limit) }
 
     fun insertPlayer(
         username: String,
