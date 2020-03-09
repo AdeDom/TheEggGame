@@ -37,22 +37,20 @@ fun setImageProfile(
     }
 }
 
-fun getLevel(level: Int?): String = "Level : $level"
-
 fun rndLatLng(latLng: LatLng): Pair<Double, Double> {
     var rndLat = Math.random() / 100 // < 0.01
     rndLat += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-    val strLat = String.format("%.7f", rndLat)
+    val strLat = String.format(KEY_LATLNG, rndLat)
     val latitude: Double = if ((0..1).random() == 0) latLng.latitude + strLat.toDouble()
     else latLng.latitude - strLat.toDouble()
 
     var rndLng = Math.random() / 100 // < 0.01
     rndLng += RADIUS_TWO_HUNDRED_METER / 100000 // 200 Meter
-    val strLng = String.format("%.7f", rndLng)
+    val strLng = String.format(KEY_LATLNG, rndLng)
     val longitude: Double = if ((0..1).random() == 0) latLng.longitude + strLng.toDouble()
     else latLng.longitude - strLng.toDouble()
 
-    val lat = String.format("%.7f", latitude).toDouble()
-    val lng = String.format("%.7f", longitude).toDouble()
+    val lat = String.format(KEY_LATLNG, latitude).toDouble()
+    val lng = String.format(KEY_LATLNG, longitude).toDouble()
     return Pair(lat, lng)
 }
