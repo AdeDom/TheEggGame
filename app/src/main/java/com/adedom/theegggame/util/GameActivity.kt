@@ -7,7 +7,7 @@ import android.os.Handler
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.util.PathiphonActivity
@@ -25,7 +25,7 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = ViewModelProviders.of(this).get(GameActivityViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(GameActivityViewModel::class.java)
 
         sActivity = this@GameActivity
         sContext = baseContext

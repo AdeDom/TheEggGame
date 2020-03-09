@@ -3,7 +3,7 @@ package com.adedom.theegggame.ui.single
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.main.MainActivity
@@ -16,7 +16,7 @@ class BackpackDialog : BaseDialogFragment<SingleActivityViewModel>(
 
     override fun initDialog(view: View) {
         super.initDialog(view)
-        viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SingleActivityViewModel::class.java)
 
         val egg = view.findViewById(R.id.mTvEgg) as TextView
         val eggI = view.findViewById(R.id.mTvEggI) as TextView

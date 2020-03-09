@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.library.extension.recyclerVertical
 import com.adedom.library.extension.textChanged
@@ -24,7 +24,7 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>(
 
     override fun initDialog(view: View) {
         super.initDialog(view)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         val etSearch = view.findViewById(R.id.mEtSearch) as EditText
         val btRank10 = view.findViewById(R.id.mBtRank10) as Button

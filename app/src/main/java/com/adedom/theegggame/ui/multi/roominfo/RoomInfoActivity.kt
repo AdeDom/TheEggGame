@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.recyclerGrid
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
@@ -26,7 +26,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_info)
 
-        viewModel = ViewModelProviders.of(this).get(RoomInfoActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RoomInfoActivityViewModel::class.java)
 
         viewModel.room = intent.getParcelableExtra(ROOM) as Room
 

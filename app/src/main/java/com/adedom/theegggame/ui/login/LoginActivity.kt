@@ -2,7 +2,7 @@ package com.adedom.theegggame.ui.login
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.isEmpty
@@ -21,7 +21,7 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        viewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
 
         init()
     }

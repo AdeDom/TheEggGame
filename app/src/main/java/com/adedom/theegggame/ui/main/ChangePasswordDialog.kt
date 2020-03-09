@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.*
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
@@ -26,7 +26,7 @@ class ChangePasswordDialog : BaseDialogFragment<MainActivityViewModel>(
 
     override fun initDialog(view: View) {
         super.initDialog(view)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         mPlayer = MainActivity.sPlayer
 

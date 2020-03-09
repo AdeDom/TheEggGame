@@ -3,7 +3,7 @@ package com.adedom.admin.ui.player
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.admin.R
 import com.adedom.admin.util.BaseActivity
 import com.adedom.admin.util.KEY_STRING
@@ -21,7 +21,7 @@ class PlayerActivity : BaseActivity<PlayerActivityViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
-        viewModel = ViewModelProviders.of(this).get(PlayerActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PlayerActivityViewModel::class.java)
 
         init()
 

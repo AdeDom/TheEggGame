@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.recyclerGrid
 import com.adedom.library.extension.setToolbar
 import com.adedom.library.extension.toast
@@ -26,7 +26,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RoomActivityViewModel::class.java)
 
         init()
     }

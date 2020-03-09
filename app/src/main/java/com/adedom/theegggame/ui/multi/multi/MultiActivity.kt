@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
@@ -33,7 +33,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         setContentView(R.layout.activity_map)
 
-        viewModel = ViewModelProviders.of(this).get(MultiActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MultiActivityViewModel::class.java)
 
         viewModel.room = intent.getParcelableExtra(ROOM) as Room
         viewModel.team = intent.getStringExtra(TEAM) as String

@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.isEmpty
@@ -32,7 +32,7 @@ class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
 
     override fun initDialog(view: View) {
         super.initDialog(view)
-        viewModel = ViewModelProviders.of(this).get(RoomActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RoomActivityViewModel::class.java)
 
         mEtName = view.findViewById(R.id.mEtName) as EditText
         mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker

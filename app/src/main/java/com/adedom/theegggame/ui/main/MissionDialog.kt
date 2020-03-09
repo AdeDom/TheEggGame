@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.toast
 import com.adedom.library.extension.writePrefFile
@@ -20,7 +20,7 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>(
 
     override fun initDialog(view: View) {
         super.initDialog(view)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         val tvMissionDelivery = view.findViewById(R.id.tvMissionDelivery) as TextView
         val tvMissionSingle = view.findViewById(R.id.tvMissionSingle) as TextView

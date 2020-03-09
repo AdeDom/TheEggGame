@@ -3,7 +3,7 @@ package com.adedom.theegggame.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.exitApplication
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.toast
@@ -28,7 +28,7 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         init()
 

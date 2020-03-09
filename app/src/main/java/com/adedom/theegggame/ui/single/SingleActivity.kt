@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.*
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
@@ -25,7 +25,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         setContentView(R.layout.activity_map)
 
-        viewModel = ViewModelProviders.of(this).get(SingleActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SingleActivityViewModel::class.java)
 
         init()
 
