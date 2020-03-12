@@ -7,13 +7,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.adedom.library.extension.onAnimationEnd
 import com.adedom.library.extension.toast
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
 import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.GameActivity.Companion.sContext
-import com.adedom.theegggame.util.extension.onAnimationEnd
 
 class BonusGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
     { R.layout.dialog_bonus_game },
