@@ -102,6 +102,8 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     }
 
     private fun startGame() {
+        //TODO start game not completed
+
         viewModel.setRoomOff().observe(this, Observer {
             if (it.result == KEY_COMPLETED) {
                 startActivityForResult(

@@ -10,6 +10,7 @@ import com.adedom.theegggame.util.KEY_BOT
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 
+//TODO find path gps location
 class Bot(latLng: LatLng) {
 
     init {

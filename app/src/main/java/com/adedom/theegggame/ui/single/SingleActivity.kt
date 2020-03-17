@@ -82,7 +82,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        sContext.setLocality(mTvLocality, sLatLng)
+        //TODO issues location -> LatLng(0.0,0.0)
+//        sContext.setLocality(mTvLocality, sLatLng)
 
         Player()
 
@@ -105,6 +106,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     private fun keepItemSingle(index: Int) {
+        //TODO keep item no double && i wants keep one only
+
         val playerId = this.readPrefFile(KEY_PLAYER_ID)
         val (myItem, values) = viewModel.getItemValues(index)
         val lat = sLatLng.latitude

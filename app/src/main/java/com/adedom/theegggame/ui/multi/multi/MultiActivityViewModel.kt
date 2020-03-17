@@ -62,6 +62,8 @@ class MultiActivityViewModel : BaseViewModel() {
     fun rndMultiItem(rnd: () -> Unit) {
         //TODO items tag
 
+        //TODO insert items five only
+
         when {
             room.status == HEAD && switchItem == GameSwitch.ON && roomInfoItems.size != 0 -> {
                 switchItem = GameSwitch.OFF

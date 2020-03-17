@@ -105,7 +105,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     override fun onLocationChanged(location: Location?) {
         super.onLocationChanged(location)
 
-        sContext.setLocality(mTvLocality, sLatLng)
+        //TODO issues location -> LatLng(0.0,0.0)
+//        sContext.setLocality(mTvLocality, sLatLng)
 
         setLatlng()
 
@@ -168,6 +169,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     }
 
     private fun keepItemMulti(multiId: String) {
+        //TODO keep item no double && i wants keep one only
+
         viewModel.keepItemMulti(
             multiId,
             MainActivity.sPlayer.playerId,
@@ -185,6 +188,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         })
     }
 
+    //TODO fight game
 //    private fun fightGame() {
 //        for (i in mRoomInfo.indices) {
 //            if (mRoomInfo[i].playerId != playerId

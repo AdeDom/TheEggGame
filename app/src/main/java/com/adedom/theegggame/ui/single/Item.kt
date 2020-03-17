@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
+//TODO using items to multi player
 class Item(singles: ArrayList<Single>, markerItems: ArrayList<Marker>) {
 
     init {
