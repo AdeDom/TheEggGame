@@ -1,4 +1,4 @@
-package com.adedom.theegggame.data.networks
+package com.adedom.theegggame.data.network
 
 import com.adedom.library.data.JsonResponse
 import com.adedom.library.data.RetrofitClient

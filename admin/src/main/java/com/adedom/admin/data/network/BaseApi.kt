@@ -1,4 +1,4 @@
-package com.adedom.admin.data.networks
+package com.adedom.admin.data.network
 
 import com.adedom.admin.data.BASE_URL
 import com.adedom.admin.data.models.ItemCollection

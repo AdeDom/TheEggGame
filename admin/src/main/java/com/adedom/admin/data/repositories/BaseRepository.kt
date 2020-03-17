@@ -1,6 +1,6 @@
 package com.adedom.admin.data.repositories
 
-import com.adedom.admin.data.networks.BaseApi
+import com.adedom.admin.data.network.BaseApi
 import com.adedom.library.data.ApiRequest
 
 class BaseRepository(private val api: BaseApi) : ApiRequest() {

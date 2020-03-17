@@ -1,7 +1,7 @@
 package com.adedom.theegggame.data.repositories
 
 import com.adedom.library.data.ApiRequest
-import com.adedom.theegggame.data.networks.PlayerApi
+import com.adedom.theegggame.data.network.PlayerApi
 
 class PlayerRepository(private val api: PlayerApi) : ApiRequest() {
 
