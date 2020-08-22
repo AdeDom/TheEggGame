@@ -32,8 +32,8 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) onBackPressed()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) onBackPressed()
 
         return super.onOptionsItemSelected(item)
     }

@@ -28,7 +28,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
 
         viewModel = ViewModelProvider(this).get(RoomInfoActivityViewModel::class.java)
 
-        viewModel.room = intent.getParcelableExtra(ROOM) as Room
+        viewModel.room = intent.getParcelableExtra(ROOM) ?: return as Room
 
         init()
     }
@@ -123,7 +123,7 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
             requestCode != KEY_REQUEST_CODE -> finish()
             resultCode == Activity.RESULT_CANCELED -> finish()
             resultCode == Activity.RESULT_OK -> {
-                val score = data!!.getParcelableExtra(SCORE) as Score
+                val score = data!!.getParcelableExtra(SCORE)?:return as Score
 
                 val bundle = Bundle()
                 bundle.putString(TEAM, viewModel.team)

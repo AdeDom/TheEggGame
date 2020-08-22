@@ -24,6 +24,7 @@ import com.adedom.theegggame.util.extension.setSoundMusic
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_map.*
 
+//TODO match with BOT
 class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     private lateinit var viewModel: MultiActivityViewModel
@@ -35,7 +36,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         viewModel = ViewModelProvider(this).get(MultiActivityViewModel::class.java)
 
-        viewModel.room = intent.getParcelableExtra(ROOM) as Room
+        viewModel.room = intent.getParcelableExtra(ROOM) ?: return as Room
         viewModel.team = intent.getStringExtra(TEAM) as String
 
         init()
@@ -60,8 +61,8 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.action_sound_music) sContext.setSoundMusic()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_sound_music) sContext.setSoundMusic()
         return super.onOptionsItemSelected(item)
     }
 
@@ -188,7 +189,7 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         })
     }
 
-    //TODO fight game
+    //TODO fight game & values min player keep Item
 //    private fun fightGame() {
 //        for (i in mRoomInfo.indices) {
 //            if (mRoomInfo[i].playerId != playerId

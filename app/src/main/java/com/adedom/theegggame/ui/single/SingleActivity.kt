@@ -6,7 +6,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.adedom.library.extension.*
+import com.adedom.library.extension.readPrefFile
+import com.adedom.library.extension.setMarkerConstant
+import com.adedom.library.extension.setToolbar
+import com.adedom.library.extension.toast
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
@@ -50,8 +53,8 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == R.id.action_sound_music) sContext.setSoundMusic()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_sound_music) sContext.setSoundMusic()
         return super.onOptionsItemSelected(item)
     }
 
