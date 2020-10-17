@@ -54,13 +54,13 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
         val username = mEtUsername.getContent()
         val password = mEtPassword.getContent()
 
-        viewModel.getPlayerId(username, password).observe(this, Observer {
-            if (it.result == null) {
-                mEtPassword.failed(getString(R.string.login_incorrect))
-            } else {
-                this.loginSuccess(MainActivity::class.java, it.result!!, username)
-            }
-        })
+//        viewModel.getPlayerId(username, password).observe(this, Observer {
+//            if (it.result == null) {
+//                mEtPassword.failed(getString(R.string.login_incorrect))
+//            } else {
+//                this.loginSuccess(MainActivity::class.java, it.result!!, username)
+//            }
+//        })
     }
 
 }

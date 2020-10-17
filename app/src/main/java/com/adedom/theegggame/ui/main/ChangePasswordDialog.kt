@@ -59,14 +59,14 @@ class ChangePasswordDialog : BaseDialogFragment<MainActivityViewModel>(
         val oldPassword = mEtOldPassword.getContent()
         val newPassword = mEtNewPassword.getContent()
 
-        viewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
-            .observe(this, Observer {
-                if (it.result == KEY_COMPLETED) {
-                    dialog!!.dismiss()
-                    GameActivity.sContext.toast(R.string.successfully)
-                } else {
-                    mEtOldPassword.failed(getString(R.string.password_incorrect))
-                }
-            })
+//        viewModel.updatePassword(mPlayer.playerId!!, oldPassword, newPassword)
+//            .observe(this, Observer {
+//                if (it.result == KEY_COMPLETED) {
+//                    dialog!!.dismiss()
+//                    GameActivity.sContext.toast(R.string.successfully)
+//                } else {
+//                    mEtOldPassword.failed(getString(R.string.password_incorrect))
+//                }
+//            })
     }
 }

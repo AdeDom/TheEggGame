@@ -44,9 +44,9 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
         sContext.playMusicGame()
 
         playerId = this.readPrefFile(KEY_PLAYER_ID)
-        mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
-            if (it.result == KEY_FAILED) baseContext.failed()
-        })
+//        mViewModel.setState(playerId!!, KEY_ONLINE).observe(this, Observer {
+//            if (it.result == KEY_FAILED) baseContext.failed()
+//        })
 
         mRunnableFetch.run()
     }
@@ -58,13 +58,13 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
 
         mHandlerFetch.removeCallbacks(mRunnableFetch)
 
-        mViewModel.setState(playerId!!, KEY_OFFLINE).observe(this, Observer {
-            if (it.result == KEY_FAILED) baseContext.failed()
-        })
-
-        mViewModel.updateLogs(keyLogs).observe(this, Observer {
-            if (it.result == KEY_FAILED) baseContext.failed()
-        })
+//        mViewModel.setState(playerId!!, KEY_OFFLINE).observe(this, Observer {
+//            if (it.result == KEY_FAILED) baseContext.failed()
+//        })
+//
+//        mViewModel.updateLogs(keyLogs).observe(this, Observer {
+//            if (it.result == KEY_FAILED) baseContext.failed()
+//        })
     }
 
     open fun gameLoop() {}
@@ -89,7 +89,7 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
 }
 
 class GameActivityViewModel : BaseViewModel() {
-    fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
-
-    fun updateLogs(key: String) = baseRepository.updateLogs(key)
+//    fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
+//
+//    fun updateLogs(key: String) = baseRepository.updateLogs(key)
 }

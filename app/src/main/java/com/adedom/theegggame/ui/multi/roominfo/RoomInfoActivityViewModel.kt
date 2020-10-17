@@ -15,18 +15,18 @@ class RoomInfoActivityViewModel : BaseViewModel() {
     var roomInfo = arrayListOf<RoomInfo>()
     var team: String = KEY_STRING
 
-    fun deletePlayerRoomInfo(playerId: String) =
-        multiRepository.deletePlayerRoomInfo(room.room_no!!, playerId)
-
-    fun getRoomInfo() = multiRepository.getRoomInfo(room.room_no!!)
-
-    fun setTeam(playerId: String) =
-        multiRepository.setTeam(room.room_no!!, playerId, team)
-
-    fun getReady(playerId: String, status: String) =
-        multiRepository.setReady(room.room_no!!, playerId, status)
-
-    fun setRoomOff() = multiRepository.setRoomOff(room.room_no!!)
+//    fun deletePlayerRoomInfo(playerId: String) =
+//        multiRepository.deletePlayerRoomInfo(room.room_no!!, playerId)
+//
+//    fun getRoomInfo() = multiRepository.getRoomInfo(room.room_no!!)
+//
+//    fun setTeam(playerId: String) =
+//        multiRepository.setTeam(room.room_no!!, playerId, team)
+//
+//    fun getReady(playerId: String, status: String) =
+//        multiRepository.setReady(room.room_no!!, playerId, status)
+//
+//    fun setRoomOff() = multiRepository.setRoomOff(room.room_no!!)
 
     fun getReady(): String {
         _ready = if (_ready == KEY_UNREADY) KEY_READY else KEY_UNREADY

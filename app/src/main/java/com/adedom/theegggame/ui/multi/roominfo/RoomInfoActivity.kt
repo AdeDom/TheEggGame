@@ -71,29 +71,29 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     }
 
     private fun setRoomReady(ready: String) {
-        viewModel.getReady(playerId!!, ready).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) fetchRoomInfo()
-        })
+//        viewModel.getReady(playerId!!, ready).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) fetchRoomInfo()
+//        })
     }
 
     private fun setTeam() {
-        viewModel.setTeam(playerId!!).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) fetchRoomInfo()
-        })
+//        viewModel.setTeam(playerId!!).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) fetchRoomInfo()
+//        })
     }
 
     override fun onBackPressed() {
-        viewModel.deletePlayerRoomInfo(playerId!!).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) finish()
-        })
+//        viewModel.deletePlayerRoomInfo(playerId!!).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) finish()
+//        })
         super.onBackPressed()
     }
 
     private fun fetchRoomInfo() {
-        viewModel.getRoomInfo().observe(this, Observer {
-            viewModel.roomInfo = it as ArrayList<RoomInfo>
-            mAdapter.setList(it)
-        })
+//        viewModel.getRoomInfo().observe(this, Observer {
+//            viewModel.roomInfo = it as ArrayList<RoomInfo>
+//            mAdapter.setList(it)
+//        })
     }
 
     override fun onPause() {
@@ -104,17 +104,17 @@ class RoomInfoActivity : GameActivity<RoomInfoActivityViewModel>() {
     private fun startGame() {
         //TODO start game not completed
 
-        viewModel.setRoomOff().observe(this, Observer {
-            if (it.result == KEY_COMPLETED) {
-                startActivityForResult(
-                    Intent(baseContext, MultiActivity::class.java)
-                        .putExtra(ROOM, viewModel.room)
-                        .putExtra(TEAM, viewModel.team)
-                    , KEY_REQUEST_CODE
-                )
-                baseContext.toast(R.string.start_game)
-            }
-        })
+//        viewModel.setRoomOff().observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) {
+//                startActivityForResult(
+//                    Intent(baseContext, MultiActivity::class.java)
+//                        .putExtra(ROOM, viewModel.room)
+//                        .putExtra(TEAM, viewModel.team)
+//                    , KEY_REQUEST_CODE
+//                )
+//                baseContext.toast(R.string.start_game)
+//            }
+//        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

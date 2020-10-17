@@ -22,15 +22,15 @@ class SingleActivityViewModel : BaseViewModel() {
     var itemBonus: Int = 0
     lateinit var latLngBot: LatLng
 
-    fun keepItemSingle(
-        playerId: String?,
-        itemId: Int,
-        qty: Int,
-        latitude: Double,
-        longitude: Double
-    ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
-
-    fun fetchBackpack(playerId: String?) = singleRepository.fetchBackpack(playerId)
+//    fun keepItemSingle(
+//        playerId: String?,
+//        itemId: Int,
+//        qty: Int,
+//        latitude: Double,
+//        longitude: Double
+//    ) = singleRepository.insertItemCollection(playerId, itemId, qty, latitude, longitude)
+//
+//    fun fetchBackpack(playerId: String?) = singleRepository.fetchBackpack(playerId)
 
     fun checkRadius(insertItem: (Int) -> Unit) {
         single.forEachIndexed { index, item ->

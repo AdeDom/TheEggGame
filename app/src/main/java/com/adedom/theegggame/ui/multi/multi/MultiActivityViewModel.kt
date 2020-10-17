@@ -28,27 +28,27 @@ class MultiActivityViewModel : BaseViewModel() {
     lateinit var room: Room
     lateinit var team: String
 
-    fun setLatlng(playerId: String, latitude: Double, longitude: Double) =
-        multiRepository.setLatlng(room.room_no!!, playerId, latitude, longitude)
-
-    fun getRoomInfo() = multiRepository.getRoomInfo(room.room_no!!)
-
-    fun getMulti() = multiRepository.getMulti(room.room_no!!)
-
-    fun insertMulti(lat: Double, lng: Double) =
-        multiRepository.insertMulti(room.room_no!!, lat, lng)
-
-    fun keepItemMulti(multiId: String, playerId: String?, latitude: Double, longitude: Double) =
-        multiRepository.insertMultiCollection(
-            multiId,
-            room.room_no!!,
-            playerId,
-            team,
-            latitude,
-            longitude
-        )
-
-    fun getScore() = multiRepository.getMultiScore(room.room_no!!)
+//    fun setLatlng(playerId: String, latitude: Double, longitude: Double) =
+//        multiRepository.setLatlng(room.room_no!!, playerId, latitude, longitude)
+//
+//    fun getRoomInfo() = multiRepository.getRoomInfo(room.room_no!!)
+//
+//    fun getMulti() = multiRepository.getMulti(room.room_no!!)
+//
+//    fun insertMulti(lat: Double, lng: Double) =
+//        multiRepository.insertMulti(room.room_no!!, lat, lng)
+//
+//    fun keepItemMulti(multiId: String, playerId: String?, latitude: Double, longitude: Double) =
+//        multiRepository.insertMultiCollection(
+//            multiId,
+//            room.room_no!!,
+//            playerId,
+//            team,
+//            latitude,
+//            longitude
+//        )
+//
+//    fun getScore() = multiRepository.getMultiScore(room.room_no!!)
 
     private fun distanceOver(latLng1: LatLng, latLng2: LatLng, distance: Float, over: () -> Unit) {
         val d = distanceBetween(

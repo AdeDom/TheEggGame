@@ -49,16 +49,16 @@ class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
         val name = mEtName.getContent()
         val people = mNumberPicker.value.toString().trim()
         val playerId = MainActivity.sPlayer.playerId
-        viewModel.createRoom(name, people, playerId).observe(this, Observer {
-            if (it.result == KEY_FAILED) {
-                GameActivity.sContext.failed()
-            } else {
-                dialog!!.dismiss()
-                startActivity(
-                    Intent(GameActivity.sContext, RoomInfoActivity::class.java)
-                        .putExtra(ROOM, Room(null, it.result, name, people, HEAD))
-                )
-            }
-        })
+//        viewModel.createRoom(name, people, playerId).observe(this, Observer {
+//            if (it.result == KEY_FAILED) {
+//                GameActivity.sContext.failed()
+//            } else {
+//                dialog!!.dismiss()
+//                startActivity(
+//                    Intent(GameActivity.sContext, RoomInfoActivity::class.java)
+//                        .putExtra(ROOM, Room(null, it.result, name, people, HEAD))
+//                )
+//            }
+//        })
     }
 }

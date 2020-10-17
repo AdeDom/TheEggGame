@@ -38,13 +38,13 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>(
 
         btChangeProfile.setOnClickListener {
             dialog!!.dismiss()
-            ChangeProfileDialog().show(activity!!.supportFragmentManager, null)
+//            ChangeProfileDialog().show(activity!!.supportFragmentManager, null)
             GameActivity.sContext.playSoundClick()
         }
 
         btChangePassword.setOnClickListener {
             dialog!!.dismiss()
-            ChangePasswordDialog().show(activity!!.supportFragmentManager, null)
+//            ChangePasswordDialog().show(activity!!.supportFragmentManager, null)
             GameActivity.sContext.playSoundClick()
         }
 
@@ -57,21 +57,21 @@ class SettingDialog : BaseDialogFragment<MainActivityViewModel>(
         }
 
         btLogout.setOnClickListener {
-            activity!!.loginSuccess(
-                LoginActivity::class.java,
-                KEY_EMPTY,
-                MainActivity.sPlayer.username!!
-            )
+//            activity!!.loginSuccess(
+//                LoginActivity::class.java,
+//                KEY_EMPTY,
+//                MainActivity.sPlayer.username!!
+//            )
 
             GameActivity.sContext.playSoundClick()
         }
 
         btExit.setOnClickListener {
-            AlertDialog.Builder(activity!!).dialogNegative(
-                R.string.exit,
-                R.string.exit_message,
-                R.drawable.ic_exit
-            ) { GameActivity.sActivity.finishAffinity() }
+//            AlertDialog.Builder(activity!!).dialogNegative(
+//                R.string.exit,
+//                R.string.exit_message,
+//                R.drawable.ic_exit
+//            ) { GameActivity.sActivity.finishAffinity() }
 
             GameActivity.sContext.playSoundClick()
         }

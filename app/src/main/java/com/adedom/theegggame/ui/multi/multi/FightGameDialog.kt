@@ -121,6 +121,6 @@ class FightGameDialog : BaseDialogFragment<MultiActivityViewModel>(
             drawable = R.drawable.shape_btn_fight_game
             button.tag = 1
         }
-        button.background = ContextCompat.getDrawable(context!!, drawable)
+//        button.background = ContextCompat.getDrawable(context!!, drawable)
     }
 }

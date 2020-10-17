@@ -20,4 +20,4 @@ private val dataModule = module {
 
 }
 
-val getDataModule = dataModule
+val getDataAndroidModule = dataModule

@@ -89,7 +89,7 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                mBitMap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, result.uri)
+//                mBitMap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, result.uri)
                 mIvProfile.loadCircle(mBitMap!!)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 GameActivity.sContext.toast(result.error.toString(), Toast.LENGTH_LONG)
@@ -115,14 +115,14 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
         val password = mEtPassword.getContent()
         val name = mEtName.getContent()
         val image = if (mBitMap == null) KEY_EMPTY else mBitMap!!.imageToString()
-        viewModel.register(username, password, name, image, gender)
-            .observe(this, Observer {
-                if (it.result == KEY_FAILED) {
-                    GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
-                } else {
-                    activity!!.loginSuccess(MainActivity::class.java, it.result!!, username)
-                }
-            })
+//        viewModel.register(username, password, name, image, gender)
+//            .observe(this, Observer {
+//                if (it.result == KEY_FAILED) {
+//                    GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
+//                } else {
+//                    activity!!.loginSuccess(MainActivity::class.java, it.result!!, username)
+//                }
+//            })
     }
 
 }

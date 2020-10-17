@@ -73,8 +73,8 @@ class MissionDialog : BaseDialogFragment<MainActivityViewModel>(
     }
 
     private fun missionComplete(messages: Int) {
-        viewModel.missionComplete(MainActivity.sPlayer.playerId).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) GameActivity.sContext.toast(messages)
-        })
+//        viewModel.missionComplete(MainActivity.sPlayer.playerId).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) GameActivity.sContext.toast(messages)
+//        })
     }
 }

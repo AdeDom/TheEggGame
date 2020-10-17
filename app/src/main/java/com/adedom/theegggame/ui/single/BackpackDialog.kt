@@ -23,12 +23,12 @@ class BackpackDialog : BaseDialogFragment<SingleActivityViewModel>(
         val eggII = view.findViewById(R.id.mTvEggII) as TextView
         val eggIII = view.findViewById(R.id.mTvEggIII) as TextView
 
-        viewModel.fetchBackpack(MainActivity.sPlayer.playerId).observe(this, Observer {
-            egg.text = it.egg.toString()
-            eggI.text = it.eggI.toString()
-            eggII.text = it.eggII.toString()
-            eggIII.text = it.eggIII.toString()
-        })
+//        viewModel.fetchBackpack(MainActivity.sPlayer.playerId).observe(this, Observer {
+//            egg.text = it.egg.toString()
+//            eggI.text = it.eggI.toString()
+//            eggII.text = it.eggII.toString()
+//            eggIII.text = it.eggIII.toString()
+//        })
     }
 
 }

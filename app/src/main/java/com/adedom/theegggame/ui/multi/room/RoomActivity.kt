@@ -31,7 +31,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
         init()
     }
 
-    override fun gameLoop() = fetchRoom()
+//    override fun gameLoop() = fetchRoom()
 
     private fun init() {
         this.setToolbar(toolbar, getString(R.string.multi_player), true)
@@ -49,19 +49,19 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
 
     private fun joinRoom(room: Room) {
         val playerId = MainActivity.sPlayer.playerId
-        viewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) {
-                startActivity(
-                    Intent(baseContext, RoomInfoActivity::class.java)
-                        .putExtra(ROOM, Room(null, room.room_no, room.name, room.people, TAIL))
-                )
-            } else {
-                baseContext.toast(R.string.full, Toast.LENGTH_LONG)
-            }
-        })
+//        viewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) {
+//                startActivity(
+//                    Intent(baseContext, RoomInfoActivity::class.java)
+//                        .putExtra(ROOM, Room(null, room.room_no, room.name, room.people, TAIL))
+//                )
+//            } else {
+//                baseContext.toast(R.string.full, Toast.LENGTH_LONG)
+//            }
+//        })
     }
 
-    private fun fetchRoom() = viewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
+//    private fun fetchRoom() = viewModel.getRooms().observe(this, Observer { mAdapter.setList(it) })
 
 }
 

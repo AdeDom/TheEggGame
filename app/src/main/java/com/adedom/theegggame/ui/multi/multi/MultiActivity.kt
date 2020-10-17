@@ -139,54 +139,54 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
     private fun setLatlng() {
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        viewModel.setLatlng(MainActivity.sPlayer.playerId!!, lat, lng).observe(this, Observer {
-            if (it.result == KEY_FAILED) sContext.failed()
-        })
+//        viewModel.setLatlng(MainActivity.sPlayer.playerId!!, lat, lng).observe(this, Observer {
+//            if (it.result == KEY_FAILED) sContext.failed()
+//        })
     }
 
     private fun fetchRoomInfo() {
-        viewModel.getRoomInfo().observe(this, Observer {
-            if (it != viewModel.roomInfoItems) {
-                viewModel.roomInfoItems = it as ArrayList<RoomInfo>
-                Player(viewModel.roomInfoItems, viewModel.markerPlayers)
-            }
-        })
+//        viewModel.getRoomInfo().observe(this, Observer {
+//            if (it != viewModel.roomInfoItems) {
+//                viewModel.roomInfoItems = it as ArrayList<RoomInfo>
+//                Player(viewModel.roomInfoItems, viewModel.markerPlayers)
+//            }
+//        })
     }
 
     private fun fetchMulti() {
-        viewModel.getMulti().observe(this, Observer {
-            if (it != viewModel.multiItems) {
-                viewModel.multiItems = it as ArrayList<Multi>
-                Item(viewModel.multiItems, viewModel.markerItems)
-            }
-        })
+//        viewModel.getMulti().observe(this, Observer {
+//            if (it != viewModel.multiItems) {
+//                viewModel.multiItems = it as ArrayList<Multi>
+//                Item(viewModel.multiItems, viewModel.markerItems)
+//            }
+//        })
     }
 
     private fun insertMulti() {
         val (lat, lng) = rndLatLng(sLatLng)
-        viewModel.insertMulti(lat, lng).observe(this, Observer {
-            if (it.result == KEY_FAILED) sContext.failed()
-        })
+//        viewModel.insertMulti(lat, lng).observe(this, Observer {
+//            if (it.result == KEY_FAILED) sContext.failed()
+//        })
     }
 
     private fun keepItemMulti(multiId: String) {
         //TODO keep item no double && i wants keep one only
 
-        viewModel.keepItemMulti(
-            multiId,
-            MainActivity.sPlayer.playerId,
-            sLatLng.latitude,
-            sLatLng.longitude
-        ).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) sContext.toast(R.string.the_egg_game)
-        })
+//        viewModel.keepItemMulti(
+//            multiId,
+//            MainActivity.sPlayer.playerId,
+//            sLatLng.latitude,
+//            sLatLng.longitude
+//        ).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) sContext.toast(R.string.the_egg_game)
+//        })
     }
 
     private fun fetchScore() {
-        viewModel.getScore().observe(this, Observer {
-            viewModel.scoreTeamA = it.teamA
-            viewModel.scoreTeamB = it.teamB
-        })
+//        viewModel.getScore().observe(this, Observer {
+//            viewModel.scoreTeamA = it.teamA
+//            viewModel.scoreTeamB = it.teamB
+//        })
     }
 
     //TODO fight game & values min player keep Item

@@ -115,9 +115,9 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
         val (myItem, values) = viewModel.getItemValues(index)
         val lat = sLatLng.latitude
         val lng = sLatLng.longitude
-        viewModel.keepItemSingle(playerId, myItem, values, lat, lng).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) sContext.toast(viewModel.itemMessages(myItem, values))
-        })
+//        viewModel.keepItemSingle(playerId, myItem, values, lat, lng).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) sContext.toast(viewModel.itemMessages(myItem, values))
+//        })
     }
 
 }

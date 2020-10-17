@@ -81,22 +81,22 @@ class MainActivity : GameActivity<MainActivityViewModel>() {
 
     private fun insertLogs() {
         val playerId = this.readPrefFile(KEY_PLAYER_ID)
-        viewModel.insertLogs(keyLogs, playerId).observe(this, Observer {
-            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
-        })
+//        viewModel.insertLogs(keyLogs, playerId).observe(this, Observer {
+//            if (it.result == KEY_COMPLETED) baseContext.toast(R.string.welcome)
+//        })
     }
 
     override fun gameLoop() {
-        viewModel.getPlayer(playerId!!).observe(this, Observer {
-            if (it.playerId == null) {
-                this.loginSuccess(LoginActivity::class.java, KEY_EMPTY, KEY_STRING)
-            } else {
-                sPlayer = it
-                setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)
-                mTvName.text = sPlayer.name
-                mTvLevel.text = getString(R.string.level, sPlayer.level)
-            }
-        })
+//        viewModel.getPlayer(playerId!!).observe(this, Observer {
+//            if (it.playerId == null) {
+//                this.loginSuccess(LoginActivity::class.java, KEY_EMPTY, KEY_STRING)
+//            } else {
+//                sPlayer = it
+//                setImageProfile(mIvProfile, sPlayer.image!!, sPlayer.gender!!)
+//                mTvName.text = sPlayer.name
+//                mTvLevel.text = getString(R.string.level, sPlayer.level)
+//            }
+//        })
     }
 
     override fun onBackPressed() = this.exitApplication()

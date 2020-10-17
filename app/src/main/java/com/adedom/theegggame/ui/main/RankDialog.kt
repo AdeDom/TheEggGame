@@ -55,8 +55,8 @@ class RankDialog : BaseDialogFragment<MainActivityViewModel>(
     }
 
     private fun fetchPlayers(search: String = KEY_STRING, limit: Int = 0) {
-        viewModel.rank(search, limit).observe(this, Observer {
-            mAdapter.setList(it)
-        })
+//        viewModel.rank(search, limit).observe(this, Observer {
+//            mAdapter.setList(it)
+//        })
     }
 }
