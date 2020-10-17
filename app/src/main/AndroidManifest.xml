@@ -5,6 +5,7 @@
         tools:ignore="LockedOrientationActivity">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -24,44 +25,15 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key" />
 
-<!--        <activity-->
-<!--                android:name=".ui.multi.multi.MultiActivity"-->
-<!--                android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--                android:name=".ui.multi.roominfo.RoomInfoActivity"-->
-<!--                android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--                android:name=".ui.multi.room.RoomActivity"-->
-<!--                android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--                android:name=".ui.single.SingleActivity"-->
-<!--                android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--                android:name=".ui.login.LoginActivity"-->
-<!--                android:screenOrientation="portrait" />-->
-<!--        <activity-->
-<!--                android:name=".ui.main.MainActivity"-->
-<!--                android:screenOrientation="portrait">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-        <activity android:name=".presentation.changeimage.ChangeImageActivity" />
-        <activity android:name=".presentation.changeprofile.ChangeProfileActivity" />
-        <activity android:name=".presentation.changepassword.ChangePasswordActivity" />
-        <activity android:name=".presentation.signup.SignUpActivity" />
-        <activity android:name=".presentation.signin.SignInActivity" />
-        <activity android:name=".presentation.splashscreen.SplashScreenActivity">
+        <activity
+                android:name=".presentation.main.MainActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.main.MainActivity" />
 
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
