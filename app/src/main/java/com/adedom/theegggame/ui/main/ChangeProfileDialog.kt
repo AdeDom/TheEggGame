@@ -35,7 +35,7 @@ class ChangeProfileDialog : BaseDialogFragment<MainActivityViewModel>(
         super.initDialog(view)
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        mPlayer = MainActivity.sPlayer
+//        mPlayer = MainActivity.sPlayer
 
         mGender = mPlayer.gender!!
 

@@ -2,11 +2,9 @@ package com.adedom.theegggame.ui.single
 
 import android.view.View
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.main.MainActivity
 
 class BackpackDialog : BaseDialogFragment<SingleActivityViewModel>(
     { R.layout.dialog_backpack },

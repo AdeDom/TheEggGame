@@ -29,39 +29,5 @@ class MainActivityViewModel : BaseViewModel() {
 //    fun insertLogs(key: String, playerId: String) =
 //        baseRepository.insertLogs(key, playerId)
 
-    fun writeFile() {
-        if (GameActivity.sContext.readPrefFile(SOUND_MUSIC) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(SOUND_MUSIC, SOUND_MUSIC_ON)
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DELIVERY) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_UNSUCCESSFUL)
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_SINGLE_GAME) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE_GAME, KEY_MISSION_UNSUCCESSFUL)
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_UNSUCCESSFUL)
-
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_MULTI_GAME) == KEY_STRING)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
-
-        //delivery
-        if (GameActivity.sContext.readPrefFile(KEY_MISSION_DATE) != getDateTime(KEY_DATE)) {
-            GameActivity.sContext.writePrefFile(KEY_MISSION_DATE, getDateTime(KEY_DATE))
-            GameActivity.sContext.writePrefFile(KEY_MISSION_DELIVERY, KEY_MISSION_UNSUCCESSFUL)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE, KEY_MISSION_UNSUCCESSFUL)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_SINGLE_GAME, KEY_MISSION_UNSUCCESSFUL)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI, KEY_MISSION_UNSUCCESSFUL)
-            GameActivity.sContext.writePrefFile(KEY_MISSION_MULTI_GAME, KEY_MISSION_UNSUCCESSFUL)
-        }
-
-    }
-
 }
 

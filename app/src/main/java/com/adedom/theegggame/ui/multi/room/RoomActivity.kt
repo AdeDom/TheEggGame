@@ -1,21 +1,12 @@
 package com.adedom.theegggame.ui.multi.room
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.recyclerGrid
 import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.KEY_COMPLETED
-import com.adedom.theegggame.util.ROOM
-import com.adedom.theegggame.util.TAIL
 import kotlinx.android.synthetic.main.activity_room.*
 
 class RoomActivity : GameActivity<RoomActivityViewModel>() {
@@ -48,7 +39,7 @@ class RoomActivity : GameActivity<RoomActivityViewModel>() {
     }
 
     private fun joinRoom(room: Room) {
-        val playerId = MainActivity.sPlayer.playerId
+//        val playerId = MainActivity.sPlayer.playerId
 //        viewModel.joinRoom(room.room_no!!, playerId).observe(this, Observer {
 //            if (it.result == KEY_COMPLETED) {
 //                startActivity(

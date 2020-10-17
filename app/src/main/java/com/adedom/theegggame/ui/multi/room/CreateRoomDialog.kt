@@ -1,23 +1,13 @@
 package com.adedom.theegggame.ui.multi.room
 
-import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.isEmpty
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.Room
-import com.adedom.theegggame.ui.main.MainActivity
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivity
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.HEAD
-import com.adedom.theegggame.util.KEY_FAILED
-import com.adedom.theegggame.util.ROOM
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
 class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
@@ -38,7 +28,7 @@ class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
         mNumberPicker = view.findViewById(R.id.mNumberPicker) as ScrollableNumberPicker
         mBtnCreateRoom = view.findViewById(R.id.mBtCreateRoom) as Button
 
-        mEtName.setText(MainActivity.sPlayer.name)
+//        mEtName.setText(MainActivity.sPlayer.name)
 
         mBtnCreateRoom.setOnClickListener { createRoom() }
     }
@@ -48,7 +38,7 @@ class CreateRoomDialog : BaseDialogFragment<RoomActivityViewModel>(
 
         val name = mEtName.getContent()
         val people = mNumberPicker.value.toString().trim()
-        val playerId = MainActivity.sPlayer.playerId
+//        val playerId = MainActivity.sPlayer.playerId
 //        viewModel.createRoom(name, people, playerId).observe(this, Observer {
 //            if (it.result == KEY_FAILED) {
 //                GameActivity.sContext.failed()

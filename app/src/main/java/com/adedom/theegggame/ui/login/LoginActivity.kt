@@ -1,17 +1,14 @@
 package com.adedom.theegggame.ui.login
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.failed
 import com.adedom.library.extension.getContent
 import com.adedom.library.extension.isEmpty
 import com.adedom.library.extension.readPrefFile
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_USERNAME
-import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
 import kotlinx.android.synthetic.main.activity_login.*
 

@@ -28,7 +28,7 @@ class ChangePasswordDialog : BaseDialogFragment<MainActivityViewModel>(
         super.initDialog(view)
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        mPlayer = MainActivity.sPlayer
+//        mPlayer = MainActivity.sPlayer
 
         mEtOldPassword = view.findViewById(R.id.mEtOldPassword) as EditText
         mEtNewPassword = view.findViewById(R.id.mEtNewPassword) as EditText

@@ -3,21 +3,16 @@ package com.adedom.theegggame.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.provider.MediaStore
 import android.view.View
 import android.widget.*
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.*
 import com.adedom.library.util.BaseDialogFragment
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.main.MainActivity
 import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.KEY_FAILED
 import com.adedom.theegggame.util.KEY_FEMALE
 import com.adedom.theegggame.util.KEY_MALE
-import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
