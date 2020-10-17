@@ -1,1 +1,2 @@
+include ':teg'
 include ':app'
