@@ -6,7 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.toast
+import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.signup.SignUpViewModel
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +23,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         }
 
         viewModel.signUpEvent.observe { response ->
-            context?.toast(response.message)
+            layoutRoot.snackbar(response.message)
             if (response.success) {
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
             }
