@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -30,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude('META-INF/io.netty.versions.properties')
+        exclude('META-INF/INDEX.LIST')
+    }
 }
 
 dependencies {
@@ -39,7 +45,40 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //Location & Map
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    //Image crop
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    //scroll
+    implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
+
+    // library & server
+    implementation project(path: ':teg')
+    implementation 'com.github.AdeDom:TheEggGame-Server:0.1.1'
+
+    // lifecycle MVVM
+    def lifecycle_version = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // koin dependencies injection
+    def koin_version= "2.1.6"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+
+    // facebook stetho logging network
+    def facebookStetho = "1.5.1"
+    implementation "com.facebook.stetho:stetho:$facebookStetho"
+    implementation "com.facebook.stetho:stetho-okhttp3:$facebookStetho"
+
+    // load image
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    // navigation graph
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

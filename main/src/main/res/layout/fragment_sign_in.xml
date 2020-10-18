@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/layoutRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+        <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="@dimen/imageLogo"
+                android:layout_height="@dimen/imageLogo"
+                android:src="@drawable/the_egg_game"
+                app:layout_constraintBottom_toTopOf="@+id/tvLogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+                android:id="@+id/tvLogo"
+                style="@style/TextViewLarge"
+                android:text="@string/app_name"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLogo">
+
+            <EditText
+                    android:id="@+id/etUsername"
+                    style="@style/EditText"
+                    android:hint="@string/username" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutUsername">
+
+            <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/EditTextPassword"
+                    android:hint="@string/password" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:id="@+id/btSignUp"
+                style="@style/Button"
+                android:text="@string/sign_up"
+                app:layout_constraintEnd_toStartOf="@+id/btSignIn"
+                app:layout_constraintStart_toStartOf="@+id/layoutPassword"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
+
+        <Button
+                android:id="@+id/btSignIn"
+                style="@style/Button"
+                android:text="@string/sign_in"
+                app:layout_constraintEnd_toEndOf="@+id/layoutPassword"
+                app:layout_constraintStart_toEndOf="@+id/btSignUp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

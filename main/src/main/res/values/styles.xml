@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">casual</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="TextViewLarge" parent="TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColor">#7986CB</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">casual</item>
+        <item name="android:layout_width">@dimen/mainLarge</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:background">@drawable/shape_edit</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/large</item>
+        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:fontFamily">casual</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+
+    <style name="EditTextPassword" parent="EditText">
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+</resources>
