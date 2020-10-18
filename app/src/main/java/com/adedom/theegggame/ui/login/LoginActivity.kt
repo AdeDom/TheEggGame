@@ -36,10 +36,6 @@ class LoginActivity : GameActivity<LoginActivityViewModel>() {
             sContext.playSoundClick()
         }
 
-        mTvForgotPassword.setOnClickListener {
-            baseContext.failed()
-            sContext.playSoundClick()
-        }
     }
 
     private fun login() {

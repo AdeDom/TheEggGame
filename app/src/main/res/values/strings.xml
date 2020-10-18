@@ -87,5 +87,7 @@
     <string name="exp">Experience point</string>
     <string name="mystery_box">Mystery Box</string>
     <string name="mystery_item">Mystery Item</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
 
 </resources>
