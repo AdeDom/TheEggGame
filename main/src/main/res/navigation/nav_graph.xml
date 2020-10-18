@@ -51,7 +51,11 @@
             android:id="@+id/signUpFragment"
             android:name="com.adedom.android.presentation.signup.SignUpFragment"
             android:label="SignUpFragment"
-            tools:layout="@layout/fragment_sign_up" />
+            tools:layout="@layout/fragment_sign_up">
+        <action
+                android:id="@+id/action_signUpFragment_to_imageProfileFragment"
+                app:destination="@id/imageProfileFragment" />
+    </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
             android:name="com.adedom.android.presentation.changepassword.ChangePasswordFragment"
@@ -67,4 +71,9 @@
             android:name="com.adedom.android.presentation.changeprofile.ChangeProfileFragment"
             android:label="ChangeProfileFragment"
             tools:layout="@layout/fragment_change_profile" />
+    <fragment
+            android:id="@+id/imageProfileFragment"
+            android:name="com.adedom.android.presentation.imageprofile.ImageProfileFragment"
+            android:label="ImageProfileFragment"
+            tools:layout="@layout/fragment_image_profile" />
 </navigation>

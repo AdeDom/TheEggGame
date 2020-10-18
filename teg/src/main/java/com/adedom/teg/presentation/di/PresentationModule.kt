@@ -3,6 +3,7 @@ package com.adedom.teg.presentation.di
 import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
+import com.adedom.teg.presentation.imageprofile.ImageProfileViewModel
 import com.adedom.teg.presentation.main.MainViewModel
 import com.adedom.teg.presentation.signin.SignInViewModel
 import com.adedom.teg.presentation.signup.SignUpViewModel
@@ -19,6 +20,7 @@ private val presentationModule = module {
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { ChangeProfileViewModel(get(), get()) }
     viewModel { ChangeImageViewModel(get(), get()) }
+    viewModel { ImageProfileViewModel(get(), get()) }
 
 }
 

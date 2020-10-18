@@ -28,9 +28,10 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         }
 
         viewModel.signUpEvent.observe { response ->
-            layoutRoot.snackbar(response.message)
             if (response.success) {
-                findNavController().navigate(R.id.action_global_splashScreenFragment)
+                findNavController().navigate(R.id.action_signUpFragment_to_imageProfileFragment)
+            } else {
+                layoutRoot.snackbar(response.message)
             }
         }
 
