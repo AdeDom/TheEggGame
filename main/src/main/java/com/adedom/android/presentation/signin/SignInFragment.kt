@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.snackbar
-import com.adedom.android.util.toast
 import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.presentation.signin.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -42,7 +41,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             if (response.success) {
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
             } else {
-                context?.toast(response.message)
+                layoutRoot.snackbar(response.message)
             }
         }
 

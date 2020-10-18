@@ -27,7 +27,7 @@
             android:id="@+id/signInFragment"
             android:name="com.adedom.android.presentation.signin.SignInFragment"
             android:label="SignInFragment"
-            tools:layout="@layout/fragment_sign_in" >
+            tools:layout="@layout/fragment_sign_in">
         <action
                 android:id="@+id/action_signInFragment_to_signUpFragment"
                 app:destination="@id/signUpFragment" />
@@ -36,10 +36,35 @@
             android:id="@+id/mainFragment"
             android:name="com.adedom.android.presentation.main.MainFragment"
             android:label="MainFragment"
-            tools:layout="@layout/fragment_main" />
+            tools:layout="@layout/fragment_main">
+        <action
+                android:id="@+id/action_mainFragment_to_changeProfileFragment"
+                app:destination="@id/changeProfileFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_changePasswordFragment"
+                app:destination="@id/changePasswordFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_changeImageFragment"
+                app:destination="@id/changeImageFragment" />
+    </fragment>
     <fragment
             android:id="@+id/signUpFragment"
             android:name="com.adedom.android.presentation.signup.SignUpFragment"
             android:label="SignUpFragment"
             tools:layout="@layout/fragment_sign_up" />
+    <fragment
+            android:id="@+id/changePasswordFragment"
+            android:name="com.adedom.android.presentation.changepassword.ChangePasswordFragment"
+            android:label="ChangePasswordFragment"
+            tools:layout="@layout/fragment_change_password" />
+    <fragment
+            android:id="@+id/changeImageFragment"
+            android:name="com.adedom.android.presentation.changeimage.ChangeImageFragment"
+            android:label="ChangeImageFragment"
+            tools:layout="@layout/fragment_change_image" />
+    <fragment
+            android:id="@+id/changeProfileFragment"
+            android:name="com.adedom.android.presentation.changeprofile.ChangeProfileFragment"
+            android:label="ChangeProfileFragment"
+            tools:layout="@layout/fragment_change_profile" />
 </navigation>
