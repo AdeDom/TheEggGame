@@ -3,24 +3,19 @@ package com.adedom.theegggame.ui.main
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
-import com.adedom.library.extension.dialogNegative
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.util.BaseDialogFragment
-import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.login.LoginActivity
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.SOUND_MUSIC
 import com.adedom.theegggame.util.SOUND_MUSIC_OFF
-import com.adedom.theegggame.util.extension.loginSuccess
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.adedom.theegggame.util.extension.setSoundMusic
 
 class SettingDialog : BaseDialogFragment<MainActivityViewModel>(
     { R.layout.dialog_setting },
-    {R.drawable.ic_setting},
-    {R.string.setting}
+    { R.drawable.ic_setting },
+    { R.string.setting }
 ) {
 
     override fun initDialog(view: View) {

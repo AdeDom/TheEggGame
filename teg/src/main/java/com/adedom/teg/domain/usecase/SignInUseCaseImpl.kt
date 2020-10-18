@@ -4,14 +4,16 @@ import com.adedom.teg.domain.Constant
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.presentation.usercase.SignInUseCase
-import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.models.request.SignInRequest
 import com.adedom.teg.models.response.SignInResponse
+import com.adedom.teg.presentation.usercase.SignInUseCase
+import com.adedom.teg.sharedpreference.service.PreferenceConfig
+import com.adedom.teg.sharedpreference.service.SessionManagerService
 
 class SignInUseCaseImpl(
     private val repository: DefaultTegRepository,
     private val sessionManagerService: SessionManagerService,
+    private val preferenceConfig: PreferenceConfig,
 ) : SignInUseCase {
 
     override suspend fun callSignIn(signIn: SignInRequest): Resource<SignInResponse> {
@@ -25,6 +27,8 @@ class SignInUseCaseImpl(
                     val refreshToken = response.token?.refreshToken.orEmpty()
                     sessionManagerService.accessToken = accessToken
                     sessionManagerService.refreshToken = refreshToken
+
+                    preferenceConfig.username = signIn.username.orEmpty()
                 }
             }
         }
@@ -52,6 +56,10 @@ class SignInUseCaseImpl(
 
     override fun validatePassword(password: String): Boolean {
         return password.isNotBlank() && password.length >= Constant.PASSWORD_LENGTH
+    }
+
+    override fun getConfigUsername(): String {
+        return preferenceConfig.username
     }
 
 }

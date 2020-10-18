@@ -2,12 +2,12 @@ package com.adedom.teg.presentation.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adedom.teg.presentation.usercase.SignInUseCase
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.models.request.SignInRequest
 import com.adedom.teg.models.response.SignInResponse
+import com.adedom.teg.presentation.usercase.SignInUseCase
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
@@ -61,6 +61,10 @@ class SignInViewModel(
             }
             setState { copy(loading = false) }
         }
+    }
+
+    fun getConfigUsername(): String {
+        return useCase.getConfigUsername()
     }
 
 }

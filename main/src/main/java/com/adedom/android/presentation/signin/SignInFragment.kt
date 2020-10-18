@@ -45,6 +45,12 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             }
         }
 
+        viewModel.attachFirstTime.observe {
+            val username = viewModel.getConfigUsername()
+            viewModel.setUsername(username)
+            etUsername.setText(username)
+        }
+
         viewModel.error.observeError()
 
         // set state

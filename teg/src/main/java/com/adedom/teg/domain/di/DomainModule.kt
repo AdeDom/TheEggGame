@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 private val domainModule = module {
 
-    single<SignInUseCase> { SignInUseCaseImpl(get(), get()) }
+    single<SignInUseCase> { SignInUseCaseImpl(get(), get(), get()) }
     single<SignUpUseCase> { SignUpUseCaseImpl(get(), get()) }
     single<SplashScreenUseCase> { SplashScreenUseCaseImpl(get()) }
     single<MainUseCase> { MainUseCaseImpl(get(), get()) }

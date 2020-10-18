@@ -1,10 +1,10 @@
 package com.adedom.theegggame.presentation.main
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.adedom.theegggame.R
-import com.adedom.theegggame.base.BaseActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

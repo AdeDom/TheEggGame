@@ -3,12 +3,11 @@ package com.adedom.theegggame.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.DialogFragment
 import com.adedom.library.extension.*
-import com.adedom.library.util.BaseDialogFragment
-import com.adedom.library.util.KEY_EMPTY
 import com.adedom.theegggame.R
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.KEY_FEMALE
@@ -16,11 +15,7 @@ import com.adedom.theegggame.util.KEY_MALE
 import com.adedom.theegggame.util.extension.playSoundClick
 import com.theartofdev.edmodo.cropper.CropImage
 
-class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
-    { R.layout.dialog_register },
-    { R.drawable.ic_player },
-    { R.string.register }
-) {
+class RegisterDialog : DialogFragment() {
 
     private lateinit var mEtUsername: EditText
     private lateinit var mEtPassword: EditText
@@ -33,9 +28,8 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
     private var gender = KEY_MALE
     private var mBitMap: Bitmap? = null
 
-    override fun initDialog(view: View) {
-        super.initDialog(view)
-        viewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         mEtUsername = view.findViewById(R.id.mEtUsername) as EditText
         mEtPassword = view.findViewById(R.id.mEtPassword) as EditText
@@ -105,19 +99,6 @@ class RegisterDialog : BaseDialogFragment<LoginActivityViewModel>(
                 getString(R.string.error_password_not_match)
             ) -> return
         }
-
-        val username = mEtUsername.getContent()
-        val password = mEtPassword.getContent()
-        val name = mEtName.getContent()
-        val image = if (mBitMap == null) KEY_EMPTY else mBitMap!!.imageToString()
-//        viewModel.register(username, password, name, image, gender)
-//            .observe(this, Observer {
-//                if (it.result == KEY_FAILED) {
-//                    GameActivity.sContext.toast(R.string.username_same_current, Toast.LENGTH_LONG)
-//                } else {
-//                    activity!!.loginSuccess(MainActivity::class.java, it.result!!, username)
-//                }
-//            })
     }
 
 }
