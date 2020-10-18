@@ -89,4 +89,6 @@
     <string name="mystery_item">Mystery Item</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="birth_date">Birth date</string>
+    <string name="back">Back</string>
 </resources>

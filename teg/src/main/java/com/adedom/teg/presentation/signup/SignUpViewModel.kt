@@ -2,12 +2,13 @@ package com.adedom.teg.presentation.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adedom.teg.presentation.usercase.SignUpUseCase
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
-import com.adedom.teg.models.request.SignUpRequest
+import com.adedom.teg.domain.model.SignUpModel
 import com.adedom.teg.models.response.SignInResponse
+import com.adedom.teg.presentation.usercase.SignUpUseCase
 import kotlinx.coroutines.launch
+import java.util.*
 
 class SignUpViewModel(
     private val useCase: SignUpUseCase
@@ -25,6 +26,10 @@ class SignUpViewModel(
         setState { copy(password = password) }
     }
 
+    fun setStateRePassword(rePassword: String) {
+        setState { copy(rePassword = rePassword) }
+    }
+
     fun setStateName(name: String) {
         setState { copy(name = name) }
     }
@@ -33,19 +38,25 @@ class SignUpViewModel(
         setState { copy(gender = gender) }
     }
 
-    fun setStateBirthDate(birthDate: String) {
-        setState { copy(birthDate = birthDate) }
+    fun setStateBirthDate(birthDate: Calendar) {
+        setState {
+            copy(
+                birthDateCalendar = birthDate,
+                birthDateString = useCase.getStringBirthDate(birthDate)
+            )
+        }
     }
 
     fun callSignUp() {
         launch {
             setState { copy(loading = true) }
-            val request = SignUpRequest(
+            val request = SignUpModel(
                 username = state.value?.username,
                 password = state.value?.password,
+                rePassword = state.value?.rePassword,
                 name = state.value?.name,
                 gender = state.value?.gender,
-                birthDate = state.value?.birthDate,
+                birthDate = state.value?.birthDateCalendar,
             )
             when (val resource = useCase.callSignUp(request)) {
                 is Resource.Success -> _signUpEvent.value = resource.data
