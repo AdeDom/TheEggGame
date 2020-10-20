@@ -11,4 +11,10 @@ interface ChangeProfileUseCase {
 
     fun getStringBirthDate(birthDate: Calendar?): String
 
+    fun getIntCalendarYear(date: String): Int
+
+    fun getIntCalendarMonth(date: String): Int
+
+    fun getIntCalendarDayOfMonth(date: String): Int
+
 }

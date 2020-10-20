@@ -45,6 +45,18 @@ class ChangeProfileViewModel(
         }
     }
 
+    fun getIntCalendarYear(date: String): Int {
+        return useCase.getIntCalendarYear(date)
+    }
+
+    fun getIntCalendarMonth(date: String): Int {
+        return useCase.getIntCalendarMonth(date)
+    }
+
+    fun getIntCalendarDayOfMonth(date: String): Int {
+        return useCase.getIntCalendarDayOfMonth(date)
+    }
+
     fun callChangeProfile() {
         launch {
             setState { copy(loading = true) }

@@ -7,6 +7,7 @@ import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.ChangeProfileRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.ChangeProfileUseCase
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ChangeProfileUseCaseImpl(
@@ -72,6 +73,21 @@ class ChangeProfileUseCaseImpl(
         val month = birthDate?.get(Calendar.MONTH)
         val dayOfMonth = birthDate?.get(Calendar.DAY_OF_MONTH)
         return "$dayOfMonth/${month?.plus(1)}/$year"
+    }
+
+    override fun getIntCalendarYear(date: String): Int {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+        return SimpleDateFormat("yyyy", Locale.ENGLISH).format(sdf.parse(date)).toInt()
+    }
+
+    override fun getIntCalendarMonth(date: String): Int {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+        return SimpleDateFormat("MM", Locale.ENGLISH).format(sdf.parse(date)).toInt().minus(1)
+    }
+
+    override fun getIntCalendarDayOfMonth(date: String): Int {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+        return SimpleDateFormat("dd", Locale.ENGLISH).format(sdf.parse(date)).toInt()
     }
 
 }

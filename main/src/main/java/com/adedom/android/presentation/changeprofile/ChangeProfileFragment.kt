@@ -12,7 +12,6 @@ import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
 import com.adedom.teg.util.TegConstant
 import kotlinx.android.synthetic.main.fragment_change_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
@@ -56,13 +55,7 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
         // event
         ivBirthDate.setOnClickListener {
             context?.let {
-                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
                 val birthDate = tvBirthDate.text.toString()
-                val date = sdf.parse(birthDate)
-                val yy = SimpleDateFormat("yyyy", Locale.ENGLISH).format(date).toInt()
-                val MM = SimpleDateFormat("MM", Locale.ENGLISH).format(date).toInt().minus(1)
-                val dd = SimpleDateFormat("dd", Locale.ENGLISH).format(date).toInt()
-
                 val calendar = Calendar.getInstance()
 
                 val dpd = DatePickerDialog(
@@ -71,9 +64,9 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
                         calendar.set(year, month, dayOfMonth)
                         viewModel.setStateBirthDateCalendar(calendar)
                     },
-                    yy,
-                    MM,
-                    dd
+                    viewModel.getIntCalendarYear(birthDate),
+                    viewModel.getIntCalendarMonth(birthDate),
+                    viewModel.getIntCalendarDayOfMonth(birthDate),
                 )
 
                 dpd.show()
