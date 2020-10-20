@@ -40,6 +40,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_settingDialog"
                 app:destination="@id/settingDialog" />
+        <action
+                android:id="@+id/action_mainFragment_to_aboutDialog"
+                app:destination="@id/aboutDialog" />
     </fragment>
     <fragment
             android:id="@+id/signUpFragment"
@@ -74,7 +77,7 @@
             android:id="@+id/settingDialog"
             android:name="com.adedom.android.presentation.main.SettingDialog"
             android:label="SettingDialog"
-            tools:layout="@layout/dialog_setting" >
+            tools:layout="@layout/dialog_setting">
         <action
                 android:id="@+id/action_settingDialog_to_changePasswordFragment"
                 app:destination="@id/changePasswordFragment" />
@@ -85,4 +88,9 @@
                 android:id="@+id/action_settingDialog_to_changeProfileFragment"
                 app:destination="@id/changeProfileFragment" />
     </dialog>
+    <dialog
+            android:id="@+id/aboutDialog"
+            android:name="com.adedom.android.presentation.main.AboutDialog"
+            android:label="AboutDialog"
+            tools:layout="@layout/dialog_about" />
 </navigation>

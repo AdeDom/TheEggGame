@@ -33,6 +33,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         viewModel.fetchPlayerInfo()
 
+        ivAbout.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_aboutDialog)
+        }
+
         ivSetting.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_settingDialog)
         }
