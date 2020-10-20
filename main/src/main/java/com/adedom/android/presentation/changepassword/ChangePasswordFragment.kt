@@ -33,7 +33,11 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
         etNewPassword.addTextChangedListener { viewModel.setStateNewPassword(it.toString()) }
         etReNewPassword.addTextChangedListener { viewModel.setStateReNewPassword(it.toString()) }
 
-        btChangepassword.setOnClickListener {
+        btBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        btChangePassword.setOnClickListener {
             viewModel.callChangePassword()
         }
     }
