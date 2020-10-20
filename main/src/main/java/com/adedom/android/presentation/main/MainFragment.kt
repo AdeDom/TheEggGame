@@ -2,6 +2,7 @@ package com.adedom.android.presentation.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.setImageCircle
@@ -32,22 +33,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         viewModel.fetchPlayerInfo()
 
-//        btSignOut.setOnClickListener {
-//            viewModel.signOut()
-//            findNavController().navigate(R.id.action_global_splashScreenFragment)
-//        }
-//
-//        btChangePassword.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment_to_changePasswordFragment)
-//        }
-//
-//        btChangeProfile.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment_to_changeProfileFragment)
-//        }
-//
-//        btChangeImageProfile.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment_to_changeImageFragment)
-//        }
+        ivSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_settingDialog)
+        }
     }
 
 }

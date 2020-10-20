@@ -95,4 +95,7 @@
     <string name="image_profile">Image profile</string>
     <string name="select_image_profile">Select image profile</string>
     <string name="upload_image_profile">Upload image profile</string>
+    <string name="exit">Exit</string>
+    <string name="sign_out">Sign out</string>
+    <string name="change_image_profile">Change image profile</string>
 </resources>
