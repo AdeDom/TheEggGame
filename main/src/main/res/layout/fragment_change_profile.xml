@@ -4,44 +4,127 @@
         android:id="@+id/layoutRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:background="@drawable/shape_bg">
 
-    <EditText
-            android:id="@+id/etName"
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:hint="Name"
+            android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/change_profile" />
 
-    <EditText
-            android:id="@+id/etGender"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Gender"
+            android:padding="@dimen/large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <EditText
-            android:id="@+id/etBirthDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Birth date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etGender" />
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit"
+                    android:hint="@string/name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+                android:id="@+id/tvGender"
+                style="@style/TextView"
+                android:layout_marginTop="8dp"
+                android:text="@string/gender"
+                app:layout_constraintBottom_toBottomOf="@+id/layoutGender"
+                app:layout_constraintEnd_toStartOf="@+id/layoutGender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutName" />
+
+        <RadioGroup
+                android:id="@+id/layoutGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/layoutName"
+                app:layout_constraintStart_toEndOf="@id/tvGender"
+                app:layout_constraintTop_toTopOf="@+id/tvGender">
+
+            <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/male" />
+
+            <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female" />
+
+        </RadioGroup>
+
+        <TextView
+                android:id="@+id/layoutBirthDate"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/birth_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+        <TextView
+                android:id="@+id/tvBirthDate"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/birth_date"
+                app:layout_constraintEnd_toStartOf="@+id/ivBirthDate"
+                app:layout_constraintStart_toEndOf="@+id/layoutBirthDate"
+                app:layout_constraintTop_toTopOf="@+id/layoutBirthDate" />
+
+        <ImageView
+                android:id="@+id/ivBirthDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_calendar_today"
+                app:layout_constraintBottom_toBottomOf="@+id/layoutBirthDate"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+            android:id="@+id/btBack"
+            style="@style/Button"
+            android:layout_marginBottom="16dp"
+            android:text="@string/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btChangeProfile"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <Button
             android:id="@+id/btChangeProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change profile"
+            style="@style/Button"
+            android:layout_width="200dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/change_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etBirthDate" />
+            app:layout_constraintStart_toEndOf="@+id/btBack" />
 
     <ProgressBar
             android:id="@+id/progressBar"

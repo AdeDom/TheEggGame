@@ -1,5 +1,6 @@
 package com.adedom.android.presentation.changeprofile
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -8,8 +9,11 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
+import com.adedom.teg.util.TegConstant
 import kotlinx.android.synthetic.main.fragment_change_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
 
@@ -20,14 +24,22 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
 
         viewModel.state.observe { state ->
             progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+
+            tvBirthDate.text = state.birthDateString
         }
 
         viewModel.playerInfo.observe(viewLifecycleOwner, { playerInfo ->
             if (playerInfo == null) return@observe
 
             etName.setText(playerInfo.name)
-            etGender.setText(playerInfo.gender)
-            etBirthDate.setText(playerInfo.birthDate)
+            when (playerInfo.gender) {
+                TegConstant.GENDER_MALE -> rbMale.isChecked = true
+                TegConstant.GENDER_FEMALE -> rbFemale.isChecked = true
+            }
+            tvBirthDate.text = playerInfo.birthDate
+
+            playerInfo.gender?.let { viewModel.setStateGender(it) }
+            playerInfo.birthDate?.let { viewModel.setStateBirthDateString(it) }
         })
 
         viewModel.changeProfileEvent.observe { response ->
@@ -38,8 +50,39 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
         }
 
         etName.addTextChangedListener { viewModel.setStateName(it.toString()) }
-        etGender.addTextChangedListener { viewModel.setStateGender(it.toString()) }
-        etBirthDate.addTextChangedListener { viewModel.setStateBirthDate(it.toString()) }
+        rbMale.setOnClickListener { viewModel.setStateGender(TegConstant.GENDER_MALE) }
+        rbFemale.setOnClickListener { viewModel.setStateGender(TegConstant.GENDER_FEMALE) }
+
+        // event
+        ivBirthDate.setOnClickListener {
+            context?.let {
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                val birthDate = tvBirthDate.text.toString()
+                val date = sdf.parse(birthDate)
+                val yy = SimpleDateFormat("yyyy", Locale.ENGLISH).format(date).toInt()
+                val MM = SimpleDateFormat("MM", Locale.ENGLISH).format(date).toInt().minus(1)
+                val dd = SimpleDateFormat("dd", Locale.ENGLISH).format(date).toInt()
+
+                val calendar = Calendar.getInstance()
+
+                val dpd = DatePickerDialog(
+                    it,
+                    { _, year, month, dayOfMonth ->
+                        calendar.set(year, month, dayOfMonth)
+                        viewModel.setStateBirthDateCalendar(calendar)
+                    },
+                    yy,
+                    MM,
+                    dd
+                )
+
+                dpd.show()
+            }
+        }
+
+        btBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         btChangeProfile.setOnClickListener {
             viewModel.callChangeProfile()

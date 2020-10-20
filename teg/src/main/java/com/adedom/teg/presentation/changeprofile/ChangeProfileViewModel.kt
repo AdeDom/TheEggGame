@@ -2,14 +2,15 @@ package com.adedom.teg.presentation.changeprofile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adedom.teg.presentation.usercase.ChangeProfileUseCase
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
+import com.adedom.teg.domain.model.ChangeProfileModel
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.models.request.ChangeProfileRequest
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.presentation.usercase.ChangeProfileUseCase
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ChangeProfileViewModel(
     private val useCase: ChangeProfileUseCase,
@@ -31,18 +32,28 @@ class ChangeProfileViewModel(
         setState { copy(gender = gender) }
     }
 
-    fun setStateBirthDate(birthDate: String) {
-        setState { copy(birthDate = birthDate) }
+    fun setStateBirthDateString(birthDateString: String) {
+        setState { copy(birthDateString = birthDateString) }
+    }
+
+    fun setStateBirthDateCalendar(birthDateCalendar: Calendar) {
+        setState {
+            copy(
+                birthDateCalendar = birthDateCalendar,
+                birthDateString = useCase.getStringBirthDate(birthDateCalendar)
+            )
+        }
     }
 
     fun callChangeProfile() {
         launch {
             setState { copy(loading = true) }
 
-            val request = ChangeProfileRequest(
+            val request = ChangeProfileModel(
                 name = state.value?.name,
                 gender = state.value?.gender,
-                birthDate = state.value?.birthDate,
+                birthDateString = state.value?.birthDateString,
+                birthDateCalendar = state.value?.birthDateCalendar,
             )
 
             when (val resource = useCase.callChangeProfile(request)) {

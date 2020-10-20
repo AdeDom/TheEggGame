@@ -1,18 +1,25 @@
 package com.adedom.teg.domain.usecase
 
-import com.adedom.teg.domain.Resource
-import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.presentation.usercase.ChangeProfileUseCase
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.domain.Resource
+import com.adedom.teg.domain.model.ChangeProfileModel
+import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.ChangeProfileRequest
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.presentation.usercase.ChangeProfileUseCase
+import java.util.*
 
 class ChangeProfileUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : ChangeProfileUseCase {
 
-    override suspend fun callChangeProfile(changeProfile: ChangeProfileRequest): Resource<BaseResponse> {
-        val resource = repository.callChangeProfile(changeProfile)
+    override suspend fun callChangeProfile(changeProfile: ChangeProfileModel): Resource<BaseResponse> {
+        val request = ChangeProfileRequest(
+            name = changeProfile.name,
+            gender = changeProfile.gender,
+            birthDate = getBirthDate(changeProfile)
+        )
+        val resource = repository.callChangeProfile(request)
 
         when (resource) {
             is Resource.Success -> {
@@ -24,6 +31,14 @@ class ChangeProfileUseCaseImpl(
         }
 
         return resource
+    }
+
+    private fun getBirthDate(changeProfile: ChangeProfileModel): String? {
+        return if (changeProfile.birthDateCalendar == null) {
+            changeProfile.birthDateString
+        } else {
+            getStringBirthDate(changeProfile.birthDateCalendar)
+        }
     }
 
     private suspend fun callFetchPlayerInfo() {
@@ -50,6 +65,13 @@ class ChangeProfileUseCaseImpl(
             }
             is Resource.Error -> callFetchPlayerInfo()
         }
+    }
+
+    override fun getStringBirthDate(birthDate: Calendar?): String {
+        val year = birthDate?.get(Calendar.YEAR)
+        val month = birthDate?.get(Calendar.MONTH)
+        val dayOfMonth = birthDate?.get(Calendar.DAY_OF_MONTH)
+        return "$dayOfMonth/${month?.plus(1)}/$year"
     }
 
 }
