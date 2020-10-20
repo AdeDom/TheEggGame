@@ -39,17 +39,20 @@ class ChangeImageFragment : BaseFragment(R.layout.fragment_change_image) {
             }
         }
 
-        ivImageProfile.setOnClickListener {
-            Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-                val mimeTypes = arrayOf("image/jpeg", "image/png")
-                putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-                startActivityForResult(this, REQUEST_CODE_IMAGE)
-            }
-        }
+        ivImageProfile.setOnClickListener { selectImage() }
+        btSelectImageProfile.setOnClickListener { selectImage() }
 
         btChangeImageProfile.setOnClickListener {
             viewModel.callChangeImageProfile()
+        }
+    }
+
+    private fun selectImage() {
+        Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            val mimeTypes = arrayOf("image/jpeg", "image/png")
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(this, REQUEST_CODE_IMAGE)
         }
     }
 
