@@ -1,11 +1,11 @@
 package com.adedom.teg.presentation.main
 
 import androidx.lifecycle.LiveData
-import com.adedom.teg.presentation.usercase.MainUseCase
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.presentation.usercase.MainUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -37,6 +37,22 @@ class MainViewModel(
         launch {
             val signOut = useCase.signOut()
             if (!signOut) signOut()
+        }
+    }
+
+    fun callLogActiveOn() {
+        launch {
+            when (val resource = repository.callLogActiveOn()) {
+                is Resource.Error -> setError(resource)
+            }
+        }
+    }
+
+    fun callLogActiveOff() {
+        launch {
+            when (val resource = repository.callLogActiveOff()) {
+                is Resource.Error -> setError(resource)
+            }
         }
     }
 

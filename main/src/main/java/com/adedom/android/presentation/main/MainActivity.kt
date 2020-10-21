@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewModel.callLogActiveOn()
+
         viewModel.error.observe(this, {
             it.throwable.printStackTrace()
             toast(it.throwable.message)
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         viewModel.callPlayerState(TegConstant.STATE_OFFLINE)
+        viewModel.callLogActiveOff()
     }
 
 }

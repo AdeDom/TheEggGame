@@ -19,7 +19,7 @@ class SplashScreenFragment : BaseFragment(R.layout.fragment_splash_screen) {
             if (viewModel.initialize()) {
                 findNavController().navigate(R.id.action_splashScreenFragment_to_mainFragment)
             } else {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_signInFragment)
+                findNavController().navigate(R.id.action_splashScreenFragment_to_authActivity)
             }
         }
 
