@@ -1,6 +1,7 @@
 package com.adedom.teg.data.network.source
 
 import androidx.lifecycle.LiveData
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -15,6 +16,14 @@ interface TegDataSource {
     fun getDbPlayerInfoLiveData(): LiveData<PlayerInfoEntity>
 
     suspend fun deletePlayerInfo()
+
+    suspend fun saveBackpack(backpack: BackpackEntity)
+
+    suspend fun getDbBackpack(): BackpackEntity?
+
+    fun getDbBackpackLiveData(): LiveData<BackpackEntity>
+
+    suspend fun deleteBackpack()
 
     suspend fun callSignIn(signIn: SignInRequest): SignInResponse
 

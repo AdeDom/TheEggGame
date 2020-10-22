@@ -2,6 +2,7 @@ package com.adedom.teg.data.repository
 
 import androidx.lifecycle.LiveData
 import com.adedom.teg.base.BaseRepository
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.domain.Resource
@@ -28,6 +29,22 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun deletePlayerInfo() {
         return dataSource.deletePlayerInfo()
+    }
+
+    override suspend fun saveBackpack(backpack: BackpackEntity) {
+        return dataSource.saveBackpack(backpack)
+    }
+
+    override suspend fun getDbBackpack(): BackpackEntity? {
+        return dataSource.getDbBackpack()
+    }
+
+    override fun getDbBackpackLiveData(): LiveData<BackpackEntity> {
+        return dataSource.getDbBackpackLiveData()
+    }
+
+    override suspend fun deleteBackpack() {
+        return dataSource.deleteBackpack()
     }
 
     override suspend fun callSignIn(signIn: SignInRequest): Resource<SignInResponse> {

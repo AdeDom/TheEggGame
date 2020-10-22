@@ -21,11 +21,15 @@ class BackpackFragment : BaseFragment(R.layout.fragment_backpack) {
 
         viewModel.state.observe { state ->
             progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
-
-            tvEggI.text = state.backpack?.eggI.toString()
-            tvEggII.text = state.backpack?.eggII.toString()
-            tvEggIII.text = state.backpack?.eggIII.toString()
         }
+
+        viewModel.getDbBackpackLiveData.observe(viewLifecycleOwner, { backpack ->
+            if (backpack == null) return@observe
+
+            tvEggI.text = backpack.eggI.toString()
+            tvEggII.text = backpack.eggII.toString()
+            tvEggIII.text = backpack.eggIII.toString()
+        })
 
         viewModel.error.observeError()
     }

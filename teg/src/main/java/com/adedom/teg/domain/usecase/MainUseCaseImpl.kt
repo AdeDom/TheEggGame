@@ -1,9 +1,9 @@
 package com.adedom.teg.domain.usecase
 
+import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.presentation.usercase.MainUseCase
-import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 
 class MainUseCaseImpl(
@@ -37,6 +37,7 @@ class MainUseCaseImpl(
         sessionManagerService.accessToken = ""
         sessionManagerService.refreshToken = ""
         repository.deletePlayerInfo()
+        repository.deleteBackpack()
         return true
     }
 

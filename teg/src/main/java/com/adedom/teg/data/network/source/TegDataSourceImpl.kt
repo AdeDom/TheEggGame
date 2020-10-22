@@ -2,6 +2,7 @@ package com.adedom.teg.data.network.source
 
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.AppDatabase
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -26,6 +27,22 @@ class TegDataSourceImpl(
 
     override suspend fun deletePlayerInfo() {
         return db.getPlayerInfoDao().deletePlayerInfo()
+    }
+
+    override suspend fun saveBackpack(backpack: BackpackEntity) {
+        return db.getBackpackDao().saveBackpack(backpack)
+    }
+
+    override suspend fun getDbBackpack(): BackpackEntity? {
+        return db.getBackpackDao().getDbBackpack()
+    }
+
+    override fun getDbBackpackLiveData(): LiveData<BackpackEntity> {
+        return db.getBackpackDao().getDbBackpackLiveData()
+    }
+
+    override suspend fun deleteBackpack() {
+        return db.getBackpackDao().deleteBackpack()
     }
 
     override suspend fun callSignIn(signIn: SignInRequest): SignInResponse {

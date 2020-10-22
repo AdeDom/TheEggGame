@@ -6,12 +6,15 @@ import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.teg.presentation.single.SingleViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_single.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SingleFragment : BaseFragment(R.layout.fragment_single), OnMapReadyCallback {
 
+    private val viewModel by viewModel<SingleViewModel>()
     private var mGoogleMap: GoogleMap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,16 @@ class SingleFragment : BaseFragment(R.layout.fragment_single), OnMapReadyCallbac
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        viewModel.state.observe { state ->
+            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+        }
+
+        viewModel.error.observeError()
+
+        btItem.setOnClickListener {
+            viewModel.callItemCollection()
+        }
 
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)

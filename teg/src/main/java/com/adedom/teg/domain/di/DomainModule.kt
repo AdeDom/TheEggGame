@@ -13,6 +13,8 @@ private val domainModule = module {
     single<ChangePasswordUseCase> { ChangePasswordUseCaseImpl(get(), get()) }
     single<ChangeProfileUseCase> { ChangeProfileUseCaseImpl(get()) }
     single<ChangeImageUseCase> { ChangeImageUseCaseImpl(get()) }
+    single<SingleUseCase> { SingleUseCaseImpl(get()) }
+    single<BackpackUseCase> { BackpackUseCaseImpl(get()) }
 
 }
 

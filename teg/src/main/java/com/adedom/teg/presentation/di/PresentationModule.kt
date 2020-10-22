@@ -1,5 +1,6 @@
 package com.adedom.teg.presentation.di
 
+import com.adedom.teg.presentation.backpack.BackpackViewModel
 import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
@@ -9,7 +10,7 @@ import com.adedom.teg.presentation.rank.RankViewModel
 import com.adedom.teg.presentation.setting.SettingViewModel
 import com.adedom.teg.presentation.signin.SignInViewModel
 import com.adedom.teg.presentation.signup.SignUpViewModel
-import com.adedom.teg.presentation.backpack.BackpackViewModel
+import com.adedom.teg.presentation.single.SingleViewModel
 import com.adedom.teg.presentation.splashscreen.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -29,8 +30,9 @@ private val presentationModule = module {
     viewModel { ChangeImageViewModel(get(), get()) }
     viewModel { ImageProfileViewModel(get(), get()) }
     viewModel { RankViewModel(get()) }
-    viewModel { BackpackViewModel(get()) }
+    viewModel { BackpackViewModel(get(), get()) }
     viewModel { SettingViewModel(get()) }
+    viewModel { SingleViewModel(get()) }
 
 }
 

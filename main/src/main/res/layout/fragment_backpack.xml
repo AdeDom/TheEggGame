@@ -6,23 +6,6 @@
         android:background="@drawable/shape_bg">
 
     <ImageView
-            android:id="@+id/ivEgg"
-            android:layout_width="@dimen/imageLogo"
-            android:layout_height="@dimen/imageLogo"
-            android:src="@drawable/ic_egg"
-            app:layout_constraintEnd_toStartOf="@+id/tvEgg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/tvEgg"
-            style="@style/TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEgg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivEgg"
-            app:layout_constraintTop_toTopOf="@+id/ivEgg" />
-
-    <ImageView
             android:id="@+id/ivEggI"
             android:layout_width="@dimen/imageLogo"
             android:layout_height="@dimen/imageLogo"
@@ -30,7 +13,7 @@
             android:src="@drawable/ic_egg_i"
             app:layout_constraintEnd_toStartOf="@+id/tvEggI"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivEgg" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/tvEggI"

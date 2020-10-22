@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.adedom.teg.data.db.dao.BackpackDao
 import com.adedom.teg.data.db.dao.PlayerInfoDao
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 
-@Database(entities = [PlayerInfoEntity::class], version = 1)
+@Database(entities = [PlayerInfoEntity::class, BackpackEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getPlayerInfoDao(): PlayerInfoDao
+    abstract fun getBackpackDao(): BackpackDao
 
     companion object {
         @Volatile

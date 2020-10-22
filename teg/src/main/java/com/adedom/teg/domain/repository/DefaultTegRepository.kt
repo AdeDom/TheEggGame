@@ -1,6 +1,7 @@
 package com.adedom.teg.domain.repository
 
 import androidx.lifecycle.LiveData
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
@@ -16,6 +17,14 @@ interface DefaultTegRepository {
     fun getDbPlayerInfoLiveData(): LiveData<PlayerInfoEntity>
 
     suspend fun deletePlayerInfo()
+
+    suspend fun saveBackpack(backpack: BackpackEntity)
+
+    suspend fun getDbBackpack(): BackpackEntity?
+
+    fun getDbBackpackLiveData(): LiveData<BackpackEntity>
+
+    suspend fun deleteBackpack()
 
     suspend fun callSignIn(signIn: SignInRequest): Resource<SignInResponse>
 
