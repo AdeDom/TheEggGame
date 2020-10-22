@@ -98,4 +98,5 @@
     <string name="exit">Exit</string>
     <string name="sign_out">Sign out</string>
     <string name="change_image_profile">Change image profile</string>
+    <string name="hide">Hide</string>
 </resources>
