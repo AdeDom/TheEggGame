@@ -1,15 +1,13 @@
 package com.adedom.android.presentation.main
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.adedom.android.R
-import com.adedom.android.util.toast
+import com.adedom.android.base.BaseLocationActivity
 import com.adedom.teg.presentation.main.MainViewModel
 import com.adedom.teg.util.TegConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseLocationActivity() {
 
     private val viewModel by viewModel<MainViewModel>()
 
@@ -19,10 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.callLogActiveOn()
 
-        viewModel.error.observe(this, {
-            it.throwable.printStackTrace()
-            toast(it.throwable.message, Toast.LENGTH_LONG)
-        })
+        viewModel.error.observeError()
     }
 
     override fun onResume() {
