@@ -36,6 +36,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_rankFragment"
                 app:destination="@id/rankFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_singleFragment"
+                app:destination="@id/singleFragment" />
     </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
@@ -82,4 +85,9 @@
             android:name="com.adedom.android.presentation.rank.RankFragment"
             android:label="RankFragment"
             tools:layout="@layout/fragment_rank" />
+    <fragment
+            android:id="@+id/singleFragment"
+            android:name="com.adedom.android.presentation.single.SingleFragment"
+            android:label="SingleFragment"
+            tools:layout="@layout/fragment_single" />
 </navigation>

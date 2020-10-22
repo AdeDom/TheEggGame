@@ -33,6 +33,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         viewModel.fetchPlayerInfo()
 
+        btSingle.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_singleFragment)
+        }
+
         ivRank.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_rankFragment)
         }
