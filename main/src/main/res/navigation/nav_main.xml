@@ -33,6 +33,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_aboutDialog"
                 app:destination="@id/aboutDialog" />
+        <action
+                android:id="@+id/action_mainFragment_to_rankFragment"
+                app:destination="@id/rankFragment" />
     </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
@@ -74,4 +77,9 @@
             android:name="com.adedom.android.presentation.auth.AuthActivity"
             android:label="activity_auth"
             tools:layout="@layout/activity_auth" />
+    <fragment
+            android:id="@+id/rankFragment"
+            android:name="com.adedom.android.presentation.rank.RankFragment"
+            android:label="RankFragment"
+            tools:layout="@layout/fragment_rank" />
 </navigation>

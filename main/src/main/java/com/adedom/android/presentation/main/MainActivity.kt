@@ -1,6 +1,7 @@
 package com.adedom.android.presentation.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.adedom.android.R
 import com.adedom.android.util.toast
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.error.observe(this, {
             it.throwable.printStackTrace()
-            toast(it.throwable.message)
+            toast(it.throwable.message, Toast.LENGTH_LONG)
         })
     }
 
