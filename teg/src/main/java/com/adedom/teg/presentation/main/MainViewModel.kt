@@ -33,13 +33,6 @@ class MainViewModel(
         }
     }
 
-    fun signOut() {
-        launch {
-            val signOut = useCase.signOut()
-            if (!signOut) signOut()
-        }
-    }
-
     fun callLogActiveOn() {
         launch {
             when (val resource = repository.callLogActiveOn()) {

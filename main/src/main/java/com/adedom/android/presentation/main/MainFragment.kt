@@ -42,11 +42,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
 
         ivAbout.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_aboutDialog)
+            findNavController().navigate(R.id.action_mainFragment_to_aboutFragment)
         }
 
         ivSetting.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_settingDialog)
+            findNavController().navigate(R.id.action_mainFragment_to_settingFragment)
         }
     }
 

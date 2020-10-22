@@ -28,11 +28,11 @@
             android:label="MainFragment"
             tools:layout="@layout/fragment_main">
         <action
-                android:id="@+id/action_mainFragment_to_settingDialog"
-                app:destination="@id/settingDialog" />
+                android:id="@+id/action_mainFragment_to_settingFragment"
+                app:destination="@id/settingFragment" />
         <action
-                android:id="@+id/action_mainFragment_to_aboutDialog"
-                app:destination="@id/aboutDialog" />
+                android:id="@+id/action_mainFragment_to_aboutFragment"
+                app:destination="@id/aboutFragment" />
         <action
                 android:id="@+id/action_mainFragment_to_rankFragment"
                 app:destination="@id/rankFragment" />
@@ -55,26 +55,26 @@
             android:name="com.adedom.android.presentation.changeprofile.ChangeProfileFragment"
             android:label="ChangeProfileFragment"
             tools:layout="@layout/fragment_change_profile" />
-    <dialog
-            android:id="@+id/settingDialog"
-            android:name="com.adedom.android.presentation.main.SettingDialog"
-            android:label="SettingDialog"
-            tools:layout="@layout/dialog_setting">
+    <fragment
+            android:id="@+id/settingFragment"
+            android:name="com.adedom.android.presentation.setting.SettingFragment"
+            android:label="SettingFragment"
+            tools:layout="@layout/fragment_setting">
         <action
-                android:id="@+id/action_settingDialog_to_changePasswordFragment"
+                android:id="@+id/action_settingFragment_to_changePasswordFragment"
                 app:destination="@id/changePasswordFragment" />
         <action
-                android:id="@+id/action_settingDialog_to_changeImageFragment"
+                android:id="@+id/action_settingFragment_to_changeImageFragment"
                 app:destination="@id/changeImageFragment" />
         <action
-                android:id="@+id/action_settingDialog_to_changeProfileFragment"
+                android:id="@+id/action_settingFragment_to_changeProfileFragment"
                 app:destination="@id/changeProfileFragment" />
-    </dialog>
-    <dialog
-            android:id="@+id/aboutDialog"
-            android:name="com.adedom.android.presentation.main.AboutDialog"
-            android:label="AboutDialog"
-            tools:layout="@layout/dialog_about" />
+    </fragment>
+    <fragment
+            android:id="@+id/aboutFragment"
+            android:name="com.adedom.android.presentation.about.AboutFragment"
+            android:label="AboutFragment"
+            tools:layout="@layout/fragment_about" />
     <activity
             android:id="@+id/authActivity"
             android:name="com.adedom.android.presentation.auth.AuthActivity"
@@ -94,9 +94,9 @@
                 android:id="@+id/action_singleFragment_to_backpackFragment"
                 app:destination="@id/backpackFragment" />
     </fragment>
-    <dialog
+    <fragment
             android:id="@+id/backpackFragment"
-            android:name="com.adedom.android.presentation.single.BackpackDialog"
+            android:name="com.adedom.android.presentation.backpack.BackpackFragment"
             android:label="BackpackFragment"
-            tools:layout="@layout/dialog_backpack" />
+            tools:layout="@layout/fragment_backpack" />
 </navigation>

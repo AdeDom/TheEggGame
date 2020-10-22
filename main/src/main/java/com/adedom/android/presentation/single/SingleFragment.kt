@@ -45,11 +45,6 @@ class SingleFragment : BaseFragment(R.layout.fragment_single), OnMapReadyCallbac
         mapView.onPause()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-    }
-
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()

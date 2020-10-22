@@ -2,19 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_bg"
         android:padding="@dimen/large">
-
-    <Button
-            android:id="@+id/btHide"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="@string/hide"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
             android:id="@+id/ivChangeProfile"
@@ -22,7 +12,7 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_change_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btHide" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
             android:id="@+id/btChangeProfile"

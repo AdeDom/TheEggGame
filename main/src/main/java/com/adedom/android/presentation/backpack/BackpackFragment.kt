@@ -1,17 +1,16 @@
-package com.adedom.android.presentation.single
+package com.adedom.android.presentation.backpack
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
-import com.adedom.android.base.BaseDialogFragment
-import com.adedom.teg.presentation.single.SingleViewModel
-import kotlinx.android.synthetic.main.dialog_backpack.*
+import com.adedom.android.base.BaseFragment
+import com.adedom.teg.presentation.backpack.BackpackViewModel
+import kotlinx.android.synthetic.main.fragment_backpack.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BackpackDialog : BaseDialogFragment(R.layout.dialog_backpack) {
+class BackpackFragment : BaseFragment(R.layout.fragment_backpack) {
 
-    private val viewModel by viewModel<SingleViewModel>()
+    private val viewModel by viewModel<BackpackViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,10 +28,6 @@ class BackpackDialog : BaseDialogFragment(R.layout.dialog_backpack) {
         }
 
         viewModel.error.observeError()
-
-        btHide.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
 }

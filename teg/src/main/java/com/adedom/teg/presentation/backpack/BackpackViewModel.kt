@@ -1,13 +1,13 @@
-package com.adedom.teg.presentation.single
+package com.adedom.teg.presentation.backpack
 
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import kotlinx.coroutines.launch
 
-class SingleViewModel(
+class BackpackViewModel(
     private val repository: DefaultTegRepository,
-) : BaseViewModel<SingleState>(SingleState()) {
+) : BaseViewModel<BackpackState>(BackpackState()) {
 
     fun callFetchItemCollection() {
         launch {
