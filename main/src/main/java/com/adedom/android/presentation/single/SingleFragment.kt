@@ -3,9 +3,9 @@ package com.adedom.android.presentation.single
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.toast
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_single.*
@@ -27,7 +27,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single), OnMapReadyCallbac
         mapView.getMapAsync(this)
 
         floatingActionButton.setOnClickListener {
-            context.toast("FloatingActionButton")
+            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
         }
     }
 

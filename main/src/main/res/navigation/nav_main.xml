@@ -89,5 +89,14 @@
             android:id="@+id/singleFragment"
             android:name="com.adedom.android.presentation.single.SingleFragment"
             android:label="SingleFragment"
-            tools:layout="@layout/fragment_single" />
+            tools:layout="@layout/fragment_single">
+        <action
+                android:id="@+id/action_singleFragment_to_backpackFragment"
+                app:destination="@id/backpackFragment" />
+    </fragment>
+    <dialog
+            android:id="@+id/backpackFragment"
+            android:name="com.adedom.android.presentation.single.BackpackDialog"
+            android:label="BackpackFragment"
+            tools:layout="@layout/dialog_backpack" />
 </navigation>

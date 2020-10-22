@@ -8,6 +8,7 @@ import com.adedom.teg.presentation.main.MainViewModel
 import com.adedom.teg.presentation.rank.RankViewModel
 import com.adedom.teg.presentation.signin.SignInViewModel
 import com.adedom.teg.presentation.signup.SignUpViewModel
+import com.adedom.teg.presentation.single.SingleViewModel
 import com.adedom.teg.presentation.splashscreen.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -27,6 +28,7 @@ private val presentationModule = module {
     viewModel { ChangeImageViewModel(get(), get()) }
     viewModel { ImageProfileViewModel(get(), get()) }
     viewModel { RankViewModel(get()) }
+    viewModel { SingleViewModel(get()) }
 
 }
 
