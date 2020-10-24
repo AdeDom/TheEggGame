@@ -1,11 +1,11 @@
 package com.adedom.teg.domain.usecase
 
 import androidx.lifecycle.LiveData
+import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.presentation.usercase.ChangeImageUseCase
-import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.presentation.usercase.ChangeImageUseCase
 import okhttp3.MultipartBody
 
 class ChangeImageUseCaseImpl(
@@ -48,8 +48,6 @@ class ChangeImageUseCaseImpl(
                     )
 
                     repository.savePlayerInfo(playerInfoEntity)
-                } else {
-                    callFetchPlayerInfo()
                 }
             }
             is Resource.Error -> callFetchPlayerInfo()

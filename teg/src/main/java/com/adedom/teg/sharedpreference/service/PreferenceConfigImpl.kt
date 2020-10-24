@@ -16,9 +16,18 @@ class PreferenceConfigImpl(context: Context) : PreferenceConfig {
             }
         }
 
+    override var signOut: Boolean
+        get() = sharedPreference.getBoolean(KEY_SIGN_OUT, false)
+        set(value) {
+            sharedPreference.edit {
+                putBoolean(KEY_SIGN_OUT, value)
+            }
+        }
+
     companion object {
         const val PREF_CONFIG = "pref_config"
         const val KEY_USERNAME = "username"
+        const val KEY_SIGN_OUT = "sign_out"
     }
 
 }

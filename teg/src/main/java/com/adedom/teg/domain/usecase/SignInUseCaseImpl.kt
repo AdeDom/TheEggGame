@@ -27,6 +27,7 @@ class SignInUseCaseImpl(
                     val refreshToken = response.token?.refreshToken.orEmpty()
                     sessionManagerService.accessToken = accessToken
                     sessionManagerService.refreshToken = refreshToken
+                    preferenceConfig.signOut = false
 
                     preferenceConfig.username = signIn.username.orEmpty()
                 }

@@ -15,6 +15,7 @@ private val domainModule = module {
     single<ChangeImageUseCase> { ChangeImageUseCaseImpl(get()) }
     single<SingleUseCase> { SingleUseCaseImpl(get()) }
     single<BackpackUseCase> { BackpackUseCaseImpl(get()) }
+    single<SettingUseCase> { SettingUseCaseImpl(get(), get(), get()) }
 
 }
 

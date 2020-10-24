@@ -62,8 +62,6 @@ class SingleUseCaseImpl(
                         birthDate = playerInfo?.birthDate,
                     )
                     repository.savePlayerInfo(playerInfoEntity)
-                } else {
-                    fetchPlayerInfo()
                 }
             }
             is Resource.Error -> fetchPlayerInfo()

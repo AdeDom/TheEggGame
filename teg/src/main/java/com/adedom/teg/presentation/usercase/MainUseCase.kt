@@ -4,6 +4,8 @@ interface MainUseCase {
 
     suspend fun fetchPlayerInfo(): Boolean = false
 
-    suspend fun signOut(): Boolean = false
+    suspend fun callPlayerStateOffline()
+
+    suspend fun callLogActiveOff()
 
 }

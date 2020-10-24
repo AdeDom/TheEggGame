@@ -60,8 +60,6 @@ class ChangeProfileUseCaseImpl(
                     )
 
                     repository.savePlayerInfo(playerInfoEntity)
-                } else {
-                    callFetchPlayerInfo()
                 }
             }
             is Resource.Error -> callFetchPlayerInfo()

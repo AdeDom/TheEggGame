@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.adedom.android.R
 import com.adedom.android.base.BaseLocationActivity
 import com.adedom.teg.presentation.main.MainViewModel
-import com.adedom.teg.util.TegConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseLocationActivity() {
@@ -22,12 +21,12 @@ class MainActivity : BaseLocationActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.callPlayerState(TegConstant.STATE_ONLINE)
+        viewModel.callPlayerStateOnline()
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.callPlayerState(TegConstant.STATE_OFFLINE)
+        viewModel.callPlayerStateOffline()
         viewModel.callLogActiveOff()
     }
 

@@ -4,11 +4,12 @@ import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.presentation.usercase.MainUseCase
-import com.adedom.teg.sharedpreference.service.SessionManagerService
+import com.adedom.teg.sharedpreference.service.PreferenceConfig
+import com.adedom.teg.util.TegConstant
 
 class MainUseCaseImpl(
     private val repository: DefaultTegRepository,
-    private val sessionManagerService: SessionManagerService,
+    private val preferenceConfig: PreferenceConfig,
 ) : MainUseCase {
 
     override suspend fun fetchPlayerInfo(): Boolean {
@@ -33,12 +34,16 @@ class MainUseCaseImpl(
         return true
     }
 
-    override suspend fun signOut(): Boolean {
-        sessionManagerService.accessToken = ""
-        sessionManagerService.refreshToken = ""
-        repository.deletePlayerInfo()
-        repository.deleteBackpack()
-        return true
+    override suspend fun callPlayerStateOffline() {
+        if (!preferenceConfig.signOut) {
+            repository.callPlayerState(TegConstant.STATE_OFFLINE)
+        }
+    }
+
+    override suspend fun callLogActiveOff() {
+        if (!preferenceConfig.signOut) {
+            repository.callLogActiveOff()
+        }
     }
 
 }

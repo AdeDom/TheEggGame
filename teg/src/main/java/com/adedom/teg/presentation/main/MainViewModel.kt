@@ -6,6 +6,7 @@ import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.presentation.usercase.MainUseCase
+import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -25,11 +26,17 @@ class MainViewModel(
         }
     }
 
-    fun callPlayerState(state: String) {
+    fun callPlayerStateOnline() {
         launch {
-            when (val resource = repository.callPlayerState(state)) {
+            when (val resource = repository.callPlayerState(TegConstant.STATE_ONLINE)) {
                 is Resource.Error -> setError(resource)
             }
+        }
+    }
+
+    fun callPlayerStateOffline() {
+        launch {
+            useCase.callPlayerStateOffline()
         }
     }
 
@@ -43,9 +50,7 @@ class MainViewModel(
 
     fun callLogActiveOff() {
         launch {
-            when (val resource = repository.callLogActiveOff()) {
-                is Resource.Error -> setError(resource)
-            }
+            useCase.callLogActiveOff()
         }
     }
 
