@@ -18,14 +18,11 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
 
     val TAG = "GameActivity"
     lateinit var viewModel: VM
-    private lateinit var mViewModel: GameActivityViewModel
     var playerId: String? = null
     private val mHandlerFetch = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mViewModel = ViewModelProvider(this).get(GameActivityViewModel::class.java)
 
         sActivity = this@GameActivity
         sContext = baseContext
@@ -86,10 +83,4 @@ abstract class GameActivity<VM : ViewModel> : PathiphonActivity() {
         lateinit var sActivity: Activity
         lateinit var sContext: Context
     }
-}
-
-class GameActivityViewModel : BaseViewModel() {
-//    fun setState(playerId: String, state: String) = baseRepository.setState(playerId, state)
-//
-//    fun updateLogs(key: String) = baseRepository.updateLogs(key)
 }
