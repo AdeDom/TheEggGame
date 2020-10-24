@@ -39,6 +39,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_singleFragment"
                 app:destination="@id/singleFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_missionFragment"
+                app:destination="@id/missionFragment" />
     </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
@@ -99,4 +102,9 @@
             android:name="com.adedom.android.presentation.backpack.BackpackFragment"
             android:label="BackpackFragment"
             tools:layout="@layout/fragment_backpack" />
+    <fragment
+            android:id="@+id/missionFragment"
+            android:name="com.adedom.android.presentation.mission.MissionFragment"
+            android:label="MissionFragment"
+            tools:layout="@layout/fragment_mission" />
 </navigation>

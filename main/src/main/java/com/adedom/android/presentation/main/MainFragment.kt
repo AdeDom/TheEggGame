@@ -37,6 +37,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             findNavController().navigate(R.id.action_mainFragment_to_singleFragment)
         }
 
+        ivMission.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_missionFragment)
+        }
+
         ivRank.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_rankFragment)
         }
