@@ -3,8 +3,24 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_auth"
-        app:startDestination="@id/signInFragment">
+        app:startDestination="@id/splashScreenFragment">
 
+    <fragment
+            android:id="@+id/splashScreenFragment"
+            android:name="com.adedom.android.presentation.splashscreen.SplashScreenFragment"
+            android:label="SplashScreenFragment"
+            tools:layout="@layout/fragment_splash_screen">
+        <action
+                android:id="@+id/action_splashScreenFragment_to_signInFragment"
+                app:destination="@id/signInFragment" />
+        <action
+                android:id="@+id/action_splashScreenFragment_to_mainActivity"
+                app:destination="@id/mainActivity" />
+    </fragment>
+    <action
+            android:id="@+id/action_global_splashScreenFragment"
+            app:destination="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
     <fragment
             android:id="@+id/signInFragment"
             android:name="com.adedom.android.presentation.signin.SignInFragment"
@@ -13,9 +29,6 @@
         <action
                 android:id="@+id/action_signInFragment_to_signUpFragment"
                 app:destination="@id/signUpFragment" />
-        <action
-                android:id="@+id/action_signInFragment_to_mainActivity"
-                app:destination="@id/mainActivity" />
     </fragment>
     <fragment
             android:id="@+id/signUpFragment"
@@ -30,11 +43,7 @@
             android:id="@+id/imageProfileFragment"
             android:name="com.adedom.android.presentation.imageprofile.ImageProfileFragment"
             android:label="ImageProfileFragment"
-            tools:layout="@layout/fragment_image_profile">
-        <action
-                android:id="@+id/action_imageProfileFragment_to_mainActivity"
-                app:destination="@id/mainActivity" />
-    </fragment>
+            tools:layout="@layout/fragment_image_profile" />
     <activity
             android:id="@+id/mainActivity"
             android:name="com.adedom.android.presentation.main.MainActivity"

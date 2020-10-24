@@ -39,7 +39,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
         viewModel.signIn.observe { response ->
             if (response.success) {
-                findNavController().navigate(R.id.action_signInFragment_to_mainActivity)
+                findNavController().navigate(R.id.action_global_splashScreenFragment)
             } else {
                 layoutRoot.snackbar(response.message)
             }

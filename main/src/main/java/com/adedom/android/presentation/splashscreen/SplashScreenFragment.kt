@@ -17,9 +17,10 @@ class SplashScreenFragment : BaseFragment(R.layout.fragment_splash_screen) {
 
         viewModel.attachFirstTime.observe {
             if (viewModel.initialize()) {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_mainFragment)
+                activity?.finish()
+                findNavController().navigate(R.id.action_splashScreenFragment_to_mainActivity)
             } else {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_authActivity)
+                findNavController().navigate(R.id.action_splashScreenFragment_to_signInFragment)
             }
         }
 

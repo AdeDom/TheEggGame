@@ -35,7 +35,8 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
 
         btSignOut.setOnClickListener {
             viewModel.signOut()
-            findNavController().navigate(R.id.action_global_splashScreenFragment)
+            activity?.finish()
+            findNavController().navigate(R.id.action_settingFragment_to_authActivity)
         }
 
         btExit.setOnClickListener {

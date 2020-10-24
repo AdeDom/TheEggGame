@@ -29,7 +29,7 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
 
         viewModel.uploadImageProfileEvent.observe { response ->
             if (response.success) {
-                findNavController().navigate(R.id.action_imageProfileFragment_to_mainActivity)
+                findNavController().navigate(R.id.action_global_splashScreenFragment)
             } else {
                 layoutRoot.snackbar(response.message)
             }
@@ -37,7 +37,7 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
 
         // event
         tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_imageProfileFragment_to_mainActivity)
+            findNavController().navigate(R.id.action_global_splashScreenFragment)
         }
 
         ivImageProfile.setOnClickListener { selectImage() }

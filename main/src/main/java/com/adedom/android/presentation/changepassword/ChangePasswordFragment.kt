@@ -25,7 +25,8 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
         viewModel.changePasswordEvent.observe { response ->
             layoutRoot.snackbar(response.message)
             if (response.success) {
-                findNavController().navigate(R.id.action_global_splashScreenFragment)
+                activity?.finish()
+                findNavController().navigate(R.id.action_global_authActivity)
             }
         }
 

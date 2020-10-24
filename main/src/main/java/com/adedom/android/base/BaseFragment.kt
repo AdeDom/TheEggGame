@@ -42,7 +42,8 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment() {
     protected fun LiveData<Resource.Error>.observeError() {
         observe(this@BaseFragment, {
             if (it.tokenExpire) {
-                findNavController().navigate(R.id.action_global_splashScreenFragment)
+                activity?.finish()
+                findNavController().navigate(R.id.action_global_authActivity)
             } else {
                 it.throwable.printStackTrace()
                 context.toast(it.throwable.message, Toast.LENGTH_LONG)
