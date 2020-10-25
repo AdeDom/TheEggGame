@@ -34,7 +34,7 @@ private val presentationModule = module {
     viewModel { BackpackViewModel(get(), get()) }
     viewModel { SettingViewModel(get()) }
     viewModel { SingleViewModel(get()) }
-    viewModel { MissionViewModel() }
+    viewModel { MissionViewModel(get(), get()) }
 
 }
 
