@@ -94,12 +94,24 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callLogActiveOff() }
     }
 
+    override suspend fun callFetchMission(): Resource<MissionResponse> {
+        return safeApiCall { dataSource.callFetchMission() }
+    }
+
+    override suspend fun callMissionMain(missionRequest: MissionRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callMissionMain(missionRequest) }
+    }
+
     override suspend fun callFetchItemCollection(): Resource<BackpackResponse> {
         return safeApiCall { dataSource.callFetchItemCollection() }
     }
 
     override suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callItemCollection(itemCollectionRequest) }
+    }
+
+    override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callMultiItemCollection(multiItemCollectionRequest) }
     }
 
 }

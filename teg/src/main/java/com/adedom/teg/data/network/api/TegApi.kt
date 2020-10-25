@@ -44,10 +44,19 @@ interface TegApi {
     @PATCH("api/application/log-active")
     suspend fun callLogActiveOff(): BaseResponse
 
+    @GET("api/application/fetch-mission")
+    suspend fun callFetchMission(): MissionResponse
+
+    @POST("api/application/mission")
+    suspend fun callMissionMain(@Body missionRequest: MissionRequest): BaseResponse
+
     @GET("api/single/item-collection")
     suspend fun callFetchItemCollection(): BackpackResponse
 
     @POST("api/single/item-collection")
     suspend fun callItemCollection(@Body itemCollectionRequest: ItemCollectionRequest): BaseResponse
+
+    @POST("api/multi/item-collection")
+    suspend fun callMultiItemCollection(@Body multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
 }

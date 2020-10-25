@@ -89,12 +89,24 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callLogActiveOff()
     }
 
+    override suspend fun callFetchMission(): MissionResponse {
+        return provider.getTegDataSource().callFetchMission()
+    }
+
+    override suspend fun callMissionMain(missionRequest: MissionRequest): BaseResponse {
+        return provider.getTegDataSource().callMissionMain(missionRequest)
+    }
+
     override suspend fun callFetchItemCollection(): BackpackResponse {
         return provider.getTegDataSource().callFetchItemCollection()
     }
 
     override suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse {
         return provider.getTegDataSource().callItemCollection(itemCollectionRequest)
+    }
+
+    override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse {
+        return provider.getTegDataSource().callMultiItemCollection(multiItemCollectionRequest)
     }
 
 }

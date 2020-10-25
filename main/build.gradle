@@ -55,7 +55,7 @@ dependencies {
 
     // library & server
     implementation project(path: ':teg')
-    implementation 'com.github.AdeDom:TheEggGame-Server:0.1.1'
+    implementation 'com.github.AdeDom:TheEggGame-Server:0.1.2'
 
     // lifecycle MVVM
     def lifecycle_version = '2.2.0'

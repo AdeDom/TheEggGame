@@ -47,8 +47,14 @@ interface TegDataSource {
 
     suspend fun callLogActiveOff(): BaseResponse
 
+    suspend fun callFetchMission(): MissionResponse
+
+    suspend fun callMissionMain(missionRequest: MissionRequest): BaseResponse
+
     suspend fun callFetchItemCollection(): BackpackResponse
 
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse
+
+    suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
 }

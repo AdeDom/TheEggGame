@@ -48,8 +48,14 @@ interface DefaultTegRepository {
 
     suspend fun callLogActiveOff(): Resource<BaseResponse>
 
+    suspend fun callFetchMission(): Resource<MissionResponse>
+
+    suspend fun callMissionMain(missionRequest: MissionRequest): Resource<BaseResponse>
+
     suspend fun callFetchItemCollection(): Resource<BackpackResponse>
 
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse>
+
+    suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
 }
