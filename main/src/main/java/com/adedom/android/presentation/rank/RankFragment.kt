@@ -51,10 +51,10 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
 
     private fun viewEventFlow(): Flow<RankViewEvent> {
         return merge(
-            etSearch.clicks().map { RankViewEvent.SEARCH },
-            btRank10.clicks().map { RankViewEvent.TEN },
-            btRank50.clicks().map { RankViewEvent.FIFTY },
-            btRank100.clicks().map { RankViewEvent.HUNDRED },
+            etSearch.clicks().map { RankViewEvent.Search },
+            btRank10.clicks().map { RankViewEvent.Ten },
+            btRank50.clicks().map { RankViewEvent.Fifty },
+            btRank100.clicks().map { RankViewEvent.Hundred },
         )
     }
 

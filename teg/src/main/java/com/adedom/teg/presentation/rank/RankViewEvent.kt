@@ -1,8 +1,8 @@
 package com.adedom.teg.presentation.rank
 
-enum class RankViewEvent {
-    SEARCH,
-    TEN,
-    FIFTY,
-    HUNDRED
+sealed class RankViewEvent {
+    object Search : RankViewEvent()
+    object Ten : RankViewEvent()
+    object Fifty : RankViewEvent()
+    object Hundred : RankViewEvent()
 }

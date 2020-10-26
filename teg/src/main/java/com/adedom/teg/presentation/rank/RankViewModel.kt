@@ -52,9 +52,9 @@ class RankViewModel(
             .asFlow()
             .onEach { event ->
                 when (event) {
-                    RankViewEvent.TEN -> setState { copy(limit = TegConstant.RANK_LIMIT_TEN) }
-                    RankViewEvent.FIFTY -> setState { copy(limit = TegConstant.RANK_LIMIT_FIFTY) }
-                    RankViewEvent.HUNDRED -> setState { copy(limit = TegConstant.RANK_LIMIT_HUNDRED) }
+                    RankViewEvent.Ten -> setState { copy(limit = TegConstant.RANK_LIMIT_TEN) }
+                    RankViewEvent.Fifty -> setState { copy(limit = TegConstant.RANK_LIMIT_FIFTY) }
+                    RankViewEvent.Hundred -> setState { copy(limit = TegConstant.RANK_LIMIT_HUNDRED) }
                 }
             }
             .onEach {
