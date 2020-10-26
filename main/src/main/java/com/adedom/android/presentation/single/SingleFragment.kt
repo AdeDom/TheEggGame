@@ -96,6 +96,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             val markerOptions = MarkerOptions().apply {
                 position(latLng)
                 title(playerInfo.name)
+                snippet(getString(R.string.level, playerInfo.level))
             }
 
             context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
@@ -108,9 +109,9 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
     }
 
     private fun setImageMarkerCircle(markerOptions: MarkerOptions, bitmap: Bitmap) {
-        mMarkerMyLocation?.remove()
-
         mapView.getMapAsync { googleMap ->
+            mMarkerMyLocation?.remove()
+
             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
             mMarkerMyLocation = googleMap.addMarker(markerOptions)
         }
