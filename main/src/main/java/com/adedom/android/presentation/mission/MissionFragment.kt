@@ -39,6 +39,10 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
             ivMissionDelivery.setVisibility(state.isMissionDelivery)
             ivMissionSingle.setVisibility(state.isMissionSingle)
             ivMissionMulti.setVisibility(state.isMissionMulti)
+
+            ivCorrectDelivery.setVisibility(state.isMissionDeliveryCompleted)
+            ivCorrectSingle.setVisibility(state.isMissionSingleCompleted)
+            ivCorrectMulti.setVisibility(state.isMissionMultiCompleted)
         }
 
         viewModel.error.observeError()

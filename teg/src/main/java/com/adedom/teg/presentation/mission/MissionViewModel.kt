@@ -59,8 +59,11 @@ class MissionViewModel(
         setState {
             copy(
                 isMissionDelivery = missionInfo?.isDelivery ?: false,
+                isMissionDeliveryCompleted = missionInfo?.isDeliveryCompleted ?: false,
                 isMissionSingle = missionInfo?.isSingle ?: false,
+                isMissionSingleCompleted = missionInfo?.isSingleCompleted ?: false,
                 isMissionMulti = missionInfo?.isMulti ?: false,
+                isMissionMultiCompleted = missionInfo?.isMultiCompleted ?: false,
             )
         }
     }
