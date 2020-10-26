@@ -4,8 +4,10 @@ import android.os.Bundle
 import com.adedom.android.R
 import com.adedom.android.base.BaseLocationActivity
 import com.adedom.teg.presentation.main.MainViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalCoroutinesApi
 class MainActivity : BaseLocationActivity() {
 
     private val viewModel by viewModel<MainViewModel>()

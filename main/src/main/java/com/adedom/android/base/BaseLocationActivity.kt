@@ -14,9 +14,11 @@ import com.adedom.android.util.locationFlow
 import com.adedom.android.util.toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
 
+@ExperimentalCoroutinesApi
 abstract class BaseLocationActivity : BaseActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
