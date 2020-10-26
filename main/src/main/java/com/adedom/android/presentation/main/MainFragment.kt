@@ -38,6 +38,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             findNavController().navigate(R.id.action_mainFragment_to_singleFragment)
         }
 
+        btMulti.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_roomFragment)
+        }
+
         ivMission.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_missionFragment)
         }

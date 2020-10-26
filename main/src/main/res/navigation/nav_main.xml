@@ -25,6 +25,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_missionFragment"
                 app:destination="@id/missionFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_roomFragment"
+                app:destination="@id/roomFragment" />
     </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
@@ -96,4 +99,34 @@
     <action
             android:id="@+id/action_global_authActivity"
             app:destination="@id/authActivity" />
+    <fragment
+            android:id="@+id/roomFragment"
+            android:name="com.adedom.android.presentation.room.RoomFragment"
+            android:label="RoomFragment"
+            tools:layout="@layout/fragment_room">
+        <action
+                android:id="@+id/action_roomFragment_to_createRoomFragment"
+                app:destination="@id/createRoomFragment"
+                app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_roomFragment_to_roomInfoFragment"
+                app:destination="@id/roomInfoFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/createRoomFragment"
+            android:name="com.adedom.android.presentation.createroom.CreateRoomFragment"
+            android:label="CreateRoomFragment"
+            tools:layout="@layout/fragment_create_room">
+        <action
+                android:id="@+id/action_createRoomFragment_to_roomInfoFragment"
+                app:destination="@id/roomInfoFragment"
+                app:popUpTo="@id/createRoomFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/roomInfoFragment"
+            android:name="com.adedom.android.presentation.roominfo.RoomInfoFragment"
+            android:label="RoomInfoFragment"
+            tools:layout="@layout/fragment_room_info" />
 </navigation>

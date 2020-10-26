@@ -99,4 +99,6 @@
     <string name="sign_out">Sign out</string>
     <string name="change_image_profile">Change image profile</string>
     <string name="hide">Hide</string>
+    <string name="room">Room</string>
+    <string name="room_info">Room info</string>
 </resources>

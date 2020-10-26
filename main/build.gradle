@@ -50,9 +50,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
-    //scroll
-    implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
-
     // library & server
     implementation project(path: ':teg')
     implementation "com.github.AdeDom:TheEggGame-Server:$teg"
