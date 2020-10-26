@@ -1,6 +1,7 @@
 package com.adedom.android.presentation.single
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -10,14 +11,14 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.awaitLastLocation
-import com.adedom.android.util.locationFlow
-import com.adedom.android.util.setVisibility
-import com.adedom.android.util.toast
+import com.adedom.android.util.*
 import com.adedom.teg.presentation.single.SingleViewModel
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
     private val viewModel by viewModel<SingleViewModel>()
+    private var mMarkerMyLocation: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +89,31 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
     private fun onLocationResult(location: Location) {
         val latLng = LatLng(location.latitude, location.longitude)
-        context.toast("${latLng.latitude}, ${latLng.longitude}")
+
+        viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
+            if (playerInfo == null) return@observe
+
+            val markerOptions = MarkerOptions().apply {
+                position(latLng)
+                title(playerInfo.name)
+            }
+
+            context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
+                setImageMarkerCircle(markerOptions, bitmap)
+            }, onLoadCleared = { bitmap ->
+                setImageMarkerCircle(markerOptions, bitmap)
+            })
+        })
+
+    }
+
+    private fun setImageMarkerCircle(markerOptions: MarkerOptions, bitmap: Bitmap) {
+        mMarkerMyLocation?.remove()
+
+        mapView.getMapAsync { googleMap ->
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+            mMarkerMyLocation = googleMap.addMarker(markerOptions)
+        }
     }
 
     override fun onResume() {

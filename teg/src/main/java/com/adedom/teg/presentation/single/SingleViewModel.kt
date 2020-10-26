@@ -1,14 +1,21 @@
 package com.adedom.teg.presentation.single
 
+import androidx.lifecycle.LiveData
 import com.adedom.teg.base.BaseViewModel
+import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
+import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.ItemCollectionRequest
 import com.adedom.teg.presentation.usercase.SingleUseCase
 import kotlinx.coroutines.launch
 
 class SingleViewModel(
     private val useCase: SingleUseCase,
+    private val repository: DefaultTegRepository,
 ) : BaseViewModel<SingleState>(SingleState()) {
+
+    val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
+        get() = repository.getDbPlayerInfoLiveData()
 
     fun callItemCollection() {
         launch {
