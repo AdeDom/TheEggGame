@@ -17,6 +17,7 @@ private val domainModule = module {
     single<BackpackUseCase> { BackpackUseCaseImpl(get()) }
     single<SettingUseCase> { SettingUseCaseImpl(get(), get(), get()) }
     single<MissionUseCase> { MissionUseCaseImpl(get()) }
+    single<MultiUseCase> { MultiUseCaseImpl(get()) }
 
 }
 
