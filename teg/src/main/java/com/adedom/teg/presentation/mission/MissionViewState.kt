@@ -1,6 +1,6 @@
 package com.adedom.teg.presentation.mission
 
-data class MissionState(
+data class MissionViewState(
     val isMissionDelivery: Boolean = false,
     val isMissionSingle: Boolean = false,
     val isMissionMulti: Boolean = false,

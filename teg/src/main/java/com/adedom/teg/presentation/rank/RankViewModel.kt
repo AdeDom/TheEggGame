@@ -20,13 +20,13 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class RankViewModel(
     private val repository: DefaultTegRepository,
-) : BaseViewModel<RankState>(RankState()) {
+) : BaseViewModel<RankViewState>(RankViewState()) {
 
-    private val channel = BroadcastChannel<RankAction>(Channel.BUFFERED)
+    private val channel = BroadcastChannel<RankViewEvent>(Channel.BUFFERED)
 
-    fun sendAction(action: RankAction) {
+    fun process(event: RankViewEvent) {
         launch {
-            channel.send(action)
+            channel.send(event)
         }
     }
 
@@ -50,11 +50,11 @@ class RankViewModel(
     init {
         channel
             .asFlow()
-            .onEach { action ->
-                when (action) {
-                    RankAction.TEN -> setState { copy(limit = TegConstant.RANK_LIMIT_TEN) }
-                    RankAction.FIFTY -> setState { copy(limit = TegConstant.RANK_LIMIT_FIFTY) }
-                    RankAction.HUNDRED -> setState { copy(limit = TegConstant.RANK_LIMIT_HUNDRED) }
+            .onEach { event ->
+                when (event) {
+                    RankViewEvent.TEN -> setState { copy(limit = TegConstant.RANK_LIMIT_TEN) }
+                    RankViewEvent.FIFTY -> setState { copy(limit = TegConstant.RANK_LIMIT_FIFTY) }
+                    RankViewEvent.HUNDRED -> setState { copy(limit = TegConstant.RANK_LIMIT_HUNDRED) }
                 }
             }
             .onEach {

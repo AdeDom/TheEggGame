@@ -1,6 +1,6 @@
 package com.adedom.teg.presentation.mission
 
-enum class MissionAction {
+enum class MissionViewEvent {
     DELIVERY,
     SINGLE,
     MULTI,

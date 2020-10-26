@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
-import com.adedom.teg.presentation.rank.RankAction
+import com.adedom.teg.presentation.rank.RankViewEvent
 import com.adedom.teg.presentation.rank.RankViewModel
 import kotlinx.android.synthetic.main.fragment_rank.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,15 +46,15 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        actionFlow().observe { viewModel.sendAction(it) }
+        viewEventFlow().observe { viewModel.process(it) }
     }
 
-    private fun actionFlow(): Flow<RankAction> {
+    private fun viewEventFlow(): Flow<RankViewEvent> {
         return merge(
-            etSearch.clicks().map { RankAction.SEARCH },
-            btRank10.clicks().map { RankAction.TEN },
-            btRank50.clicks().map { RankAction.FIFTY },
-            btRank100.clicks().map { RankAction.HUNDRED },
+            etSearch.clicks().map { RankViewEvent.SEARCH },
+            btRank10.clicks().map { RankViewEvent.TEN },
+            btRank50.clicks().map { RankViewEvent.FIFTY },
+            btRank100.clicks().map { RankViewEvent.HUNDRED },
         )
     }
 

@@ -2,7 +2,7 @@ package com.adedom.teg.presentation.rank
 
 import com.adedom.teg.models.response.PlayerInfo
 
-data class RankState(
+data class RankViewState(
     val search: String = "",
     val limit: Int = 0,
     val rankPlayers: List<PlayerInfo> = emptyList(),

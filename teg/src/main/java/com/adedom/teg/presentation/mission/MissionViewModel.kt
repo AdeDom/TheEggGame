@@ -23,9 +23,9 @@ import kotlinx.coroutines.launch
 class MissionViewModel(
     private val useCase: MissionUseCase,
     private val repository: DefaultTegRepository,
-) : BaseViewModel<MissionState>(MissionState()) {
+) : BaseViewModel<MissionViewState>(MissionViewState()) {
 
-    private val channel = BroadcastChannel<MissionAction>(Channel.BUFFERED)
+    private val channel = BroadcastChannel<MissionViewEvent>(Channel.BUFFERED)
 
     fun callFetchMission() {
         launch {
@@ -65,19 +65,19 @@ class MissionViewModel(
         }
     }
 
-    fun sendAction(action: MissionAction) {
+    fun process(event: MissionViewEvent) {
         launch {
-            channel.send(action)
+            channel.send(event)
         }
     }
 
     init {
         channel.asFlow()
-            .onEach { action ->
-                when (action) {
-                    MissionAction.DELIVERY -> callMissionMain(TegConstant.MISSION_DELIVERY)
-                    MissionAction.SINGLE -> callMissionMain(TegConstant.MISSION_SINGLE)
-                    MissionAction.MULTI -> callMissionMain(TegConstant.MISSION_MULTI)
+            .onEach { event ->
+                when (event) {
+                    MissionViewEvent.DELIVERY -> callMissionMain(TegConstant.MISSION_DELIVERY)
+                    MissionViewEvent.SINGLE -> callMissionMain(TegConstant.MISSION_SINGLE)
+                    MissionViewEvent.MULTI -> callMissionMain(TegConstant.MISSION_MULTI)
                 }
             }
             .catch { e ->

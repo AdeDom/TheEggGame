@@ -5,7 +5,7 @@ import android.view.View
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
-import com.adedom.teg.presentation.mission.MissionAction
+import com.adedom.teg.presentation.mission.MissionViewEvent
 import com.adedom.teg.presentation.mission.MissionViewModel
 import kotlinx.android.synthetic.main.fragment_mission.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,15 +38,15 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
 
         viewModel.error.observeError()
 
-        actionFlow().observe { viewModel.sendAction(it) }
+        viewEventFlow().observe { viewModel.process(it) }
 
     }
 
-    private fun actionFlow(): Flow<MissionAction> {
+    private fun viewEventFlow(): Flow<MissionViewEvent> {
         return merge(
-            tvMissionDelivery.clicks().map { MissionAction.DELIVERY },
-            tvMissionSingle.clicks().map { MissionAction.SINGLE },
-            tvMissionMulti.clicks().map { MissionAction.MULTI },
+            tvMissionDelivery.clicks().map { MissionViewEvent.DELIVERY },
+            tvMissionSingle.clicks().map { MissionViewEvent.SINGLE },
+            tvMissionMulti.clicks().map { MissionViewEvent.MULTI },
         )
     }
 

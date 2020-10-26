@@ -1,6 +1,6 @@
 package com.adedom.teg.presentation.rank
 
-enum class RankAction {
+enum class RankViewEvent {
     SEARCH,
     TEN,
     FIFTY,
