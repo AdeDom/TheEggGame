@@ -15,6 +15,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+            android:id="@+id/ivMissionDelivery"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_egg"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMissionDelivery"
+            app:layout_constraintStart_toEndOf="@id/tvMissionDelivery" />
+
+    <ImageView
             android:id="@+id/ivCorrectDelivery"
             android:layout_width="@dimen/correct"
             android:layout_height="@dimen/correct"
@@ -33,6 +42,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMissionDelivery" />
+
+    <ImageView
+            android:id="@+id/ivMissionSingle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_egg"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMissionSingle"
+            app:layout_constraintStart_toEndOf="@id/tvMissionSingle" />
 
     <ImageView
             android:id="@+id/ivCorrectSingle"
@@ -54,6 +72,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMissionSingle" />
+
+    <ImageView
+            android:id="@+id/ivMissionMulti"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_egg"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMissionMulti"
+            app:layout_constraintStart_toEndOf="@id/tvMissionMulti" />
 
     <ImageView
             android:id="@+id/ivCorrectMulti"

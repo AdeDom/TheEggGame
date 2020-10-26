@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
+import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.rank.RankViewEvent
 import com.adedom.teg.presentation.rank.RankViewModel
 import kotlinx.android.synthetic.main.fragment_rank.*
@@ -37,7 +38,7 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
 
             adt.setList(state.rankPlayers)
         }

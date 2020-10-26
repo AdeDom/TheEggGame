@@ -5,6 +5,7 @@ import android.view.View
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
+import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.mission.MissionViewEvent
 import com.adedom.teg.presentation.mission.MissionViewModel
 import kotlinx.android.synthetic.main.fragment_mission.*
@@ -29,11 +30,15 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
 
             tvMissionDelivery.isClickable = state.isMissionDelivery
             tvMissionSingle.isClickable = state.isMissionSingle
             tvMissionMulti.isClickable = state.isMissionMulti
+
+            ivMissionDelivery.setVisibility(state.isMissionDelivery)
+            ivMissionSingle.setVisibility(state.isMissionSingle)
+            ivMissionMulti.setVisibility(state.isMissionMulti)
         }
 
         viewModel.error.observeError()

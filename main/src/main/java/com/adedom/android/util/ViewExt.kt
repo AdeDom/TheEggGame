@@ -22,3 +22,7 @@ fun View.clicks(): Flow<Unit> {
         awaitClose { setOnClickListener(null) }
     }
 }
+
+fun View.setVisibility(isVisibility: Boolean) {
+    this.visibility = if (isVisibility) View.VISIBLE else View.INVISIBLE
+}

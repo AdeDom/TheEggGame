@@ -7,6 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.signup.SignUpViewModel
 import com.adedom.teg.util.TegConstant
@@ -22,7 +23,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
 
             tvBirthDate.text = state.birthDateString
         }

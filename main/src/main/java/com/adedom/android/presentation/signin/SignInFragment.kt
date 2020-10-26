@@ -7,6 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.presentation.signin.SignInViewModel
@@ -23,7 +24,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         // observe
         viewModel.state.observe { state ->
             btSignIn.isEnabled = state.isValidUsername && state.isValidPassword
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
         }
 
         viewModel.signInEvent.observe {

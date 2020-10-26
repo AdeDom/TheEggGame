@@ -9,6 +9,7 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.presentation.changeimage.ChangeImageFragment
 import com.adedom.android.util.setImageCircle
+import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.imageprofile.ImageProfileViewModel
 import kotlinx.android.synthetic.main.fragment_image_profile.*
@@ -22,7 +23,7 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
 
             btUploadImageProfile.isEnabled = state.isImageUri
         }

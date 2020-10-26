@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.single.SingleViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,7 +31,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single), OnMapReadyCallbac
         mapView.getMapAsync(this)
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
         }
 
         viewModel.error.observeError()

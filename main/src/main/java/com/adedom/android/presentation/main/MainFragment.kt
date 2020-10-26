@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.setImageCircle
+import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.main.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +19,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observeForever { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
         }
 
         viewModel.playerInfo.observe(viewLifecycleOwner, { playerInfo ->

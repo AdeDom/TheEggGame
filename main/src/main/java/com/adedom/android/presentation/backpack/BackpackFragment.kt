@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.backpack.BackpackViewModel
 import kotlinx.android.synthetic.main.fragment_backpack.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,7 +21,7 @@ class BackpackFragment : BaseFragment(R.layout.fragment_backpack) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
         }
 
         viewModel.getDbBackpackLiveData.observe(viewLifecycleOwner, { backpack ->

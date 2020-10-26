@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.setImageCircle
+import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import kotlinx.android.synthetic.main.fragment_change_image.*
@@ -21,7 +22,7 @@ class ChangeImageFragment : BaseFragment(R.layout.fragment_change_image) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.INVISIBLE
+            progressBar.setVisibility(state.loading)
 
             btChangeImageProfile.isEnabled = state.isImageUri
         }
