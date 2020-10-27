@@ -7,63 +7,33 @@
         android:padding="16dp">
 
     <TextView
-            android:id="@+id/layoutRoomNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No : "
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
             android:id="@+id/tvRoomNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/layoutRoomNo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/layoutRoomName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name : "
+            android:text="Room no : 10"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutRoomNo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/tvRoomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AdeDom"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/layoutRoomName"
-            app:layout_constraintTop_toBottomOf="@+id/tvRoomNo" />
-
-    <TextView
-            android:id="@+id/layoutRoomPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="People : "
+            android:text="Room name : AdeDom"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutRoomName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRoomNo" />
 
     <TextView
             android:id="@+id/tvRoomPeople"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
+            android:text="People : 4"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/layoutRoomPeople"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRoomName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
