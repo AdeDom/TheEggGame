@@ -79,6 +79,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callChangeProfile(changeProfile) }
     }
 
+    override suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeLatLng(changeLatLngRequest) }
+    }
+
     override suspend fun callFetchRankPlayers(
         search: String,
         limit: Int
@@ -112,6 +116,10 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callMultiItemCollection(multiItemCollectionRequest) }
+    }
+
+    override suspend fun callFetchRooms(): Resource<RoomsResponse> {
+        return safeApiCall { dataSource.callFetchRooms() }
     }
 
 }

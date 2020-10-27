@@ -42,6 +42,8 @@ interface DefaultTegRepository {
 
     suspend fun callChangeProfile(changeProfile: ChangeProfileRequest): Resource<BaseResponse>
 
+    suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): Resource<BaseResponse>
+
     suspend fun callFetchRankPlayers(search: String, limit: Int): Resource<RankPlayersResponse>
 
     suspend fun callLogActiveOn(): Resource<BaseResponse>
@@ -57,5 +59,7 @@ interface DefaultTegRepository {
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse>
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
+
+    suspend fun callFetchRooms(): Resource<RoomsResponse>
 
 }

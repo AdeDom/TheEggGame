@@ -77,6 +77,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callChangeProfile(changeProfile)
     }
 
+    override suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): BaseResponse {
+        return provider.getTegDataSource().callChangeLatLng(changeLatLngRequest)
+    }
+
     override suspend fun callFetchRankPlayers(search: String, limit: Int): RankPlayersResponse {
         return provider.getTegDataSource().callFetchRankPlayers(search, limit)
     }
@@ -107,6 +111,10 @@ class TegDataSourceImpl(
 
     override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse {
         return provider.getTegDataSource().callMultiItemCollection(multiItemCollectionRequest)
+    }
+
+    override suspend fun callFetchRooms(): RoomsResponse {
+        return provider.getTegDataSource().callFetchRooms()
     }
 
 }

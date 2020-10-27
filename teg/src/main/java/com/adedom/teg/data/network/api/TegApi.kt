@@ -32,6 +32,9 @@ interface TegApi {
     @PUT("api/account/change-profile")
     suspend fun callChangeProfile(@Body changeProfile: ChangeProfileRequest): BaseResponse
 
+    @PUT("api/account/change-lat-lng")
+    suspend fun callChangeLatLng(@Body changeLatLngRequest: ChangeLatLngRequest): BaseResponse
+
     @GET("api/application/rank/rank")
     suspend fun callFetchRankPlayers(
         @Query("search") search: String,
@@ -58,5 +61,8 @@ interface TegApi {
 
     @POST("api/multi/item-collection")
     suspend fun callMultiItemCollection(@Body multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
+
+    @GET("api/multi/fetch-room")
+    suspend fun callFetchRooms(): RoomsResponse
 
 }

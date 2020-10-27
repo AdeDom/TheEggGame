@@ -41,6 +41,8 @@ interface TegDataSource {
 
     suspend fun callChangeProfile(changeProfile: ChangeProfileRequest): BaseResponse
 
+    suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): BaseResponse
+
     suspend fun callFetchRankPlayers(search: String, limit: Int): RankPlayersResponse
 
     suspend fun callLogActiveOn(): BaseResponse
@@ -56,5 +58,7 @@ interface TegDataSource {
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
+
+    suspend fun callFetchRooms(): RoomsResponse
 
 }
