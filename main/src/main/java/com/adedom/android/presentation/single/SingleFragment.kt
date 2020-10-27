@@ -1,7 +1,6 @@
 package com.adedom.android.presentation.single
 
 import android.annotation.SuppressLint
-import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -10,22 +9,23 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
+import com.adedom.teg.presentation.single.SingleViewEvent
 import com.adedom.teg.presentation.single.SingleViewModel
+import com.adedom.teg.presentation.single.SingleViewState
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
@@ -61,49 +61,69 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
             locationProviderClient
                 .locationFlow()
-                .onEach { onLocationResult(googleMap, it) }
+                .onEach { viewModel.setStateLatLng(it.latitude, it.longitude) }
                 .catch { context.toast(it.message, Toast.LENGTH_LONG) }
                 .launchIn(this)
         }
 
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)
+
+            // marker
+            setMarkerMyLocation(state)
         }
 
         viewModel.error.observeError()
 
-        btItem.setOnClickListener {
-            viewModel.callItemCollection()
-        }
+        viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
+            if (playerInfo == null) return@observe
 
-        floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
-        }
-    }
-
-    private suspend fun onLocationResult(googleMap: GoogleMap, location: Location) {
-        val latLng = LatLng(location.latitude, location.longitude)
-
-        val playerInfo = viewModel.getDbPlayerInfo()
-
-        val markerOptions = MarkerOptions().apply {
-            position(latLng)
-            title(playerInfo?.name)
-            snippet(getString(R.string.level, playerInfo?.level))
-        }
-
-        context?.setImageCircle(playerInfo?.image, onResourceReady = { bitmap ->
-            mMarkerMyLocation?.remove()
-
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMarkerMyLocation = googleMap.addMarker(markerOptions)
-        }, onLoadCleared = { bitmap ->
-            mMarkerMyLocation?.remove()
-
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMarkerMyLocation = googleMap.addMarker(markerOptions)
+            context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
+                viewModel.setStateBitmap(bitmap)
+            }, onLoadCleared = { bitmap ->
+                viewModel.setStateBitmap(bitmap)
+            })
         })
 
+        viewModel.singleViewEvent.observe { event ->
+            when (event) {
+                is SingleViewEvent.BackpackFragment -> {
+                    findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
+                }
+                else -> {
+                }
+            }
+        }
+
+        viewEvent().observe { viewModel.process(it) }
+    }
+
+    private fun viewEvent(): Flow<SingleViewEvent> {
+        return merge(
+            btItem.clicks().map { SingleViewEvent.CallItemCollection },
+            floatingActionButton.clicks().map { SingleViewEvent.BackpackFragment },
+        )
+    }
+
+    private fun setMarkerMyLocation(state: SingleViewState) {
+        launch {
+            val googleMap = mapView.getGoogleMap()
+
+            val latLng = LatLng(state.latLng.latitude, state.latLng.longitude)
+
+            val markerOptions = MarkerOptions().apply {
+                position(latLng)
+                title(state.name)
+                snippet(getString(R.string.level, state.level))
+            }
+
+            state.bitmap?.let {
+                mMarkerMyLocation?.remove()
+
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(state.bitmap))
+                mMarkerMyLocation = googleMap.addMarker(markerOptions)
+            }
+        }
     }
 
     override fun onResume() {

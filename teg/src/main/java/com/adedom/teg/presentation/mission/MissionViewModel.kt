@@ -1,6 +1,5 @@
 package com.adedom.teg.presentation.mission
 
-import androidx.lifecycle.viewModelScope
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -86,7 +85,7 @@ class MissionViewModel(
             .catch { e ->
                 setError(Resource.Error(e))
             }
-            .launchIn(viewModelScope)
+            .launchIn(this)
     }
 
 }

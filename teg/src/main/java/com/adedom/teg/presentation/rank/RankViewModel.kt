@@ -1,7 +1,6 @@
 package com.adedom.teg.presentation.rank
 
 import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -69,7 +68,7 @@ class RankViewModel(
             .catch { e ->
                 setError(Resource.Error(e))
             }
-            .launchIn(viewModelScope)
+            .launchIn(this)
     }
 
 }
