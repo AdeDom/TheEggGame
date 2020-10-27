@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
+import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.room.RoomViewModel
 import kotlinx.android.synthetic.main.fragment_room.*
@@ -22,6 +23,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
         recyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = adt
+            addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
         }
 
         viewModel.attachFirstTime.observe {
