@@ -19,6 +19,10 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
 
         viewModel.error.observeError()
 
+        btPlayerProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_settingFragment_to_playerProfileFragment)
+        }
+
         btChangeProfile.setOnClickListener {
             findNavController().navigate(R.id.action_settingFragment_to_changeProfileFragment)
         }

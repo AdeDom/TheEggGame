@@ -7,6 +7,7 @@ import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
 import com.adedom.teg.presentation.imageprofile.ImageProfileViewModel
 import com.adedom.teg.presentation.main.MainViewModel
 import com.adedom.teg.presentation.mission.MissionViewModel
+import com.adedom.teg.presentation.playerprofile.PlayerProfileViewModel
 import com.adedom.teg.presentation.rank.RankViewModel
 import com.adedom.teg.presentation.roominfo.RoomInfoViewModel
 import com.adedom.teg.presentation.setting.SettingViewModel
@@ -37,6 +38,7 @@ private val presentationModule = module {
     viewModel { SingleViewModel(get(), get()) }
     viewModel { MissionViewModel(get(), get()) }
     viewModel { RoomInfoViewModel(get()) }
+    viewModel { PlayerProfileViewModel(get()) }
 
 }
 

@@ -101,4 +101,9 @@
     <string name="hide">Hide</string>
     <string name="room">Room</string>
     <string name="room_info">Room info</string>
+    <string name="player_profile">Player profile</string>
+    <string name="player_profile_name">Name : %1$s</string>
+    <string name="player_profile_gender">Gender : %1$s</string>
+    <string name="player_profile_birth_date">Birth date : %1$s</string>
+
 </resources>

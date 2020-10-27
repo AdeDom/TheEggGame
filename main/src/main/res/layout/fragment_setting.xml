@@ -4,7 +4,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_bg"
-        android:padding="@dimen/large">
+        android:padding="16dp">
+
+    <ImageView
+            android:id="@+id/ivPlayerProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_player_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/btPlayerProfile"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:text="@string/player_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPlayerProfile"
+            app:layout_constraintStart_toEndOf="@+id/ivPlayerProfile"
+            app:layout_constraintTop_toTopOf="@+id/ivPlayerProfile" />
+
 
     <ImageView
             android:id="@+id/ivChangeProfile"
@@ -12,7 +32,7 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_change_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/ivPlayerProfile" />
 
     <Button
             android:id="@+id/btChangeProfile"

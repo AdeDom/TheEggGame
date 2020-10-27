@@ -61,6 +61,9 @@
         <action
                 android:id="@+id/action_settingFragment_to_authActivity"
                 app:destination="@id/authActivity" />
+        <action
+                android:id="@+id/action_settingFragment_to_playerProfileFragment"
+                app:destination="@id/playerProfileFragment" />
     </fragment>
     <fragment
             android:id="@+id/aboutFragment"
@@ -129,4 +132,9 @@
             android:name="com.adedom.android.presentation.roominfo.RoomInfoFragment"
             android:label="RoomInfoFragment"
             tools:layout="@layout/fragment_room_info" />
+    <fragment
+            android:id="@+id/playerProfileFragment"
+            android:name="com.adedom.android.presentation.playerprofile.PlayerProfileFragment"
+            android:label="PlayerProfileFragment"
+            tools:layout="@layout/fragment_player_profile" />
 </navigation>
