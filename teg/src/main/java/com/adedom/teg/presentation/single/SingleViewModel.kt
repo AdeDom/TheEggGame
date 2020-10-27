@@ -1,9 +1,7 @@
 package com.adedom.teg.presentation.single
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
@@ -12,11 +10,6 @@ import com.adedom.teg.models.request.ItemCollectionRequest
 import com.adedom.teg.presentation.usercase.SingleUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @FlowPreview
@@ -26,14 +19,8 @@ class SingleViewModel(
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<SingleViewState>(SingleViewState()) {
 
-    private val channel = ConflatedBroadcastChannel<SingleViewEvent>()
-
     val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
         get() = repository.getDbPlayerInfoLiveData()
-
-    private val _singleViewEvent = MutableLiveData<SingleViewEvent>()
-    val singleViewEvent: LiveData<SingleViewEvent>
-        get() = _singleViewEvent
 
     fun setStateLatLng(latitude: Double, longitude: Double) {
         setState { copy(latLng = SingleViewState.Latlng(latitude, longitude)) }
@@ -43,7 +30,7 @@ class SingleViewModel(
         setState { copy(bitmap = bitmap) }
     }
 
-    private fun callItemCollection() {
+    fun callItemCollection() {
         launch {
             setState { copy(loading = true) }
 
@@ -63,31 +50,7 @@ class SingleViewModel(
         }
     }
 
-    fun process(event: SingleViewEvent) {
-        launch {
-            channel.send(event)
-        }
-    }
-
     init {
-        channel
-            .asFlow()
-            .onEach { event ->
-                when (event) {
-                    is SingleViewEvent.CallItemCollection -> callItemCollection()
-                    is SingleViewEvent.BackpackFragment -> {
-                        _singleViewEvent.value = SingleViewEvent.BackpackFragment
-                    }
-                }
-            }
-            .onEach {
-                Log.d("AdeDom", "Single : $it")
-            }
-            .catch { e ->
-                setError(Resource.Error(e))
-            }
-            .launchIn(this)
-
         launch {
             val playerInfo = repository.getDbPlayerInfo()
 

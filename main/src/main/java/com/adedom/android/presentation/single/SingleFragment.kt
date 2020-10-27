@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
-import com.adedom.teg.presentation.single.SingleViewEvent
 import com.adedom.teg.presentation.single.SingleViewModel
 import com.adedom.teg.presentation.single.SingleViewState
 import com.google.android.gms.location.LocationServices
@@ -21,7 +20,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -85,24 +86,13 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             })
         })
 
-        viewModel.singleViewEvent.observe { event ->
-            when (event) {
-                is SingleViewEvent.BackpackFragment -> {
-                    findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
-                }
-                else -> {
-                }
-            }
+        btItem.setOnClickListener {
+            viewModel.callItemCollection()
         }
 
-        viewEvent().observe { viewModel.process(it) }
-    }
-
-    private fun viewEvent(): Flow<SingleViewEvent> {
-        return merge(
-            btItem.clicks().map { SingleViewEvent.CallItemCollection },
-            floatingActionButton.clicks().map { SingleViewEvent.BackpackFragment },
-        )
+        floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
+        }
     }
 
     private fun setMarkerMyLocation(state: SingleViewState) {
