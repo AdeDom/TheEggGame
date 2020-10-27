@@ -4,24 +4,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
-import androidx.lifecycle.asLiveData
-import com.adedom.android.util.locationFlow
-import com.adedom.android.util.toast
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.conflate
 
 @ExperimentalCoroutinesApi
 abstract class BaseLocationActivity : BaseActivity() {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (LocationManager.PROVIDERS_CHANGED_ACTION == intent.action) {
@@ -38,8 +28,6 @@ abstract class BaseLocationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        startUpdatingLocation()
         settingLocation()
     }
 
@@ -54,20 +42,6 @@ abstract class BaseLocationActivity : BaseActivity() {
         //Unregister receiver.
         broadcastReceiver(false)
     }
-
-    private fun startUpdatingLocation() {
-        fusedLocationClient.locationFlow()
-            .conflate()
-            .catch { e ->
-                toast(e.message, Toast.LENGTH_LONG)
-            }
-            .asLiveData()
-            .observe {
-                onLocationResult(it)
-            }
-    }
-
-    protected open fun onLocationResult(location: Location) {}
 
     // When location is not enabled, the application will end.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

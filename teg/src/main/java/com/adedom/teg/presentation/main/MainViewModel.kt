@@ -5,6 +5,7 @@ import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.models.request.ChangeLatLngRequest
 import com.adedom.teg.presentation.usercase.MainUseCase
 import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.launch
@@ -51,6 +52,18 @@ class MainViewModel(
     fun callLogActiveOff() {
         launch {
             useCase.callLogActiveOff()
+        }
+    }
+
+    fun callChangeLatLng(latitude: Double, longitude: Double) {
+        launch {
+            val request = ChangeLatLngRequest(
+                latitude = latitude,
+                longitude = longitude,
+            )
+            when (val resource = repository.callChangeLatLng(request)) {
+                is Resource.Error -> setError(resource)
+            }
         }
     }
 
