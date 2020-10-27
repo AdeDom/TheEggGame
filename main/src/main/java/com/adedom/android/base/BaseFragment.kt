@@ -13,10 +13,25 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.util.toast
 import com.adedom.teg.domain.Resource
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlin.coroutines.CoroutineContext
 
-abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment() {
+abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), CoroutineScope {
+
+    private val job = SupervisorJob()
+    private val exceptionHandler = CoroutineExceptionHandler { _, err ->
+        context.toast(err.message, Toast.LENGTH_LONG)
+    }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main + exceptionHandler
+
+    override fun onDestroy() {
+        coroutineContext.cancel()
+        super.onDestroy()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
@@ -22,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,7 +47,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
         mapView.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
+        launch {
             val googleMap = mapView.getGoogleMap()
 
             googleMap.isMyLocationEnabled = true
@@ -64,7 +63,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
                 .locationFlow()
                 .onEach { onLocationResult(googleMap, it) }
                 .catch { context.toast(it.message, Toast.LENGTH_LONG) }
-                .collect()
+                .launchIn(this)
         }
 
         viewModel.state.observe { state ->
