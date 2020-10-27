@@ -1,6 +1,5 @@
 package com.adedom.teg.presentation.single
 
-import androidx.lifecycle.LiveData
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
@@ -14,8 +13,9 @@ class SingleViewModel(
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<SingleState>(SingleState()) {
 
-    val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
-        get() = repository.getDbPlayerInfoLiveData()
+    suspend fun getDbPlayerInfo(): PlayerInfoEntity? {
+        return repository.getDbPlayerInfo()
+    }
 
     fun callItemCollection() {
         launch {

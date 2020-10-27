@@ -1,13 +1,13 @@
 package com.adedom.android.presentation.single
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
@@ -20,8 +20,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_single.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
@@ -53,7 +51,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             googleMap.setMinZoomPreference(12F)
             googleMap.setMaxZoomPreference(16F)
 
-            CoroutineScope(Dispatchers.Main).launch {
+            lifecycleScope.launch {
                 val location = locationProviderClient.awaitLastLocation()
                 val latLng = LatLng(location.latitude, location.longitude)
                 val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14F)
@@ -78,8 +76,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
                 context.toast(e.message, Toast.LENGTH_LONG)
             }
             .asLiveData()
-            .observe {
-                onLocationResult(it)
+            .observe { location ->
+                lifecycleScope.launch {
+                    onLocationResult(location)
+                }
             }
 
         floatingActionButton.setOnClickListener {
@@ -87,34 +87,33 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         }
     }
 
-    private fun onLocationResult(location: Location) {
+    private suspend fun onLocationResult(location: Location) {
         val latLng = LatLng(location.latitude, location.longitude)
 
-        viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
-            if (playerInfo == null) return@observe
+        val playerInfo = viewModel.getDbPlayerInfo()
 
-            val markerOptions = MarkerOptions().apply {
-                position(latLng)
-                title(playerInfo.name)
-                snippet(getString(R.string.level, playerInfo.level))
+        val markerOptions = MarkerOptions().apply {
+            position(latLng)
+            title(playerInfo?.name)
+            snippet(getString(R.string.level, playerInfo?.level))
+        }
+
+        context?.setImageCircle(playerInfo?.image, onResourceReady = { bitmap ->
+            lifecycleScope.launch {
+                mMarkerMyLocation?.remove()
+
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                mMarkerMyLocation = mapView.getGoogleMap().addMarker(markerOptions)
             }
+        }, onLoadCleared = { bitmap ->
+            lifecycleScope.launch {
+                mMarkerMyLocation?.remove()
 
-            context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
-                setImageMarkerCircle(markerOptions, bitmap)
-            }, onLoadCleared = { bitmap ->
-                setImageMarkerCircle(markerOptions, bitmap)
-            })
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                mMarkerMyLocation = mapView.getGoogleMap().addMarker(markerOptions)
+            }
         })
 
-    }
-
-    private fun setImageMarkerCircle(markerOptions: MarkerOptions, bitmap: Bitmap) {
-        mapView.getMapAsync { googleMap ->
-            mMarkerMyLocation?.remove()
-
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-            mMarkerMyLocation = googleMap.addMarker(markerOptions)
-        }
     }
 
     override fun onResume() {
