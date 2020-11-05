@@ -28,18 +28,25 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
 
         viewModel.attachFirstTime.observe {
             viewModel.fetchRooms()
+            viewModel.incomingRoom()
         }
 
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)
 
             adt.setList(state.rooms)
+
+            tvPeopleAll.text = state.peopleAll.toString()
         }
 
         viewModel.error.observeError()
 
         btRoomInfo.setOnClickListener {
             findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
+        }
+
+        btTestWebSocket.setOnClickListener {
+            viewModel.outgoingRoom()
         }
 
         floatingActionButton.setOnClickListener {

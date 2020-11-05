@@ -2,10 +2,12 @@ package com.adedom.teg.data.network.source
 
 import com.adedom.teg.BuildConfig
 import com.adedom.teg.data.network.api.TegApi
-import com.adedom.teg.sharedpreference.service.SessionManagerService
+import com.adedom.teg.data.network.websocket.TegWebSocket
 import com.adedom.teg.models.request.RefreshTokenRequest
+import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -16,7 +18,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class DataSourceProvider(private val sessionManagerService: SessionManagerService) {
+@KtorExperimentalAPI
+class DataSourceProvider(
+    private val sessionManagerService: SessionManagerService,
+    private val webSocket: TegWebSocket,
+) {
 
     fun getDataSource(): TegApi {
         val okHttpClient = OkHttpClient.Builder().apply {
@@ -75,6 +81,10 @@ class DataSourceProvider(private val sessionManagerService: SessionManagerServic
         }.build()
 
         return retrofit.create(TegApi::class.java)
+    }
+
+    fun getWebSocketDataSource(): TegWebSocket {
+        return webSocket
     }
 
     private fun callRefreshToken() {

@@ -3,6 +3,7 @@ package com.adedom.teg.presentation.room
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.models.websocket.RoomListSocket
 import kotlinx.coroutines.launch
 
 class RoomViewModel(
@@ -19,6 +20,21 @@ class RoomViewModel(
             }
 
             setState { copy(loading = false) }
+        }
+    }
+
+    fun incomingRoom() {
+        launch {
+            repository.incomingRoom { roomListSocket ->
+                setState { copy(peopleAll = roomListSocket.peopleAll ?: 0) }
+            }
+        }
+    }
+
+    fun outgoingRoom() {
+        launch {
+            val request = RoomListSocket()
+            repository.outgoingRoom(request)
         }
     }
 

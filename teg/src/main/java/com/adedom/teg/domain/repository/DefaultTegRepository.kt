@@ -3,9 +3,11 @@ package com.adedom.teg.domain.repository
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.RoomListSocket
 import okhttp3.MultipartBody
 
 interface DefaultTegRepository {
@@ -61,5 +63,9 @@ interface DefaultTegRepository {
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
     suspend fun callFetchRooms(): Resource<RoomsResponse>
+
+    suspend fun incomingRoom(socket: RoomSocket)
+
+    suspend fun outgoingRoom(socket: RoomListSocket)
 
 }

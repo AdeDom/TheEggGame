@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.RoomListSocket
+import io.ktor.util.*
 import okhttp3.MultipartBody
 
+@KtorExperimentalAPI
 class TegDataSourceImpl(
     private val db: AppDatabase,
     private val provider: DataSourceProvider,
@@ -115,6 +119,14 @@ class TegDataSourceImpl(
 
     override suspend fun callFetchRooms(): RoomsResponse {
         return provider.getTegDataSource().callFetchRooms()
+    }
+
+    override suspend fun incomingRoom(socket: RoomSocket) {
+        return provider.getWebSocketDataSource().incomingRoom(socket)
+    }
+
+    override suspend fun outgoingRoom(socket: RoomListSocket) {
+        return provider.getWebSocketDataSource().outgoingRoom(socket)
     }
 
 }

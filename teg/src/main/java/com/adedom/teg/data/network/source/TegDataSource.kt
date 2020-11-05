@@ -3,8 +3,10 @@ package com.adedom.teg.data.network.source
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.RoomListSocket
 import okhttp3.MultipartBody
 
 interface TegDataSource {
@@ -60,5 +62,9 @@ interface TegDataSource {
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
     suspend fun callFetchRooms(): RoomsResponse
+
+    suspend fun incomingRoom(socket: RoomSocket)
+
+    suspend fun outgoingRoom(socket: RoomListSocket)
 
 }

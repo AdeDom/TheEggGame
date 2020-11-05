@@ -77,6 +77,9 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-androidx-fragment:$koin_version"
 
+    // ktor client
+    implementation "io.ktor:ktor-client-okhttp:1.4.1"
+
     // unit test
     testImplementation 'junit:junit:4.13.1'
 

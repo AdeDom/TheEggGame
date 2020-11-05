@@ -6,12 +6,14 @@ import com.adedom.teg.domain.di.getDomainModule
 import com.adedom.teg.presentation.di.getPresentationModule
 import com.adedom.teg.sharedpreference.di.getSharedPreferenceModule
 import com.facebook.stetho.Stetho
+import io.ktor.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
+@KtorExperimentalAPI
 @FlowPreview
 @ExperimentalCoroutinesApi
 class MainApplication : Application() {

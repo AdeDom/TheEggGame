@@ -38,6 +38,26 @@
             app:spanCount="2"
             tools:listitem="@layout/item_room" />
 
+    <TextView
+            android:id="@+id/tvPeopleAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large"
+            android:background="@drawable/shape_bg_gray"
+            android:padding="@dimen/large"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+            android:id="@+id/btTestWebSocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Web Socket"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"

@@ -76,4 +76,7 @@ dependencies {
     // navigation graph
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // ktor client
+    implementation "io.ktor:ktor-client-okhttp:1.4.1"
 }
