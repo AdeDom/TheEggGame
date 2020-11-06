@@ -28,7 +28,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
 
         viewModel.attachFirstTime.observe {
             viewModel.fetchRooms()
-            viewModel.incomingRoom()
+            viewModel.incomingRoomPeopleAll()
         }
 
         viewModel.state.observe { state ->
@@ -43,10 +43,6 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
 
         btRoomInfo.setOnClickListener {
             findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
-        }
-
-        btTestWebSocket.setOnClickListener {
-            viewModel.outgoingRoom()
         }
 
         floatingActionButton.setOnClickListener {

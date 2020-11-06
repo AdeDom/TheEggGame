@@ -7,7 +7,6 @@ import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.RoomListSocket
 import okhttp3.MultipartBody
 
 interface DefaultTegRepository {
@@ -64,8 +63,6 @@ interface DefaultTegRepository {
 
     suspend fun callFetchRooms(): Resource<RoomsResponse>
 
-    suspend fun incomingRoom(socket: RoomSocket)
-
-    suspend fun outgoingRoom(socket: RoomListSocket)
+    suspend fun incomingRoomPeopleAll(socket: RoomSocket)
 
 }

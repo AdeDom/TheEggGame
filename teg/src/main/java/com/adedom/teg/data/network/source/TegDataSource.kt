@@ -6,7 +6,6 @@ import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.RoomListSocket
 import okhttp3.MultipartBody
 
 interface TegDataSource {
@@ -63,8 +62,6 @@ interface TegDataSource {
 
     suspend fun callFetchRooms(): RoomsResponse
 
-    suspend fun incomingRoom(socket: RoomSocket)
-
-    suspend fun outgoingRoom(socket: RoomListSocket)
+    suspend fun incomingRoomPeopleAll(socket: RoomSocket)
 
 }

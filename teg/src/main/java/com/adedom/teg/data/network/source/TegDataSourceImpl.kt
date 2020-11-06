@@ -7,7 +7,6 @@ import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.RoomSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.RoomListSocket
 import io.ktor.util.*
 import okhttp3.MultipartBody
 
@@ -121,12 +120,8 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchRooms()
     }
 
-    override suspend fun incomingRoom(socket: RoomSocket) {
-        return provider.getWebSocketDataSource().incomingRoom(socket)
-    }
-
-    override suspend fun outgoingRoom(socket: RoomListSocket) {
-        return provider.getWebSocketDataSource().outgoingRoom(socket)
+    override suspend fun incomingRoomPeopleAll(socket: RoomSocket) {
+        return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
 
 }

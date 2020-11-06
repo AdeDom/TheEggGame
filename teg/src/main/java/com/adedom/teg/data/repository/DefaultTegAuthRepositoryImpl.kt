@@ -10,7 +10,6 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.RoomListSocket
 import okhttp3.MultipartBody
 
 class DefaultTegAuthRepositoryImpl(
@@ -124,12 +123,8 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callFetchRooms() }
     }
 
-    override suspend fun incomingRoom(socket: RoomSocket) {
-        return dataSource.incomingRoom(socket)
-    }
-
-    override suspend fun outgoingRoom(socket: RoomListSocket) {
-        return dataSource.outgoingRoom(socket)
+    override suspend fun incomingRoomPeopleAll(socket: RoomSocket) {
+        return dataSource.incomingRoomPeopleAll(socket)
     }
 
 }
