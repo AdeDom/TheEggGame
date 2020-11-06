@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
-import com.adedom.teg.data.network.websocket.RoomSocket
+import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import io.ktor.util.*
@@ -120,7 +120,7 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchRooms()
     }
 
-    override suspend fun incomingRoomPeopleAll(socket: RoomSocket) {
+    override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
 

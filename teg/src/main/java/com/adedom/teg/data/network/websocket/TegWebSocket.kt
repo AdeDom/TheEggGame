@@ -1,6 +1,6 @@
 package com.adedom.teg.data.network.websocket
 
-import com.adedom.teg.models.websocket.RoomListSocket
+import com.adedom.teg.models.websocket.RoomPeopleAllOutgoing
 import com.adedom.teg.util.fromJson
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
 
-typealias RoomSocket = (RoomListSocket) -> Unit
+typealias RoomPeopleAllSocket = (RoomPeopleAllOutgoing) -> Unit
 
 @KtorExperimentalAPI
 class TegWebSocket {
 
-    suspend fun incomingRoomPeopleAll(socket: RoomSocket) {
+    suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         val client = HttpClient(OkHttp) {
             install(WebSockets)
         }
@@ -30,7 +30,7 @@ class TegWebSocket {
         ) {
             incoming.consumeAsFlow()
                 .onEach { frame ->
-                    val response = frame.fromJson<RoomListSocket>()
+                    val response = frame.fromJson<RoomPeopleAllOutgoing>()
                     socket.invoke(response)
                 }
                 .catch { }

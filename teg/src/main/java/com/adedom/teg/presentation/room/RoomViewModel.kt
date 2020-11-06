@@ -24,8 +24,8 @@ class RoomViewModel(
 
     fun incomingRoomPeopleAll() {
         launch {
-            repository.incomingRoomPeopleAll { roomListSocket ->
-                setState { copy(peopleAll = roomListSocket.peopleAll ?: 0) }
+            repository.incomingRoomPeopleAll { roomPeopleAll ->
+                setState { copy(peopleAll = roomPeopleAll.peopleAll) }
             }
         }
     }

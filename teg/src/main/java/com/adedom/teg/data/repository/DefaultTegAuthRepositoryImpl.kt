@@ -5,7 +5,7 @@ import com.adedom.teg.base.BaseRepository
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.source.TegDataSource
-import com.adedom.teg.data.network.websocket.RoomSocket
+import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.*
@@ -123,7 +123,7 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callFetchRooms() }
     }
 
-    override suspend fun incomingRoomPeopleAll(socket: RoomSocket) {
+    override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }
 
