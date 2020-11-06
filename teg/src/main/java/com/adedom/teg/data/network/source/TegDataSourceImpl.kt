@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -116,12 +117,12 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callMultiItemCollection(multiItemCollectionRequest)
     }
 
-    override suspend fun callFetchRooms(): RoomsResponse {
-        return provider.getTegDataSource().callFetchRooms()
-    }
-
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
+    }
+
+    override suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket) {
+        return provider.getWebSocketDataSource().incomingPlaygroundRoom(socket)
     }
 
 }

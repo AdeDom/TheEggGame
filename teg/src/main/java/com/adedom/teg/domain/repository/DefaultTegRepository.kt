@@ -3,6 +3,7 @@ package com.adedom.teg.domain.repository
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
@@ -61,8 +62,8 @@ interface DefaultTegRepository {
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
-    suspend fun callFetchRooms(): Resource<RoomsResponse>
-
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
+
+    suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)
 
 }

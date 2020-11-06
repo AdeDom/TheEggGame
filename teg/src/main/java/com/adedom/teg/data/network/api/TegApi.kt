@@ -62,7 +62,4 @@ interface TegApi {
     @POST("api/multi/item-collection")
     suspend fun callMultiItemCollection(@Body multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
-    @GET("api/multi/fetch-room")
-    suspend fun callFetchRooms(): RoomsResponse
-
 }

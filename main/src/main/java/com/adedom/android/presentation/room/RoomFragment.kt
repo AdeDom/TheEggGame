@@ -27,8 +27,8 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
         }
 
         viewModel.attachFirstTime.observe {
-            viewModel.fetchRooms()
             viewModel.incomingRoomPeopleAll()
+            viewModel.incomingPlaygroundRoom()
         }
 
         viewModel.state.observe { state ->
