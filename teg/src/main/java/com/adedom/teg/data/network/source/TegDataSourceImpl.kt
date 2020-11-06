@@ -8,6 +8,7 @@ import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.CreateRoomIncoming
 import io.ktor.util.*
 import okhttp3.MultipartBody
 
@@ -123,6 +124,10 @@ class TegDataSourceImpl(
 
     override suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket) {
         return provider.getWebSocketDataSource().incomingPlaygroundRoom(socket)
+    }
+
+    override suspend fun outgoingCreateRoom(socket: CreateRoomIncoming) {
+        return provider.getWebSocketDataSource().outgoingCreateRoom(socket)
     }
 
 }

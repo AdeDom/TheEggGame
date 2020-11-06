@@ -16,6 +16,15 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
 
     private val viewModel by viewModel<RoomViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.attachFirstTime.observe {
+            viewModel.incomingRoomPeopleAll()
+            viewModel.incomingPlaygroundRoom()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,11 +33,6 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
             layoutManager = GridLayoutManager(context, 2)
             adapter = adt
             addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
-        }
-
-        viewModel.attachFirstTime.observe {
-            viewModel.incomingRoomPeopleAll()
-            viewModel.incomingPlaygroundRoom()
         }
 
         viewModel.state.observe { state ->

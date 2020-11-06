@@ -4,7 +4,6 @@ import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.network.source.DataSourceProvider
 import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.data.network.source.TegDataSourceImpl
-import com.adedom.teg.data.network.websocket.TegWebSocket
 import com.adedom.teg.data.repository.DefaultTegAuthRepositoryImpl
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import io.ktor.util.*
@@ -15,9 +14,7 @@ private val dataModule = module {
 
     single { AppDatabase(get()) }
 
-    single { TegWebSocket() }
-
-    single { DataSourceProvider(get(), get()) }
+    single { DataSourceProvider(get()) }
 
     single<TegDataSource> { TegDataSourceImpl(get(), get()) }
 

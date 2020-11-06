@@ -11,6 +11,7 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.CreateRoomIncoming
 import okhttp3.MultipartBody
 
 class DefaultTegAuthRepositoryImpl(
@@ -126,6 +127,10 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket) {
         return dataSource.incomingPlaygroundRoom(socket)
+    }
+
+    override suspend fun outgoingCreateRoom(socket: CreateRoomIncoming) {
+        return dataSource.outgoingCreateRoom(socket)
     }
 
 }

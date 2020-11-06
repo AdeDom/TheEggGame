@@ -7,6 +7,10 @@ import com.adedom.teg.models.request.RefreshTokenRequest
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
+import io.ktor.client.features.websocket.*
+import io.ktor.client.request.*
 import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -19,10 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @KtorExperimentalAPI
-class DataSourceProvider(
-    private val sessionManagerService: SessionManagerService,
-    private val webSocket: TegWebSocket,
-) {
+class DataSourceProvider(private val sessionManagerService: SessionManagerService) {
 
     fun getDataSource(): TegApi {
         val okHttpClient = OkHttpClient.Builder().apply {
@@ -84,7 +85,14 @@ class DataSourceProvider(
     }
 
     fun getWebSocketDataSource(): TegWebSocket {
-        return webSocket
+        val client = HttpClient(OkHttp) {
+            install(WebSockets)
+
+            request {
+                header(TegConstant.ACCESS_TOKEN, sessionManagerService.accessToken)
+            }
+        }
+        return TegWebSocket(client)
     }
 
     private fun callRefreshToken() {

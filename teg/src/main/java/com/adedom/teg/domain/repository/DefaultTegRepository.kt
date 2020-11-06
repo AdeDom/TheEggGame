@@ -8,6 +8,7 @@ import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
+import com.adedom.teg.models.websocket.CreateRoomIncoming
 import okhttp3.MultipartBody
 
 interface DefaultTegRepository {
@@ -65,5 +66,7 @@ interface DefaultTegRepository {
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)
+
+    suspend fun outgoingCreateRoom(socket: CreateRoomIncoming)
 
 }
