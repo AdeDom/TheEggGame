@@ -1,6 +1,7 @@
 package com.adedom.teg.presentation.createroom
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
@@ -29,6 +30,10 @@ class CreateRoomViewModel(
     val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
         get() = repository.getDbPlayerInfoLiveData()
 
+    private val _createRoomEvent = MutableLiveData<Boolean>()
+    val createRoomEvent: LiveData<Boolean>
+        get() = _createRoomEvent
+
     fun setStateRoomName(roomName: String) {
         setState { copy(roomName = roomName) }
     }
@@ -44,6 +49,8 @@ class CreateRoomViewModel(
             repository.outgoingCreateRoom(createRoom)
 
             setState { copy(loading = false) }
+
+            _createRoomEvent.value = true
         }
     }
 

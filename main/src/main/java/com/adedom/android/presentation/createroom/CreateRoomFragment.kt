@@ -39,6 +39,12 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
             etRoomName.setText(playerInfo.name)
         })
 
+        viewModel.createRoomEvent.observe {
+            if (it) {
+                findNavController().navigate(R.id.action_createRoomFragment_to_roomInfoFragment)
+            }
+        }
+
         viewModel.error.observeError()
 
         etRoomName.addTextChangedListener { viewModel.setStateRoomName(it.toString()) }
@@ -48,8 +54,7 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
         }
 
         btCreateRoom.setOnClickListener {
-            findNavController().navigate(R.id.action_createRoomFragment_to_roomInfoFragment)
-//            viewModel.outgoingCreateRoom()
+            viewModel.outgoingCreateRoom()
         }
 
         viewEvent().observe { viewModel.process(it) }
