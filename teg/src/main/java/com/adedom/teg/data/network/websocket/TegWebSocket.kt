@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.onEach
 
 typealias RoomPeopleAllSocket = (RoomPeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
+typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
 class TegWebSocket(
@@ -29,16 +30,31 @@ class TegWebSocket(
 
     private var roomSocket: WebSocketSession? = null
 
-    suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
+    private suspend fun wss(
+        path: String,
+        webSockets: suspend DefaultClientWebSocketSession.() -> Unit
+    ) {
         client.wss(
             method = HttpMethod.Get,
-            host = "the-egg-game.herokuapp.com",
+            host = TegConstant.BASE_HOST,
             port = DEFAULT_PORT,
-            path = "/websocket/multi/room-people-all",
+            path = path,
+            request = {
+                header(TegConstant.ACCESS_TOKEN, sessionManagerService.accessToken)
+            }
         ) {
+            webSockets.invoke(this)
+        }
+    }
+
+    private suspend inline fun <reified T : Any> wss(
+        path: String,
+        crossinline socket: WebSockets<T>
+    ) {
+        wss(path) {
             incoming.consumeAsFlow()
                 .onEach { frame ->
-                    val response = frame.fromJson<RoomPeopleAllOutgoing>()
+                    val response = frame.fromJson<T>()
                     socket.invoke(response)
                 }
                 .catch { }
@@ -46,16 +62,14 @@ class TegWebSocket(
         }
     }
 
+    suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
+        wss<RoomPeopleAllOutgoing>("/websocket/multi/room-people-all") {
+            socket.invoke(it)
+        }
+    }
+
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket) {
-        client.wss(
-            method = HttpMethod.Get,
-            host = "the-egg-game.herokuapp.com",
-            port = DEFAULT_PORT,
-            path = "/websocket/multi/playground-room",
-            request = {
-                header(TegConstant.ACCESS_TOKEN, sessionManagerService.accessToken)
-            }
-        ) {
+        wss("/websocket/multi/playground-room") {
             roomSocket = this
             try {
                 incoming.consumeAsFlow()
