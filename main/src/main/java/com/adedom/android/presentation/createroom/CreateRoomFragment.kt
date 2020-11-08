@@ -8,6 +8,7 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
 import com.adedom.android.util.setVisibility
+import com.adedom.android.util.toast
 import com.adedom.teg.presentation.createroom.CreateRoomViewEvent
 import com.adedom.teg.presentation.createroom.CreateRoomViewModel
 import kotlinx.android.synthetic.main.fragment_create_room.*
@@ -39,9 +40,11 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
             etRoomName.setText(playerInfo.name)
         })
 
-        viewModel.createRoomEvent.observe {
-            if (it) {
+        viewModel.createRoomEvent.observe { response ->
+            if (response.success) {
                 findNavController().navigate(R.id.action_createRoomFragment_to_roomInfoFragment)
+            } else {
+                context.toast(response.message)
             }
         }
 
@@ -54,7 +57,7 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
         }
 
         btCreateRoom.setOnClickListener {
-            viewModel.outgoingCreateRoom()
+            viewModel.callCreateRoom()
         }
 
         viewEvent().observe { viewModel.process(it) }

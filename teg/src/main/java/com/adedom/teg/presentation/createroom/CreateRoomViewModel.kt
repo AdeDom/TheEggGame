@@ -7,7 +7,8 @@ import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.models.websocket.CreateRoomIncoming
+import com.adedom.teg.models.request.CreateRoomRequest
+import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.CreateRoomUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -30,27 +31,28 @@ class CreateRoomViewModel(
     val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
         get() = repository.getDbPlayerInfoLiveData()
 
-    private val _createRoomEvent = MutableLiveData<Boolean>()
-    val createRoomEvent: LiveData<Boolean>
+    private val _createRoomEvent = MutableLiveData<BaseResponse>()
+    val createRoomEvent: LiveData<BaseResponse>
         get() = _createRoomEvent
 
     fun setStateRoomName(roomName: String) {
         setState { copy(roomName = roomName) }
     }
 
-    fun outgoingCreateRoom() {
+    fun callCreateRoom() {
         launch {
             setState { copy(loading = true) }
 
-            val createRoom = CreateRoomIncoming(
+            val request = CreateRoomRequest(
                 roomName = state.value?.roomName,
                 roomPeople = state.value?.roomPeople,
             )
-            repository.outgoingCreateRoom(createRoom)
+            when (val resource = useCase.callCreateRoom(request)) {
+                is Resource.Success -> _createRoomEvent.value = resource.data
+                is Resource.Error -> setError(resource)
+            }
 
             setState { copy(loading = false) }
-
-            _createRoomEvent.value = true
         }
     }
 

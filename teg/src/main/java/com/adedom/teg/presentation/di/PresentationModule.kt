@@ -39,7 +39,7 @@ private val presentationModule = module {
     viewModel { SettingViewModel(get()) }
     viewModel { SingleViewModel(get(), get()) }
     viewModel { MissionViewModel(get(), get()) }
-    viewModel { RoomInfoViewModel(get()) }
+    viewModel { RoomInfoViewModel(get(), get()) }
     viewModel { PlayerProfileViewModel(get()) }
     viewModel { RoomViewModel(get()) }
     viewModel { CreateRoomViewModel(get(), get()) }

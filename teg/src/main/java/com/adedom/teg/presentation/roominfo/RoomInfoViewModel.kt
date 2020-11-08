@@ -2,13 +2,23 @@ package com.adedom.teg.presentation.roominfo
 
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
+import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.launch
 
 class RoomInfoViewModel(
     private val useCase: MultiUseCase,
+    private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomInfoViewState>(RoomInfoViewState()) {
+
+    fun incomingRoomInfo() {
+        launch {
+            repository.incomingRoomInfo { roomInfoOutgoing ->
+                setState { copy(roomInfoOutgoing = roomInfoOutgoing) }
+            }
+        }
+    }
 
     fun callMultiItemCollection() {
         launch {

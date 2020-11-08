@@ -21,9 +21,9 @@ class RoomAdapter(
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        val roomNo = context?.getString(R.string.room_holder_room_no, list[position].roomNo)
-        val roomName = context?.getString(R.string.room_holder_room_name, list[position].name)
-        val people = context?.getString(R.string.room_holder_room_people, list[position].people)
+        val roomNo = context?.getString(R.string.room_title_room_no, list[position].roomNo)
+        val roomName = context?.getString(R.string.room_title_room_name, list[position].name)
+        val people = context?.getString(R.string.room_title_room_people, list[position].people)
 
         holder.itemView.tvRoomNo.text = roomNo
         holder.itemView.tvRoomName.text = roomName

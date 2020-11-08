@@ -6,12 +6,12 @@ import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
+import com.adedom.teg.data.network.websocket.RoomInfoSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.CreateRoomIncoming
 import okhttp3.MultipartBody
 
 class DefaultTegAuthRepositoryImpl(
@@ -121,6 +121,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callMultiItemCollection(multiItemCollectionRequest) }
     }
 
+    override suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callCreateRoom(createRoomRequest) }
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }
@@ -129,8 +133,12 @@ class DefaultTegAuthRepositoryImpl(
         return dataSource.incomingPlaygroundRoom(socket)
     }
 
-    override suspend fun outgoingCreateRoom(socket: CreateRoomIncoming) {
-        return dataSource.outgoingCreateRoom(socket)
+    override suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
+        return dataSource.incomingRoomInfo(socket)
+    }
+
+    override suspend fun outgoingCreateRoom() {
+        return dataSource.outgoingCreateRoom()
     }
 
 }

@@ -1,12 +1,11 @@
 package com.adedom.teg.data.network.websocket
 
 import com.adedom.teg.models.response.RoomsResponse
-import com.adedom.teg.models.websocket.CreateRoomIncoming
+import com.adedom.teg.models.websocket.RoomInfoOutgoing
 import com.adedom.teg.models.websocket.RoomPeopleAllOutgoing
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
 import com.adedom.teg.util.fromJson
-import com.adedom.teg.util.toJson
 import io.ktor.client.*
 import io.ktor.client.features.websocket.*
 import io.ktor.client.request.*
@@ -20,6 +19,7 @@ import kotlinx.coroutines.flow.onEach
 
 typealias RoomPeopleAllSocket = (RoomPeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
+typealias RoomInfoSocket = (RoomInfoOutgoing) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -85,8 +85,20 @@ class TegWebSocket(
         }
     }
 
-    suspend fun outgoingCreateRoom(socket: CreateRoomIncoming) {
-        roomSocket?.outgoing?.send(socket.toJson())
+    suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
+        wss("/websocket/multi/room-info") {
+            incoming.consumeAsFlow()
+                .onEach { frame ->
+                    val response = frame.fromJson<RoomInfoOutgoing>()
+                    socket.invoke(response)
+                }
+                .catch { }
+                .collect()
+        }
+    }
+
+    suspend fun outgoingCreateRoom() {
+        roomSocket?.outgoing?.send(Frame.Text(""))
     }
 
 }

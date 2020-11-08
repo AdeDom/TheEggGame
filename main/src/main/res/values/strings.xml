@@ -100,9 +100,9 @@
     <string name="change_image_profile">Change image profile</string>
     <string name="hide">Hide</string>
     <string name="room">Room</string>
-    <string name="room_holder_room_no">Room no : %1$s</string>
-    <string name="room_holder_room_name">Room name : %1$s</string>
-    <string name="room_holder_room_people">People : %1$d</string>
+    <string name="room_title_room_no">Room no : %1$s</string>
+    <string name="room_title_room_name">Room name : %1$s</string>
+    <string name="room_title_room_people">People : %1$d</string>
     <string name="room_info">Room info</string>
     <string name="player_profile">Player profile</string>
     <string name="player_profile_name">Name : %1$s</string>

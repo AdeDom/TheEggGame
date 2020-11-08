@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
+import com.adedom.teg.data.network.websocket.RoomInfoSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.CreateRoomIncoming
 import okhttp3.MultipartBody
 
 interface DefaultTegRepository {
@@ -63,10 +63,14 @@ interface DefaultTegRepository {
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
+    suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): Resource<BaseResponse>
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)
 
-    suspend fun outgoingCreateRoom(socket: CreateRoomIncoming)
+    suspend fun incomingRoomInfo(socket: RoomInfoSocket)
+
+    suspend fun outgoingCreateRoom()
 
 }

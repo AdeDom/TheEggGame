@@ -5,10 +5,10 @@ import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
+import com.adedom.teg.data.network.websocket.RoomInfoSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
-import com.adedom.teg.models.websocket.CreateRoomIncoming
 import io.ktor.util.*
 import okhttp3.MultipartBody
 
@@ -118,6 +118,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callMultiItemCollection(multiItemCollectionRequest)
     }
 
+    override suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): BaseResponse {
+        return provider.getTegDataSource().callCreateRoom(createRoomRequest)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
@@ -126,8 +130,12 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingPlaygroundRoom(socket)
     }
 
-    override suspend fun outgoingCreateRoom(socket: CreateRoomIncoming) {
-        return provider.getWebSocketDataSource().outgoingCreateRoom(socket)
+    override suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
+        return provider.getWebSocketDataSource().incomingRoomInfo(socket)
+    }
+
+    override suspend fun outgoingCreateRoom() {
+        return provider.getWebSocketDataSource().outgoingCreateRoom()
     }
 
 }

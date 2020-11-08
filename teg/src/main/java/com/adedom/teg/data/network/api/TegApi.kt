@@ -62,4 +62,7 @@ interface TegApi {
     @POST("api/multi/item-collection")
     suspend fun callMultiItemCollection(@Body multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
+    @POST("api/multi/create-room")
+    suspend fun callCreateRoom(@Body createRoomRequest: CreateRoomRequest): BaseResponse
+
 }

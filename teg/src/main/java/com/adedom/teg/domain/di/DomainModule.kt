@@ -18,7 +18,7 @@ private val domainModule = module {
     single<SettingUseCase> { SettingUseCaseImpl(get(), get(), get()) }
     single<MissionUseCase> { MissionUseCaseImpl(get()) }
     single<MultiUseCase> { MultiUseCaseImpl(get()) }
-    single<CreateRoomUseCase> { CreateRoomUseCaseImpl() }
+    single<CreateRoomUseCase> { CreateRoomUseCaseImpl(get()) }
 
 }
 
