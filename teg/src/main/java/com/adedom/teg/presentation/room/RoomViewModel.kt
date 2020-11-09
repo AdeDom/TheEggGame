@@ -1,21 +1,16 @@
 package com.adedom.teg.presentation.room
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.JoinRoomInfoRequest
-import com.adedom.teg.models.response.BaseResponse
 import kotlinx.coroutines.launch
 
 class RoomViewModel(
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomViewState>(RoomViewState()) {
 
-    private val _joinRoomInfoEvent = MutableLiveData<BaseResponse>()
-    val joinRoomInfo: LiveData<BaseResponse>
-        get() = _joinRoomInfoEvent
+    var listener: JoinRoomInfoListener? = null
 
     fun incomingRoomPeopleAll() {
         launch {
@@ -43,7 +38,7 @@ class RoomViewModel(
 
             val request = JoinRoomInfoRequest(roomNo)
             when (val resource = repository.callJoinRoomInfo(request)) {
-                is Resource.Success -> _joinRoomInfoEvent.value = resource.data
+                is Resource.Success -> listener?.onJoinRoomInfoResponse(resource.data)
                 is Resource.Error -> setError(resource)
             }
 

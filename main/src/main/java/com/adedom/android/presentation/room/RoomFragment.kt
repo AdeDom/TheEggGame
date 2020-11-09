@@ -9,11 +9,13 @@ import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.toast
+import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.presentation.room.JoinRoomInfoListener
 import com.adedom.teg.presentation.room.RoomViewModel
 import kotlinx.android.synthetic.main.fragment_room.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RoomFragment : BaseFragment(R.layout.fragment_room) {
+class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener {
 
     private val viewModel by viewModel<RoomViewModel>()
 
@@ -36,20 +38,14 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
             addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
         }
 
+        viewModel.listener = this
+
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)
 
             adt.setList(state.rooms)
 
             tvPeopleAll.text = state.peopleAll.toString()
-        }
-
-        viewModel.joinRoomInfo.observe { response ->
-            if (response.success) {
-                findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
-            } else {
-                context.toast(response.message)
-            }
         }
 
         viewModel.error.observeError()
@@ -60,6 +56,14 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
 
         adt.onClick = {
             viewModel.callJoinRoomInfo(it.roomNo)
+        }
+    }
+
+    override fun onJoinRoomInfoResponse(response: BaseResponse) {
+        if (response.success) {
+            findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
+        } else {
+            context.toast(response.message)
         }
     }
 
