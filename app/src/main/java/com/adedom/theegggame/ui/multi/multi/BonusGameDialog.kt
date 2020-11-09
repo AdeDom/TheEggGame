@@ -1,33 +1,27 @@
 package com.adedom.theegggame.ui.multi.multi
 
+import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.DialogFragment
 import com.adedom.library.extension.onAnimationEnd
 import com.adedom.library.extension.toast
-import com.adedom.library.util.BaseDialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.GameActivity.Companion.sContext
 
-class BonusGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
-    { R.layout.dialog_bonus_game },
-    { R.drawable.ic_egg_bonus },
-    { R.string.bonus }
-) {
+class BonusGameDialog : DialogFragment() {
 
     private var onClick = 0
     private var bonus = 0
     private var lastDir = 0F
 
-    override fun initDialog(view: View) {
-        super.initDialog(view)
-        viewModel = ViewModelProvider(this).get(RoomInfoActivityViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val tvBonus = view.findViewById(R.id.tvBonus) as TextView
         val ivWheel = view.findViewById(R.id.ivWheel) as ImageView

@@ -1,23 +1,19 @@
 package com.adedom.theegggame.ui.multi.multi
 
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.adedom.library.util.BaseDialogFragment
+import androidx.fragment.app.DialogFragment
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.models.Score
-import com.adedom.theegggame.ui.multi.roominfo.RoomInfoActivityViewModel
-import com.adedom.theegggame.util.*
+import com.adedom.theegggame.util.TEAM_ALWAYS
 
-class EndGameDialog : BaseDialogFragment<RoomInfoActivityViewModel>(
-    { R.layout.dialog_end_game },
-    { R.drawable.the_egg_game },
-    { R.string.end_game }
-) {
+class EndGameDialog : DialogFragment() {
 
-    override fun initDialog(view: View) {
-        super.initDialog(view)
-//        val team = arguments!!.getString(TEAM)!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //        val team = arguments!!.getString(TEAM)!!
 //        val (teamA, teamB) = arguments!!.getParcelable<Score>(SCORE) as Score
 
         val tvTeamA = view.findViewById(R.id.tvTeamA) as TextView

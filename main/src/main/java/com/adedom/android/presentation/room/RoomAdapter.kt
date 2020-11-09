@@ -1,6 +1,5 @@
 package com.adedom.android.presentation.room
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,7 @@ import com.adedom.android.R
 import com.adedom.teg.models.response.FetchRoomResponse
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomAdapter(
-    private val context: Context?,
-) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+class RoomAdapter : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
     private val list by lazy { mutableListOf<FetchRoomResponse>() }
     var onClick: ((FetchRoomResponse) -> Unit)? = null
@@ -22,6 +19,7 @@ class RoomAdapter(
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
+        val context = holder.itemView.context
         val roomNo = context?.getString(R.string.room_title_room_no, list[position].roomNo)
         val roomName = context?.getString(R.string.room_title_room_name, list[position].name)
         val people = context?.getString(R.string.room_title_room_people, list[position].people)

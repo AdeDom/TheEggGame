@@ -4,7 +4,7 @@
         android:id="@+id/layoutRoomInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_team_a"
+        android:background="@drawable/shape_bg_gray"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:padding="@dimen/large">
@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-            android:id="@+id/ivKing"
+            android:id="@+id/ivRoleHead"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_king"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <ImageView
-            android:id="@+id/ivReady"
+            android:id="@+id/ivStatus"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

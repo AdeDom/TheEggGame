@@ -31,7 +31,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adt = RoomAdapter(context)
+        val adt = RoomAdapter()
         recyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = adt
