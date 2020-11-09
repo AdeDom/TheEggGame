@@ -8,6 +8,7 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.setVisibility
+import com.adedom.android.util.toast
 import com.adedom.teg.presentation.room.RoomViewModel
 import kotlinx.android.synthetic.main.fragment_room.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,14 +44,22 @@ class RoomFragment : BaseFragment(R.layout.fragment_room) {
             tvPeopleAll.text = state.peopleAll.toString()
         }
 
-        viewModel.error.observeError()
-
-        btRoomInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
+        viewModel.joinRoomInfo.observe { response ->
+            if (response.success) {
+                findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
+            } else {
+                context.toast(response.message)
+            }
         }
+
+        viewModel.error.observeError()
 
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_roomFragment_to_createRoomFragment)
+        }
+
+        adt.onClick = {
+            viewModel.callJoinRoomInfo(it.roomNo)
         }
     }
 

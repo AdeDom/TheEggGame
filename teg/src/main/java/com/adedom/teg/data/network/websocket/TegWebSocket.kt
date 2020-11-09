@@ -1,7 +1,8 @@
 package com.adedom.teg.data.network.websocket
 
 import com.adedom.teg.models.response.RoomsResponse
-import com.adedom.teg.models.websocket.RoomInfoOutgoing
+import com.adedom.teg.models.websocket.RoomInfoPlayersOutgoing
+import com.adedom.teg.models.websocket.RoomInfoTitleOutgoing
 import com.adedom.teg.models.websocket.RoomPeopleAllOutgoing
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
@@ -19,7 +20,8 @@ import kotlinx.coroutines.flow.onEach
 
 typealias RoomPeopleAllSocket = (RoomPeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
-typealias RoomInfoSocket = (RoomInfoOutgoing) -> Unit
+typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
+typealias RoomInfoPlayersSocket = (RoomInfoPlayersOutgoing) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -85,11 +87,23 @@ class TegWebSocket(
         }
     }
 
-    suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
-        wss("/websocket/multi/room-info") {
+    suspend fun incomingRoomInfoTitle(socket: RoomInfoTitleSocket) {
+        wss("/websocket/multi/room-info-title") {
             incoming.consumeAsFlow()
                 .onEach { frame ->
-                    val response = frame.fromJson<RoomInfoOutgoing>()
+                    val response = frame.fromJson<RoomInfoTitleOutgoing>()
+                    socket.invoke(response)
+                }
+                .catch { }
+                .collect()
+        }
+    }
+
+    suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket) {
+        wss("/websocket/multi/room-info-players") {
+            incoming.consumeAsFlow()
+                .onEach { frame ->
+                    val response = frame.fromJson<RoomInfoPlayersOutgoing>()
                     socket.invoke(response)
                 }
                 .catch { }

@@ -12,10 +12,26 @@ class RoomInfoViewModel(
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomInfoViewState>(RoomInfoViewState()) {
 
-    fun incomingRoomInfo() {
+    fun incomingRoomInfoTitle() {
         launch {
-            repository.incomingRoomInfo { roomInfoOutgoing ->
-                setState { copy(roomInfoOutgoing = roomInfoOutgoing) }
+            setState { copy(loading = true) }
+
+            repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
+                setState { copy(loading = false) }
+
+                setState { copy(roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle) }
+            }
+        }
+    }
+
+    fun incomingRoomInfoPlayers() {
+        launch {
+            setState { copy(loading = true) }
+
+            repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
+                setState { copy(loading = false) }
+
+                setState { copy(roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers) }
             }
         }
     }

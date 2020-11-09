@@ -5,7 +5,8 @@ import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoSocket
+import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
+import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -122,6 +123,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callCreateRoom(createRoomRequest)
     }
 
+    override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse {
+        return provider.getTegDataSource().callJoinRoomInfo(joinRoomInfoRequest)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
@@ -130,8 +135,12 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingPlaygroundRoom(socket)
     }
 
-    override suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
-        return provider.getWebSocketDataSource().incomingRoomInfo(socket)
+    override suspend fun incomingRoomInfoTitle(socket: RoomInfoTitleSocket) {
+        return provider.getWebSocketDataSource().incomingRoomInfoTitle(socket)
+    }
+
+    override suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket) {
+        return provider.getWebSocketDataSource().incomingRoomInfoPlayers(socket)
     }
 
     override suspend fun outgoingCreateRoom() {

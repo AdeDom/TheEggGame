@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoSocket
+import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
+import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -64,11 +65,15 @@ interface TegDataSource {
 
     suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): BaseResponse
 
+    suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)
 
-    suspend fun incomingRoomInfo(socket: RoomInfoSocket)
+    suspend fun incomingRoomInfoTitle(socket: RoomInfoTitleSocket)
+
+    suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
     suspend fun outgoingCreateRoom()
 

@@ -14,6 +14,7 @@ class RoomAdapter(
 ) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
     private val list by lazy { mutableListOf<FetchRoomResponse>() }
+    var onClick: ((FetchRoomResponse) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room, parent, false)
@@ -28,6 +29,11 @@ class RoomAdapter(
         holder.itemView.tvRoomNo.text = roomNo
         holder.itemView.tvRoomName.text = roomName
         holder.itemView.tvRoomPeople.text = people
+
+        holder.itemView.setOnClickListener {
+            val room = list[position]
+            onClick?.invoke(room)
+        }
     }
 
     override fun getItemCount(): Int = list.size

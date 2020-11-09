@@ -109,12 +109,10 @@
             tools:layout="@layout/fragment_room">
         <action
                 android:id="@+id/action_roomFragment_to_createRoomFragment"
-                app:destination="@id/createRoomFragment"
-                app:popUpToInclusive="true" />
+                app:destination="@id/createRoomFragment" />
         <action
                 android:id="@+id/action_roomFragment_to_roomInfoFragment"
-                app:destination="@id/roomInfoFragment"
-                app:popUpToInclusive="true" />
+                app:destination="@id/roomInfoFragment" />
     </fragment>
     <fragment
             android:id="@+id/createRoomFragment"

@@ -6,7 +6,8 @@ import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoSocket
+import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
+import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
 import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -125,6 +126,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callCreateRoom(createRoomRequest) }
     }
 
+    override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callJoinRoomInfo(joinRoomInfoRequest) }
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }
@@ -133,8 +138,12 @@ class DefaultTegAuthRepositoryImpl(
         return dataSource.incomingPlaygroundRoom(socket)
     }
 
-    override suspend fun incomingRoomInfo(socket: RoomInfoSocket) {
-        return dataSource.incomingRoomInfo(socket)
+    override suspend fun incomingRoomInfoTitle(socket: RoomInfoTitleSocket) {
+        return dataSource.incomingRoomInfoTitle(socket)
+    }
+
+    override suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket) {
+        return dataSource.incomingRoomInfoPlayers(socket)
     }
 
     override suspend fun outgoingCreateRoom() {
