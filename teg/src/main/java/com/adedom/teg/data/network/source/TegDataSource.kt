@@ -65,6 +65,8 @@ interface TegDataSource {
 
     suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): BaseResponse
 
+    suspend fun callCurrentRoomNo(): CurrentRoomNoResponse
+
     suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse
 
     suspend fun callLeaveRoomInfo(): BaseResponse
@@ -78,5 +80,7 @@ interface TegDataSource {
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
     suspend fun outgoingPlaygroundRoom()
+
+    suspend fun outgoingRoomInfoPlayers()
 
 }

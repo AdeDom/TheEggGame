@@ -123,6 +123,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callCreateRoom(createRoomRequest)
     }
 
+    override suspend fun callCurrentRoomNo(): CurrentRoomNoResponse {
+        return provider.getTegDataSource().callCurrentRoomNo()
+    }
+
     override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse {
         return provider.getTegDataSource().callJoinRoomInfo(joinRoomInfoRequest)
     }
@@ -149,6 +153,10 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingPlaygroundRoom() {
         return provider.getWebSocketDataSource().outgoingPlaygroundRoom()
+    }
+
+    override suspend fun outgoingRoomInfoPlayers() {
+        return provider.getWebSocketDataSource().outgoingRoomInfoPlayers()
     }
 
 }

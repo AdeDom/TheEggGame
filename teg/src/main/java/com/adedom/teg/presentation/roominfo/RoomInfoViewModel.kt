@@ -7,6 +7,7 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.models.response.CurrentRoomNoResponse
 import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.launch
 
@@ -14,6 +15,10 @@ class RoomInfoViewModel(
     private val useCase: MultiUseCase,
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomInfoViewState>(RoomInfoViewState()) {
+
+    private val _currentRoomNo = MutableLiveData<CurrentRoomNoResponse>()
+    val currentRoomNo: LiveData<CurrentRoomNoResponse>
+        get() = _currentRoomNo
 
     private val _leaveRoomInfoEvent = MutableLiveData<BaseResponse>()
     val leaveRoomInfoEvent: LiveData<BaseResponse>
@@ -26,7 +31,9 @@ class RoomInfoViewModel(
             repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
                 setState { copy(loading = false) }
 
-                setState { copy(roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle) }
+                if (state.value?.roomNo == roomInfoTitleOutgoing.roomNo) {
+                    setState { copy(roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle) }
+                }
             }
         }
     }
@@ -62,6 +69,19 @@ class RoomInfoViewModel(
         }
     }
 
+    fun callCurrentRoomNo() {
+        launch {
+            setState { copy(loading = true) }
+
+            when (val resource = repository.callCurrentRoomNo()) {
+                is Resource.Success -> _currentRoomNo.value = resource.data
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(loading = false) }
+        }
+    }
+
     fun callLeaveRoomInfo() {
         launch {
             setState { copy(loading = true) }
@@ -73,6 +93,10 @@ class RoomInfoViewModel(
 
             setState { copy(loading = false) }
         }
+    }
+
+    fun setStateRoomNo(roomNo: String?) {
+        setState { copy(roomNo = roomNo) }
     }
 
 }

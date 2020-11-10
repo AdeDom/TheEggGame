@@ -24,7 +24,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
         super.onCreate(savedInstanceState)
 
         viewModel.attachFirstTime.observe {
-            viewModel.incomingRoomInfoTitle()
+            viewModel.callCurrentRoomNo()
             viewModel.incomingRoomInfoPlayers()
         }
     }
@@ -51,6 +51,13 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             if (state.roomInfoPlayers.isNotEmpty()) {
                 context.toast(state.roomInfoPlayers.toString())
                 adt.setList(state.roomInfoPlayers)
+            }
+        }
+
+        viewModel.currentRoomNo.observe { response ->
+            if (response.success) {
+                viewModel.setStateRoomNo(response.roomNo)
+                viewModel.incomingRoomInfoTitle()
             }
         }
 

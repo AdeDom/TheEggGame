@@ -126,6 +126,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callCreateRoom(createRoomRequest) }
     }
 
+    override suspend fun callCurrentRoomNo(): Resource<CurrentRoomNoResponse> {
+        return safeApiCall { dataSource.callCurrentRoomNo() }
+    }
+
     override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callJoinRoomInfo(joinRoomInfoRequest) }
     }
@@ -152,6 +156,10 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun outgoingPlaygroundRoom() {
         return dataSource.outgoingPlaygroundRoom()
+    }
+
+    override suspend fun outgoingRoomInfoPlayers() {
+        return dataSource.outgoingRoomInfoPlayers()
     }
 
 }

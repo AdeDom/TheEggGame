@@ -31,6 +31,7 @@ class TegWebSocket(
 ) {
 
     private var playgroundRoom: WebSocketSession? = null
+    private var roomInfoPlayers: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -101,18 +102,27 @@ class TegWebSocket(
 
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket) {
         wss("/websocket/multi/room-info-players") {
-            incoming.consumeAsFlow()
-                .onEach { frame ->
-                    val response = frame.fromJson<RoomInfoPlayersOutgoing>()
-                    socket.invoke(response)
-                }
-                .catch { }
-                .collect()
+            roomInfoPlayers = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<RoomInfoPlayersOutgoing>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                roomInfoPlayers = null
+            }
         }
     }
 
     suspend fun outgoingPlaygroundRoom() {
         playgroundRoom?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingRoomInfoPlayers() {
+        roomInfoPlayers?.outgoing?.send(Frame.Text(""))
     }
 
 }
