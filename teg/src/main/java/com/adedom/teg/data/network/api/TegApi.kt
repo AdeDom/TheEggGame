@@ -68,4 +68,7 @@ interface TegApi {
     @POST("api/multi/join-room-info")
     suspend fun callJoinRoomInfo(@Body joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse
 
+    @DELETE("api/multi/leave-room-info")
+    suspend fun callLeaveRoomInfo(): BaseResponse
+
 }

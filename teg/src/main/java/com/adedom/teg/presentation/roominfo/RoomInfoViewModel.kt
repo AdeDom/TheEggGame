@@ -1,9 +1,12 @@
 package com.adedom.teg.presentation.roominfo
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
+import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.launch
 
@@ -11,6 +14,10 @@ class RoomInfoViewModel(
     private val useCase: MultiUseCase,
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomInfoViewState>(RoomInfoViewState()) {
+
+    private val _leaveRoomInfoEvent = MutableLiveData<BaseResponse>()
+    val leaveRoomInfoEvent: LiveData<BaseResponse>
+        get() = _leaveRoomInfoEvent
 
     fun incomingRoomInfoTitle() {
         launch {
@@ -48,6 +55,19 @@ class RoomInfoViewModel(
             )
 
             when (val resource = useCase.callMultiItemCollection(request)) {
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(loading = false) }
+        }
+    }
+
+    fun callLeaveRoomInfo() {
+        launch {
+            setState { copy(loading = true) }
+
+            when (val resource = useCase.callLeaveRoomInfo()) {
+                is Resource.Success -> _leaveRoomInfoEvent.value = resource.data
                 is Resource.Error -> setError(resource)
             }
 

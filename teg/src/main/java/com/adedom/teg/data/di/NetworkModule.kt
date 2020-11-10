@@ -9,6 +9,7 @@ import com.adedom.teg.data.repository.DefaultTegAuthRepositoryImpl
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
+import io.ktor.client.features.logging.*
 import io.ktor.client.features.websocket.*
 import io.ktor.util.*
 import org.koin.dsl.module
@@ -21,6 +22,11 @@ private val dataModule = module {
     single {
         HttpClient(OkHttp) {
             install(WebSockets)
+
+            install(Logging) {
+                logger = Logger.DEFAULT
+                level = LogLevel.HEADERS
+            }
         }
     }
     single { TegWebSocket(get(), get()) }

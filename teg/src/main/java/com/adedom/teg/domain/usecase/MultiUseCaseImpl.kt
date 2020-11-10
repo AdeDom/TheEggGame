@@ -47,4 +47,16 @@ class MultiUseCaseImpl(
         }
     }
 
+    override suspend fun callLeaveRoomInfo(): Resource<BaseResponse> {
+        val resource = repository.callLeaveRoomInfo()
+
+        when (resource) {
+            is Resource.Success -> {
+
+            }
+        }
+
+        return resource
+    }
+
 }

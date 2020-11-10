@@ -130,6 +130,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callJoinRoomInfo(joinRoomInfoRequest) }
     }
 
+    override suspend fun callLeaveRoomInfo(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callLeaveRoomInfo() }
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }

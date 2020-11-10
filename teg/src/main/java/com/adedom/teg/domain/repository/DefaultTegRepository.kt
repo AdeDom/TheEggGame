@@ -68,6 +68,8 @@ interface DefaultTegRepository {
 
     suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): Resource<BaseResponse>
 
+    suspend fun callLeaveRoomInfo(): Resource<BaseResponse>
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

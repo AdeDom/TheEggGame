@@ -127,6 +127,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callJoinRoomInfo(joinRoomInfoRequest)
     }
 
+    override suspend fun callLeaveRoomInfo(): BaseResponse {
+        return provider.getTegDataSource().callLeaveRoomInfo()
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
