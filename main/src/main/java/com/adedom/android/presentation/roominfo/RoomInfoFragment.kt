@@ -25,7 +25,6 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
 
         viewModel.attachFirstTime.observe {
             viewModel.callCurrentRoomNo()
-            viewModel.incomingRoomInfoPlayers()
         }
     }
 
@@ -71,6 +70,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             if (response.success) {
                 viewModel.setStateRoomNo(response.roomNo)
                 viewModel.incomingRoomInfoTitle()
+                viewModel.incomingRoomInfoPlayers()
             }
         }
 
