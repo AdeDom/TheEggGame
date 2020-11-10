@@ -10,8 +10,8 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.setVisibility
-import com.adedom.android.util.toast
 import com.adedom.teg.presentation.roominfo.RoomInfoViewModel
+import com.adedom.teg.util.TegConstant
 import kotlinx.android.synthetic.main.fragment_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,10 +49,23 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             }
 
             if (state.roomInfoPlayers.isNotEmpty()) {
-                context.toast(state.roomInfoPlayers.toString())
+                state.roomInfoPlayers
+                    .filter { it.playerId == state.playerId }
+                    .onEach {
+                        if (it.roleRoomInfo == TegConstant.ROOM_ROLE_HEAD) {
+                            btGoTeg.setText(R.string.go)
+                        }
+                    }
+
                 adt.setList(state.roomInfoPlayers)
             }
         }
+
+        viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
+            if (playerInfo == null) return@observe
+
+            viewModel.setStatePlayerId(playerInfo.playerId)
+        })
 
         viewModel.currentRoomNo.observe { response ->
             if (response.success) {

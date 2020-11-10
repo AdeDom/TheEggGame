@@ -3,6 +3,7 @@ package com.adedom.teg.presentation.roominfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
+import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
@@ -15,6 +16,9 @@ class RoomInfoViewModel(
     private val useCase: MultiUseCase,
     private val repository: DefaultTegRepository,
 ) : BaseViewModel<RoomInfoViewState>(RoomInfoViewState()) {
+
+    val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
+        get() = repository.getDbPlayerInfoLiveData()
 
     private val _currentRoomNo = MutableLiveData<CurrentRoomNoResponse>()
     val currentRoomNo: LiveData<CurrentRoomNoResponse>
@@ -45,7 +49,9 @@ class RoomInfoViewModel(
             repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
                 setState { copy(loading = false) }
 
-                setState { copy(roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers) }
+                if (state.value?.roomNo == roomInfoPlayersOutgoing.roomNo) {
+                    setState { copy(roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers) }
+                }
             }
         }
     }
@@ -97,6 +103,10 @@ class RoomInfoViewModel(
 
     fun setStateRoomNo(roomNo: String?) {
         setState { copy(roomNo = roomNo) }
+    }
+
+    fun setStatePlayerId(playerId: String?) {
+        setState { copy(playerId = playerId) }
     }
 
 }
