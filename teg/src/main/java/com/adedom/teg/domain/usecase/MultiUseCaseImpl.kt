@@ -52,7 +52,10 @@ class MultiUseCaseImpl(
 
         when (resource) {
             is Resource.Success -> {
-
+                if (resource.data.success) {
+                    // TODO: 10/11/2563 outgoingRoomInfoPlayers
+                    repository.outgoingPlaygroundRoom()
+                }
             }
         }
 

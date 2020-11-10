@@ -30,7 +30,7 @@ class TegWebSocket(
     private val sessionManagerService: SessionManagerService,
 ) {
 
-    private var roomSocket: WebSocketSession? = null
+    private var playgroundRoom: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -72,7 +72,7 @@ class TegWebSocket(
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket) {
         wss("/websocket/multi/playground-room") {
-            roomSocket = this
+            playgroundRoom = this
             try {
                 incoming.consumeAsFlow()
                     .onEach { frame ->
@@ -82,7 +82,7 @@ class TegWebSocket(
                     .catch { }
                     .collect()
             } finally {
-                roomSocket = null
+                playgroundRoom = null
             }
         }
     }
@@ -111,8 +111,8 @@ class TegWebSocket(
         }
     }
 
-    suspend fun outgoingCreateRoom() {
-        roomSocket?.outgoing?.send(Frame.Text(""))
+    suspend fun outgoingPlaygroundRoom() {
+        playgroundRoom?.outgoing?.send(Frame.Text(""))
     }
 
 }

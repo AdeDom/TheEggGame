@@ -2,7 +2,7 @@ package com.adedom.android.presentation.roominfo
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -66,19 +66,23 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             viewModel.callMultiItemCollection()
         }
 
-        activity?.onBackPressedDispatcher?.addCallback {
-            AlertDialog.Builder(requireActivity()).apply {
-                setTitle(R.string.dialog_room_info_title)
-                setMessage(R.string.dialog_room_info_message)
-                setPositiveButton(android.R.string.cancel) { dialog, _ ->
-                    dialog.dismiss()
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(requireActivity()).apply {
+                        setTitle(R.string.dialog_room_info_title)
+                        setMessage(R.string.dialog_room_info_message)
+                        setPositiveButton(android.R.string.cancel) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        setNegativeButton(android.R.string.ok) { _, _ ->
+                            viewModel.callLeaveRoomInfo()
+                        }
+                        show()
+                    }
                 }
-                setNegativeButton(android.R.string.ok) { _, _ ->
-                    viewModel.callLeaveRoomInfo()
-                }
-                show()
-            }
-        }
+            })
     }
 
 }

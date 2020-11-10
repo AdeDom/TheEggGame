@@ -33,7 +33,7 @@ class CreateRoomUseCaseImpl(
         when (resource) {
             is Resource.Success -> {
                 if (resource.data.success) {
-                    repository.outgoingCreateRoom()
+                    repository.outgoingPlaygroundRoom()
                 }
             }
         }

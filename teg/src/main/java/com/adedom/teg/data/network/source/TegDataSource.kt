@@ -77,6 +77,6 @@ interface TegDataSource {
 
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
-    suspend fun outgoingCreateRoom()
+    suspend fun outgoingPlaygroundRoom()
 
 }

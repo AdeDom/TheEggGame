@@ -150,8 +150,8 @@ class DefaultTegAuthRepositoryImpl(
         return dataSource.incomingRoomInfoPlayers(socket)
     }
 
-    override suspend fun outgoingCreateRoom() {
-        return dataSource.outgoingCreateRoom()
+    override suspend fun outgoingPlaygroundRoom() {
+        return dataSource.outgoingPlaygroundRoom()
     }
 
 }

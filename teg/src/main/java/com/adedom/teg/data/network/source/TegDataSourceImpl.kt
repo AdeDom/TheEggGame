@@ -147,8 +147,8 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingRoomInfoPlayers(socket)
     }
 
-    override suspend fun outgoingCreateRoom() {
-        return provider.getWebSocketDataSource().outgoingCreateRoom()
+    override suspend fun outgoingPlaygroundRoom() {
+        return provider.getWebSocketDataSource().outgoingPlaygroundRoom()
     }
 
 }
