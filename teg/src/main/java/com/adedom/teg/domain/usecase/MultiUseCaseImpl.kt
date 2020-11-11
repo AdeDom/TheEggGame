@@ -47,19 +47,4 @@ class MultiUseCaseImpl(
         }
     }
 
-    override suspend fun callLeaveRoomInfo(): Resource<BaseResponse> {
-        val resource = repository.callLeaveRoomInfo()
-
-        when (resource) {
-            is Resource.Success -> {
-                if (resource.data.success) {
-                    repository.outgoingRoomInfoPlayers()
-                    repository.outgoingPlaygroundRoom()
-                }
-            }
-        }
-
-        return resource
-    }
-
 }

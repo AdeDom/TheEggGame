@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.adedom.teg.base.BaseViewModel
-import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
-import com.adedom.teg.domain.model.ValidateRoleRoomInfo
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
@@ -31,9 +29,6 @@ class RoomInfoViewModel(
 
     private val channel = ConflatedBroadcastChannel<RoomInfoViewEvent>()
 
-    val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
-        get() = repository.getDbPlayerInfoLiveData()
-
     private val _currentRoomNo = MutableLiveData<CurrentRoomNoResponse>()
     val currentRoomNo: LiveData<CurrentRoomNoResponse>
         get() = _currentRoomNo
@@ -42,35 +37,37 @@ class RoomInfoViewModel(
     val leaveRoomInfoEvent: LiveData<BaseResponse>
         get() = _leaveRoomInfoEvent
 
-    fun incomingRoomInfoTitle() {
+    fun incomingRoomInfoTitle(roomNo: String?) {
         launch {
             setState { copy(loading = true) }
 
-            repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
-                setState { copy(loading = false) }
-
-                if (state.value?.roomNo == roomInfoTitleOutgoing.roomNo) {
-                    setState { copy(roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle) }
+            useCase.incomingRoomInfoTitle(roomNo) { roomInfoTitleOutgoing ->
+                setState {
+                    copy(
+                        loading = false,
+                        roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle,
+                    )
                 }
             }
         }
     }
 
-    fun incomingRoomInfoPlayers() {
+    fun incomingRoomInfoPlayers(roomNo: String?) {
         launch {
             setState { copy(loading = true) }
 
-            repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
-                setState { copy(loading = false) }
+            val playerId = repository.getDbPlayerInfo()?.playerId
 
-                if (state.value?.roomNo == roomInfoPlayersOutgoing.roomNo) {
-                    setState { copy(roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers) }
-
-                    val validateRoleRoomInfo = ValidateRoleRoomInfo(
-                        playerId = state.value?.playerId,
-                        roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers
+            useCase.incomingRoomInfoPlayers(roomNo) { roomInfoPlayersOutgoing ->
+                setState {
+                    copy(
+                        loading = false,
+                        roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers,
+                        isRoleHead = useCase.isValidateRoleHead(
+                            playerId,
+                            roomInfoPlayersOutgoing.roomInfoPlayers
+                        )
                     )
-                    setState { copy(isRoleHead = useCase.isValidateRoleHead(validateRoleRoomInfo)) }
                 }
             }
         }
@@ -137,24 +134,12 @@ class RoomInfoViewModel(
         launch {
             setState { copy(loading = true) }
 
-            val validateRoleRoomInfo = ValidateRoleRoomInfo(
-                playerId = state.value?.playerId,
-                roomInfoPlayers = state.value?.roomInfoPlayers,
-            )
-            when (val resource = useCase.callChangeGoTeg(validateRoleRoomInfo)) {
+            when (val resource = useCase.callChangeGoTeg(state.value?.roomInfoPlayers)) {
                 is Resource.Error -> setError(resource)
             }
 
             setState { copy(loading = false) }
         }
-    }
-
-    fun setStateRoomNo(roomNo: String?) {
-        setState { copy(roomNo = roomNo) }
-    }
-
-    fun setStatePlayerId(playerId: String?) {
-        setState { copy(playerId = playerId) }
     }
 
     fun process(event: RoomInfoViewEvent) {

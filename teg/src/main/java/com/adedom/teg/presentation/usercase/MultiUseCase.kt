@@ -8,6 +8,4 @@ interface MultiUseCase {
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
-    suspend fun callLeaveRoomInfo(): Resource<BaseResponse>
-
 }

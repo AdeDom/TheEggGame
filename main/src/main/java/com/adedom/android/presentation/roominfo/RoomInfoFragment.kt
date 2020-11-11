@@ -64,17 +64,10 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             }
         }
 
-        viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
-            if (playerInfo == null) return@observe
-
-            viewModel.setStatePlayerId(playerInfo.playerId)
-        })
-
         viewModel.currentRoomNo.observe { response ->
             if (response.success) {
-                viewModel.setStateRoomNo(response.roomNo)
-                viewModel.incomingRoomInfoTitle()
-                viewModel.incomingRoomInfoPlayers()
+                viewModel.incomingRoomInfoTitle(response.roomNo)
+                viewModel.incomingRoomInfoPlayers(response.roomNo)
             }
         }
 
