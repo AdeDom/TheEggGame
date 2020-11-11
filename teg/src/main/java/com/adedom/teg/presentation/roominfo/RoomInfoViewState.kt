@@ -8,5 +8,6 @@ data class RoomInfoViewState(
     var roomNo: String? = null,
     var roomInfoTitle: FetchRoomResponse? = null,
     var roomInfoPlayers: List<RoomInfoPlayers> = emptyList(),
+    var isRoleHead: Boolean = false,
     val loading: Boolean = false,
 )

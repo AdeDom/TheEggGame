@@ -46,7 +46,7 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoViewHolder>
         }
 //        }
 
-        if (status == TegConstant.ROOM_READY) {
+        if (status == TegConstant.ROOM_STATUS_READY) {
             view.ivStatus.background =
                 ContextCompat.getDrawable(context, R.drawable.shape_oval_green)
         } else {

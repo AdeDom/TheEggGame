@@ -74,4 +74,10 @@ interface TegApi {
     @DELETE("api/multi/leave-room-info")
     suspend fun callLeaveRoomInfo(): BaseResponse
 
+    @PATCH("api/multi/change-team/{team}")
+    suspend fun callChangeTeam(@Path("team") team: String): BaseResponse
+
+    @PATCH("api/multi/change-go-teg")
+    suspend fun callChangeGoTeg(): BaseResponse
+
 }

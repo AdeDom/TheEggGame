@@ -72,6 +72,10 @@ interface DefaultTegRepository {
 
     suspend fun callLeaveRoomInfo(): Resource<BaseResponse>
 
+    suspend fun callChangeTeam(team: String): Resource<BaseResponse>
+
+    suspend fun callChangeGoTeg(): Resource<BaseResponse>
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

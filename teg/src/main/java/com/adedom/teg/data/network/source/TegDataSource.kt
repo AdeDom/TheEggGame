@@ -71,6 +71,10 @@ interface TegDataSource {
 
     suspend fun callLeaveRoomInfo(): BaseResponse
 
+    suspend fun callChangeTeam(team: String): BaseResponse
+
+    suspend fun callChangeGoTeg(): BaseResponse
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

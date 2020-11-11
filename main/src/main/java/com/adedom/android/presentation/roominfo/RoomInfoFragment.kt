@@ -9,13 +9,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
+import com.adedom.android.util.clicks
 import com.adedom.android.util.setVisibility
+import com.adedom.teg.presentation.roominfo.RoomInfoViewEvent
 import com.adedom.teg.presentation.roominfo.RoomInfoViewModel
-import com.adedom.teg.util.TegConstant
 import kotlinx.android.synthetic.main.fragment_room_info.*
 import kotlinx.android.synthetic.main.item_room.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
 
     private val viewModel by viewModel<RoomInfoViewModel>()
@@ -48,15 +56,11 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             }
 
             if (state.roomInfoPlayers.isNotEmpty()) {
-                state.roomInfoPlayers
-                    .filter { it.playerId == state.playerId }
-                    .onEach {
-                        if (it.roleRoomInfo == TegConstant.ROOM_ROLE_HEAD) {
-                            btGoTeg.setText(R.string.go)
-                        }
-                    }
-
                 adt.setList(state.roomInfoPlayers)
+            }
+
+            if (state.isRoleHead) {
+                btGoTeg.setText(R.string.go)
             }
         }
 
@@ -82,9 +86,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
 
         viewModel.error.observeError()
 
-        btGoTeg.setOnClickListener {
-            viewModel.callMultiItemCollection()
-        }
+        viewEventFlow().observe { viewModel.process(it) }
 
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
@@ -103,6 +105,14 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
                     }
                 }
             })
+    }
+
+    private fun viewEventFlow(): Flow<RoomInfoViewEvent> {
+        return merge(
+            btGoTeg.clicks().map { RoomInfoViewEvent.GoTeg },
+            ivTeamA.clicks().map { RoomInfoViewEvent.TeamA },
+            ivTeamB.clicks().map { RoomInfoViewEvent.TeamB },
+        )
     }
 
 }

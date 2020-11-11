@@ -138,6 +138,14 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callLeaveRoomInfo() }
     }
 
+    override suspend fun callChangeTeam(team: String): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeTeam(team) }
+    }
+
+    override suspend fun callChangeGoTeg(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeGoTeg() }
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }

@@ -135,6 +135,14 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callLeaveRoomInfo()
     }
 
+    override suspend fun callChangeTeam(team: String): BaseResponse {
+        return provider.getTegDataSource().callChangeTeam(team)
+    }
+
+    override suspend fun callChangeGoTeg(): BaseResponse {
+        return provider.getTegDataSource().callChangeGoTeg()
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
