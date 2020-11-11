@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
-import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
-import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
-import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
+import com.adedom.teg.data.network.websocket.*
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import io.ktor.util.*
@@ -139,8 +136,12 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callChangeTeam(team)
     }
 
-    override suspend fun callChangeGoTeg(): BaseResponse {
-        return provider.getTegDataSource().callChangeGoTeg()
+    override suspend fun callChangeStatusRoomInfo(): BaseResponse {
+        return provider.getTegDataSource().callChangeStatusRoomInfo()
+    }
+
+    override suspend fun callRoomInfoTegMulti(): BaseResponse {
+        return provider.getTegDataSource().callRoomInfoTegMulti()
     }
 
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
@@ -159,12 +160,20 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingRoomInfoPlayers(socket)
     }
 
+    override suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket) {
+        return provider.getWebSocketDataSource().incomingRoomInfoTegMulti(socket)
+    }
+
     override suspend fun outgoingPlaygroundRoom() {
         return provider.getWebSocketDataSource().outgoingPlaygroundRoom()
     }
 
     override suspend fun outgoingRoomInfoPlayers() {
         return provider.getWebSocketDataSource().outgoingRoomInfoPlayers()
+    }
+
+    override suspend fun outgoingRoomInfoTegMulti() {
+        return provider.getWebSocketDataSource().outgoingRoomInfoTegMulti()
     }
 
 }

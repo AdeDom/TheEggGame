@@ -77,7 +77,10 @@ interface TegApi {
     @PATCH("api/multi/change-team/{team}")
     suspend fun callChangeTeam(@Path("team") team: String): BaseResponse
 
-    @PATCH("api/multi/change-go-teg")
-    suspend fun callChangeGoTeg(): BaseResponse
+    @PATCH("api/multi/change-status-room-info")
+    suspend fun callChangeStatusRoomInfo(): BaseResponse
+
+    @PATCH("api/multi/room-info-teg-multi")
+    suspend fun callRoomInfoTegMulti(): BaseResponse
 
 }

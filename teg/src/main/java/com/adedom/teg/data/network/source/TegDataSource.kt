@@ -3,10 +3,7 @@ package com.adedom.teg.data.network.source
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
-import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
-import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
-import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
+import com.adedom.teg.data.network.websocket.*
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import okhttp3.MultipartBody
@@ -73,7 +70,9 @@ interface TegDataSource {
 
     suspend fun callChangeTeam(team: String): BaseResponse
 
-    suspend fun callChangeGoTeg(): BaseResponse
+    suspend fun callChangeStatusRoomInfo(): BaseResponse
+
+    suspend fun callRoomInfoTegMulti(): BaseResponse
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
@@ -83,8 +82,12 @@ interface TegDataSource {
 
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
+    suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
+
     suspend fun outgoingPlaygroundRoom()
 
     suspend fun outgoingRoomInfoPlayers()
+
+    suspend fun outgoingRoomInfoTegMulti()
 
 }

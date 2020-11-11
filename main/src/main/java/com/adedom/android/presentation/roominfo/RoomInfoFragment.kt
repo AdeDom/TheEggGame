@@ -2,6 +2,7 @@ package com.adedom.android.presentation.roominfo
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,9 @@ import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.clicks
 import com.adedom.android.util.setVisibility
+import com.adedom.android.util.toast
+import com.adedom.teg.models.websocket.RoomInfoTegMultiOutgoing
+import com.adedom.teg.presentation.roominfo.RoomInfoTegMultiListener
 import com.adedom.teg.presentation.roominfo.RoomInfoViewEvent
 import com.adedom.teg.presentation.roominfo.RoomInfoViewModel
 import kotlinx.android.synthetic.main.fragment_room_info.*
@@ -24,7 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
+class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegMultiListener {
 
     private val viewModel by viewModel<RoomInfoViewModel>()
 
@@ -45,6 +49,8 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             adapter = adt
             addItemDecoration(ItemDecoration(2, ItemDecoration.dpToPx(10, resources), true))
         }
+
+        viewModel.listener = this
 
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)
@@ -68,12 +74,19 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             if (response.success) {
                 viewModel.incomingRoomInfoTitle(response.roomNo)
                 viewModel.incomingRoomInfoPlayers(response.roomNo)
+                viewModel.incomingRoomInfoTegMulti(response.roomNo)
             }
         }
 
         viewModel.leaveRoomInfoEvent.observe { response ->
             if (response.success) {
                 findNavController().popBackStack()
+            }
+        }
+
+        viewModel.goTegMultiEvent.observe { response ->
+            if (!response.success) {
+                context.toast(response.message, Toast.LENGTH_LONG)
             }
         }
 
@@ -106,6 +119,12 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info) {
             ivTeamA.clicks().map { RoomInfoViewEvent.TeamA },
             ivTeamB.clicks().map { RoomInfoViewEvent.TeamB },
         )
+    }
+
+    override fun roomInfoTegMultiResponse(roomInfoTegMultiOutgoing: RoomInfoTegMultiOutgoing) {
+        if (roomInfoTegMultiOutgoing.success) {
+            findNavController().navigate(R.id.action_roomInfoFragment_to_multiFragment)
+        }
     }
 
 }

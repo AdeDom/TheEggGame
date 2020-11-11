@@ -29,6 +29,8 @@ class RoomInfoViewModel(
 
     private val channel = ConflatedBroadcastChannel<RoomInfoViewEvent>()
 
+    var listener: RoomInfoTegMultiListener? = null
+
     private val _currentRoomNo = MutableLiveData<CurrentRoomNoResponse>()
     val currentRoomNo: LiveData<CurrentRoomNoResponse>
         get() = _currentRoomNo
@@ -36,6 +38,10 @@ class RoomInfoViewModel(
     private val _leaveRoomInfoEvent = MutableLiveData<BaseResponse>()
     val leaveRoomInfoEvent: LiveData<BaseResponse>
         get() = _leaveRoomInfoEvent
+
+    private val _goTegMultiEvent = MutableLiveData<BaseResponse>()
+    val goTegMultiEvent: LiveData<BaseResponse>
+        get() = _goTegMultiEvent
 
     fun incomingRoomInfoTitle(roomNo: String?) {
         launch {
@@ -69,6 +75,14 @@ class RoomInfoViewModel(
                         )
                     )
                 }
+            }
+        }
+    }
+
+    fun incomingRoomInfoTegMulti(roomNo: String?) {
+        launch {
+            useCase.incomingRoomInfoTegMulti(roomNo) { roomInfoTegMultiOutgoing ->
+                listener?.roomInfoTegMultiResponse(roomInfoTegMultiOutgoing)
             }
         }
     }
@@ -135,6 +149,7 @@ class RoomInfoViewModel(
             setState { copy(loading = true) }
 
             when (val resource = useCase.callChangeGoTeg(state.value?.roomInfoPlayers)) {
+                is Resource.Success -> _goTegMultiEvent.value = resource.data
                 is Resource.Error -> setError(resource)
             }
 

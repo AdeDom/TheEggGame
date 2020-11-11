@@ -2,6 +2,7 @@ package com.adedom.teg.data.network.websocket
 
 import com.adedom.teg.models.response.RoomsResponse
 import com.adedom.teg.models.websocket.RoomInfoPlayersOutgoing
+import com.adedom.teg.models.websocket.RoomInfoTegMultiOutgoing
 import com.adedom.teg.models.websocket.RoomInfoTitleOutgoing
 import com.adedom.teg.models.websocket.RoomPeopleAllOutgoing
 import com.adedom.teg.sharedpreference.service.SessionManagerService
@@ -22,6 +23,7 @@ typealias RoomPeopleAllSocket = (RoomPeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
 typealias RoomInfoPlayersSocket = (RoomInfoPlayersOutgoing) -> Unit
+typealias RoomInfoTegMultiSocket = (RoomInfoTegMultiOutgoing) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -32,6 +34,7 @@ class TegWebSocket(
 
     private var playgroundRoom: WebSocketSession? = null
     private var roomInfoPlayers: WebSocketSession? = null
+    private var roomInfoTegMulti: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -117,12 +120,33 @@ class TegWebSocket(
         }
     }
 
+    suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket) {
+        wss("/websocket/multi/room-info-teg-multi") {
+            roomInfoTegMulti = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<RoomInfoTegMultiOutgoing>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                roomInfoTegMulti = null
+            }
+        }
+    }
+
     suspend fun outgoingPlaygroundRoom() {
         playgroundRoom?.outgoing?.send(Frame.Text(""))
     }
 
     suspend fun outgoingRoomInfoPlayers() {
         roomInfoPlayers?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingRoomInfoTegMulti() {
+        roomInfoTegMulti?.outgoing?.send(Frame.Text(""))
     }
 
 }

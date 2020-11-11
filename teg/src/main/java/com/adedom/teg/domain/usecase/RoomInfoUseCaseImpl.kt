@@ -1,6 +1,7 @@
 package com.adedom.teg.domain.usecase
 
 import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
+import com.adedom.teg.data.network.websocket.RoomInfoTegMultiSocket
 import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -25,6 +26,14 @@ class RoomInfoUseCaseImpl(
         repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
             if (roomNo == roomInfoPlayersOutgoing.roomNo) {
                 socket.invoke(roomInfoPlayersOutgoing)
+            }
+        }
+    }
+
+    override suspend fun incomingRoomInfoTegMulti(roomNo: String?, socket: RoomInfoTegMultiSocket) {
+        repository.incomingRoomInfoTegMulti { roomInfoTegMultiOutgoing ->
+            if (roomNo == roomInfoTegMultiOutgoing.roomNo) {
+                socket.invoke(roomInfoTegMultiOutgoing)
             }
         }
     }
@@ -78,11 +87,22 @@ class RoomInfoUseCaseImpl(
     }
 
     private suspend fun changeStatusReadyHead(): Resource<BaseResponse> {
-        return changeStatusReadyTail()
+        val resource = repository.callRoomInfoTegMulti()
+
+        when (resource) {
+            is Resource.Success -> {
+                repository.outgoingRoomInfoPlayers()
+                if (resource.data.success) {
+                    repository.outgoingRoomInfoTegMulti()
+                }
+            }
+        }
+
+        return resource
     }
 
     private suspend fun changeStatusReadyTail(): Resource<BaseResponse> {
-        val resource = repository.callChangeGoTeg()
+        val resource = repository.callChangeStatusRoomInfo()
 
         when (resource) {
             is Resource.Success -> {

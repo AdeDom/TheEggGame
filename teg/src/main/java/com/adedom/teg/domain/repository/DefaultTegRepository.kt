@@ -3,10 +3,7 @@ package com.adedom.teg.domain.repository
 import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
-import com.adedom.teg.data.network.websocket.PlaygroundRoomSocket
-import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
-import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
-import com.adedom.teg.data.network.websocket.RoomPeopleAllSocket
+import com.adedom.teg.data.network.websocket.*
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
@@ -74,7 +71,9 @@ interface DefaultTegRepository {
 
     suspend fun callChangeTeam(team: String): Resource<BaseResponse>
 
-    suspend fun callChangeGoTeg(): Resource<BaseResponse>
+    suspend fun callChangeStatusRoomInfo(): Resource<BaseResponse>
+
+    suspend fun callRoomInfoTegMulti(): Resource<BaseResponse>
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
@@ -84,8 +83,12 @@ interface DefaultTegRepository {
 
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
+    suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
+
     suspend fun outgoingPlaygroundRoom()
 
     suspend fun outgoingRoomInfoPlayers()
+
+    suspend fun outgoingRoomInfoTegMulti()
 
 }
