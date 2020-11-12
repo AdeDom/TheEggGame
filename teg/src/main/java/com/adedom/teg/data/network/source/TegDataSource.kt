@@ -74,6 +74,10 @@ interface TegDataSource {
 
     suspend fun callRoomInfoTegMulti(): BaseResponse
 
+    suspend fun callChangeStatusUnready(): BaseResponse
+
+    suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

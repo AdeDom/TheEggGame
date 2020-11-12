@@ -127,4 +127,9 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
         }
     }
 
+    override fun onPause() {
+        viewModel.callChangeStatusUnready()
+        super.onPause()
+    }
+
 }

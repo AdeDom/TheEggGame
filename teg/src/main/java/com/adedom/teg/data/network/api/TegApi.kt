@@ -83,4 +83,10 @@ interface TegApi {
     @PATCH("api/multi/room-info-teg-multi")
     suspend fun callRoomInfoTegMulti(): BaseResponse
 
+    @PATCH("api/multi/change-status-off")
+    suspend fun callChangeStatusUnready(): BaseResponse
+
+    @GET("api/multi/fetch-multi-player")
+    suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
+
 }

@@ -157,6 +157,14 @@ class RoomInfoViewModel(
         }
     }
 
+    fun callChangeStatusUnready() {
+        launch {
+            when (val resource = useCase.callChangeStatusUnready()) {
+                is Resource.Error -> setError(resource)
+            }
+        }
+    }
+
     fun process(event: RoomInfoViewEvent) {
         launch {
             channel.send(event)

@@ -144,6 +144,14 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callRoomInfoTegMulti()
     }
 
+    override suspend fun callChangeStatusUnready(): BaseResponse {
+        return provider.getTegDataSource().callChangeStatusUnready()
+    }
+
+    override suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse {
+        return provider.getTegDataSource().callFetchMultiPlayer()
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }

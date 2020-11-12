@@ -75,6 +75,10 @@ interface DefaultTegRepository {
 
     suspend fun callRoomInfoTegMulti(): Resource<BaseResponse>
 
+    suspend fun callChangeStatusUnready(): Resource<BaseResponse>
+
+    suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse>
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

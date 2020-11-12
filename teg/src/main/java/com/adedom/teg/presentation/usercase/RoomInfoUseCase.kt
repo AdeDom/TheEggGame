@@ -23,4 +23,6 @@ interface RoomInfoUseCase {
 
     suspend fun callChangeGoTeg(roomInfoPlayers: List<RoomInfoPlayers>?): Resource<BaseResponse>
 
+    suspend fun callChangeStatusUnready(): Resource<BaseResponse>
+
 }

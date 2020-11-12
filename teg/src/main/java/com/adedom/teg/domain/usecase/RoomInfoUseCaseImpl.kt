@@ -94,6 +94,7 @@ class RoomInfoUseCaseImpl(
                 repository.outgoingRoomInfoPlayers()
                 if (resource.data.success) {
                     repository.outgoingRoomInfoTegMulti()
+                    repository.outgoingPlaygroundRoom()
                 }
             }
         }
@@ -103,6 +104,20 @@ class RoomInfoUseCaseImpl(
 
     private suspend fun changeStatusReadyTail(): Resource<BaseResponse> {
         val resource = repository.callChangeStatusRoomInfo()
+
+        when (resource) {
+            is Resource.Success -> {
+                if (resource.data.success) {
+                    repository.outgoingRoomInfoPlayers()
+                }
+            }
+        }
+
+        return resource
+    }
+
+    override suspend fun callChangeStatusUnready(): Resource<BaseResponse> {
+        val resource = repository.callChangeStatusUnready()
 
         when (resource) {
             is Resource.Success -> {

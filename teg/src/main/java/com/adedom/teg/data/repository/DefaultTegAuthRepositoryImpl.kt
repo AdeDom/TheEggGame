@@ -147,6 +147,14 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callRoomInfoTegMulti() }
     }
 
+    override suspend fun callChangeStatusUnready(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeStatusUnready() }
+    }
+
+    override suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse> {
+        return safeApiCall { dataSource.callFetchMultiPlayer() }
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }
