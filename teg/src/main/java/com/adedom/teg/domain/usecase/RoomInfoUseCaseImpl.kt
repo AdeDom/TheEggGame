@@ -1,8 +1,5 @@
 package com.adedom.teg.domain.usecase
 
-import com.adedom.teg.data.network.websocket.RoomInfoPlayersSocket
-import com.adedom.teg.data.network.websocket.RoomInfoTegMultiSocket
-import com.adedom.teg.data.network.websocket.RoomInfoTitleSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.response.BaseResponse
@@ -13,30 +10,6 @@ import com.adedom.teg.util.TegConstant
 class RoomInfoUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : RoomInfoUseCase {
-
-    override suspend fun incomingRoomInfoTitle(roomNo: String?, socket: RoomInfoTitleSocket) {
-        repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
-            if (roomNo == roomInfoTitleOutgoing.roomNo) {
-                socket.invoke(roomInfoTitleOutgoing)
-            }
-        }
-    }
-
-    override suspend fun incomingRoomInfoPlayers(roomNo: String?, socket: RoomInfoPlayersSocket) {
-        repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
-            if (roomNo == roomInfoPlayersOutgoing.roomNo) {
-                socket.invoke(roomInfoPlayersOutgoing)
-            }
-        }
-    }
-
-    override suspend fun incomingRoomInfoTegMulti(roomNo: String?, socket: RoomInfoTegMultiSocket) {
-        repository.incomingRoomInfoTegMulti { roomInfoTegMultiOutgoing ->
-            if (roomNo == roomInfoTegMultiOutgoing.roomNo) {
-                socket.invoke(roomInfoTegMultiOutgoing)
-            }
-        }
-    }
 
     override suspend fun callLeaveRoomInfo(): Resource<BaseResponse> {
         val resource = repository.callLeaveRoomInfo()

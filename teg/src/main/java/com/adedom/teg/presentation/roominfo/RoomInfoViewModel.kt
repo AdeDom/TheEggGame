@@ -8,7 +8,6 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
-import com.adedom.teg.models.response.CurrentRoomNoResponse
 import com.adedom.teg.presentation.usercase.RoomInfoUseCase
 import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,10 +30,6 @@ class RoomInfoViewModel(
 
     var listener: RoomInfoTegMultiListener? = null
 
-    private val _currentRoomNo = MutableLiveData<CurrentRoomNoResponse>()
-    val currentRoomNo: LiveData<CurrentRoomNoResponse>
-        get() = _currentRoomNo
-
     private val _leaveRoomInfoEvent = MutableLiveData<BaseResponse>()
     val leaveRoomInfoEvent: LiveData<BaseResponse>
         get() = _leaveRoomInfoEvent
@@ -43,11 +38,11 @@ class RoomInfoViewModel(
     val goTegMultiEvent: LiveData<BaseResponse>
         get() = _goTegMultiEvent
 
-    fun incomingRoomInfoTitle(roomNo: String?) {
+    fun incomingRoomInfoTitle() {
         launch {
             setState { copy(loading = true) }
 
-            useCase.incomingRoomInfoTitle(roomNo) { roomInfoTitleOutgoing ->
+            repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
                 setState {
                     copy(
                         loading = false,
@@ -58,13 +53,13 @@ class RoomInfoViewModel(
         }
     }
 
-    fun incomingRoomInfoPlayers(roomNo: String?) {
+    fun incomingRoomInfoPlayers() {
         launch {
             setState { copy(loading = true) }
 
             val playerId = repository.getDbPlayerInfo()?.playerId
 
-            useCase.incomingRoomInfoPlayers(roomNo) { roomInfoPlayersOutgoing ->
+            repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
                 setState {
                     copy(
                         loading = false,
@@ -79,9 +74,9 @@ class RoomInfoViewModel(
         }
     }
 
-    fun incomingRoomInfoTegMulti(roomNo: String?) {
+    fun incomingRoomInfoTegMulti() {
         launch {
-            useCase.incomingRoomInfoTegMulti(roomNo) { roomInfoTegMultiOutgoing ->
+            repository.incomingRoomInfoTegMulti { roomInfoTegMultiOutgoing ->
                 listener?.roomInfoTegMultiResponse(roomInfoTegMultiOutgoing)
             }
         }
@@ -101,19 +96,6 @@ class RoomInfoViewModel(
 //            when (val resource = useCase.callMultiItemCollection(request)) {
 //                is Resource.Error -> setError(resource)
 //            }
-
-            setState { copy(loading = false) }
-        }
-    }
-
-    fun callCurrentRoomNo() {
-        launch {
-            setState { copy(loading = true) }
-
-            when (val resource = repository.callCurrentRoomNo()) {
-                is Resource.Success -> _currentRoomNo.value = resource.data
-                is Resource.Error -> setError(resource)
-            }
 
             setState { copy(loading = false) }
         }

@@ -36,7 +36,9 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
         super.onCreate(savedInstanceState)
 
         viewModel.attachFirstTime.observe {
-            viewModel.callCurrentRoomNo()
+            viewModel.incomingRoomInfoTitle()
+            viewModel.incomingRoomInfoPlayers()
+            viewModel.incomingRoomInfoTegMulti()
         }
     }
 
@@ -67,14 +69,6 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
 
             if (state.isRoleHead) {
                 btGoTeg.setText(R.string.go)
-            }
-        }
-
-        viewModel.currentRoomNo.observe { response ->
-            if (response.success) {
-                viewModel.incomingRoomInfoTitle(response.roomNo)
-                viewModel.incomingRoomInfoPlayers(response.roomNo)
-                viewModel.incomingRoomInfoTegMulti(response.roomNo)
             }
         }
 
