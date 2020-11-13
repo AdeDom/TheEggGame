@@ -54,6 +54,8 @@ interface TegDataSource {
 
     suspend fun callMissionMain(missionRequest: MissionRequest): BaseResponse
 
+    suspend fun callChangeCurrentMode(mode: String): BaseResponse
+
     suspend fun callFetchItemCollection(): BackpackResponse
 
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse
@@ -77,6 +79,8 @@ interface TegDataSource {
     suspend fun callChangeStatusUnready(): BaseResponse
 
     suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
+
+    suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 

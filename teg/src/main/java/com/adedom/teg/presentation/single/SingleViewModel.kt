@@ -8,6 +8,7 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.ItemCollectionRequest
 import com.adedom.teg.presentation.usercase.SingleUseCase
+import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
@@ -21,6 +22,14 @@ class SingleViewModel(
 
     val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
         get() = repository.getDbPlayerInfoLiveData()
+
+    fun incomingSinglePeopleAll() {
+        launch {
+            repository.incomingSinglePeopleAll { roomPeopleAllOutgoing ->
+                setState { copy(peopleAll = roomPeopleAllOutgoing.peopleAll) }
+            }
+        }
+    }
 
     fun setStateLatLng(latitude: Double, longitude: Double) {
         setState { copy(latLng = SingleViewState.Latlng(latitude, longitude)) }
@@ -47,6 +56,14 @@ class SingleViewModel(
             }
 
             setState { copy(loading = false) }
+        }
+    }
+
+    fun callChangeCurrentModeSingle() {
+        launch {
+            when (val resource = repository.callChangeCurrentMode(TegConstant.PLAY_MODE_SINGLE)) {
+                is Resource.Error -> setError(resource)
+            }
         }
     }
 

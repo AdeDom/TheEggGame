@@ -37,6 +37,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         super.onCreate(savedInstanceState)
 
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        viewModel.attachFirstTime.observe {
+            viewModel.incomingSinglePeopleAll()
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -70,6 +74,8 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)
 
+            tvPeopleAll.text = state.peopleAll.toString()
+
             // marker
             setMarkerMyLocation(state)
         }
@@ -93,6 +99,8 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
         }
+
+        viewModel.callChangeCurrentModeSingle()
     }
 
     private fun setMarkerMyLocation(state: SingleViewState) {

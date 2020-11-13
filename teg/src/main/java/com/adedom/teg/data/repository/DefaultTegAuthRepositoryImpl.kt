@@ -107,6 +107,10 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callMissionMain(missionRequest) }
     }
 
+    override suspend fun callChangeCurrentMode(mode: String): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callChangeCurrentMode(mode) }
+    }
+
     override suspend fun callFetchItemCollection(): Resource<BackpackResponse> {
         return safeApiCall { dataSource.callFetchItemCollection() }
     }
@@ -153,6 +157,10 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse> {
         return safeApiCall { dataSource.callFetchMultiPlayer() }
+    }
+
+    override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
+        return dataSource.incomingSinglePeopleAll(socket)
     }
 
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {

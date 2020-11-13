@@ -3,6 +3,7 @@ package com.adedom.teg.presentation.single
 import android.graphics.Bitmap
 
 data class SingleViewState(
+    val peopleAll: Int = 0,
     val name: String = "",
     val level: Int = 0,
     val latLng: Latlng = Latlng(),

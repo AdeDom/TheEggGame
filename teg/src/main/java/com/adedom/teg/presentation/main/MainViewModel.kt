@@ -67,4 +67,12 @@ class MainViewModel(
         }
     }
 
+    fun callChangeCurrentModeMain() {
+        launch {
+            when (val resource = repository.callChangeCurrentMode(TegConstant.PLAY_MODE_MAIN)) {
+                is Resource.Error -> setError(resource)
+            }
+        }
+    }
+
 }

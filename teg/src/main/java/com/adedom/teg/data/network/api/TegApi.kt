@@ -53,6 +53,9 @@ interface TegApi {
     @POST("api/application/mission")
     suspend fun callMissionMain(@Body missionRequest: MissionRequest): BaseResponse
 
+    @PATCH("api/application/change-current-mode/{mode}")
+    suspend fun callChangeCurrentMode(@Path("mode") mode: String): BaseResponse
+
     @GET("api/single/item-collection")
     suspend fun callFetchItemCollection(): BackpackResponse
 

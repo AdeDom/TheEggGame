@@ -4,6 +4,7 @@ import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.JoinRoomInfoRequest
+import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.launch
 
 class RoomViewModel(
@@ -43,6 +44,14 @@ class RoomViewModel(
             }
 
             setState { copy(loading = false) }
+        }
+    }
+
+    fun callChangeCurrentModeMulti() {
+        launch {
+            when (val resource = repository.callChangeCurrentMode(TegConstant.PLAY_MODE_MULTI)) {
+                is Resource.Error -> setError(resource)
+            }
         }
     }
 

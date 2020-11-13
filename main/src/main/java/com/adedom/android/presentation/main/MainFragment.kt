@@ -59,4 +59,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.callChangeCurrentModeMain()
+    }
+
 }

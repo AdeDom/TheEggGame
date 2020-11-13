@@ -104,6 +104,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callMissionMain(missionRequest)
     }
 
+    override suspend fun callChangeCurrentMode(mode: String): BaseResponse {
+        return provider.getTegDataSource().callChangeCurrentMode(mode)
+    }
+
     override suspend fun callFetchItemCollection(): BackpackResponse {
         return provider.getTegDataSource().callFetchItemCollection()
     }
@@ -150,6 +154,10 @@ class TegDataSourceImpl(
 
     override suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse {
         return provider.getTegDataSource().callFetchMultiPlayer()
+    }
+
+    override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
+        return provider.getWebSocketDataSource().incomingSinglePeopleAll(socket)
     }
 
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {

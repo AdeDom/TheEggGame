@@ -55,6 +55,8 @@ interface DefaultTegRepository {
 
     suspend fun callMissionMain(missionRequest: MissionRequest): Resource<BaseResponse>
 
+    suspend fun callChangeCurrentMode(mode: String): Resource<BaseResponse>
+
     suspend fun callFetchItemCollection(): Resource<BackpackResponse>
 
     suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse>
@@ -78,6 +80,8 @@ interface DefaultTegRepository {
     suspend fun callChangeStatusUnready(): Resource<BaseResponse>
 
     suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse>
+
+    suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 

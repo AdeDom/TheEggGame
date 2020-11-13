@@ -57,6 +57,8 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         adt.onClick = {
             viewModel.callJoinRoomInfo(it.roomNo)
         }
+
+        viewModel.callChangeCurrentModeMulti()
     }
 
     override fun onJoinRoomInfoResponse(response: BaseResponse) {
