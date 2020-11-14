@@ -22,20 +22,20 @@ class SignInViewModel(
     val signIn: LiveData<SignInResponse>
         get() = _signIn
 
-    fun setUsername(username: String) {
+    fun setStateUsername(username: String) {
         setState {
             copy(
                 username = username,
-                isValidUsername = useCase.validateUsername(username)
+                isValidUsername = useCase.isValidateUsername(username)
             )
         }
     }
 
-    fun setPassword(password: String) {
+    fun setStatePassword(password: String) {
         setState {
             copy(
                 password = password,
-                isValidPassword = useCase.validatePassword(password)
+                isValidPassword = useCase.isValidatePassword(password)
             )
         }
     }

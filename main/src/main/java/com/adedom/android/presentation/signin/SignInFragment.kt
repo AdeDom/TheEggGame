@@ -54,15 +54,15 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
         viewModel.attachFirstTime.observe {
             val username = viewModel.getConfigUsername()
-            viewModel.setUsername(username)
+            viewModel.setStateUsername(username)
             etUsername.setText(username)
         }
 
         viewModel.error.observeError()
 
         // set state
-        etUsername.addTextChangedListener { viewModel.setUsername(it.toString()) }
-        etPassword.addTextChangedListener { viewModel.setPassword(it.toString()) }
+        etUsername.addTextChangedListener { viewModel.setStateUsername(it.toString()) }
+        etPassword.addTextChangedListener { viewModel.setStatePassword(it.toString()) }
 
         // event
         btSignIn.setOnClickListener { viewModel.onSignIn() }

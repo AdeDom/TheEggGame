@@ -1,6 +1,5 @@
 package com.adedom.teg.domain.usecase
 
-import com.adedom.teg.domain.Constant
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -9,6 +8,7 @@ import com.adedom.teg.models.response.SignInResponse
 import com.adedom.teg.presentation.usercase.SignInUseCase
 import com.adedom.teg.sharedpreference.service.PreferenceConfig
 import com.adedom.teg.sharedpreference.service.SessionManagerService
+import com.adedom.teg.util.TegConstant
 
 class SignInUseCaseImpl(
     private val repository: DefaultTegRepository,
@@ -43,20 +43,20 @@ class SignInUseCaseImpl(
         return when {
             signIn.username == null -> ValidateSignIn.VALIDATE_ERROR
             username.isBlank() -> ValidateSignIn.USERNAME_EMPTY
-            username.length < Constant.USERNAME_LENGTH -> ValidateSignIn.USERNAME_INCORRECT
+            username.length < TegConstant.MIN_USERNAME -> ValidateSignIn.USERNAME_INCORRECT
             signIn.password == null -> ValidateSignIn.VALIDATE_ERROR
             password.isBlank() -> ValidateSignIn.PASSWORD_EMPTY
-            password.length < Constant.PASSWORD_LENGTH -> ValidateSignIn.PASSWORD_INCORRECT
+            password.length < TegConstant.MIN_PASSWORD -> ValidateSignIn.PASSWORD_INCORRECT
             else -> ValidateSignIn.VALIDATE_SUCCESS
         }
     }
 
-    override fun validateUsername(username: String): Boolean {
-        return username.isNotBlank() && username.length >= Constant.USERNAME_LENGTH
+    override fun isValidateUsername(username: String): Boolean {
+        return username.isNotBlank() && username.length >= TegConstant.MIN_USERNAME
     }
 
-    override fun validatePassword(password: String): Boolean {
-        return password.isNotBlank() && password.length >= Constant.PASSWORD_LENGTH
+    override fun isValidatePassword(password: String): Boolean {
+        return password.isNotBlank() && password.length >= TegConstant.MIN_PASSWORD
     }
 
     override fun getConfigUsername(): String {

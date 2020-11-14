@@ -11,9 +11,9 @@ interface SignInUseCase {
 
     fun validateSignIn(signIn: SignInRequest): ValidateSignIn
 
-    fun validateUsername(username: String): Boolean
+    fun isValidateUsername(username: String): Boolean
 
-    fun validatePassword(password: String): Boolean
+    fun isValidatePassword(password: String): Boolean
 
     fun getConfigUsername(): String
 
