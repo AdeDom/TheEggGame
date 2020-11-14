@@ -3,7 +3,6 @@ package com.adedom.android.presentation.changeprofile
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
@@ -22,8 +21,6 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
 
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
@@ -23,8 +22,6 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
 
         viewModel.state.observe { state ->
             progressBar.setVisibility(state.loading)

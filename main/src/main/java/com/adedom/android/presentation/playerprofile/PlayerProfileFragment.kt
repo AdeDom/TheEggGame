@@ -2,7 +2,6 @@ package com.adedom.android.presentation.playerprofile
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.setImageCircle
@@ -16,8 +15,6 @@ class PlayerProfileFragment : BaseFragment(R.layout.fragment_player_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
 
         viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
             if (playerInfo == null) return@observe

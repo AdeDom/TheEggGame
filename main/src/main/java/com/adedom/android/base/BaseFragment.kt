@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -39,6 +40,12 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), Co
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)?.supportActionBar?.show()
     }
 
     protected inline fun <reified T> LiveData<T>.observe(crossinline onNext: (T) -> Unit) {

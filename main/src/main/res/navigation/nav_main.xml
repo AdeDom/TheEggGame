@@ -33,7 +33,11 @@
                 app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_singleFragment"
-                app:destination="@id/singleFragment" />
+                app:destination="@id/singleFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_missionFragment"
                 app:destination="@id/missionFragment"
@@ -115,16 +119,20 @@
     <fragment
             android:id="@+id/singleFragment"
             android:name="com.adedom.android.presentation.single.SingleFragment"
-            android:label="SingleFragment"
+            android:label="Single player"
             tools:layout="@layout/fragment_single">
         <action
                 android:id="@+id/action_singleFragment_to_backpackFragment"
-                app:destination="@id/backpackFragment" />
+                app:destination="@id/backpackFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/backpackFragment"
             android:name="com.adedom.android.presentation.backpack.BackpackFragment"
-            android:label="BackpackFragment"
+            android:label="Backpack"
             tools:layout="@layout/fragment_backpack" />
     <fragment
             android:id="@+id/missionFragment"

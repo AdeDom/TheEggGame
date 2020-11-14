@@ -2,7 +2,6 @@ package com.adedom.android.presentation.mission
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
@@ -25,8 +24,6 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
 
         viewModel.attachFirstTime.observe {
             viewModel.callFetchMission()
