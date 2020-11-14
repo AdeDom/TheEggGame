@@ -3,6 +3,7 @@ package com.adedom.android.presentation.signin
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
@@ -20,6 +21,8 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)?.supportActionBar?.hide()
 
         // observe
         viewModel.state.observe { state ->
