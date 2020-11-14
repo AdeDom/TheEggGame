@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
+import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.setVisibility
 import com.adedom.teg.presentation.rank.RankViewEvent
 import com.adedom.teg.presentation.rank.RankViewModel
@@ -48,6 +49,8 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
         viewEventFlow().observe { viewModel.process(it) }
+
+        rootLayout.setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
     private fun viewEventFlow(): Flow<RankViewEvent> {

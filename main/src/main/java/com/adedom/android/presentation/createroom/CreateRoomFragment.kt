@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.clicks
+import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.toast
 import com.adedom.teg.presentation.createroom.CreateRoomViewEvent
@@ -62,6 +63,7 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
 
         viewEvent().observe { viewModel.process(it) }
 
+        rootLayout.setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
     private fun viewEvent(): Flow<CreateRoomViewEvent> {

@@ -34,7 +34,7 @@ class ChangeImageFragment : BaseFragment(R.layout.fragment_change_image) {
         })
 
         viewModel.changeImageProfileEvent.observe { response ->
-            layoutRoot.snackbar(response.message)
+            rootLayout.snackbar(response.message)
             if (response.success) {
                 findNavController().popBackStack()
             }
