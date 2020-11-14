@@ -2,7 +2,6 @@ package com.adedom.android.presentation.roominfo
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
@@ -12,7 +11,7 @@ import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.clicks
 import com.adedom.android.util.setVisibility
-import com.adedom.android.util.toast
+import com.adedom.android.util.snackbar
 import com.adedom.teg.models.websocket.RoomInfoTegMultiOutgoing
 import com.adedom.teg.presentation.roominfo.RoomInfoTegMultiListener
 import com.adedom.teg.presentation.roominfo.RoomInfoViewEvent
@@ -80,7 +79,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
 
         viewModel.goTegMultiEvent.observe { response ->
             if (!response.success) {
-                context.toast(response.message, Toast.LENGTH_LONG)
+                rootLayout.snackbar(response.message)
             }
         }
 

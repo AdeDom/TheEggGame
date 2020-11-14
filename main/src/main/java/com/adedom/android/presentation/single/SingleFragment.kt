@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
@@ -67,7 +66,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             locationProviderClient
                 .locationFlow()
                 .onEach { viewModel.setStateLatLng(it.latitude, it.longitude) }
-                .catch { context.toast(it.message, Toast.LENGTH_LONG) }
+                .catch { rootLayout.snackbar(it.message) }
                 .launchIn(this)
         }
 

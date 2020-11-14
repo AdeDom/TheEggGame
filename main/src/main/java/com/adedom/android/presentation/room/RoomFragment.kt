@@ -8,7 +8,7 @@ import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.setVisibility
-import com.adedom.android.util.toast
+import com.adedom.android.util.snackbar
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.room.JoinRoomInfoListener
 import com.adedom.teg.presentation.room.RoomViewModel
@@ -65,7 +65,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         if (response.success) {
             findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
         } else {
-            context.toast(response.message)
+            rootLayout.snackbar(response.message)
         }
     }
 

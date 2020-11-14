@@ -1,7 +1,6 @@
 package com.adedom.android.presentation.main
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,7 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseLocationActivity
 import com.adedom.android.util.locationFlow
-import com.adedom.android.util.toast
+import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.main.MainViewModel
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,9 +34,7 @@ class MainActivity : BaseLocationActivity() {
         LocationServices.getFusedLocationProviderClient(this)
             .locationFlow()
             .conflate()
-            .catch { e ->
-                toast(e.message, Toast.LENGTH_LONG)
-            }
+            .catch { rootLayout.snackbar(it.message) }
             .asLiveData()
             .observe {
                 viewModel.callChangeLatLng(it.latitude, it.longitude)
