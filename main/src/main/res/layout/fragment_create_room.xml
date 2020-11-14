@@ -5,108 +5,88 @@
         android:layout_height="match_parent"
         android:background="@drawable/shape_bg"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:padding="@dimen/large">
 
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutRoomName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/create_room" />
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="@dimen/large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutRoomName"
+        <EditText
+                android:id="@+id/etRoomName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:background="@drawable/shape_edit"
+                android:hint="@string/name"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black" />
 
-            <EditText
-                    android:id="@+id/etRoomName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_edit"
-                    android:hint="@string/name"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+            android:id="@+id/layoutPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large"
+            android:text="People : "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutRoomName" />
 
-        <TextView
-                android:id="@+id/layoutPeople"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/large"
-                android:text="People : "
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutRoomName" />
+    <ImageView
+            android:id="@+id/ivArrowLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRoomPeople"
+            app:layout_constraintEnd_toStartOf="@+id/tvRoomPeople"
+            app:layout_constraintTop_toTopOf="@+id/tvRoomPeople" />
 
-        <ImageView
-                android:id="@+id/ivArrowLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:src="@drawable/ic_arrow_left"
-                app:layout_constraintBottom_toBottomOf="@+id/tvRoomPeople"
-                app:layout_constraintEnd_toStartOf="@+id/tvRoomPeople"
-                app:layout_constraintTop_toTopOf="@+id/tvRoomPeople" />
+    <TextView
+            android:id="@+id/tvRoomPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            app:layout_constraintBaseline_toBaselineOf="@+id/layoutPeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layoutPeople"
+            app:layout_constraintTop_toBottomOf="@+id/layoutRoomName" />
 
-        <TextView
-                android:id="@+id/tvRoomPeople"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/layoutPeople"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/layoutPeople"
-                app:layout_constraintTop_toBottomOf="@+id/layoutRoomName" />
+    <ImageView
+            android:id="@+id/ivArrowRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRoomPeople"
+            app:layout_constraintStart_toEndOf="@+id/tvRoomPeople"
+            app:layout_constraintTop_toTopOf="@+id/tvRoomPeople" />
 
-        <ImageView
-                android:id="@+id/ivArrowRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="@+id/tvRoomPeople"
-                app:layout_constraintStart_toEndOf="@+id/tvRoomPeople"
-                app:layout_constraintTop_toTopOf="@+id/tvRoomPeople" />
+    <Button
+            android:id="@+id/btBack"
+            style="@style/Button"
+            android:layout_marginBottom="16dp"
+            android:text="@string/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btCreateRoom"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-                android:id="@+id/btBack"
-                style="@style/Button"
-                android:layout_marginBottom="16dp"
-                android:text="@string/back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btCreateRoom"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-                android:id="@+id/btCreateRoom"
-                style="@style/Button"
-                android:layout_marginBottom="16dp"
-                android:text="@string/create_room"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btBack" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+            android:id="@+id/btCreateRoom"
+            style="@style/Button"
+            android:layout_marginBottom="16dp"
+            android:text="@string/create_room"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btBack" />
 
     <ProgressBar
             android:id="@+id/progressBar"

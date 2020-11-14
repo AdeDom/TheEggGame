@@ -47,7 +47,11 @@
                 app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_roomFragment"
-                app:destination="@id/roomFragment" />
+                app:destination="@id/roomFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/changePasswordFragment"
@@ -145,34 +149,50 @@
     <fragment
             android:id="@+id/roomFragment"
             android:name="com.adedom.android.presentation.room.RoomFragment"
-            android:label="RoomFragment"
+            android:label="Room"
             tools:layout="@layout/fragment_room">
         <action
                 android:id="@+id/action_roomFragment_to_createRoomFragment"
-                app:destination="@id/createRoomFragment" />
+                app:destination="@id/createRoomFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_roomFragment_to_roomInfoFragment"
-                app:destination="@id/roomInfoFragment" />
+                app:destination="@id/roomInfoFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/createRoomFragment"
             android:name="com.adedom.android.presentation.createroom.CreateRoomFragment"
-            android:label="CreateRoomFragment"
+            android:label="Create room"
             tools:layout="@layout/fragment_create_room">
         <action
                 android:id="@+id/action_createRoomFragment_to_roomInfoFragment"
                 app:destination="@id/roomInfoFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@id/createRoomFragment"
                 app:popUpToInclusive="true" />
     </fragment>
     <fragment
             android:id="@+id/roomInfoFragment"
             android:name="com.adedom.android.presentation.roominfo.RoomInfoFragment"
-            android:label="RoomInfoFragment"
+            android:label="Room info"
             tools:layout="@layout/fragment_room_info">
         <action
                 android:id="@+id/action_roomInfoFragment_to_multiFragment"
                 app:destination="@id/multiFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@id/roomInfoFragment"
                 app:popUpToInclusive="true" />
     </fragment>
@@ -184,6 +204,6 @@
     <fragment
             android:id="@+id/multiFragment"
             android:name="com.adedom.android.presentation.multi.MultiFragment"
-            android:label="MultiFragment"
+            android:label="Multi player"
             tools:layout="@layout/fragment_multi" />
 </navigation>
