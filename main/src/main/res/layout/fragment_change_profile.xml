@@ -9,7 +9,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -17,10 +17,9 @@
 
         <EditText
                 android:id="@+id/etName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_edit"
-                android:hint="@string/name" />
+                style="@style/EditText"
+                android:hint="@string/name"
+                android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,7 +30,7 @@
             android:text="@string/gender"
             app:layout_constraintBottom_toBottomOf="@+id/layoutGender"
             app:layout_constraintEnd_toStartOf="@+id/layoutGender"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/layoutName"
             app:layout_constraintTop_toBottomOf="@+id/layoutName" />
 
     <RadioGroup
@@ -66,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/birth_date"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvGender"
             app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
     <TextView
@@ -86,7 +85,7 @@
             android:adjustViewBounds="true"
             android:src="@drawable/ic_calendar_today"
             app:layout_constraintBottom_toBottomOf="@+id/layoutBirthDate"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/layoutGender" />
 
     <Button
             android:id="@+id/btBack"

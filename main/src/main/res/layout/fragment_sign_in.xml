@@ -56,8 +56,10 @@
 
             <EditText
                     android:id="@+id/etPassword"
-                    style="@style/EditTextPassword"
-                    android:hint="@string/password" />
+                    style="@style/EditText"
+                    android:hint="@string/password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
