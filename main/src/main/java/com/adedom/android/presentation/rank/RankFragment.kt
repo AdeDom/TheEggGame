@@ -2,6 +2,7 @@ package com.adedom.android.presentation.rank
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adedom.android.R
@@ -26,6 +27,8 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)?.supportActionBar?.show()
 
         val adt = RankAdapter()
         recyclerView.apply {

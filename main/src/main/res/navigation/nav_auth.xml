@@ -37,7 +37,7 @@
     <fragment
             android:id="@+id/signUpFragment"
             android:name="com.adedom.android.presentation.signup.SignUpFragment"
-            android:label="Sign Up"
+            android:label="Sign up"
             tools:layout="@layout/fragment_sign_up">
         <action
                 android:id="@+id/action_signUpFragment_to_imageProfileFragment"
@@ -50,7 +50,7 @@
     <fragment
             android:id="@+id/imageProfileFragment"
             android:name="com.adedom.android.presentation.imageprofile.ImageProfileFragment"
-            android:label="Image Profile"
+            android:label="Image profile"
             tools:layout="@layout/fragment_image_profile" />
     <activity
             android:id="@+id/mainActivity"

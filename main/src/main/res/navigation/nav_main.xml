@@ -12,19 +12,35 @@
             tools:layout="@layout/fragment_main">
         <action
                 android:id="@+id/action_mainFragment_to_settingFragment"
-                app:destination="@id/settingFragment" />
+                app:destination="@id/settingFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_aboutFragment"
-                app:destination="@id/aboutFragment" />
+                app:destination="@id/aboutFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_rankFragment"
-                app:destination="@id/rankFragment" />
+                app:destination="@id/rankFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_singleFragment"
                 app:destination="@id/singleFragment" />
         <action
                 android:id="@+id/action_mainFragment_to_missionFragment"
-                app:destination="@id/missionFragment" />
+                app:destination="@id/missionFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_mainFragment_to_roomFragment"
                 app:destination="@id/roomFragment" />
@@ -32,43 +48,59 @@
     <fragment
             android:id="@+id/changePasswordFragment"
             android:name="com.adedom.android.presentation.changepassword.ChangePasswordFragment"
-            android:label="ChangePasswordFragment"
+            android:label="Change password"
             tools:layout="@layout/fragment_change_password" />
     <fragment
             android:id="@+id/changeImageFragment"
             android:name="com.adedom.android.presentation.changeimage.ChangeImageFragment"
-            android:label="ChangeImageFragment"
+            android:label="Change image profile"
             tools:layout="@layout/fragment_change_image" />
     <fragment
             android:id="@+id/changeProfileFragment"
             android:name="com.adedom.android.presentation.changeprofile.ChangeProfileFragment"
-            android:label="ChangeProfileFragment"
+            android:label="Change profile"
             tools:layout="@layout/fragment_change_profile" />
     <fragment
             android:id="@+id/settingFragment"
             android:name="com.adedom.android.presentation.setting.SettingFragment"
-            android:label="SettingFragment"
+            android:label="Setting"
             tools:layout="@layout/fragment_setting">
         <action
                 android:id="@+id/action_settingFragment_to_changePasswordFragment"
-                app:destination="@id/changePasswordFragment" />
+                app:destination="@id/changePasswordFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_settingFragment_to_changeImageFragment"
-                app:destination="@id/changeImageFragment" />
+                app:destination="@id/changeImageFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_settingFragment_to_changeProfileFragment"
-                app:destination="@id/changeProfileFragment" />
+                app:destination="@id/changeProfileFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_settingFragment_to_authActivity"
                 app:destination="@id/authActivity" />
         <action
                 android:id="@+id/action_settingFragment_to_playerProfileFragment"
-                app:destination="@id/playerProfileFragment" />
+                app:destination="@id/playerProfileFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/aboutFragment"
             android:name="com.adedom.android.presentation.about.AboutFragment"
-            android:label="AboutFragment"
+            android:label="About"
             tools:layout="@layout/fragment_about" />
     <activity
             android:id="@+id/authActivity"
@@ -78,7 +110,7 @@
     <fragment
             android:id="@+id/rankFragment"
             android:name="com.adedom.android.presentation.rank.RankFragment"
-            android:label="RankFragment"
+            android:label="Rank"
             tools:layout="@layout/fragment_rank" />
     <fragment
             android:id="@+id/singleFragment"
@@ -97,7 +129,7 @@
     <fragment
             android:id="@+id/missionFragment"
             android:name="com.adedom.android.presentation.mission.MissionFragment"
-            android:label="MissionFragment"
+            android:label="Mission"
             tools:layout="@layout/fragment_mission" />
     <action
             android:id="@+id/action_global_authActivity"
@@ -139,7 +171,7 @@
     <fragment
             android:id="@+id/playerProfileFragment"
             android:name="com.adedom.android.presentation.playerprofile.PlayerProfileFragment"
-            android:label="PlayerProfileFragment"
+            android:label="Player profile"
             tools:layout="@layout/fragment_player_profile" />
     <fragment
             android:id="@+id/multiFragment"
