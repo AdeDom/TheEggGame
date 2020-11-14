@@ -33,7 +33,7 @@ private val presentationModule = module {
     viewModel { SignUpViewModel(get()) }
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { ChangeProfileViewModel(get(), get()) }
-    viewModel { ChangeImageViewModel(get(), get()) }
+    viewModel { ChangeImageViewModel(get(), get(), get()) }
     viewModel { ImageProfileViewModel(get(), get()) }
     viewModel { RankViewModel(get()) }
     viewModel { BackpackViewModel(get(), get()) }

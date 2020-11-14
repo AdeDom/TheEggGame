@@ -1,6 +1,5 @@
 package com.adedom.teg.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -11,10 +10,6 @@ import okhttp3.MultipartBody
 class ChangeImageUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : ChangeImageUseCase {
-
-    override fun fetchPlayerInfo(): LiveData<PlayerInfoEntity> {
-        return repository.getDbPlayerInfoLiveData()
-    }
 
     override suspend fun callChangeImageProfile(imageFile: MultipartBody.Part): Resource<BaseResponse> {
         val resource = repository.callChangeImageProfile(imageFile)

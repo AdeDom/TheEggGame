@@ -5,5 +5,6 @@ data class SignInState(
     val password: String = "",
     val isValidUsername: Boolean = false,
     val isValidPassword: Boolean = false,
+    val isClickable: Boolean = true,
     val loading: Boolean = false
 )

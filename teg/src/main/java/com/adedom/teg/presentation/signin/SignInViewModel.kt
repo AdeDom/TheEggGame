@@ -50,7 +50,7 @@ class SignInViewModel(
 
     fun callSignIn() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
             val request = SignInRequest(
                 username = state.value?.username,
                 password = state.value?.password
@@ -59,7 +59,7 @@ class SignInViewModel(
                 is Resource.Success -> _signIn.value = resource.data
                 is Resource.Error -> setError(resource)
             }
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 
