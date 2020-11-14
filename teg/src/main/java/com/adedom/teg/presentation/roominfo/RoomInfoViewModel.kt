@@ -50,6 +50,7 @@ class RoomInfoViewModel(
                     )
                 }
             }
+            incomingRoomInfoTitle()
         }
     }
 
@@ -71,6 +72,7 @@ class RoomInfoViewModel(
                     )
                 }
             }
+            incomingRoomInfoPlayers()
         }
     }
 
@@ -79,6 +81,7 @@ class RoomInfoViewModel(
             repository.incomingRoomInfoTegMulti { roomInfoTegMultiOutgoing ->
                 listener?.roomInfoTegMultiResponse(roomInfoTegMultiOutgoing)
             }
+            incomingRoomInfoTegMulti()
         }
     }
 

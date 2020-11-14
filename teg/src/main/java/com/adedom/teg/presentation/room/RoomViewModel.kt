@@ -18,6 +18,7 @@ class RoomViewModel(
             repository.incomingRoomPeopleAll { roomPeopleAll ->
                 setState { copy(peopleAll = roomPeopleAll.peopleAll) }
             }
+            incomingRoomPeopleAll()
         }
     }
 
@@ -26,10 +27,9 @@ class RoomViewModel(
             setState { copy(loading = true) }
 
             repository.incomingPlaygroundRoom { rooms ->
-                setState { copy(loading = false) }
-
-                setState { copy(rooms = rooms.rooms) }
+                setState { copy(rooms = rooms.rooms, loading = false) }
             }
+            incomingPlaygroundRoom()
         }
     }
 

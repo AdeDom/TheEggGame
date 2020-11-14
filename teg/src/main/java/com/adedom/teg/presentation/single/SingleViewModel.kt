@@ -28,6 +28,7 @@ class SingleViewModel(
             repository.incomingSinglePeopleAll { roomPeopleAllOutgoing ->
                 setState { copy(peopleAll = roomPeopleAllOutgoing.peopleAll) }
             }
+            incomingSinglePeopleAll()
         }
     }
 
