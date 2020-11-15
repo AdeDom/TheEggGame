@@ -15,6 +15,4 @@ interface SignInUseCase {
 
     fun isValidatePassword(password: String): Boolean
 
-    fun getConfigUsername(): String
-
 }

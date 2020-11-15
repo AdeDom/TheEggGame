@@ -8,13 +8,14 @@ import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.models.response.SignInResponse
 import com.adedom.teg.models.response.Token
 import com.adedom.teg.presentation.usercase.SignInUseCase
+import com.adedom.teg.sharedpreference.service.PreferenceConfig
 import com.adedom.teg.util.getOrAwaitValue
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,11 +32,12 @@ class SignInViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val useCase = mockk<SignInUseCase>(relaxed = true)
+    private val preferenceConfig = mockk<PreferenceConfig>(relaxed = true)
     private lateinit var viewModel: SignInViewModel
 
     @Before
     fun setup() {
-        viewModel = SignInViewModel(useCase)
+        viewModel = SignInViewModel(useCase, preferenceConfig)
     }
 
     @After
@@ -44,27 +46,10 @@ class SignInViewModelTest {
     }
 
     @Test
-    fun setStateUsername_incorrectUsernameIsBlank() {
-        // given
-        val username = ""
-        val isValidateUsername = false
-        every { useCase.isValidateUsername(username) } returns isValidateUsername
-
-        // when
-        viewModel.setStateUsername(username)
-        val state = viewModel.state.getOrAwaitValue()
-
-        // then
-        assertEquals(username, state.username)
-        assertEquals(isValidateUsername, state.isValidUsername)
-    }
-
-    @Test
-    fun setStateUsername_incorrectUsernameLengthLessThenFour() {
+    fun setStateUsername_incorrectIsValidateUsername_returnFalse() {
         // given
         val username = "ad"
-        val isValidateUsername = false
-        every { useCase.isValidateUsername(username) } returns isValidateUsername
+        every { useCase.isValidateUsername(any()) } returns false
 
         // when
         viewModel.setStateUsername(username)
@@ -72,15 +57,14 @@ class SignInViewModelTest {
 
         // then
         assertEquals(username, state.username)
-        assertEquals(isValidateUsername, state.isValidUsername)
+        assertFalse(state.isValidUsername)
     }
 
     @Test
-    fun setStateUsername_correct() {
+    fun setStateUsername_correctIsValidateUsername_returnTrue() {
         // given
         val username = "admin"
-        val isValidateUsername = true
-        every { useCase.isValidateUsername(username) } returns isValidateUsername
+        every { useCase.isValidateUsername(any()) } returns true
 
         // when
         viewModel.setStateUsername(username)
@@ -88,15 +72,14 @@ class SignInViewModelTest {
 
         // then
         assertEquals(username, state.username)
-        assertEquals(isValidateUsername, state.isValidUsername)
+        assertTrue(state.isValidUsername)
     }
 
     @Test
-    fun setStatePassword_incorrectPasswordIsBlank() {
+    fun setStatePassword_incorrectIsValidatePassword_returnFalse() {
         // given
-        val password = ""
-        val isValidatePassword = false
-        every { useCase.isValidatePassword(password) } returns isValidatePassword
+        val password = "12"
+        every { useCase.isValidatePassword(any()) } returns false
 
         // when
         viewModel.setStatePassword(password)
@@ -104,31 +87,14 @@ class SignInViewModelTest {
 
         // then
         assertEquals(password, state.password)
-        assertEquals(isValidatePassword, state.isValidPassword)
+        assertFalse(state.isValidPassword)
     }
 
     @Test
-    fun setStatePassword_incorrectPasswordLengthLessThenFour() {
-        // given
-        val password = "123"
-        val isValidatePassword = false
-        every { useCase.isValidatePassword(password) } returns isValidatePassword
-
-        // when
-        viewModel.setStatePassword(password)
-        val state = viewModel.state.getOrAwaitValue()
-
-        // then
-        assertEquals(password, state.password)
-        assertEquals(isValidatePassword, state.isValidPassword)
-    }
-
-    @Test
-    fun setStatePassword_correct() {
+    fun setStatePassword_correctIsValidatePassword_returnTrue() {
         // given
         val password = "1234"
-        val isValidatePassword = true
-        every { useCase.isValidatePassword(password) } returns isValidatePassword
+        every { useCase.isValidatePassword(any()) } returns true
 
         // when
         viewModel.setStatePassword(password)
@@ -136,7 +102,7 @@ class SignInViewModelTest {
 
         // then
         assertEquals(password, state.password)
-        assertEquals(isValidatePassword, state.isValidPassword)
+        assertTrue(state.isValidPassword)
     }
 
     @Test
@@ -264,7 +230,7 @@ class SignInViewModelTest {
     fun getConfigUsername() {
         // given
         val username = "AdeDom"
-        every { useCase.getConfigUsername() } returns username
+        every { preferenceConfig.username } returns username
 
         // when
         val result = viewModel.getConfigUsername()

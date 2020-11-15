@@ -8,10 +8,12 @@ import com.adedom.teg.domain.model.ValidateSignIn
 import com.adedom.teg.models.request.SignInRequest
 import com.adedom.teg.models.response.SignInResponse
 import com.adedom.teg.presentation.usercase.SignInUseCase
+import com.adedom.teg.sharedpreference.service.PreferenceConfig
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
-    private val useCase: SignInUseCase
+    private val useCase: SignInUseCase,
+    private val preferenceConfig: PreferenceConfig,
 ) : BaseViewModel<SignInState>(SignInState()) {
 
     private val _signInEvent = MutableLiveData<ValidateSignIn>()
@@ -64,7 +66,7 @@ class SignInViewModel(
     }
 
     fun getConfigUsername(): String {
-        return useCase.getConfigUsername()
+        return preferenceConfig.username
     }
 
 }

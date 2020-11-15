@@ -48,7 +48,7 @@ class SignInUseCaseImplTest {
             token = Token(accessToken = accessToken, refreshToken = refreshToken)
         )
         val success = Resource.Success(signInResponse)
-        coEvery { repository.callSignIn(signInRequest) } returns success
+        coEvery { repository.callSignIn(any()) } returns success
         every { sessionManagerService.accessToken } returns accessToken
         every { sessionManagerService.refreshToken } returns refreshToken
         every { preferenceConfig.signOut } returns false
@@ -233,19 +233,6 @@ class SignInUseCaseImplTest {
 
         // then
         assertTrue(result)
-    }
-
-    @Test
-    fun getConfigUsername() {
-        // given
-        val username = "AdeDom"
-        every { preferenceConfig.username } returns username
-
-        // when
-        val result = useCase.getConfigUsername()
-
-        // then
-        assertEquals(username, result)
     }
 
 }

@@ -59,8 +59,4 @@ class SignInUseCaseImpl(
         return password.isNotBlank() && password.length >= TegConstant.MIN_PASSWORD
     }
 
-    override fun getConfigUsername(): String {
-        return preferenceConfig.username
-    }
-
 }
