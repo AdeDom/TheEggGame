@@ -31,7 +31,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/large</item>
-        <item name="android:background">@drawable/shape_btn</item>
+        <item name="android:background">@drawable/selector_button_background</item>
         <item name="android:fontFamily">casual</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>

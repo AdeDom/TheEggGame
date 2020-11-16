@@ -23,6 +23,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         super.onCreate(savedInstanceState)
 
         viewModel.attachFirstTime.observe {
+            viewModel.callChangeCurrentModeMulti()
             viewModel.incomingRoomPeopleAll()
             viewModel.incomingPlaygroundRoom()
         }
@@ -57,8 +58,6 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         adt.onClick = {
             viewModel.callJoinRoomInfo(it.roomNo)
         }
-
-        viewModel.callChangeCurrentModeMulti()
     }
 
     override fun onJoinRoomInfoResponse(response: BaseResponse) {
