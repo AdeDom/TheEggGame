@@ -58,7 +58,7 @@ interface TegDataSource {
 
     suspend fun callFetchItemCollection(): BackpackResponse
 
-    suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse
+    suspend fun callSingleItemCollection(singleId: Int): BaseResponse
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse
 
@@ -81,6 +81,8 @@ interface TegDataSource {
     suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
 
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
+
+    suspend fun incomingSingleItem(socket: SingleItemSocket)
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 

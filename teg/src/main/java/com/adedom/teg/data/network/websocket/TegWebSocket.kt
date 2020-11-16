@@ -1,10 +1,7 @@
 package com.adedom.teg.data.network.websocket
 
 import com.adedom.teg.models.response.RoomsResponse
-import com.adedom.teg.models.websocket.PeopleAllOutgoing
-import com.adedom.teg.models.websocket.RoomInfoPlayersOutgoing
-import com.adedom.teg.models.websocket.RoomInfoTegMultiOutgoing
-import com.adedom.teg.models.websocket.RoomInfoTitleOutgoing
+import com.adedom.teg.models.websocket.*
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
 import com.adedom.teg.util.fromJson
@@ -20,6 +17,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
 
 typealias SinglePeopleAllSocket = (PeopleAllOutgoing) -> Unit
+typealias SingleItemSocket = (SingleItemOutgoing) -> Unit
 typealias RoomPeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
@@ -72,6 +70,18 @@ class TegWebSocket(
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         wss<PeopleAllOutgoing>("/websocket/single/single-people-all") {
             socket.invoke(it)
+        }
+    }
+
+    suspend fun incomingSingleItem(socket:SingleItemSocket) {
+        wss("/websocket/single/single-item") {
+            incoming.consumeAsFlow()
+                .onEach { frame ->
+                    val response = frame.fromJson<SingleItemOutgoing>()
+                    socket.invoke(response)
+                }
+                .catch { }
+                .collect()
         }
     }
 

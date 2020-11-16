@@ -6,9 +6,9 @@ import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.models.request.ItemCollectionRequest
 import com.adedom.teg.presentation.usercase.SingleUseCase
 import com.adedom.teg.util.TegConstant
+import com.adedom.teg.util.TegLatLng
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
@@ -32,27 +32,30 @@ class SingleViewModel(
         }
     }
 
-    fun setStateLatLng(latitude: Double, longitude: Double) {
-        setState { copy(latLng = SingleViewState.Latlng(latitude, longitude)) }
+    fun incomingSingleItem() {
+        launch {
+            setState { copy(loading = true) }
+
+            repository.incomingSingleItem { singleItemOutgoing ->
+                setState { copy(singleItems = singleItemOutgoing.singleItems, loading = false) }
+            }
+            incomingSingleItem()
+        }
+    }
+
+    fun setStateLatLng(latLng: TegLatLng) {
+        setState { copy(latLng = latLng) }
     }
 
     fun setStateBitmap(bitmap: Bitmap) {
         setState { copy(bitmap = bitmap) }
     }
 
-    fun callItemCollection() {
+    fun callSingleItemCollection(singleId: Int) {
         launch {
             setState { copy(loading = true) }
 
-            // TODO: 22/10/2563 mock item
-            val request = ItemCollectionRequest(
-                itemId = 999,
-                qty = 500,
-                latitude = 13.5231001,
-                longitude = 100.7517565,
-            )
-
-            when (val resource = useCase.callItemCollection(request)) {
+            when (val resource = useCase.callSingleItemCollection(singleId)) {
                 is Resource.Error -> setError(resource)
             }
 

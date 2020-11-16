@@ -112,8 +112,8 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchItemCollection()
     }
 
-    override suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): BaseResponse {
-        return provider.getTegDataSource().callItemCollection(itemCollectionRequest)
+    override suspend fun callSingleItemCollection(singleId: Int): BaseResponse {
+        return provider.getTegDataSource().callSingleItemCollection(singleId)
     }
 
     override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse {
@@ -158,6 +158,10 @@ class TegDataSourceImpl(
 
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingSinglePeopleAll(socket)
+    }
+
+    override suspend fun incomingSingleItem(socket: SingleItemSocket) {
+        return provider.getWebSocketDataSource().incomingSingleItem(socket)
     }
 
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {

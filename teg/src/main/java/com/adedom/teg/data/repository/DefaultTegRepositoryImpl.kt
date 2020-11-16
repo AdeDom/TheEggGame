@@ -12,7 +12,7 @@ import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import okhttp3.MultipartBody
 
-class DefaultTegAuthRepositoryImpl(
+class DefaultTegRepositoryImpl(
     private val dataSource: TegDataSource
 ) : BaseRepository(), DefaultTegRepository {
 
@@ -115,8 +115,8 @@ class DefaultTegAuthRepositoryImpl(
         return safeApiCall { dataSource.callFetchItemCollection() }
     }
 
-    override suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse> {
-        return safeApiCall { dataSource.callItemCollection(itemCollectionRequest) }
+    override suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callSingleItemCollection(singleId) }
     }
 
     override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse> {
@@ -161,6 +161,10 @@ class DefaultTegAuthRepositoryImpl(
 
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return dataSource.incomingSinglePeopleAll(socket)
+    }
+
+    override suspend fun incomingSingleItem(socket: SingleItemSocket) {
+        return dataSource.incomingSingleItem(socket)
     }
 
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {

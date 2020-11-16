@@ -5,7 +5,7 @@ import com.adedom.teg.data.network.source.DataSourceProvider
 import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.data.network.source.TegDataSourceImpl
 import com.adedom.teg.data.network.websocket.TegWebSocket
-import com.adedom.teg.data.repository.DefaultTegAuthRepositoryImpl
+import com.adedom.teg.data.repository.DefaultTegRepositoryImpl
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
@@ -35,7 +35,7 @@ private val dataModule = module {
 
     single<TegDataSource> { TegDataSourceImpl(get(), get()) }
 
-    single<DefaultTegRepository> { DefaultTegAuthRepositoryImpl(get()) }
+    single<DefaultTegRepository> { DefaultTegRepositoryImpl(get()) }
 
 }
 

@@ -59,7 +59,7 @@ interface DefaultTegRepository {
 
     suspend fun callFetchItemCollection(): Resource<BackpackResponse>
 
-    suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse>
+    suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse>
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
@@ -82,6 +82,8 @@ interface DefaultTegRepository {
     suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse>
 
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
+
+    suspend fun incomingSingleItem(socket: SingleItemSocket)
 
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 

@@ -4,7 +4,6 @@ import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.models.request.ItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.SingleUseCase
 
@@ -12,8 +11,8 @@ class SingleUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : SingleUseCase {
 
-    override suspend fun callItemCollection(itemCollectionRequest: ItemCollectionRequest): Resource<BaseResponse> {
-        val resource = repository.callItemCollection(itemCollectionRequest)
+    override suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse> {
+        val resource = repository.callSingleItemCollection(singleId)
 
         when (resource) {
             is Resource.Success -> {

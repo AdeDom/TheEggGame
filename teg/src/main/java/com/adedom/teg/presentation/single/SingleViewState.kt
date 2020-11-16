@@ -1,19 +1,15 @@
 package com.adedom.teg.presentation.single
 
 import android.graphics.Bitmap
+import com.adedom.teg.data.models.SingleItemDb
+import com.adedom.teg.util.TegLatLng
 
 data class SingleViewState(
+    val singleItems: List<SingleItemDb> = emptyList(),
     val peopleAll: Int = 0,
     val name: String = "",
     val level: Int = 0,
-    val latLng: Latlng = Latlng(),
+    val latLng: TegLatLng = TegLatLng(),
     val bitmap: Bitmap? = null,
     val loading: Boolean = false,
-) {
-
-    class Latlng(
-        val latitude: Double = 0.0,
-        val longitude: Double = 0.0,
-    )
-
-}
+)
