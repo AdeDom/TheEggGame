@@ -32,14 +32,19 @@ class SingleViewModel(
         }
     }
 
-    fun incomingSingleItem() {
+    fun incomingSingleItemAround(latLng: TegLatLng) {
         launch {
             setState { copy(loading = true) }
 
-            repository.incomingSingleItem { singleItemOutgoing ->
-                setState { copy(singleItems = singleItemOutgoing.singleItems, loading = false) }
+            useCase.incomingSingleItem(latLng) { singleItemAroundOutgoing ->
+                setState {
+                    copy(
+                        singleItems = singleItemAroundOutgoing.singleItems,
+                        loading = false
+                    )
+                }
             }
-            incomingSingleItem()
+            incomingSingleItemAround(latLng)
         }
     }
 

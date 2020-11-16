@@ -42,7 +42,6 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         viewModel.attachFirstTime.observe {
             viewModel.callChangeCurrentModeSingle()
             viewModel.incomingSinglePeopleAll()
-            viewModel.incomingSingleItem()
         }
     }
 
@@ -66,6 +65,8 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             val latLng = LatLng(location.latitude, location.longitude)
             val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14F)
             googleMap.animateCamera(cameraUpdate)
+
+            viewModel.incomingSingleItemAround(TegLatLng(location.latitude,location.longitude))
 
             locationProviderClient
                 .locationFlow()

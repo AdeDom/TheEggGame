@@ -6,6 +6,8 @@ import com.adedom.teg.data.models.SingleItemDb
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.models.websocket.SingleItemOutgoing
+import com.adedom.teg.presentation.usercase.SingleItemAroundSocket
 import com.adedom.teg.presentation.usercase.SingleUseCase
 import com.adedom.teg.util.TegLatLng
 import kotlin.math.asin
@@ -16,6 +18,18 @@ import kotlin.math.sqrt
 class SingleUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : SingleUseCase {
+
+    override suspend fun incomingSingleItem(latLng: TegLatLng, socket: SingleItemAroundSocket) {
+        repository.incomingSingleItem { singleItemOutgoing ->
+            val singleItemAround = singleItemOutgoing.singleItems
+                .filter { it.latitude != null && it.longitude != null }
+                .map { Pair(it, distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))) }
+                .filter { it.second < 3000 }
+                .map { it.first }
+
+            socket.invoke(SingleItemOutgoing(singleItemAround))
+        }
+    }
 
     override suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse> {
         val resource = repository.callSingleItemCollection(singleId)
