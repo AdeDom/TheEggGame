@@ -6,9 +6,9 @@ import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.presentation.usercase.SingleUseCase
 import com.adedom.teg.util.TegConstant
-import com.adedom.teg.util.TegLatLng
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch

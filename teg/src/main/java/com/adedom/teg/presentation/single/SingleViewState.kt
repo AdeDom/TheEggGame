@@ -2,7 +2,7 @@ package com.adedom.teg.presentation.single
 
 import android.graphics.Bitmap
 import com.adedom.teg.data.models.SingleItemDb
-import com.adedom.teg.util.TegLatLng
+import com.adedom.teg.models.TegLatLng
 
 data class SingleViewState(
     val singleItems: List<SingleItemDb> = emptyList(),

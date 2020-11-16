@@ -207,10 +207,4 @@ class SingleActivityViewModel : BaseViewModel() {
 
     }
 
-    companion object {
-        var markerPlayer: Marker? = null
-        var markerBot: Marker? = null
-        var circlePlayer: Circle? = null
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.adedom.android.presentation.single
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -8,9 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.presentation.single.SingleViewModel
 import com.adedom.teg.presentation.single.SingleViewState
-import com.adedom.teg.util.TegLatLng
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -66,7 +67,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14F)
             googleMap.animateCamera(cameraUpdate)
 
-            viewModel.incomingSingleItemAround(TegLatLng(location.latitude,location.longitude))
+            viewModel.incomingSingleItemAround(TegLatLng(location.latitude, location.longitude))
 
             locationProviderClient
                 .locationFlow()
@@ -138,18 +139,31 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             }
             mMarkerSingleItems.clear()
 
-            state.singleItems
-                .filter { it.latitude != null && it.longitude != null }
-                .forEach {
-                    val markerOptions = MarkerOptions().apply {
-                        position(LatLng(it.latitude!!, it.longitude!!))
-                        icon(BitmapDescriptorFactory.defaultMarker())
-                        title("Title")
-                        snippet("Snippet")
-                    }
-
-                    mMarkerSingleItems.add(googleMap.addMarker(markerOptions))
+            state.singleItems.forEach {
+                val bmp = when (it.itemTypeId) {
+                    1 -> BitmapFactory.decodeResource(resources, R.drawable.ic_egg)
+                    2 -> BitmapFactory.decodeResource(resources, R.drawable.ic_mystery_box)
+                    3 -> BitmapFactory.decodeResource(resources, R.drawable.ic_mystery_item)
+                    4 -> BitmapFactory.decodeResource(resources, R.drawable.ic_egg_bonus)
+                    else -> null
                 }
+
+                val title = when (it.itemTypeId) {
+                    1 -> getString(R.string.exp)
+                    2 -> getString(R.string.mystery_box)
+                    3 -> getString(R.string.mystery_item)
+                    4 -> getString(R.string.bonus)
+                    else -> null
+                }
+
+                val markerOptions = MarkerOptions().apply {
+                    position(LatLng(it.latitude!!, it.longitude!!))
+                    icon(BitmapDescriptorFactory.fromBitmap(bmp))
+                    title(title)
+                }
+
+                mMarkerSingleItems.add(googleMap.addMarker(markerOptions))
+            }
         }
     }
 

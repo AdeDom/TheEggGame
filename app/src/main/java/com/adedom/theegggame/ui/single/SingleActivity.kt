@@ -4,12 +4,10 @@ import android.location.Location
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.adedom.library.extension.readPrefFile
 import com.adedom.library.extension.setMarkerConstant
 import com.adedom.library.extension.setToolbar
-import com.adedom.library.extension.toast
 import com.adedom.library.util.GoogleMapActivity
 import com.adedom.library.util.pauseMusic
 import com.adedom.theegggame.R
@@ -70,7 +68,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
     override fun onActivityRunning() {
 
-        viewModel.checkItem { single, markerItems -> Item(single, markerItems) }
+        viewModel.checkItem { single, markerItems -> }
 
         viewModel.rndMultiItem()
 
@@ -78,7 +76,7 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         viewModel.checkRadius { keepItemSingle(it) }
 
-        viewModel.bot { Bot(it) }
+        viewModel.bot { }
 
     }
 
@@ -87,8 +85,6 @@ class SingleActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         //TODO issues location -> LatLng(0.0,0.0)
 //        sContext.setLocality(mTvLocality, sLatLng)
-
-        Player()
 
     }
 
