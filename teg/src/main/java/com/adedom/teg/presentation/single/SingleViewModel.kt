@@ -44,16 +44,26 @@ class SingleViewModel(
     }
 
     fun setStateLatLng(latLng: TegLatLng) {
-        setState { copy(latLng = latLng) }
+        setState {
+            copy(
+                latLng = latLng,
+                isValidateDistanceBetween = useCase.isValidateDistanceBetween(
+                    latLng,
+                    state.value?.singleItems
+                )
+            )
+        }
     }
 
     fun setStateBitmap(bitmap: Bitmap) {
         setState { copy(bitmap = bitmap) }
     }
 
-    fun callSingleItemCollection(singleId: Int) {
+    fun callSingleItemCollection() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isValidateDistanceBetween = false) }
+
+            val singleId = useCase.getSingleItemId(state.value?.latLng, state.value?.singleItems)
 
             when (val resource = useCase.callSingleItemCollection(singleId)) {
                 is Resource.Error -> setError(resource)

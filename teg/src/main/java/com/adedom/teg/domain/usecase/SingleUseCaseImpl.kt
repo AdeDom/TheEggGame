@@ -2,21 +2,28 @@ package com.adedom.teg.domain.usecase
 
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.models.SingleItemDb
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.SingleUseCase
+import com.adedom.teg.util.TegLatLng
+import kotlin.math.asin
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 class SingleUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : SingleUseCase {
 
-    override suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse> {
+    override suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse> {
         val resource = repository.callSingleItemCollection(singleId)
 
         when (resource) {
             is Resource.Success -> {
                 if (resource.data.success) {
+                    repository.outgoingSingleItem()
                     fetchItemCollection()
                 }
             }
@@ -64,6 +71,47 @@ class SingleUseCaseImpl(
                 }
             }
             is Resource.Error -> fetchPlayerInfo()
+        }
+    }
+
+    override fun isValidateDistanceBetween(
+        latLng: TegLatLng,
+        singleItems: List<SingleItemDb>?
+    ): Boolean {
+        val count = singleItems
+            ?.filter { it.latitude != null && it.longitude != null }
+            ?.map { distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!)) }
+            ?.filter { it < 200 }
+            ?.count()
+
+        return count != 0
+    }
+
+    private fun distanceBetween(startP: TegLatLng, endP: TegLatLng): Double {
+        val lat1: Double = startP.latitude
+        val lat2: Double = endP.latitude
+        val lon1: Double = startP.longitude
+        val lon2: Double = endP.longitude
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2) * sin(dLon / 2)
+        val c = 2 * asin(sqrt(a))
+        return 6366000 * c
+    }
+
+    override fun getSingleItemId(latLng: TegLatLng?, singleItems: List<SingleItemDb>?): Int? {
+        return latLng?.let {
+            singleItems
+                ?.filter { it.latitude != null && it.longitude != null }
+                ?.map {
+                    Pair(
+                        it.singleId,
+                        distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))
+                    )
+                }?.single { it.second < 100 }
+                ?.first
         }
     }
 

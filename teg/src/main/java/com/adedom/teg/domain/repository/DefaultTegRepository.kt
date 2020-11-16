@@ -59,7 +59,7 @@ interface DefaultTegRepository {
 
     suspend fun callFetchItemCollection(): Resource<BackpackResponse>
 
-    suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse>
+    suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse>
 
     suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse>
 
@@ -94,6 +94,8 @@ interface DefaultTegRepository {
     suspend fun incomingRoomInfoPlayers(socket: RoomInfoPlayersSocket)
 
     suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
+
+    suspend fun outgoingSingleItem()
 
     suspend fun outgoingPlaygroundRoom()
 

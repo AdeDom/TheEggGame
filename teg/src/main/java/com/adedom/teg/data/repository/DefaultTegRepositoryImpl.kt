@@ -115,7 +115,7 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callFetchItemCollection() }
     }
 
-    override suspend fun callSingleItemCollection(singleId: Int): Resource<BaseResponse> {
+    override suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse> {
         return safeApiCall { dataSource.callSingleItemCollection(singleId) }
     }
 
@@ -185,6 +185,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket) {
         return dataSource.incomingRoomInfoTegMulti(socket)
+    }
+
+    override suspend fun outgoingSingleItem() {
+        return dataSource.outgoingSingleItem()
     }
 
     override suspend fun outgoingPlaygroundRoom() {

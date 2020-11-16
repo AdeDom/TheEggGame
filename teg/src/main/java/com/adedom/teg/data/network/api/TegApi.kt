@@ -59,8 +59,8 @@ interface TegApi {
     @GET("api/single/item-collection")
     suspend fun callFetchItemCollection(): BackpackResponse
 
-    @POST("api/single/item-collection/{singleId}")
-    suspend fun callSingleItemCollection(@Path("singleId") singleId: Int): BaseResponse
+    @PATCH("api/single/item-collection/{singleId}")
+    suspend fun callSingleItemCollection(@Path("singleId") singleId: Int?): BaseResponse
 
     @POST("api/multi/item-collection")
     suspend fun callMultiItemCollection(@Body multiItemCollectionRequest: MultiItemCollectionRequest): BaseResponse

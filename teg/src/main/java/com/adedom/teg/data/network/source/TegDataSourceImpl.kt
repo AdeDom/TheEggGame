@@ -112,7 +112,7 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchItemCollection()
     }
 
-    override suspend fun callSingleItemCollection(singleId: Int): BaseResponse {
+    override suspend fun callSingleItemCollection(singleId: Int?): BaseResponse {
         return provider.getTegDataSource().callSingleItemCollection(singleId)
     }
 
@@ -182,6 +182,10 @@ class TegDataSourceImpl(
 
     override suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket) {
         return provider.getWebSocketDataSource().incomingRoomInfoTegMulti(socket)
+    }
+
+    override suspend fun outgoingSingleItem() {
+        return provider.getWebSocketDataSource().outgoingSingleItem()
     }
 
     override suspend fun outgoingPlaygroundRoom() {

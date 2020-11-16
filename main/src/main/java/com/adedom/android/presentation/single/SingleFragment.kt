@@ -84,6 +84,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
             // marker item
             setMarkerItem(state)
+
+            if (state.isValidateDistanceBetween) {
+                viewModel.callSingleItemCollection()
+            }
         }
 
         viewModel.error.observeError()

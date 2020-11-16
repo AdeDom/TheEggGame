@@ -10,6 +10,7 @@ data class SingleViewState(
     val name: String = "",
     val level: Int = 0,
     val latLng: TegLatLng = TegLatLng(),
+    val isValidateDistanceBetween: Boolean = false,
     val bitmap: Bitmap? = null,
     val loading: Boolean = false,
 )

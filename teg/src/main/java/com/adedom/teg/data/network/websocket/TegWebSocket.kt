@@ -31,6 +31,7 @@ class TegWebSocket(
     private val sessionManagerService: SessionManagerService,
 ) {
 
+    private var singleItem: WebSocketSession? = null
     private var playgroundRoom: WebSocketSession? = null
     private var roomInfoPlayers: WebSocketSession? = null
     private var roomInfoTegMulti: WebSocketSession? = null
@@ -73,15 +74,20 @@ class TegWebSocket(
         }
     }
 
-    suspend fun incomingSingleItem(socket:SingleItemSocket) {
+    suspend fun incomingSingleItem(socket: SingleItemSocket) {
         wss("/websocket/single/single-item") {
-            incoming.consumeAsFlow()
-                .onEach { frame ->
-                    val response = frame.fromJson<SingleItemOutgoing>()
-                    socket.invoke(response)
-                }
-                .catch { }
-                .collect()
+            singleItem = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<SingleItemOutgoing>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                singleItem = null
+            }
         }
     }
 
@@ -152,6 +158,10 @@ class TegWebSocket(
                 roomInfoTegMulti = null
             }
         }
+    }
+
+    suspend fun outgoingSingleItem() {
+        singleItem?.outgoing?.send(Frame.Text(""))
     }
 
     suspend fun outgoingPlaygroundRoom() {
