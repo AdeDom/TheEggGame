@@ -27,7 +27,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginTop="@dimen/large"
-            android:background="@drawable/shape_marker_circle"
+            android:background="@drawable/shape_marker_player"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

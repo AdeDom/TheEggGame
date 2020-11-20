@@ -36,24 +36,46 @@ fun Context.setImageCircle(
             .circleCrop()
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    onResourceReady.invoke(convertLayoutMarkerCircle(resource))
+                    onResourceReady.invoke(convertLayoutMarkerPlayer(resource))
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
                 }
             })
     } else {
-        onLoadCleared.invoke(convertLayoutMarkerCircle(null))
+        onLoadCleared.invoke(convertLayoutMarkerPlayer(null))
     }
 }
 
-private fun Context.convertLayoutMarkerCircle(
+private fun Context.convertLayoutMarkerPlayer(
     resource: Bitmap?,
-    @LayoutRes layout: Int = R.layout.layout_marker_circle,
+    @LayoutRes layout: Int = R.layout.layout_marker_player,
 ): Bitmap {
     val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view: View = inflater.inflate(layout, null)
     resource?.let { view.findViewById<ImageView>(R.id.ivImageProfile).setImageBitmap(it) }
+    val displayMetrics = DisplayMetrics()
+    view.layoutParams =
+        ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT)
+    view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+    view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+    view.buildDrawingCache()
+    val bitmap = Bitmap.createBitmap(
+        view.measuredWidth,
+        view.measuredHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    view.draw(Canvas(bitmap))
+    return bitmap
+}
+
+fun Context.convertLayoutMarkerItem(
+    resource: Int,
+    @LayoutRes layout: Int = R.layout.layout_marker_item,
+): Bitmap {
+    val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    val view: View = inflater.inflate(layout, null)
+    view.findViewById<ImageView>(R.id.ivImageItem).setImageResource(resource)
     val displayMetrics = DisplayMetrics()
     view.layoutParams =
         ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT)

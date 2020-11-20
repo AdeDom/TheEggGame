@@ -1,7 +1,6 @@
 package com.adedom.android.presentation.single
 
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -141,10 +140,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
             state.singleItems.forEach {
                 val bmp = when (it.itemTypeId) {
-                    1 -> BitmapFactory.decodeResource(resources, R.drawable.ic_egg)
-                    2 -> BitmapFactory.decodeResource(resources, R.drawable.ic_mystery_box)
-                    3 -> BitmapFactory.decodeResource(resources, R.drawable.ic_mystery_item)
-                    4 -> BitmapFactory.decodeResource(resources, R.drawable.ic_egg_bonus)
+                    1 -> context?.convertLayoutMarkerItem(R.drawable.ic_egg)
+                    2 -> context?.convertLayoutMarkerItem(R.drawable.ic_mystery_box)
+                    3 -> context?.convertLayoutMarkerItem(R.drawable.ic_mystery_item)
+                    4 -> context?.convertLayoutMarkerItem(R.drawable.ic_egg_bonus)
                     else -> null
                 }
 
