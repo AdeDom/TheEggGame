@@ -102,6 +102,9 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
             if (playerInfo == null) return@observe
 
+            viewModel.setStateName(playerInfo.name)
+            viewModel.setStateLevel(playerInfo.level)
+
             context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
                 viewModel.setStateBitmap(bitmap)
             }, onLoadCleared = { bitmap ->

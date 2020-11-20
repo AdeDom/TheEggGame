@@ -101,17 +101,12 @@ class SingleViewModel(
         }
     }
 
-    init {
-        launch {
-            val playerInfo = repository.getDbPlayerInfo()
+    fun setStateName(name: String?) {
+        setState { copy(name = name) }
+    }
 
-            setState {
-                copy(
-                    name = playerInfo?.name.orEmpty(),
-                    level = playerInfo?.level ?: 0
-                )
-            }
-        }
+    fun setStateLevel(level: Int?) {
+        setState { copy(level = level) }
     }
 
 }
