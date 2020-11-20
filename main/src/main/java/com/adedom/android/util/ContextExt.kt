@@ -1,17 +1,21 @@
 package com.adedom.android.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import com.adedom.android.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,6 +24,27 @@ import com.bumptech.glide.request.transition.Transition
 
 fun Context?.toast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
+}
+
+@SuppressLint("InflateParams")
+fun Context?.toastTeg(
+    @DrawableRes image: Int,
+    @StringRes message: Int,
+    duration: Int = Toast.LENGTH_LONG
+) {
+    val view: View = LayoutInflater.from(this).inflate(R.layout.layout_toast, null)
+
+    view.apply {
+        findViewById<ImageView>(R.id.ivImageItem).setImageResource(image)
+        findViewById<TextView>(R.id.tvMessage).setText(message)
+    }
+
+    Toast(this).apply {
+        setGravity(Gravity.TOP, 0, 40)
+        setDuration(duration)
+        setView(view)
+        show()
+    }
 }
 
 fun Context.setImageCircle(
