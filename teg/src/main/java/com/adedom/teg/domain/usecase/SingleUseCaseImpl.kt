@@ -95,7 +95,7 @@ class SingleUseCaseImpl(
         val count = singleItems
             ?.filter { it.latitude != null && it.longitude != null }
             ?.map { distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!)) }
-            ?.filter { it < 200 }
+            ?.filter { it < 100 }
             ?.count()
 
         return count != 0
@@ -118,14 +118,18 @@ class SingleUseCaseImpl(
     override fun getSingleItemId(latLng: TegLatLng?, singleItems: List<SingleItemDb>?): Int? {
         return latLng?.let {
             singleItems
+                ?.asSequence()
                 ?.filter { it.latitude != null && it.longitude != null }
                 ?.map {
                     Pair(
-                        it.singleId,
+                        it,
                         distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))
                     )
-                }?.single { it.second < 100 }
-                ?.first
+                }
+                ?.filter { it.second < 100 }
+                ?.map { it.first.singleId }
+                ?.take(1)
+                ?.singleOrNull()
         }
     }
 

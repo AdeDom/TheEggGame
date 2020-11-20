@@ -3,6 +3,7 @@ package com.adedom.android.base
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -48,9 +49,14 @@ abstract class BaseActivity : AppCompatActivity() {
                 recreate()
             } else {
                 it.throwable.printStackTrace()
-                toast(it.throwable.message, Toast.LENGTH_LONG)
+                toast("BaseActivity : observeError ${it.throwable.message}", Toast.LENGTH_LONG)
+                Log.d(TAG, "observeError: ${it.throwable.message}")
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "BaseActivity"
     }
 
 }

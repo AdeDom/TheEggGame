@@ -1,6 +1,7 @@
 package com.adedom.android.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,8 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), Co
 
     private val job = SupervisorJob()
     private val exceptionHandler = CoroutineExceptionHandler { _, err ->
-        context.toast(err.message, Toast.LENGTH_LONG)
+        context.toast("BaseFragment : exceptionHandler ${err.message}", Toast.LENGTH_LONG)
+        Log.d(TAG, "exceptionHandler : ${err.message}")
     }
 
     override val coroutineContext: CoroutineContext
@@ -55,7 +57,8 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), Co
     protected inline fun <reified T> Flow<T>.observe(crossinline onNext: (T) -> Unit) {
         this
             .catch { e ->
-                context.toast(e.message, Toast.LENGTH_LONG)
+                context.toast("BaseFragment : observe ${e.message}", Toast.LENGTH_LONG)
+                Log.d("BaseFragment", "observe: ${e.message}")
             }
             .asLiveData()
             .observe(this@BaseFragment, { onNext(it) })
@@ -68,9 +71,14 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), Co
                 findNavController().navigate(R.id.action_global_authActivity)
             } else {
                 it.throwable.printStackTrace()
-                context.toast(it.throwable.message, Toast.LENGTH_LONG)
+                context.toast("BaseFragment : observeError ${it.throwable.message}", Toast.LENGTH_LONG)
+                Log.d(TAG, "observeError: ${it.throwable.message}")
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "BaseFragment"
     }
 
 }
