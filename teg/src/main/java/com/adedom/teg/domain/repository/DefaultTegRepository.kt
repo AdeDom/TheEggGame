@@ -85,6 +85,8 @@ interface DefaultTegRepository {
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)
 
+    suspend fun incomingSingleSuccessAnnouncement(socket: SingleSuccessAnnouncementSocket)
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)
@@ -96,6 +98,8 @@ interface DefaultTegRepository {
     suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
 
     suspend fun outgoingSingleItem()
+
+    suspend fun outgoingSingleSuccessAnnouncement()
 
     suspend fun outgoingPlaygroundRoom()
 

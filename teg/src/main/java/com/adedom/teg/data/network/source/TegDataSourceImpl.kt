@@ -164,6 +164,10 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingSingleItem(socket)
     }
 
+    override suspend fun incomingSingleSuccessAnnouncement(socket: SingleSuccessAnnouncementSocket) {
+        return provider.getWebSocketDataSource().incomingSingleSuccessAnnouncement(socket)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }
@@ -186,6 +190,10 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingSingleItem() {
         return provider.getWebSocketDataSource().outgoingSingleItem()
+    }
+
+    override suspend fun outgoingSingleSuccessAnnouncement() {
+        return provider.getWebSocketDataSource().outgoingSingleSuccessAnnouncement()
     }
 
     override suspend fun outgoingPlaygroundRoom() {

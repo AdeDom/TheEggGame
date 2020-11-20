@@ -38,6 +38,7 @@ class SingleUseCaseImpl(
             is Resource.Success -> {
                 if (resource.data.success) {
                     repository.outgoingSingleItem()
+                    repository.outgoingSingleSuccessAnnouncement()
                     fetchItemCollection()
                 }
             }

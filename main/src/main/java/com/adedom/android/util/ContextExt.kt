@@ -26,21 +26,23 @@ fun Context?.toast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 
-@SuppressLint("InflateParams")
-fun Context?.toastTeg(
+@SuppressLint("InflateParams", "SetTextI18n")
+fun Context?.toastTegSingle(
     @DrawableRes image: Int,
-    @StringRes message: Int,
+    qty: Int?,
+    message: String?,
     duration: Int = Toast.LENGTH_LONG
 ) {
     val view: View = LayoutInflater.from(this).inflate(R.layout.layout_toast, null)
 
     view.apply {
         findViewById<ImageView>(R.id.ivImageItem).setImageResource(image)
-        findViewById<TextView>(R.id.tvMessage).setText(message)
+        findViewById<TextView>(R.id.tvQty).text = "($qty)"
+        findViewById<TextView>(R.id.tvMessage).text = message
     }
 
     Toast(this).apply {
-        setGravity(Gravity.TOP, 0, 40)
+        setGravity(Gravity.TOP, 0, 150)
         setDuration(duration)
         setView(view)
         show()

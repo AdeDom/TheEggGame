@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.onEach
 
 typealias SinglePeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias SingleItemSocket = (SingleItemOutgoing) -> Unit
+typealias SingleSuccessAnnouncementSocket = (SingleSuccessAnnouncementOutgoing) -> Unit
 typealias RoomPeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
@@ -32,6 +33,7 @@ class TegWebSocket(
 ) {
 
     private var singleItem: WebSocketSession? = null
+    private var singleSuccessAnnouncement: WebSocketSession? = null
     private var playgroundRoom: WebSocketSession? = null
     private var roomInfoPlayers: WebSocketSession? = null
     private var roomInfoTegMulti: WebSocketSession? = null
@@ -87,6 +89,23 @@ class TegWebSocket(
                     .collect()
             } finally {
                 singleItem = null
+            }
+        }
+    }
+
+    suspend fun incomingSingleSuccessAnnouncement(socket: SingleSuccessAnnouncementSocket) {
+        wss("/websocket/single/single-success-announcement") {
+            singleSuccessAnnouncement = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<SingleSuccessAnnouncementOutgoing>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                singleSuccessAnnouncement = null
             }
         }
     }
@@ -162,6 +181,10 @@ class TegWebSocket(
 
     suspend fun outgoingSingleItem() {
         singleItem?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingSingleSuccessAnnouncement() {
+        singleSuccessAnnouncement?.outgoing?.send(Frame.Text(""))
     }
 
     suspend fun outgoingPlaygroundRoom() {

@@ -11,6 +11,7 @@ import com.adedom.android.util.*
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.presentation.single.SingleViewModel
 import com.adedom.teg.presentation.single.SingleViewState
+import com.adedom.teg.util.TegConstant
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -42,6 +43,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         viewModel.attachFirstTime.observe {
             viewModel.callChangeCurrentModeSingle()
             viewModel.incomingSinglePeopleAll()
+            viewModel.incomingSingleSuccessAnnouncement()
         }
     }
 
@@ -89,6 +91,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             if (state.isValidateDistanceBetween) {
                 viewModel.callSingleItemCollection()
             }
+
+            if (state.isSingleSuccessAnnouncement) {
+                singleSuccessAnnouncement(state)
+            }
         }
 
         viewModel.error.observeError()
@@ -106,6 +112,22 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
         }
+    }
+
+    private fun singleSuccessAnnouncement(state: SingleViewState) {
+        val image: Int = when (state.singleSuccessAnnouncement?.itemId) {
+            TegConstant.SINGLE_ITEM_ONE -> R.drawable.ic_egg_i
+            TegConstant.SINGLE_ITEM_TWO -> R.drawable.ic_egg_ii
+            TegConstant.SINGLE_ITEM_THREE -> R.drawable.ic_egg_iii
+            TegConstant.ITEM_LEVEL -> R.drawable.ic_egg
+            else -> 0
+        }
+
+        context.toastTegSingle(
+            image,
+            state.singleSuccessAnnouncement?.qty,
+            state.singleSuccessAnnouncement?.name
+        )
     }
 
     private fun setMarkerMyLocation(state: SingleViewState) {

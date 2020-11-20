@@ -3,6 +3,7 @@ package com.adedom.teg.presentation.single
 import android.graphics.Bitmap
 import com.adedom.teg.data.models.SingleItemDb
 import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.websocket.SingleSuccessAnnouncementOutgoing
 
 data class SingleViewState(
     val singleItems: List<SingleItemDb> = emptyList(),
@@ -12,5 +13,7 @@ data class SingleViewState(
     val latLng: TegLatLng = TegLatLng(),
     val isValidateDistanceBetween: Boolean = false,
     val bitmap: Bitmap? = null,
+    val singleSuccessAnnouncement: SingleSuccessAnnouncementOutgoing? = null,
+    val isSingleSuccessAnnouncement: Boolean = false,
     val loading: Boolean = false,
 )

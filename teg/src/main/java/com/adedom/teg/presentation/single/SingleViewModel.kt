@@ -48,6 +48,21 @@ class SingleViewModel(
         }
     }
 
+    fun incomingSingleSuccessAnnouncement() {
+        launch {
+            repository.incomingSingleSuccessAnnouncement {
+                setState {
+                    copy(
+                        singleSuccessAnnouncement = it,
+                        isSingleSuccessAnnouncement = true
+                    )
+                }
+                setState { copy(isSingleSuccessAnnouncement = false) }
+            }
+            incomingSingleSuccessAnnouncement()
+        }
+    }
+
     fun setStateLatLng(latLng: TegLatLng) {
         setState {
             copy(

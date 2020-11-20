@@ -24,9 +24,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+                android:id="@+id/tvQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(3)"
+                app:layout_constraintBottom_toBottomOf="@+id/ivImageItem"
+                app:layout_constraintStart_toEndOf="@+id/ivImageItem" />
+
+        <TextView
                 android:id="@+id/tvMessage"
                 style="@style/TextViewLarge"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="32dp"
                 android:text="Message"
                 app:layout_constraintBottom_toBottomOf="@+id/ivImageItem"
                 app:layout_constraintEnd_toEndOf="parent"

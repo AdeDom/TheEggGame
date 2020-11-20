@@ -167,6 +167,10 @@ class DefaultTegRepositoryImpl(
         return dataSource.incomingSingleItem(socket)
     }
 
+    override suspend fun incomingSingleSuccessAnnouncement(socket: SingleSuccessAnnouncementSocket) {
+        return dataSource.incomingSingleSuccessAnnouncement(socket)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }
@@ -189,6 +193,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun outgoingSingleItem() {
         return dataSource.outgoingSingleItem()
+    }
+
+    override suspend fun outgoingSingleSuccessAnnouncement() {
+        return dataSource.outgoingSingleSuccessAnnouncement()
     }
 
     override suspend fun outgoingPlaygroundRoom() {
