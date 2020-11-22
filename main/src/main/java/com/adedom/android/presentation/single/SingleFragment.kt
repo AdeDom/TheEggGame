@@ -115,11 +115,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             viewModel.setStateName(playerInfo.name)
             viewModel.setStateLevel(playerInfo.level)
 
-            context?.setImageCircle(playerInfo.image, onResourceReady = { bitmap ->
+            launch {
+                val bitmap = context?.setImageCircle(playerInfo.image, playerInfo.gender)
                 viewModel.setStateBitmap(bitmap)
-            }, onLoadCleared = { bitmap ->
-                viewModel.setStateBitmap(bitmap)
-            })
+            }
         })
 
         floatingActionButton.setOnClickListener {
@@ -211,9 +210,11 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             mMarkerSinglePlayers.clear()
 
             state.players.forEach {
+                val bitmap = context?.setImageCircle(it.image, it.gender)
+
                 val markerOptions = MarkerOptions().apply {
                     position(LatLng(it.latitude!!, it.longitude!!))
-                    icon(BitmapDescriptorFactory.defaultMarker())
+                    icon(BitmapDescriptorFactory.fromBitmap(bitmap))
                     title(it.name)
                     snippet(getString(R.string.level, it.level))
                 }

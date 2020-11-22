@@ -85,7 +85,7 @@ class SingleViewModel(
         }
     }
 
-    fun setStateBitmap(bitmap: Bitmap) {
+    fun setStateBitmap(bitmap: Bitmap?) {
         setState { copy(bitmap = bitmap) }
     }
 
