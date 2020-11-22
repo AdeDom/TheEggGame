@@ -2,7 +2,9 @@ package com.adedom.teg.presentation.single
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
+import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -22,6 +24,13 @@ class SingleViewModel(
 
     val getDbPlayerInfoLiveData: LiveData<PlayerInfoEntity>
         get() = repository.getDbPlayerInfoLiveData()
+
+    val getDbBackpackLiveData: LiveData<BackpackEntity>
+        get() = repository.getDbBackpackLiveData()
+
+    private val _isBackpackItemEvent = MutableLiveData<Boolean>()
+    val isBackpackItemEvent: LiveData<Boolean>
+        get() = _isBackpackItemEvent
 
     fun incomingSinglePeopleAll() {
         launch {
@@ -117,6 +126,10 @@ class SingleViewModel(
 
     fun setStateLevel(level: Int?) {
         setState { copy(level = level) }
+    }
+
+    fun setStateBackpackItem() {
+        _isBackpackItemEvent.value = !(isBackpackItemEvent.value ?: false)
     }
 
 }

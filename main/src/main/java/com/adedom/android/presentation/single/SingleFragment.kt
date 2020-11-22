@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.navigation.fragment.findNavController
+import android.view.animation.AnimationUtils
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
@@ -121,9 +121,42 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             }
         })
 
-        floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
+        viewModel.getDbBackpackLiveData.observe(viewLifecycleOwner, { backpackItem ->
+            if (backpackItem == null) return@observe
+
+            tvEggI.text = getString(R.string.egg_i, backpackItem.eggI)
+            tvEggII.text = getString(R.string.egg_ii, backpackItem.eggII)
+            tvEggIII.text = getString(R.string.egg_iii, backpackItem.eggIII)
+        })
+
+        viewModel.isBackpackItemEvent.observe { isBackpackItem ->
+            viewShadow.setVisibility(isBackpackItem)
+
+            if (!isBackpackItem) {
+                floatingActionButton.setImageResource(R.drawable.ic_backpack_white)
+                tvEggI.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+                tvEggII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+                tvEggIII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+                fabEggI.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+                fabEggII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+                fabEggIII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_close))
+            } else {
+                floatingActionButton.setImageResource(R.drawable.ic_close_white)
+                tvEggI.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+                tvEggII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+                tvEggIII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+                fabEggI.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+                fabEggII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+                fabEggIII.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fab_open))
+            }
         }
+
+        floatingActionButton.setOnClickListener {
+//            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
+            viewModel.setStateBackpackItem()
+        }
+
+        viewShadow.setOnClickListener { viewModel.setStateBackpackItem() }
     }
 
     private fun singleSuccessAnnouncement(state: SingleViewState) {

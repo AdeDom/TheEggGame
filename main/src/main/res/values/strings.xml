@@ -79,9 +79,9 @@
     <string name="bonus">Bonus</string>
     <string name="backpack">Backpack</string>
     <string name="experience_point">Experience point : %1$d</string>
-    <string name="egg_i">Egg I : %1$d</string>
-    <string name="egg_ii">Egg II : %1$d</string>
-    <string name="egg_iii">Egg III : %1$d</string>
+    <string name="egg_i">Egg I (%1$d)</string>
+    <string name="egg_ii">Egg II (%1$d)</string>
+    <string name="egg_iii">Egg III (%1$d)</string>
     <string name="dru_title">DRU</string>
     <string name="dru_snippet">Dhonburi rajabhat university</string>
     <string name="exp">Experience point</string>
