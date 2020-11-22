@@ -27,6 +27,8 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
             animationViewLoading.setVisibility(state.loading)
 
             btUploadImageProfile.isEnabled = state.isImageUri
+
+            btUploadImageProfile.isClickable = state.isClickable
         }
 
         viewModel.uploadImageProfileEvent.observe { response ->

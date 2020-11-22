@@ -25,6 +25,8 @@ class ChangeImageFragment : BaseFragment(R.layout.fragment_change_image) {
             animationViewLoading.setVisibility(state.loading)
 
             btChangeImageProfile.isEnabled = state.isImageUri
+
+            btChangeImageProfile.isClickable = state.isClickable
         }
 
         viewModel.fetchPlayerInfo.observe(viewLifecycleOwner, { playerInfo ->

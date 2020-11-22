@@ -27,6 +27,8 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
             animationViewLoading.setVisibility(state.loading)
 
             tvBirthDate.text = state.birthDateString
+
+            btChangeProfile.isClickable = state.isClickable
         }
 
         viewModel.playerInfo.observe(viewLifecycleOwner, { playerInfo ->

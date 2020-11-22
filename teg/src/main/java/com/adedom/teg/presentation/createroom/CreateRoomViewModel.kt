@@ -41,7 +41,7 @@ class CreateRoomViewModel(
 
     fun callCreateRoom() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             val request = CreateRoomRequest(
                 roomName = state.value?.roomName,
@@ -52,7 +52,7 @@ class CreateRoomViewModel(
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 

@@ -33,6 +33,8 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
             animationViewLoading.setVisibility(state.loading)
 
             tvRoomPeople.text = state.roomPeople.toString()
+
+            btCreateRoom.isClickable = state.isClickable
         }
 
         viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->

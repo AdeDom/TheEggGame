@@ -35,7 +35,7 @@ class RoomViewModel(
 
     fun callJoinRoomInfo(roomNo: String?) {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             val request = JoinRoomInfoRequest(roomNo)
             when (val resource = repository.callJoinRoomInfo(request)) {
@@ -43,7 +43,7 @@ class RoomViewModel(
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 

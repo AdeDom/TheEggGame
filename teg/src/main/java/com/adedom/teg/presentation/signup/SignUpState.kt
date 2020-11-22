@@ -10,5 +10,6 @@ data class SignUpState(
     val gender: String = "",
     val birthDateCalendar: Calendar? = null,
     val birthDateString: String = "",
+    val isClickable: Boolean = true,
     val loading: Boolean = false,
 )

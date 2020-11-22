@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
-import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.RoomInfoUseCase
 import com.adedom.teg.util.TegConstant
@@ -85,25 +84,6 @@ class RoomInfoViewModel(
         }
     }
 
-    fun callMultiItemCollection() {
-        launch {
-            setState { copy(loading = true) }
-
-            val request = MultiItemCollectionRequest(
-                itemId = 999,
-                qty = 500,
-                latitude = 13.5231001,
-                longitude = 100.7517565,
-            )
-
-//            when (val resource = useCase.callMultiItemCollection(request)) {
-//                is Resource.Error -> setError(resource)
-//            }
-
-            setState { copy(loading = false) }
-        }
-    }
-
     fun callLeaveRoomInfo() {
         launch {
             setState { copy(loading = true) }
@@ -119,26 +99,26 @@ class RoomInfoViewModel(
 
     private fun callChangeTeam(team: String) {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             when (val resource = useCase.callChangeTeam(team)) {
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 
     private fun callChangeGoTeg() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             when (val resource = useCase.callChangeGoTeg(state.value?.roomInfoPlayers)) {
                 is Resource.Success -> _goTegMultiEvent.value = resource.data
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 
@@ -160,6 +140,8 @@ class RoomInfoViewModel(
         channel
             .asFlow()
             .onEach { event ->
+                if (state.value?.isClickable != true) return@onEach
+
                 when (event) {
                     is RoomInfoViewEvent.GoTeg -> callChangeGoTeg()
                     is RoomInfoViewEvent.TeamA -> callChangeTeam(TegConstant.TEAM_A)

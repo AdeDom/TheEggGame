@@ -7,5 +7,6 @@ data class ChangeProfileState(
     val gender: String = "",
     val birthDateString: String = "",
     val birthDateCalendar: Calendar? = null,
+    val isClickable: Boolean = true,
     val loading: Boolean = false,
 )

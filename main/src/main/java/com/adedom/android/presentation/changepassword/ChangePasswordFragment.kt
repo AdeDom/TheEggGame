@@ -22,6 +22,8 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
 
         viewModel.state.observe { state ->
             animationViewLoading.setVisibility(state.loading)
+
+            btChangePassword.isClickable = state.isClickable
         }
 
         viewModel.changePasswordEvent.observe { response ->

@@ -26,7 +26,7 @@ class ImageProfileViewModel(
 
     fun callUploadImageProfile() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             val fileUri = Uri.parse(state.value?.imageUri)
             val request = context.convertMultipartBodyPart(fileUri, "imageFile")
@@ -35,7 +35,7 @@ class ImageProfileViewModel(
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 

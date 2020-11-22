@@ -5,5 +5,6 @@ import com.adedom.teg.util.TegConstant
 data class CreateRoomViewState(
     val roomName: String = "",
     val roomPeople: Int = TegConstant.ROOM_PEOPLE_MIN,
+    val isClickable: Boolean = true,
     val loading: Boolean = false,
 )

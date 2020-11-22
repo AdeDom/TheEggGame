@@ -49,7 +49,7 @@ class SignUpViewModel(
 
     fun callSignUp() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
             val request = SignUpModel(
                 username = state.value?.username,
                 password = state.value?.password,
@@ -62,7 +62,7 @@ class SignUpViewModel(
                 is Resource.Success -> _signUpEvent.value = resource.data
                 is Resource.Error -> setError(resource)
             }
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 

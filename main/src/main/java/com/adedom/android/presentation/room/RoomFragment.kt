@@ -47,16 +47,18 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
             adt.setList(state.rooms)
 
             tvPeopleAll.text = state.peopleAll.toString()
+
+            if (state.isClickable) {
+                adt.onClick = { viewModel.callJoinRoomInfo(it.roomNo) }
+            } else {
+                adt.onClick = null
+            }
         }
 
         viewModel.error.observeError()
 
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_roomFragment_to_createRoomFragment)
-        }
-
-        adt.onClick = {
-            viewModel.callJoinRoomInfo(it.roomNo)
         }
     }
 

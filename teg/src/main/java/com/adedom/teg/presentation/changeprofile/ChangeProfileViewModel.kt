@@ -59,7 +59,7 @@ class ChangeProfileViewModel(
 
     fun callChangeProfile() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
 
             val request = ChangeProfileModel(
                 name = state.value?.name,
@@ -73,7 +73,7 @@ class ChangeProfileViewModel(
                 is Resource.Error -> setError(resource)
             }
 
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 

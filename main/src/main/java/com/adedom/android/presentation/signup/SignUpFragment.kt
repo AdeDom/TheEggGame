@@ -27,6 +27,8 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             animationViewLoading.setVisibility(state.loading)
 
             tvBirthDate.text = state.birthDateString
+
+            btSignUp.isClickable = state.isClickable
         }
 
         viewModel.signUpEvent.observe { response ->

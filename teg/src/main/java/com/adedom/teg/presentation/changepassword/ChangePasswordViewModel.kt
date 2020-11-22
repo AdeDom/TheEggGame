@@ -2,11 +2,11 @@ package com.adedom.teg.presentation.changepassword
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.adedom.teg.presentation.usercase.ChangePasswordUseCase
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.ChangePasswordRequest
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.presentation.usercase.ChangePasswordUseCase
 import kotlinx.coroutines.launch
 
 class ChangePasswordViewModel(
@@ -31,7 +31,7 @@ class ChangePasswordViewModel(
 
     fun callChangePassword() {
         launch {
-            setState { copy(loading = true) }
+            setState { copy(loading = true, isClickable = false) }
             val request = ChangePasswordRequest(
                 oldPassword = state.value?.oldPassword,
                 newPassword = state.value?.newPassword,
@@ -40,7 +40,7 @@ class ChangePasswordViewModel(
                 is Resource.Success -> _changePasswordEvent.value = resource.data
                 is Resource.Error -> setError(resource)
             }
-            setState { copy(loading = false) }
+            setState { copy(loading = false, isClickable = true) }
         }
     }
 
