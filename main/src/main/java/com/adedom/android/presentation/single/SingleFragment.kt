@@ -42,6 +42,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         viewModel.attachFirstTime.observe {
+            viewModel.callFetchItemCollection()
             viewModel.callChangeCurrentModeSingle()
             viewModel.incomingSinglePeopleAll()
             viewModel.incomingSingleSuccessAnnouncement()
@@ -152,7 +153,6 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         }
 
         floatingActionButton.setOnClickListener {
-//            findNavController().navigate(R.id.action_singleFragment_to_backpackFragment)
             viewModel.setStateBackpackItem()
         }
 

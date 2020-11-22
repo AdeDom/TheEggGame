@@ -1,6 +1,5 @@
 package com.adedom.teg.presentation.di
 
-import com.adedom.teg.presentation.backpack.BackpackViewModel
 import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
@@ -36,7 +35,6 @@ private val presentationModule = module {
     viewModel { ChangeImageViewModel(get(), get(), get()) }
     viewModel { ImageProfileViewModel(get(), get()) }
     viewModel { RankViewModel(get()) }
-    viewModel { BackpackViewModel(get(), get()) }
     viewModel { SettingViewModel(get()) }
     viewModel { SingleViewModel(get(), get()) }
     viewModel { MissionViewModel(get(), get()) }

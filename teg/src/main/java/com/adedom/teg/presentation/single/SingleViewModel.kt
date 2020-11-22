@@ -98,6 +98,20 @@ class SingleViewModel(
         setState { copy(bitmap = bitmap) }
     }
 
+    fun callFetchItemCollection() {
+        launch {
+            if (repository.getDbBackpack() == null) {
+                setState { copy(loading = true) }
+
+                when (val resource = useCase.callFetchItemCollection()) {
+                    is Resource.Error -> setError(resource)
+                }
+
+                setState { copy(loading = false) }
+            }
+        }
+    }
+
     fun callSingleItemCollection() {
         launch {
             setState { copy(loading = true, isValidateDistanceBetween = false) }

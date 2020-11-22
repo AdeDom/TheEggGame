@@ -7,6 +7,7 @@ import com.adedom.teg.data.network.websocket.PlaygroundSinglePlayerSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.response.BackpackResponse
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.websocket.PlaygroundSinglePlayerOutgoing
 import com.adedom.teg.models.websocket.SingleItemOutgoing
@@ -47,6 +48,26 @@ class SingleUseCaseImpl(
 
             socket.invoke(PlaygroundSinglePlayerOutgoing(players))
         }
+    }
+
+    override suspend fun callFetchItemCollection(): Resource<BackpackResponse> {
+        val resource = repository.callFetchItemCollection()
+
+        when (resource) {
+            is Resource.Success -> {
+                if (resource.data.success) {
+                    val backpack = resource.data.backpack
+                    val backpackEntity = BackpackEntity(
+                        eggI = backpack?.eggI,
+                        eggII = backpack?.eggII,
+                        eggIII = backpack?.eggIII,
+                    )
+                    repository.saveBackpack(backpackEntity)
+                }
+            }
+        }
+
+        return resource
     }
 
     override suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse> {

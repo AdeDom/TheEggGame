@@ -4,6 +4,7 @@ import com.adedom.teg.data.models.SingleItemDb
 import com.adedom.teg.data.network.websocket.PlaygroundSinglePlayerSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.response.BackpackResponse
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.websocket.SingleItemOutgoing
 
@@ -17,6 +18,8 @@ interface SingleUseCase {
         latLng: TegLatLng,
         socket: PlaygroundSinglePlayerSocket
     )
+
+    suspend fun callFetchItemCollection(): Resource<BackpackResponse>
 
     suspend fun callSingleItemCollection(singleId: Int?): Resource<BaseResponse>
 
