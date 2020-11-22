@@ -86,6 +86,8 @@ interface TegDataSource {
 
     suspend fun incomingSingleSuccessAnnouncement(socket: SingleSuccessAnnouncementSocket)
 
+    suspend fun incomingPlaygroundSinglePlayer(socket: PlaygroundSinglePlayerSocket)
+
     suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket)
 
     suspend fun incomingPlaygroundRoom(socket: PlaygroundRoomSocket)

@@ -63,6 +63,15 @@ class SingleViewModel(
         }
     }
 
+    fun incomingPlaygroundSinglePlayer(latLng: TegLatLng) {
+        launch {
+            useCase.incomingPlaygroundSinglePlayer(latLng) {
+                setState { copy(players = it.players) }
+            }
+            incomingPlaygroundSinglePlayer(latLng)
+        }
+    }
+
     fun setStateLatLng(latLng: TegLatLng) {
         setState {
             copy(

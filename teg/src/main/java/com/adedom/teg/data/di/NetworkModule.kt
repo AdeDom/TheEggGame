@@ -9,6 +9,7 @@ import com.adedom.teg.data.repository.DefaultTegRepositoryImpl
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
+import io.ktor.client.features.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.features.websocket.*
 import io.ktor.util.*
@@ -22,6 +23,10 @@ private val dataModule = module {
     single {
         HttpClient(OkHttp) {
             install(WebSockets)
+
+            install(HttpTimeout) {
+                requestTimeoutMillis = 60_000
+            }
 
             install(Logging) {
                 logger = Logger.DEFAULT

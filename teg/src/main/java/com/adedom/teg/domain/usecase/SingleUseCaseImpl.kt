@@ -3,6 +3,7 @@ package com.adedom.teg.domain.usecase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.models.SingleItemDb
+import com.adedom.teg.data.network.websocket.PlaygroundSinglePlayerSocket
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.TegLatLng
@@ -10,6 +11,7 @@ import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.websocket.SingleItemOutgoing
 import com.adedom.teg.presentation.usercase.SingleItemAroundSocket
 import com.adedom.teg.presentation.usercase.SingleUseCase
+import com.adedom.teg.util.PlaygroundSinglePlayerOutgoing
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.sin
@@ -24,10 +26,26 @@ class SingleUseCaseImpl(
             val singleItemAround = singleItemOutgoing.singleItems
                 .filter { it.latitude != null && it.longitude != null }
                 .map { Pair(it, distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))) }
-                .filter { it.second < 3000 }
+                .filter { it.second < 3_000 }
                 .map { it.first }
 
             socket.invoke(SingleItemOutgoing(singleItemAround))
+        }
+    }
+
+    override suspend fun incomingPlaygroundSinglePlayer(
+        latLng: TegLatLng,
+        socket: PlaygroundSinglePlayerSocket
+    ) {
+        repository.incomingPlaygroundSinglePlayer { playgroundSinglePlayerOutgoing ->
+            val players = playgroundSinglePlayerOutgoing.players.filter {
+                it.playerId != repository.getDbPlayerInfo()?.playerId
+            }.filter { it.latitude != null && it.longitude != null }
+                .map { Pair(it, distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))) }
+                .filter { it.second < 3_000 }
+                .map { it.first }.toList()
+
+            socket.invoke(PlaygroundSinglePlayerOutgoing(players))
         }
     }
 

@@ -171,6 +171,10 @@ class DefaultTegRepositoryImpl(
         return dataSource.incomingSingleSuccessAnnouncement(socket)
     }
 
+    override suspend fun incomingPlaygroundSinglePlayer(socket: PlaygroundSinglePlayerSocket) {
+        return dataSource.incomingPlaygroundSinglePlayer(socket)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return dataSource.incomingRoomPeopleAll(socket)
     }

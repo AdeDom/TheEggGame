@@ -3,6 +3,7 @@ package com.adedom.teg.data.network.websocket
 import com.adedom.teg.models.response.RoomsResponse
 import com.adedom.teg.models.websocket.*
 import com.adedom.teg.sharedpreference.service.SessionManagerService
+import com.adedom.teg.util.PlaygroundSinglePlayerOutgoing
 import com.adedom.teg.util.TegConstant
 import com.adedom.teg.util.fromJson
 import io.ktor.client.*
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.onEach
 typealias SinglePeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias SingleItemSocket = (SingleItemOutgoing) -> Unit
 typealias SingleSuccessAnnouncementSocket = (SingleSuccessAnnouncementOutgoing) -> Unit
+typealias PlaygroundSinglePlayerSocket = suspend (PlaygroundSinglePlayerOutgoing) -> Unit
 typealias RoomPeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
@@ -107,6 +109,18 @@ class TegWebSocket(
             } finally {
                 singleSuccessAnnouncement = null
             }
+        }
+    }
+
+    suspend fun incomingPlaygroundSinglePlayer(socket: PlaygroundSinglePlayerSocket) {
+        wss("/websocket/single/playground-single-player") {
+            incoming.consumeAsFlow()
+                .onEach { frame ->
+                    val response = frame.fromJson<PlaygroundSinglePlayerOutgoing>()
+                    socket.invoke(response)
+                }
+                .catch { }
+                .collect()
         }
     }
 

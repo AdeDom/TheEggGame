@@ -168,6 +168,10 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingSingleSuccessAnnouncement(socket)
     }
 
+    override suspend fun incomingPlaygroundSinglePlayer(socket: PlaygroundSinglePlayerSocket) {
+        return provider.getWebSocketDataSource().incomingPlaygroundSinglePlayer(socket)
+    }
+
     override suspend fun incomingRoomPeopleAll(socket: RoomPeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingRoomPeopleAll(socket)
     }

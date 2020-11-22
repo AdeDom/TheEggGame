@@ -68,7 +68,9 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14F)
             googleMap.animateCamera(cameraUpdate)
 
-            viewModel.incomingSingleItemAround(TegLatLng(location.latitude, location.longitude))
+            val tegLatLng = TegLatLng(location.latitude, location.longitude)
+            viewModel.incomingSingleItemAround(tegLatLng)
+            viewModel.incomingPlaygroundSinglePlayer(tegLatLng)
 
             locationProviderClient
                 .locationFlow()
@@ -94,6 +96,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
             if (state.isSingleSuccessAnnouncement) {
                 singleSuccessAnnouncement(state)
+            }
+
+            if (state.players.isNotEmpty()) {
+                context.toast(state.players.toString())
             }
         }
 
