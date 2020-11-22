@@ -39,7 +39,7 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             adt.setList(state.rankPlayers)
         }

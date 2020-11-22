@@ -54,7 +54,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
         viewModel.listener = this
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             state.roomInfoTitle?.let {
                 tvRoomNo.text = getString(R.string.room_title_room_no, it.roomNo)

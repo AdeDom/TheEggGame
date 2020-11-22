@@ -24,7 +24,7 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             btUploadImageProfile.isEnabled = state.isImageUri
         }

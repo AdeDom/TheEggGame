@@ -42,7 +42,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         viewModel.listener = this
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             adt.setList(state.rooms)
 

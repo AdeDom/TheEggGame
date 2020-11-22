@@ -27,7 +27,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
         }
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
         }
     }
 

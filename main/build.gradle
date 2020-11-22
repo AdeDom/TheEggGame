@@ -79,4 +79,8 @@ dependencies {
 
     // ktor client
     implementation "io.ktor:ktor-client-okhttp:1.4.1"
+
+    // animation
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

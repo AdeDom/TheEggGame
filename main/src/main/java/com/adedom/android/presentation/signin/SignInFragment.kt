@@ -30,7 +30,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             btSignIn.isEnabled = state.isValidUsername && state.isValidPassword
             btSignIn.isClickable = state.isClickable
 
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
         }
 
         viewModel.signInEvent.observe {

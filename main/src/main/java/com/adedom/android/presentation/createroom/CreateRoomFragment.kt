@@ -30,7 +30,7 @@ class CreateRoomFragment : BaseFragment(R.layout.fragment_create_room) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             tvRoomPeople.text = state.roomPeople.toString()
         }

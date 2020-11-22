@@ -22,7 +22,7 @@ class ChangeImageFragment : BaseFragment(R.layout.fragment_change_image) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             btChangeImageProfile.isEnabled = state.isImageUri
         }

@@ -22,7 +22,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         (activity as AppCompatActivity?)?.supportActionBar?.hide()
 
         viewModel.state.observeForever { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
         }
 
         viewModel.playerInfo.observe(viewLifecycleOwner, { playerInfo ->

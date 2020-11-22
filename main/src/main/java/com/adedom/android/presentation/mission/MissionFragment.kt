@@ -30,7 +30,7 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             tvMissionDelivery.isClickable = state.isMissionDelivery
             tvMissionSingle.isClickable = state.isMissionSingle

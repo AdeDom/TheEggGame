@@ -21,7 +21,7 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
         }
 
         viewModel.changePasswordEvent.observe { response ->

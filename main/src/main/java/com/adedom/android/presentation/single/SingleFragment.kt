@@ -85,7 +85,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         }
 
         viewModel.state.observe { state ->
-            progressBar.setVisibility(state.loading)
+            animationViewLoading.setVisibility(state.loading)
 
             tvPeopleAll.text = state.peopleAll.toString()
 
