@@ -34,6 +34,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
     private val viewModel by viewModel<SingleViewModel>()
     private var mMarkerMyLocation: Marker? = null
     private val mMarkerSingleItems by lazy { mutableListOf<Marker>() }
+    private val mMarkerSinglePlayers by lazy { mutableListOf<Marker>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,10 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
             locationProviderClient
                 .locationFlow()
-                .onEach { viewModel.setStateLatLng(TegLatLng(it.latitude, it.longitude)) }
+                .onEach {
+                    viewModel.setStateLatLng(TegLatLng(it.latitude, it.longitude))
+                    viewModel.outgoingPlaygroundSinglePlayer(TegLatLng(it.latitude, it.longitude))
+                }
                 .catch { rootLayout.snackbar(it.message) }
                 .launchIn(this)
         }
@@ -99,7 +103,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             }
 
             if (state.players.isNotEmpty()) {
-                context.toast(state.players.toString())
+                setMarkerPlayers(state)
             }
         }
 
@@ -193,6 +197,27 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
                 }
 
                 mMarkerSingleItems.add(googleMap.addMarker(markerOptions))
+            }
+        }
+    }
+
+    private fun setMarkerPlayers(state: SingleViewState) {
+        launch {
+            val googleMap = mapView.getGoogleMap()
+
+            for (marker in mMarkerSinglePlayers) {
+                marker.remove()
+            }
+            mMarkerSinglePlayers.clear()
+
+            state.players.forEach {
+                val markerOptions = MarkerOptions().apply {
+                    position(LatLng(it.latitude!!, it.longitude!!))
+                    icon(BitmapDescriptorFactory.defaultMarker())
+                    title(it.name)
+                    snippet(getString(R.string.level, it.level))
+                }
+                mMarkerSinglePlayers.add(googleMap.addMarker(markerOptions))
             }
         }
     }

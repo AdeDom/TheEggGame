@@ -8,10 +8,10 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.response.BaseResponse
+import com.adedom.teg.models.websocket.PlaygroundSinglePlayerOutgoing
 import com.adedom.teg.models.websocket.SingleItemOutgoing
 import com.adedom.teg.presentation.usercase.SingleItemAroundSocket
 import com.adedom.teg.presentation.usercase.SingleUseCase
-import com.adedom.teg.util.PlaygroundSinglePlayerOutgoing
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.sin

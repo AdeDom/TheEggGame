@@ -5,6 +5,7 @@ import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.*
 import com.adedom.teg.domain.Resource
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import okhttp3.MultipartBody
@@ -102,6 +103,8 @@ interface DefaultTegRepository {
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
+
+    suspend fun outgoingPlaygroundSinglePlayer(latLng: TegLatLng)
 
     suspend fun outgoingPlaygroundRoom()
 

@@ -5,6 +5,7 @@ import com.adedom.teg.data.db.AppDatabase
 import com.adedom.teg.data.db.entities.BackpackEntity
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.network.websocket.*
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import io.ktor.util.*
@@ -198,6 +199,10 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingSingleSuccessAnnouncement() {
         return provider.getWebSocketDataSource().outgoingSingleSuccessAnnouncement()
+    }
+
+    override suspend fun outgoingPlaygroundSinglePlayer(latLng: TegLatLng) {
+        return provider.getWebSocketDataSource().outgoingPlaygroundSinglePlayer(latLng)
     }
 
     override suspend fun outgoingPlaygroundRoom() {

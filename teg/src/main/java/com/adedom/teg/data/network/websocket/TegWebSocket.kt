@@ -1,11 +1,12 @@
 package com.adedom.teg.data.network.websocket
 
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.response.RoomsResponse
 import com.adedom.teg.models.websocket.*
 import com.adedom.teg.sharedpreference.service.SessionManagerService
-import com.adedom.teg.util.PlaygroundSinglePlayerOutgoing
 import com.adedom.teg.util.TegConstant
 import com.adedom.teg.util.fromJson
+import com.adedom.teg.util.toJson
 import io.ktor.client.*
 import io.ktor.client.features.websocket.*
 import io.ktor.client.request.*
@@ -36,6 +37,7 @@ class TegWebSocket(
 
     private var singleItem: WebSocketSession? = null
     private var singleSuccessAnnouncement: WebSocketSession? = null
+    private var playgroundSinglePlayer: WebSocketSession? = null
     private var playgroundRoom: WebSocketSession? = null
     private var roomInfoPlayers: WebSocketSession? = null
     private var roomInfoTegMulti: WebSocketSession? = null
@@ -114,13 +116,18 @@ class TegWebSocket(
 
     suspend fun incomingPlaygroundSinglePlayer(socket: PlaygroundSinglePlayerSocket) {
         wss("/websocket/single/playground-single-player") {
-            incoming.consumeAsFlow()
-                .onEach { frame ->
-                    val response = frame.fromJson<PlaygroundSinglePlayerOutgoing>()
-                    socket.invoke(response)
-                }
-                .catch { }
-                .collect()
+            playgroundSinglePlayer = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<PlaygroundSinglePlayerOutgoing>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                playgroundSinglePlayer = null
+            }
         }
     }
 
@@ -199,6 +206,10 @@ class TegWebSocket(
 
     suspend fun outgoingSingleSuccessAnnouncement() {
         singleSuccessAnnouncement?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingPlaygroundSinglePlayer(latLng: TegLatLng) {
+        playgroundSinglePlayer?.outgoing?.send(latLng.toJson())
     }
 
     suspend fun outgoingPlaygroundRoom() {

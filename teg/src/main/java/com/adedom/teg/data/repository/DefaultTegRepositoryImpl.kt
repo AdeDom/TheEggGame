@@ -8,6 +8,7 @@ import com.adedom.teg.data.network.source.TegDataSource
 import com.adedom.teg.data.network.websocket.*
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.request.*
 import com.adedom.teg.models.response.*
 import okhttp3.MultipartBody
@@ -201,6 +202,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun outgoingSingleSuccessAnnouncement() {
         return dataSource.outgoingSingleSuccessAnnouncement()
+    }
+
+    override suspend fun outgoingPlaygroundSinglePlayer(latLng: TegLatLng) {
+        return dataSource.outgoingPlaygroundSinglePlayer(latLng)
     }
 
     override suspend fun outgoingPlaygroundRoom() {

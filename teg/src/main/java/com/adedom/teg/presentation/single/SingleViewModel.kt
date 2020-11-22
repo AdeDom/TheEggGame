@@ -34,14 +34,9 @@ class SingleViewModel(
 
     fun incomingSingleItemAround(latLng: TegLatLng) {
         launch {
-            setState { copy(loading = true) }
-
             useCase.incomingSingleItem(latLng) { singleItemAroundOutgoing ->
                 setState {
-                    copy(
-                        singleItems = singleItemAroundOutgoing.singleItems,
-                        loading = false
-                    )
+                    copy(singleItems = singleItemAroundOutgoing.singleItems)
                 }
             }
             incomingSingleItemAround(latLng)
@@ -81,6 +76,12 @@ class SingleViewModel(
                     state.value?.singleItems
                 )
             )
+        }
+    }
+
+    fun outgoingPlaygroundSinglePlayer(latLng: TegLatLng) {
+        launch {
+            repository.outgoingPlaygroundSinglePlayer(latLng)
         }
     }
 
