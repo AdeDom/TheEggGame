@@ -41,24 +41,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-            android:id="@+id/ivTeamA"
-            android:layout_width="@dimen/imagePlayer"
-            android:layout_height="@dimen/imagePlayer"
+    <androidx.cardview.widget.CardView
+            android:id="@+id/layoutTeamA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/large"
-            android:src="@drawable/shape_team_a"
-            app:layout_constraintBottom_toBottomOf="@+id/ivTeamB"
-            app:layout_constraintEnd_toStartOf="@+id/ivTeamB"
-            app:layout_constraintTop_toTopOf="@+id/ivTeamB" />
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutTeamB"
+            app:layout_constraintEnd_toStartOf="@+id/layoutTeamB"
+            app:layout_constraintTop_toTopOf="@+id/layoutTeamB">
 
-    <ImageView
-            android:id="@+id/ivTeamB"
-            android:layout_width="@dimen/imagePlayer"
-            android:layout_height="@dimen/imagePlayer"
+        <ImageView
+                android:id="@+id/ivTeamA"
+                android:layout_width="@dimen/imagePlayer"
+                android:layout_height="@dimen/imagePlayer"
+                android:src="@drawable/shape_team_a" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/layoutTeamB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/large"
-            android:src="@drawable/shape_team_b"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+                android:id="@+id/ivTeamB"
+                android:layout_width="@dimen/imagePlayer"
+                android:layout_height="@dimen/imagePlayer"
+                android:src="@drawable/shape_team_b" />
+
+    </androidx.cardview.widget.CardView>
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationViewLoading"

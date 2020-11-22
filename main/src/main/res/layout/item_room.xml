@@ -1,66 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_room"
-        android:padding="16dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="16dp">
 
-    <ImageView
-            android:id="@+id/ivRoomNo"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_room_no"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/tvRoomNo"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:text="10"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/ivRoomNo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/shape_bg_room"
+            android:padding="16dp">
 
-    <ImageView
-            android:id="@+id/ivRoomName"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_room_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivRoomNo" />
+        <ImageView
+                android:id="@+id/ivRoomNo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_room_no"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-            android:id="@+id/tvRoomName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:text="AdeDon"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/ivRoomName"
-            app:layout_constraintTop_toBottomOf="@+id/tvRoomNo" />
+        <TextView
+                android:id="@+id/tvRoomNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:text="10"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toEndOf="@+id/ivRoomNo"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-            android:id="@+id/ivRoomPeople"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_room_people"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivRoomName" />
+        <ImageView
+                android:id="@+id/ivRoomName"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_room_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivRoomNo" />
 
-    <TextView
-            android:id="@+id/tvRoomPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:text="5"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/ivRoomPeople"
-            app:layout_constraintTop_toBottomOf="@+id/tvRoomName" />
+        <TextView
+                android:id="@+id/tvRoomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:text="AdeDon"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toEndOf="@+id/ivRoomName"
+                app:layout_constraintTop_toBottomOf="@+id/tvRoomNo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+                android:id="@+id/ivRoomPeople"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_room_people"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivRoomName" />
+
+        <TextView
+                android:id="@+id/tvRoomPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:text="5"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toEndOf="@+id/ivRoomPeople"
+                app:layout_constraintTop_toBottomOf="@+id/tvRoomName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
