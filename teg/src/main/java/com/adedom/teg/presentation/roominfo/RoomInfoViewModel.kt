@@ -12,10 +12,7 @@ import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @FlowPreview
@@ -139,9 +136,8 @@ class RoomInfoViewModel(
     init {
         channel
             .asFlow()
+            .filter { state.value?.isClickable == true }
             .onEach { event ->
-                if (state.value?.isClickable != true) return@onEach
-
                 when (event) {
                     is RoomInfoViewEvent.GoTeg -> callChangeGoTeg()
                     is RoomInfoViewEvent.TeamA -> callChangeTeam(TegConstant.TEAM_A)
