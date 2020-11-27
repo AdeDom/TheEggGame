@@ -127,6 +127,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
 
                 val bitmap = context?.setImageCircle(playerInfo.image, playerInfo.gender)
                 markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                mMarkerMyLocation?.remove()
                 mMarkerMyLocation = mapView.getGoogleMap().addMarker(markerOptions)
             }
         })
