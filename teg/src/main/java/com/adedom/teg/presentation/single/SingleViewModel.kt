@@ -1,6 +1,5 @@
 package com.adedom.teg.presentation.single
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.adedom.teg.base.BaseViewModel
@@ -31,6 +30,10 @@ class SingleViewModel(
     private val _isBackpackItemEvent = MutableLiveData<Boolean>()
     val isBackpackItemEvent: LiveData<Boolean>
         get() = _isBackpackItemEvent
+
+    private val _markerMyLocation = MutableLiveData<TegLatLng>()
+    val markerMyLocation: LiveData<TegLatLng>
+        get() = _markerMyLocation
 
     fun incomingSinglePeopleAll() {
         launch {
@@ -76,6 +79,10 @@ class SingleViewModel(
         }
     }
 
+    fun setMarkerMyLocation(tegLatLng: TegLatLng) {
+        _markerMyLocation.value = tegLatLng
+    }
+
     fun setStateLatLng(latLng: TegLatLng) {
         setState {
             copy(
@@ -92,10 +99,6 @@ class SingleViewModel(
         launch {
             repository.outgoingPlaygroundSinglePlayer(latLng)
         }
-    }
-
-    fun setStateBitmap(bitmap: Bitmap?) {
-        setState { copy(bitmap = bitmap) }
     }
 
     fun callFetchItemCollection() {
@@ -132,14 +135,6 @@ class SingleViewModel(
                 is Resource.Error -> setError(resource)
             }
         }
-    }
-
-    fun setStateName(name: String?) {
-        setState { copy(name = name) }
-    }
-
-    fun setStateLevel(level: Int?) {
-        setState { copy(level = level) }
     }
 
     fun setStateBackpackItem() {

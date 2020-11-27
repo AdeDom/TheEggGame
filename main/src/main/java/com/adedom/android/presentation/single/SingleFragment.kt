@@ -1,10 +1,13 @@
 package com.adedom.android.presentation.single
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
@@ -73,13 +76,11 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             val tegLatLng = TegLatLng(location.latitude, location.longitude)
             viewModel.incomingSingleItemAround(tegLatLng)
             viewModel.incomingPlaygroundSinglePlayer(tegLatLng)
+            viewModel.setMarkerMyLocation(tegLatLng)
 
             locationProviderClient
                 .locationFlow()
-                .onEach {
-                    viewModel.setStateLatLng(TegLatLng(it.latitude, it.longitude))
-                    viewModel.outgoingPlaygroundSinglePlayer(TegLatLng(it.latitude, it.longitude))
-                }
+                .onEach { onLocationChange(it) }
                 .catch { rootLayout.snackbar(it.message) }
                 .launchIn(this)
         }
@@ -88,9 +89,6 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             animationViewLoading.setVisibility(state.loading)
 
             tvPeopleAll.text = state.peopleAll.toString()
-
-            // marker
-            setMarkerMyLocation(state)
 
             // marker item
             setMarkerItem(state)
@@ -108,17 +106,28 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             }
         }
 
+        viewModel.markerMyLocation.observe {
+            mMarkerMyLocation?.position = LatLng(it.latitude, it.longitude)
+        }
+
         viewModel.error.observeError()
 
         viewModel.getDbPlayerInfoLiveData.observe(viewLifecycleOwner, { playerInfo ->
             if (playerInfo == null) return@observe
 
-            viewModel.setStateName(playerInfo.name)
-            viewModel.setStateLevel(playerInfo.level)
-
             launch {
+                val location = locationProviderClient.awaitLastLocation()
+                val latLng = LatLng(location.latitude, location.longitude)
+
+                val markerOptions = MarkerOptions().apply {
+                    position(latLng)
+                    title(playerInfo.name)
+                    snippet(getString(R.string.level, playerInfo.level))
+                }
+
                 val bitmap = context?.setImageCircle(playerInfo.image, playerInfo.gender)
-                viewModel.setStateBitmap(bitmap)
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                mMarkerMyLocation = mapView.getGoogleMap().addMarker(markerOptions)
             }
         })
 
@@ -159,6 +168,25 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
         viewShadow.setOnClickListener { viewModel.setStateBackpackItem() }
     }
 
+    private fun onLocationChange(location: Location) {
+        viewModel.outgoingPlaygroundSinglePlayer(TegLatLng(location.latitude, location.longitude))
+        viewModel.setStateLatLng(TegLatLng(location.latitude, location.longitude))
+
+        ValueAnimator.ofInt(0, 1).apply {
+            duration = 3_000
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                val fraction = it.animatedFraction
+                val oldLatLng = viewModel.markerMyLocation.value ?: TegLatLng()
+                val lat = fraction * location.latitude + (1 - fraction) * oldLatLng.latitude
+                val lng = fraction * location.longitude + (1 - fraction) * oldLatLng.longitude
+
+                viewModel.setMarkerMyLocation(TegLatLng(lat, lng))
+            }
+            start()
+        }
+    }
+
     private fun singleSuccessAnnouncement(state: SingleViewState) {
         val image: Int = when (state.singleSuccessAnnouncement?.itemId) {
             TegConstant.SINGLE_ITEM_ONE -> R.drawable.ic_egg_i
@@ -173,27 +201,6 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             state.singleSuccessAnnouncement?.qty,
             state.singleSuccessAnnouncement?.name
         )
-    }
-
-    private fun setMarkerMyLocation(state: SingleViewState) {
-        launch {
-            val googleMap = mapView.getGoogleMap()
-
-            val latLng = LatLng(state.latLng.latitude, state.latLng.longitude)
-
-            val markerOptions = MarkerOptions().apply {
-                position(latLng)
-                title(state.name)
-                snippet(getString(R.string.level, state.level))
-            }
-
-            state.bitmap?.let {
-                mMarkerMyLocation?.remove()
-
-                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(state.bitmap))
-                mMarkerMyLocation = googleMap.addMarker(markerOptions)
-            }
-        }
     }
 
     private fun setMarkerItem(state: SingleViewState) {
