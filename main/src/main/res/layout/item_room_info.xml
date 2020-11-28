@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_king"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/layoutImageProfile"
-                app:layout_constraintEnd_toEndOf="@+id/layoutImageProfile" />
+                app:layout_constraintStart_toEndOf="@+id/layoutImageProfile" />
 
         <TextView
                 android:id="@+id/tvName"

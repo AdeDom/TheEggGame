@@ -125,7 +125,7 @@
                     android:id="@+id/ivRank"
                     android:layout_width="@dimen/imagePlayer"
                     android:layout_height="@dimen/imagePlayer"
-                    android:src="@drawable/ic_rank" />
+                    android:src="@drawable/ic_rank_main" />
 
             <TextView
                     style="@style/TextView"
