@@ -35,7 +35,7 @@ class ImageProfileFragment : BaseFragment(R.layout.fragment_image_profile) {
             if (response.success) {
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
             } else {
-                rootLayout.snackbar(response.message)
+                requireView().snackbar(response.message)
             }
         }
 

@@ -81,7 +81,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
             locationProviderClient
                 .locationFlow()
                 .onEach { onLocationChange(it) }
-                .catch { rootLayout.snackbar(it.message) }
+                .catch { requireView().snackbar(it.message) }
                 .launchIn(this)
         }
 

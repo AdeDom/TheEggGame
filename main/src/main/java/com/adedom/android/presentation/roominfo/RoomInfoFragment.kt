@@ -79,7 +79,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
 
         viewModel.goTegMultiEvent.observe { response ->
             if (!response.success) {
-                rootLayout.snackbar(response.message)
+                requireView().snackbar(response.message)
             }
         }
 

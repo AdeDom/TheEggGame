@@ -6,7 +6,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
@@ -27,7 +26,7 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
         }
 
         viewModel.changePasswordEvent.observe { response ->
-            rootLayout.snackbar(response.message)
+            requireView().snackbar(response.message)
             if (response.success) {
                 activity?.finish()
                 findNavController().navigate(R.id.action_global_authActivity)
@@ -45,8 +44,6 @@ class ChangePasswordFragment : BaseFragment(R.layout.fragment_change_password) {
         btChangePassword.setOnClickListener {
             viewModel.callChangePassword()
         }
-
-        rootLayout.setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
 }

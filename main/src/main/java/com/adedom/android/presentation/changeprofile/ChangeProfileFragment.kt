@@ -7,7 +7,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
@@ -46,7 +45,7 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
         })
 
         viewModel.changeProfileEvent.observe { response ->
-            rootLayout.snackbar(response.message)
+            requireView().snackbar(response.message)
             if (response.success) {
                 findNavController().popBackStack()
             }
@@ -84,8 +83,6 @@ class ChangeProfileFragment : BaseFragment(R.layout.fragment_change_profile) {
         btChangeProfile.setOnClickListener {
             viewModel.callChangeProfile()
         }
-
-        rootLayout.setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
 }

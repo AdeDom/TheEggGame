@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_multi.*
 import kotlinx.android.synthetic.main.fragment_multi.animationViewLoading
 import kotlinx.android.synthetic.main.fragment_multi.mapView
-import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -66,7 +65,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
             locationProviderClient
                 .locationFlow()
                 .onEach { onLocationChange(it) }
-                .catch { rootLayout.snackbar(it.message) }
+                .catch { requireView().snackbar(it.message) }
                 .launchIn(this)
         }
 

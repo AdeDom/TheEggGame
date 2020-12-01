@@ -13,6 +13,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
+import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.toast
 import com.adedom.teg.domain.Resource
 import kotlinx.coroutines.*
@@ -48,6 +49,12 @@ abstract class BaseFragment(@LayoutRes private val layout: Int) : Fragment(), Co
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity?)?.supportActionBar?.show()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        requireView().setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
     protected inline fun <reified T> LiveData<T>.observe(crossinline onNext: (T) -> Unit) {
