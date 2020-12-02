@@ -11,8 +11,6 @@ import androidx.fragment.app.DialogFragment
 import com.adedom.library.extension.onAnimationEnd
 import com.adedom.library.extension.toast
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.GameActivity
-import com.adedom.theegggame.util.GameActivity.Companion.sContext
 
 class BonusGameDialog : DialogFragment() {
 
@@ -45,8 +43,10 @@ class BonusGameDialog : DialogFragment() {
                 if (onClick >= 3) {
                     //TODO insert bonus
 
-                    sContext.toast(sContext.resources.getString(R.string.experience_point, bonus))
-                    GameActivity.sActivity.finish()
+                    context?.toast(
+                        context?.resources?.getString(R.string.experience_point, bonus).orEmpty()
+                    )
+                    activity?.finish()
                 }
             }
             ivWheel.startAnimation(rotate)

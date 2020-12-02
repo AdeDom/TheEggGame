@@ -1,4 +1,4 @@
-package com.adedom.theegggame.util.extension
+package com.adedom.theegggame.util
 
 import android.content.Context
 import com.adedom.library.extension.readPrefFile
@@ -7,7 +7,6 @@ import com.adedom.library.util.playMusic
 import com.adedom.library.util.playSound
 import com.adedom.library.util.stopMusic
 import com.adedom.theegggame.R
-import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.SOUND_MUSIC
 import com.adedom.theegggame.util.SOUND_MUSIC_OFF
 import com.adedom.theegggame.util.SOUND_MUSIC_ON
@@ -22,7 +21,7 @@ fun Context.playSoundKeep() {
 
 fun Context.playMusicGame() {
     if (this.readPrefFile(SOUND_MUSIC) == SOUND_MUSIC_ON)
-        playMusic(GameActivity.sContext, R.raw.music)
+        playMusic(applicationContext, R.raw.music)
 }
 
 fun Context.setSoundMusic(on: (() -> Unit)? = null, off: (() -> Unit)? = null) {
@@ -36,5 +35,3 @@ fun Context.setSoundMusic(on: (() -> Unit)? = null, off: (() -> Unit)? = null) {
         off?.invoke()
     }
 }
-
-
