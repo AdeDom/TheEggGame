@@ -6,6 +6,8 @@ import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.response.FetchMultiPlayerResponse
+import com.adedom.teg.models.response.MultiItemResponse
+import com.adedom.teg.models.response.ScoreResponse
 import com.adedom.teg.presentation.multi.TegMultiPlayerListener
 import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.delay
@@ -77,6 +79,22 @@ class MultiUseCaseImpl(
         }
 
         return resource
+    }
+
+    override suspend fun callFetchMultiScore(): Resource<ScoreResponse> {
+        return repository.callFetchMultiScore()
+    }
+
+    override suspend fun callAddMultiScore(): Resource<BaseResponse> {
+        return repository.callAddMultiScore()
+    }
+
+    override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {
+        return repository.callFetchMultiItem()
+    }
+
+    override suspend fun callAddMultiItem(): Resource<BaseResponse> {
+        return repository.callAddMultiItem()
     }
 
 }

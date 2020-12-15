@@ -7,6 +7,8 @@ import android.location.Location
 import android.os.Bundle
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
@@ -20,8 +22,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_multi.*
-import kotlinx.android.synthetic.main.fragment_multi.animationViewLoading
-import kotlinx.android.synthetic.main.fragment_multi.mapView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -104,6 +104,24 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
         })
 
         viewModel.error.observeError()
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(requireActivity()).apply {
+                        setTitle(R.string.dialog_multi_title)
+                        setMessage(R.string.dialog_multi_message)
+                        setPositiveButton(android.R.string.cancel) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        setNegativeButton(android.R.string.ok) { _, _ ->
+                            findNavController().popBackStack()
+                        }
+                        show()
+                    }
+                }
+            })
     }
 
     private fun onLocationChange(location: Location) {

@@ -110,5 +110,7 @@
     <string name="player_profile_birth_date">Birth date : %1$s</string>
     <string name="dialog_room_info_title">Leave the room</string>
     <string name="dialog_room_info_message">Do you really want to return to the main room?</string>
+    <string name="dialog_multi_title">Exit multi game</string>
+    <string name="dialog_multi_message">Do you really want to return to the room?</string>
 
 </resources>

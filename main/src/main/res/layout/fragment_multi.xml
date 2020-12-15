@@ -11,14 +11,46 @@
 
     <TextView
             android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
             android:layout_marginTop="@dimen/large"
-            android:textColor="@android:color/black"
+            android:background="@drawable/shape_bg_gray"
+            android:gravity="center"
+            android:padding="@dimen/large"
+            android:text="15:00"
+            android:textColor="#F44336"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/tvScoreRed"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/medium"
+            android:background="@drawable/shape_team_a"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvScoreBlue"
+            app:layout_constraintStart_toStartOf="@+id/tvTimer"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+
+    <TextView
+            android:id="@+id/tvScoreBlue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="@dimen/medium"
+            android:layout_marginTop="@dimen/medium"
+            android:background="@drawable/shape_team_b"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvTimer"
+            app:layout_constraintStart_toEndOf="@+id/tvScoreRed"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationViewLoading"
