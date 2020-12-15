@@ -1,6 +1,7 @@
 package com.adedom.teg.data.network.websocket
 
 import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.response.MultiItemResponse
 import com.adedom.teg.models.response.RoomsResponse
 import com.adedom.teg.models.websocket.*
 import com.adedom.teg.sharedpreference.service.SessionManagerService
@@ -27,6 +28,7 @@ typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
 typealias RoomInfoPlayersSocket = (RoomInfoPlayersOutgoing) -> Unit
 typealias RoomInfoTegMultiSocket = (RoomInfoTegMultiOutgoing) -> Unit
+typealias MultiPlayerItemsSocket = (MultiItemResponse) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -41,6 +43,7 @@ class TegWebSocket(
     private var playgroundRoom: WebSocketSession? = null
     private var roomInfoPlayers: WebSocketSession? = null
     private var roomInfoTegMulti: WebSocketSession? = null
+    private var multiPlayerItems: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -200,6 +203,23 @@ class TegWebSocket(
         }
     }
 
+    suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket) {
+        wss("/websocket/multi/multi-player-items") {
+            multiPlayerItems = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<MultiItemResponse>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                multiPlayerItems = null
+            }
+        }
+    }
+
     suspend fun outgoingSingleItem() {
         singleItem?.outgoing?.send(Frame.Text(""))
     }
@@ -222,6 +242,10 @@ class TegWebSocket(
 
     suspend fun outgoingRoomInfoTegMulti() {
         roomInfoTegMulti?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingMultiPlayerItems() {
+        multiPlayerItems?.outgoing?.send(Frame.Text(""))
     }
 
 }

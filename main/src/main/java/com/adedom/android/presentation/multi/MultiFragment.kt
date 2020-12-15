@@ -81,6 +81,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
 
         viewModel.attachFirstTime.observe {
             viewModel.callTimerTegMultiPlayer()
+            viewModel.incomingMultiPlayerItems()
             if (args.isRoleHead) {
                 viewModel.callAddMultiItem()
             }

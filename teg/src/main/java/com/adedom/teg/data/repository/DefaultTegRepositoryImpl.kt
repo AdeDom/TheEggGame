@@ -212,6 +212,10 @@ class DefaultTegRepositoryImpl(
         return dataSource.incomingRoomInfoTegMulti(socket)
     }
 
+    override suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket) {
+        return dataSource.incomingMultiPlayerItems(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return dataSource.outgoingSingleItem()
     }
@@ -234,6 +238,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun outgoingRoomInfoTegMulti() {
         return dataSource.outgoingRoomInfoTegMulti()
+    }
+
+    override suspend fun outgoingMultiPlayerItems() {
+        return dataSource.outgoingMultiPlayerItems()
     }
 
 }

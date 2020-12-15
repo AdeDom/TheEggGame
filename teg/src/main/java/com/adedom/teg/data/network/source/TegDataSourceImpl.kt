@@ -209,6 +209,10 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingRoomInfoTegMulti(socket)
     }
 
+    override suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket) {
+        return provider.getWebSocketDataSource().incomingMultiPlayerItems(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return provider.getWebSocketDataSource().outgoingSingleItem()
     }
@@ -231,6 +235,10 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingRoomInfoTegMulti() {
         return provider.getWebSocketDataSource().outgoingRoomInfoTegMulti()
+    }
+
+    override suspend fun outgoingMultiPlayerItems() {
+        return provider.getWebSocketDataSource().outgoingMultiPlayerItems()
     }
 
 }

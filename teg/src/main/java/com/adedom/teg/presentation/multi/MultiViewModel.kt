@@ -63,4 +63,20 @@ class MultiViewModel(
         }
     }
 
+    fun incomingMultiPlayerItems() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            repository.incomingMultiPlayerItems { multiItemResponse ->
+                setState {
+                    copy(
+                        isLoading = false,
+                        multiItems = multiItemResponse.multiItems,
+                    )
+                }
+            }
+            incomingMultiPlayerItems()
+        }
+    }
+
 }

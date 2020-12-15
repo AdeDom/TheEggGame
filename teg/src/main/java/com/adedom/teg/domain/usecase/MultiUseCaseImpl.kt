@@ -94,7 +94,15 @@ class MultiUseCaseImpl(
     }
 
     override suspend fun callAddMultiItem(): Resource<BaseResponse> {
-        return repository.callAddMultiItem()
+        val response = repository.callAddMultiItem()
+
+        if (response is Resource.Success) {
+            if (response.data.success) {
+                repository.outgoingMultiPlayerItems()
+            }
+        }
+
+        return response
     }
 
 }
