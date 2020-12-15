@@ -81,6 +81,14 @@ interface TegDataSource {
 
     suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
 
+    suspend fun callFetchMultiScore(): ScoreResponse
+
+    suspend fun callAddMultiScore(): BaseResponse
+
+    suspend fun callFetchMultiItem(): MultiItemResponse
+
+    suspend fun callAddMultiItem(): BaseResponse
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)

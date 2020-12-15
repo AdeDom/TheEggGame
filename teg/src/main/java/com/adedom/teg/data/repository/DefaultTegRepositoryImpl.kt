@@ -160,6 +160,22 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callFetchMultiPlayer() }
     }
 
+    override suspend fun callFetchMultiScore(): Resource<ScoreResponse> {
+        return safeApiCall { dataSource.callFetchMultiScore() }
+    }
+
+    override suspend fun callAddMultiScore(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddMultiScore() }
+    }
+
+    override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {
+        return safeApiCall { dataSource.callFetchMultiItem() }
+    }
+
+    override suspend fun callAddMultiItem(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddMultiItem() }
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return dataSource.incomingSinglePeopleAll(socket)
     }

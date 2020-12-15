@@ -157,6 +157,22 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchMultiPlayer()
     }
 
+    override suspend fun callFetchMultiScore(): ScoreResponse {
+        return provider.getTegDataSource().callFetchMultiScore()
+    }
+
+    override suspend fun callAddMultiScore(): BaseResponse {
+        return provider.getTegDataSource().callAddMultiScore()
+    }
+
+    override suspend fun callFetchMultiItem(): MultiItemResponse {
+        return provider.getTegDataSource().callFetchMultiItem()
+    }
+
+    override suspend fun callAddMultiItem(): BaseResponse {
+        return provider.getTegDataSource().callAddMultiItem()
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingSinglePeopleAll(socket)
     }

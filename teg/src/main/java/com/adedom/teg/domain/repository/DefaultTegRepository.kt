@@ -82,6 +82,14 @@ interface DefaultTegRepository {
 
     suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse>
 
+    suspend fun callFetchMultiScore(): Resource<ScoreResponse>
+
+    suspend fun callAddMultiScore(): Resource<BaseResponse>
+
+    suspend fun callFetchMultiItem(): Resource<MultiItemResponse>
+
+    suspend fun callAddMultiItem(): Resource<BaseResponse>
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)

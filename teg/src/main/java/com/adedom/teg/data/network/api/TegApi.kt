@@ -92,4 +92,16 @@ interface TegApi {
     @GET("api/multi/fetch-multi-player")
     suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
 
+    @GET("api/multi/fetch-multi-score")
+    suspend fun callFetchMultiScore(): ScoreResponse
+
+    @POST("api/multi/add-multi-score")
+    suspend fun callAddMultiScore(): BaseResponse
+
+    @GET("api/multi/fetch-multi-item")
+    suspend fun callFetchMultiItem(): MultiItemResponse
+
+    @POST("api/multi/add-multi-item")
+    suspend fun callAddMultiItem(): BaseResponse
+
 }
