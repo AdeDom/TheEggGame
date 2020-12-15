@@ -8,12 +8,15 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
 import com.adedom.android.util.*
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.presentation.multi.MultiViewModel
+import com.adedom.teg.presentation.multi.MultiViewState
 import com.adedom.teg.presentation.multi.TegMultiPlayerListener
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,6 +25,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_multi.*
+import kotlinx.android.synthetic.main.fragment_multi.animationViewLoading
+import kotlinx.android.synthetic.main.fragment_multi.mapView
+import kotlinx.android.synthetic.main.fragment_single.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -32,8 +38,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @ExperimentalCoroutinesApi
 class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListener {
 
+    private val args by navArgs<MultiFragmentArgs>()
     private val viewModel by viewModel<MultiViewModel>()
     private var mMarkerMyLocation: Marker? = null
+    private val mMarkerMultiItems by lazy { mutableListOf<Marker>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,10 +81,13 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
 
         viewModel.attachFirstTime.observe {
             viewModel.callTimerTegMultiPlayer()
+            if (args.isRoleHead) {
+                viewModel.callAddMultiItem()
+            }
         }
 
         viewModel.state.observe { state ->
-            animationViewLoading.setVisibility(state.loading)
+            renderUI(state)
         }
 
         viewModel.markerMyLocation.observe {
@@ -124,6 +135,35 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
             })
     }
 
+    private fun renderUI(state: MultiViewState) {
+        animationViewLoading.isVisible = state.isLoading
+
+        // marker item
+        setMarkerItem(state)
+    }
+
+    private fun setMarkerItem(state: MultiViewState) {
+        launch {
+            val googleMap = mapView.getGoogleMap()
+
+            for (marker in mMarkerMultiItems) {
+                marker.remove()
+            }
+            mMarkerMultiItems.clear()
+
+            state.multiItems.forEach {
+                val bmp = context?.convertLayoutMarkerItem(R.drawable.the_egg_game)
+
+                val markerOptions = MarkerOptions().apply {
+                    position(LatLng(it.latitude!!, it.longitude!!))
+                    icon(BitmapDescriptorFactory.fromBitmap(bmp))
+                }
+
+                mMarkerMultiItems.add(googleMap.addMarker(markerOptions))
+            }
+        }
+    }
+
     private fun onLocationChange(location: Location) {
         ValueAnimator.ofInt(0, 1).apply {
             duration = 3_000
@@ -153,6 +193,12 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
             }
             show()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.callFetchMultiItem()
     }
 
     override fun onResume() {

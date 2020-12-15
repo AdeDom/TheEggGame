@@ -116,7 +116,10 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
 
     override fun roomInfoTegMultiResponse(roomInfoTegMultiOutgoing: RoomInfoTegMultiOutgoing) {
         if (roomInfoTegMultiOutgoing.success) {
-            findNavController().navigate(R.id.action_roomInfoFragment_to_multiFragment)
+            val navDirections = RoomInfoFragmentDirections.actionRoomInfoFragmentToMultiFragment(
+                viewModel.state.value?.isRoleHead ?: false
+            )
+            findNavController().navigate(navDirections)
         }
     }
 

@@ -38,4 +38,29 @@ class MultiViewModel(
         _markerMyLocation.value = tegLatLng
     }
 
+    fun callFetchMultiItem() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            when (val resource = useCase.callFetchMultiItem()) {
+                is Resource.Success -> setState { copy(multiItems = resource.data.multiItems) }
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(isLoading = false) }
+        }
+    }
+
+    fun callAddMultiItem() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            when (val resource = useCase.callAddMultiItem()) {
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(isLoading = false) }
+        }
+    }
+
 }
