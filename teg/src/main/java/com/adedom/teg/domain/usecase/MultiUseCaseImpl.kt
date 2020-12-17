@@ -94,6 +94,7 @@ class MultiUseCaseImpl(
         if (response is Resource.Success) {
             if (response.data.success) {
                 repository.outgoingMultiPlayerItems()
+                repository.outgoingMultiPlayerScore()
             }
         }
 

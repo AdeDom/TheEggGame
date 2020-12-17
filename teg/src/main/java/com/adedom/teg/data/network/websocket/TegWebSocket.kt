@@ -3,6 +3,7 @@ package com.adedom.teg.data.network.websocket
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.response.MultiItemResponse
 import com.adedom.teg.models.response.RoomsResponse
+import com.adedom.teg.models.response.ScoreResponse
 import com.adedom.teg.models.websocket.*
 import com.adedom.teg.sharedpreference.service.SessionManagerService
 import com.adedom.teg.util.TegConstant
@@ -29,6 +30,7 @@ typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
 typealias RoomInfoPlayersSocket = (RoomInfoPlayersOutgoing) -> Unit
 typealias RoomInfoTegMultiSocket = (RoomInfoTegMultiOutgoing) -> Unit
 typealias MultiPlayerItemsSocket = (MultiItemResponse) -> Unit
+typealias MultiPlayerScoreSocket = (ScoreResponse) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -44,6 +46,7 @@ class TegWebSocket(
     private var roomInfoPlayers: WebSocketSession? = null
     private var roomInfoTegMulti: WebSocketSession? = null
     private var multiPlayerItems: WebSocketSession? = null
+    private var multiPlayerScore: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -220,6 +223,23 @@ class TegWebSocket(
         }
     }
 
+    suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket) {
+        wss("/websocket/multi/multi-player-score") {
+            multiPlayerScore = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = frame.fromJson<ScoreResponse>()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                multiPlayerScore = null
+            }
+        }
+    }
+
     suspend fun outgoingSingleItem() {
         singleItem?.outgoing?.send(Frame.Text(""))
     }
@@ -246,6 +266,10 @@ class TegWebSocket(
 
     suspend fun outgoingMultiPlayerItems() {
         multiPlayerItems?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingMultiPlayerScore() {
+        multiPlayerScore?.outgoing?.send(Frame.Text(""))
     }
 
 }

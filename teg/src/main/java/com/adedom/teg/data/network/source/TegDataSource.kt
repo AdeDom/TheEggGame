@@ -109,6 +109,8 @@ interface TegDataSource {
 
     suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket)
 
+    suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket)
+
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
@@ -122,5 +124,7 @@ interface TegDataSource {
     suspend fun outgoingRoomInfoTegMulti()
 
     suspend fun outgoingMultiPlayerItems()
+
+    suspend fun outgoingMultiPlayerScore()
 
 }

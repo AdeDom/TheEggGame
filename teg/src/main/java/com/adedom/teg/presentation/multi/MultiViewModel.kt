@@ -75,6 +75,20 @@ class MultiViewModel(
         }
     }
 
+    fun incomingMultiPlayerScore() {
+        launch {
+            repository.incomingMultiPlayerScore { scoreResponse ->
+                setState {
+                    copy(
+                        scoreTeamA = scoreResponse.score?.teamA,
+                        scoreTeamB = scoreResponse.score?.teamB,
+                    )
+                }
+            }
+            incomingMultiPlayerScore()
+        }
+    }
+
     fun setStateLatLng(latLng: TegLatLng) {
         setState {
             copy(

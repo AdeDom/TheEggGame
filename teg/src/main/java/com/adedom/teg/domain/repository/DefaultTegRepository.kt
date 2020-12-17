@@ -110,6 +110,8 @@ interface DefaultTegRepository {
 
     suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket)
 
+    suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket)
+
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
@@ -123,5 +125,7 @@ interface DefaultTegRepository {
     suspend fun outgoingRoomInfoTegMulti()
 
     suspend fun outgoingMultiPlayerItems()
+
+    suspend fun outgoingMultiPlayerScore()
 
 }

@@ -216,6 +216,10 @@ class DefaultTegRepositoryImpl(
         return dataSource.incomingMultiPlayerItems(socket)
     }
 
+    override suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket) {
+        return dataSource.incomingMultiPlayerScore(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return dataSource.outgoingSingleItem()
     }
@@ -242,6 +246,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun outgoingMultiPlayerItems() {
         return dataSource.outgoingMultiPlayerItems()
+    }
+
+    override suspend fun outgoingMultiPlayerScore() {
+        return dataSource.outgoingMultiPlayerScore()
     }
 
 }
