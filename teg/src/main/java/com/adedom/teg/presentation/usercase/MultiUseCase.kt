@@ -1,6 +1,9 @@
 package com.adedom.teg.presentation.usercase
 
+import com.adedom.teg.data.models.MultiItemDb
 import com.adedom.teg.domain.Resource
+import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.request.AddMultiScoreRequest
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.response.FetchMultiPlayerResponse
@@ -16,10 +19,14 @@ interface MultiUseCase {
 
     suspend fun callFetchMultiScore(): Resource<ScoreResponse>
 
-    suspend fun callAddMultiScore(): Resource<BaseResponse>
+    suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse>
 
     suspend fun callFetchMultiItem(): Resource<MultiItemResponse>
 
     suspend fun callAddMultiItem(): Resource<BaseResponse>
+
+    fun isValidateDistanceBetween(latLng: TegLatLng, multiItems: List<MultiItemDb>?): Boolean
+
+    fun getMultiItemId(latLng: TegLatLng?, multiItems: List<MultiItemDb>?): Int?
 
 }

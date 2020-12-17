@@ -164,8 +164,8 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callFetchMultiScore() }
     }
 
-    override suspend fun callAddMultiScore(): Resource<BaseResponse> {
-        return safeApiCall { dataSource.callAddMultiScore() }
+    override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddMultiScore(addMultiScoreRequest) }
     }
 
     override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {

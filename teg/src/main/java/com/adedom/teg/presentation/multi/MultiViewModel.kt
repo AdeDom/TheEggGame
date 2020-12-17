@@ -7,6 +7,7 @@ import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.request.AddMultiScoreRequest
 import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -76,6 +77,32 @@ class MultiViewModel(
                 }
             }
             incomingMultiPlayerItems()
+        }
+    }
+
+    fun setStateLatLng(latLng: TegLatLng) {
+        setState {
+            copy(
+                latLng = latLng,
+                isValidateDistanceBetween = useCase.isValidateDistanceBetween(
+                    latLng,
+                    state.value?.multiItems
+                )
+            )
+        }
+    }
+
+    fun callAddMultiScore() {
+        launch {
+            setState { copy(isLoading = true, isValidateDistanceBetween = false) }
+
+            val singleId = useCase.getMultiItemId(state.value?.latLng, state.value?.multiItems)
+
+            when (val resource = useCase.callAddMultiScore(AddMultiScoreRequest(singleId))) {
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(isLoading = false) }
         }
     }
 

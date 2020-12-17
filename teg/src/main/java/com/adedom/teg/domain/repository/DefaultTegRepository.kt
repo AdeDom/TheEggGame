@@ -84,7 +84,7 @@ interface DefaultTegRepository {
 
     suspend fun callFetchMultiScore(): Resource<ScoreResponse>
 
-    suspend fun callAddMultiScore(): Resource<BaseResponse>
+    suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse>
 
     suspend fun callFetchMultiItem(): Resource<MultiItemResponse>
 

@@ -1,8 +1,11 @@
 package com.adedom.teg.domain.usecase
 
 import com.adedom.teg.data.db.entities.PlayerInfoEntity
+import com.adedom.teg.data.models.MultiItemDb
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
+import com.adedom.teg.models.TegLatLng
+import com.adedom.teg.models.request.AddMultiScoreRequest
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.response.FetchMultiPlayerResponse
@@ -13,6 +16,10 @@ import com.adedom.teg.presentation.usercase.MultiUseCase
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.asin
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 class MultiUseCaseImpl(
     private val repository: DefaultTegRepository,
@@ -85,8 +92,8 @@ class MultiUseCaseImpl(
         return repository.callFetchMultiScore()
     }
 
-    override suspend fun callAddMultiScore(): Resource<BaseResponse> {
-        return repository.callAddMultiScore()
+    override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse> {
+        return repository.callAddMultiScore(addMultiScoreRequest)
     }
 
     override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {
@@ -103,6 +110,51 @@ class MultiUseCaseImpl(
         }
 
         return response
+    }
+
+    override fun isValidateDistanceBetween(
+        latLng: TegLatLng,
+        multiItems: List<MultiItemDb>?
+    ): Boolean {
+        val count = multiItems
+            ?.filter { it.latitude != null && it.longitude != null }
+            ?.map { distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!)) }
+            ?.filter { it < 100 }
+            ?.count()
+
+        return count != 0
+    }
+
+    private fun distanceBetween(startP: TegLatLng, endP: TegLatLng): Double {
+        val lat1: Double = startP.latitude
+        val lat2: Double = endP.latitude
+        val lon1: Double = startP.longitude
+        val lon2: Double = endP.longitude
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2) * sin(dLon / 2)
+        val c = 2 * asin(sqrt(a))
+        return 6366000 * c
+    }
+
+    override fun getMultiItemId(latLng: TegLatLng?, multiItems: List<MultiItemDb>?): Int? {
+        return latLng?.let {
+            multiItems
+                ?.asSequence()
+                ?.filter { it.latitude != null && it.longitude != null }
+                ?.map {
+                    Pair(
+                        it,
+                        distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))
+                    )
+                }
+                ?.filter { it.second < 100 }
+                ?.map { it.first.multiId }
+                ?.take(1)
+                ?.singleOrNull()
+        }
     }
 
 }

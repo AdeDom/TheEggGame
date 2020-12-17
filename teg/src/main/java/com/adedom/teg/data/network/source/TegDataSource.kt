@@ -83,7 +83,7 @@ interface TegDataSource {
 
     suspend fun callFetchMultiScore(): ScoreResponse
 
-    suspend fun callAddMultiScore(): BaseResponse
+    suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): BaseResponse
 
     suspend fun callFetchMultiItem(): MultiItemResponse
 

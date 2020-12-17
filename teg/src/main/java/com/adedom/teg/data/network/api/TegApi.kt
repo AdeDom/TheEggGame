@@ -96,7 +96,7 @@ interface TegApi {
     suspend fun callFetchMultiScore(): ScoreResponse
 
     @POST("api/multi/add-multi-score")
-    suspend fun callAddMultiScore(): BaseResponse
+    suspend fun callAddMultiScore(@Body addMultiScoreRequest: AddMultiScoreRequest): BaseResponse
 
     @GET("api/multi/fetch-multi-item")
     suspend fun callFetchMultiItem(): MultiItemResponse

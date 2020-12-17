@@ -141,6 +141,10 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
 
         // marker item
         setMarkerItem(state)
+
+        if (state.isValidateDistanceBetween) {
+            viewModel.callAddMultiScore()
+        }
     }
 
     private fun setMarkerItem(state: MultiViewState) {
@@ -166,6 +170,8 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
     }
 
     private fun onLocationChange(location: Location) {
+        viewModel.setStateLatLng(TegLatLng(location.latitude, location.longitude))
+
         ValueAnimator.ofInt(0, 1).apply {
             duration = 3_000
             interpolator = LinearInterpolator()

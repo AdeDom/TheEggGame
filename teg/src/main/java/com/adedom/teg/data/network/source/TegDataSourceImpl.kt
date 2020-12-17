@@ -161,8 +161,8 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchMultiScore()
     }
 
-    override suspend fun callAddMultiScore(): BaseResponse {
-        return provider.getTegDataSource().callAddMultiScore()
+    override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): BaseResponse {
+        return provider.getTegDataSource().callAddMultiScore(addMultiScoreRequest)
     }
 
     override suspend fun callFetchMultiItem(): MultiItemResponse {
