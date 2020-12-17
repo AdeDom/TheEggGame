@@ -28,11 +28,9 @@ class MultiUseCaseImpl(
     override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse> {
         val resource = repository.callMultiItemCollection(multiItemCollectionRequest)
 
-        when (resource) {
-            is Resource.Success -> {
-                if (resource.data.success) {
-                    fetchPlayerInfo()
-                }
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                fetchPlayerInfo()
             }
         }
 
@@ -64,24 +62,22 @@ class MultiUseCaseImpl(
     override suspend fun callTimerTegMultiPlayer(listener: TegMultiPlayerListener?): Resource<FetchMultiPlayerResponse> {
         val resource = repository.callFetchMultiPlayer()
 
-        when (resource) {
-            is Resource.Success -> {
-                if (resource.data.success) {
-                    val startTime = resource.data.roomInfoTitle?.startTime ?: 0L // real
-                    val endTime: Long = startTime + (1_000 * 60 * 15) // real
+        if (resource is Resource.Success) {
+            if (resource.data.success) {
+                val startTime = resource.data.roomInfoTitle?.startTime ?: 0L // real
+                val endTime: Long = startTime + (1_000 * 60 * 15) // real
 
-                    val delayTime = System.currentTimeMillis() - startTime // time call api
+                val delayTime = System.currentTimeMillis() - startTime // time call api
 
-                    var tempTime = (1_000 * 60 * 15) - delayTime
-                    while (System.currentTimeMillis() < endTime) {
-                        val timer = SimpleDateFormat("mm:ss", Locale.getDefault()).format(tempTime)
-                        listener?.onTimerTegMultiPlayer(timer)
-                        tempTime -= 1_000
-                        delay(1_000)
-                    }
-
-                    listener?.onEndTegMultiPlayer()
+                var tempTime = (1_000 * 60 * 15) - delayTime
+                while (System.currentTimeMillis() < endTime) {
+                    val timer = SimpleDateFormat("mm:ss", Locale.getDefault()).format(tempTime)
+                    listener?.onTimerTegMultiPlayer(timer)
+                    tempTime -= 1_000
+                    delay(1_000)
                 }
+
+                listener?.onEndTegMultiPlayer()
             }
         }
 
@@ -93,7 +89,15 @@ class MultiUseCaseImpl(
     }
 
     override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse> {
-        return repository.callAddMultiScore(addMultiScoreRequest)
+        val response = repository.callAddMultiScore(addMultiScoreRequest)
+
+        if (response is Resource.Success) {
+            if (response.data.success) {
+                repository.outgoingMultiPlayerItems()
+            }
+        }
+
+        return response
     }
 
     override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {
