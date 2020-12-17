@@ -66,14 +66,9 @@ class MultiViewModel(
 
     fun incomingMultiPlayerItems() {
         launch {
-            setState { copy(isLoading = true) }
-
             repository.incomingMultiPlayerItems { multiItemResponse ->
                 setState {
-                    copy(
-                        isLoading = false,
-                        multiItems = multiItemResponse.multiItems,
-                    )
+                    copy(multiItems = multiItemResponse.multiItems)
                 }
             }
             incomingMultiPlayerItems()
@@ -99,6 +94,26 @@ class MultiViewModel(
             val singleId = useCase.getMultiItemId(state.value?.latLng, state.value?.multiItems)
 
             when (val resource = useCase.callAddMultiScore(AddMultiScoreRequest(singleId))) {
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(isLoading = false) }
+        }
+    }
+
+    fun callFetchMultiScore() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            when (val resource = useCase.callFetchMultiScore()) {
+                is Resource.Success -> {
+                    setState {
+                        copy(
+                            scoreTeamA = resource.data.score?.teamA,
+                            scoreTeamB = resource.data.score?.teamB,
+                        )
+                    }
+                }
                 is Resource.Error -> setError(resource)
             }
 

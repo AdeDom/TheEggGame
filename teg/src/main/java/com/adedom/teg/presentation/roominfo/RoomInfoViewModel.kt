@@ -36,14 +36,9 @@ class RoomInfoViewModel(
 
     fun incomingRoomInfoTitle() {
         launch {
-            setState { copy(loading = true) }
-
             repository.incomingRoomInfoTitle { roomInfoTitleOutgoing ->
                 setState {
-                    copy(
-                        loading = false,
-                        roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle,
-                    )
+                    copy(roomInfoTitle = roomInfoTitleOutgoing.roomInfoTitle)
                 }
             }
             incomingRoomInfoTitle()
@@ -52,14 +47,11 @@ class RoomInfoViewModel(
 
     fun incomingRoomInfoPlayers() {
         launch {
-            setState { copy(loading = true) }
-
             val playerId = repository.getDbPlayerInfo()?.playerId
 
             repository.incomingRoomInfoPlayers { roomInfoPlayersOutgoing ->
                 setState {
                     copy(
-                        loading = false,
                         roomInfoPlayers = roomInfoPlayersOutgoing.roomInfoPlayers,
                         isRoleHead = useCase.isValidateRoleHead(
                             playerId,

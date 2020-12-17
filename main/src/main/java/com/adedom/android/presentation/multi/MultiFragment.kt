@@ -145,6 +145,10 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
         if (state.isValidateDistanceBetween) {
             viewModel.callAddMultiScore()
         }
+
+        // score
+        tvScoreA.text = state.scoreTeamA.toString()
+        tvScoreB.text = state.scoreTeamB.toString()
     }
 
     private fun setMarkerItem(state: MultiViewState) {
@@ -206,6 +210,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
         super.onStart()
 
         viewModel.callFetchMultiItem()
+        viewModel.callFetchMultiScore()
     }
 
     override fun onResume() {

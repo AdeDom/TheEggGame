@@ -24,10 +24,8 @@ class RoomViewModel(
 
     fun incomingPlaygroundRoom() {
         launch {
-            setState { copy(loading = true) }
-
             repository.incomingPlaygroundRoom { rooms ->
-                setState { copy(rooms = rooms.rooms, loading = false) }
+                setState { copy(rooms = rooms.rooms) }
             }
             incomingPlaygroundRoom()
         }
