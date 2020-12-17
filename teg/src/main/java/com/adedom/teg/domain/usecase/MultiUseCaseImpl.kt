@@ -98,6 +98,18 @@ class MultiUseCaseImpl(
             }
         }
 
+        when (val resource = repository.callFetchMultiScore()) {
+            is Resource.Success -> {
+                val data = resource.data
+                if (data.success) {
+                    val sumScore = (data.score?.teamA ?: 0) + (data.score?.teamB ?: 0)
+                    if (sumScore >= 5) {
+                        repository.outgoingMultiPlayerEndGame()
+                    }
+                }
+            }
+        }
+
         return response
     }
 

@@ -217,6 +217,10 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingMultiPlayerScore(socket)
     }
 
+    override suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket) {
+        return provider.getWebSocketDataSource().incomingMultiPlayerEndGame(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return provider.getWebSocketDataSource().outgoingSingleItem()
     }
@@ -247,6 +251,10 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingMultiPlayerScore() {
         return provider.getWebSocketDataSource().outgoingMultiPlayerScore()
+    }
+
+    override suspend fun outgoingMultiPlayerEndGame() {
+        return provider.getWebSocketDataSource().outgoingMultiPlayerEndGame()
     }
 
 }

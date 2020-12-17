@@ -28,9 +28,10 @@ typealias RoomPeopleAllSocket = (PeopleAllOutgoing) -> Unit
 typealias PlaygroundRoomSocket = (RoomsResponse) -> Unit
 typealias RoomInfoTitleSocket = (RoomInfoTitleOutgoing) -> Unit
 typealias RoomInfoPlayersSocket = (RoomInfoPlayersOutgoing) -> Unit
-typealias RoomInfoTegMultiSocket = (RoomInfoTegMultiOutgoing) -> Unit
+typealias RoomInfoTegMultiSocket = (String) -> Unit
 typealias MultiPlayerItemsSocket = (MultiItemResponse) -> Unit
 typealias MultiPlayerScoreSocket = (ScoreResponse) -> Unit
+typealias MultiPlayerEndGameSocket = (String) -> Unit
 typealias WebSockets<T> = (T) -> Unit
 
 @KtorExperimentalAPI
@@ -47,6 +48,7 @@ class TegWebSocket(
     private var roomInfoTegMulti: WebSocketSession? = null
     private var multiPlayerItems: WebSocketSession? = null
     private var multiPlayerScore: WebSocketSession? = null
+    private var multiPlayerEndGame: WebSocketSession? = null
 
     private suspend fun wss(
         path: String,
@@ -195,7 +197,7 @@ class TegWebSocket(
             try {
                 incoming.consumeAsFlow()
                     .onEach { frame ->
-                        val response = frame.fromJson<RoomInfoTegMultiOutgoing>()
+                        val response = (frame as Frame.Text).readText()
                         socket.invoke(response)
                     }
                     .catch { }
@@ -240,6 +242,23 @@ class TegWebSocket(
         }
     }
 
+    suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket) {
+        wss("/websocket/multi/multi-player-end-teg") {
+            multiPlayerEndGame = this
+            try {
+                incoming.consumeAsFlow()
+                    .onEach { frame ->
+                        val response = (frame as Frame.Text).readText()
+                        socket.invoke(response)
+                    }
+                    .catch { }
+                    .collect()
+            } finally {
+                multiPlayerEndGame = null
+            }
+        }
+    }
+
     suspend fun outgoingSingleItem() {
         singleItem?.outgoing?.send(Frame.Text(""))
     }
@@ -270,6 +289,10 @@ class TegWebSocket(
 
     suspend fun outgoingMultiPlayerScore() {
         multiPlayerScore?.outgoing?.send(Frame.Text(""))
+    }
+
+    suspend fun outgoingMultiPlayerEndGame() {
+        multiPlayerEndGame?.outgoing?.send(Frame.Text(""))
     }
 
 }

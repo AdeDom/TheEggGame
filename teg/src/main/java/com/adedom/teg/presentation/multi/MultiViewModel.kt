@@ -89,6 +89,15 @@ class MultiViewModel(
         }
     }
 
+    fun incomingMultiPlayerEndGame() {
+        launch {
+            repository.incomingMultiPlayerEndGame {
+                listener?.onEndTegMultiPlayer()
+            }
+            incomingMultiPlayerEndGame()
+        }
+    }
+
     fun setStateLatLng(latLng: TegLatLng) {
         setState {
             copy(

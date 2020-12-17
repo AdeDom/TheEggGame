@@ -111,6 +111,8 @@ interface TegDataSource {
 
     suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket)
 
+    suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket)
+
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
@@ -126,5 +128,7 @@ interface TegDataSource {
     suspend fun outgoingMultiPlayerItems()
 
     suspend fun outgoingMultiPlayerScore()
+
+    suspend fun outgoingMultiPlayerEndGame()
 
 }

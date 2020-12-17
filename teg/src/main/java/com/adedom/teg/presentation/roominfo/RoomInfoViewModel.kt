@@ -66,8 +66,8 @@ class RoomInfoViewModel(
 
     fun incomingRoomInfoTegMulti() {
         launch {
-            repository.incomingRoomInfoTegMulti { roomInfoTegMultiOutgoing ->
-                listener?.roomInfoTegMultiResponse(roomInfoTegMultiOutgoing)
+            repository.incomingRoomInfoTegMulti {
+                listener?.roomInfoTegMultiResponse()
             }
             incomingRoomInfoTegMulti()
         }

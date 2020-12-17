@@ -83,6 +83,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
             viewModel.callTimerTegMultiPlayer()
             viewModel.incomingMultiPlayerItems()
             viewModel.incomingMultiPlayerScore()
+            viewModel.incomingMultiPlayerEndGame()
             if (args.isRoleHead) {
                 viewModel.callAddMultiItem()
             }
