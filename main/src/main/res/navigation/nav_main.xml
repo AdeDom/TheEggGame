@@ -210,5 +210,20 @@
             android:id="@+id/endTegGameFragment"
             android:name="com.adedom.android.presentation.endteggame.EndTegGameFragment"
             android:label="EndTegGameFragment"
-            tools:layout="@layout/fragment_end_teg_game" />
+            tools:layout="@layout/fragment_end_teg_game">
+        <action
+                android:id="@+id/action_endTegGameFragment_to_bonusTegGameFragment"
+                app:destination="@id/bonusTegGameFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@id/endTegGameFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/bonusTegGameFragment"
+            android:name="com.adedom.android.presentation.bonusteggame.BonusTegGameFragment"
+            android:label="BonusTegGameFragment"
+            tools:layout="@layout/fragment_bonus_teg_game" />
 </navigation>

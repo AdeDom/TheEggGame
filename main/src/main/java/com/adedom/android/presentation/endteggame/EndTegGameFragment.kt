@@ -48,7 +48,7 @@ class EndTegGameFragment : BaseFragment(R.layout.fragment_end_teg_game) {
         }
 
         btBonusEndGame.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_endTegGameFragment_to_bonusTegGameFragment)
         }
     }
 

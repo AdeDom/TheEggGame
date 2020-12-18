@@ -20,6 +20,7 @@ private val domainModule = module {
     single<CreateRoomUseCase> { CreateRoomUseCaseImpl(get()) }
     single<RoomInfoUseCase> { RoomInfoUseCaseImpl(get()) }
     single<EndTegGameUseCase> { EndTegGameUseCaseImpl(get()) }
+    single<BonusTegGameUseCase> { BonusTegGameUseCaseImpl() }
 
 }
 

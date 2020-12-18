@@ -1,5 +1,6 @@
 package com.adedom.teg.presentation.di
 
+import com.adedom.teg.presentation.bonusteggame.BonusTegGameViewModel
 import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
@@ -45,6 +46,7 @@ private val presentationModule = module {
     viewModel { CreateRoomViewModel(get(), get()) }
     viewModel { MultiViewModel(get(), get()) }
     viewModel { EndTegGameViewModel(get()) }
+    viewModel { BonusTegGameViewModel(get()) }
 
 }
 
