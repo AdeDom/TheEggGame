@@ -14,6 +14,7 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.util.GameActivity
 import com.adedom.theegggame.util.GameActivity.Companion.sContext
 
+//test branch
 class BonusGameDialog : DialogFragment() {
 
     private var onClick = 0
