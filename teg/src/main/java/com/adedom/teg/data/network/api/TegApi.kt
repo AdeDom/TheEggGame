@@ -104,4 +104,7 @@ interface TegApi {
     @POST("api/multi/add-multi-item")
     suspend fun callAddMultiItem(): BaseResponse
 
+    @GET("api/multi/multi-player-end-teg")
+    suspend fun callFetchMultiPlayerEndTeg(): MultiPlayerEndGameResponse
+
 }

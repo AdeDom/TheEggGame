@@ -102,7 +102,7 @@ class MultiUseCaseImpl(
             is Resource.Success -> {
                 val data = resource.data
                 if (data.success) {
-                    val sumScore = (data.score?.teamA ?: 0) + (data.score?.teamB ?: 0)
+                    val sumScore = (data.score?.scoreTeamA ?: 0) + (data.score?.scoreTeamB ?: 0)
                     if (sumScore >= 5) {
                         repository.outgoingMultiPlayerEndGame()
                     }

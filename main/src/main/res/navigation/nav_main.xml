@@ -196,5 +196,19 @@
         <argument
                 android:name="isRoleHead"
                 app:argType="boolean" />
+        <action
+                android:id="@+id/action_multiFragment_to_endTegGameFragment"
+                app:destination="@id/endTegGameFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@id/multiFragment"
+                app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+            android:id="@+id/endTegGameFragment"
+            android:name="com.adedom.android.presentation.endteggame.EndTegGameFragment"
+            android:label="EndTegGameFragment"
+            tools:layout="@layout/fragment_end_teg_game" />
 </navigation>

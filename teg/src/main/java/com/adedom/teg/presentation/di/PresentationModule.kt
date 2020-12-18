@@ -4,6 +4,7 @@ import com.adedom.teg.presentation.changeimage.ChangeImageViewModel
 import com.adedom.teg.presentation.changepassword.ChangePasswordViewModel
 import com.adedom.teg.presentation.changeprofile.ChangeProfileViewModel
 import com.adedom.teg.presentation.createroom.CreateRoomViewModel
+import com.adedom.teg.presentation.endteggame.EndTegGameViewModel
 import com.adedom.teg.presentation.imageprofile.ImageProfileViewModel
 import com.adedom.teg.presentation.main.MainViewModel
 import com.adedom.teg.presentation.mission.MissionViewModel
@@ -43,6 +44,7 @@ private val presentationModule = module {
     viewModel { RoomViewModel(get()) }
     viewModel { CreateRoomViewModel(get(), get()) }
     viewModel { MultiViewModel(get(), get()) }
+    viewModel { EndTegGameViewModel(get()) }
 
 }
 

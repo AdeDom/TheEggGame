@@ -3,7 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.4.21'
     ext.nav_version = "2.3.1"
-    ext.teg = "0.3.4"
+    ext.teg = "0.3.5"
     repositories {
         google()
         jcenter()
