@@ -80,8 +80,8 @@ class MultiViewModel(
             repository.incomingMultiPlayerScore { scoreResponse ->
                 setState {
                     copy(
-                        scoreTeamA = scoreResponse.score?.teamA,
-                        scoreTeamB = scoreResponse.score?.teamB,
+                        scoreTeamA = scoreResponse.score?.scoreTeamA,
+                        scoreTeamB = scoreResponse.score?.scoreTeamB,
                     )
                 }
             }
@@ -132,8 +132,8 @@ class MultiViewModel(
                 is Resource.Success -> {
                     setState {
                         copy(
-                            scoreTeamA = resource.data.score?.teamA,
-                            scoreTeamB = resource.data.score?.teamB,
+                            scoreTeamA = resource.data.score?.scoreTeamA,
+                            scoreTeamB = resource.data.score?.scoreTeamB,
                         )
                     }
                 }

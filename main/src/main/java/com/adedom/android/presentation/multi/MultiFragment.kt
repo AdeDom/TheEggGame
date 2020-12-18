@@ -149,8 +149,8 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
         }
 
         // score
-        tvScoreA.text = state.scoreTeamA.toString()
-        tvScoreB.text = state.scoreTeamB.toString()
+        tvScoreTeamA.text = state.scoreTeamA.toString()
+        tvScoreTeamB.text = state.scoreTeamB.toString()
     }
 
     private fun setMarkerItem(state: MultiViewState) {
@@ -198,14 +198,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
     }
 
     override fun onEndTegMultiPlayer() {
-        AlertDialog.Builder(requireActivity()).apply {
-            setTitle("Title")
-            setMessage("Message")
-            setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            show()
-        }
+        findNavController().navigate(R.id.action_multiFragment_to_endTegGameFragment)
     }
 
     override fun onStart() {

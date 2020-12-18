@@ -1,12 +1,10 @@
 package com.adedom.teg.domain.usecase
 
-import com.adedom.teg.data.db.entities.PlayerInfoEntity
 import com.adedom.teg.data.models.MultiItemDb
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.request.AddMultiScoreRequest
-import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.models.response.FetchMultiPlayerResponse
 import com.adedom.teg.models.response.MultiItemResponse
@@ -24,40 +22,6 @@ import kotlin.math.sqrt
 class MultiUseCaseImpl(
     private val repository: DefaultTegRepository,
 ) : MultiUseCase {
-
-    override suspend fun callMultiItemCollection(multiItemCollectionRequest: MultiItemCollectionRequest): Resource<BaseResponse> {
-        val resource = repository.callMultiItemCollection(multiItemCollectionRequest)
-
-        if (resource is Resource.Success) {
-            if (resource.data.success) {
-                fetchPlayerInfo()
-            }
-        }
-
-        return resource
-    }
-
-    private suspend fun fetchPlayerInfo() {
-        when (val resource = repository.callFetchPlayerInfo()) {
-            is Resource.Success -> {
-                if (resource.data.success) {
-                    val playerInfo = resource.data.playerInfo
-                    val playerInfoEntity = PlayerInfoEntity(
-                        playerId = playerInfo?.playerId.orEmpty(),
-                        username = playerInfo?.username,
-                        name = playerInfo?.name,
-                        image = playerInfo?.image,
-                        level = playerInfo?.level,
-                        state = playerInfo?.state,
-                        gender = playerInfo?.gender,
-                        birthDate = playerInfo?.birthDate,
-                    )
-                    repository.savePlayerInfo(playerInfoEntity)
-                }
-            }
-            is Resource.Error -> fetchPlayerInfo()
-        }
-    }
 
     override suspend fun callTimerTegMultiPlayer(listener: TegMultiPlayerListener?): Resource<FetchMultiPlayerResponse> {
         val resource = repository.callFetchMultiPlayer()
@@ -102,7 +66,7 @@ class MultiUseCaseImpl(
             is Resource.Success -> {
                 val data = resource.data
                 if (data.success) {
-                    val sumScore = (data.score?.teamA ?: 0) + (data.score?.teamB ?: 0)
+                    val sumScore = (data.score?.scoreTeamA ?: 0) + (data.score?.scoreTeamB ?: 0)
                     if (sumScore >= 5) {
                         repository.outgoingMultiPlayerEndGame()
                     }
