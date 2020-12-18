@@ -7,7 +7,6 @@ import com.adedom.teg.domain.Resource
 import com.adedom.teg.models.request.MultiItemCollectionRequest
 import com.adedom.teg.models.response.BaseResponse
 import com.adedom.teg.presentation.usercase.BonusTegGameUseCase
-import com.adedom.teg.util.TegConstant
 import kotlinx.coroutines.launch
 
 class BonusTegGameViewModel(
@@ -22,12 +21,7 @@ class BonusTegGameViewModel(
         launch {
             setState { copy(isLoading = true, isRotateBonusCompleted = false) }
 
-            val request = MultiItemCollectionRequest(
-                itemId = TegConstant.ITEM_LEVEL,
-                qty = state.value?.bonusPoint,
-                latitude = 0.0,
-                longitude = 0.0,
-            )
+            val request = MultiItemCollectionRequest(state.value?.bonusPoint)
             when (val resource = useCase.callMultiItemCollection(request)) {
                 is Resource.Success -> _bonusTegGameEvent.value = resource.data
                 is Resource.Error -> setError(resource)
