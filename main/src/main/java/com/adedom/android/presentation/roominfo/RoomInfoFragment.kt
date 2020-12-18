@@ -12,7 +12,6 @@ import com.adedom.android.util.ItemDecoration
 import com.adedom.android.util.clicks
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
-import com.adedom.teg.models.websocket.RoomInfoTegMultiOutgoing
 import com.adedom.teg.presentation.roominfo.RoomInfoTegMultiListener
 import com.adedom.teg.presentation.roominfo.RoomInfoViewEvent
 import com.adedom.teg.presentation.roominfo.RoomInfoViewModel
@@ -79,7 +78,7 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
 
         viewModel.goTegMultiEvent.observe { response ->
             if (!response.success) {
-                rootLayout.snackbar(response.message)
+                requireView().snackbar(response.message)
             }
         }
 
@@ -114,10 +113,11 @@ class RoomInfoFragment : BaseFragment(R.layout.fragment_room_info), RoomInfoTegM
         )
     }
 
-    override fun roomInfoTegMultiResponse(roomInfoTegMultiOutgoing: RoomInfoTegMultiOutgoing) {
-        if (roomInfoTegMultiOutgoing.success) {
-            findNavController().navigate(R.id.action_roomInfoFragment_to_multiFragment)
-        }
+    override fun roomInfoTegMultiResponse() {
+        val navDirections = RoomInfoFragmentDirections.actionRoomInfoFragmentToMultiFragment(
+            viewModel.state.value?.isRoleHead ?: false
+        )
+        findNavController().navigate(navDirections)
     }
 
     override fun onPause() {

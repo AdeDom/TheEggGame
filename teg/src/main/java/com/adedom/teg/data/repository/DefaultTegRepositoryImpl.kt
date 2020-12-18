@@ -160,6 +160,22 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callFetchMultiPlayer() }
     }
 
+    override suspend fun callFetchMultiScore(): Resource<ScoreResponse> {
+        return safeApiCall { dataSource.callFetchMultiScore() }
+    }
+
+    override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddMultiScore(addMultiScoreRequest) }
+    }
+
+    override suspend fun callFetchMultiItem(): Resource<MultiItemResponse> {
+        return safeApiCall { dataSource.callFetchMultiItem() }
+    }
+
+    override suspend fun callAddMultiItem(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callAddMultiItem() }
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return dataSource.incomingSinglePeopleAll(socket)
     }
@@ -196,6 +212,18 @@ class DefaultTegRepositoryImpl(
         return dataSource.incomingRoomInfoTegMulti(socket)
     }
 
+    override suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket) {
+        return dataSource.incomingMultiPlayerItems(socket)
+    }
+
+    override suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket) {
+        return dataSource.incomingMultiPlayerScore(socket)
+    }
+
+    override suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket) {
+        return dataSource.incomingMultiPlayerEndGame(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return dataSource.outgoingSingleItem()
     }
@@ -218,6 +246,18 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun outgoingRoomInfoTegMulti() {
         return dataSource.outgoingRoomInfoTegMulti()
+    }
+
+    override suspend fun outgoingMultiPlayerItems() {
+        return dataSource.outgoingMultiPlayerItems()
+    }
+
+    override suspend fun outgoingMultiPlayerScore() {
+        return dataSource.outgoingMultiPlayerScore()
+    }
+
+    override suspend fun outgoingMultiPlayerEndGame() {
+        return dataSource.outgoingMultiPlayerEndGame()
     }
 
 }

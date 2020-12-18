@@ -8,7 +8,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.adedom.android.R
 import com.adedom.android.base.BaseFragment
-import com.adedom.android.util.hideSoftKeyboard
 import com.adedom.android.util.setVisibility
 import com.adedom.android.util.snackbar
 import com.adedom.teg.domain.model.ValidateSignIn
@@ -35,11 +34,11 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
         viewModel.signInEvent.observe {
             when (it) {
-                ValidateSignIn.VALIDATE_ERROR -> rootLayout.snackbar(it.toString())
-                ValidateSignIn.USERNAME_EMPTY -> rootLayout.snackbar(it.toString())
-                ValidateSignIn.USERNAME_INCORRECT -> rootLayout.snackbar(it.toString())
-                ValidateSignIn.PASSWORD_EMPTY -> rootLayout.snackbar(it.toString())
-                ValidateSignIn.PASSWORD_INCORRECT -> rootLayout.snackbar(it.toString())
+                ValidateSignIn.VALIDATE_ERROR -> requireView().snackbar(it.toString())
+                ValidateSignIn.USERNAME_EMPTY -> requireView().snackbar(it.toString())
+                ValidateSignIn.USERNAME_INCORRECT -> requireView().snackbar(it.toString())
+                ValidateSignIn.PASSWORD_EMPTY -> requireView().snackbar(it.toString())
+                ValidateSignIn.PASSWORD_INCORRECT -> requireView().snackbar(it.toString())
                 else -> viewModel.callSignIn()
             }
         }
@@ -48,7 +47,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             if (response.success) {
                 findNavController().navigate(R.id.action_global_splashScreenFragment)
             } else {
-                rootLayout.snackbar(response.message)
+                requireView().snackbar(response.message)
             }
         }
 
@@ -74,8 +73,6 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         btSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
-
-        rootLayout.setOnClickListener { activity?.hideSoftKeyboard() }
     }
 
 }

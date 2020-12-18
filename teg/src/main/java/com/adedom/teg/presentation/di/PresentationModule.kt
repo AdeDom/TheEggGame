@@ -42,7 +42,7 @@ private val presentationModule = module {
     viewModel { PlayerProfileViewModel(get()) }
     viewModel { RoomViewModel(get()) }
     viewModel { CreateRoomViewModel(get(), get()) }
-    viewModel { MultiViewModel(get()) }
+    viewModel { MultiViewModel(get(), get()) }
 
 }
 

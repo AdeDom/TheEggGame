@@ -82,6 +82,14 @@ interface DefaultTegRepository {
 
     suspend fun callFetchMultiPlayer(): Resource<FetchMultiPlayerResponse>
 
+    suspend fun callFetchMultiScore(): Resource<ScoreResponse>
+
+    suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): Resource<BaseResponse>
+
+    suspend fun callFetchMultiItem(): Resource<MultiItemResponse>
+
+    suspend fun callAddMultiItem(): Resource<BaseResponse>
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)
@@ -100,6 +108,12 @@ interface DefaultTegRepository {
 
     suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
 
+    suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket)
+
+    suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket)
+
+    suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket)
+
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
@@ -111,5 +125,11 @@ interface DefaultTegRepository {
     suspend fun outgoingRoomInfoPlayers()
 
     suspend fun outgoingRoomInfoTegMulti()
+
+    suspend fun outgoingMultiPlayerItems()
+
+    suspend fun outgoingMultiPlayerScore()
+
+    suspend fun outgoingMultiPlayerEndGame()
 
 }

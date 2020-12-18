@@ -192,5 +192,9 @@
             android:id="@+id/multiFragment"
             android:name="com.adedom.android.presentation.multi.MultiFragment"
             android:label="Multi player"
-            tools:layout="@layout/fragment_multi" />
+            tools:layout="@layout/fragment_multi">
+        <argument
+                android:name="isRoleHead"
+                app:argType="boolean" />
+    </fragment>
 </navigation>

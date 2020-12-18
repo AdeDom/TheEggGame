@@ -16,8 +16,8 @@ import com.adedom.theegggame.R
 import com.adedom.theegggame.data.models.Room
 import com.adedom.theegggame.data.models.Score
 import com.adedom.theegggame.util.*
-import com.adedom.theegggame.util.extension.playMusicGame
-import com.adedom.theegggame.util.extension.setSoundMusic
+import com.adedom.theegggame.util.playMusicGame
+import com.adedom.theegggame.util.setSoundMusic
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_map.*
 
@@ -80,7 +80,6 @@ class MultiActivity : GoogleMapActivity(R.id.mapFragment, 5000) {
 
         viewModel.checkRadius { multi_id, multiItems, markerItems ->
             keepItemMulti(multi_id)
-            Item(multiItems, markerItems)
         }
 
         viewModel.checkEndGame({ scoreTeamA, scoreTeamB ->

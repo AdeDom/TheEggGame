@@ -1,11 +1,9 @@
 package com.adedom.theegggame.util
 
 import android.widget.ImageView
-import com.adedom.library.extension.loadCircle
 import com.adedom.library.util.KEY_EMPTY
 import com.adedom.library.util.getKeyUUID
 import com.adedom.theegggame.R
-import com.adedom.theegggame.data.imageUrl
 import com.google.android.gms.maps.model.LatLng
 
 var keyLogs: String = getKeyUUID()
@@ -19,7 +17,7 @@ fun setImageProfile(ivImage: ImageView, image: String, gender: String) {
         image == KEY_EMPTY && gender == KEY_FEMALE -> {
             ivImage.setImageResource(R.drawable.ic_player_female)
         }
-        image != KEY_EMPTY -> ivImage.loadCircle(imageUrl(image))
+//        image != KEY_EMPTY -> ivImage.loadCircle(imageUrl(image))
     }
 }
 

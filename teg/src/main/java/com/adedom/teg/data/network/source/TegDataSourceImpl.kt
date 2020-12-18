@@ -157,6 +157,22 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchMultiPlayer()
     }
 
+    override suspend fun callFetchMultiScore(): ScoreResponse {
+        return provider.getTegDataSource().callFetchMultiScore()
+    }
+
+    override suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): BaseResponse {
+        return provider.getTegDataSource().callAddMultiScore(addMultiScoreRequest)
+    }
+
+    override suspend fun callFetchMultiItem(): MultiItemResponse {
+        return provider.getTegDataSource().callFetchMultiItem()
+    }
+
+    override suspend fun callAddMultiItem(): BaseResponse {
+        return provider.getTegDataSource().callAddMultiItem()
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingSinglePeopleAll(socket)
     }
@@ -193,6 +209,18 @@ class TegDataSourceImpl(
         return provider.getWebSocketDataSource().incomingRoomInfoTegMulti(socket)
     }
 
+    override suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket) {
+        return provider.getWebSocketDataSource().incomingMultiPlayerItems(socket)
+    }
+
+    override suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket) {
+        return provider.getWebSocketDataSource().incomingMultiPlayerScore(socket)
+    }
+
+    override suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket) {
+        return provider.getWebSocketDataSource().incomingMultiPlayerEndGame(socket)
+    }
+
     override suspend fun outgoingSingleItem() {
         return provider.getWebSocketDataSource().outgoingSingleItem()
     }
@@ -215,6 +243,18 @@ class TegDataSourceImpl(
 
     override suspend fun outgoingRoomInfoTegMulti() {
         return provider.getWebSocketDataSource().outgoingRoomInfoTegMulti()
+    }
+
+    override suspend fun outgoingMultiPlayerItems() {
+        return provider.getWebSocketDataSource().outgoingMultiPlayerItems()
+    }
+
+    override suspend fun outgoingMultiPlayerScore() {
+        return provider.getWebSocketDataSource().outgoingMultiPlayerScore()
+    }
+
+    override suspend fun outgoingMultiPlayerEndGame() {
+        return provider.getWebSocketDataSource().outgoingMultiPlayerEndGame()
     }
 
 }

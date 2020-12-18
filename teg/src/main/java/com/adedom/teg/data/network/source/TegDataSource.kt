@@ -81,6 +81,14 @@ interface TegDataSource {
 
     suspend fun callFetchMultiPlayer(): FetchMultiPlayerResponse
 
+    suspend fun callFetchMultiScore(): ScoreResponse
+
+    suspend fun callAddMultiScore(addMultiScoreRequest: AddMultiScoreRequest): BaseResponse
+
+    suspend fun callFetchMultiItem(): MultiItemResponse
+
+    suspend fun callAddMultiItem(): BaseResponse
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)
@@ -99,6 +107,12 @@ interface TegDataSource {
 
     suspend fun incomingRoomInfoTegMulti(socket: RoomInfoTegMultiSocket)
 
+    suspend fun incomingMultiPlayerItems(socket: MultiPlayerItemsSocket)
+
+    suspend fun incomingMultiPlayerScore(socket: MultiPlayerScoreSocket)
+
+    suspend fun incomingMultiPlayerEndGame(socket: MultiPlayerEndGameSocket)
+
     suspend fun outgoingSingleItem()
 
     suspend fun outgoingSingleSuccessAnnouncement()
@@ -110,5 +124,11 @@ interface TegDataSource {
     suspend fun outgoingRoomInfoPlayers()
 
     suspend fun outgoingRoomInfoTegMulti()
+
+    suspend fun outgoingMultiPlayerItems()
+
+    suspend fun outgoingMultiPlayerScore()
+
+    suspend fun outgoingMultiPlayerEndGame()
 
 }

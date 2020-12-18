@@ -66,7 +66,7 @@ class RoomFragment : BaseFragment(R.layout.fragment_room), JoinRoomInfoListener 
         if (response.success) {
             findNavController().navigate(R.id.action_roomFragment_to_roomInfoFragment)
         } else {
-            rootLayout.snackbar(response.message)
+            requireView().snackbar(response.message)
         }
     }
 
