@@ -57,10 +57,6 @@ class TegDataSourceImpl(
         return provider.getDataSource().callSignUp(signUp)
     }
 
-    override suspend fun callRefreshToken(refreshToken: RefreshTokenRequest): SignInResponse {
-        return provider.getDataSource().callRefreshToken(refreshToken)
-    }
-
     override suspend fun callFetchPlayerInfo(): PlayerInfoResponse {
         return provider.getTegDataSource().callFetchPlayerInfo()
     }
@@ -123,10 +119,6 @@ class TegDataSourceImpl(
 
     override suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): BaseResponse {
         return provider.getTegDataSource().callCreateRoom(createRoomRequest)
-    }
-
-    override suspend fun callCurrentRoomNo(): CurrentRoomNoResponse {
-        return provider.getTegDataSource().callCurrentRoomNo()
     }
 
     override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse {

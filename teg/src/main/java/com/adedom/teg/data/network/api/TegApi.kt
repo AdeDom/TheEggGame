@@ -68,9 +68,6 @@ interface TegApi {
     @POST("api/multi/create-room")
     suspend fun callCreateRoom(@Body createRoomRequest: CreateRoomRequest): BaseResponse
 
-    @GET("api/multi/current-room-no")
-    suspend fun callCurrentRoomNo(): CurrentRoomNoResponse
-
     @POST("api/multi/join-room-info")
     suspend fun callJoinRoomInfo(@Body joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse
 
