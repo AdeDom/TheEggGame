@@ -8,7 +8,7 @@ class SplashScreenUseCaseImpl(
 ) : SplashScreenUseCase {
 
     override fun isValidateSignIn(): Boolean {
-        return !sessionManagerService.accessToken.isBlank()
+        return sessionManagerService.accessToken.isNotBlank()
     }
 
 }

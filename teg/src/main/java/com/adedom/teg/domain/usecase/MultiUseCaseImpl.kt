@@ -98,8 +98,7 @@ class MultiUseCaseImpl(
         multiItems: List<MultiItemDb>?
     ): Boolean {
         val count = multiItems
-            ?.filter { it.latitude != null && it.longitude != null }
-            ?.map { distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!)) }
+            ?.map { distanceBetween(latLng, TegLatLng(it.latitude, it.longitude)) }
             ?.filter { it < 100 }
             ?.count()
 
@@ -124,11 +123,10 @@ class MultiUseCaseImpl(
         return latLng?.let {
             multiItems
                 ?.asSequence()
-                ?.filter { it.latitude != null && it.longitude != null }
                 ?.map {
                     Pair(
                         it,
-                        distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))
+                        distanceBetween(latLng, TegLatLng(it.latitude, it.longitude))
                     )
                 }
                 ?.filter { it.second < 100 }
