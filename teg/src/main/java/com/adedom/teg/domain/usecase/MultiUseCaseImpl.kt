@@ -93,6 +93,10 @@ class MultiUseCaseImpl(
         return response
     }
 
+    override suspend fun callMultiPlayerEndGame(): Resource<BaseResponse> {
+        return repository.callMultiPlayerEndGame()
+    }
+
     override fun isValidateDistanceBetween(
         latLng: TegLatLng,
         multiItems: List<MultiItemDb>?

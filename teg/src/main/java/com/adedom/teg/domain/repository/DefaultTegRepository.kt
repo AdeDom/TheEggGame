@@ -88,6 +88,8 @@ interface DefaultTegRepository {
 
     suspend fun callFetchMultiPlayerEndTeg(): Resource<MultiPlayerEndGameResponse>
 
+    suspend fun callMultiPlayerEndGame(): Resource<BaseResponse>
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)

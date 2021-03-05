@@ -104,4 +104,7 @@ interface TegApi {
     @GET("api/multi/multi-player-end-teg")
     suspend fun callFetchMultiPlayerEndTeg(): MultiPlayerEndGameResponse
 
+    @PATCH("api/multi/multi-player-end-game")
+    suspend fun callMultiPlayerEndGame(): BaseResponse
+
 }

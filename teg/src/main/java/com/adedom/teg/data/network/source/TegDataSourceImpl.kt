@@ -169,6 +169,10 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callFetchMultiPlayerEndTeg()
     }
 
+    override suspend fun callMultiPlayerEndGame(): BaseResponse {
+        return provider.getTegDataSource().callMultiPlayerEndGame()
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return provider.getWebSocketDataSource().incomingSinglePeopleAll(socket)
     }

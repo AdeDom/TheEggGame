@@ -87,6 +87,8 @@ interface TegDataSource {
 
     suspend fun callFetchMultiPlayerEndTeg(): MultiPlayerEndGameResponse
 
+    suspend fun callMultiPlayerEndGame(): BaseResponse
+
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 
     suspend fun incomingSingleItem(socket: SingleItemSocket)

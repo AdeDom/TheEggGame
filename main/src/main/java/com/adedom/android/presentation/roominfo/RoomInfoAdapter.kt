@@ -24,7 +24,7 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoViewHolder>
     override fun onBindViewHolder(holder: RoomInfoViewHolder, position: Int) {
         val view = holder.itemView
         val context = holder.itemView.context
-        val (_, _, name, image, level, state, gender, _, role, status, team) = list[position]
+        val (_, _, name, image, level, _, _, _, role, status, team) = list[position]
 
         view.tvName.text = name
         view.tvLevel.text = context.getString(R.string.level, level)
@@ -34,9 +34,6 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoViewHolder>
             view.ivRoleHead.visibility = View.VISIBLE
         }
 
-//        if (state == KEY_OFFLINE) {
-//            view.mBgPlayer.background = ContextCompat.getDrawable(context, R.drawable.shape_bg_gray)
-//        } else {
         if (team == TegConstant.TEAM_A) {
             view.layoutRoomInfo.background =
                 ContextCompat.getDrawable(context, R.drawable.shape_team_a)
@@ -44,7 +41,6 @@ class RoomInfoAdapter : RecyclerView.Adapter<RoomInfoAdapter.RoomInfoViewHolder>
             view.layoutRoomInfo.background =
                 ContextCompat.getDrawable(context, R.drawable.shape_team_b)
         }
-//        }
 
         if (status == TegConstant.ROOM_STATUS_READY) {
             view.ivStatus.background =

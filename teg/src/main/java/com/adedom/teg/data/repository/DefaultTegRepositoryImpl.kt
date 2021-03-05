@@ -172,6 +172,10 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callFetchMultiPlayerEndTeg() }
     }
 
+    override suspend fun callMultiPlayerEndGame(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callMultiPlayerEndGame() }
+    }
+
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
         return dataSource.incomingSinglePeopleAll(socket)
     }

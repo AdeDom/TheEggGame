@@ -166,7 +166,7 @@ class MultiFragment : BaseFragment(R.layout.fragment_multi), TegMultiPlayerListe
                 val bmp = context?.convertLayoutMarkerItem(R.drawable.the_egg_game)
 
                 val markerOptions = MarkerOptions().apply {
-                    position(LatLng(it.latitude!!, it.longitude!!))
+                    position(LatLng(it.latitude, it.longitude))
                     icon(BitmapDescriptorFactory.fromBitmap(bmp))
                 }
 

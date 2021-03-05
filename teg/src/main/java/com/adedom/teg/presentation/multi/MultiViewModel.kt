@@ -92,9 +92,26 @@ class MultiViewModel(
     fun incomingMultiPlayerEndGame() {
         launch {
             repository.incomingMultiPlayerEndGame {
-                listener?.onEndTegMultiPlayer()
+                callMultiPlayerEndGame()
             }
             incomingMultiPlayerEndGame()
+        }
+    }
+
+    private fun callMultiPlayerEndGame() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            when (val resource = useCase.callMultiPlayerEndGame()) {
+                is Resource.Success -> {
+                    if (resource.data.success) {
+                        listener?.onEndTegMultiPlayer()
+                    }
+                }
+                is Resource.Error -> setError(resource)
+            }
+
+            setState { copy(isLoading = true) }
         }
     }
 

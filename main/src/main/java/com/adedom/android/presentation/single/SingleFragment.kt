@@ -231,7 +231,7 @@ class SingleFragment : BaseFragment(R.layout.fragment_single) {
                 }
 
                 val markerOptions = MarkerOptions().apply {
-                    position(LatLng(it.latitude!!, it.longitude!!))
+                    position(LatLng(it.latitude, it.longitude))
                     icon(BitmapDescriptorFactory.fromBitmap(bmp))
                     title(title)
                 }
