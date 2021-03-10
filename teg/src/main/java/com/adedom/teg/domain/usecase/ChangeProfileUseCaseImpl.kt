@@ -75,17 +75,18 @@ class ChangeProfileUseCaseImpl(
 
     override fun getIntCalendarYear(date: String): Int {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-        return SimpleDateFormat("yyyy", Locale.ENGLISH).format(sdf.parse(date)).toInt()
+        return SimpleDateFormat("yyyy", Locale.ENGLISH).format(sdf.parse(date) ?: Date()).toInt()
     }
 
     override fun getIntCalendarMonth(date: String): Int {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-        return SimpleDateFormat("MM", Locale.ENGLISH).format(sdf.parse(date)).toInt().minus(1)
+        return SimpleDateFormat("MM", Locale.ENGLISH).format(sdf.parse(date) ?: Date()).toInt()
+            .minus(1)
     }
 
     override fun getIntCalendarDayOfMonth(date: String): Int {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-        return SimpleDateFormat("dd", Locale.ENGLISH).format(sdf.parse(date)).toInt()
+        return SimpleDateFormat("dd", Locale.ENGLISH).format(sdf.parse(date) ?: Date()).toInt()
     }
 
 }
