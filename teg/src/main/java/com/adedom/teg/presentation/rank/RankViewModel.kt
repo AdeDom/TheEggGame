@@ -1,6 +1,5 @@
 package com.adedom.teg.presentation.rank
 
-import android.util.Log
 import com.adedom.teg.base.BaseViewModel
 import com.adedom.teg.domain.Resource
 import com.adedom.teg.domain.repository.DefaultTegRepository
@@ -63,7 +62,6 @@ class RankViewModel(
                 )
             }
             .onEach {
-                Log.d("AdeDom", "Rank : ${state.value?.search}, ${state.value?.limit}")
             }
             .catch { e ->
                 setError(Resource.Error(e))
