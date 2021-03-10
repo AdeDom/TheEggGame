@@ -25,8 +25,7 @@ class SingleUseCaseImpl(
     override suspend fun incomingSingleItem(latLng: TegLatLng, socket: SingleItemAroundSocket) {
         repository.incomingSingleItem { singleItemOutgoing ->
             val singleItemAround = singleItemOutgoing.singleItems
-                .filter { it.latitude != null && it.longitude != null }
-                .map { Pair(it, distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))) }
+                .map { Pair(it, distanceBetween(latLng, TegLatLng(it.latitude, it.longitude))) }
                 .filter { it.second < 3_000 }
                 .map { it.first }
 
@@ -133,8 +132,7 @@ class SingleUseCaseImpl(
         singleItems: List<SingleItemDb>?
     ): Boolean {
         val count = singleItems
-            ?.filter { it.latitude != null && it.longitude != null }
-            ?.map { distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!)) }
+            ?.map { distanceBetween(latLng, TegLatLng(it.latitude, it.longitude)) }
             ?.filter { it < 100 }
             ?.count()
 
@@ -159,11 +157,10 @@ class SingleUseCaseImpl(
         return latLng?.let {
             singleItems
                 ?.asSequence()
-                ?.filter { it.latitude != null && it.longitude != null }
                 ?.map {
                     Pair(
                         it,
-                        distanceBetween(latLng, TegLatLng(it.latitude!!, it.longitude!!))
+                        distanceBetween(latLng, TegLatLng(it.latitude, it.longitude))
                     )
                 }
                 ?.filter { it.second < 100 }

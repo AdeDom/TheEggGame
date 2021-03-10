@@ -32,8 +32,6 @@ interface DefaultTegRepository {
 
     suspend fun callSignUp(signUp: SignUpRequest): Resource<SignInResponse>
 
-    suspend fun callRefreshToken(refreshToken: RefreshTokenRequest): Resource<SignInResponse>
-
     suspend fun callFetchPlayerInfo(): Resource<PlayerInfoResponse>
 
     suspend fun callChangeImageProfile(imageFile: MultipartBody.Part): Resource<BaseResponse>
@@ -66,8 +64,6 @@ interface DefaultTegRepository {
 
     suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): Resource<BaseResponse>
 
-    suspend fun callCurrentRoomNo(): Resource<CurrentRoomNoResponse>
-
     suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): Resource<BaseResponse>
 
     suspend fun callLeaveRoomInfo(): Resource<BaseResponse>
@@ -91,6 +87,8 @@ interface DefaultTegRepository {
     suspend fun callAddMultiItem(): Resource<BaseResponse>
 
     suspend fun callFetchMultiPlayerEndTeg(): Resource<MultiPlayerEndGameResponse>
+
+    suspend fun callMultiPlayerEndGame(): Resource<BaseResponse>
 
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 

@@ -57,10 +57,6 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callSignUp(signUp) }
     }
 
-    override suspend fun callRefreshToken(refreshToken: RefreshTokenRequest): Resource<SignInResponse> {
-        return safeApiCall { dataSource.callRefreshToken(refreshToken) }
-    }
-
     override suspend fun callFetchPlayerInfo(): Resource<PlayerInfoResponse> {
         return safeApiCall { dataSource.callFetchPlayerInfo() }
     }
@@ -128,10 +124,6 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callCreateRoom(createRoomRequest) }
     }
 
-    override suspend fun callCurrentRoomNo(): Resource<CurrentRoomNoResponse> {
-        return safeApiCall { dataSource.callCurrentRoomNo() }
-    }
-
     override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): Resource<BaseResponse> {
         return safeApiCall { dataSource.callJoinRoomInfo(joinRoomInfoRequest) }
     }
@@ -178,6 +170,10 @@ class DefaultTegRepositoryImpl(
 
     override suspend fun callFetchMultiPlayerEndTeg(): Resource<MultiPlayerEndGameResponse> {
         return safeApiCall { dataSource.callFetchMultiPlayerEndTeg() }
+    }
+
+    override suspend fun callMultiPlayerEndGame(): Resource<BaseResponse> {
+        return safeApiCall { dataSource.callMultiPlayerEndGame() }
     }
 
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {

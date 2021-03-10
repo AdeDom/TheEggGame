@@ -31,8 +31,6 @@ interface TegDataSource {
 
     suspend fun callSignUp(signUp: SignUpRequest): SignInResponse
 
-    suspend fun callRefreshToken(refreshToken: RefreshTokenRequest): SignInResponse
-
     suspend fun callFetchPlayerInfo(): PlayerInfoResponse
 
     suspend fun callChangeImageProfile(imageFile: MultipartBody.Part): BaseResponse
@@ -65,8 +63,6 @@ interface TegDataSource {
 
     suspend fun callCreateRoom(createRoomRequest: CreateRoomRequest): BaseResponse
 
-    suspend fun callCurrentRoomNo(): CurrentRoomNoResponse
-
     suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse
 
     suspend fun callLeaveRoomInfo(): BaseResponse
@@ -90,6 +86,8 @@ interface TegDataSource {
     suspend fun callAddMultiItem(): BaseResponse
 
     suspend fun callFetchMultiPlayerEndTeg(): MultiPlayerEndGameResponse
+
+    suspend fun callMultiPlayerEndGame(): BaseResponse
 
     suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket)
 

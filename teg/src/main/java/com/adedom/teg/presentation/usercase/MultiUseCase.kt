@@ -22,6 +22,8 @@ interface MultiUseCase {
 
     suspend fun callAddMultiItem(): Resource<BaseResponse>
 
+    suspend fun callMultiPlayerEndGame(): Resource<BaseResponse>
+
     fun isValidateDistanceBetween(latLng: TegLatLng, multiItems: List<MultiItemDb>?): Boolean
 
     fun getMultiItemId(latLng: TegLatLng?, multiItems: List<MultiItemDb>?): Int?

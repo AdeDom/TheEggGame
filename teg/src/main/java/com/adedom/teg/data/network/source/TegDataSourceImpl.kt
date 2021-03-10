@@ -57,10 +57,6 @@ class TegDataSourceImpl(
         return provider.getDataSource().callSignUp(signUp)
     }
 
-    override suspend fun callRefreshToken(refreshToken: RefreshTokenRequest): SignInResponse {
-        return provider.getDataSource().callRefreshToken(refreshToken)
-    }
-
     override suspend fun callFetchPlayerInfo(): PlayerInfoResponse {
         return provider.getTegDataSource().callFetchPlayerInfo()
     }
@@ -125,10 +121,6 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callCreateRoom(createRoomRequest)
     }
 
-    override suspend fun callCurrentRoomNo(): CurrentRoomNoResponse {
-        return provider.getTegDataSource().callCurrentRoomNo()
-    }
-
     override suspend fun callJoinRoomInfo(joinRoomInfoRequest: JoinRoomInfoRequest): BaseResponse {
         return provider.getTegDataSource().callJoinRoomInfo(joinRoomInfoRequest)
     }
@@ -175,6 +167,10 @@ class TegDataSourceImpl(
 
     override suspend fun callFetchMultiPlayerEndTeg(): MultiPlayerEndGameResponse {
         return provider.getTegDataSource().callFetchMultiPlayerEndTeg()
+    }
+
+    override suspend fun callMultiPlayerEndGame(): BaseResponse {
+        return provider.getTegDataSource().callMultiPlayerEndGame()
     }
 
     override suspend fun incomingSinglePeopleAll(socket: SinglePeopleAllSocket) {
