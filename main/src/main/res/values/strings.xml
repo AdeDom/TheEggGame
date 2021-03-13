@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">The Egg Game</string>
-    <string name="google_maps_key">AIzaSyA0X_TUK3iYed_8q7tiGzup3TworGgYEfo</string>
+    <string name="google_maps_key">AIzaSyDAeKtNyQW7RJhmpbQ1n7v6T76AQfespag</string>
 
     <string name="h2p">How to play</string>
     <string name="least_one_person_per_team">Arrange at least 1 team per team</string>
