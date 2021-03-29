@@ -1,5 +1,6 @@
 package com.adedom.teg.data.network.websocket
 
+import com.adedom.teg.data.network.source.DataSourceProvider
 import com.adedom.teg.models.TegLatLng
 import com.adedom.teg.models.response.MultiItemResponse
 import com.adedom.teg.models.response.RoomsResponse
@@ -54,10 +55,10 @@ class TegWebSocket(
         path: String,
         webSockets: suspend DefaultClientWebSocketSession.() -> Unit
     ) {
-        client.wss(
+        client.ws(
             method = HttpMethod.Get,
-            host = TegConstant.BASE_HOST,
-            port = DEFAULT_PORT,
+            host = DataSourceProvider.HOST_NAME,
+            port = 8080,
             path = path,
             request = {
                 header(TegConstant.ACCESS_TOKEN, sessionManagerService.accessToken)

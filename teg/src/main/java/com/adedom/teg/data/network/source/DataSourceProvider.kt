@@ -5,7 +5,6 @@ import com.adedom.teg.data.network.api.TegApi
 import com.adedom.teg.data.network.websocket.TegWebSocket
 import com.adedom.teg.models.request.RefreshTokenRequest
 import com.adedom.teg.sharedpreference.service.SessionManagerService
-import com.adedom.teg.util.TegConstant
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
@@ -18,6 +17,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * pathiphondev@gmail.com
+ */
 @KtorExperimentalAPI
 class DataSourceProvider(
     private val sessionManagerService: SessionManagerService,
@@ -42,7 +44,7 @@ class DataSourceProvider(
         val retrofit = Retrofit.Builder().apply {
             client(okHttpClient)
             addConverterFactory(GsonConverterFactory.create())
-            baseUrl(TegConstant.BASE_URL)
+            baseUrl(BASE_URL)
         }.build()
 
         return retrofit.create(TegApi::class.java)
@@ -77,7 +79,7 @@ class DataSourceProvider(
         val retrofit = Retrofit.Builder().apply {
             client(okHttpClient)
             addConverterFactory(GsonConverterFactory.create())
-            baseUrl(TegConstant.BASE_URL)
+            baseUrl(BASE_URL)
         }.build()
 
         return retrofit.create(TegApi::class.java)
@@ -110,6 +112,12 @@ class DataSourceProvider(
             .build()
 
         return chain.proceed(request)
+    }
+
+    // hostName -> open terminal [ipconfig] using => IPv4 Address
+    companion object {
+        const val HOST_NAME = "192.168.43.22"
+        private const val BASE_URL = "http://$HOST_NAME:8080/"
     }
 
 }
