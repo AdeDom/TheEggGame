@@ -116,7 +116,7 @@ class DataSourceProvider(
 
     // hostName -> open terminal [ipconfig] using => IPv4 Address
     companion object {
-        const val HOST_NAME = "192.168.43.22"
+        const val HOST_NAME = ""
         private const val BASE_URL = "http://$HOST_NAME:8080/"
     }
 
