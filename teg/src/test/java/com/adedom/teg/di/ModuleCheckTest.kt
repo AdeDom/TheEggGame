@@ -16,6 +16,7 @@ import org.koin.test.AutoCloseKoinTest
 import org.koin.test.category.CheckModuleTest
 import org.koin.test.check.checkModules
 
+@ExperimentalStdlibApi
 @FlowPreview
 @ExperimentalCoroutinesApi
 @Category(CheckModuleTest::class)

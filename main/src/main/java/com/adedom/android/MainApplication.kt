@@ -17,6 +17,7 @@ import org.koin.core.context.startKoin
  * AdeDom Jaiyen
  * https://github.com/AdeDom
  */
+@ExperimentalStdlibApi
 @KtorExperimentalAPI
 @FlowPreview
 @ExperimentalCoroutinesApi

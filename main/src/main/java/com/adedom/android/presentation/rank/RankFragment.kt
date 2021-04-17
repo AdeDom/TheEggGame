@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalStdlibApi
 @FlowPreview
 @ExperimentalCoroutinesApi
 class RankFragment : BaseFragment(R.layout.fragment_rank) {
@@ -40,12 +41,12 @@ class RankFragment : BaseFragment(R.layout.fragment_rank) {
         viewModel.state.observe { state ->
             animationViewLoading.setVisibility(state.loading)
 
-            adt.setList(state.rankPlayers)
+            adt.submitList(state.rankPlayers)
         }
 
         viewModel.error.observeError()
 
-        etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
+        etSearch.addTextChangedListener { viewModel.searchByName(it.toString()) }
 
         viewEventFlow().observe { viewModel.process(it) }
     }

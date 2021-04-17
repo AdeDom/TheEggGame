@@ -43,7 +43,7 @@ interface TegDataSource {
 
     suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): BaseResponse
 
-    suspend fun callFetchRankPlayers(search: String, limit: Int): RankPlayersResponse
+    suspend fun callFetchRankPlayers(): RankPlayersResponse
 
     suspend fun callLogActiveOn(): BaseResponse
 

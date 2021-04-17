@@ -44,7 +44,7 @@ interface DefaultTegRepository {
 
     suspend fun callChangeLatLng(changeLatLngRequest: ChangeLatLngRequest): Resource<BaseResponse>
 
-    suspend fun callFetchRankPlayers(search: String, limit: Int): Resource<RankPlayersResponse>
+    suspend fun callFetchRankPlayers(): Resource<RankPlayersResponse>
 
     suspend fun callLogActiveOn(): Resource<BaseResponse>
 

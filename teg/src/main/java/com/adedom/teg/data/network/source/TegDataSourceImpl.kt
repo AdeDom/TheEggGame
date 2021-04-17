@@ -81,8 +81,8 @@ class TegDataSourceImpl(
         return provider.getTegDataSource().callChangeLatLng(changeLatLngRequest)
     }
 
-    override suspend fun callFetchRankPlayers(search: String, limit: Int): RankPlayersResponse {
-        return provider.getTegDataSource().callFetchRankPlayers(search, limit)
+    override suspend fun callFetchRankPlayers(): RankPlayersResponse {
+        return provider.getTegDataSource().callFetchRankPlayers()
     }
 
     override suspend fun callLogActiveOn(): BaseResponse {

@@ -35,11 +35,8 @@ interface TegApi {
     @PUT("api/account/change-lat-lng")
     suspend fun callChangeLatLng(@Body changeLatLngRequest: ChangeLatLngRequest): BaseResponse
 
-    @GET("api/application/rank/rank")
-    suspend fun callFetchRankPlayers(
-        @Query("search") search: String,
-        @Query("limit") limit: Int,
-    ): RankPlayersResponse
+    @GET("api/application/rank")
+    suspend fun callFetchRankPlayers(): RankPlayersResponse
 
     @POST("api/application/log-active")
     suspend fun callLogActiveOn(): BaseResponse
