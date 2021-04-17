@@ -24,6 +24,7 @@ import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+@ExperimentalStdlibApi
 @FlowPreview
 @ExperimentalCoroutinesApi
 private val presentationModule = module {
@@ -50,6 +51,7 @@ private val presentationModule = module {
 
 }
 
+@ExperimentalStdlibApi
 @FlowPreview
 @ExperimentalCoroutinesApi
 val getPresentationModule = presentationModule

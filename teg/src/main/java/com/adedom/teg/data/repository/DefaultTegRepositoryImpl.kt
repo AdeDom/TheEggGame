@@ -81,11 +81,8 @@ class DefaultTegRepositoryImpl(
         return safeApiCall { dataSource.callChangeLatLng(changeLatLngRequest) }
     }
 
-    override suspend fun callFetchRankPlayers(
-        search: String,
-        limit: Int
-    ): Resource<RankPlayersResponse> {
-        return safeApiCall { dataSource.callFetchRankPlayers(search, limit) }
+    override suspend fun callFetchRankPlayers(): Resource<RankPlayersResponse> {
+        return safeApiCall { dataSource.callFetchRankPlayers() }
     }
 
     override suspend fun callLogActiveOn(): Resource<BaseResponse> {

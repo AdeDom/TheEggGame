@@ -13,6 +13,11 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
+/**
+ * AdeDom Jaiyen
+ * https://github.com/AdeDom
+ */
+@ExperimentalStdlibApi
 @KtorExperimentalAPI
 @FlowPreview
 @ExperimentalCoroutinesApi
